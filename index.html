@@ -4431,6 +4431,410 @@
       .agent__steps li.is-done i::after { content: ""; position: absolute; left: 4.5px; top: 2px; width: 4px; height: 7px; border: solid #6ee7a8; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
       .agent__foot { min-height: 1.4em; color: #6ee7a8; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .02em; transition: opacity .3s ease; }
       .agent__foot.is-hidden { opacity: 0; }
+
+      /* ==========================================================
+         DESTAQUES TIPOGRÁFICOS E BLOCOS DE TEXTO
+         ========================================================== */
+      /* Rótulos de seção em cápsula, com o número em destaque */
+      .label {
+        display: inline-flex;
+        align-items: center;
+        gap: .6rem;
+        padding: .34rem .95rem .34rem .34rem;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--r-pill);
+        background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .015));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 10px 30px -18px rgba(255, 85, 0, .5);
+        color: var(--text-primary);
+        font-size: .82rem;
+        letter-spacing: .14em;
+      }
+      .label__num {
+        display: inline-grid;
+        place-items: center;
+        min-width: 2.35em;
+        height: 1.9em;
+        padding: 0 .5em;
+        border: 1px solid rgba(255, 85, 0, .45);
+        border-radius: var(--r-pill);
+        background: radial-gradient(circle at 50% 30%, rgba(255, 85, 0, .28), rgba(255, 85, 0, .08));
+        color: #ff7a33;
+        letter-spacing: .06em;
+      }
+      /* Linha do cabeçalho com um feixe de luz que percorre */
+      .section-head__rule { position: relative; overflow: hidden; }
+      .section-head__rule::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 22%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 120, 50, .9), transparent);
+        transform: translateX(-100%);
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        .section-head__rule::after { animation: rule-beam 5.5s var(--ease-in-out) infinite; }
+      }
+      @keyframes rule-beam { 0% { transform: translateX(-100%); } 60%, 100% { transform: translateX(560%); } }
+
+      /* Alerta: sinalizador piscando e linha de monitor com batimento */
+      .label--alert { border-color: rgba(255, 85, 0, .5); background: linear-gradient(180deg, rgba(255, 85, 0, .14), rgba(255, 85, 0, .04)); padding-left: .7rem; }
+      .label__beacon { position: relative; width: 9px; height: 9px; border-radius: 50%; background: #ff3b1f; box-shadow: 0 0 10px #ff3b1f; }
+      .label__beacon::after { content: ""; position: absolute; inset: -5px; border: 1.5px solid #ff3b1f; border-radius: 50%; opacity: 0; }
+      @media (prefers-reduced-motion: no-preference) {
+        .label__beacon { animation: beacon-blink 1.6s steps(1) infinite; }
+        .label__beacon::after { animation: beacon-ping 1.6s var(--ease-out) infinite; }
+      }
+      @keyframes beacon-blink { 0%, 70% { opacity: 1; } 85% { opacity: .35; } }
+      @keyframes beacon-ping { 0% { opacity: .8; transform: scale(.5); } 100% { opacity: 0; transform: scale(1.8); } }
+      .section-head__rule--pulse { height: 24px; background: none; overflow: visible; }
+      .section-head__rule--pulse::after { display: none; }
+      .section-head__rule--pulse svg { width: 100%; height: 100%; overflow: visible; }
+      .pulse__base, .pulse__beat { fill: none; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+      .pulse__base { stroke: rgba(255, 255, 255, .14); stroke-width: 1; }
+      .pulse__beat { stroke: #ff5500; stroke-width: 1.6; stroke-dasharray: .14 .86; stroke-dashoffset: .14; filter: drop-shadow(0 0 4px rgba(255, 85, 0, .9)); }
+      @media (prefers-reduced-motion: no-preference) {
+        .pulse__beat { animation: pulse-run 3.2s linear infinite; }
+        .alert.is-offscreen .pulse__beat { animation-play-state: paused; }
+      }
+      @keyframes pulse-run { from { stroke-dashoffset: .14; } to { stroke-dashoffset: -.86; } }
+
+      /* Palavras em destaque nos títulos */
+      .hl-accent {
+        background: linear-gradient(100deg, #ff5500 0%, #ff8a3d 55%, #ffc08a 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+      }
+      .hl-dim { color: var(--text-secondary); }
+      .hl-box {
+        position: relative;
+        display: inline-block;
+        padding: 0 .16em .04em;
+        margin: 0 -.04em;
+        border: 1px solid rgba(255, 255, 255, .14);
+        border-radius: .16em;
+        background: linear-gradient(180deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .03));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), inset 0 -2px 0 rgba(0, 0, 0, .35), 0 16px 34px -18px rgba(0, 0, 0, .9);
+        line-height: 1.02;
+      }
+      .hl-box::before {
+        content: "";
+        position: absolute;
+        left: -1px;
+        top: -1px;
+        width: .28em;
+        height: .28em;
+        border-top: 2px solid var(--accent);
+        border-left: 2px solid var(--accent);
+        border-radius: .1em 0 0 0;
+      }
+      .hl-box--accent {
+        border-color: rgba(255, 85, 0, .45);
+        background: linear-gradient(180deg, rgba(255, 85, 0, .2), rgba(255, 85, 0, .06));
+        box-shadow: inset 0 1px 0 rgba(255, 170, 120, .25), 0 18px 40px -18px rgba(255, 85, 0, .55);
+      }
+      /* Sublinhado de pincel que se desenha quando o título aparece */
+      .hl-under { position: relative; display: inline-block; }
+      .hl-under::after {
+        content: "";
+        position: absolute;
+        left: -2%;
+        right: -2%;
+        bottom: -.1em;
+        height: .2em;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8.5C40 3 90 2.5 198 6.5' fill='none' stroke='%23ff5500' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+        clip-path: inset(0 100% 0 0);
+        transition: clip-path .9s var(--ease-out) .75s;
+      }
+      .is-revealed .hl-under::after, .no-js .hl-under::after { clip-path: inset(0 0 0 0); }
+      /* Canetão por baixo da palavra */
+      .hl-mark { position: relative; z-index: 0; white-space: nowrap; }
+      .hl-mark::before {
+        content: "";
+        position: absolute;
+        left: -.08em;
+        right: -.1em;
+        bottom: .06em;
+        z-index: -1;
+        height: .42em;
+        border-radius: .2em .35em .25em .3em;
+        background: linear-gradient(90deg, rgba(255, 85, 0, .78), rgba(255, 130, 60, .62));
+        transform: scaleX(0) skewX(-8deg) rotate(-1deg);
+        transform-origin: 0 50%;
+        transition: transform .85s var(--ease-out) .45s;
+      }
+      .is-revealed .hl-mark::before, .is-revealed.hl-mark::before { transform: scaleX(1) skewX(-8deg) rotate(-1deg); }
+      /* "Zero improviso": a palavra improviso é riscada */
+      .hl-strike { position: relative; display: inline-block; color: var(--text-tertiary); }
+      .hl-strike::after {
+        content: "";
+        position: absolute;
+        left: -3%;
+        right: -3%;
+        top: 54%;
+        height: .09em;
+        border-radius: 1em;
+        background: var(--accent);
+        box-shadow: 0 0 12px rgba(255, 85, 0, .7);
+        transform: scaleX(0) rotate(-3deg);
+        transform-origin: 0 50%;
+        transition: transform .7s var(--ease-out) .8s;
+      }
+      .is-revealed .hl-strike::after { transform: scaleX(1) rotate(-3deg); }
+      /* "o mais alto": degradê com brilho que sobe e uma seta ascendente */
+      .hl-peak {
+        position: relative;
+        display: inline-block;
+        background: linear-gradient(100deg, #ff5500 0%, #ff9a4d 35%, #fff1e2 50%, #ff9a4d 65%, #ff5500 100%);
+        background-size: 220% 100%;
+        background-position: 100% 0;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .hl-peak::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: -.15em;
+        bottom: -.16em;
+        height: .34em;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M2 17 L60 14 L110 10 L160 6 L194 3 M184 2 L195 3 L188 11' fill='none' stroke='%23ff5500' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+        clip-path: inset(0 100% 0 0);
+        transition: clip-path 1s var(--ease-out) .8s;
+      }
+      .is-revealed .hl-peak::after { clip-path: inset(0 0 0 0); }
+      @media (prefers-reduced-motion: no-preference) {
+        .hl-peak { animation: peak-shine 5s ease-in-out 1.4s infinite; }
+      }
+      @keyframes peak-shine { 0%, 55% { background-position: 100% 0; } 85%, 100% { background-position: 0 0; } }
+      /* "Nexus 1.0" em cromo com reflexo */
+      .hl-chrome {
+        background: linear-gradient(180deg, #ffffff 0%, #d9dce3 45%, #8b8f99 52%, #f4f5f8 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 0 18px rgba(255, 85, 0, .35));
+      }
+
+      /* Blocos de texto que antes eram texto puro */
+      .lead-card {
+        position: relative;
+        isolation: isolate;
+        padding: 1.25rem 1.35rem 1.3rem 1.5rem;
+        border: 1px solid var(--line);
+        border-radius: var(--r-lg);
+        background: linear-gradient(160deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .012) 60%), var(--bg-raised);
+        box-shadow: var(--inner-hl), 0 24px 50px -30px rgba(0, 0, 0, .9);
+        font-size: calc(var(--fs-lead) * .96);
+        transition: border-color var(--dur-2) ease, transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) ease;
+      }
+      .lead-card::before {
+        content: "";
+        position: absolute;
+        left: -1px;
+        top: 1.1rem;
+        bottom: 1.1rem;
+        width: 2px;
+        border-radius: 2px;
+        background: linear-gradient(180deg, #ff5500, rgba(255, 85, 0, .1));
+        box-shadow: 0 0 12px rgba(255, 85, 0, .6);
+      }
+      .lead-card[data-spotlight]::before { z-index: auto; }
+      @media (hover: hover) and (pointer: fine) {
+        .lead-card:hover { border-color: rgba(255, 85, 0, .35); transform: translateY(-2px); box-shadow: var(--inner-hl), 0 28px 60px -30px rgba(255, 85, 0, .35); }
+        /* o holofote do mouse não substitui a barra lateral */
+        .lead-card[data-spotlight]::before {
+          opacity: 1;
+          inset: auto;
+          left: -1px;
+          top: 1.1rem;
+          bottom: 1.1rem;
+          width: 2px;
+          border-radius: 2px;
+          background: linear-gradient(180deg, #ff5500, rgba(255, 85, 0, .1));
+        }
+      }
+      .lead-card strong { color: var(--text-primary); font-weight: 560; }
+      .lead-card strong.k { color: #ff8a4d; }
+      .lead-card__punch { display: block; margin-top: .7rem; padding-top: .7rem; border-top: 1px dashed var(--line-strong); color: var(--text-primary); font-weight: 520; }
+      .lead-card--warn { border-color: rgba(255, 85, 0, .28); background: linear-gradient(160deg, rgba(255, 85, 0, .09), rgba(255, 85, 0, .015) 55%), var(--bg-raised); }
+      .lead-card--term { font-size: calc(var(--fs-lead) * .92); }
+      .chip-code { padding: .08em .45em; border: 1px solid rgba(255, 85, 0, .4); border-radius: 6px; background: rgba(255, 85, 0, .1); color: #ff9a5c; font-family: var(--font-mono); font-size: .88em; }
+      .prose strong { color: var(--text-primary); font-weight: 560; }
+
+      /* Ponte "atrair → converter" */
+      .alert__bridge .bridge { display: grid; gap: .55rem; max-width: none; color: var(--text-secondary); font-size: calc(var(--fs-lead) * 1.12); line-height: 1.35; }
+      .bridge__line { display: block; }
+      .bridge__line::before { content: "01"; display: inline-block; vertical-align: .2em; margin-right: .55rem; padding: .1rem .4rem; border: 1px solid var(--line-strong); border-radius: 6px; color: var(--text-tertiary); font-family: var(--font-mono); font-size: .62rem; letter-spacing: .08em; }
+      .bridge__line--go { color: var(--text-primary); }
+      .bridge__line--go::before { content: "02"; border-color: rgba(255, 85, 0, .5); color: var(--accent); background: rgba(255, 85, 0, .1); }
+      .bridge__word { color: var(--text-primary); font-family: var(--font-serif); font-style: italic; font-size: 1.18em; font-weight: 400; }
+      .bridge__word.hl-accent { color: transparent; }
+
+      /* FAQ: frase de impacto */
+      .faq__punch { color: var(--text-secondary); font-size: clamp(1.25rem, 1rem + 1vw, 1.6rem); line-height: 1.35; letter-spacing: -.015em; }
+      .faq__punch strong, .faq__punch .hl-mark { color: var(--text-primary); font-weight: 580; }
+
+      /* Nexus: linha de comando com cursor */
+      .nexus__claim {
+        position: relative;
+        padding: .85rem 1rem .85rem 2.1rem;
+        border: 1px solid rgba(255, 85, 0, .3);
+        border-left: 2px solid var(--accent);
+        border-radius: 0 var(--r-md) var(--r-md) 0;
+        background: linear-gradient(90deg, rgba(255, 85, 0, .1), rgba(255, 85, 0, .02));
+      }
+      .nexus__claim::before { content: ">"; position: absolute; left: .9rem; color: var(--accent); }
+      .nexus__claim::after { content: ""; display: inline-block; width: .55em; height: 1.05em; margin-left: .3em; vertical-align: -.18em; background: var(--accent); }
+      @media (prefers-reduced-motion: no-preference) {
+        .nexus__claim::after { animation: caret-blink 1.1s steps(1) infinite; }
+      }
+      @keyframes caret-blink { 50% { opacity: 0; } }
+
+      /* Etiquetas da equipe: nós que acendem em sequência, como o fluxo de IA acima */
+      .team__tags .tag {
+        position: relative;
+        gap: .55rem;
+        border-color: var(--line-strong);
+        background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .01));
+        color: var(--text-primary);
+        transition: border-color var(--dur-2) ease, box-shadow var(--dur-2) ease, transform var(--dur-2) var(--ease-out);
+      }
+      .team__tags .tag::before { content: ""; width: 7px; height: 7px; border: 1px solid rgba(255, 85, 0, .7); border-radius: 50%; background: rgba(255, 85, 0, .2); }
+      @media (prefers-reduced-motion: no-preference) {
+        .team__tags .tag { animation: tag-glow 7.2s ease-in-out infinite; }
+        .team__tags .tag::before { animation: tag-dot 7.2s ease-in-out infinite; }
+        .team__tags .tag:nth-child(2), .team__tags .tag:nth-child(2)::before { animation-delay: 1.2s; }
+        .team__tags .tag:nth-child(3), .team__tags .tag:nth-child(3)::before { animation-delay: 2.4s; }
+        .team__tags .tag:nth-child(4), .team__tags .tag:nth-child(4)::before { animation-delay: 3.6s; }
+        .team__tags .tag:nth-child(5), .team__tags .tag:nth-child(5)::before { animation-delay: 4.8s; }
+        .team__tags .tag:nth-child(6), .team__tags .tag:nth-child(6)::before { animation-delay: 6s; }
+      }
+      @keyframes tag-glow { 0%, 22%, 100% { border-color: var(--line-strong); box-shadow: none; } 8% { border-color: rgba(255, 85, 0, .7); box-shadow: 0 0 18px -4px rgba(255, 85, 0, .6); } }
+      @keyframes tag-dot { 0%, 22%, 100% { background: rgba(255, 85, 0, .2); box-shadow: none; } 8% { background: #ff5500; box-shadow: 0 0 8px #ff5500; } }
+      @media (hover: hover) and (pointer: fine) {
+        .team__tags .tag:hover { border-color: rgba(255, 85, 0, .7); box-shadow: 0 0 22px -6px rgba(255, 85, 0, .7); transform: translateY(-2px); }
+      }
+
+      /* Template genérico × Projeto Tirvo */
+      .compare caption { font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem); }
+      .compare__title { display: flex; flex-wrap: wrap; align-items: center; gap: .3em .5em; }
+      .compare__vs-a { color: var(--text-tertiary); text-decoration: line-through; text-decoration-color: rgba(255, 255, 255, .25); text-decoration-thickness: 2px; }
+      .compare__vs-x { display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; border: 1px solid var(--line-strong); border-radius: 50%; color: var(--text-tertiary); font-size: .6em; }
+      .compare__vs-b { display: inline-flex; align-items: center; gap: .35em; color: var(--text-primary); }
+      .compare__logo { width: auto; height: 1.35em; margin-top: -.28em; filter: drop-shadow(0 0 16px rgba(255, 85, 0, .35)); }
+      .compare__generic { filter: grayscale(1); opacity: .62; }
+      .compare__generic .compare__cell { font-size: .9rem; }
+      .compare td.compare__tirvo, .compare th.compare__tirvo {
+        position: relative;
+        border-left: 1px solid rgba(255, 85, 0, .45);
+        border-right: 1px solid rgba(255, 85, 0, .45);
+        background: linear-gradient(90deg, rgba(255, 85, 0, .1), rgba(255, 85, 0, .03));
+      }
+      .compare thead th.compare__tirvo { border-top: 1px solid rgba(255, 85, 0, .55); border-radius: 12px 12px 0 0; background: linear-gradient(180deg, rgba(255, 85, 0, .22), rgba(255, 85, 0, .08)); }
+      .compare tbody tr:last-child td.compare__tirvo { border-bottom: 1px solid rgba(255, 85, 0, .45); }
+      .compare__head { display: inline-flex; align-items: center; gap: .6rem; color: #ffb27d; font-size: .8rem; }
+      .compare__badge { padding: .12rem .45rem; border-radius: var(--r-pill); background: var(--accent); color: var(--on-accent); font-size: .6rem; letter-spacing: .1em; }
+      .compare__tirvo .compare__cell { font-size: 1.02rem; font-weight: 500; }
+      .compare__tirvo .icon {
+        box-sizing: content-box;
+        padding: 3px;
+        border-radius: 50%;
+        background: rgba(255, 85, 0, .16);
+        box-shadow: 0 0 12px rgba(255, 85, 0, .45);
+      }
+      /* Reflexo de energia descendo pela coluna da Tirvo */
+      @media (prefers-reduced-motion: no-preference) {
+        .compare td.compare__tirvo::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          background: linear-gradient(180deg, transparent 0%, rgba(255, 140, 70, .16) 50%, transparent 100%);
+          opacity: 0;
+          animation: col-energy 7s ease-in-out infinite;
+        }
+        .compare tbody tr:nth-child(2) td.compare__tirvo::after { animation-delay: .35s; }
+        .compare tbody tr:nth-child(3) td.compare__tirvo::after { animation-delay: .7s; }
+        .compare tbody tr:nth-child(4) td.compare__tirvo::after { animation-delay: 1.05s; }
+        .compare tbody tr:nth-child(5) td.compare__tirvo::after { animation-delay: 1.4s; }
+        .compare tbody tr:nth-child(6) td.compare__tirvo::after { animation-delay: 1.75s; }
+        .compare tbody tr:nth-child(7) td.compare__tirvo::after { animation-delay: 2.1s; }
+      }
+      @keyframes col-energy { 0%, 40%, 100% { opacity: 0; } 20% { opacity: 1; } }
+      @media (max-width: 767.98px) {
+        .compare td.compare__tirvo { border: 0; border-left: 2px solid var(--accent); }
+        .compare tbody tr:last-child td.compare__tirvo { border-bottom: 0; }
+      }
+
+      /* Fases do método em blocos */
+      .timeline__body {
+        position: relative;
+        padding: 1.2rem 1.25rem 1.3rem;
+        border: 1px solid var(--line);
+        border-radius: var(--r-lg);
+        background: linear-gradient(170deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .01) 55%), var(--bg-raised);
+        box-shadow: var(--inner-hl);
+        transition: border-color var(--dur-2) ease, transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) ease;
+      }
+      .timeline__body::before {
+        content: "";
+        position: absolute;
+        left: 1.25rem;
+        right: 1.25rem;
+        top: -1px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        opacity: .55;
+      }
+      .timeline__body h3 { display: flex; align-items: center; gap: .6rem; font-size: 1.3rem; letter-spacing: -.02em; }
+      .timeline__body h3::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--line-strong), transparent); }
+      @media (hover: hover) and (pointer: fine) {
+        .timeline__body:hover { border-color: rgba(255, 85, 0, .38); transform: translateY(-3px); box-shadow: var(--inner-hl), 0 24px 50px -28px rgba(255, 85, 0, .45); }
+      }
+
+      /* Selos: título da faixa em destaque e cada selo em bloco */
+      .seals-head p {
+        display: inline-flex;
+        align-items: center;
+        gap: .6rem;
+        padding: .45rem 1.1rem .45rem .45rem;
+        border: 1px solid rgba(255, 85, 0, .4);
+        border-radius: var(--r-pill);
+        background: linear-gradient(180deg, rgba(255, 85, 0, .14), rgba(255, 85, 0, .03));
+        color: var(--text-primary);
+        font-family: var(--font-sans);
+        font-size: clamp(1rem, .9rem + .5vw, 1.25rem);
+        font-weight: 580;
+        letter-spacing: -.01em;
+        text-transform: none;
+        box-shadow: 0 14px 34px -20px rgba(255, 85, 0, .7);
+      }
+      .seals-head__icon { display: grid; place-items: center; width: 2em; height: 2em; border-radius: 50%; background: var(--accent); color: var(--on-accent); }
+      .seals-head__icon .icon { width: 1.05em; height: 1.05em; }
+      .seals-head__amp { color: var(--text-tertiary); font-family: var(--font-serif); font-style: italic; font-weight: 400; }
+      .seals-head span:last-child { position: relative; overflow: hidden; }
+      .seal {
+        padding: 1.25rem 1.2rem 1.35rem;
+        border: 1px solid var(--line);
+        border-radius: var(--r-lg);
+        background: radial-gradient(120% 70% at 50% 0%, rgba(255, 85, 0, .07), transparent 60%), var(--bg-raised);
+        transition: border-color var(--dur-2) ease, transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) ease;
+      }
+      .seal h3 { display: flex; align-items: center; gap: .5rem; }
+      .seal h3::before { content: ""; width: 14px; height: 2px; border-radius: 2px; background: var(--accent); box-shadow: 0 0 8px rgba(255, 85, 0, .8); }
+      @media (hover: hover) and (pointer: fine) {
+        .seal:hover { border-color: rgba(255, 85, 0, .38); transform: translateY(-3px); box-shadow: 0 24px 50px -28px rgba(255, 85, 0, .45); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hl-under::after, .hl-mark::before, .hl-strike::after, .hl-peak::after { transition: none; }
+      }
   </style>
 </head>
 <body>
@@ -4678,13 +5082,13 @@
       <span class="crosshair crosshair--tr" aria-hidden="true"></span>
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">02</span> — O alerta</p>
-          <span class="section-head__rule" aria-hidden="true"></span>
+          <p class="label label--alert" data-decode><span class="label__beacon" aria-hidden="true"></span><span class="label__num">02</span> <span class="label__txt">O alerta</span></p>
+          <span class="section-head__rule section-head__rule--pulse" aria-hidden="true"><svg viewBox="0 0 600 24" preserveAspectRatio="none" focusable="false"><path class="pulse__base" d="M0 12 H230 L242 12 L250 3 L258 21 L266 7 L272 12 H600"/><path class="pulse__beat" pathLength="1" d="M0 12 H230 L242 12 L250 3 L258 21 L266 7 L272 12 H600"/></svg></span>
         </div>
 
         <div class="l-grid">
-          <h2 class="title alert__title" id="alerta-titulo" data-reveal="title">Seu negócio está construído em <span class="serif">terreno alugado</span>.</h2>
-          <p class="lead alert__lead" data-reveal>No Instagram e no TikTok, as regras não são suas. O algoritmo muda sem aviso, contas são hackeadas, suspensas ou banidas da noite para o dia, e a audiência que você levou anos para construir pertence à plataforma. Seguidor não é cliente — e alcance emprestado não é patrimônio.</p>
+          <h2 class="title alert__title" id="alerta-titulo" data-reveal="title"><span class="hl-box">Seu negócio</span> está construído em <span class="serif hl-accent hl-under">terreno alugado</span>.</h2>
+          <p class="lead lead-card lead-card--warn alert__lead" data-reveal data-spotlight>No <strong>Instagram</strong> e no <strong>TikTok</strong>, <strong class="k">as regras não são suas</strong>. O algoritmo muda sem aviso, contas são hackeadas, suspensas ou banidas da noite para o dia, e a audiência que você levou anos para construir <strong>pertence à plataforma</strong>. <span class="lead-card__punch">Seguidor não é cliente — e alcance emprestado não é patrimônio.</span></p>
         </div>
 
         <div class="split">
@@ -4745,9 +5149,9 @@
         </div>
 
         <div class="l-grid alert__quote-wrap">
-          <p class="pullquote" data-reveal>Rede social é vitrine. Site é <span class="serif">sede</span>.</p>
+          <p class="pullquote" data-reveal>Rede social é <span class="hl-mark">vitrine</span>. Site é <span class="serif">sede</span>.</p>
           <div class="alert__bridge" data-reveal style="--i:1">
-            <p>Use as redes para atrair. Use o site para converter.</p>
+            <p class="bridge"><span class="bridge__line">Use as redes para <span class="bridge__word">atrair</span>.</span> <span class="bridge__line bridge__line--go">Use o site para <span class="bridge__word hl-accent">converter</span>.</span></p>
             <div class="micro-cta">
               <a class="btn btn--primary" href="#contato"><span class="btn__sheen" aria-hidden="true"></span>Quero minha sede digital<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
             </div>
@@ -4762,14 +5166,14 @@
       <span class="glow glow--services" aria-hidden="true"></span>
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">03</span> — Serviços</p>
+          <p class="label" data-decode><span class="label__num">03</span> <span class="label__txt">Serviços</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
           <span class="section-head__meta" aria-hidden="true">5 frentes</span>
         </div>
 
         <div class="l-grid">
-          <h2 class="title services__title" id="servicos-titulo" data-reveal="title">Cinco frentes. Um único padrão: o mais alto.</h2>
-          <p class="lead services__lead" data-reveal>Do primeiro traço do logotipo ao agente de IA em produção, cada entrega segue o mesmo rigor de engenharia.</p>
+          <h2 class="title services__title" id="servicos-titulo" data-reveal="title">Cinco frentes. Um único padrão: <span class="hl-peak">o mais alto</span>.</h2>
+          <p class="lead lead-card services__lead" data-reveal data-spotlight>Do <strong>primeiro traço do logotipo</strong> ao <strong>agente de IA em produção</strong>, cada entrega segue <strong class="k">o mesmo rigor de engenharia</strong>.</p>
         </div>
 
         <div class="bento" data-stagger>
@@ -5146,18 +5550,18 @@
       <span class="crosshair crosshair--tr" aria-hidden="true"></span>
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">04</span> — Equipe</p>
+          <p class="label" data-decode><span class="label__num">04</span> <span class="label__txt">Equipe</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
 
         <div class="l-grid">
-          <h2 class="title team__title" id="equipe-titulo" data-reveal="title">Engenharia <span class="serif">de verdade</span>. Não um template com o seu logo.</h2>
+          <h2 class="title team__title" id="equipe-titulo" data-reveal="title"><span class="hl-box hl-box--accent">Engenharia</span> <span class="serif hl-accent">de verdade</span>. <span class="hl-dim">Não um template com o seu logo.</span></h2>
 
           <div class="team__manifesto" data-reveal>
-            <p class="lead">Seu projeto fica nas mãos de uma equipe multidisciplinar e experiente, que une programadores raiz a especialistas na fronteira da inteligência artificial.</p>
+            <p class="lead lead-card" data-spotlight>Seu projeto fica nas mãos de uma <strong>equipe multidisciplinar e experiente</strong>, que une <strong class="k">programadores raiz</strong> a especialistas na <strong class="k">fronteira da inteligência artificial</strong>.</p>
             <div class="prose">
-              <p>Programadores raiz são os que passaram anos escrevendo código puro e entendem o que existe por baixo do capô: HTML, CSS, JavaScript, back-end, bancos de dados e infraestrutura. É esse domínio que permite construir sem atalhos e sem peso morto.</p>
-              <p>Por isso, criar com a Tirvo é um projeto de engenharia: arquitetura pensada, código sob medida, testes e performance medida — nunca um tema pronto com as suas cores.</p>
+              <p>Programadores raiz são os que passaram anos escrevendo <strong>código puro</strong> e entendem o que existe por baixo do capô: HTML, CSS, JavaScript, back-end, bancos de dados e infraestrutura. É esse domínio que permite construir sem atalhos e sem peso morto.</p>
+              <p>Por isso, criar com a Tirvo é <strong>um projeto de engenharia</strong>: arquitetura pensada, código sob medida, testes e performance medida — nunca um tema pronto com as suas cores.</p>
             </div>
           </div>
 
@@ -5219,12 +5623,12 @@
 
         <div class="compare" data-reveal>
           <table role="table">
-            <caption>Template genérico × Projeto Tirvo</caption>
+            <caption><span class="compare__title"><span class="compare__vs-a">Template genérico</span> <span class="compare__vs-x">×</span> <span class="compare__vs-b">Projeto <img class="compare__logo" src="tirvo-logo-negativo.png" width="601" height="260" alt="" loading="lazy" decoding="async"><span class="sr-only">Tirvo</span></span></span></caption>
             <thead role="rowgroup">
               <tr role="row">
                 <th scope="col" role="columnheader">Critério</th>
                 <th scope="col" role="columnheader" class="compare__generic">Template genérico</th>
-                <th scope="col" role="columnheader" class="compare__tirvo">Projeto Tirvo</th>
+                <th scope="col" role="columnheader" class="compare__tirvo"><span class="compare__head">Projeto Tirvo<span class="compare__badge" aria-hidden="true">sob medida</span></span></th>
               </tr>
             </thead>
             <tbody role="rowgroup">
@@ -5278,13 +5682,13 @@
     <section class="section section--cv method" id="metodo" aria-labelledby="metodo-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">05</span> — Método</p>
+          <p class="label" data-decode><span class="label__num">05</span> <span class="label__txt">Método</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
 
         <div class="l-grid">
-          <h2 class="title method__title" id="metodo-titulo" data-reveal="title">Um método. Três fases. Zero improviso.</h2>
-          <p class="lead method__lead" data-reveal>Você sabe o que acontece em cada etapa, o que será entregue e quando decidir. Transparência é parte da engenharia.</p>
+          <h2 class="title method__title" id="metodo-titulo" data-reveal="title">Um método. Três fases. <span class="hl-accent">Zero</span> <span class="hl-strike">improviso</span>.</h2>
+          <p class="lead lead-card method__lead" data-reveal data-spotlight>Você sabe <strong>o que acontece em cada etapa</strong>, <strong>o que será entregue</strong> e <strong>quando decidir</strong>. <span class="lead-card__punch">Transparência é parte da engenharia.</span></p>
         </div>
 
         <ol class="timeline" data-timeline>
@@ -5330,7 +5734,7 @@
         </ol>
 
         <div class="seals-head" aria-hidden="true">
-          <p>Segurança e performance</p>
+          <p><span class="seals-head__icon"><svg class="icon"><use href="#i-shield"/></svg></span>Segurança <span class="seals-head__amp">e</span> <span class="hl-accent">performance</span></p>
           <span></span>
         </div>
 
@@ -5393,15 +5797,15 @@
 
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">06</span> — Nexus 1.0</p>
+          <p class="label" data-decode><span class="label__num">06</span> <span class="label__txt">Nexus 1.0</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
           <span class="section-head__meta" aria-hidden="true">sistema autônomo</span>
         </div>
 
         <div class="l-grid">
           <div class="nexus__copy">
-            <h2 class="title" id="nexus-titulo" data-reveal="title">Nexus 1.0. Ele não conversa. <span class="serif">Ele entrega.</span></h2>
-            <p class="lead" data-reveal>O Nexus é um enxame de agentes autônomos dedicado exclusivamente à programação. Ele não fica batendo papo: recebe a tarefa, navega, pesquisa, escreve o código e entrega o software pronto em um arquivo .zip.</p>
+            <h2 class="title" id="nexus-titulo" data-reveal="title"><span class="hl-chrome">Nexus 1.0</span>. <span class="hl-dim">Ele não conversa.</span> <span class="serif hl-accent hl-under">Ele entrega.</span></h2>
+            <p class="lead lead-card lead-card--term" data-reveal data-spotlight>O Nexus é um <strong class="k">enxame de agentes autônomos</strong> dedicado <strong>exclusivamente à programação</strong>. Ele não fica batendo papo: recebe a tarefa, navega, pesquisa, escreve o código e entrega o software pronto em um arquivo <code class="chip-code">.zip</code>.</p>
             <p class="nexus__claim" data-reveal>Sem conversa. Sem prompt infinito. A tarefa entra, o software sai.</p>
           </div>
 
@@ -5596,11 +6000,11 @@
       <div class="blueprint" aria-hidden="true"></div>
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">07</span> — Números</p>
+          <p class="label" data-decode><span class="label__num">07</span> <span class="label__txt">Números</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
         <div class="l-grid">
-          <h2 class="title numbers__title" id="numeros-titulo" data-reveal="title">Números que importam.</h2>
+          <h2 class="title numbers__title" id="numeros-titulo" data-reveal="title">Números que <span class="hl-accent hl-under">importam</span>.</h2>
         </div>
 
         <ul class="stats" data-counters>
@@ -5639,14 +6043,14 @@
     <section class="section section--cv faq" id="faq" aria-labelledby="faq-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">08</span> — Perguntas</p>
+          <p class="label" data-decode><span class="label__num">08</span> <span class="label__txt">Perguntas</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
 
         <div class="l-grid">
           <div class="faq__aside">
-            <h2 class="title" id="faq-titulo" data-reveal="title">Perguntas frequentes</h2>
-            <p class="lead" data-reveal>Respostas diretas para uma decisão segura.</p>
+            <h2 class="title" id="faq-titulo" data-reveal="title">Perguntas <span class="serif hl-accent">frequentes</span></h2>
+            <p class="lead faq__punch" data-reveal><strong>Respostas diretas</strong> para uma <span class="hl-mark">decisão segura</span>.</p>
             <a class="faq__wa" href="https://api.whatsapp.com/send?phone=5541991933850&amp;text=Ol%C3%A1%2C%20Tirvo!%20Vim%20pelo%20site%20e%20tenho%20uma%20d%C3%BAvida%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer" data-reveal><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Ainda com dúvidas? Fale direto no WhatsApp</a>
           </div>
 
@@ -5711,11 +6115,11 @@
       <div class="container l-grid">
         <div class="contact__intro">
           <div class="section-head">
-            <p class="label" data-decode><span class="label__num">09</span> — Contato</p>
+            <p class="label" data-decode><span class="label__num">09</span> <span class="label__txt">Contato</span></p>
             <span class="section-head__rule" aria-hidden="true"></span>
           </div>
-          <h2 class="title" id="contato-titulo" data-reveal="title">Vamos projetar o <span class="serif">futuro digital</span> da sua empresa.</h2>
-          <p class="lead" data-reveal>Conte o seu desafio em poucas linhas. A mensagem chega pronta no WhatsApp da equipe e a conversa começa exatamente de onde você parou.</p>
+          <h2 class="title" id="contato-titulo" data-reveal="title">Vamos projetar o <span class="serif hl-accent hl-under">futuro digital</span> da <span class="hl-box hl-box--accent">sua empresa</span>.</h2>
+          <p class="lead lead-card" data-reveal data-spotlight><strong class="k">Conte o seu desafio em poucas linhas.</strong> A mensagem chega pronta no <strong>WhatsApp da equipe</strong> e a conversa começa exatamente de onde você parou.</p>
           <ul class="assure" data-reveal>
             <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Atendimento direto com a equipe Tirvo</li>
             <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Orçamento sem compromisso</li>
