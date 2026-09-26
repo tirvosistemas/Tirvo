@@ -606,6 +606,59 @@
        COMPONENTES
        ========================================================== */
     @layer components {
+      /* Abertura: logo animada com som, exibida uma vez ao abrir o site */
+      .intro { display: none; }
+      .js .intro {
+        position: fixed;
+        inset: 0;
+        z-index: 2147483000;
+        display: block;
+        overflow: hidden;
+        background: #f7f3ed;
+        transition: opacity 600ms var(--ease-out), visibility 0s linear 600ms;
+      }
+      .js .intro.is-leaving { opacity: 0; visibility: hidden; pointer-events: none; }
+      /* Cobre a tela no paisagem; no retrato, amplia até o logo ocupar a largura (o fundo do vídeo é o mesmo creme) */
+      .intro__video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: max(100vw, min(200vw, 177.78vh));
+        max-width: none;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        transform: translate(-50%, -50%);
+      }
+      .intro__controls {
+        position: absolute;
+        right: max(16px, env(safe-area-inset-right));
+        bottom: max(16px, env(safe-area-inset-bottom));
+        display: flex;
+        gap: .5rem;
+      }
+      .intro__btn {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        min-height: 44px;
+        padding: 0 1.1rem;
+        border: 1px solid rgb(34 28 43 / .16);
+        border-radius: 999px;
+        background: rgb(255 255 255 / .55);
+        color: #221c2b;
+        font: 500 .875rem/1 var(--font-sans);
+        transition: background-color 200ms ease, border-color 200ms ease;
+      }
+      .intro__btn:hover { background: #fff; border-color: rgb(34 28 43 / .3); }
+      .intro__btn:focus-visible { outline-color: #ff5500; }
+      .intro__btn[hidden] { display: none; }
+      .intro__btn svg { width: 18px; height: 18px; }
+      /* Enquanto a abertura roda, a página não rola e as animações de entrada esperam */
+      html.intro-on { overflow: hidden; background: #f7f3ed; }
+      html.intro-on .header,
+      html.intro-on .hero,
+      html.intro-on .hero * { animation-play-state: paused !important; }
+
       /* Ícones do sprite */
       .icon {
         display: inline-block;
@@ -3250,6 +3303,106 @@
   </style>
 </head>
 <body>
+  <!-- ============ ABERTURA (logo animada com som) ============ -->
+  <div class="intro" role="dialog" aria-modal="true" aria-label="Abertura da Tirvo" data-intro>
+    <video class="intro__video" playsinline preload="auto" disablepictureinpicture disableremoteplayback aria-hidden="true" data-intro-video>
+      <source src="tirvo-abertura.webm" type='video/webm; codecs="vp9, opus"'>
+      <source src="tirvo-abertura.mp4" type="video/mp4">
+    </video>
+    <div class="intro__controls">
+      <button class="intro__btn" type="button" hidden data-intro-sound>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+        Ver com som
+      </button>
+      <button class="intro__btn" type="button" data-intro-skip>Pular abertura</button>
+    </div>
+  </div>
+  <script>
+    /* Abertura: toca a logo do início ao fim. O navegador só libera som automático se o visitante já interagiu com o site;
+       quando bloqueia, a animação roda sem som e o botão "Ver com som" recomeça do início com áudio. */
+    (function () {
+      var d = document.documentElement;
+      var intro = document.querySelector('[data-intro]');
+      var resolveDone;
+      window.tirvoIntro = { done: new Promise(function (resolve) { resolveDone = resolve; }) };
+      if (!intro) { resolveDone(); return; }
+      if (!d.classList.contains('js')) { intro.remove(); resolveDone(); return; }
+
+      var video = intro.querySelector('[data-intro-video]');
+      var soundBtn = intro.querySelector('[data-intro-sound]');
+      var skipBtn = intro.querySelector('[data-intro-skip]');
+      var sources = video.querySelectorAll('source');
+      var ended = false;
+      var playing = false;
+      var watchdog = 0;
+      d.classList.add('intro-on');
+
+      var setInert = function (value) {
+        for (var el = intro.nextElementSibling; el; el = el.nextElementSibling) {
+          if (el.tagName !== 'SCRIPT') el.inert = value;
+        }
+      };
+      var arm = function (ms) {
+        clearTimeout(watchdog);
+        if (!document.hidden) watchdog = setTimeout(finish, ms);
+      };
+      // Sem início em 4 s (conexão lenta) ou travada no meio: libera o site
+      var armForState = function () {
+        if (!playing) arm(4000);
+        else arm(Math.max(0, ((video.duration || 5) - video.currentTime) * 1000) + 2500);
+      };
+      function finish() {
+        if (ended) return;
+        ended = true;
+        clearTimeout(watchdog);
+        document.removeEventListener('keydown', onKey);
+        document.removeEventListener('visibilitychange', onVisibility);
+        setInert(false);
+        d.classList.remove('intro-on');
+        intro.classList.add('is-leaving');
+        try { video.pause(); } catch (e) { /* nada a fazer */ }
+        resolveDone();
+        setTimeout(function () { intro.remove(); }, 650);
+      }
+      function onKey(event) { if (event.key === 'Escape') finish(); }
+      function onVisibility() { if (document.hidden) clearTimeout(watchdog); else armForState(); }
+
+      var start = function (withSound) {
+        video.muted = !withSound;
+        var attempt = video.play();
+        if (!attempt || !attempt.catch) return;
+        attempt.catch(function (error) {
+          if (ended) return;
+          // Som bloqueado pela política de reprodução automática: roda sem som e oferece recomeçar com áudio
+          if (withSound && error && error.name === 'NotAllowedError') {
+            soundBtn.hidden = false;
+            start(false);
+          } else {
+            finish();
+          }
+        });
+      };
+
+      video.addEventListener('playing', function () { playing = true; armForState(); });
+      video.addEventListener('ended', finish);
+      video.addEventListener('error', finish);
+      if (sources.length) sources[sources.length - 1].addEventListener('error', finish);
+      skipBtn.addEventListener('click', finish);
+      soundBtn.addEventListener('click', function () {
+        soundBtn.hidden = true;
+        skipBtn.focus({ preventScroll: true });
+        try { video.currentTime = 0; } catch (e) { /* nada a fazer */ }
+        start(true);
+        armForState();
+      });
+      document.addEventListener('keydown', onKey);
+      document.addEventListener('visibilitychange', onVisibility);
+      document.addEventListener('DOMContentLoaded', function () { if (!ended) setInert(true); });
+
+      start(true);
+      armForState();
+    })();
+  </script>
   <a class="skip-link" href="#conteudo" data-overlay-inert>Pular para o conteúdo</a>
 
   <!-- Barra de progresso e granulação -->
@@ -5295,8 +5448,11 @@
         if (lit < chars.length) requestAnimationFrame(tick);
         else finish();
       };
-      const startDelay = Math.max(0, cfg.startAt - performance.now());
-      setTimeout(() => requestAnimationFrame(tick), startDelay);
+      // Espera a abertura terminar para a digitação acontecer à vista
+      (window.tirvoIntro?.done ?? Promise.resolve()).then(() => {
+        const startDelay = Math.max(cfg.startAt - performance.now(), window.tirvoIntro ? 250 : 0, 0);
+        setTimeout(() => requestAnimationFrame(tick), startDelay);
+      });
       prefersReducedMotion.subscribe((reduce) => { if (reduce) finish(); });
     }
 
