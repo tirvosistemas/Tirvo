@@ -3725,6 +3725,9 @@
       /* Longe do canto, o balão sai sobre a cabeça e desliza para dentro da tela */
       .mascot.is-away .mascot__bubble { margin-left: var(--bub-dx, 0px); transition-property: opacity, scale, translate, visibility, margin-left; }
       .mascot.is-away .mascot__bubble::after { left: clamp(0px, calc(var(--bub-dx, 0px) * -1), calc(100% - 18px)); }
+      /* Balão parado sobre as letras enquanto ele pula: sem rabinho, porque o robô muda de letra */
+      .mascot.is-pinned .mascot__bubble { border-radius: 18px; transition-property: opacity, scale, translate, visibility; }
+      .mascot.is-pinned .mascot__bubble::after { display: none; }
       /* Ao lado do WhatsApp, o balão se alinha pela direita, acima do botão */
       .mascot.is-at-wa .mascot__bubble {
         left: auto;
@@ -6610,9 +6613,10 @@
         footer: {
           letters: 'Toque nas letras da Tirvo: cada uma tem uma surpresa.',
           whatsapp: 'O próximo passo é uma conversa com a equipe. Toque aqui no WhatsApp.',
-          perchMs: 1150,
+          hopMs: 950,
+          perchMs: 1900,
           waMs: 7500,
-          waAfterPlay: 6000,
+          waAfterPlay: 2500,
         },
       },
     };
@@ -9520,7 +9524,7 @@
       });
       // Com o cursor sobre o mascote ou o balão, o balão não some
       mascot.addEventListener('pointerenter', () => cancel('hide'));
-      mascot.addEventListener('pointerleave', () => { if (bubbleOpen) later('hide', 2400, hideBubble); });
+      mascot.addEventListener('pointerleave', () => { if (bubbleOpen && !scene) later('hide', 2400, hideBubble); });
       // Quando o visitante toca todas as letras da assinatura do rodapé, o Next comemora junto
       const party = () => {
         if (!landed || concealed) return;
@@ -9545,7 +9549,7 @@
       const foot = cfg.footer;
       // Onde ele pisa no topo de cada letra (T, R, V e O), em coordenadas do viewBox da assinatura
       const PERCHES = [[49, 47], [233, 99], [403.5, 99], [518, 99]];
-      const ROUTE = [0, 1, 2, 3, 2, 3];
+      const ROUTE = [0, 1, 2, 3];
       const FEET = 0.955; // altura da sola em relação à caixa do robô
       let sceneToken = 0;
       let footerSceneAt = -Infinity;
@@ -9553,7 +9557,9 @@
       let offset = { x: 0, y: 0 };
       let homeBox = null;
       let motion = null;
+      let bubbleMotion = null;
       let perch = -1;
+      let pin = null; // enquanto ele pula nas letras, o balão fica parado neste ponto para dar tempo de ler
 
       const canRoam = () => landed && !concealed && !prefersReducedMotion.value && Boolean(signature)
         && typeof mascot.animate === 'function' && mascot.classList.contains('is-at-footer');
@@ -9562,6 +9568,12 @@
         offset = { x, y };
         mascot.style.transform = x || y ? `translate(${x}px, ${y}px)` : '';
         mascot.classList.toggle('is-away', x !== 0 || y !== 0);
+        if (pin) bubble.style.transform = `translate(${pin.x - x}px, ${pin.y - y}px)`;
+      };
+      const pinBubble = (on) => {
+        pin = on ? { ...offset } : null;
+        mascot.classList.toggle('is-pinned', on);
+        if (!on) bubble.style.removeProperty('transform');
       };
       const measureHome = () => {
         const box = mascot.getBoundingClientRect();
@@ -9575,11 +9587,18 @@
         motion?.cancel();
         setOffset(x, y);
         const frames = [];
+        const counter = [];
         for (let i = 0; i <= 14; i += 1) {
           const t = i / 14;
           const ease = arc ? t : t < 0.5 ? 2 * t * t : 1 - ((2 - 2 * t) ** 2) / 2;
-          frames.push({ transform: `translate(${lerp(from.x, x, ease).toFixed(1)}px, ${(lerp(from.y, y, t) - arc * 4 * t * (1 - t)).toFixed(1)}px)` });
+          const px = lerp(from.x, x, ease);
+          const py = lerp(from.y, y, t) - arc * 4 * t * (1 - t);
+          frames.push({ transform: `translate(${px.toFixed(1)}px, ${py.toFixed(1)}px)` });
+          if (pin) counter.push({ transform: `translate(${(pin.x - px).toFixed(1)}px, ${(pin.y - py).toFixed(1)}px)` });
         }
+        // O balão fixo recebe o movimento inverso, quadro a quadro, e fica parado na tela
+        bubbleMotion?.cancel();
+        bubbleMotion = pin ? bubble.animate(counter, { duration: ms }) : null;
         const animation = mascot.animate(frames, { duration: ms });
         motion = animation;
         return animation.finished.then(() => {
@@ -9592,7 +9611,7 @@
         setFace('happy');
         sfx.play('hop');
         const rise = Math.max(0, offset.y - y);
-        const ok = await moveTo(x, y, clamp(480 + rise * 0.6, 480, 900), clamp(homeBox.height * 0.55 + rise * 0.25, 40, 200));
+        const ok = await moveTo(x, y, clamp(foot.hopMs + rise * 0.5, foot.hopMs, foot.hopMs + 450), clamp(homeBox.height * 0.6 + rise * 0.25, 40, 200));
         return ok && token === sceneToken;
       };
       const run = async (x, token) => {
@@ -9619,11 +9638,13 @@
         const box = signature.getBoundingClientRect();
         return Boolean(top) && homeBox.top + top.y > 8 && box.top + box.width * 0.36 < innerHeight;
       };
-      // Balão sobre a cabeça: desliza para dentro da tela se passaria da borda direita
-      const fitBubble = () => {
+      // Balão das letras: centralizado sobre a assinatura, sem passar das bordas da tela
+      const centerBubble = () => {
+        const box = signature.getBoundingClientRect();
         const left = homeBox.left + offset.x + homeBox.width * 0.5;
-        const dx = Math.max(12 - left, Math.min(0, innerWidth - 12 - left - bubble.offsetWidth));
-        mascot.style.setProperty('--bub-dx', `${Math.round(dx)}px`);
+        const wanted = box.left + box.width / 2 - bubble.offsetWidth / 2;
+        const target = clamp(wanted, 12, innerWidth - 12 - bubble.offsetWidth);
+        mascot.style.setProperty('--bub-dx', `${Math.round(target - left)}px`);
       };
       const sceneSay = (message, pose) => {
         speak(message, false, { pose, face: 'happy' });
@@ -9640,13 +9661,23 @@
           if (!target || !(await hop(target.x, target.y, token))) return false;
           perch = ROUTE[step];
           setPose('point-down');
-          if (step === 0) sceneSay(foot.letters, 'point-down');
-          fitBubble();
+          if (step === 0) {
+            centerBubble();
+            sceneSay(foot.letters, 'point-down');
+            pinBubble(true);
+          }
           if (!(await pause(foot.perchMs, token))) return false;
         }
-        perch = -1;
-        hideBubble();
-        return hop(offset.x, 0, token);
+        return true;
+      };
+      // Depois das letras, ele espera no canto; se o visitante não completar a brincadeira, lembra do WhatsApp
+      const scheduleWhatsApp = () => {
+        if (footerVisit.wa) return;
+        const nudge = () => {
+          if (scene || bubbleOpen) { later('sceneWa', 1500, nudge); return; }
+          startFooterScene({ letters: false });
+        };
+        later('sceneWa', foot.waAfterPlay, nudge);
       };
       const playWhatsApp = async (token) => {
         footerVisit.wa = true;
@@ -9673,7 +9704,12 @@
         hideBubble();
         if (!motion) measureHome();
         if (letters && !footerVisit.letters && lettersInView()) {
-          if (!(await playLetters(token))) return;
+          // Pulou em todas as letras: volta para o canto e espera antes de chamar para o WhatsApp
+          if (await playLetters(token)) {
+            await endScene();
+            scheduleWhatsApp();
+          }
+          return;
         }
         await playWhatsApp(token);
       }
@@ -9684,6 +9720,7 @@
         waButton?.classList.remove('is-called');
         perch = -1;
         hideBubble();
+        later('sceneUnpin', 220, () => { if (scene !== 'letters') pinBubble(false); });
         later('sceneWaBubble', 250, () => { if (scene !== 'wa') mascot.classList.remove('is-at-wa'); });
         const finish = () => {
           scene = null;
@@ -9708,19 +9745,17 @@
       signature?.addEventListener('click', (event) => {
         if (!event.target.closest('[data-letter]') || !canRoam()) return;
         if (scene === 'letters' || scene === 'start') endScene();
-        if (!footerVisit.wa) {
-          const nudge = () => {
-            if (scene || bubbleOpen) { later('sceneWa', 1500, nudge); return; }
-            startFooterScene({ letters: false });
-          };
-          later('sceneWa', foot.waAfterPlay, nudge);
-        }
+        // A cada toque, a espera recomeça: ele só vai ao WhatsApp quando o visitante para de brincar
+        if (scene !== 'wa') scheduleWhatsApp();
       });
       // Em cima das letras, acompanha a rolagem
       addEventListener('scroll', rafThrottle(() => {
         if (scene !== 'letters' || perch < 0 || motion) return;
         const target = perchOffset(perch);
-        if (target) setOffset(target.x, target.y);
+        if (!target) return;
+        // O balão fixo acompanha as letras na rolagem
+        if (pin) { pin.x += target.x - offset.x; pin.y += target.y - offset.y; }
+        setOffset(target.x, target.y);
       }), { passive: true });
       addEventListener('resize', () => {
         if (scene) endScene({ instant: true });
