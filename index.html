@@ -561,7 +561,7 @@
       .services { --cis: 4400px; }
       .team { --cis: 4200px; }
       .method { --cis: 2550px; }
-      .nexus { --cis: 2080px; }
+      .nexus { --cis: 2300px; }
       .numbers { --cis: 900px; }
       .faq { --cis: 1450px; }
       .contact { --cis: 2000px; }
@@ -571,7 +571,7 @@
         .services { --cis: 3700px; }
         .team { --cis: 3500px; }
         .method { --cis: 2100px; }
-        .nexus { --cis: 1950px; }
+        .nexus { --cis: 2100px; }
         .faq { --cis: 1270px; }
         .contact { --cis: 1780px; }
       }
@@ -579,7 +579,7 @@
         .services { --cis: 2800px; }
         .team { --cis: 2470px; }
         .method { --cis: 1850px; }
-        .nexus { --cis: 1880px; }
+        .nexus { --cis: 2200px; }
         .faq { --cis: 1200px; }
         .contact { --cis: 1580px; }
         .footer { --cis: 1480px; }
@@ -592,7 +592,7 @@
         .services { --cis: 2220px; }
         .team { --cis: 2220px; }
         .method { --cis: 1290px; }
-        .nexus { --cis: 1950px; }
+        .nexus { --cis: 2250px; }
         .numbers { --cis: 730px; }
         .faq { --cis: 1130px; }
         .contact { --cis: 1120px; }
@@ -2356,7 +2356,8 @@
         position: relative;
         overflow: clip;
         container-type: inline-size;
-        padding-block: clamp(1rem, 2.5vw, 2rem);
+        --vp-pad: clamp(1rem, 2.5vw, 2rem);
+        padding-block: var(--vp-pad);
       }
       .carousel__track {
         --slide-w: 86%;
@@ -2368,7 +2369,11 @@
         scroll-snap-type: x mandatory;
         scrollbar-width: thin;
       }
-      .carousel__slide { flex: 0 0 var(--slide-w); scroll-snap-align: center; }
+      .carousel__slide { display: flex; flex: 0 0 var(--slide-w); flex-direction: column; scroll-snap-align: center; }
+      .carousel__meta { display: grid; flex: 1; align-content: start; gap: .4rem; padding: 0 .25rem 1.1rem; }
+      .carousel__tag { color: var(--accent); font-family: var(--font-mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+      .carousel__title { font-size: var(--fs-h3); }
+      .carousel__desc { max-width: 46em; color: var(--text-secondary); font-size: clamp(.92rem, .85rem + .25vw, 1.02rem); }
       .carousel__open {
         position: relative;
         display: block;
@@ -2383,10 +2388,8 @@
       .carousel__open img { width: 100%; height: 100%; object-fit: contain; user-select: none; -webkit-user-drag: none; }
 
       /* Modo aprimorado (JS): trilho por transform com laço infinito */
-      .carousel.is-enhanced .carousel__viewport { touch-action: pan-y; }
+      .carousel.is-enhanced .carousel__viewport { --slide-w: 100cqw; --gap: 4cqw; touch-action: pan-y; }
       .carousel.is-enhanced .carousel__track {
-        --slide-w: 100cqw;
-        --gap: 4cqw;
         gap: 0;
         padding-inline: 0;
         overflow: visible;
@@ -2405,31 +2408,33 @@
       .carousel.is-enhanced .carousel__track.is-jumping,
       .carousel.is-enhanced .carousel__track.is-jumping .carousel__slide { transition: none; }
       @media (min-width: 1024px) {
-        .carousel.is-enhanced .carousel__track { --slide-w: 78cqw; --gap: 2cqw; }
+        .carousel.is-enhanced .carousel__viewport { --slide-w: 78cqw; --gap: 2cqw; }
       }
 
-      /* Área reservada enquanto as telas do Nexus não chegam */
-      .carousel__reserved {
-        position: relative;
+      /* Setas laterais, centralizadas na altura da imagem ativa */
+      .carousel__side {
+        position: absolute;
+        z-index: 2;
+        bottom: calc(var(--vp-pad) + var(--slide-w) * 10 / 16 / 2 - 24px);
         display: grid;
         place-items: center;
-        width: min(100% - 2rem, 78%);
-        margin-inline: auto;
-        aspect-ratio: var(--shot-ratio);
-        overflow: clip;
-        border: 1px dashed var(--line-strong);
-        border-radius: var(--r-sm);
-        background:
-          linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px) 0 0 / 40px 40px,
-          linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px) 0 0 / 40px 40px,
-          var(--bg-void);
+        width: 48px;
+        height: 48px;
+        border: 1px solid var(--line-strong);
+        border-radius: 50%;
+        background: rgba(9, 9, 11, .78);
+        color: var(--text-primary);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+        transition: border-color var(--dur-1) ease, background-color var(--dur-1) ease, transform var(--dur-1) ease;
       }
-      .carousel__reserved-inner { display: grid; justify-items: center; gap: .75rem; padding: 1.5rem; text-align: center; }
-      .carousel__reserved-inner .icon { width: 28px; height: 28px; color: var(--accent); }
-      .carousel__reserved-title { color: var(--text-primary); font-family: var(--font-mono); font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; }
-      .carousel__reserved-note { color: var(--text-tertiary); font-size: .9rem; max-width: 24em; }
+      .carousel__side[hidden] { display: none; }
+      .carousel__side:hover { border-color: var(--accent); background: rgba(9, 9, 11, .92); transform: scale(1.06); }
+      .carousel__side .icon { width: 22px; height: 22px; }
+      .carousel__side--prev { left: max(.5rem, (100cqw - var(--slide-w)) / 4 - 24px); }
+      .carousel__side--next { right: max(.5rem, (100cqw - var(--slide-w)) / 4 - 24px); }
       @media (max-width: 767.98px) {
-        .carousel__reserved { width: calc(100% - 2rem); aspect-ratio: 4 / 3; }
+        .carousel__side { width: 44px; height: 44px; bottom: calc(var(--vp-pad) + var(--slide-w) * 10 / 16 / 2 - 22px); }
       }
 
       /* Barra de progresso em segmentos + controles */
@@ -3939,20 +3944,65 @@
           <div class="carousel__frame">
             <span class="brackets" aria-hidden="true"></span>
             <div class="carousel__bar" aria-hidden="true">
-              <span class="carousel__addr" data-carousel-addr>NEXUS://tela-00</span>
-              <span class="carousel__caption" data-carousel-caption>Telas em preparação</span>
+              <span class="carousel__addr" data-carousel-addr>NEXUS://tela-01</span>
+              <span class="carousel__caption" data-carousel-caption>Editor de prompt</span>
               <span class="carousel__live">interface real</span>
             </div>
             <div class="carousel__viewport" data-carousel-viewport>
-              <!-- Área reservada para as capturas de tela do Nexus 1.0 (arquivos nexus-01, nexus-02 e seguintes, na ordem enviada) -->
-              <ul class="carousel__track" aria-live="off" data-carousel-track></ul>
-              <div class="carousel__reserved" data-carousel-reserved>
-                <div class="carousel__reserved-inner">
-                  <svg class="icon" aria-hidden="true"><use href="#i-browser"/></svg>
-                  <p class="carousel__reserved-title">Telas do Nexus 1.0</p>
-                  <p class="carousel__reserved-note">As capturas reais da interface do Nexus serão publicadas neste espaço em breve.</p>
+              <div class="carousel__track" aria-live="off" data-carousel-track>
+                <div class="carousel__slide" role="group" aria-roledescription="slide" aria-label="1 de 5: Editor de prompt" data-slide data-caption="Editor de prompt">
+                  <div class="carousel__meta">
+                    <span class="carousel__tag" aria-hidden="true">Tela 01</span>
+                    <h3 class="carousel__title">Editor de prompt</h3>
+                    <p class="carousel__desc">Escreva a tarefa em Markdown, com títulos, listas e blocos de código, ou dite por voz. O Nexus lê cada parte como uma etapa distinta do trabalho.</p>
+                  </div>
+                  <button class="carousel__open" type="button" aria-label="Ampliar tela 1: Editor de prompt">
+                    <img src="nexus-01.webp" width="2000" height="1250" alt="Janela Editor de prompt do Nexus, com barra de formatação (títulos, negrito, itálico, código, listas, citação, link, tabela e microfone), um texto em Markdown, contador de 359 caracteres e os botões Aplicar e fechar e Enviar prompt." loading="lazy" decoding="async" draggable="false">
+                  </button>
+                </div>
+                <div class="carousel__slide" role="group" aria-roledescription="slide" aria-label="2 de 5: Perfis de comunicação" data-slide data-caption="Perfis de comunicação">
+                  <div class="carousel__meta">
+                    <span class="carousel__tag" aria-hidden="true">Tela 02</span>
+                    <h3 class="carousel__title">Perfis de comunicação</h3>
+                    <p class="carousel__desc">Escolha como o Nexus conversa com você: perfis de acessibilidade cognitiva, como TEA, TDAH e dislexia, e o perfil técnico com que quer receber o código.</p>
+                  </div>
+                  <button class="carousel__open" type="button" aria-label="Ampliar tela 2: Perfis de comunicação">
+                    <img src="nexus-02.webp" width="2000" height="1250" alt="Janela Perfis do Nexus, com opções de acessibilidade cognitiva (Autismo, TDAH, Altas habilidades, Dislexia e Sensibilidade sensorial) e cartões de perfil técnico, como Aprendiz, Desenvolvedor pleno, Sênior, Front-end, Back-end, IA e Criador de produto." loading="lazy" decoding="async" draggable="false">
+                  </button>
+                </div>
+                <div class="carousel__slide" role="group" aria-roledescription="slide" aria-label="3 de 5: Agentes em execução" data-slide data-caption="Agentes em execução">
+                  <div class="carousel__meta">
+                    <span class="carousel__tag" aria-hidden="true">Tela 03</span>
+                    <h3 class="carousel__title">Agentes em execução</h3>
+                    <p class="carousel__desc">Acompanhe em tempo real cada agente do enxame, as tarefas concluídas, os arquivos criados e o console com cada passo da execução.</p>
+                  </div>
+                  <button class="carousel__open" type="button" aria-label="Ampliar tela 3: Agentes em execução">
+                    <img src="nexus-03.webp" width="2000" height="1250" alt="Painel de produção do Nexus com seis agentes marcados como concluídos, a lista de arquivos gerados no projeto e o console com o registro de cada ação, com horário." loading="lazy" decoding="async" draggable="false">
+                  </button>
+                </div>
+                <div class="carousel__slide" role="group" aria-roledescription="slide" aria-label="4 de 5: Consumo de tokens" data-slide data-caption="Consumo de tokens">
+                  <div class="carousel__meta">
+                    <span class="carousel__tag" aria-hidden="true">Tela 04</span>
+                    <h3 class="carousel__title">Consumo de tokens</h3>
+                    <p class="carousel__desc">Painel ao vivo com tokens de entrada, saída e raciocínio, consumo por subtarefa e por modelo, e relatório exportável em TXT, MD ou PDF.</p>
+                  </div>
+                  <button class="carousel__open" type="button" aria-label="Ampliar tela 4: Consumo de tokens">
+                    <img src="nexus-04.webp" width="2000" height="1250" alt="Janela Consumo de tokens do Nexus, com totais de entrada, saída, raciocínio, chamadas e ritmo, gráfico de consumo acumulado, divisão por subtarefa e gráfico de rosca por modelo." loading="lazy" decoding="async" draggable="false">
+                  </button>
+                </div>
+                <div class="carousel__slide" role="group" aria-roledescription="slide" aria-label="5 de 5: Editor de código" data-slide data-caption="Editor de código">
+                  <div class="carousel__meta">
+                    <span class="carousel__tag" aria-hidden="true">Tela 05</span>
+                    <h3 class="carousel__title">Editor de código</h3>
+                    <p class="carousel__desc">Navegue pelos arquivos do projeto e veja o código que os agentes escreveram, sincronizado com a execução.</p>
+                  </div>
+                  <button class="carousel__open" type="button" aria-label="Ampliar tela 5: Editor de código">
+                    <img src="nexus-05.webp" width="2000" height="1250" alt="Aba Editor do Nexus, com a árvore de arquivos do projeto à esquerda e o arquivo index.html aberto com realce de sintaxe e o status Sincronizado." loading="lazy" decoding="async" draggable="false">
+                  </button>
                 </div>
               </div>
+              <button class="carousel__side carousel__side--prev" type="button" aria-label="Tela anterior" hidden data-carousel-prev><svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
+              <button class="carousel__side carousel__side--next" type="button" aria-label="Próxima tela" hidden data-carousel-next><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
             </div>
           </div>
           <div class="carousel__progress" hidden data-carousel-dots></div>
@@ -3961,8 +4011,6 @@
               <svg class="icon" aria-hidden="true" data-icon-pause><use href="#i-pause"/></svg>
               <svg class="icon" aria-hidden="true" data-icon-play hidden><use href="#i-play"/></svg>
             </button>
-            <button class="carousel__btn" type="button" aria-label="Tela anterior" data-carousel-prev><svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
-            <button class="carousel__btn" type="button" aria-label="Próxima tela" data-carousel-next><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
             <span class="carousel__counter" aria-hidden="true" data-carousel-counter>01 / 01</span>
           </div>
         </div>
@@ -5701,9 +5749,7 @@
       const frameEl = $('.carousel__frame', carousel);
       const slides = $$('[data-slide]', track);
       const total = slides.length;
-      // Sem capturas ainda: a área reservada permanece visível
       if (!total) return;
-      $('[data-carousel-reserved]', carousel)?.remove();
 
       const addr = $('[data-carousel-addr]', carousel);
       const captionEl = $('[data-carousel-caption]', carousel);
@@ -5735,6 +5781,7 @@
       const iconPlay = $('[data-icon-play]', toggle);
       controls.hidden = false;
       dots.hidden = false;
+      $$('.carousel__side', carousel).forEach((button) => { button.hidden = false; });
 
       // Clones para o laço contínuo (aria-hidden e inertes)
       const CLONES = Math.min(2, total);
@@ -5887,8 +5934,8 @@
         }
         sync();
       });
-      $('[data-carousel-prev]', carousel).addEventListener('click', () => prev({ user: true }));
-      $('[data-carousel-next]', carousel).addEventListener('click', () => next({ user: true }));
+      $$('[data-carousel-prev]', carousel).forEach((button) => button.addEventListener('click', () => prev({ user: true })));
+      $$('[data-carousel-next]', carousel).forEach((button) => button.addEventListener('click', () => next({ user: true })));
 
       frameEl.addEventListener('pointerenter', (event) => {
         if (event.pointerType !== 'mouse') return;
@@ -5908,10 +5955,13 @@
         paused.focus = false;
         sync();
       });
-      onVisible(carousel, (visible) => {
-        paused.offscreen = !visible;
+      // Visível = pelo menos 35% da tela (ou do carrossel, se for menor que a tela) ocupada por ele
+      onVisible(carousel, (_, entry) => {
+        const shown = entry ? entry.intersectionRect.height : Infinity;
+        const needed = Math.min(entry ? entry.boundingClientRect.height : 0, window.innerHeight) * 0.35;
+        paused.offscreen = !(shown > 0 && shown >= needed);
         sync();
-      }, { threshold: 0.35 });
+      }, { threshold: Array.from({ length: 21 }, (_, i) => i / 20) });
       onTabVisibility((visible) => {
         paused.tab = !visible;
         sync();
@@ -5962,6 +6012,7 @@
       let drag = null;
       viewport.addEventListener('pointerdown', (event) => {
         if (event.pointerType === 'mouse' && event.button !== 0) return;
+        if (event.target.closest('.carousel__side')) return;
         drag = { id: event.pointerId, x: event.clientX, y: event.clientY, t: event.timeStamp, dx: 0, active: false };
       });
       viewport.addEventListener('pointermove', (event) => {
