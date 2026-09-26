@@ -1110,7 +1110,24 @@
         .header::before { background: rgba(9, 9, 11, .96); }
       }
       .header.is-scrolled::before { opacity: 1; }
-      .header.is-hidden { transform: translate3d(0, -100%, 0); }
+      /* Topo sempre fixo. Rolando, ganha fundo de vidro e um feixe de luz que percorre a borda inferior */
+      .header::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        width: 28%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--dur-3) ease;
+      }
+      .header.is-scrolled::after { opacity: .85; }
+      @media (prefers-reduced-motion: no-preference) {
+        .header.is-scrolled::after { animation: header-scan 7s linear infinite; }
+      }
+      @keyframes header-scan { from { transform: translateX(-100%); } to { transform: translateX(460%); } }
 
       .header__inner {
         position: relative;
@@ -1208,37 +1225,74 @@
       @keyframes lg-bob { from { translate: 0 0; } to { translate: 0 -7px; } }
 
 
+      /* ---------- Navegação do computador: cápsula de vidro com indicador deslizante ---------- */
       .nav { display: none; }
-      .nav__list { display: flex; align-items: center; gap: .25rem; }
+      .nav__list {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: .15rem;
+        padding: 4px;
+        border: 1px solid var(--line);
+        border-radius: var(--r-pill);
+        background: linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .012));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05), 0 10px 30px -18px rgba(0, 0, 0, .9);
+      }
+      .nav__indicator {
+        position: absolute;
+        top: 4px;
+        bottom: 4px;
+        left: 0;
+        width: 0;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--r-pill);
+        background: radial-gradient(120% 140% at 50% 120%, rgba(255, 85, 0, .22), rgba(255, 255, 255, .04) 60%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 480ms var(--ease-out), width 480ms var(--ease-out), opacity var(--dur-2) ease;
+      }
+      .nav__indicator::after {
+        content: "";
+        position: absolute;
+        left: 22%;
+        right: 22%;
+        bottom: -1px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--gradient-ignition);
+        box-shadow: 0 0 12px 1px var(--accent-glow);
+      }
       .nav__link {
         position: relative;
+        z-index: 1;
         display: inline-flex;
         align-items: center;
-        min-height: 44px;
-        padding-inline: .85rem;
+        gap: .45rem;
+        min-height: 40px;
+        padding-inline: .95rem;
+        border-radius: var(--r-pill);
         color: var(--text-secondary);
-        font-size: .9rem;
+        font-size: .88rem;
         font-weight: 500;
         text-decoration: none;
         transition: color var(--dur-1) ease;
       }
-      .nav__link::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: .45rem;
-        width: 4px;
-        height: 4px;
-        margin-left: -2px;
-        border-radius: 50%;
-        background: var(--accent);
-        box-shadow: 0 0 8px var(--accent-glow);
-        opacity: 0;
-        transform: scale(0);
-        transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out);
+      .nav__num {
+        color: var(--text-tertiary);
+        font-family: var(--font-mono);
+        font-size: .62rem;
+        letter-spacing: .08em;
+        transition: color var(--dur-2) ease;
       }
       .nav__link:hover, .nav__link.is-active { color: var(--text-primary); }
-      .nav__link.is-active::before { opacity: 1; transform: none; }
+      .nav__link:hover .nav__num, .nav__link.is-active .nav__num { color: var(--accent); }
+      .nav__link:focus-visible { outline-offset: -2px; }
+
+      /* Efeito de decodificação: o fantasma transparente reserva a largura, o texto vivo embaralha por cima */
+      .scr { display: inline-grid; }
+      .scr > * { grid-area: 1 / 1; }
+      .scr__ghost { color: transparent; }
+      .scr__live { overflow: hidden; white-space: nowrap; }
 
       .header__actions {
         display: flex;
@@ -1254,7 +1308,6 @@
       @media (min-width: 1024px) {
         .nav { display: block; margin-inline: auto; }
         .header__actions { margin-left: 0; }
-        .header__logo img { height: 32px; }
       }
 
       /* Botão hambúrguer que vira × */
@@ -1286,72 +1339,170 @@
         .header .menu-toggle { display: none; }
       }
 
-      /* ---------- Menu móvel ---------- */
+      /* ---------- Menu móvel: painel de controle com grade, varredura e itens que decodificam ---------- */
       .menu {
         position: fixed;
         inset: 0;
         z-index: var(--z-menu);
+        isolation: isolate;
         display: grid;
-        grid-template-rows: var(--header-h) 1fr auto;
-        background: rgba(0, 0, 0, .9);
-        -webkit-backdrop-filter: blur(16px) saturate(140%);
-        backdrop-filter: blur(16px) saturate(140%);
+        grid-template-rows: var(--header-h) auto 1fr auto;
+        background: rgba(5, 5, 7, .94);
+        -webkit-backdrop-filter: blur(18px) saturate(140%);
+        backdrop-filter: blur(18px) saturate(140%);
         opacity: 0;
         transition: opacity var(--dur-2) var(--ease-out);
+        overflow-x: hidden;
         overflow-y: auto;
         overscroll-behavior: contain;
       }
       .menu.is-open { opacity: 1; }
-      .menu__top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      .menu__bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+      .menu__grid {
+        position: absolute;
+        inset: -44px;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px);
+        background-size: 44px 44px;
+        -webkit-mask-image: radial-gradient(ellipse 90% 70% at 80% 15%, #000 15%, transparent 75%);
+        mask-image: radial-gradient(ellipse 90% 70% at 80% 15%, #000 15%, transparent 75%);
       }
-      .menu__logo { width: auto; height: 30px; }
-      .menu__nav { align-self: center; padding-block: 2rem; }
-      .menu__list { display: grid; gap: .25rem; }
-      .menu__link {
+      .menu__glow {
+        position: absolute;
+        top: -18vh;
+        right: -25vw;
+        width: 80vw;
+        height: 60vh;
+        border-radius: 50%;
+        background: radial-gradient(closest-side, rgba(255, 85, 0, .22), transparent);
+      }
+      .menu__scan {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 120px;
+        background: linear-gradient(180deg, transparent, rgba(255, 85, 0, .08) 80%, rgba(255, 120, 60, .5) 99%, transparent);
+        opacity: 0;
+      }
+      .menu__top { display: flex; align-items: center; justify-content: space-between; }
+      .menu__logo .logo-anim { display: block; width: auto; height: 30px; overflow: visible; color: var(--text-primary); }
+      .menu__status {
         display: flex;
-        align-items: baseline;
-        gap: 1rem;
-        min-height: 56px;
-        padding-block: .35rem;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: .5rem;
+        padding-block: .35rem .5rem;
+        color: var(--text-tertiary);
+        font-family: var(--font-mono);
+        font-size: .68rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      .menu__dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34, 197, 94, .18); }
+      .menu__sep { color: var(--line-strong); }
+      .menu__nav { align-self: center; padding-block: 1.25rem; }
+      .menu__list { display: grid; }
+      .menu__list li { position: relative; }
+      /* Linhas divisórias que se desenham da esquerda ao abrir */
+      .menu__list li::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background: linear-gradient(90deg, var(--line-strong), var(--line) 70%, transparent);
+        transform: scaleX(0);
+        transform-origin: 0 50%;
+        transition: transform 700ms var(--ease-out) calc(var(--i, 0) * 60ms + 120ms);
+      }
+      .menu.is-open .menu__list li::after { transform: none; }
+      .menu__link {
+        position: relative;
+        display: grid;
+        grid-template-columns: 2.1rem 1fr auto;
+        align-items: center;
+        gap: .75rem;
+        min-height: 64px;
+        padding-block: .7rem;
         color: var(--text-primary);
-        font-size: clamp(2rem, 1.4rem + 3vw, 3.25rem);
-        font-weight: 560;
-        letter-spacing: -.035em;
-        line-height: 1.1;
         text-decoration: none;
         opacity: 0;
-        transform: translateY(18px);
+        transform: translateX(-14px);
         transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out);
-        transition-delay: calc(var(--i, 0) * 70ms + 60ms);
+        transition-delay: calc(var(--i, 0) * 60ms + 80ms);
       }
       .menu.is-open .menu__link { opacity: 1; transform: none; }
-      .menu__num {
-        color: var(--accent);
+      .menu__num { color: var(--accent); font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; }
+      .menu__text { display: grid; gap: .2rem; min-width: 0; }
+      .menu__label { font-size: clamp(1.6rem, 1.15rem + 2.3vw, 2.5rem); font-weight: 560; letter-spacing: -.03em; line-height: 1.05; }
+      .menu__desc {
+        overflow: hidden;
+        color: var(--text-tertiary);
         font-family: var(--font-mono);
-        font-size: .75rem;
-        letter-spacing: .12em;
+        font-size: .68rem;
+        letter-spacing: .08em;
+        text-overflow: ellipsis;
+        text-transform: uppercase;
+        white-space: nowrap;
       }
+      .menu__arrow {
+        width: 22px;
+        height: 22px;
+        color: var(--text-tertiary);
+        transition: transform var(--dur-2) var(--ease-out), color var(--dur-2) ease;
+      }
+      .menu__link:is(:hover, :active, :focus-visible) .menu__arrow { color: var(--accent); transform: translateX(4px); }
+      .menu__link:is(:hover, :active) .menu__label { color: var(--accent); transition: color var(--dur-1) ease; }
+      /* Seção em que o visitante está */
+      .menu__link.is-active .menu__num { color: var(--text-primary); }
+      .menu__link.is-active::before {
+        content: "";
+        position: absolute;
+        left: -1rem;
+        top: 22%;
+        bottom: 22%;
+        width: 3px;
+        border-radius: 0 3px 3px 0;
+        background: var(--gradient-ignition);
+        box-shadow: 0 0 14px var(--accent-glow);
+      }
+      .menu__link.is-active .menu__desc::before { content: "● você está aqui · "; color: var(--accent); }
       .menu__foot {
         display: grid;
-        gap: 1rem;
-        padding-block: 1.5rem calc(1.5rem + env(safe-area-inset-bottom));
+        gap: .9rem;
+        padding-block: 1.25rem calc(1.25rem + env(safe-area-inset-bottom));
         border-top: 1px solid var(--line);
       }
-      .menu__contact {
+      .menu__actions { display: grid; grid-template-columns: 1fr auto; gap: .6rem; }
+      .menu__wa {
         display: inline-flex;
         align-items: center;
-        gap: .6rem;
-        min-height: 44px;
+        justify-content: center;
+        gap: .5rem;
+        min-height: 48px;
+        padding-inline: 1.1rem;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--r-pill);
         color: var(--text-primary);
-        text-decoration: none;
-        font-family: var(--font-mono);
         font-size: .9rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: border-color var(--dur-2) ease, background-color var(--dur-2) ease;
       }
-      .menu__contact .icon { color: var(--accent); }
-      .menu__addr { color: var(--text-tertiary); font-size: .875rem; }
+      .menu__wa:hover { border-color: var(--accent); background: var(--accent-soft); }
+      .menu__wa .icon { width: 18px; height: 18px; color: var(--accent); }
+      .menu__addr { color: var(--text-tertiary); font-family: var(--font-mono); font-size: .72rem; letter-spacing: .04em; }
+      @media (prefers-reduced-motion: no-preference) {
+        .menu.is-open .menu__grid { animation: menu-grid 9s linear infinite; }
+        .menu.is-open .menu__scan { animation: menu-scan 1.2s cubic-bezier(.5, 0, .3, 1) .05s both; }
+        .menu.is-open .menu__dot { animation: menu-dot 1.8s ease-in-out infinite; }
+      }
+      @keyframes menu-grid { to { transform: translate(44px, 44px); } }
+      @keyframes menu-scan { 0% { opacity: 1; transform: translateY(-120px); } 85% { opacity: 1; } 100% { opacity: 0; transform: translateY(100vh); } }
+      @keyframes menu-dot { 50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); } }
 
       /* ---------- Hero ---------- */
       .hero {
@@ -3870,11 +4021,11 @@
 
       <nav class="nav" aria-label="Navegação principal">
         <ul class="nav__list">
-          <li><a class="nav__link" href="#servicos" data-nav-link>Serviços</a></li>
-          <li><a class="nav__link" href="#equipe" data-nav-link>Equipe</a></li>
-          <li><a class="nav__link" href="#metodo" data-nav-link>Método</a></li>
-          <li><a class="nav__link" href="#nexus" data-nav-link>Nexus</a></li>
-          <li><a class="nav__link" href="#faq" data-nav-link>FAQ</a></li>
+          <li><a class="nav__link" href="#servicos" data-nav-link><span class="nav__num" aria-hidden="true">01</span><span class="scr" data-scramble><span class="scr__ghost">Serviços</span><span class="scr__live" aria-hidden="true">Serviços</span></span></a></li>
+          <li><a class="nav__link" href="#equipe" data-nav-link><span class="nav__num" aria-hidden="true">02</span><span class="scr" data-scramble><span class="scr__ghost">Equipe</span><span class="scr__live" aria-hidden="true">Equipe</span></span></a></li>
+          <li><a class="nav__link" href="#metodo" data-nav-link><span class="nav__num" aria-hidden="true">03</span><span class="scr" data-scramble><span class="scr__ghost">Método</span><span class="scr__live" aria-hidden="true">Método</span></span></a></li>
+          <li><a class="nav__link" href="#nexus" data-nav-link><span class="nav__num" aria-hidden="true">04</span><span class="scr" data-scramble><span class="scr__ghost">Nexus</span><span class="scr__live" aria-hidden="true">Nexus</span></span></a></li>
+          <li><a class="nav__link" href="#faq" data-nav-link><span class="nav__num" aria-hidden="true">05</span><span class="scr" data-scramble><span class="scr__ghost">FAQ</span><span class="scr__live" aria-hidden="true">FAQ</span></span></a></li>
         </ul>
       </nav>
 
@@ -3890,26 +4041,46 @@
 
   <!-- ============ MENU MÓVEL ============ -->
   <div class="menu" id="menu-movel" role="dialog" aria-modal="true" aria-label="Menu de navegação" hidden data-menu>
+    <div class="menu__bg" aria-hidden="true"><span class="menu__grid"></span><span class="menu__glow"></span><span class="menu__scan"></span></div>
     <div class="container menu__top">
-      <img class="menu__logo" src="tirvo-logo-negativo.png" width="601" height="260" alt="Tirvo" decoding="async" loading="lazy">
+      <span class="menu__logo">
+  <svg class="logo-anim" viewBox="0 0 601 260" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="currentColor" stroke-width="33" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M49 63.5V238.5" class="lg-s lg-t1" pathLength="1"/>
+        <path d="M20.5 115.5H91.5" class="lg-s lg-t2" pathLength="1"/>
+        <path d="M139 115.5V238.5" class="lg-s lg-i1" pathLength="1"/>
+        <path d="M205 115.5V238.5" class="lg-s lg-r1" pathLength="1"/>
+        <path d="M205 170C205 134 226 115.5 261.5 115.5" class="lg-s lg-r2" pathLength="1"/>
+        <path d="M319.5 115.5 361.5 238.5 403.5 115.5" class="lg-s lg-v1" pathLength="1"/>
+        <circle cx="518" cy="177" r="61.5" transform="rotate(90 518 177)" class="lg-s lg-o1" pathLength="1"/>
+        </g>
+        <g class="lg-pin"><g class="lg-pin-bob">
+          <circle class="lg-ring" cx="139" cy="40" r="30" fill="none" stroke="#fe6a3c" stroke-width="5"/>
+          <path fill="#fe6a3c" fill-rule="evenodd" d="M139 89.4C132.7 75.5 109 56 109 35.1a30 30 0 0 1 60 0c0 20.9-23.7 40.4-30 54.3ZM139 24.7a10.4 10.4 0 1 0 0 20.8 10.4 10.4 0 0 0 0-20.8Z"/>
+        </g></g>
+      </svg>
+      </span>
       <button class="menu-toggle" type="button" aria-label="Fechar menu" data-menu-close>
         <span class="menu-toggle__line"></span>
         <span class="menu-toggle__line"></span>
       </button>
     </div>
+    <p class="container menu__status" aria-hidden="true"><span class="menu__dot"></span>Online<span class="menu__sep">/</span>Curitiba <span data-menu-clock>--:--</span><span class="menu__sep">/</span>6 seções</p>
     <nav class="container menu__nav" aria-label="Menu">
       <ol class="menu__list">
-        <li><a class="menu__link" href="#servicos" style="--i:0"><span class="menu__num">01</span>Serviços</a></li>
-        <li><a class="menu__link" href="#equipe" style="--i:1"><span class="menu__num">02</span>Equipe</a></li>
-        <li><a class="menu__link" href="#metodo" style="--i:2"><span class="menu__num">03</span>Método</a></li>
-        <li><a class="menu__link" href="#nexus" style="--i:3"><span class="menu__num">04</span>Nexus</a></li>
-        <li><a class="menu__link" href="#faq" style="--i:4"><span class="menu__num">05</span>FAQ</a></li>
-        <li><a class="menu__link" href="#contato" style="--i:5"><span class="menu__num">06</span>Contato</a></li>
+        <li><a class="menu__link" href="#servicos" style="--i:0" data-nav-link aria-label="Serviços: sites, sistemas, marca e IA"><span class="menu__num" aria-hidden="true">01</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Serviços</span><span class="menu__desc">Sites, sistemas, marca e IA</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        <li><a class="menu__link" href="#equipe" style="--i:1" data-nav-link aria-label="Equipe: programadores raiz e IA"><span class="menu__num" aria-hidden="true">02</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Equipe</span><span class="menu__desc">Programadores raiz e IA</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        <li><a class="menu__link" href="#metodo" style="--i:2" data-nav-link aria-label="Método: descoberta, engenharia, lançamento"><span class="menu__num" aria-hidden="true">03</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Método</span><span class="menu__desc">Descoberta, engenharia, lançamento</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        <li><a class="menu__link" href="#nexus" style="--i:3" data-nav-link aria-label="Nexus: enxame de agentes autônomos"><span class="menu__num" aria-hidden="true">04</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Nexus</span><span class="menu__desc">Enxame de agentes autônomos</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        <li><a class="menu__link" href="#faq" style="--i:4" data-nav-link aria-label="FAQ: respostas diretas"><span class="menu__num" aria-hidden="true">05</span><span class="menu__text"><span class="menu__label" data-scramble-menu>FAQ</span><span class="menu__desc">Respostas diretas</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        <li><a class="menu__link" href="#contato" style="--i:5" data-nav-link aria-label="Contato: seu projeto começa aqui"><span class="menu__num" aria-hidden="true">06</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Contato</span><span class="menu__desc">Seu projeto começa aqui</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
       </ol>
     </nav>
     <div class="container menu__foot">
-      <a class="btn btn--primary btn--block" href="#contato"><span class="btn__sheen" aria-hidden="true"></span>Iniciar projeto</a>
-      <a class="menu__contact" href="https://api.whatsapp.com/send?phone=5541991933850&amp;text=Ol%C3%A1%2C%20Tirvo!%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Conversar no WhatsApp: <span class="nowrap">+55 (41) 99193-3850</span></a>
+      <div class="menu__actions">
+        <a class="btn btn--primary" href="#contato"><span class="btn__sheen" aria-hidden="true"></span>Iniciar projeto</a>
+        <a class="menu__wa" href="https://api.whatsapp.com/send?phone=5541991933850&amp;text=Ol%C3%A1%2C%20Tirvo!%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>WhatsApp<span class="sr-only">: +55 (41) 99193-3850</span></a>
+      </div>
       <p class="menu__addr">Av. Silva Jardim, 1003 – Centro, Curitiba – PR</p>
     </div>
   </div>
@@ -5250,7 +5421,7 @@
       // Formulário
       form: { maxChars: 1500, minName: 2, minChallenge: 20, draftKey: 'tirvo:rascunho' },
       // Cabeçalho
-      header: { solidAfter: 40, hideAfter: 320 },
+      header: { solidAfter: 40 },
       // Lightbox
       lightbox: { maxScale: 4, doubleTapScale: 2.5, hintMs: 2800 },
       // Mascote: tempos (ms) e frases de cada seção, na ordem em que aparecem
@@ -5400,42 +5571,99 @@
     /* ==========================================================
        CABEÇALHO INTELIGENTE + SCROLL-SPY
        ========================================================== */
+    // Efeito de decodificação: embaralha com símbolos e revela o texto da esquerda para a direita
+    const SCRAMBLE_GLYPHS = '01<>/_#$%*+=';
+    function scramble(element, { duration = 420, delay = 0 } = {}) {
+      if (!element) return;
+      const text = (element.dataset.text ??= element.textContent);
+      cancelAnimationFrame(element._scrambleFrame);
+      clearTimeout(element._scrambleTimer);
+      if (prefersReducedMotion.value) {
+        element.textContent = text;
+        return;
+      }
+      element._scrambleTimer = setTimeout(() => {
+        const start = performance.now();
+        const tick = (now) => {
+          const progress = Math.min(1, (now - start) / duration);
+          const revealed = Math.floor(progress * text.length);
+          let out = '';
+          for (let index = 0; index < text.length; index += 1) {
+            out += index < revealed || text[index] === ' '
+              ? text[index]
+              : SCRAMBLE_GLYPHS[Math.floor(Math.random() * SCRAMBLE_GLYPHS.length)];
+          }
+          element.textContent = out;
+          if (progress < 1) element._scrambleFrame = requestAnimationFrame(tick);
+        };
+        element._scrambleFrame = requestAnimationFrame(tick);
+      }, delay);
+    }
+
     function initHeader() {
       const header = $('[data-header]');
       if (!header) return;
-      const { solidAfter, hideAfter } = CONFIG.header;
-      let lastY = 0;
-
-      const update = () => {
-        const y = window.scrollY;
-        header.classList.toggle('is-scrolled', y > solidAfter);
-        const locked = root.classList.contains('is-menu-open') || header.contains(document.activeElement);
-        if (!locked && y > lastY + 6 && y > hideAfter) header.classList.add('is-hidden');
-        else if (y < lastY - 6 || y <= hideAfter) header.classList.remove('is-hidden');
-        if (Math.abs(y - lastY) > 6) lastY = y;
-      };
-
+      // Topo sempre fixo: a rolagem só troca o fundo transparente pelo de vidro
+      const update = () => header.classList.toggle('is-scrolled', window.scrollY > CONFIG.header.solidAfter);
       window.addEventListener('scroll', rafThrottle(update), { passive: true });
-      header.addEventListener('focusin', () => header.classList.remove('is-hidden'));
       requestAnimationFrame(update);
 
-      // Destaque da seção ativa na navegação
-      const links = $$('[data-nav-link]', header);
-      const byId = new Map(links.map((link) => [link.hash.slice(1), link]));
-      const sections = [...byId.keys()].map((id) => document.getElementById(id)).filter(Boolean);
+      // Indicador de luz que desliza até o item ativo (ou o que está sob o mouse)
+      const list = $('.nav__list', header);
+      const navLinks = $$('.nav__link', header);
+      let indicator = null;
+      let hovered = null;
+      const moveIndicator = () => {
+        if (!indicator) return;
+        const target = hovered || navLinks.find((link) => link.classList.contains('is-active'));
+        if (!target || !target.offsetWidth) {
+          indicator.style.opacity = '0';
+          return;
+        }
+        indicator.style.width = `${target.offsetWidth}px`;
+        indicator.style.transform = `translateX(${target.offsetLeft}px)`;
+        indicator.style.opacity = '1';
+      };
+      if (list) {
+        indicator = document.createElement('li');
+        indicator.className = 'nav__indicator';
+        indicator.setAttribute('aria-hidden', 'true');
+        indicator.setAttribute('role', 'presentation');
+        list.prepend(indicator);
+        navLinks.forEach((link) => {
+          link.addEventListener('pointerenter', () => {
+            hovered = link;
+            moveIndicator();
+            scramble($('.scr__live', link), { duration: 380 });
+          });
+          link.addEventListener('focus', () => { hovered = link; moveIndicator(); });
+          link.addEventListener('blur', () => { hovered = null; moveIndicator(); });
+        });
+        list.addEventListener('pointerleave', () => { hovered = null; moveIndicator(); });
+        window.addEventListener('resize', rafThrottle(moveIndicator), { passive: true });
+        document.fonts?.ready.then(moveIndicator);
+      }
+
+      // Destaque da seção ativa no topo e no menu do celular
+      const links = $$('[data-nav-link]');
+      const ids = [...new Set(links.map((link) => link.hash.slice(1)))];
+      const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
       if (!hasIO || !sections.length) return;
+      let activeId = '';
       const setActive = (id) => {
+        activeId = id;
         links.forEach((link) => {
           const active = link.hash.slice(1) === id;
           link.classList.toggle('is-active', active);
           if (active) link.setAttribute('aria-current', 'true');
           else link.removeAttribute('aria-current');
         });
+        moveIndicator();
       };
       const spy = new IntersectionObserver((entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) setActive(entry.target.id);
-          else if (links.some((l) => l.classList.contains('is-active') && l.hash.slice(1) === entry.target.id)) setActive('');
+          else if (activeId === entry.target.id) setActive('');
         }
       }, { rootMargin: '-45% 0px -50% 0px' });
       sections.forEach((section) => spy.observe(section));
@@ -5453,6 +5681,10 @@
       let open = false;
       let cleanup = null;
       let hideTimer = 0;
+      let clockTimer = 0;
+      const clock = $('[data-menu-clock]', menu);
+      const clockFormat = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo' });
+      const updateClock = () => { if (clock) clock.textContent = clockFormat.format(new Date()); };
       const desktop = matchMedia('(min-width: 1024px)');
       const focusables = () => $$('a[href], button:not([disabled])', menu);
       const outside = () => $$('[data-overlay-inert]');
@@ -5485,6 +5717,10 @@
         outside().forEach((element) => { element.inert = true; });
         lockScroll(true);
         requestAnimationFrame(() => requestAnimationFrame(() => menu.classList.add('is-open')));
+        // Itens "decodificam" em cascata e o relógio de Curitiba aparece na barra de status
+        $$('[data-scramble-menu]', menu).forEach((label, index) => scramble(label, { duration: 520, delay: 140 + index * 70 }));
+        updateClock();
+        clockTimer = setInterval(updateClock, 15000);
         const firstLink = $('.menu__link', menu);
         firstLink?.focus({ preventScroll: true });
 
@@ -5511,6 +5747,7 @@
         cleanup?.();
         cleanup = null;
         menu.classList.remove('is-open');
+        clearInterval(clockTimer);
         root.classList.remove('is-menu-open');
         toggle.setAttribute('aria-expanded', 'false');
         toggle.setAttribute('aria-label', 'Abrir menu');
