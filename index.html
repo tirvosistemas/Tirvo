@@ -3313,6 +3313,42 @@
       .mascot__close svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
       .mascot__bubble :focus-visible { outline-color: #ff3300; outline-offset: 1px; }
 
+      /* Botão de som do Next */
+      .mascot__sound {
+        position: absolute;
+        left: calc(var(--bot-w) - 16px);
+        bottom: calc(var(--bot-w) * .78);
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border: 1px solid var(--line-strong);
+        border-radius: 50%;
+        background: var(--bg-elevated);
+        color: var(--accent);
+        pointer-events: auto;
+        transition: opacity var(--dur-2) ease, visibility 0s linear 0s, background-color var(--dur-1) ease;
+      }
+      .mascot__sound:hover { background: #222228; }
+      .mascot__sound svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+      .mascot__sound[aria-pressed="true"] .mascot__sound-off,
+      .mascot__sound[aria-pressed="false"] .mascot__sound-on { display: none; }
+      .mascot__sound[aria-pressed="false"] { color: var(--text-tertiary); }
+      .mascot.is-intro .mascot__sound, .mascot.is-flying .mascot__sound { display: none; }
+      @media (hover: hover) and (pointer: fine) {
+        /* No computador, aparece ao passar o mouse, com foco ou com o balão aberto */
+        .mascot:not(:hover):not(:focus-within):not(.is-bubble-open) .mascot__sound {
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity var(--dur-2) ease, visibility 0s linear var(--dur-2);
+        }
+      }
+      /* Resposta tátil ao toque */
+      .bot { transform-origin: 50% 90%; transition: transform 140ms ease; }
+      .mascot__bot:active .bot { transform: scale(1.06, .9); }
+      .mascot[data-face="dizzy"] .bot__smile { opacity: 0; }
+      .mascot[data-face="dizzy"] .bot__o { opacity: 1; }
+
       @media (prefers-reduced-motion: no-preference) {
         /* Respiração: expansão vertical sutil com os pés fixos (composta na GPU) */
         .mascot__breath { animation: bot-breath 3.4s ease-in-out infinite; }
@@ -3334,6 +3370,10 @@
       .mascot[data-pose="fly"] .bot__wiggle--r { animation: bot-nudge 260ms ease-in-out infinite alternate; }
         .mascot.is-talking .bot__mouth { animation: bot-talk 170ms ease-in-out infinite alternate; }
         .mascot.is-talking .bot__core-glow { animation: bot-core 340ms ease-in-out infinite alternate; }
+        .mascot.is-boing .bot__antenna { animation: bot-boing 800ms ease-out; }
+        .mascot.is-tickle .mascot__pop { animation: bot-tickle 650ms ease-in-out; }
+        .mascot.is-dizzy .mascot__pop { transform-origin: 50% 60%; animation: bot-spin 900ms cubic-bezier(.3, .6, .3, 1); }
+        .mascot[data-face="dizzy"] .bot__eyes { animation: bot-dizzy 520ms linear infinite; }
       }
       @media (prefers-reduced-motion: reduce) {
         .bot__arm, .bot__fore, .bot__leg, .bot__head, .bot__antenna, .bot__eyes { transition-duration: 1ms; }
@@ -3353,6 +3393,19 @@
       @keyframes bot-palm { from { transform: rotate(-10deg); } to { transform: rotate(12deg); } }
       @keyframes bot-talk { from { transform: scale(1, .45); } to { transform: scale(.9, 1.45); } }
       @keyframes bot-core { from { opacity: .5; } to { opacity: 1; } }
+      @keyframes bot-boing {
+        0% { transform: rotate(0); } 15% { transform: rotate(28deg); } 32% { transform: rotate(-22deg); }
+        50% { transform: rotate(14deg); } 68% { transform: rotate(-8deg); } 84% { transform: rotate(4deg); } 100% { transform: rotate(0); }
+      }
+      @keyframes bot-tickle {
+        0%, 100% { transform: rotate(0); } 15% { transform: rotate(-7deg) scale(1.03, .97); } 30% { transform: rotate(6deg); }
+        45% { transform: rotate(-5deg) scale(1.02, .98); } 60% { transform: rotate(4deg); } 80% { transform: rotate(-2deg); }
+      }
+      @keyframes bot-spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+      @keyframes bot-dizzy {
+        0% { transform: translate(4px, 0); } 25% { transform: translate(0, 3px); } 50% { transform: translate(-4px, 0); }
+        75% { transform: translate(0, -3px); } 100% { transform: translate(4px, 0); }
+      }
 
       /* ---------- WhatsApp flutuante ---------- */
       .wa-float {
@@ -4853,6 +4906,9 @@
         </svg>
       </span></span></span>
     </button>
+    <button class="mascot__sound" type="button" aria-pressed="true" aria-label="Sons do Next" data-mascot-sound>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path class="mascot__sound-body" d="M11 5 6 9H3v6h3l5 4V5Z"/><path class="mascot__sound-on" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="mascot__sound-off" d="m16 9.5 5 5m0-5-5 5"/></svg>
+    </button>
   </div>
   </aside>
 
@@ -4970,6 +5026,16 @@
         idleMin: 14000,
         idleMax: 24000,
         flightMs: 1050,
+        comboWindow: 1200,
+        dizzyAt: 7,
+        hoverSoundGap: 700,
+        soundKey: 'tirvo:sons-next',
+        // Respostas quando o visitante brinca com o Next
+        play: {
+          tickle: ['Hihi, isso faz cócegas.', 'Ei, assim eu não consigo me concentrar.', 'Tá bom, tá bom, você venceu.'],
+          boing: ['Ei, essa é a minha antena.', 'Boing. Ela sempre volta para o lugar.', 'Cuidado, é por ela que chegam as ideias.'],
+          dizzy: ['Uau, fiquei tonto. Vamos com calma?', 'Tudo girando por aqui. Mas já estou pronto de novo.'],
+        },
         messages: {
           inicio: ['Oi, eu sou o Next, o guia da Tirvo. Vou te levar ao próximo passo.', 'Sites, sistemas, marcas e IA, tudo com rigor de engenharia. Role para ver.'],
           alerta: ['Rede social é terreno alugado: as regras mudam sem aviso.', 'Use as redes para atrair e o seu site para converter.'],
@@ -7452,6 +7518,121 @@
     }
 
     /* ==========================================================
+       SONS DO MASCOTE: sintetizados com Web Audio (nenhum arquivo baixado)
+       ========================================================== */
+    function createMascotSounds(storageKey) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      let ctx = null;
+      let master = null;
+      let enabled = true;
+      try { enabled = localStorage.getItem(storageKey) !== 'off'; } catch (error) { /* armazenamento indisponível */ }
+
+      const ensure = () => {
+        if (!AudioCtx) return null;
+        if (!ctx) {
+          ctx = new AudioCtx();
+          master = ctx.createGain();
+          master.gain.value = 0.22;
+          const limiter = ctx.createDynamicsCompressor();
+          master.connect(limiter);
+          limiter.connect(ctx.destination);
+        }
+        if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+        return ctx;
+      };
+      // O navegador só libera áudio depois de um gesto: o primeiro toque, clique ou tecla na página prepara tudo
+      const unlock = () => { if (enabled) ensure(); };
+      ['pointerdown', 'keydown', 'touchend'].forEach((type) => addEventListener(type, unlock, { capture: true, passive: true }));
+
+      // Toca só com o áudio já liberado ou durante um gesto; nunca acumula sons para disparar de uma vez depois
+      const ready = () => {
+        if (!enabled || !AudioCtx) return false;
+        if (ctx && ctx.state === 'running') return true;
+        if (navigator.userActivation?.isActive) { ensure(); return true; }
+        return false;
+      };
+
+      // Uma nota com envelope curto, deslize de frequência e vibrato opcionais
+      const tone = ({ f0, f1 = f0, dur = 0.1, type = 'sine', at = 0, vol = 0.5, vib = 0, vibRate = 0 }) => {
+        const start = ctx.currentTime + at;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(f0, start);
+        if (f1 !== f0) osc.frequency.exponentialRampToValueAtTime(f1, start + dur);
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(vol, start + 0.008);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+        osc.connect(gain);
+        gain.connect(master);
+        if (vib) {
+          const lfo = ctx.createOscillator();
+          const depth = ctx.createGain();
+          lfo.frequency.value = vibRate;
+          depth.gain.value = vib;
+          lfo.connect(depth);
+          depth.connect(osc.frequency);
+          lfo.start(start);
+          lfo.stop(start + dur + 0.03);
+        }
+        osc.start(start);
+        osc.stop(start + dur + 0.03);
+        return osc;
+      };
+
+      const SOUNDS = {
+        // Passar o mouse: "bup" curto subindo
+        hover: () => tone({ f0: 520, f1: 900, dur: 0.09, vol: 0.45 }),
+        // Toque: "bi-bup" de duas notas
+        tap: () => {
+          tone({ f0: 660, dur: 0.07, type: 'triangle', vol: 0.55 });
+          tone({ f0: 990, dur: 0.1, type: 'triangle', at: 0.075, vol: 0.55 });
+        },
+        // Antena: mola com vibrato
+        boing: () => tone({ f0: 170, f1: 440, dur: 0.48, vol: 0.75, vib: 70, vibRate: 22 }),
+        // Cócegas: risadinha de notas rápidas
+        giggle: () => [1046, 1318, 1175, 1480, 1318].forEach((f, i) => tone({
+          f0: f * (1 + (Math.random() - 0.5) * 0.04), f1: f * 0.82, dur: 0.075, type: 'triangle', at: i * 0.085, vol: 0.4,
+        })),
+        // Tontura: descida longa e ondulada
+        dizzy: () => tone({ f0: 900, f1: 150, dur: 0.95, vol: 0.55, vib: 45, vibRate: 9 }),
+        // Fechar o balão
+        pop: () => tone({ f0: 1400, f1: 480, dur: 0.05, vol: 0.35 }),
+        // Sons ligados
+        on: () => {
+          tone({ f0: 523, dur: 0.08, type: 'triangle', vol: 0.5 });
+          tone({ f0: 784, dur: 0.13, type: 'triangle', at: 0.09, vol: 0.5 });
+        },
+      };
+
+      let chatterNodes = [];
+      const stopChatter = () => {
+        chatterNodes.forEach((osc) => { try { osc.stop(); } catch (error) { /* já parou */ } });
+        chatterNodes = [];
+      };
+
+      return {
+        get enabled() { return enabled; },
+        play(name) { if (ready()) SOUNDS[name]?.(); },
+        // "Fala" de robô: bipes curtos com altura aleatória enquanto a boca mexe
+        chatter(ms) {
+          stopChatter();
+          if (!ready()) return;
+          const count = Math.min(18, Math.floor(ms / 90));
+          for (let i = 0; i < count; i += 1) {
+            chatterNodes.push(tone({ f0: 430 + Math.random() * 380, dur: 0.045, type: 'triangle', at: i * 0.09, vol: 0.22 }));
+          }
+        },
+        stopChatter,
+        setEnabled(value) {
+          enabled = value;
+          try { localStorage.setItem(storageKey, value ? 'on' : 'off'); } catch (error) { /* armazenamento indisponível */ }
+          if (value) { ensure(); SOUNDS.on(); } else { stopChatter(); ctx?.suspend().catch(() => {}); }
+        },
+      };
+    }
+
+    /* ==========================================================
        MASCOTE: coreografia da abertura, acompanhamento por seção e balões de fala
        ========================================================== */
     function initMascot() {
@@ -7460,7 +7641,9 @@
       const bot = $('[data-mascot-bot]', mascot);
       const text = $('[data-mascot-text]', mascot);
       const closeButton = $('[data-mascot-close]', mascot);
+      const soundButton = $('[data-mascot-sound]', mascot);
       const cfg = CONFIG.mascot;
+      const sfx = createMascotSounds(cfg.soundKey);
 
       // Temporizadores nomeados: reagendar uma chave cancela o anterior
       const timers = new Map();
@@ -7500,20 +7683,23 @@
 
       const hideBubble = () => {
         cancel('hide', 'talk', 'pose');
+        sfx.stopChatter();
         mascot.classList.remove('is-bubble-open', 'is-talking');
         bubbleOpen = false;
         relax();
       };
-      const speak = (message, announce) => {
+      const speak = (message, announce, { pose = 'explain', face = 'happy' } = {}) => {
         cancel('idleSeq');
         // Anuncia para leitores de tela só quando o visitante pediu a dica; nas trocas de seção, fica em silêncio
         text.setAttribute('aria-live', announce ? 'polite' : 'off');
         text.textContent = message;
         mascot.classList.add('is-bubble-open', 'is-talking');
         bubbleOpen = true;
-        setPose('explain');
-        setFace('happy');
+        setPose(pose);
+        setFace(face);
         const talk = Math.min(cfg.talkMax, 500 + message.length * cfg.talkPerChar);
+        // A "voz" de bipes só acompanha falas que o visitante provocou
+        if (announce) sfx.chatter(talk);
         later('talk', talk, () => { mascot.classList.remove('is-talking'); setFace('neutral'); });
         later('pose', talk + 900, () => { if (bubbleOpen) setPose('rest'); });
         later('hide', Math.min(cfg.bubbleMax, cfg.bubbleMin + message.length * cfg.bubblePerChar), hideBubble);
@@ -7615,22 +7801,84 @@
         });
       };
 
-      /* ---------- Interação direta ---------- */
-      bot.addEventListener('click', () => {
+      /* ---------- Interação direta: dica, brincadeiras e sons ---------- */
+      const REACTIONS = {
+        boing: { sound: 'boing', className: 'is-boing', ms: 800, face: 'surprised', pose: 'explain' },
+        tickle: { sound: 'giggle', className: 'is-tickle', ms: 650, face: 'happy', pose: 'cheer' },
+        dizzy: { sound: 'dizzy', className: 'is-dizzy', ms: 1500, face: 'dizzy', pose: 'rest' },
+      };
+      const playCount = { boing: 0, tickle: 0, dizzy: 0 };
+      const react = (kind) => {
+        const reaction = REACTIONS[kind];
+        const line = cfg.play[kind][playCount[kind]++ % cfg.play[kind].length];
+        sfx.play(reaction.sound);
+        mascot.classList.remove('is-boing', 'is-tickle', 'is-dizzy');
+        void mascot.offsetWidth; // reinicia a animação se o mesmo gesto se repetir
+        mascot.classList.add(reaction.className);
+        later('react', reaction.ms, () => mascot.classList.remove(reaction.className));
+        if (kind === 'dizzy') {
+          hideBubble();
+          setFace('dizzy');
+          later('reactSpeak', reaction.ms, () => speak(line, true));
+        } else {
+          speak(line, true, { face: reaction.face, pose: reaction.pose });
+        }
+      };
+
+      let combo = 0;
+      let lastTap = 0;
+      bot.addEventListener('click', (event) => {
         if (mascot.classList.contains('is-intro')) return;
-        setFace('surprised');
-        later('surprise', 220, () => speakAbout(current || 'inicio', true));
+        const now = performance.now();
+        combo = now - lastTap < cfg.comboWindow ? combo + 1 : 1;
+        lastTap = now;
+        // Muitos toques seguidos: ele gira e fica tonto
+        if (combo >= cfg.dizzyAt) {
+          combo = 0;
+          react('dizzy');
+          return;
+        }
+        // Primeiro toque: dica sobre a seção. Com o balão aberto: antena (cabeça) ou cócegas (corpo).
+        if (!bubbleOpen) {
+          sfx.play('tap');
+          setFace('surprised');
+          later('surprise', 220, () => speakAbout(current || 'inicio', true));
+          return;
+        }
+        const rect = bot.getBoundingClientRect();
+        const onHead = event.detail > 0 && event.clientY - rect.top < rect.height * 0.5;
+        react(onHead ? 'boing' : 'tickle');
       });
-      bot.addEventListener('pointerenter', () => {
+      let lastHoverSound = 0;
+      bot.addEventListener('pointerenter', (event) => {
+        if (mascot.classList.contains('is-intro')) return;
+        if (event.pointerType !== 'touch' && performance.now() - lastHoverSound > cfg.hoverSoundGap) {
+          lastHoverSound = performance.now();
+          sfx.play('hover');
+        }
         if (!bubbleOpen && mascot.dataset.pose === 'rest') setFace('happy');
       });
       bot.addEventListener('pointerleave', () => {
         if (!bubbleOpen && mascot.dataset.pose === 'rest') setFace('neutral');
       });
+      // A animação de entrada sai de cena ao terminar, liberando o invólucro para os gestos de brincadeira
+      $('.mascot__pop', mascot).addEventListener('animationend', (event) => {
+        if (event.animationName === 'bot-pop') mascot.classList.remove('is-entering');
+      });
+      if (soundButton) {
+        const syncSound = () => soundButton.setAttribute('aria-pressed', String(sfx.enabled));
+        syncSound();
+        soundButton.addEventListener('click', () => { sfx.setEnabled(!sfx.enabled); syncSound(); });
+      }
       // Com o cursor sobre o mascote ou o balão, o balão não some
       mascot.addEventListener('pointerenter', () => cancel('hide'));
       mascot.addEventListener('pointerleave', () => { if (bubbleOpen) later('hide', 2400, hideBubble); });
-      closeButton.addEventListener('click', () => { hideBubble(); bot.focus({ preventScroll: true }); });
+      closeButton.addEventListener('click', (event) => {
+        sfx.play('pop');
+        hideBubble();
+        // Pelo teclado, o foco volta para o robô; com mouse ou toque, sem anel de foco
+        if (event.detail === 0) bot.focus({ preventScroll: true });
+      });
       mascot.addEventListener('keydown', (event) => { if (event.key === 'Escape' && bubbleOpen) hideBubble(); });
 
       /* ---------- Pouso no canto e início do acompanhamento ---------- */
