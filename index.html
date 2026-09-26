@@ -3141,6 +3141,212 @@
         user-select: none;
       }
 
+      /* ---------- Mascote: robô da Tirvo ---------- */
+      .mascot {
+        /* Pose de descanso: ângulos de ombro (a), cotovelo (f), cabeça, pernas e direção do olhar.
+           Especificidade baixa de propósito: as poses em [data-pose] sobrescrevem estes valores. */
+        --al: 10deg; --fl: -10deg; --ar: -10deg; --fr: 10deg;
+        --head: 0deg; --ll: 0deg; --lr: 0deg; --ex: 0px; --ey: 0px;
+        --point: -100deg;
+        --bot-w: 72px;
+        display: none;
+      }
+      .js .mascot:not([hidden]) {
+        position: fixed;
+        left: calc(.75rem + env(safe-area-inset-left));
+        bottom: calc(.5rem + env(safe-area-inset-bottom));
+        z-index: var(--z-float);
+        display: block;
+        width: var(--bot-w);
+        transform-origin: 0 0;
+        pointer-events: none;
+        transition: opacity var(--dur-2) ease, visibility 0s linear 0s, translate var(--dur-2) var(--ease-out);
+      }
+      @media (min-width: 768px) {
+        .js .mascot:not([hidden]) { --bot-w: 92px; left: calc(1.25rem + env(safe-area-inset-left)); bottom: calc(.75rem + env(safe-area-inset-bottom)); }
+      }
+      .js .mascot.is-concealed {
+        opacity: 0;
+        visibility: hidden;
+        translate: 0 16px;
+        transition: opacity var(--dur-2) ease, visibility 0s linear var(--dur-2), translate var(--dur-2) var(--ease-out);
+      }
+      /* Na abertura: a âncora invisível marca onde o robô aparece sobre o palco do vídeo (mesma geometria de
+         .intro__video), ao lado do logo. O robô continua ancorado no canto e só é deslocado por transform até ela,
+         então a saída da abertura não gera deslocamento de layout (CLS). */
+      .mascot-anchor {
+        --sw: max(100vw, min(200vw, 177.78vh));
+        --sh: calc(var(--sw) * .5625);
+        --bot-w: min(calc(var(--sw) * .14), 280px);
+        position: fixed;
+        left: calc((100vw - var(--sw)) / 2 + var(--sw) * .13);
+        top: calc((100vh - var(--sh)) / 2 + var(--sh) * .22);
+        width: var(--bot-w);
+        aspect-ratio: 200 / 246;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      @media (max-aspect-ratio: 1 / 1) {
+        /* Retrato: o logo ocupa a largura, então o robô fica logo abaixo e aponta para cima */
+        .mascot-anchor {
+          --bot-w: min(calc(var(--sw) * .17), 190px);
+          left: calc(50vw - var(--bot-w) / 2);
+          top: min(calc((100vh - var(--sh)) / 2 + var(--sh) * .79), calc(100vh - 76px - var(--bot-w) * 1.23));
+        }
+        .mascot.is-intro { --point: -168deg; }
+      }
+      .js .mascot.is-intro:not([hidden]),
+      .js .mascot.is-flying:not([hidden]) { z-index: 2147483001; }
+
+      .mascot__bot {
+        display: block;
+        width: 100%;
+        aspect-ratio: 200 / 246;
+        border-radius: 40% 40% 30% 30%;
+        pointer-events: auto;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .mascot.is-intro .mascot__bot { pointer-events: none; }
+      .mascot__pop, .mascot__jump, .mascot__breath { display: block; width: 100%; height: 100%; }
+      .mascot__breath { transform-origin: 50% 94%; }
+      .bot { width: 100%; height: 100%; overflow: visible; }
+      .bot__shadow { fill: #000; opacity: .2; }
+      .mascot:not(.is-intro) .bot__shadow { fill: #ff5500; opacity: .16; }
+
+      /* Articulações: cada grupo gira em torno da própria origem local */
+      .bot__part { transform-box: view-box; transform-origin: 0 0; }
+      .bot__arm, .bot__fore, .bot__leg, .bot__head { transition: transform 560ms cubic-bezier(.45, .05, .25, 1); }
+      .bot__arm--l { transform: rotate(var(--al)); }
+      .bot__fore--l { transform: rotate(var(--fl)); }
+      .bot__arm--r { transform: rotate(var(--ar)); }
+      .bot__fore--r { transform: rotate(var(--fr)); }
+      .bot__leg--l { transform: rotate(var(--ll)); }
+      .bot__leg--r { transform: rotate(var(--lr)); }
+      .bot__head { transform: rotate(var(--head)); }
+      /* A antena segue a cabeça com atraso e leve sobressalto, como uma mola */
+      .bot__antenna { transform: rotate(calc(var(--head) * -1.8)); transition: transform 1.1s cubic-bezier(.3, 1.7, .45, 1); }
+      .bot__eyes { transform: translate(var(--ex), var(--ey)); transition: transform 260ms var(--ease-out); }
+      .bot__eye { transition: transform 90ms ease; }
+      .bot__eyes-open, .bot__eyes-happy, .bot__blush, .bot__smile, .bot__o { transition: opacity 180ms ease; }
+      .bot__eyes-happy, .bot__blush, .bot__o { opacity: 0; }
+
+      /* Poses */
+      .mascot[data-pose="wave"] { --ar: -148deg; --fr: -30deg; --al: 16deg; --fl: -14deg; --head: -4deg; }
+      .mascot[data-pose="build"] { --ar: var(--point); --fr: -14deg; --al: 28deg; --fl: -72deg; --head: 6deg; --ex: 5px; --ey: -1px; }
+      .mascot.is-intro[data-pose="build"] { --ey: -2px; }
+      @media (max-aspect-ratio: 1 / 1) { .mascot.is-intro[data-pose="build"] { --head: 0deg; --ex: 0px; --ey: -5px; } }
+      .mascot[data-pose="cheer"] { --al: 150deg; --fl: 22deg; --ar: -150deg; --fr: -22deg; --ll: 7deg; --lr: -7deg; }
+      .mascot[data-pose="explain"] { --ar: -128deg; --fr: -34deg; --al: 14deg; --fl: -26deg; --head: -5deg; --ex: 3px; --ey: -3px; }
+      .mascot[data-pose="look-l"] { --head: -8deg; --ex: -5px; --ey: -1px; }
+      .mascot[data-pose="look-r"] { --head: 8deg; --ex: 5px; --ey: -1px; }
+      .mascot[data-pose="fly"] { --al: 62deg; --fl: 24deg; --ar: -62deg; --fr: -24deg; --ll: 9deg; --lr: -9deg; }
+
+      /* Expressões */
+      .mascot[data-face="happy"] .bot__eyes-open { opacity: 0; }
+      .mascot[data-face="happy"] .bot__eyes-happy { opacity: 1; }
+      .mascot[data-face="happy"] .bot__blush { opacity: .45; }
+      .mascot[data-face="focus"] .bot__eye { transform: scale(1.06, .72); }
+      .mascot[data-face="surprised"] .bot__eye { transform: scale(1.14); }
+      .mascot[data-face="surprised"] .bot__smile { opacity: 0; }
+      .mascot[data-face="surprised"] .bot__o { opacity: 1; }
+      .mascot.is-blink .bot__eye { transform: scaleY(.1); }
+
+      /* Balão de fala */
+      .mascot__bubble {
+        position: absolute;
+        left: calc(var(--bot-w) * .5);
+        bottom: calc(var(--bot-w) * 1.18);
+        width: max-content;
+        max-width: min(18rem, calc(100vw - var(--bot-w) * .5 - 2rem - env(safe-area-inset-left) - env(safe-area-inset-right)));
+        padding: .8rem 2.35rem .85rem 1rem;
+        border-radius: 18px 18px 18px 6px;
+        background: #f7f3ed;
+        color: #1b1622;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, .6) inset, 0 18px 40px -16px rgba(0, 0, 0, .7), 0 0 0 1px rgba(255, 85, 0, .18);
+        transform-origin: 0 100%;
+        opacity: 0;
+        visibility: hidden;
+        scale: .6;
+        translate: 0 10px;
+        pointer-events: auto;
+        transition: opacity 200ms ease, scale 200ms ease, translate 200ms ease, visibility 0s linear 200ms;
+      }
+      .mascot__bubble::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        width: 18px;
+        height: 12px;
+        background: inherit;
+        clip-path: polygon(0 0, 100% 0, 0 100%);
+      }
+      .mascot.is-bubble-open .mascot__bubble {
+        opacity: 1;
+        visibility: visible;
+        scale: 1;
+        translate: 0 0;
+        transition: opacity 220ms ease, scale 480ms cubic-bezier(.34, 1.56, .64, 1), translate 480ms cubic-bezier(.34, 1.56, .64, 1), visibility 0s;
+      }
+      .mascot.is-intro .mascot__bubble { display: none; }
+      .mascot__text { font: 500 .9rem/1.45 var(--font-sans); letter-spacing: -.005em; text-wrap: pretty; }
+      .mascot__close {
+        position: absolute;
+        top: .35rem;
+        right: .35rem;
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        color: rgba(27, 22, 34, .55);
+        transition: background-color var(--dur-1) ease, color var(--dur-1) ease;
+      }
+      .mascot__close:hover { background: rgba(27, 22, 34, .08); color: #1b1622; }
+      .mascot__close svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+      .mascot__bubble :focus-visible { outline-color: #ff3300; outline-offset: 1px; }
+
+      @media (prefers-reduced-motion: no-preference) {
+        /* Respiração: expansão vertical sutil com os pés fixos (composta na GPU) */
+        .mascot__breath { animation: bot-breath 3.4s ease-in-out infinite; }
+        .mascot.is-entering .mascot__pop { animation: bot-pop 760ms cubic-bezier(.34, 1.56, .64, 1) both; }
+        .mascot[data-pose="cheer"] .mascot__jump { animation: bot-jump 620ms cubic-bezier(.33, 0, .3, 1) infinite; }
+        .mascot[data-pose="wave"] .bot__wiggle--r { animation: bot-wave 460ms ease-in-out infinite alternate; }
+        .mascot[data-pose="wave"] .bot__hand--r { animation: bot-hand 230ms ease-in-out infinite alternate; }
+        .mascot[data-pose="build"] .bot__hand--r { animation: bot-conjure 240ms ease-in-out infinite alternate; }
+        .mascot[data-pose="build"] .bot__wiggle--r { animation: bot-nudge 900ms ease-in-out infinite alternate; }
+        .mascot[data-pose="cheer"] .bot__wiggle--l,
+        .mascot[data-pose="cheer"] .bot__wiggle--r { animation: bot-nudge 310ms ease-in-out infinite alternate; }
+        .mascot[data-pose="explain"] .bot__hand--r { animation: bot-palm 1.1s ease-in-out infinite alternate; }
+        .mascot[data-pose="explain"] .bot__wiggle--l { animation: bot-nudge 1.4s ease-in-out infinite alternate; }
+        .mascot[data-pose="look-l"] { --head: -8deg; --ex: -5px; --ey: -1px; }
+      .mascot[data-pose="look-r"] { --head: 8deg; --ex: 5px; --ey: -1px; }
+      .mascot[data-pose="fly"] .bot__wiggle--l,
+        .mascot[data-pose="look-l"] { --head: -8deg; --ex: -5px; --ey: -1px; }
+      .mascot[data-pose="look-r"] { --head: 8deg; --ex: 5px; --ey: -1px; }
+      .mascot[data-pose="fly"] .bot__wiggle--r { animation: bot-nudge 260ms ease-in-out infinite alternate; }
+        .mascot.is-talking .bot__mouth { animation: bot-talk 170ms ease-in-out infinite alternate; }
+        .mascot.is-talking .bot__core-glow { animation: bot-core 340ms ease-in-out infinite alternate; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .bot__arm, .bot__fore, .bot__leg, .bot__head, .bot__antenna, .bot__eyes { transition-duration: 1ms; }
+      }
+      @keyframes bot-breath { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(.992, 1.028); } }
+      @keyframes bot-pop { 0% { opacity: 0; transform: translateY(26%) scale(.35); } 60% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+      @keyframes bot-jump {
+        0%, 100% { transform: translateY(0) scale(1, 1); }
+        12% { transform: translateY(0) scale(1.05, .93); }
+        45% { transform: translateY(-11%) scale(.97, 1.04); }
+        78% { transform: translateY(0) scale(1.04, .95); }
+      }
+      @keyframes bot-wave { from { transform: rotate(-22deg); } to { transform: rotate(18deg); } }
+      @keyframes bot-hand { from { transform: rotate(-12deg); } to { transform: rotate(12deg); } }
+      @keyframes bot-conjure { from { transform: rotate(-16deg) scale(.94); } to { transform: rotate(14deg) scale(1.06); } }
+      @keyframes bot-nudge { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
+      @keyframes bot-palm { from { transform: rotate(-10deg); } to { transform: rotate(12deg); } }
+      @keyframes bot-talk { from { transform: scale(1, .45); } to { transform: scale(.9, 1.45); } }
+      @keyframes bot-core { from { opacity: .5; } to { opacity: 1; } }
+
       /* ---------- WhatsApp flutuante ---------- */
       .wa-float {
         position: fixed;
@@ -4519,6 +4725,127 @@
     <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
     <span class="wa-float__tip" aria-hidden="true">Fale com a gente</span>
   </a>
+
+  <!-- ============ MASCOTE (robô da Tirvo) ============ -->
+  <div class="mascot-anchor" aria-hidden="true" data-mascot-anchor></div>
+  <div class="mascot" data-pose="rest" data-face="neutral" hidden data-mascot data-overlay-inert>
+    <div class="mascot__bubble" id="mascote-balao" data-mascot-bubble>
+      <p class="mascot__text" aria-live="off" data-mascot-text></p>
+      <button class="mascot__close" type="button" aria-label="Fechar balão" data-mascot-close>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>
+      </button>
+    </div>
+    <button class="mascot__bot" type="button" aria-label="Assistente da Tirvo: mostrar uma dica sobre esta parte do site" aria-describedby="mascote-balao" data-mascot-bot>
+      <span class="mascot__pop"><span class="mascot__jump"><span class="mascot__breath">
+        <svg class="bot" viewBox="0 -8 200 246" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="bot-shell" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#f7f3ed"/><stop offset="1" stop-color="#e2d8cb"/>
+            </linearGradient>
+            <linearGradient id="bot-visor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2d2537"/><stop offset="1" stop-color="#110d16"/>
+            </linearGradient>
+            <linearGradient id="bot-ignition" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ff7a33"/><stop offset=".55" stop-color="#ff5500"/><stop offset="1" stop-color="#ff3300"/>
+            </linearGradient>
+            <radialGradient id="bot-glow">
+              <stop offset="0" stop-color="#ff5500" stop-opacity=".5"/><stop offset="1" stop-color="#ff5500" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <ellipse class="bot__shadow" cx="100" cy="229" rx="42" ry="6"/>
+
+          <!-- Pernas -->
+          <g transform="translate(86 180)"><g class="bot__part bot__leg bot__leg--l"><g transform="translate(-86 -180)">
+            <rect x="78.5" y="176" width="15" height="38" rx="7.5" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.5"/>
+            <rect x="77.5" y="203" width="17" height="6" rx="3" fill="url(#bot-ignition)"/>
+            <path d="M71 226c0-9 6-13 15-13s13 4 13 9.5c0 3-1.5 4.5-5 4.5H73.5c-1.7 0-2.5-.4-2.5-1Z" fill="#221c2b"/>
+          </g></g></g>
+          <g transform="translate(114 180)"><g class="bot__part bot__leg bot__leg--r"><g transform="translate(-114 -180)">
+            <rect x="106.5" y="176" width="15" height="38" rx="7.5" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.5"/>
+            <rect x="105.5" y="203" width="17" height="6" rx="3" fill="url(#bot-ignition)"/>
+            <path d="M129 226c0-9-6-13-15-13s-13 4-13 9.5c0 3 1.5 4.5 5 4.5h20.5c1.7 0 2.5-.4 2.5-1Z" fill="#221c2b"/>
+          </g></g></g>
+
+          <!-- Tronco -->
+          <path d="M100 122c27 0 41 14 40 36-1 22-16 36-40 36s-39-14-40-36c-1-22 13-36 40-36Z" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.5"/>
+          <path d="M68 172c20 9 44 9 64 0" fill="none" stroke="#221c2b" stroke-opacity=".14" stroke-width="2" stroke-linecap="round"/>
+          <circle class="bot__core-glow" cx="100" cy="152" r="17" fill="url(#bot-glow)"/>
+          <g transform="translate(100 152)">
+            <path d="M0 11C-1.8 7.4-8 2-8-3.6a8 8 0 1 1 16 0C8 2 1.8 7.4 0 11Z" fill="url(#bot-ignition)"/>
+            <circle cy="-3.6" r="2.8" fill="#fff"/>
+          </g>
+
+          <!-- Braço esquerdo -->
+          <g transform="translate(64 142)"><g class="bot__part bot__arm bot__arm--l"><g transform="translate(-64 -142)">
+            <rect x="57.5" y="138" width="13" height="30" rx="6.5" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.5"/>
+            <g transform="translate(64 164)"><g class="bot__part bot__fore bot__fore--l"><g class="bot__part bot__wiggle bot__wiggle--l"><g transform="translate(-64 -164)">
+              <rect x="58" y="161" width="12" height="24" rx="6" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.5"/>
+              <g transform="translate(64 184)"><g class="bot__part bot__hand bot__hand--l"><g transform="translate(-64 -184)">
+                <rect x="67" y="180" width="6" height="11" rx="3" transform="rotate(-24 70 185)" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.2"/>
+                <ellipse cx="64" cy="190" rx="8.5" ry="8.8" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.5"/>
+              </g></g></g>
+              <circle cx="64" cy="164" r="4" fill="url(#bot-ignition)"/>
+            </g></g></g></g>
+            <circle cx="64" cy="142" r="8.5" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.5"/>
+          </g></g></g>
+
+          <!-- Braço direito -->
+          <g transform="translate(136 142)"><g class="bot__part bot__arm bot__arm--r"><g transform="translate(-136 -142)">
+            <rect x="129.5" y="138" width="13" height="30" rx="6.5" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.5"/>
+            <g transform="translate(136 164)"><g class="bot__part bot__fore bot__fore--r"><g class="bot__part bot__wiggle bot__wiggle--r"><g transform="translate(-136 -164)">
+              <rect x="130" y="161" width="12" height="24" rx="6" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.5"/>
+              <g transform="translate(136 184)"><g class="bot__part bot__hand bot__hand--r"><g transform="translate(-136 -184)">
+                <rect x="127" y="180" width="6" height="11" rx="3" transform="rotate(24 130 185)" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.2"/>
+                <ellipse cx="136" cy="190" rx="8.5" ry="8.8" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.5"/>
+              </g></g></g>
+              <circle cx="136" cy="164" r="4" fill="url(#bot-ignition)"/>
+            </g></g></g></g>
+            <circle cx="136" cy="142" r="8.5" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.5"/>
+          </g></g></g>
+
+          <!-- Pescoço e cabeça -->
+          <rect x="91" y="110" width="18" height="16" rx="6" fill="#221c2b"/>
+          <g transform="translate(100 118)"><g class="bot__part bot__head"><g transform="translate(-100 -118)">
+            <g transform="translate(100 38)"><g class="bot__part bot__antenna"><g transform="translate(-100 -38)">
+              <path d="M100 38V19" stroke="#221c2b" stroke-width="3.5" stroke-linecap="round"/>
+              <g transform="translate(100 5)">
+                <path d="M0 13C-2 8.6-9.5 2.4-9.5-4.2a9.5 9.5 0 1 1 19 0C9.5 2.4 2 8.6 0 13Z" fill="url(#bot-ignition)"/>
+                <circle cy="-4.2" r="3.3" fill="#fff"/>
+              </g>
+            </g></g></g>
+            <circle cx="38" cy="84" r="10.5" fill="#221c2b"/><circle cx="35.5" cy="84" r="4" fill="url(#bot-ignition)"/>
+            <circle cx="162" cy="84" r="10.5" fill="#221c2b"/><circle cx="164.5" cy="84" r="4" fill="url(#bot-ignition)"/>
+            <path d="M100 34c45 0 62 22 62 48s-20 38-62 38-62-12-62-38 17-48 62-48Z" fill="url(#bot-shell)" stroke="#221c2b" stroke-width="2.5"/>
+            <path d="M100 50c34 0 48 13 48 32s-14 28-48 28-48-9-48-28 14-32 48-32Z" fill="url(#bot-visor)"/>
+            <path d="M66 62c8-5 19-7.5 30-7.5" fill="none" stroke="#fff" stroke-opacity=".2" stroke-width="3" stroke-linecap="round"/>
+            <ellipse cx="100" cy="82" rx="42" ry="22" fill="url(#bot-glow)" opacity=".55"/>
+            <ellipse class="bot__blush" cx="68" cy="95" rx="7" ry="3.2" fill="#ff5500"/>
+            <ellipse class="bot__blush" cx="132" cy="95" rx="7" ry="3.2" fill="#ff5500"/>
+            <g class="bot__part bot__eyes">
+              <g class="bot__eyes-open">
+                <g transform="translate(82 80)"><g class="bot__part bot__eye">
+                  <rect x="-7" y="-10.5" width="14" height="21" rx="7" fill="url(#bot-ignition)"/>
+                  <circle cx="2.4" cy="-4.6" r="2.3" fill="#fff" fill-opacity=".92"/>
+                </g></g>
+                <g transform="translate(118 80)"><g class="bot__part bot__eye">
+                  <rect x="-7" y="-10.5" width="14" height="21" rx="7" fill="url(#bot-ignition)"/>
+                  <circle cx="2.4" cy="-4.6" r="2.3" fill="#fff" fill-opacity=".92"/>
+                </g></g>
+              </g>
+              <g class="bot__eyes-happy" fill="none" stroke="#ff5500" stroke-width="5" stroke-linecap="round">
+                <path d="M74 84q8-12 16 0"/><path d="M110 84q8-12 16 0"/>
+              </g>
+            </g>
+            <g transform="translate(100 97)"><g class="bot__part bot__mouth">
+              <path class="bot__smile" d="M-8-1q8 7 16 0" fill="none" stroke="#ff5500" stroke-width="3" stroke-linecap="round"/>
+              <ellipse class="bot__o" cy="1" rx="3.6" ry="4.2" fill="#ff5500"/>
+            </g></g>
+          </g></g></g>
+        </svg>
+      </span></span></span>
+    </button>
+  </div>
   </aside>
 
   <!-- ============ LIGHTBOX ============ -->
@@ -4621,6 +4948,33 @@
       header: { solidAfter: 40, hideAfter: 320 },
       // Lightbox
       lightbox: { maxScale: 4, doubleTapScale: 2.5, hintMs: 2800 },
+      // Mascote: tempos (ms) e frases de cada seção, na ordem em que aparecem
+      mascot: {
+        dwell: 700,
+        revisitGap: 20000,
+        bubbleMin: 4200,
+        bubblePerChar: 40,
+        bubbleMax: 9000,
+        talkPerChar: 38,
+        talkMax: 2600,
+        blinkMin: 2400,
+        blinkMax: 6000,
+        idleMin: 14000,
+        idleMax: 24000,
+        flightMs: 1050,
+        messages: {
+          inicio: ['Oi, que bom ter você aqui. Vou te acompanhar pelo site.', 'Sites, sistemas, marcas e IA, tudo com rigor de engenharia. Role para ver.'],
+          alerta: ['Rede social é terreno alugado: as regras mudam sem aviso.', 'Use as redes para atrair e o seu site para converter.'],
+          servicos: ['São cinco frentes: sites, sistemas, marca, design e IA. Qual delas é a sua?', 'Nos sites, você escolhe: receber o código ou deixar a gestão completa com a gente.'],
+          equipe: ['Aqui ninguém usa template: é gente que programa de verdade.', 'Programadores raiz lado a lado com especialistas em IA.'],
+          metodo: ['Três fases, zero improviso: Descoberta, Engenharia e Lançamento.', 'Você sabe o que será entregue em cada etapa, e quando.'],
+          nexus: ['Esse é o Nexus: um enxame de agentes que escreve o código e entrega em .zip.', 'Use as setas para ver cada tela do Nexus por dentro.'],
+          numeros: ['Zero código genérico. Tudo é projetado para o seu negócio.', 'Com a Gestão 360º, sua operação é monitorada 24/7.'],
+          faq: ['Ficou alguma dúvida? Abra uma pergunta para ver a resposta.', 'Não achou o que procurava? Dá para falar direto no WhatsApp.'],
+          contato: ['Conte o seu desafio em poucas linhas. A mensagem chega pronta no WhatsApp da equipe.', 'Nenhum dado fica guardado aqui: tudo vai direto para o WhatsApp.'],
+          rodape: ['Obrigado pela visita. Quando quiser, é só chamar.', 'Seu futuro digital começa com uma conversa.'],
+        },
+      },
     };
 
     /* ==========================================================
@@ -7090,6 +7444,274 @@
     }
 
     /* ==========================================================
+       MASCOTE: coreografia da abertura, acompanhamento por seção e balões de fala
+       ========================================================== */
+    function initMascot() {
+      const mascot = $('[data-mascot]');
+      if (!mascot) return;
+      const bot = $('[data-mascot-bot]', mascot);
+      const text = $('[data-mascot-text]', mascot);
+      const closeButton = $('[data-mascot-close]', mascot);
+      const cfg = CONFIG.mascot;
+
+      // Temporizadores nomeados: reagendar uma chave cancela o anterior
+      const timers = new Map();
+      const later = (key, ms, fn) => { clearTimeout(timers.get(key)); timers.set(key, setTimeout(fn, ms)); };
+      const cancel = (...keys) => keys.forEach((key) => clearTimeout(timers.get(key)));
+
+      const setFace = (face) => { if (mascot.dataset.face !== face) mascot.dataset.face = face; };
+      const setPose = (pose) => {
+        if (mascot.dataset.pose === pose) return;
+        mascot.dataset.pose = pose;
+        // O olhar que segue o cursor vale só em repouso; nas outras poses, manda a direção da pose
+        if (pose !== 'rest') {
+          mascot.style.removeProperty('--ex');
+          mascot.style.removeProperty('--ey');
+        }
+      };
+      const relax = () => { setPose('rest'); setFace('neutral'); };
+
+      /* ---------- Piscar: intervalo irregular, às vezes em dobro ---------- */
+      const blinkOnce = (ms) => {
+        mascot.classList.add('is-blink');
+        setTimeout(() => mascot.classList.remove('is-blink'), ms);
+      };
+      const blink = () => {
+        if (!document.hidden && mascot.dataset.face !== 'happy') {
+          blinkOnce(130);
+          if (Math.random() < 0.22) setTimeout(() => blinkOnce(120), 260);
+        }
+        later('blink', cfg.blinkMin + Math.random() * (cfg.blinkMax - cfg.blinkMin), blink);
+      };
+
+      /* ---------- Balão de fala ---------- */
+      let bubbleOpen = false;
+      let concealed = false;
+      let current = '';
+      const history = new Map(); // seção → { count, at }
+
+      const hideBubble = () => {
+        cancel('hide', 'talk', 'pose');
+        mascot.classList.remove('is-bubble-open', 'is-talking');
+        bubbleOpen = false;
+        relax();
+      };
+      const speak = (message, announce) => {
+        cancel('idleSeq');
+        // Anuncia para leitores de tela só quando o visitante pediu a dica; nas trocas de seção, fica em silêncio
+        text.setAttribute('aria-live', announce ? 'polite' : 'off');
+        text.textContent = message;
+        mascot.classList.add('is-bubble-open', 'is-talking');
+        bubbleOpen = true;
+        setPose('explain');
+        setFace('happy');
+        const talk = Math.min(cfg.talkMax, 500 + message.length * cfg.talkPerChar);
+        later('talk', talk, () => { mascot.classList.remove('is-talking'); setFace('neutral'); });
+        later('pose', talk + 900, () => { if (bubbleOpen) setPose('rest'); });
+        later('hide', Math.min(cfg.bubbleMax, cfg.bubbleMin + message.length * cfg.bubblePerChar), hideBubble);
+      };
+      const speakAbout = (id, manual) => {
+        const lines = cfg.messages[id];
+        if (!lines || !lines.length) return;
+        const record = history.get(id) || { count: 0, at: 0 };
+        if (!manual) {
+          // Em cada seção, a primeira frase ao chegar; ao voltar depois de um tempo, a seguinte. Depois disso, só se pedirem.
+          if (record.count >= lines.length) return;
+          if (record.count && performance.now() - record.at < cfg.revisitGap) return;
+        }
+        history.set(id, { count: record.count + 1, at: performance.now() });
+        speak(lines[record.count % lines.length], manual);
+      };
+
+      /* ---------- Seção atual (faixa central da tela) ---------- */
+      const trackSections = () => {
+        const sections = Object.keys(cfg.messages).map((id) => document.getElementById(id)).filter(Boolean);
+        if (!hasIO || !sections.length) return;
+        const inBand = new Set();
+        const observer = new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) inBand.add(entry.target);
+            else inBand.delete(entry.target);
+          }
+          const id = sections.filter((section) => inBand.has(section)).pop()?.id || '';
+          if (id === current) return;
+          current = id;
+          cancel('section');
+          // Só fala depois que o visitante se demora na seção (rolagem rápida não dispara balões em série)
+          if (id) later('section', cfg.dwell, () => { if (current === id && !concealed) speakAbout(id, false); });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        sections.forEach((section) => observer.observe(section));
+      };
+
+      /* ---------- Ocultação: menu, lightbox e digitação no celular ---------- */
+      let formFocus = false;
+      const wide = matchMedia('(min-width: 768px)');
+      const updateConceal = () => {
+        concealed = root.classList.contains('is-menu-open')
+          || root.classList.contains('is-lightbox-open')
+          || (formFocus && !wide.matches);
+        mascot.classList.toggle('is-concealed', concealed);
+        if (concealed && bubbleOpen) hideBubble();
+      };
+      const watchConceal = () => {
+        new MutationObserver(updateConceal).observe(root, { attributes: true, attributeFilter: ['class'] });
+        document.addEventListener('focusin', (event) => {
+          formFocus = Boolean(event.target.closest?.('form'));
+          updateConceal();
+        });
+        document.addEventListener('focusout', () => {
+          formFocus = false;
+          requestAnimationFrame(updateConceal);
+        });
+        updateConceal();
+      };
+
+      /* ---------- Olhar que acompanha o cursor (só mouse, um cálculo por quadro) ---------- */
+      const trackPointer = () => {
+        if (!isFinePointer() || prefersReducedMotion.value) return;
+        let x = 0;
+        let y = 0;
+        const apply = rafThrottle(() => {
+          if (mascot.dataset.pose !== 'rest' || concealed) return;
+          const rect = bot.getBoundingClientRect();
+          const dx = x - (rect.left + rect.width / 2);
+          const dy = y - (rect.top + rect.height * 0.33);
+          const distance = Math.hypot(dx, dy) || 1;
+          const reach = Math.min(1, distance / 420);
+          mascot.style.setProperty('--ex', `${((dx / distance) * 5 * reach).toFixed(1)}px`);
+          mascot.style.setProperty('--ey', `${((dy / distance) * 3.5 * reach).toFixed(1)}px`);
+        });
+        addEventListener('pointermove', (event) => { x = event.clientX; y = event.clientY; apply(); }, { passive: true });
+      };
+
+      /* ---------- Gestos ociosos para chamar a atenção de vez em quando ---------- */
+      const IDLE_MOVES = [
+        [['wave', 'happy', 1500]],
+        [['look-l', 'neutral', 900], ['look-r', 'neutral', 900]],
+        [['cheer', 'happy', 1250]],
+      ];
+      const scheduleIdle = () => {
+        later('idle', cfg.idleMin + Math.random() * (cfg.idleMax - cfg.idleMin), () => {
+          if (!document.hidden && !bubbleOpen && !concealed && mascot.dataset.pose === 'rest') {
+            const steps = IDLE_MOVES[Math.floor(Math.random() * IDLE_MOVES.length)];
+            const play = (index) => {
+              if (index >= steps.length) { relax(); return; }
+              const [pose, face, ms] = steps[index];
+              setPose(pose);
+              setFace(face);
+              later('idleSeq', ms, () => play(index + 1));
+            };
+            play(0);
+          }
+          scheduleIdle();
+        });
+      };
+
+      /* ---------- Interação direta ---------- */
+      bot.addEventListener('click', () => {
+        if (mascot.classList.contains('is-intro')) return;
+        setFace('surprised');
+        later('surprise', 220, () => speakAbout(current || 'inicio', true));
+      });
+      bot.addEventListener('pointerenter', () => {
+        if (!bubbleOpen && mascot.dataset.pose === 'rest') setFace('happy');
+      });
+      bot.addEventListener('pointerleave', () => {
+        if (!bubbleOpen && mascot.dataset.pose === 'rest') setFace('neutral');
+      });
+      // Com o cursor sobre o mascote ou o balão, o balão não some
+      mascot.addEventListener('pointerenter', () => cancel('hide'));
+      mascot.addEventListener('pointerleave', () => { if (bubbleOpen) later('hide', 2400, hideBubble); });
+      closeButton.addEventListener('click', () => { hideBubble(); bot.focus({ preventScroll: true }); });
+      mascot.addEventListener('keydown', (event) => { if (event.key === 'Escape' && bubbleOpen) hideBubble(); });
+
+      /* ---------- Pouso no canto e início do acompanhamento ---------- */
+      let landed = false;
+      const land = () => {
+        if (landed) return;
+        landed = true;
+        relax();
+        watchConceal();
+        trackPointer();
+        trackSections();
+        if (!prefersReducedMotion.value) scheduleIdle();
+      };
+      const dock = (animate) => {
+        const first = mascot.getBoundingClientRect();
+        removeEventListener('resize', placeOnAnchor);
+        anchor?.remove();
+        mascot.style.removeProperty('transform');
+        mascot.classList.remove('is-intro');
+        if (!animate || prefersReducedMotion.value || typeof mascot.animate !== 'function') {
+          mascot.classList.add('is-entering');
+          land();
+          return;
+        }
+        // FLIP: mede o antes e o depois e anima só transform, num arco até o canto
+        mascot.classList.add('is-flying');
+        setPose('fly');
+        setFace('happy');
+        const last = mascot.getBoundingClientRect();
+        const dx = first.left - last.left;
+        const dy = first.top - last.top;
+        const scale = first.width / last.width;
+        const flight = mascot.animate([
+          { transform: `translate(${dx}px, ${dy}px) scale(${scale})` },
+          { transform: `translate(${dx * 0.5}px, ${dy * 0.42 - 70}px) scale(${(scale + 1) / 2}) rotate(-7deg)`, offset: 0.45 },
+          { transform: 'none' },
+        ], { duration: cfg.flightMs, easing: 'cubic-bezier(.5, 0, .25, 1)' });
+        flight.finished.catch(() => {}).then(() => {
+          mascot.classList.remove('is-flying');
+          land();
+        });
+      };
+
+      /* ---------- Coreografia da abertura, sincronizada com o tempo do vídeo ---------- */
+      // [fim da fase (s), pose, expressão]: surge, "constrói" o logo apontando, comemora e acena
+      const INTRO = [
+        [0.3, 'rest', 'happy'],
+        [1.9, 'build', 'focus'],
+        [3.2, 'cheer', 'happy'],
+        [Infinity, 'wave', 'happy'],
+      ];
+      const intro = $('[data-intro]');
+      const video = $('[data-intro-video]');
+      const anchor = $('[data-mascot-anchor]');
+      // Leva o robô (ancorado no canto) até a âncora da abertura só com transform
+      const placeOnAnchor = () => {
+        if (!anchor) return;
+        mascot.style.removeProperty('transform');
+        const target = anchor.getBoundingClientRect();
+        const box = mascot.getBoundingClientRect();
+        mascot.style.transform = `translate(${target.left - box.left}px, ${target.top - box.top}px) scale(${target.width / box.width})`;
+      };
+      const introRunning = intro && root.classList.contains('intro-on') && window.tirvoIntro?.done;
+
+      mascot.hidden = false;
+      blink();
+      if (!introRunning) {
+        dock(false);
+        return;
+      }
+      mascot.classList.add('is-intro', 'is-entering');
+      placeOnAnchor();
+      addEventListener('resize', placeOnAnchor, { passive: true });
+      let frame = 0;
+      const tick = () => {
+        const time = video ? video.currentTime : 0;
+        const [, pose, face] = INTRO.find(([end]) => time < end);
+        setPose(pose);
+        setFace(face);
+        frame = requestAnimationFrame(tick);
+      };
+      tick();
+      window.tirvoIntro.done.then(() => {
+        cancelAnimationFrame(frame);
+        dock(true);
+      });
+    }
+
+    /* ==========================================================
        ANO ATUAL NO RODAPÉ
        ========================================================== */
     function initYear() {
@@ -7104,6 +7726,7 @@
 
     // Etapa 1 — o que aparece na primeira dobra
     run('initTypewriter', initTypewriter);
+    run('initMascot', initMascot);
     run('initAnchors', initAnchors);
     run('initHeader', initHeader);
     run('initMobileMenu', initMobileMenu);
