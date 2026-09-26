@@ -565,7 +565,7 @@
       .numbers { --cis: 900px; }
       .faq { --cis: 1450px; }
       .contact { --cis: 2000px; }
-      .footer { --cis: 1690px; }
+      .footer { --cis: 1790px; }
       @media (min-width: 480px) {
         .alert { --cis: 2050px; }
         .services { --cis: 3700px; }
@@ -582,7 +582,7 @@
         .nexus { --cis: 2200px; }
         .faq { --cis: 1200px; }
         .contact { --cis: 1580px; }
-        .footer { --cis: 1480px; }
+        .footer { --cis: 1550px; }
       }
       @media (min-width: 900px) {
         .numbers { --cis: 600px; }
@@ -596,7 +596,7 @@
         .numbers { --cis: 730px; }
         .faq { --cis: 1130px; }
         .contact { --cis: 1120px; }
-        .footer { --cis: 1420px; }
+        .footer { --cis: 1500px; }
       }
       /* Navegação por âncora: renderiza tudo para o destino ser exato */
       .is-cv-off .section--cv { content-visibility: visible; }
@@ -3217,8 +3217,11 @@
       .footer__signature {
         width: min(100% - var(--pad-x) * 2, var(--container));
         height: auto;
-        margin: clamp(1rem, 3vw, 2rem) auto calc(clamp(2.5rem, 9vw, 9rem) * -1);
-        opacity: .05;
+        /* Marca inteira, sem sangrar pela borda; o respiro embaixo evita que o Next e o WhatsApp a cubram */
+        margin: clamp(1rem, 3vw, 2rem) auto 0;
+        padding-bottom: calc(clamp(6.5rem, 9vw, 8rem) + env(safe-area-inset-bottom));
+        box-sizing: content-box;
+        opacity: .06;
         pointer-events: none;
         user-select: none;
       }
