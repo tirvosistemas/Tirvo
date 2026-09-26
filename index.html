@@ -3141,7 +3141,7 @@
         user-select: none;
       }
 
-      /* ---------- Mascote: robô da Tirvo ---------- */
+      /* ---------- Mascote: Next, o robô guia da Tirvo ---------- */
       .mascot {
         /* Pose de descanso: ângulos de ombro (a), cotovelo (f), cabeça, pernas e direção do olhar.
            Especificidade baixa de propósito: as poses em [data-pose] sobrescrevem estes valores. */
@@ -3289,6 +3289,13 @@
         transition: opacity 220ms ease, scale 480ms cubic-bezier(.34, 1.56, .64, 1), translate 480ms cubic-bezier(.34, 1.56, .64, 1), visibility 0s;
       }
       .mascot.is-intro .mascot__bubble { display: none; }
+      .mascot__name {
+        margin-bottom: .2rem;
+        color: #b83d00;
+        font: 600 .68rem/1 var(--font-mono);
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
       .mascot__text { font: 500 .9rem/1.45 var(--font-sans); letter-spacing: -.005em; text-wrap: pretty; }
       .mascot__close {
         position: absolute;
@@ -4726,16 +4733,17 @@
     <span class="wa-float__tip" aria-hidden="true">Fale com a gente</span>
   </a>
 
-  <!-- ============ MASCOTE (robô da Tirvo) ============ -->
+  <!-- ============ MASCOTE: Next, o robô guia da Tirvo ============ -->
   <div class="mascot-anchor" aria-hidden="true" data-mascot-anchor></div>
   <div class="mascot" data-pose="rest" data-face="neutral" hidden data-mascot data-overlay-inert>
     <div class="mascot__bubble" id="mascote-balao" data-mascot-bubble>
+      <p class="mascot__name" aria-hidden="true">Next</p>
       <p class="mascot__text" aria-live="off" data-mascot-text></p>
       <button class="mascot__close" type="button" aria-label="Fechar balão" data-mascot-close>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>
       </button>
     </div>
-    <button class="mascot__bot" type="button" aria-label="Assistente da Tirvo: mostrar uma dica sobre esta parte do site" aria-describedby="mascote-balao" data-mascot-bot>
+    <button class="mascot__bot" type="button" aria-label="Next, o guia da Tirvo: mostrar uma dica sobre esta parte do site" aria-describedby="mascote-balao" data-mascot-bot>
       <span class="mascot__pop"><span class="mascot__jump"><span class="mascot__breath">
         <svg class="bot" viewBox="0 -8 200 246" aria-hidden="true" focusable="false">
           <defs>
@@ -4963,7 +4971,7 @@
         idleMax: 24000,
         flightMs: 1050,
         messages: {
-          inicio: ['Oi, que bom ter você aqui. Vou te acompanhar pelo site.', 'Sites, sistemas, marcas e IA, tudo com rigor de engenharia. Role para ver.'],
+          inicio: ['Oi, eu sou o Next, o guia da Tirvo. Vou te levar ao próximo passo.', 'Sites, sistemas, marcas e IA, tudo com rigor de engenharia. Role para ver.'],
           alerta: ['Rede social é terreno alugado: as regras mudam sem aviso.', 'Use as redes para atrair e o seu site para converter.'],
           servicos: ['São cinco frentes: sites, sistemas, marca, design e IA. Qual delas é a sua?', 'Nos sites, você escolhe: receber o código ou deixar a gestão completa com a gente.'],
           equipe: ['Aqui ninguém usa template: é gente que programa de verdade.', 'Programadores raiz lado a lado com especialistas em IA.'],
@@ -4972,7 +4980,7 @@
           numeros: ['Zero código genérico. Tudo é projetado para o seu negócio.', 'Com a Gestão 360º, sua operação é monitorada 24/7.'],
           faq: ['Ficou alguma dúvida? Abra uma pergunta para ver a resposta.', 'Não achou o que procurava? Dá para falar direto no WhatsApp.'],
           contato: ['Conte o seu desafio em poucas linhas. A mensagem chega pronta no WhatsApp da equipe.', 'Nenhum dado fica guardado aqui: tudo vai direto para o WhatsApp.'],
-          rodape: ['Obrigado pela visita. Quando quiser, é só chamar.', 'Seu futuro digital começa com uma conversa.'],
+          rodape: ['Obrigado pela visita. O próximo passo é uma conversa com a equipe.', 'Seu futuro digital começa com uma conversa.'],
         },
       },
     };
