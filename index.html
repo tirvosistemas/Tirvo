@@ -3224,12 +3224,12 @@
         user-select: none;
       }
       /* ---------- Assinatura animada do rodapé: escrita a fogo, esfria e recebe um brilho de tempos em tempos ---------- */
-      .sig { display: block; aspect-ratio: 601 / 260; overflow: visible; pointer-events: auto; }
+      .sig { display: block; aspect-ratio: 601 / 260; overflow: visible; pointer-events: none; -webkit-tap-highlight-color: transparent; }
       .sig__base { opacity: .07; }
       .sig__pin { opacity: .3; }
       .sig__fire { display: none; }
       .sig__shine { opacity: .22; }
-      .sig__pin, .sig__pin-bob { transform-box: fill-box; transform-origin: 50% 100%; }
+      .sig__pin, .sig__pin-bob, .sig__pin-play { transform-box: fill-box; transform-origin: 50% 100%; }
       .sig__s { stroke-dasharray: 1 2; }
       @media (prefers-reduced-motion: no-preference) {
         .sig--anim .sig__fire { display: inline; }
@@ -3249,6 +3249,67 @@
       @media (prefers-reduced-motion: reduce) { .sig__shine { display: none; } }
       @keyframes sig-bob { from { translate: 0 0; } to { translate: 0 -12px; } }
       @keyframes sig-sweep { 0% { transform: translateX(0); } 26%, 100% { transform: translateX(900px); } }
+
+      /* ---------- Brincadeiras: cada letra é uma tecla com uma acrobacia própria ---------- */
+      .sig__hit { pointer-events: all; cursor: pointer; }
+      .sig__flash { opacity: .95; }
+      /* O brilho fica nos traços; o movimento, no grupo da letra (assim os dois se somam) */
+      .sig__flash .sig__l > * { opacity: 0; }
+      .sig__l { transform-box: view-box; transition: transform 320ms var(--ease-out); }
+      .sig__l--t { transform-origin: 56px 151px; }
+      .sig__l--i { transform-origin: 139px 255px; }
+      .sig__l--r { transform-origin: 233px 255px; }
+      .sig__l--v { transform-origin: 361px 255px; }
+      .sig__l--o { transform-origin: 518px 177px; }
+      .sig.is-play-t .sig__flash .sig__l--t > *, .sig.is-play-i .sig__flash .sig__l--i > *, .sig.is-play-r .sig__flash .sig__l--r > *,
+      .sig.is-play-v .sig__flash .sig__l--v > *, .sig.is-play-o .sig__flash .sig__l--o > * { animation: sig-flash 900ms ease-out; }
+      .sig.is-party .sig__flash .sig__l > * { animation: sig-flash 1.6s ease-out var(--wave, 0s) both; }
+      .sig__l--i { --wave: .09s; } .sig__l--r { --wave: .18s; } .sig__l--v { --wave: .27s; } .sig__l--o { --wave: .36s; }
+      @media (prefers-reduced-motion: no-preference) {
+        @media (hover: hover) and (pointer: fine) {
+          /* Com o mouse por cima, a letra se oferece para a brincadeira */
+          .sig:has(.sig__hit[data-letter="t"]:hover) .sig__l--t, .sig:has(.sig__hit[data-letter="i"]:hover) .sig__l--i,
+          .sig:has(.sig__hit[data-letter="r"]:hover) .sig__l--r, .sig:has(.sig__hit[data-letter="v"]:hover) .sig__l--v,
+          .sig:has(.sig__hit[data-letter="o"]:hover) .sig__l--o { transform: translateY(-10px); }
+          .sig:has(.sig__hit[data-letter="pin"]:hover) .sig__pin-play { transform: translateY(-8px) rotate(-8deg); transition: transform 320ms var(--ease-out); }
+        }
+        .sig.is-play-t .sig__l--t { animation: sig-flip 900ms cubic-bezier(.4, 0, .2, 1); }
+        .sig.is-play-i .sig__l--i { animation: sig-hop 800ms cubic-bezier(.3, 0, .3, 1); }
+        .sig.is-play-i .sig__pin-play, .sig.is-play-pin .sig__pin-play { animation: sig-pin-fly 1.1s cubic-bezier(.3, 0, .3, 1); }
+        .sig.is-play-r .sig__l--r { animation: sig-jelly 900ms ease-out; }
+        .sig.is-play-v .sig__l--v { animation: sig-spring 850ms ease-out; }
+        .sig.is-play-o .sig__l--o { animation: sig-roll 1.1s cubic-bezier(.45, 0, .3, 1); }
+        .sig.is-party .sig__l { animation: sig-wave 700ms cubic-bezier(.3, 0, .3, 1) var(--wave, 0s) 2; }
+        .sig.is-party .sig__pin-play { animation: sig-pin-fly 1.1s cubic-bezier(.3, 0, .3, 1) .1s; }
+      }
+      @keyframes sig-flash { 0% { opacity: 0; } 12% { opacity: 1; } 55% { opacity: .9; } 100% { opacity: 0; } }
+      @keyframes sig-flip {
+        0% { transform: none; } 30% { transform: translateY(-70px) rotate(-180deg); }
+        62% { transform: translateY(-20px) rotate(-340deg); } 80% { transform: translateY(0) rotate(-360deg) scale(1.08, .9); }
+        100% { transform: rotate(-360deg); }
+      }
+      @keyframes sig-hop {
+        0% { transform: none; } 15% { transform: scale(1.1, .82); } 45% { transform: translateY(-80px) scale(.94, 1.08); }
+        75% { transform: translateY(0) scale(1.12, .84); } 100% { transform: none; }
+      }
+      @keyframes sig-pin-fly {
+        0% { transform: none; } 12% { transform: scale(1.15, .8); } 50% { transform: translateY(-150px) rotate(360deg); }
+        78% { transform: translateY(0) rotate(720deg) scale(1.15, .85); } 90% { transform: translateY(-14px) rotate(720deg); }
+        100% { transform: rotate(720deg); }
+      }
+      @keyframes sig-jelly {
+        0% { transform: none; } 15% { transform: skewX(-16deg) scale(1.08, .9); } 32% { transform: skewX(12deg) scale(.94, 1.08); }
+        50% { transform: skewX(-7deg) scale(1.04, .96); } 68% { transform: skewX(4deg); } 84% { transform: skewX(-2deg); } 100% { transform: none; }
+      }
+      @keyframes sig-spring {
+        0% { transform: none; } 18% { transform: scale(1.15, .55); } 40% { transform: scale(.9, 1.3) translateY(-24px); }
+        60% { transform: scale(1.06, .88); } 78% { transform: scale(.98, 1.06); } 100% { transform: none; }
+      }
+      @keyframes sig-roll {
+        0% { transform: none; } 40% { transform: translateX(90px) rotate(200deg); } 72% { transform: translateX(-30px) rotate(-60deg); }
+        88% { transform: translateX(8px) rotate(10deg); } 100% { transform: none; }
+      }
+      @keyframes sig-wave { 0%, 100% { transform: none; } 40% { transform: translateY(-46px) scale(.96, 1.06); } 70% { transform: translateY(0) scale(1.06, .92); } }
 
       /* ---------- Mascote: Next, o robô guia da Tirvo ---------- */
       .mascot {
@@ -3377,7 +3438,8 @@
         visibility: hidden;
         scale: .6;
         translate: 0 10px;
-        pointer-events: auto;
+        /* O balão não bloqueia toques no que está embaixo (como as letras do rodapé); só o × é clicável */
+        pointer-events: none;
         transition: opacity 200ms ease, scale 200ms ease, translate 200ms ease, visibility 0s linear 200ms;
       }
       .mascot__bubble::after {
@@ -3407,6 +3469,7 @@
       }
       .mascot__text { font: 500 .9rem/1.45 var(--font-sans); letter-spacing: -.005em; text-wrap: pretty; }
       .mascot__close {
+        pointer-events: auto;
         position: absolute;
         top: .35rem;
         right: .35rem;
@@ -4914,36 +4977,46 @@
       <g fill="none" stroke-width="33" stroke-linecap="round" stroke-linejoin="round">
         <!-- Marca-d'água que fica -->
         <g class="sig__base" stroke="#fafafa">
-          <path d="M49 63.5V238.5" class="sig__s" pathLength="1" style="--d:0s;--t:0.45s"/>
-          <path d="M20.5 115.5H91.5" class="sig__s" pathLength="1" style="--d:0.18s;--t:0.32s"/>
-          <path d="M139 115.5V238.5" class="sig__s" pathLength="1" style="--d:0.3s;--t:0.36s"/>
-          <path d="M205 115.5V238.5" class="sig__s" pathLength="1" style="--d:0.44s;--t:0.34s"/>
-          <path d="M205 170C205 134 226 115.5 261.5 115.5" class="sig__s" pathLength="1" style="--d:0.56s;--t:0.3s"/>
-          <path d="M319.5 115.5 361.5 238.5 403.5 115.5" class="sig__s" pathLength="1" style="--d:0.68s;--t:0.5s"/>
-          <circle cx="518" cy="177" r="61.5" transform="rotate(90 518 177)" class="sig__s" pathLength="1" style="--d:0.86s;--t:0.72s"/>
+          <g class="sig__l sig__l--t"><path d="M49 63.5V238.5" class="sig__s" pathLength="1" style="--d:0s;--t:0.45s"/><path d="M20.5 115.5H91.5" class="sig__s" pathLength="1" style="--d:0.18s;--t:0.32s"/></g>
+          <g class="sig__l sig__l--i"><path d="M139 115.5V238.5" class="sig__s" pathLength="1" style="--d:0.3s;--t:0.36s"/></g>
+          <g class="sig__l sig__l--r"><path d="M205 115.5V238.5" class="sig__s" pathLength="1" style="--d:0.44s;--t:0.34s"/><path d="M205 170C205 134 226 115.5 261.5 115.5" class="sig__s" pathLength="1" style="--d:0.56s;--t:0.3s"/></g>
+          <g class="sig__l sig__l--v"><path d="M319.5 115.5 361.5 238.5 403.5 115.5" class="sig__s" pathLength="1" style="--d:0.68s;--t:0.5s"/></g>
+          <g class="sig__l sig__l--o"><circle cx="518" cy="177" r="61.5" transform="rotate(90 518 177)" class="sig__s" pathLength="1" style="--d:0.86s;--t:0.72s"/></g>
         </g>
         <!-- Traço em brasa que escreve e esfria -->
         <g class="sig__fire" stroke="url(#sig-fire)">
-          <path d="M49 63.5V238.5" class="sig__s" pathLength="1" style="--d:0s;--t:0.45s"/>
-          <path d="M20.5 115.5H91.5" class="sig__s" pathLength="1" style="--d:0.18s;--t:0.32s"/>
-          <path d="M139 115.5V238.5" class="sig__s" pathLength="1" style="--d:0.3s;--t:0.36s"/>
-          <path d="M205 115.5V238.5" class="sig__s" pathLength="1" style="--d:0.44s;--t:0.34s"/>
-          <path d="M205 170C205 134 226 115.5 261.5 115.5" class="sig__s" pathLength="1" style="--d:0.56s;--t:0.3s"/>
-          <path d="M319.5 115.5 361.5 238.5 403.5 115.5" class="sig__s" pathLength="1" style="--d:0.68s;--t:0.5s"/>
-          <circle cx="518" cy="177" r="61.5" transform="rotate(90 518 177)" class="sig__s" pathLength="1" style="--d:0.86s;--t:0.72s"/>
+          <g class="sig__l sig__l--t"><path d="M49 63.5V238.5" class="sig__s" pathLength="1" style="--d:0s;--t:0.45s"/><path d="M20.5 115.5H91.5" class="sig__s" pathLength="1" style="--d:0.18s;--t:0.32s"/></g>
+          <g class="sig__l sig__l--i"><path d="M139 115.5V238.5" class="sig__s" pathLength="1" style="--d:0.3s;--t:0.36s"/></g>
+          <g class="sig__l sig__l--r"><path d="M205 115.5V238.5" class="sig__s" pathLength="1" style="--d:0.44s;--t:0.34s"/><path d="M205 170C205 134 226 115.5 261.5 115.5" class="sig__s" pathLength="1" style="--d:0.56s;--t:0.3s"/></g>
+          <g class="sig__l sig__l--v"><path d="M319.5 115.5 361.5 238.5 403.5 115.5" class="sig__s" pathLength="1" style="--d:0.68s;--t:0.5s"/></g>
+          <g class="sig__l sig__l--o"><circle cx="518" cy="177" r="61.5" transform="rotate(90 518 177)" class="sig__s" pathLength="1" style="--d:0.86s;--t:0.72s"/></g>
         </g>
         <!-- Brilho que atravessa as letras de tempos em tempos -->
         <g class="sig__shine" stroke="#fff" mask="url(#sig-sweep)">
-          <path d="M49 63.5V238.5"/>
-          <path d="M20.5 115.5H91.5"/>
-          <path d="M139 115.5V238.5"/>
-          <path d="M205 115.5V238.5"/>
-          <path d="M205 170C205 134 226 115.5 261.5 115.5"/>
-          <path d="M319.5 115.5 361.5 238.5 403.5 115.5"/>
-          <circle cx="518" cy="177" r="61.5" transform="rotate(90 518 177)"/>
+          <g class="sig__l sig__l--t"><path d="M49 63.5V238.5"/><path d="M20.5 115.5H91.5"/></g>
+          <g class="sig__l sig__l--i"><path d="M139 115.5V238.5"/></g>
+          <g class="sig__l sig__l--r"><path d="M205 115.5V238.5"/><path d="M205 170C205 134 226 115.5 261.5 115.5"/></g>
+          <g class="sig__l sig__l--v"><path d="M319.5 115.5 361.5 238.5 403.5 115.5"/></g>
+          <g class="sig__l sig__l--o"><circle cx="518" cy="177" r="61.5" transform="rotate(90 518 177)"/></g>
+        </g>
+        <!-- Acende a letra tocada -->
+        <g class="sig__flash" stroke="url(#sig-fire)">
+          <g class="sig__l sig__l--t"><path d="M49 63.5V238.5"/><path d="M20.5 115.5H91.5"/></g>
+          <g class="sig__l sig__l--i"><path d="M139 115.5V238.5"/></g>
+          <g class="sig__l sig__l--r"><path d="M205 115.5V238.5"/><path d="M205 170C205 134 226 115.5 261.5 115.5"/></g>
+          <g class="sig__l sig__l--v"><path d="M319.5 115.5 361.5 238.5 403.5 115.5"/></g>
+          <g class="sig__l sig__l--o"><circle cx="518" cy="177" r="61.5" transform="rotate(90 518 177)"/></g>
         </g>
       </g>
-      <g class="sig__pin"><g class="sig__pin-bob" fill="#fe6a3c"><path fill-rule="evenodd" d="M139 89.4C132.7 75.5 109 56 109 35.1a30 30 0 0 1 60 0c0 20.9-23.7 40.4-30 54.3ZM139 24.7a10.4 10.4 0 1 0 0 20.8 10.4 10.4 0 0 0 0-20.8Z"/></g></g>
+      <g class="sig__pin"><g class="sig__pin-bob"><g class="sig__pin-play" fill="#fe6a3c"><path fill-rule="evenodd" d="M139 89.4C132.7 75.5 109 56 109 35.1a30 30 0 0 1 60 0c0 20.9-23.7 40.4-30 54.3ZM139 24.7a10.4 10.4 0 1 0 0 20.8 10.4 10.4 0 0 0 0-20.8Z"/></g></g></g>
+      <g class="sig__hits" fill="transparent">
+        <rect class="sig__hit" x="0" y="30" width="115" height="232" data-letter="t"/>
+        <rect class="sig__hit" x="115" y="95" width="57" height="167" data-letter="i"/>
+        <rect class="sig__hit" x="172" y="90" width="120" height="172" data-letter="r"/>
+        <rect class="sig__hit" x="292" y="90" width="138" height="172" data-letter="v"/>
+        <rect class="sig__hit" x="430" y="90" width="175" height="172" data-letter="o"/>
+        <rect class="sig__hit" x="100" y="-10" width="78" height="105" data-letter="pin"/>
+      </g>
     </svg>
   </footer>
 
@@ -5203,6 +5276,7 @@
           tickle: ['Hihi, isso faz cócegas.', 'Ei, assim eu não consigo me concentrar.', 'Tá bom, tá bom, você venceu.'],
           boing: ['Ei, essa é a minha antena.', 'Boing. Ela sempre volta para o lugar.', 'Cuidado, é por ela que chegam as ideias.'],
           dizzy: ['Uau, fiquei tonto. Vamos com calma?', 'Tudo girando por aqui. Mas já estou pronto de novo.'],
+          party: ['Que melodia. Você tocou a Tirvo inteira.', 'Bis. Agora o próximo passo é tirar o seu projeto do papel.'],
         },
         messages: {
           inicio: ['Oi, eu sou o Next, o guia da Tirvo. Vou te levar ao próximo passo.', 'Sites, sistemas, marcas e IA, tudo com rigor de engenharia. Role para ver.'],
@@ -5214,7 +5288,7 @@
           numeros: ['Zero código genérico. Tudo é projetado para o seu negócio.', 'Com a Gestão 360º, sua operação é monitorada 24/7.'],
           faq: ['Ficou alguma dúvida? Abra uma pergunta para ver a resposta.', 'Não achou o que procurava? Dá para falar direto no WhatsApp.'],
           contato: ['Conte o seu desafio em poucas linhas. A mensagem chega pronta no WhatsApp da equipe.', 'Nenhum dado fica guardado aqui: tudo vai direto para o WhatsApp.'],
-          rodape: ['Obrigado pela visita. O próximo passo é uma conversa com a equipe.', 'Seu futuro digital começa com uma conversa.'],
+          rodape: ['Obrigado pela visita. Toque nas letras da Tirvo aqui embaixo: cada uma tem uma surpresa.', 'O próximo passo é uma conversa com a equipe.'],
         },
       },
     };
@@ -7771,6 +7845,11 @@
           tone({ f0: 523, dur: 0.08, type: 'triangle', vol: 0.5 });
           tone({ f0: 784, dur: 0.13, type: 'triangle', at: 0.09, vol: 0.5 });
         },
+        // Comemoração: arpejo subindo e acorde final
+        fanfare: () => {
+          [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tone({ f0: f, dur: 0.16, type: 'triangle', at: i * 0.09, vol: 0.45 }));
+          [523.25, 659.25, 783.99, 1046.5].forEach((f) => tone({ f0: f, dur: 0.6, type: 'triangle', at: 0.4, vol: 0.22 }));
+        },
       };
 
       let chatterNodes = [];
@@ -7792,6 +7871,12 @@
           }
         },
         stopChatter,
+        // Nota de xilofone: corpo em triângulo e um toque agudo de ataque
+        note(freq) {
+          if (!ready()) return;
+          tone({ f0: freq, dur: 0.42, type: 'triangle', vol: 0.5 });
+          tone({ f0: freq * 2, dur: 0.1, vol: 0.14 });
+        },
         setEnabled(value) {
           enabled = value;
           try { localStorage.setItem(storageKey, value ? 'on' : 'off'); } catch (error) { /* armazenamento indisponível */ }
@@ -7799,6 +7884,10 @@
         },
       };
     }
+
+    // Uma instância de som para o site todo: o botão de som do Next vale também para a assinatura do rodapé
+    let siteSounds = null;
+    const getSounds = () => (siteSounds ??= createMascotSounds(CONFIG.mascot.soundKey));
 
     /* ==========================================================
        MASCOTE: coreografia da abertura, acompanhamento por seção e balões de fala
@@ -7811,7 +7900,7 @@
       const closeButton = $('[data-mascot-close]', mascot);
       const soundButton = $('[data-mascot-sound]', mascot);
       const cfg = CONFIG.mascot;
-      const sfx = createMascotSounds(cfg.soundKey);
+      const sfx = getSounds();
 
       // Temporizadores nomeados: reagendar uma chave cancela o anterior
       const timers = new Map();
@@ -7975,7 +8064,7 @@
         tickle: { sound: 'giggle', className: 'is-tickle', ms: 650, face: 'happy', pose: 'cheer' },
         dizzy: { sound: 'dizzy', className: 'is-dizzy', ms: 1500, face: 'dizzy', pose: 'rest' },
       };
-      const playCount = { boing: 0, tickle: 0, dizzy: 0 };
+      const playCount = { boing: 0, tickle: 0, dizzy: 0, party: 0 };
       const react = (kind) => {
         const reaction = REACTIONS[kind];
         const line = cfg.play[kind][playCount[kind]++ % cfg.play[kind].length];
@@ -8041,6 +8130,11 @@
       // Com o cursor sobre o mascote ou o balão, o balão não some
       mascot.addEventListener('pointerenter', () => cancel('hide'));
       mascot.addEventListener('pointerleave', () => { if (bubbleOpen) later('hide', 2400, hideBubble); });
+      // Quando o visitante toca todas as letras da assinatura do rodapé, o Next comemora junto
+      document.addEventListener('tirvo:marca-completa', () => {
+        if (!landed || concealed) return;
+        speak(cfg.play.party[playCount.party++ % cfg.play.party.length], true, { pose: 'cheer', face: 'happy' });
+      });
       closeButton.addEventListener('click', (event) => {
         sfx.play('pop');
         hideBubble();
@@ -8140,27 +8234,56 @@
        ========================================================== */
     function initSignature() {
       const sig = $('[data-signature]');
-      if (!sig || !hasIO || prefersReducedMotion.value) return;
-      sig.classList.add('sig--anim');
-      let drawnAt = 0;
-      const draw = () => {
-        sig.classList.remove('is-drawn');
-        void sig.getBoundingClientRect(); // aplica o estado recolhido antes de escrever de novo
-        sig.classList.add('is-drawn');
-        drawnAt = performance.now();
+      if (!sig) return;
+
+      // Escrita a fogo ao entrar na tela (repete a cada nova visita ao rodapé)
+      if (hasIO && !prefersReducedMotion.value) {
+        sig.classList.add('sig--anim');
+        new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            sig.classList.toggle('is-visible', entry.isIntersecting);
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.3) sig.classList.add('is-drawn');
+            else if (!entry.isIntersecting) sig.classList.remove('is-drawn');
+          }
+        }, { threshold: [0, 0.3] }).observe(sig);
+      }
+
+      /* Brincadeiras: cada letra é uma tecla de xilofone com uma acrobacia; o pino pula.
+         Tocar as cinco letras em poucos segundos dispara a comemoração (e o Next comemora junto). */
+      const sfx = getSounds();
+      const NOTES = { t: 523.25, i: 659.25, r: 783.99, v: 880, o: 1046.5 };
+      const DURATION = { t: 900, i: 1100, r: 900, v: 850, o: 1100, pin: 1100, party: 2000 };
+      const timers = new Map();
+      const played = new Map();
+      const play = (name) => {
+        const className = `is-play-${name}`.replace('is-play-party', 'is-party');
+        clearTimeout(timers.get(name));
+        sig.classList.remove(className);
+        void sig.getBoundingClientRect(); // reinicia a animação quando a mesma letra é tocada de novo
+        sig.classList.add(className);
+        timers.set(name, setTimeout(() => sig.classList.remove(className), DURATION[name]));
       };
-      new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          sig.classList.toggle('is-visible', entry.isIntersecting);
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.3 && !sig.classList.contains('is-drawn')) draw();
-          // Saiu por completo: recolhe para escrever outra vez na próxima visita ao rodapé
-          else if (!entry.isIntersecting) sig.classList.remove('is-drawn');
+      sig.addEventListener('click', (event) => {
+        const letter = event.target.closest('[data-letter]')?.dataset.letter;
+        if (!letter) return;
+        if (letter === 'pin') {
+          sfx.play('boing');
+          play('pin');
+          return;
         }
-      }, { threshold: [0, 0.3] }).observe(sig);
-      // Mouse por cima ou toque: escreve de novo (depois de terminada a escrita anterior)
-      const replay = () => { if (performance.now() - drawnAt > 3200) draw(); };
-      sig.addEventListener('pointerenter', (event) => { if (event.pointerType === 'mouse') replay(); });
-      sig.addEventListener('click', replay);
+        sfx.note(NOTES[letter]);
+        play(letter);
+        const now = performance.now();
+        played.set(letter, now);
+        if (Object.keys(NOTES).every((key) => now - (played.get(key) ?? -Infinity) < 8000)) {
+          played.clear();
+          setTimeout(() => {
+            sfx.play('fanfare');
+            play('party');
+            document.dispatchEvent(new CustomEvent('tirvo:marca-completa'));
+          }, 450);
+        }
+      });
     }
 
     /* ==========================================================
