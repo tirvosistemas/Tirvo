@@ -3889,6 +3889,525 @@
       @keyframes wa-ring { 0% { opacity: .7; transform: scale(1); } 66% { opacity: 0; transform: scale(1.75); } 100% { opacity: 0; transform: scale(1.75); } }
       @keyframes chip-flash { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(1.18, 1.5); } }
     }
+
+      /* ==========================================================
+         SERVIÇOS · CONTORNO VIVO, LUZES DA MATRIZ E VITRINES
+         ========================================================== */
+      @property --beam {
+        syntax: "<angle>";
+        inherits: false;
+        initial-value: 0deg;
+      }
+      /* Feixe de luz que percorre a borda do cartão, bem discreto */
+      .svc__beam {
+        position: absolute;
+        inset: -1px;
+        z-index: 1;
+        padding: 1px;
+        border-radius: inherit;
+        pointer-events: none;
+        opacity: 0;
+        background: conic-gradient(from var(--beam), transparent 0 280deg, rgba(255, 85, 0, .5) 335deg, rgba(255, 190, 140, .85) 354deg, transparent 360deg);
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+      }
+      .svc--sites { --beam-delay: 0s; }
+      .svc--sistemas { --beam-delay: -4.2s; }
+      .svc--marca { --beam-delay: -8.1s; }
+      .svc--design { --beam-delay: -2.3s; }
+      .svc--ia { --beam-delay: -6.6s; }
+      @media (prefers-reduced-motion: no-preference) {
+        .svc__beam { opacity: .75; animation: svc-beam 12s linear var(--beam-delay) infinite; }
+        .svc.is-offscreen .svc__beam { animation-play-state: paused; }
+      }
+      @keyframes svc-beam { to { --beam: 360deg; } }
+
+      /* Quadradinhos da matriz: luzes que enfraquecem e voltam, cada vizinho no seu tempo */
+      @media (prefers-reduced-motion: no-preference) {
+        .matrix td.is-tirvo .matrix__mark { animation: mark-pulse 2.9s ease-in-out var(--pd, 0s) infinite; }
+        .matrix tbody tr:nth-child(3n+1) td:last-child .matrix__mark { --pd: 0s; }
+        .matrix tbody tr:nth-child(3n+2) td:last-child .matrix__mark { --pd: -1.75s; }
+        .matrix tbody tr:nth-child(3n) td:last-child .matrix__mark { --pd: -.8s; }
+        .matrix tbody tr:first-child td:nth-child(2) .matrix__mark { --pd: -2.3s; }
+        .svc.is-offscreen .matrix__mark { animation-play-state: paused; }
+      }
+      @keyframes mark-pulse {
+        0%, 62%, 100% { opacity: 1; box-shadow: 0 0 8px var(--accent-glow); }
+        80% { opacity: .42; box-shadow: 0 0 2px rgba(255, 85, 0, .12); }
+      }
+
+      /* Base das vitrines */
+      .demo {
+        position: relative;
+        overflow: clip;
+        border: 1px solid var(--line);
+        border-radius: var(--r-md);
+        background:
+          radial-gradient(110% 80% at 50% 0%, rgba(255, 85, 0, .07), transparent 62%),
+          var(--bg-base);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+      .demo::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1.2px);
+        background-size: 18px 18px;
+        -webkit-mask: radial-gradient(90% 90% at 50% 40%, #000, transparent);
+        mask: radial-gradient(90% 90% at 50% 40%, #000, transparent);
+      }
+      .demo__hint {
+        position: absolute;
+        right: .7rem;
+        bottom: .6rem;
+        z-index: 5;
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        padding: .25rem .55rem;
+        border: 1px solid var(--line);
+        border-radius: var(--r-pill);
+        background: rgba(9, 9, 11, .72);
+        color: var(--text-secondary);
+        font-family: var(--font-mono);
+        font-size: .64rem;
+        letter-spacing: .06em;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        transition: opacity var(--dur-2) ease;
+      }
+      .demo__hint-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 6px var(--accent-glow); }
+      .hint-mouse { display: none; }
+      @media (hover: hover) and (pointer: fine) {
+        .hint-mouse { display: inline; }
+        .hint-touch { display: none; }
+      }
+      .demo.is-touched .demo__hint { opacity: 0; }
+
+      /* ---------- 01 · Telas de sites premium ---------- */
+      .demo--sites {
+        aspect-ratio: 16 / 11.2;
+        max-height: 500px;
+        margin-block: .25rem .35rem;
+        perspective: 1500px;
+        perspective-origin: 50% 20%;
+      }
+      .sites__rig { position: absolute; inset: 0; --sp: 1; }
+      .shot {
+        position: absolute;
+        top: 19%;
+        left: 19%;
+        width: 62%;
+        overflow: hidden;
+        border-radius: 9px;
+        background: #111114;
+        box-shadow: 0 34px 60px -24px rgba(0, 0, 0, .9), 0 0 0 1px rgba(255, 255, 255, .09);
+        container-type: inline-size;
+        transition: transform .85s var(--ease-out), filter .5s ease, box-shadow .5s ease;
+        will-change: transform;
+      }
+      .shot[data-pos="c"] { z-index: 3; transform: perspective(1500px) translate3d(0, 0, 70px); }
+      @container (max-width: 480px) {
+        .demo--sites { aspect-ratio: 16 / 13; }
+        .shot { top: 17%; left: 12%; width: 76%; }
+      }
+      .shot[data-pos="l"] {
+        transform-origin: 0% 50%;
+        z-index: 1;
+        transform: perspective(1500px) translate3d(calc(-34% * var(--sp)), 8%, -20px) rotateY(26deg) rotateZ(-2deg);
+        filter: brightness(.78) saturate(.92);
+      }
+      .shot[data-pos="r"] {
+        transform-origin: 100% 50%;
+        z-index: 2;
+        transform: perspective(1500px) translate3d(calc(34% * var(--sp)), 10%, -20px) rotateY(-26deg) rotateZ(2deg);
+        filter: brightness(.78) saturate(.92);
+      }
+      @media (hover: hover) and (pointer: fine) {
+        .demo--sites:hover .sites__rig { --sp: 1.12; }
+        .demo--sites:hover .shot[data-pos="c"] { box-shadow: 0 40px 70px -24px rgba(0, 0, 0, .95), 0 0 0 1px rgba(255, 85, 0, .45), 0 0 40px -10px rgba(255, 85, 0, .35); }
+        .shot[data-pos="l"]:hover, .shot[data-pos="r"]:hover { filter: brightness(.92); }
+      }
+      .shot__bar {
+        display: flex;
+        align-items: center;
+        gap: 1.2cqi;
+        height: 6.4cqi;
+        padding: 0 2.6cqi;
+        border-bottom: 1px solid rgba(255, 255, 255, .06);
+        background: #1c1c21;
+      }
+      .shot__bar > i { width: 1.6cqi; height: 1.6cqi; border-radius: 50%; background: #3b3b42; }
+      .shot__bar > i:first-child { background: #ff5f57; }
+      .shot__bar > i:nth-child(2) { background: #febc2e; }
+      .shot__bar > i:nth-child(3) { background: #28c840; }
+      .shot__url {
+        margin-inline: auto;
+        padding: .6cqi 3.4cqi;
+        border-radius: 99px;
+        background: rgba(255, 255, 255, .06);
+        color: #9a9aa3;
+        font: 500 2cqi/1 var(--font-mono);
+        letter-spacing: .02em;
+      }
+      .shot__view { position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
+      .site { position: absolute; inset: 0 0 auto; padding: 0 5cqi 5cqi; }
+      @media (prefers-reduced-motion: no-preference) {
+        .shot[data-pos="c"] .site { animation: site-scroll 15s var(--ease-in-out) 1.2s infinite; }
+        .svc.is-offscreen .site { animation-play-state: paused; }
+      }
+      @keyframes site-scroll {
+        0%, 16% { transform: translateY(0); }
+        44%, 64% { transform: translateY(calc(-100% + 62.5cqi)); }
+        92%, 100% { transform: translateY(0); }
+      }
+      .site i { font-style: normal; }
+      .st-nav { display: flex; align-items: center; gap: 3cqi; height: 9cqi; font-size: 2.1cqi; }
+      .st-logo { display: inline-flex; align-items: center; gap: 1cqi; font-weight: 700; }
+      .st-links { display: flex; gap: 3cqi; margin-left: auto; opacity: .7; }
+      .st-cta { padding: 1cqi 2.4cqi; border-radius: 99px; font-weight: 600; }
+      .st-h { display: block; font-weight: 600; letter-spacing: -.035em; line-height: 1.02; }
+      .st-h em { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: -.01em; }
+      .st-p { display: block; font-size: 2.2cqi; line-height: 1.45; opacity: .72; }
+      .st-btn { display: inline-block; padding: 1.5cqi 3.2cqi; border-radius: 99px; font-size: 2.1cqi; font-weight: 600; }
+
+      /* Aurum: arquitetura, preto e dourado */
+      .site--aurum { background: #0f0e0c; color: #efe7da; }
+      .site--aurum .st-logo { letter-spacing: .42em; font-size: 2.4cqi; font-weight: 500; }
+      .site--aurum .st-cta { border: 1px solid rgba(212, 176, 106, .6); color: #d4b06a; }
+      .site--aurum .st-hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4cqi; align-items: center; padding-top: 3cqi; }
+      .site--aurum .st-kicker { display: block; margin-bottom: 2cqi; color: #d4b06a; font: 500 1.7cqi/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; }
+      .site--aurum .st-h { font-size: 6.4cqi; font-weight: 500; }
+      .site--aurum .st-h em { display: block; color: #d4b06a; }
+      .site--aurum .st-p { margin: 2.4cqi 0 3.4cqi; }
+      .site--aurum .st-btn { background: #d4b06a; color: #14110b; }
+      .site--aurum .st-art { position: relative; height: 34cqi; overflow: hidden; border-radius: 1.4cqi; background: linear-gradient(180deg, #2a2219, #15120e); }
+      .st-sun { position: absolute; top: 12%; right: 16%; width: 11cqi; height: 11cqi; border-radius: 50%; background: radial-gradient(circle, #f3d49a, #c9924a 70%); box-shadow: 0 0 6cqi rgba(243, 196, 120, .45); }
+      .st-arch { position: absolute; bottom: 18%; border-radius: 99px 99px 0 0; }
+      .st-arch--1 { left: 12%; width: 34%; height: 62%; background: linear-gradient(180deg, #d9c3a0, #8e7658); }
+      .st-arch--2 { left: 38%; width: 44%; height: 48%; background: linear-gradient(180deg, #6b5a44, #3a2f23); box-shadow: -2cqi 0 4cqi rgba(0, 0, 0, .35); }
+      .st-floor { position: absolute; inset: auto 0 0; height: 18%; background: linear-gradient(180deg, #2b241b, #0f0d0a); }
+      .site--aurum .st-stats { display: flex; gap: 6cqi; margin-top: 6cqi; padding-top: 3cqi; border-top: 1px solid rgba(239, 231, 218, .12); font-size: 1.9cqi; color: rgba(239, 231, 218, .6); }
+      .site--aurum .st-stats b { display: block; color: #efe7da; font-family: var(--font-serif); font-style: italic; font-size: 5cqi; font-weight: 400; }
+      .site--aurum .st-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4cqi; margin-top: 5cqi; font-size: 1.9cqi; }
+      .site--aurum .st-tiles i { display: block; height: 16cqi; margin-bottom: 1.4cqi; border-radius: 1cqi; background: linear-gradient(160deg, #cdb58e, #4b3d2c); }
+      .site--aurum .st-tiles span:nth-child(2) i { background: linear-gradient(200deg, #9aa3a0, #2e3332); }
+      .site--aurum .st-tiles span:nth-child(3) i { background: linear-gradient(170deg, #6f8a6a, #1f2a1e); }
+
+      /* Volt: fintech, azul-noite e violeta */
+      .site--volt { background: radial-gradient(70cqi 50cqi at 85% 20%, rgba(139, 92, 255, .35), transparent 70%), radial-gradient(50cqi 40cqi at 10% 90%, rgba(255, 85, 0, .18), transparent 70%), #0a0a18; color: #eef0ff; }
+      .site--volt .st-logo i { width: 3cqi; height: 3cqi; border-radius: .8cqi; background: linear-gradient(135deg, #b69cff, #6d3bff); }
+      .site--volt .st-logo { font-size: 2.6cqi; letter-spacing: -.02em; }
+      .site--volt .st-cta { background: #eef0ff; color: #0a0a18; }
+      .site--volt .st-hero { display: grid; grid-template-columns: 1fr 1.05fr; gap: 4cqi; align-items: center; padding-top: 3cqi; }
+      .st-pill { display: inline-block; margin-bottom: 2.4cqi; padding: .9cqi 2cqi; border: 1px solid rgba(182, 156, 255, .45); border-radius: 99px; color: #cdbdff; font-size: 1.7cqi; }
+      .site--volt .st-h { font-size: 6.2cqi; }
+      .site--volt .st-p { margin: 2.4cqi 0 3.4cqi; }
+      .site--volt .st-btn { background: linear-gradient(135deg, #8b5cff, #5b2bff); color: #fff; box-shadow: 0 1cqi 4cqi rgba(109, 59, 255, .5); }
+      .st-dash { display: grid; gap: .6cqi; padding: 3cqi; border: 1px solid rgba(255, 255, 255, .1); border-radius: 2cqi; background: linear-gradient(160deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02)); box-shadow: 0 3cqi 8cqi rgba(0, 0, 0, .45); }
+      .st-dash__k { font-size: 1.7cqi; opacity: .6; }
+      .st-dash__v { font-size: 5.2cqi; font-weight: 600; letter-spacing: -.03em; }
+      .st-dash__v small { font-size: .5em; opacity: .5; }
+      .st-dash__d { color: #6ee7a8; font-size: 1.7cqi; }
+      .st-chart { width: 100%; height: 12cqi; margin-top: 1cqi; overflow: visible; }
+      .st-bars { display: flex; align-items: end; gap: 1cqi; height: 7cqi; margin-top: 1cqi; }
+      .st-bars i { flex: 1; height: 40%; border-radius: .5cqi; background: rgba(182, 156, 255, .35); }
+      .st-bars i:nth-child(2) { height: 65%; } .st-bars i:nth-child(3) { height: 50%; } .st-bars i:nth-child(4) { height: 80%; }
+      .st-bars i:nth-child(5) { height: 60%; } .st-bars i:nth-child(6) { height: 92%; background: #b69cff; } .st-bars i:nth-child(7) { height: 72%; }
+      .site--volt .st-logos { display: flex; justify-content: space-between; margin-top: 7cqi; padding-block: 3cqi; border-block: 1px solid rgba(255, 255, 255, .08); font-size: 2.2cqi; font-weight: 700; letter-spacing: .08em; opacity: .5; }
+      .site--volt .st-logos i:nth-child(2), .site--volt .st-logos i:nth-child(4) { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
+      .site--volt .st-feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4cqi; margin-top: 4cqi; font-size: 1.9cqi; }
+      .site--volt .st-feats span { padding: 2.4cqi; border: 1px solid rgba(255, 255, 255, .08); border-radius: 1.4cqi; background: rgba(255, 255, 255, .03); }
+      .site--volt .st-feats i { display: block; width: 4cqi; height: 4cqi; margin-bottom: 2cqi; border-radius: 1cqi; background: linear-gradient(135deg, #b69cff, #6d3bff); }
+
+      /* Sereno: clínica, creme e verde-sálvia */
+      .site--sereno { background: linear-gradient(180deg, #f5f1ea, #efe9df); color: #1f2a24; text-align: center; }
+      .site--sereno .st-nav { text-align: left; }
+      .site--sereno .st-logo { font-size: 2.6cqi; font-weight: 600; letter-spacing: -.03em; }
+      .site--sereno .st-logo i { width: 3cqi; height: 3cqi; border-radius: 50% 50% 50% 0; background: #5b7a6a; }
+      .site--sereno .st-cta { background: #1f2a24; color: #f5f1ea; }
+      .site--sereno .st-hero { display: grid; justify-items: center; gap: 2.4cqi; padding-top: 4cqi; }
+      .st-tag { display: inline-flex; align-items: center; gap: 1cqi; padding: .9cqi 2.2cqi; border-radius: 99px; background: #e2eadf; color: #3f5d4e; font-size: 1.8cqi; }
+      .st-tag i { width: 1.4cqi; height: 1.4cqi; border-radius: 50%; background: #4f9a6f; }
+      .site--sereno .st-h { max-width: 16em; font-size: 6.6cqi; }
+      .site--sereno .st-h em { color: #5b7a6a; }
+      .site--sereno .st-p { max-width: 30em; }
+      .st-btns { display: flex; gap: 1.6cqi; }
+      .site--sereno .st-btn { background: #5b7a6a; color: #fff; }
+      .site--sereno .st-btn--ghost { background: transparent; color: #1f2a24; box-shadow: inset 0 0 0 1px rgba(31, 42, 36, .25); }
+      .st-proof { display: inline-flex; align-items: center; gap: 1.4cqi; font-size: 1.8cqi; opacity: .8; }
+      .st-avs { display: flex; }
+      .st-avs i { width: 3.6cqi; height: 3.6cqi; margin-left: -1cqi; border: .4cqi solid #f5f1ea; border-radius: 50%; background: linear-gradient(135deg, #d9b99b, #8c6a52); }
+      .st-avs i:nth-child(2) { background: linear-gradient(135deg, #a8b8a0, #52684a); }
+      .st-avs i:nth-child(3) { background: linear-gradient(135deg, #c9c3d9, #6c648a); }
+      .site--sereno .st-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4cqi; margin-top: 6cqi; font-size: 2cqi; font-weight: 600; text-align: left; }
+      .site--sereno .st-cards span { padding: 2.6cqi; border-radius: 2cqi; background: #fff; box-shadow: 0 1cqi 3cqi rgba(31, 42, 36, .08); }
+      .site--sereno .st-cards i { display: block; height: 14cqi; margin-bottom: 2cqi; border-radius: 1.4cqi; background: linear-gradient(160deg, #dfe8dc, #a9c1a8); }
+      .site--sereno .st-cards span:nth-child(2) i { background: linear-gradient(160deg, #f1e3cf, #d8b98f); }
+      .site--sereno .st-cards span:nth-child(3) i { background: linear-gradient(160deg, #dde3ee, #9eacc6); }
+
+      /* ---------- 02 · Fluxo de automação ---------- */
+      .demo--flow { display: grid; gap: .9rem; padding: 1rem 1rem 2.6rem; }
+      .flow__head { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .9rem; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .04em; color: var(--text-tertiary); }
+      .flow__live { display: inline-flex; align-items: center; gap: .4rem; color: #6ee7a8; }
+      .flow__live i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
+      .demo--flow.is-running .flow__live { color: var(--accent); }
+      .flow__count { margin-left: auto; }
+      .flow__count b { color: var(--text-primary); font-weight: 500; font-variant-numeric: tabular-nums; }
+      .flow__track { position: relative; display: flex; align-items: flex-start; }
+      .flow__node { position: relative; z-index: 1; display: grid; justify-items: center; flex: none; gap: .3rem; width: 58px; text-align: center; }
+      .flow__ico {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border: 1px solid var(--line-strong);
+        border-radius: 12px;
+        background: linear-gradient(180deg, #1a1a1f, #111114);
+        color: var(--text-secondary);
+        transition: color .3s ease, border-color .3s ease, box-shadow .3s ease, transform .3s var(--ease-out);
+      }
+      .flow__ico svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+      .flow__label { color: var(--text-primary); font-size: .74rem; font-weight: 500; line-height: 1; }
+      .flow__sub { color: var(--text-tertiary); font-family: var(--font-mono); font-size: .58rem; line-height: 1.2; }
+      .flow__node.is-hit .flow__ico { color: var(--accent); border-color: rgba(255, 85, 0, .7); box-shadow: 0 0 0 4px rgba(255, 85, 0, .12), 0 0 22px rgba(255, 85, 0, .45); transform: translateY(-2px) scale(1.06); }
+      .flow__node.is-hit .flow__sub { color: #6ee7a8; }
+      @media (hover: hover) and (pointer: fine) {
+        .demo--flow:hover .flow__ico { border-color: rgba(255, 85, 0, .35); }
+      }
+      .flow__wire { position: relative; flex: 1; height: 1px; margin-top: 21px; overflow: visible; clip-path: inset(-3px 0); background: repeating-linear-gradient(90deg, var(--line-strong) 0 4px, transparent 4px 8px); }
+      /* Pacote: faixa do tamanho do fio com a "cabeça" luminosa na ponta direita */
+      .flow__pkt { position: absolute; inset: -1.5px 0; height: 4px; background: linear-gradient(90deg, transparent calc(100% - 26px), rgba(255, 85, 0, .9) calc(100% - 4px), #ffd2b0); transform: translateX(-100%); opacity: 0; }
+      @media (prefers-reduced-motion: no-preference) {
+        .flow__pkt { animation: flow-pkt 2.6s linear infinite; }
+        .flow__pkt--b { animation-delay: -1.3s; }
+        .flow__wire:nth-of-type(4) .flow__pkt { animation-delay: -.7s; }
+        .flow__wire:nth-of-type(4) .flow__pkt--b { animation-delay: -2s; }
+        .flow__wire:nth-of-type(6) .flow__pkt { animation-delay: -1.6s; }
+        .flow__wire:nth-of-type(6) .flow__pkt--b { animation-delay: -.3s; }
+        .demo--flow.is-running .flow__pkt { animation-duration: .9s; }
+        .svc.is-offscreen .flow__pkt { animation-play-state: paused; }
+      }
+      @keyframes flow-pkt {
+        0% { transform: translateX(-100%); opacity: 0; }
+        10%, 86% { opacity: 1; }
+        100% { transform: translateX(8%); opacity: 0; }
+      }
+      .flow__log { display: grid; gap: .3rem; height: 4.6rem; overflow: hidden; padding: .55rem .7rem; border: 1px solid var(--line-subtle); border-radius: var(--r-sm); background: rgba(0, 0, 0, .35); font-family: var(--font-mono); font-size: .66rem; line-height: 1.3; }
+      .flow__log p { display: flex; gap: .7rem; min-width: 0; color: var(--text-secondary); }
+      .flow__log time { flex: none; color: var(--text-tertiary); }
+      .flow__log span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .flow__log b { flex: none; color: #6ee7a8; font-weight: 500; }
+      .flow__log p.is-new { animation: log-in .45s var(--ease-out); }
+      @keyframes log-in { from { opacity: 0; transform: translateY(-6px); } }
+      .flow__metrics { display: flex; flex-wrap: wrap; gap: .3rem 1rem; color: var(--text-tertiary); font-family: var(--font-mono); font-size: .64rem; }
+      .flow__metrics b { color: var(--text-primary); font-weight: 500; }
+
+      /* ---------- 03 · Logotipos premium ---------- */
+      .demo--brand { height: clamp(290px, 76cqi, 350px); perspective: 1200px; }
+      .lt {
+        position: absolute;
+        width: 44%;
+        aspect-ratio: 4 / 3;
+        transform-style: preserve-3d;
+        transform: rotate(var(--rot)) translate3d(0, 0, 0);
+        transition: transform .7s var(--ease-out), box-shadow .5s ease;
+        border-radius: 12px;
+        box-shadow: 0 18px 34px -16px rgba(0, 0, 0, .85);
+      }
+      .lt:nth-of-type(1) { top: 5%; left: 4%; --rot: -6deg; }
+      .lt:nth-of-type(2) { top: 9%; right: 4%; --rot: 5deg; }
+      .lt:nth-of-type(3) { bottom: 14%; left: 8%; --rot: 4deg; }
+      .lt:nth-of-type(4) { bottom: 11%; right: 6%; --rot: -4deg; }
+      .lt.is-flipped { transform: rotate(0deg) translate3d(0, -4px, 30px) rotateY(180deg); z-index: 3; }
+      @media (hover: hover) and (pointer: fine) {
+        .lt:hover { z-index: 4; transform: rotate(0deg) translate3d(0, -6px, 40px) scale(1.07); box-shadow: 0 26px 44px -16px rgba(0, 0, 0, .9); }
+        .lt.is-flipped:hover { transform: rotate(0deg) translate3d(0, -6px, 40px) scale(1.07) rotateY(180deg); }
+      }
+      .lt__face {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        gap: 3%;
+        overflow: hidden;
+        border-radius: inherit;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
+      }
+      .lt__back { transform: rotateY(180deg); gap: .45rem; }
+      .lt__mark { width: clamp(30px, 11cqi, 44px); height: auto; overflow: visible; }
+      .lt__draw { fill: none; stroke: currentColor; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+      .lt__draw--thin { stroke-width: 1.6; opacity: .7; }
+      .lt__word { font-size: clamp(.8rem, 3.6cqi, 1rem); font-weight: 600; line-height: 1; }
+      .lt__sub { font-family: var(--font-mono); font-size: .54rem; letter-spacing: .2em; text-transform: uppercase; opacity: .65; }
+      .lt__aa { font-size: 1.5rem; line-height: 1; }
+      .lt__sw { display: flex; gap: .3rem; }
+      .lt__sw i { width: 18px; height: 18px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25); }
+      .lt__hex { font-family: var(--font-mono); font-size: .5rem; letter-spacing: .04em; opacity: .75; }
+      /* Redesenho do símbolo ao passar o mouse ou tocar */
+      .lt.is-drawing .lt__draw { animation: lt-draw 1.1s var(--ease-out) both; }
+      .lt.is-drawing .lt__draw--thin { animation-delay: .35s; }
+      @keyframes lt-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+      .lt--vetra .lt__face { background: radial-gradient(90% 90% at 30% 0%, #26221a, #0c0c0c 70%); color: #d4b06a; }
+      .lt--vetra .lt__word { font-family: Georgia, "Times New Roman", serif; font-weight: 400; letter-spacing: .38em; margin-right: -.38em; color: #f4eee2; }
+      .lt--vetra .lt__sw i:nth-child(1) { background: #0c0c0c; } .lt--vetra .lt__sw i:nth-child(2) { background: #d4b06a; } .lt--vetra .lt__sw i:nth-child(3) { background: #f4eee2; }
+      .lt--vetra .lt__aa { font-family: Georgia, serif; color: #f4eee2; }
+
+      .lt--orbe .lt__face { background: #f3ede3; color: #1a1a1a; }
+      .lt--orbe .lt__draw { stroke: #1a1a1a; stroke-width: 2.2; }
+      .lt__sun { fill: #ff5a1f; }
+      .lt__moon { fill: #1a1a1a; }
+      .lt__orbit { transform-origin: 32px 32px; transition: transform 1.2s var(--ease-out); }
+      .lt--orbe .lt__word { font-size: clamp(.95rem, 4.4cqi, 1.2rem); font-weight: 700; letter-spacing: -.06em; }
+      .lt--orbe.is-drawing .lt__orbit, .lt--orbe:hover .lt__orbit { transform: rotate(-200deg); }
+      .lt--orbe .lt__sw i:nth-child(1) { background: #ff5a1f; } .lt--orbe .lt__sw i:nth-child(2) { background: #1a1a1a; } .lt--orbe .lt__sw i:nth-child(3) { background: #f3ede3; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2); }
+      .lt--orbe .lt__aa { font-weight: 700; letter-spacing: -.05em; }
+
+      .lt--nativa .lt__face { background: radial-gradient(100% 100% at 80% 100%, #1b4a39, #0f2e24 70%); color: #9fe3b8; }
+      .lt__leaf { fill: #9fe3b8; transform-origin: 46px 16px; transition: transform .8s var(--ease-out); }
+      .lt--nativa .lt__word { color: #efe6d6; font-family: var(--font-serif); font-style: italic; font-size: clamp(1rem, 4.6cqi, 1.3rem); font-weight: 400; letter-spacing: .01em; }
+      .lt--nativa.is-drawing .lt__leaf, .lt--nativa:hover .lt__leaf { transform: rotate(-14deg) scale(1.1); }
+      .lt--nativa .lt__sw i:nth-child(1) { background: #0f2e24; } .lt--nativa .lt__sw i:nth-child(2) { background: #9fe3b8; } .lt--nativa .lt__sw i:nth-child(3) { background: #efe6d6; }
+      .lt--nativa .lt__aa { font-family: var(--font-serif); font-style: italic; color: #efe6d6; }
+
+      .lt--kinto .lt__face { background: linear-gradient(145deg, #2a4bff, #1d3cff 50%, #1430d6); color: #fff; }
+      .lt__bar { fill: #fff; transition: transform .6s var(--ease-out); }
+      .lt--kinto.is-drawing .lt__bar--2, .lt--kinto:hover .lt__bar--2 { transform: translate(3px, -3px); }
+      .lt--kinto.is-drawing .lt__bar--3, .lt--kinto:hover .lt__bar--3 { transform: translate(3px, 3px); }
+      .lt--kinto .lt__word { font-weight: 800; letter-spacing: .14em; margin-right: -.14em; }
+      .lt--kinto .lt__sw i:nth-child(1) { background: #1d3cff; } .lt--kinto .lt__sw i:nth-child(2) { background: #fff; } .lt--kinto .lt__sw i:nth-child(3) { background: #0b0f2a; }
+      .lt--kinto .lt__aa { font-weight: 800; }
+
+      /* ---------- 04 · Peças digitais ---------- */
+      .demo--pieces { height: clamp(260px, 70cqi, 310px); perspective: 1200px; container-type: inline-size; }
+      .pieces__rig { position: absolute; inset: 0; --fan: 1; }
+      .pc {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 24px 40px -18px rgba(0, 0, 0, .9), 0 0 0 1px rgba(255, 255, 255, .08);
+        transition: transform .8s var(--ease-out), filter .5s ease;
+      }
+      .pc[data-slot="0"] { z-index: 1; transform: translate(-50%, -50%) translate3d(calc(-27cqi * var(--fan)), 4%, 0) rotate(calc(-10deg * var(--fan))); filter: brightness(.7); }
+      .pc[data-slot="1"] { z-index: 3; transform: translate(-50%, -50%) translate3d(0, -2%, 0) rotate(0deg) scale(1.06); }
+      .pc[data-slot="2"] { z-index: 2; transform: translate(-50%, -50%) translate3d(calc(27cqi * var(--fan)), 6%, 0) rotate(calc(9deg * var(--fan))); filter: brightness(.7); }
+      @media (hover: hover) and (pointer: fine) {
+        .demo--pieces:hover .pieces__rig { --fan: 1.12; }
+        .pc[data-slot="0"]:hover, .pc[data-slot="2"]:hover { filter: brightness(.95); }
+      }
+      /* Post quadrado */
+      .pc--post { width: min(42cqi, 190px); aspect-ratio: 4 / 5; display: grid; grid-template-rows: auto 1fr auto; background: #fff; color: #111; }
+      .pc-post__head { display: flex; align-items: center; gap: 6px; padding: 7px 8px; font-size: .58rem; font-weight: 600; }
+      .pc-post__head i { width: 16px; height: 16px; border-radius: 50%; background: conic-gradient(#ff5500, #ffb347, #1b5e6b, #ff5500); }
+      .pc-post__head b { margin-left: auto; opacity: .5; }
+      .pc-post__art { position: relative; overflow: hidden; background: linear-gradient(180deg, #ffcf8a 0%, #ff8a4c 46%, #0f4b5c 46.5%, #0a2f3a 100%); }
+      .pc-post__sun { position: absolute; top: 18%; left: 50%; width: 42%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #fff3d6, #ffb347 70%); transform: translateX(-50%); }
+      .pc-post__sea { position: absolute; inset: 46% 0 0; background: repeating-linear-gradient(180deg, rgba(255, 255, 255, .14) 0 1px, transparent 1px 7px); }
+      .pc-post__title { position: absolute; left: 9%; bottom: 9%; color: #fff; font-size: .62rem; font-weight: 700; letter-spacing: .14em; line-height: 1.1; text-transform: uppercase; }
+      .pc-post__title em { display: block; font-family: var(--font-serif); font-size: 1.6rem; font-weight: 400; letter-spacing: -.01em; text-transform: none; }
+      .pc-post__foot { display: flex; align-items: center; gap: 7px; padding: 7px 8px; }
+      .pc-post__foot > i { width: 10px; height: 10px; border: 1.5px solid #111; border-radius: 3px; }
+      .pc-post__foot > i:first-child { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; border-color: #ff3b5c; background: #ff3b5c; }
+      .pc-post__dots { display: flex; gap: 3px; margin-left: auto; }
+      .pc-post__dots b { width: 4px; height: 4px; border-radius: 50%; background: #ccc; }
+      .pc-post__dots b:first-child { background: #0a84ff; }
+      /* Story vertical */
+      .pc--story { width: min(30cqi, 140px); aspect-ratio: 9 / 16; display: grid; align-content: start; justify-items: center; padding: 8px 10px 10px; background: radial-gradient(80% 50% at 50% 40%, #6b3a1c, transparent 70%), linear-gradient(180deg, #2a160b, #120905); color: #f7e7d3; text-align: center; }
+      .pc-story__bars { display: flex; gap: 3px; width: 100%; }
+      .pc-story__bars i { position: relative; flex: 1; height: 2px; overflow: hidden; border-radius: 2px; background: rgba(255, 255, 255, .3); }
+      .pc-story__bars i:first-child { background: #fff; }
+      .pc-story__bars i:nth-child(2)::after { content: ""; position: absolute; inset: 0; background: #fff; transform-origin: 0 50%; transform: scaleX(.45); }
+      @media (prefers-reduced-motion: no-preference) {
+        .pc-story__bars i:nth-child(2)::after { animation: story-bar 5s linear infinite; }
+        .svc.is-offscreen .pc-story__bars i::after { animation-play-state: paused; }
+      }
+      @keyframes story-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+      .pc-story__brand { display: flex; align-items: center; gap: 5px; align-self: start; justify-self: start; margin-top: 7px; font-size: .54rem; font-weight: 600; }
+      .pc-story__brand i { width: 14px; height: 14px; border-radius: 50%; background: #c98a4b; }
+      .pc-story__cup { position: relative; width: 44%; aspect-ratio: 1 / 1.05; margin-top: 16%; border-radius: 0 0 40% 40%; background: linear-gradient(180deg, #f3e2cc, #d6b995); box-shadow: 0 10px 24px rgba(0, 0, 0, .5); }
+      .pc-story__cup span { position: absolute; inset: 0 8% auto; height: 22%; border-radius: 50%; background: radial-gradient(circle at 50% 40%, #a8672f, #4a2610); transform: translateY(-40%); }
+      .pc-story__title { margin-top: 14%; font-size: .5rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+      .pc-story__title em { display: block; margin-top: 2px; font-family: var(--font-serif); font-size: 1.25rem; font-weight: 400; letter-spacing: 0; text-transform: none; color: #ffcf9a; }
+      .pc-story__cta { margin-top: auto; padding: 4px 10px; border-radius: 99px; background: #f7e7d3; color: #2a160b; font-size: .5rem; font-weight: 700; }
+      .pc--story { grid-template-rows: auto auto auto auto 1fr; }
+      /* Slide de apresentação */
+      .pc--deck { width: min(52cqi, 240px); aspect-ratio: 16 / 10; display: grid; grid-template-rows: auto 1fr auto; padding: 9px 11px; background: #f6f3ee; color: #121212; }
+      .pc-deck__top { display: flex; align-items: center; gap: 8px; font-size: .5rem; opacity: .8; }
+      .pc-deck__top b { letter-spacing: .2em; }
+      .pc-deck__top i { margin-left: auto; font-family: var(--font-mono); font-style: normal; opacity: .6; }
+      .pc-deck__big { align-self: center; font-size: 2.1rem; font-weight: 700; letter-spacing: -.05em; line-height: .95; color: #ff5500; }
+      .pc-deck__big small { display: block; margin-top: 4px; color: #121212; font-size: .52rem; font-weight: 500; letter-spacing: .02em; }
+      .pc-deck__bars { display: flex; align-items: end; gap: 4px; height: 26px; }
+      .pc-deck__bars i { flex: 1; height: 30%; border-radius: 2px 2px 0 0; background: #d9d3c8; }
+      .pc-deck__bars i:nth-child(2) { height: 42%; } .pc-deck__bars i:nth-child(3) { height: 50%; } .pc-deck__bars i:nth-child(4) { height: 64%; }
+      .pc-deck__bars i:nth-child(5) { height: 78%; } .pc-deck__bars i:nth-child(6) { height: 100%; background: #ff5500; }
+
+      /* ---------- 05 · Agente de IA ---------- */
+      .demo--agent { display: grid; grid-template-columns: 1fr; gap: 1rem; padding: 1rem 1rem 2.6rem; }
+      @container (min-width: 520px) {
+        .demo--agent { grid-template-columns: 150px 1fr; align-items: center; gap: 1.25rem; }
+      }
+      .agent__orb { position: relative; display: grid; place-items: center; justify-self: center; width: clamp(104px, 28cqi, 132px); aspect-ratio: 1; }
+      .agent__rings { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+      .agent__ring { fill: none; stroke: rgba(255, 85, 0, .45); stroke-width: 1; transform-origin: 60px 60px; }
+      .agent__ring--1 { stroke-dasharray: 3 7; }
+      .agent__ring--2 { stroke-dasharray: 60 22 8 22; stroke: rgba(255, 150, 90, .6); }
+      .agent__ring--3 { stroke-dasharray: 2 4; stroke: rgba(255, 255, 255, .25); }
+      @media (prefers-reduced-motion: no-preference) {
+        .agent__ring--1 { animation: ring-spin 22s linear infinite; }
+        .agent__ring--2 { animation: ring-spin 9s linear infinite reverse; }
+        .agent__ring--3 { animation: ring-spin 14s linear infinite; }
+        .agent__core { animation: core-breathe 3.2s ease-in-out infinite; }
+        .svc.is-offscreen .agent__ring, .svc.is-offscreen .agent__core { animation-play-state: paused; }
+      }
+      @keyframes ring-spin { to { transform: rotate(360deg); } }
+      @keyframes core-breathe { 50% { transform: scale(1.08); } }
+      .agent__core {
+        width: 52px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #ffd2b0, #ff5500 45%, #7a1d00 100%);
+        box-shadow: 0 0 30px rgba(255, 85, 0, .55), inset 0 -6px 14px rgba(0, 0, 0, .35);
+        transition: box-shadow .4s ease, filter .4s ease;
+      }
+      .demo--agent.is-thinking .agent__core { box-shadow: 0 0 46px rgba(255, 85, 0, .9), inset 0 -6px 14px rgba(0, 0, 0, .35); filter: saturate(1.25) brightness(1.1); }
+      @media (hover: hover) and (pointer: fine) {
+        .demo--agent:hover .agent__core { box-shadow: 0 0 42px rgba(255, 85, 0, .8), inset 0 -6px 14px rgba(0, 0, 0, .35); }
+      }
+      .agent__tag { position: absolute; bottom: -4px; padding: .15rem .5rem; border: 1px solid rgba(110, 231, 168, .35); border-radius: var(--r-pill); background: var(--bg-base); color: #6ee7a8; font-family: var(--font-mono); font-size: .58rem; letter-spacing: .06em; white-space: nowrap; }
+      .agent__panel { display: grid; gap: .6rem; min-width: 0; }
+      .agent__head { display: flex; justify-content: space-between; gap: .75rem; color: var(--text-tertiary); font-family: var(--font-mono); font-size: .66rem; letter-spacing: .04em; }
+      .agent__state { color: #6ee7a8; }
+      .demo--agent.is-thinking .agent__state { color: var(--accent); }
+      .agent__ask { display: flex; align-items: baseline; gap: .55rem; min-height: 2.9em; padding: .55rem .7rem; border: 1px solid var(--line); border-radius: var(--r-sm); background: rgba(255, 255, 255, .03); color: var(--text-primary); font-size: .84rem; line-height: 1.4; }
+      .agent__who { flex: none; color: var(--accent); font-family: var(--font-mono); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; }
+      .agent__caret { display: none; width: 2px; height: 1em; align-self: center; background: var(--accent); }
+      .demo--agent.is-typing .agent__caret { display: inline-block; }
+      .agent__steps { display: grid; gap: .4rem; }
+      .agent__steps li { display: flex; align-items: center; gap: .6rem; color: var(--text-tertiary); font-size: .8rem; transition: color .3s ease; }
+      .agent__steps li i { position: relative; flex: none; width: 15px; height: 15px; border: 1px solid var(--line-strong); border-radius: 50%; }
+      .agent__steps li.is-run { color: var(--text-primary); }
+      .agent__steps li.is-run i { border-color: var(--accent); border-right-color: transparent; }
+      @media (prefers-reduced-motion: no-preference) {
+        .agent__steps li.is-run i { animation: ring-spin .7s linear infinite; }
+      }
+      .agent__steps li.is-done { color: var(--text-secondary); }
+      .agent__steps li.is-done i { border-color: #6ee7a8; background: rgba(110, 231, 168, .14); }
+      .agent__steps li.is-done i::after { content: ""; position: absolute; left: 4.5px; top: 2px; width: 4px; height: 7px; border: solid #6ee7a8; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
+      .agent__foot { min-height: 1.4em; color: #6ee7a8; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .02em; transition: opacity .3s ease; }
+      .agent__foot.is-hidden { opacity: 0; }
   </style>
 </head>
 <body>
@@ -4231,13 +4750,82 @@
         </div>
 
         <div class="bento" data-stagger>
-          <!-- 01 · Sites profissionais -->
-          <article class="card svc svc--sites" id="servico-sites" aria-labelledby="svc-sites-titulo" data-spotlight data-reveal>
+          <!-- 01 · Sites premium -->
+          <article class="card svc svc--sites" id="servico-sites" aria-labelledby="svc-sites-titulo" data-spotlight data-reveal data-anim-scope>
+            <span class="svc__beam" aria-hidden="true"></span>
             <div class="svc__top">
               <span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-browser"/></svg></span>
               <span class="svc__index" aria-hidden="true">01</span>
             </div>
-            <h3 class="svc__title" id="svc-sites-titulo">Sites profissionais</h3>
+            <h3 class="svc__title" id="svc-sites-titulo">Sites premium</h3>
+            <div class="demo demo--sites" data-demo="sites" aria-hidden="true">
+              <div class="sites__rig">
+                <!-- Tela 1 · estúdio de arquitetura -->
+                <div class="shot" data-pos="l">
+                  <div class="shot__bar"><i></i><i></i><i></i><span class="shot__url">aurum.arq.br</span></div>
+                  <div class="shot__view">
+                    <div class="site site--aurum">
+                      <div class="st-nav"><span class="st-logo">AURUM</span><span class="st-links"><i>Projetos</i><i>Estúdio</i><i>Contato</i></span><span class="st-cta">Agendar visita</span></div>
+                      <div class="st-hero">
+                        <div class="st-copy">
+                          <span class="st-kicker">Arquitetura autoral · Curitiba</span>
+                          <span class="st-h">Espaços que <em>contam histórias</em></span>
+                          <span class="st-p">Residências e interiores desenhados sob medida, do conceito à obra.</span>
+                          <span class="st-btn">Ver projetos</span>
+                        </div>
+                        <div class="st-art"><span class="st-sun"></span><span class="st-arch st-arch--1"></span><span class="st-arch st-arch--2"></span><span class="st-floor"></span></div>
+                      </div>
+                      <div class="st-stats"><span><b>120+</b>projetos</span><span><b>14</b>prêmios</span><span><b>16</b>anos</span></div>
+                      <div class="st-tiles"><span><i></i>Casa Atalaia</span><span><i></i>Loft Batel</span><span><i></i>Refúgio Serra</span></div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Tela 2 · fintech -->
+                <div class="shot" data-pos="c">
+                  <div class="shot__bar"><i></i><i></i><i></i><span class="shot__url">volt.app</span></div>
+                  <div class="shot__view">
+                    <div class="site site--volt">
+                      <div class="st-nav"><span class="st-logo"><i></i>volt</span><span class="st-links"><i>Produto</i><i>Planos</i><i>Clientes</i></span><span class="st-cta">Criar conta</span></div>
+                      <div class="st-hero">
+                        <div class="st-copy">
+                          <span class="st-pill">Novo · conciliação com IA</span>
+                          <span class="st-h">Seu caixa, em tempo real.</span>
+                          <span class="st-p">Conciliação automática com 30 bancos e relatórios prontos para o contador.</span>
+                          <span class="st-btn">Testar por 14 dias</span>
+                        </div>
+                        <div class="st-dash">
+                          <span class="st-dash__k">Saldo consolidado</span>
+                          <span class="st-dash__v">184.320<small>,00</small></span>
+                          <span class="st-dash__d">▲ 12,4% no mês</span>
+                          <svg class="st-chart" viewBox="0 0 100 36" preserveAspectRatio="none"><defs><linearGradient id="volt-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b5cff" stop-opacity=".55"/><stop offset="1" stop-color="#8b5cff" stop-opacity="0"/></linearGradient></defs><path d="M0 30 C10 28 14 22 22 23 S36 14 44 17 58 9 66 12 80 4 88 6 100 2 100 2 V36 H0Z" fill="url(#volt-area)"/><path d="M0 30 C10 28 14 22 22 23 S36 14 44 17 58 9 66 12 80 4 88 6 100 2 100 2" fill="none" stroke="#b69cff" stroke-width="1.4" vector-effect="non-scaling-stroke"/></svg>
+                          <span class="st-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                        </div>
+                      </div>
+                      <div class="st-logos"><i>NORTE</i><i>Lumina</i><i>ARCO</i><i>Pátio</i><i>Brava</i></div>
+                      <div class="st-feats"><span><i></i>Conciliação diária</span><span><i></i>Fluxo projetado</span><span><i></i>Alertas no celular</span></div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Tela 3 · clínica -->
+                <div class="shot" data-pos="r">
+                  <div class="shot__bar"><i></i><i></i><i></i><span class="shot__url">clinicasereno.com.br</span></div>
+                  <div class="shot__view">
+                    <div class="site site--sereno">
+                      <div class="st-nav"><span class="st-logo"><i></i>sereno</span><span class="st-links"><i>Especialidades</i><i>Equipe</i><i>Convênios</i></span><span class="st-cta">Agendar</span></div>
+                      <div class="st-hero">
+                        <span class="st-tag"><i></i>Agenda aberta esta semana</span>
+                        <span class="st-h">Cuidado que se sente <em>em cada detalhe</em></span>
+                        <span class="st-p">Clínica integrada, com especialistas que conversam entre si sobre você.</span>
+                        <span class="st-btns"><span class="st-btn">Agendar consulta</span><span class="st-btn st-btn--ghost">Conhecer a equipe</span></span>
+                        <span class="st-proof"><span class="st-avs"><i></i><i></i><i></i></span>4,9 · 2.300 avaliações</span>
+                      </div>
+                      <div class="st-cards"><span><i></i>Dermatologia</span><span><i></i>Nutrição</span><span><i></i>Fisioterapia</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <span class="demo__hint"><span class="demo__hint-dot"></span><span class="hint-touch">Toque</span><span class="hint-mouse">Clique</span> nas telas</span>
+            </div>
             <p class="svc__desc">Criação de sites rápidos, seguros e desenhados para transformar visitantes em contatos. Você escolhe como quer receber o seu projeto:</p>
 
             <div class="models">
@@ -4320,18 +4908,56 @@
               <li>Performance extrema</li>
             </ul>
             <div class="svc__foot">
-              <a class="link-arrow link-arrow--right" href="#contato" data-service-link="sites">Quero este serviço<span class="sr-only">: sites profissionais</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+              <a class="link-arrow link-arrow--right" href="#contato" data-service-link="sites">Quero este serviço<span class="sr-only">: sites premium</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
             </div>
           </article>
 
           <!-- 02 · Sistemas -->
-          <article class="card svc svc--sistemas" id="servico-sistemas" aria-labelledby="svc-sistemas-titulo" data-spotlight data-reveal>
+          <article class="card svc svc--sistemas" id="servico-sistemas" aria-labelledby="svc-sistemas-titulo" data-spotlight data-reveal data-anim-scope>
+            <span class="svc__beam" aria-hidden="true"></span>
             <div class="svc__top">
               <span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-system"/></svg></span>
               <span class="svc__index" aria-hidden="true">02</span>
             </div>
             <h3 class="svc__title" id="svc-sistemas-titulo">Sistemas sob medida e automações</h3>
             <p class="svc__desc">Desenvolvimento de sistemas sob medida que se encaixam na sua operação — e não o contrário. Menos planilha, menos retrabalho, mais controle.</p>
+            <div class="demo demo--flow" data-demo="flow" aria-hidden="true">
+              <div class="flow__head">
+                <span class="flow__live"><i></i><span data-flow-state>Fluxo ativo</span></span>
+                <span class="flow__name">pedido-novo.flow</span>
+                <span class="flow__count">Execuções hoje <b data-flow-count>1.284</b></span>
+              </div>
+              <div class="flow__track">
+                <div class="flow__node" data-flow-node>
+                  <span class="flow__ico"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+                  <span class="flow__label">Site</span><span class="flow__sub">formulário</span>
+                </div>
+                <div class="flow__wire"><i class="flow__pkt"></i><i class="flow__pkt flow__pkt--b"></i></div>
+                <div class="flow__node" data-flow-node>
+                  <span class="flow__ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.2"/><path d="M3.5 19c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"/><circle cx="17" cy="8" r="2.4"/><path d="M16 13.6c2.4 0 4 1.3 4.6 3.9"/></svg></span>
+                  <span class="flow__label">CRM</span><span class="flow__sub">lead criado</span>
+                </div>
+                <div class="flow__wire"><i class="flow__pkt"></i><i class="flow__pkt flow__pkt--b"></i></div>
+                <div class="flow__node" data-flow-node>
+                  <span class="flow__ico"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="2.8"/><path d="M5 6v12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8V6M5 12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8"/></svg></span>
+                  <span class="flow__label">ERP</span><span class="flow__sub">estoque ok</span>
+                </div>
+                <div class="flow__wire"><i class="flow__pkt"></i><i class="flow__pkt flow__pkt--b"></i></div>
+                <div class="flow__node" data-flow-node>
+                  <span class="flow__ico"><svg viewBox="0 0 24 24"><path d="M4 19.5l1.2-3.6A8 8 0 1 1 8.3 19z"/><path d="M9 10.5c.4 1.8 2 3.6 4.4 4.2l1.1-1.2 1.7.8"/></svg></span>
+                  <span class="flow__label">WhatsApp</span><span class="flow__sub">cliente avisado</span>
+                </div>
+              </div>
+              <div class="flow__log" data-flow-log>
+                <p><time>09:41:07</time><span>Pedido #4821 · ERP atualizado</span><b>ok</b></p>
+                <p><time>09:40:52</time><span>Lead Marina S. · CRM</span><b>ok</b></p>
+                <p><time>09:40:31</time><span>Nota fiscal 1.204 emitida</span><b>ok</b></p>
+              </div>
+              <div class="flow__metrics">
+                <span>Tempo médio <b>0,8 s</b></span><span>Erros <b>0</b></span><span>Horas poupadas <b>36/mês</b></span>
+              </div>
+              <span class="demo__hint"><span class="demo__hint-dot"></span><span class="hint-touch">Toque</span><span class="hint-mouse">Clique</span> para executar</span>
+            </div>
             <ul class="ticks svc__list">
               <li>Software empresarial</li>
               <li>Sistemas internos e painéis</li>
@@ -4345,13 +4971,65 @@
           </article>
 
           <!-- 03 · Marca -->
-          <article class="card svc svc--marca" id="servico-marca" aria-labelledby="svc-marca-titulo" data-spotlight data-reveal>
+          <article class="card svc svc--marca" id="servico-marca" aria-labelledby="svc-marca-titulo" data-spotlight data-reveal data-anim-scope>
+            <span class="svc__beam" aria-hidden="true"></span>
             <div class="svc__top">
               <span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-pen"/></svg></span>
               <span class="svc__index" aria-hidden="true">03</span>
             </div>
             <h3 class="svc__title" id="svc-marca-titulo">Logotipos, logomarcas e identidade visual</h3>
             <p class="svc__desc">Criação de logotipo e logomarca com conceito, método e aplicação real: uma identidade visual que a sua empresa consegue sustentar em qualquer canal.</p>
+            <div class="demo demo--brand" data-demo="brand" aria-hidden="true">
+              <!-- Vetra · gestora de investimentos -->
+              <div class="lt lt--vetra" data-lt>
+                <div class="lt__face lt__front">
+                  <svg class="lt__mark" viewBox="0 0 64 64"><path class="lt__draw" pathLength="1" d="M32 5 59 32 32 59 5 32Z"/><path class="lt__draw" pathLength="1" d="M19 21 32 45 45 21"/><path class="lt__draw lt__draw--thin" pathLength="1" d="M25.5 21 32 33.5 38.5 21"/></svg>
+                  <span class="lt__word">VETRA</span><span class="lt__sub">Capital</span>
+                </div>
+                <div class="lt__face lt__back">
+                  <span class="lt__aa">Aa</span>
+                  <span class="lt__sw"><i></i><i></i><i></i></span>
+                  <span class="lt__hex">#0C0C0C · #D4B06A · #F4EEE2</span>
+                </div>
+              </div>
+              <!-- Orbe · estúdio de tecnologia -->
+              <div class="lt lt--orbe" data-lt>
+                <div class="lt__face lt__front">
+                  <svg class="lt__mark" viewBox="0 0 64 64"><circle class="lt__sun" cx="32" cy="32" r="13"/><g class="lt__orbit"><ellipse class="lt__draw" pathLength="1" cx="32" cy="32" rx="27" ry="10" transform="rotate(-24 32 32)"/><circle class="lt__moon" cx="56" cy="21" r="3.4"/></g></svg>
+                  <span class="lt__word">orbe</span><span class="lt__sub">estúdio digital</span>
+                </div>
+                <div class="lt__face lt__back">
+                  <span class="lt__aa">Aa</span>
+                  <span class="lt__sw"><i></i><i></i><i></i></span>
+                  <span class="lt__hex">#FF5A1F · #1A1A1A · #F3EDE3</span>
+                </div>
+              </div>
+              <!-- Nativa · cosméticos naturais -->
+              <div class="lt lt--nativa" data-lt>
+                <div class="lt__face lt__front">
+                  <svg class="lt__mark" viewBox="0 0 64 64"><path class="lt__draw" pathLength="1" d="M18 48V18l28 28V16"/><path class="lt__leaf" d="M46 16c-9 1-14 7-13 15 8-.5 13-6.5 13-15z"/><path class="lt__draw lt__draw--thin" pathLength="1" d="M34.5 29.5 45 17"/></svg>
+                  <span class="lt__word">nativa</span><span class="lt__sub">cosméticos</span>
+                </div>
+                <div class="lt__face lt__back">
+                  <span class="lt__aa">Aa</span>
+                  <span class="lt__sw"><i></i><i></i><i></i></span>
+                  <span class="lt__hex">#0F2E24 · #9FE3B8 · #EFE6D6</span>
+                </div>
+              </div>
+              <!-- Kinto · mobilidade -->
+              <div class="lt lt--kinto" data-lt>
+                <div class="lt__face lt__front">
+                  <svg class="lt__mark" viewBox="0 0 64 64"><rect class="lt__bar lt__bar--1" x="12" y="12" width="10" height="40" rx="2"/><path class="lt__bar lt__bar--2" d="M26 32 42 12h12L38 32z"/><path class="lt__bar lt__bar--3" d="M26 32h12l16 20H42z"/></svg>
+                  <span class="lt__word">KINTO</span><span class="lt__sub">mobilidade</span>
+                </div>
+                <div class="lt__face lt__back">
+                  <span class="lt__aa">Aa</span>
+                  <span class="lt__sw"><i></i><i></i><i></i></span>
+                  <span class="lt__hex">#1D3CFF · #FFFFFF · #0B0F2A</span>
+                </div>
+              </div>
+              <span class="demo__hint"><span class="demo__hint-dot"></span><span class="hint-touch">Toque</span><span class="hint-mouse">Clique</span> para ver a identidade</span>
+            </div>
             <ul class="ticks svc__list">
               <li>Criação de logotipo e logomarca (símbolo + tipografia)</li>
               <li>Paleta de cores e tipografia da marca</li>
@@ -4365,13 +5043,42 @@
           </article>
 
           <!-- 04 · Design gráfico -->
-          <article class="card svc svc--design" id="servico-design" aria-labelledby="svc-design-titulo" data-spotlight data-reveal>
+          <article class="card svc svc--design" id="servico-design" aria-labelledby="svc-design-titulo" data-spotlight data-reveal data-anim-scope>
+            <span class="svc__beam" aria-hidden="true"></span>
             <div class="svc__top">
               <span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-layers"/></svg></span>
               <span class="svc__index" aria-hidden="true">04</span>
             </div>
             <h3 class="svc__title" id="svc-design-titulo">Design gráfico e peças digitais</h3>
             <p class="svc__desc">Design gráfico consistente com a sua marca em cada canal — do feed à gráfica.</p>
+            <div class="demo demo--pieces" data-demo="pieces" aria-hidden="true">
+              <div class="pieces__rig">
+                <!-- Post de feed -->
+                <div class="pc pc--post" data-slot="0">
+                  <span class="pc-post__head"><i></i>mare.studio<b>···</b></span>
+                  <span class="pc-post__art">
+                    <span class="pc-post__sun"></span><span class="pc-post__sea"></span>
+                    <span class="pc-post__title">Coleção<em>Verão 26</em></span>
+                  </span>
+                  <span class="pc-post__foot"><i></i><i></i><i></i><span class="pc-post__dots"><b></b><b></b><b></b></span></span>
+                </div>
+                <!-- Story -->
+                <div class="pc pc--story" data-slot="1">
+                  <span class="pc-story__bars"><i></i><i></i><i></i></span>
+                  <span class="pc-story__brand"><i></i>âmbar café</span>
+                  <span class="pc-story__cup"><span></span></span>
+                  <span class="pc-story__title">Blend<em>72 horas</em></span>
+                  <span class="pc-story__cta">Arraste para cima</span>
+                </div>
+                <!-- Slide de apresentação -->
+                <div class="pc pc--deck" data-slot="2">
+                  <span class="pc-deck__top"><b>NORTE</b>Relatório anual 2026<i>04 / 18</i></span>
+                  <span class="pc-deck__big">+48%<small>de receita recorrente</small></span>
+                  <span class="pc-deck__bars"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                </div>
+              </div>
+              <span class="demo__hint"><span class="demo__hint-dot"></span><span class="hint-touch">Toque</span><span class="hint-mouse">Clique</span> para alternar</span>
+            </div>
             <ul class="ticks svc__list">
               <li>Banners</li>
               <li>Conteúdo e templates para redes sociais</li>
@@ -4385,13 +5092,37 @@
           </article>
 
           <!-- 05 · Engenharia de IA -->
-          <article class="card svc svc--ia" id="servico-ia" aria-labelledby="svc-ia-titulo" data-spotlight data-reveal>
+          <article class="card svc svc--ia" id="servico-ia" aria-labelledby="svc-ia-titulo" data-spotlight data-reveal data-anim-scope>
+            <span class="svc__beam" aria-hidden="true"></span>
             <div class="svc__top">
               <span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-chip"/></svg></span>
               <span class="svc__index" aria-hidden="true">05</span>
             </div>
             <h3 class="svc__title" id="svc-ia-titulo">Engenharia de IA</h3>
             <p class="svc__desc">Inteligência artificial para empresas, aplicada onde gera resultado: agentes autônomos de IA que executam tarefas, em vez de apenas responder perguntas.</p>
+            <div class="demo demo--agent" data-demo="agent" aria-hidden="true">
+              <div class="agent__orb">
+                <svg class="agent__rings" viewBox="0 0 120 120">
+                  <circle class="agent__ring agent__ring--1" cx="60" cy="60" r="54"/>
+                  <circle class="agent__ring agent__ring--2" cx="60" cy="60" r="44"/>
+                  <circle class="agent__ring agent__ring--3" cx="60" cy="60" r="34"/>
+                </svg>
+                <span class="agent__core"></span>
+                <span class="agent__tag">agente · online</span>
+              </div>
+              <div class="agent__panel">
+                <div class="agent__head"><span>Agente Tirvo · operações</span><span class="agent__state" data-agent-state>Aguardando</span></div>
+                <p class="agent__ask"><span class="agent__who">Tarefa</span><span data-agent-ask>Cliente pediu orçamento de 40 cadeiras pelo WhatsApp.</span><i class="agent__caret"></i></p>
+                <ol class="agent__steps" data-agent-steps>
+                  <li class="is-done"><i></i><span>Entendeu o pedido</span></li>
+                  <li class="is-done"><i></i><span>Consultou o estoque no ERP</span></li>
+                  <li class="is-done"><i></i><span>Calculou preço e prazo</span></li>
+                  <li class="is-done"><i></i><span>Enviou a proposta ao cliente</span></li>
+                </ol>
+                <p class="agent__foot" data-agent-foot>Proposta enviada em 3,4 s, sem intervenção humana.</p>
+              </div>
+              <span class="demo__hint"><span class="demo__hint-dot"></span><span class="hint-touch">Toque</span><span class="hint-mouse">Clique</span> para dar outra tarefa</span>
+            </div>
             <ul class="ticks svc__list">
               <li>Agentes autônomos</li>
               <li>IA integrada a sistemas e sites</li>
@@ -5016,7 +5747,7 @@
               <fieldset class="field">
                 <legend>Serviços de interesse <span class="field__opt">(opcional)</span></legend>
                 <div class="chips">
-                  <label class="chip-check"><input type="checkbox" name="servicos" value="Sites profissionais" data-service-chip="sites"><span><svg class="icon chip-check__off" aria-hidden="true"><use href="#i-plus"/></svg><svg class="icon chip-check__on" aria-hidden="true"><use href="#i-check"/></svg>Sites profissionais</span></label>
+                  <label class="chip-check"><input type="checkbox" name="servicos" value="Sites premium" data-service-chip="sites"><span><svg class="icon chip-check__off" aria-hidden="true"><use href="#i-plus"/></svg><svg class="icon chip-check__on" aria-hidden="true"><use href="#i-check"/></svg>Sites premium</span></label>
                   <label class="chip-check"><input type="checkbox" name="servicos" value="Sistemas e automações" data-service-chip="sistemas"><span><svg class="icon chip-check__off" aria-hidden="true"><use href="#i-plus"/></svg><svg class="icon chip-check__on" aria-hidden="true"><use href="#i-check"/></svg>Sistemas e automações</span></label>
                   <label class="chip-check"><input type="checkbox" name="servicos" value="Logotipo e identidade visual" data-service-chip="identidade"><span><svg class="icon chip-check__off" aria-hidden="true"><use href="#i-plus"/></svg><svg class="icon chip-check__on" aria-hidden="true"><use href="#i-check"/></svg>Logotipo e identidade visual</span></label>
                   <label class="chip-check"><input type="checkbox" name="servicos" value="Design gráfico" data-service-chip="design"><span><svg class="icon chip-check__off" aria-hidden="true"><use href="#i-plus"/></svg><svg class="icon chip-check__on" aria-hidden="true"><use href="#i-check"/></svg>Design gráfico</span></label>
@@ -5111,7 +5842,7 @@
         <div>
           <p class="footer__heading">Serviços</p>
           <ul class="footer__links">
-            <li><a href="#servico-sites">Sites profissionais</a></li>
+            <li><a href="#servico-sites">Sites premium</a></li>
             <li><a href="#servico-sistemas">Sistemas sob medida e automações</a></li>
             <li><a href="#servico-marca">Logotipos, logomarcas e identidade visual</a></li>
             <li><a href="#servico-design">Design gráfico e peças digitais</a></li>
@@ -8524,6 +9255,227 @@
     }
 
     /* ==========================================================
+       VITRINES DOS SERVIÇOS (telas, fluxo, marcas, peças e agente)
+       ========================================================== */
+    function initServiceDemos() {
+      const sfx = getSounds();
+      const wait = (ms) => new Promise((resolve) => { setTimeout(resolve, ms); });
+      const touched = (demo) => demo.classList.add('is-touched');
+
+      // Palco em leque: tocar num item lateral traz para a frente; tocar no da frente gira todos
+      const fanStage = (demo, selector, attr, center, ring) => {
+        const items = $$(selector, demo);
+        demo.addEventListener('click', (event) => {
+          touched(demo);
+          sfx.play('tap');
+          const item = event.target.closest(selector);
+          if (item && item.dataset[attr] !== center) {
+            const front = items.find((other) => other.dataset[attr] === center);
+            front.dataset[attr] = item.dataset[attr];
+            item.dataset[attr] = center;
+            return;
+          }
+          items.forEach((other) => { other.dataset[attr] = ring[(ring.indexOf(other.dataset[attr]) + 1) % ring.length]; });
+        });
+      };
+
+      // 01 · Telas de sites premium
+      const sites = $('[data-demo="sites"]');
+      if (sites) fanStage(sites, '.shot', 'pos', 'c', ['l', 'c', 'r']);
+
+      // 04 · Peças digitais
+      const pieces = $('[data-demo="pieces"]');
+      if (pieces) fanStage(pieces, '.pc', 'slot', '1', ['0', '1', '2']);
+
+      // 02 · Fluxo de automação: o dado passa por cada sistema e vira uma linha no log
+      const flow = $('[data-demo="flow"]');
+      if (flow) {
+        const nodes = $$('[data-flow-node]', flow);
+        const log = $('[data-flow-log]', flow);
+        const countEl = $('[data-flow-count]', flow);
+        const stateEl = $('[data-flow-state]', flow);
+        const number = new Intl.NumberFormat('pt-BR');
+        const leads = ['Rafael M.', 'Juliana P.', 'Carlos T.', 'Ana L.', 'Bruno C.'];
+        let count = 1284;
+        let serial = 4822;
+        let turn = 0;
+        let running = false;
+        const events = [
+          () => `Pedido #${serial} · ERP atualizado`,
+          () => `Lead ${leads[serial % leads.length]} · CRM`,
+          () => `Nota fiscal ${number.format(serial - 3617)} emitida`,
+          () => 'Cobrança conciliada · banco',
+          () => 'Estoque sincronizado · 3 lojas',
+        ];
+        const run = () => {
+          if (running) return;
+          running = true;
+          flow.classList.add('is-running');
+          stateEl.textContent = 'Executando';
+          const step = prefersReducedMotion.value ? 0 : 300;
+          nodes.forEach((node, index) => {
+            setTimeout(() => {
+              node.classList.add('is-hit');
+              setTimeout(() => node.classList.remove('is-hit'), 650);
+            }, index * step);
+          });
+          setTimeout(() => {
+            count += 1;
+            serial += 1;
+            countEl.textContent = number.format(count);
+            const line = document.createElement('p');
+            const time = document.createElement('time');
+            const text = document.createElement('span');
+            const ok = document.createElement('b');
+            time.textContent = new Date().toLocaleTimeString('pt-BR', { hour12: false });
+            text.textContent = events[turn % events.length]();
+            ok.textContent = 'ok';
+            turn += 1;
+            line.className = 'is-new';
+            line.append(time, text, ok);
+            log.prepend(line);
+            while (log.children.length > 3) log.lastElementChild.remove();
+            stateEl.textContent = 'Fluxo ativo';
+            flow.classList.remove('is-running');
+            running = false;
+          }, nodes.length * step + 150);
+        };
+        flow.addEventListener('click', () => { touched(flow); sfx.play('tap'); run(); });
+        // Enquanto está na tela, o fluxo roda sozinho de tempos em tempos
+        let auto = 0;
+        onVisible(flow, (visible) => {
+          clearInterval(auto);
+          if (visible && !prefersReducedMotion.value) auto = setInterval(run, 5200);
+        });
+      }
+
+      // 03 · Logotipos: o símbolo se redesenha ao passar o mouse; o toque vira o cartão e mostra a identidade
+      const brand = $('[data-demo="brand"]');
+      if (brand) {
+        const tiles = $$('[data-lt]', brand);
+        const draw = (tile) => {
+          clearTimeout(tile._drawTimer);
+          tile.classList.remove('is-drawing');
+          void tile.offsetWidth;
+          tile.classList.add('is-drawing');
+          tile._drawTimer = setTimeout(() => tile.classList.remove('is-drawing'), 1400);
+        };
+        tiles.forEach((tile) => {
+          tile.addEventListener('pointerenter', (event) => { if (event.pointerType === 'mouse') draw(tile); });
+        });
+        brand.addEventListener('click', (event) => {
+          const tile = event.target.closest('[data-lt]');
+          if (!tile) return;
+          touched(brand);
+          sfx.play('tap');
+          tiles.forEach((other) => { if (other !== tile) other.classList.remove('is-flipped'); });
+          tile.classList.toggle('is-flipped');
+          if (!tile.classList.contains('is-flipped')) draw(tile);
+        });
+        // Na primeira vez que aparece, cada marca se desenha em sequência
+        let stop = () => {};
+        stop = onVisible(brand, (visible) => {
+          if (!visible || prefersReducedMotion.value) return;
+          stop();
+          tiles.forEach((tile, index) => setTimeout(() => draw(tile), 200 + index * 260));
+        }, { threshold: 0.4 });
+      }
+
+      // 05 · Agente de IA: recebe a tarefa, executa cada etapa e reporta o resultado
+      const agent = $('[data-demo="agent"]');
+      if (agent) {
+        const askEl = $('[data-agent-ask]', agent);
+        const stateEl = $('[data-agent-state]', agent);
+        const footEl = $('[data-agent-foot]', agent);
+        const steps = $$('[data-agent-steps] li', agent);
+        const tasks = [
+          {
+            ask: 'Cliente pediu orçamento de 40 cadeiras pelo WhatsApp.',
+            steps: ['Entendeu o pedido', 'Consultou o estoque no ERP', 'Calculou preço e prazo', 'Enviou a proposta ao cliente'],
+            done: 'Proposta enviada em 3,4 s, sem intervenção humana.',
+          },
+          {
+            ask: 'Chegaram 12 notas fiscais no e-mail do financeiro.',
+            steps: ['Leu os anexos', 'Conferiu valores com os pedidos', 'Lançou no sistema financeiro', 'Avisou o gestor no chat interno'],
+            done: '12 notas lançadas em 6,1 s.',
+          },
+          {
+            ask: 'Paciente quer remarcar a consulta de quinta-feira.',
+            steps: ['Identificou o paciente', 'Buscou horários livres na agenda', 'Confirmou o novo horário', 'Enviou lembrete por WhatsApp'],
+            done: 'Consulta remarcada em 2,8 s.',
+          },
+        ];
+        let index = 0;
+        let token = 0;
+        let loop = 0;
+        let visible = false;
+
+        const play = async (task) => {
+          const mine = ++token;
+          const alive = () => mine === token;
+          clearTimeout(loop);
+          steps.forEach((li, i) => {
+            li.className = '';
+            li.querySelector('span').textContent = task.steps[i];
+          });
+          footEl.classList.add('is-hidden');
+          agent.classList.remove('is-thinking');
+          if (prefersReducedMotion.value) {
+            askEl.textContent = task.ask;
+            steps.forEach((li) => { li.className = 'is-done'; });
+            stateEl.textContent = 'Concluído';
+            footEl.textContent = task.done;
+            footEl.classList.remove('is-hidden');
+            return;
+          }
+          stateEl.textContent = 'Recebendo tarefa';
+          agent.classList.add('is-typing');
+          for (let i = 1; i <= task.ask.length; i += 1) {
+            askEl.textContent = task.ask.slice(0, i);
+            await wait(20);
+            if (!alive()) return;
+          }
+          agent.classList.remove('is-typing');
+          agent.classList.add('is-thinking');
+          stateEl.textContent = 'Executando';
+          for (const li of steps) {
+            li.className = 'is-run';
+            await wait(560);
+            if (!alive()) return;
+            li.className = 'is-done';
+          }
+          agent.classList.remove('is-thinking');
+          stateEl.textContent = 'Concluído';
+          footEl.textContent = task.done;
+          footEl.classList.remove('is-hidden');
+          if (visible) loop = setTimeout(next, 4200);
+        };
+        const next = () => {
+          index = (index + 1) % tasks.length;
+          play(tasks[index]);
+        };
+
+        agent.addEventListener('click', () => { touched(agent); sfx.play('tap'); next(); });
+        let started = false;
+        onVisible(agent, (isVisible) => {
+          visible = isVisible;
+          if (!isVisible) {
+            clearTimeout(loop);
+            return;
+          }
+          if (prefersReducedMotion.value) return;
+          if (!started) {
+            started = true;
+            index = -1;
+            loop = setTimeout(next, 500);
+          } else if (!agent.classList.contains('is-thinking') && !agent.classList.contains('is-typing')) {
+            loop = setTimeout(next, 1800);
+          }
+        }, { threshold: 0.35 });
+      }
+    }
+
+    /* ==========================================================
        ANO ATUAL NO RODAPÉ
        ========================================================== */
     function initYear() {
@@ -8564,6 +9516,7 @@
       ['initContactForm', initContactForm],
       ['initMagnetic', initMagnetic],
       ['initSpotlight', initSpotlight],
+      ['initServiceDemos', initServiceDemos],
       ['initYear', initYear],
       ['initSignature', initSignature],
     ];
