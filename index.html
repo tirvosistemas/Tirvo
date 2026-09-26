@@ -656,6 +656,7 @@
       /* Enquanto a abertura roda, a página não rola e as animações de entrada esperam */
       html.intro-on { overflow: hidden; background: #f7f3ed; }
       html.intro-on .header,
+      html.intro-on .header *,
       html.intro-on .hero,
       html.intro-on .hero * { animation-play-state: paused !important; }
 
@@ -1125,6 +1126,87 @@
         flex: none;
       }
       .header__logo img { width: auto; height: 30px; }
+
+      /* ---------- Logo animado do cabeçalho: o nome se forma traço a traço, em ciclo ---------- */
+      .header__logo .logo-anim { display: block; width: auto; height: 30px; overflow: visible; color: var(--text-primary); }
+      @media (min-width: 1024px) { .header__logo .logo-anim { height: 32px; } }
+      .logo-anim .lg-s { stroke-dasharray: 1 2; }
+      .logo-anim .lg-pin, .logo-anim .lg-pin-bob, .logo-anim .lg-ring { transform-box: fill-box; transform-origin: 50% 100%; }
+      .logo-anim .lg-ring { transform-origin: 50% 50%; opacity: 0; }
+      @media (prefers-reduced-motion: no-preference) {
+        .logo-anim .lg-t1 { animation: lg-t1 9.0s linear infinite; }
+        .logo-anim .lg-t2 { animation: lg-t2 9.0s linear infinite; }
+        .logo-anim .lg-i1 { animation: lg-i1 9.0s linear infinite; }
+        .logo-anim .lg-r1 { animation: lg-r1 9.0s linear infinite; }
+        .logo-anim .lg-r2 { animation: lg-r2 9.0s linear infinite; }
+        .logo-anim .lg-v1 { animation: lg-v1 9.0s linear infinite; }
+        .logo-anim .lg-o1 { animation: lg-o1 9.0s linear infinite; }
+        .logo-anim .lg-pin { animation: lg-pin 9.0s linear infinite; }
+        .logo-anim .lg-pin-bob { animation: lg-bob 2.6s ease-in-out infinite alternate; }
+        .logo-anim .lg-ring { animation: lg-ring 9.0s linear infinite; }
+      }
+      @keyframes lg-t1 {
+        0%, 3.889% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        3.900% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        7.222%, 80.556% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        84.333% { stroke-dashoffset: -1; opacity: 1; }
+        84.444%, 100% { stroke-dashoffset: -1; opacity: 0; }
+      }
+      @keyframes lg-t2 {
+        0%, 6.444% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        6.456% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        8.889%, 81.333% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        85.111% { stroke-dashoffset: -1; opacity: 1; }
+        85.222%, 100% { stroke-dashoffset: -1; opacity: 0; }
+      }
+      @keyframes lg-i1 {
+        0%, 8.444% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        8.456% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        11.111%, 82.111% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        85.889% { stroke-dashoffset: -1; opacity: 1; }
+        86.000%, 100% { stroke-dashoffset: -1; opacity: 0; }
+      }
+      @keyframes lg-r1 {
+        0%, 10.444% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        10.456% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        12.889%, 82.889% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        86.667% { stroke-dashoffset: -1; opacity: 1; }
+        86.778%, 100% { stroke-dashoffset: -1; opacity: 0; }
+      }
+      @keyframes lg-r2 {
+        0%, 12.222% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        12.233% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        14.667%, 83.667% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        87.444% { stroke-dashoffset: -1; opacity: 1; }
+        87.556%, 100% { stroke-dashoffset: -1; opacity: 0; }
+      }
+      @keyframes lg-v1 {
+        0%, 13.778% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        13.789% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        17.778%, 84.444% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        88.222% { stroke-dashoffset: -1; opacity: 1; }
+        88.333%, 100% { stroke-dashoffset: -1; opacity: 0; }
+      }
+      @keyframes lg-o1 {
+        0%, 16.222% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        16.233% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        21.778%, 85.222% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+        89.000% { stroke-dashoffset: -1; opacity: 1; }
+        89.111%, 100% { stroke-dashoffset: -1; opacity: 0; }
+      }
+      @keyframes lg-pin {
+        0% { transform: translateY(-70px) scale(.6); opacity: 0; animation-timing-function: cubic-bezier(.3, 0, .6, 1); }
+        3.333% { transform: translateY(6px) scale(1.04, .92); opacity: 1; animation-timing-function: cubic-bezier(.3, 1.4, .5, 1); }
+        5.778%, 85.556% { transform: none; opacity: 1; animation-timing-function: cubic-bezier(.5, 0, .75, 0); }
+        90.556%, 100% { transform: translateY(-60px) scale(.7); opacity: 0; }
+      }
+      @keyframes lg-ring {
+        0%, 3.333% { transform: scale(.4); opacity: 0; }
+        3.556% { transform: scale(.5); opacity: .7; animation-timing-function: cubic-bezier(.2, .6, .3, 1); }
+        12.778%, 100% { transform: scale(1.7); opacity: 0; }
+      }
+      @keyframes lg-bob { from { translate: 0 0; } to { translate: 0 -7px; } }
+
 
       .nav { display: none; }
       .nav__list { display: flex; align-items: center; gap: .25rem; }
@@ -3679,7 +3761,21 @@
   <header class="header" data-header data-overlay-inert>
     <div class="container header__inner">
       <a class="header__logo" href="#inicio" aria-label="Tirvo — voltar ao início">
-        <img src="tirvo-logo-negativo.png" width="601" height="260" alt="" decoding="async">
+        <svg class="logo-anim" viewBox="0 0 601 260" aria-hidden="true" focusable="false">
+          <g fill="none" stroke="currentColor" stroke-width="33" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M49 63.5V238.5" class="lg-s lg-t1" pathLength="1"/>
+          <path d="M20.5 115.5H91.5" class="lg-s lg-t2" pathLength="1"/>
+          <path d="M139 115.5V238.5" class="lg-s lg-i1" pathLength="1"/>
+          <path d="M205 115.5V238.5" class="lg-s lg-r1" pathLength="1"/>
+          <path d="M205 170C205 134 226 115.5 261.5 115.5" class="lg-s lg-r2" pathLength="1"/>
+          <path d="M319.5 115.5 361.5 238.5 403.5 115.5" class="lg-s lg-v1" pathLength="1"/>
+          <circle cx="518" cy="177" r="61.5" transform="rotate(90 518 177)" class="lg-s lg-o1" pathLength="1"/>
+          </g>
+          <g class="lg-pin"><g class="lg-pin-bob">
+            <circle class="lg-ring" cx="139" cy="40" r="30" fill="none" stroke="#fe6a3c" stroke-width="5"/>
+            <path fill="#fe6a3c" fill-rule="evenodd" d="M139 89.4C132.7 75.5 109 56 109 35.1a30 30 0 0 1 60 0c0 20.9-23.7 40.4-30 54.3ZM139 24.7a10.4 10.4 0 1 0 0 20.8 10.4 10.4 0 0 0 0-20.8Z"/>
+          </g></g>
+        </svg>
       </a>
 
       <nav class="nav" aria-label="Navegação principal">
