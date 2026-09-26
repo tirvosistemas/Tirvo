@@ -3611,6 +3611,29 @@
         transition: opacity 220ms ease, scale 480ms cubic-bezier(.34, 1.56, .64, 1), translate 480ms cubic-bezier(.34, 1.56, .64, 1), visibility 0s;
       }
       .mascot.is-intro .mascot__bubble { display: none; }
+      /* No rodapé, o balão sai na altura dos pés e se estende até a borda direita, sem cobrir o nome da Tirvo */
+      .mascot.is-at-footer .mascot__bubble {
+        left: calc(var(--bot-w) * 1.08);
+        bottom: 0;
+        width: min(36rem, calc(100vw - var(--bot-w) * 1.08 - 1.25rem - env(safe-area-inset-left) - env(safe-area-inset-right)));
+        max-width: none;
+        border-radius: 18px;
+        transform-origin: 0 100%;
+      }
+      .mascot.is-at-footer .mascot__bubble::after {
+        left: -9px;
+        bottom: 16px;
+        width: 12px;
+        height: 18px;
+        clip-path: polygon(100% 0, 100% 100%, 0 75%);
+      }
+      .mascot.is-at-footer .mascot__bubble { padding: .6rem 2.1rem .65rem .9rem; }
+      .mascot.is-at-footer .mascot__name { margin-bottom: .12rem; font-size: .62rem; }
+      .mascot.is-at-footer .mascot__text { font-size: .84rem; line-height: 1.36; }
+      .mascot.is-at-footer .mascot__sound { left: calc(var(--bot-w) * .5 - 14px); bottom: calc(var(--bot-w) * 1.28); }
+      @media (max-width: 767px) {
+        .mascot.is-at-footer .mascot__bubble { width: calc(100vw - var(--bot-w) * 1.08 - 1.25rem - env(safe-area-inset-left) - env(safe-area-inset-right)); }
+      }
       .mascot__name {
         margin-bottom: .2rem;
         color: #b83d00;
@@ -9099,6 +9122,11 @@
         watchConceal();
         trackPointer();
         trackSections();
+        // Com o nome da Tirvo do rodapé na tela, o balão passa para a altura dos pés
+        const signature = $('[data-signature]');
+        if (signature && hasIO) {
+          new IntersectionObserver(([entry]) => mascot.classList.toggle('is-at-footer', entry.isIntersecting)).observe(signature);
+        }
         if (!prefersReducedMotion.value) scheduleIdle();
       };
       const dock = (animate) => {
