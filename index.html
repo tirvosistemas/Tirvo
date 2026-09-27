@@ -3559,6 +3559,8 @@
       .mascot[data-pose="cheer"] { --al: 150deg; --fl: 22deg; --ar: -150deg; --fr: -22deg; --ll: 7deg; --lr: -7deg; }
       .mascot[data-pose="explain"] { --ar: -128deg; --fr: -34deg; --al: 14deg; --fl: -26deg; --head: -5deg; --ex: 3px; --ey: -3px; }
       .mascot[data-pose="look-l"] { --head: -8deg; --ex: -5px; --ey: -1px; }
+      /* Falando: braço estendido apontando para o conteúdo ao lado */
+      .mascot[data-pose="present"] { --ar: -116deg; --fr: -6deg; --al: 14deg; --fl: -24deg; --head: 6deg; --ex: 4px; --ey: -2px; }
       .mascot[data-pose="look-r"] { --head: 8deg; --ex: 5px; --ey: -1px; }
       .mascot[data-pose="fly"] { --al: 62deg; --fl: 24deg; --ar: -62deg; --fr: -24deg; --ll: 9deg; --lr: -9deg; }
 
@@ -3677,6 +3679,8 @@
         .mascot[data-pose="cheer"] .bot__wiggle--r { animation: bot-nudge 310ms ease-in-out infinite alternate; }
         .mascot[data-pose="explain"] .bot__hand--r { animation: bot-palm 1.1s ease-in-out infinite alternate; }
         .mascot[data-pose="explain"] .bot__wiggle--l { animation: bot-nudge 1.4s ease-in-out infinite alternate; }
+        .mascot[data-pose="present"] .bot__hand--r { animation: bot-jab 520ms ease-in-out infinite alternate; }
+        .mascot[data-pose="present"] .bot__wiggle--l { animation: bot-nudge 1.4s ease-in-out infinite alternate; }
         .mascot[data-pose="fly"] .bot__wiggle--l,
         .mascot[data-pose="fly"] .bot__wiggle--r { animation: bot-nudge 260ms ease-in-out infinite alternate; }
         .mascot.is-talking .bot__mouth { animation: bot-talk 170ms ease-in-out infinite alternate; }
@@ -9270,6 +9274,74 @@
     }
 
     // Uma instância de som para o site todo: o botão de som do Next vale também para a assinatura do rodapé
+    /* ==========================================================
+       VOZ DO NEXT: síntese de fala do próprio aparelho, em português do Brasil, afinada para soar como um robozinho
+       ========================================================== */
+    function createMascotVoice() {
+      const synth = window.speechSynthesis;
+      if (!synth || typeof SpeechSynthesisUtterance !== 'function') return null;
+      // Como as frases devem soar (o texto escrito continua o mesmo)
+      const SPOKEN = [
+        [/\bHihi\b/g, 'Ri ri ri'],
+        [/\bBoing\b/g, 'Bóim'],
+        [/\.zip\b/g, ' ponto zip'],
+        [/360º/g, 'trezentos e sessenta'],
+        [/24\/7/g, 'vinte e quatro horas, sete dias por semana'],
+        [/\bIA\b/g, 'I A'],
+        [/…/g, ','],
+      ];
+      // Prefere as vozes neurais (Natural, Online, Google) e, entre elas, as brasileiras
+      const score = (v) => (/^pt[-_]BR/i.test(v.lang) ? 100 : 0)
+        + (/natural|neural|online/i.test(v.name) ? 40 : 0)
+        + (/google/i.test(v.name) ? 30 : 0)
+        + (/francisca|thalita|luciana|maria|felipe|antonio|daniel/i.test(v.name) ? 10 : 0)
+        + (v.localService ? 5 : 0);
+      let voice = null;
+      const pick = () => {
+        const options = synth.getVoices().filter((v) => /^pt/i.test(v.lang));
+        voice = options.sort((a, b) => score(b) - score(a))[0] || null;
+      };
+      pick();
+      synth.addEventListener?.('voiceschanged', pick);
+      // O navegador só libera a fala depois de um toque: o primeiro gesto dispara uma fala muda que destrava (iPhone incluso)
+      let unlocked = false;
+      const unlock = () => {
+        if (unlocked || !voice) return;
+        unlocked = true;
+        const primer = new SpeechSynthesisUtterance(' ');
+        primer.volume = 0;
+        synth.speak(primer);
+      };
+      ['pointerup', 'keydown', 'touchend'].forEach((type) => addEventListener(type, unlock, { capture: true, passive: true }));
+      addEventListener('pagehide', () => synth.cancel());
+      document.addEventListener('visibilitychange', () => { if (document.hidden) synth.cancel(); });
+
+      let serial = 0;
+      return {
+        get ready() {
+          const active = navigator.userActivation ? navigator.userActivation.hasBeenActive : unlocked;
+          return Boolean(voice) && active && !document.hidden;
+        },
+        say(message, onend) {
+          const id = ++serial;
+          synth.cancel();
+          const utterance = new SpeechSynthesisUtterance(SPOKEN.reduce((line, [pattern, spoken]) => line.replace(pattern, spoken), message));
+          utterance.voice = voice;
+          utterance.lang = voice.lang;
+          utterance.pitch = 1.55;
+          utterance.rate = 1.04;
+          const done = () => { if (id === serial) onend(); };
+          utterance.onend = done;
+          utterance.onerror = done;
+          synth.speak(utterance);
+        },
+        stop() {
+          serial += 1;
+          synth.cancel();
+        },
+      };
+    }
+
     let siteSounds = null;
     const getSounds = () => (siteSounds ??= createMascotSounds(CONFIG.mascot.soundKey));
 
@@ -9284,6 +9356,7 @@
       const closeButton = $('[data-mascot-close]', mascot);
       const cfg = CONFIG.mascot;
       const sfx = getSounds();
+      const voice = createMascotVoice();
 
       // Temporizadores nomeados: reagendar uma chave cancela o anterior
       const timers = new Map();
@@ -9325,20 +9398,37 @@
       const hideBubble = () => {
         cancel('hide', 'talk', 'pose');
         sfx.stopChatter();
-        mascot.classList.remove('is-bubble-open', 'is-talking');
+        if (mascot.classList.contains('is-voice')) voice.stop();
+        mascot.classList.remove('is-bubble-open', 'is-talking', 'is-voice');
         bubbleOpen = false;
         // Durante a cena do rodapé, a pose é da cena
         if (!scene) relax();
       };
-      const speak = (message, announce, { pose = 'explain', face = 'happy' } = {}) => {
-        cancel('idleSeq');
-        // Anuncia para leitores de tela só quando o visitante pediu a dica; nas trocas de seção, fica em silêncio
-        text.setAttribute('aria-live', announce ? 'polite' : 'off');
+      const speak = (message, announce, { pose = 'present', face = 'happy' } = {}) => {
+        cancel('idleSeq', 'hide', 'talk', 'pose');
         text.textContent = message;
-        mascot.classList.add('is-bubble-open', 'is-talking');
         bubbleOpen = true;
         setPose(pose);
         setFace(face);
+        // Com voz disponível, ele fala em voz alta, apontando, e o balão não aparece
+        if (voice?.ready) {
+          text.setAttribute('aria-live', 'off');
+          sfx.stopChatter();
+          mascot.classList.remove('is-bubble-open');
+          mascot.classList.add('is-voice', 'is-talking');
+          voice.say(message, () => {
+            mascot.classList.remove('is-talking');
+            later('hide', 600, hideBubble);
+          });
+          // Garantia caso o aparelho nunca avise o fim da fala
+          later('hide', 4000 + message.length * 90, hideBubble);
+          return;
+        }
+        // Sem voz (aparelho sem português ou antes do primeiro toque na página): balão escrito
+        // Anuncia para leitores de tela só quando o visitante pediu a dica; nas trocas de seção, fica em silêncio
+        text.setAttribute('aria-live', announce ? 'polite' : 'off');
+        mascot.classList.remove('is-voice');
+        mascot.classList.add('is-bubble-open', 'is-talking');
         const talk = Math.min(cfg.talkMax, 500 + message.length * cfg.talkPerChar);
         // A "voz" de bipes só acompanha falas que o visitante provocou
         if (announce) sfx.chatter(talk);
@@ -9524,7 +9614,7 @@
       });
       // Com o cursor sobre o mascote ou o balão, o balão não some
       mascot.addEventListener('pointerenter', () => cancel('hide'));
-      mascot.addEventListener('pointerleave', () => { if (bubbleOpen && !scene) later('hide', 2400, hideBubble); });
+      mascot.addEventListener('pointerleave', () => { if (bubbleOpen && !scene && !mascot.classList.contains('is-voice')) later('hide', 2400, hideBubble); });
       // Quando o visitante toca todas as letras da assinatura do rodapé, o Next comemora junto
       const party = () => {
         if (!landed || concealed) return;
@@ -9648,7 +9738,8 @@
       };
       const sceneSay = (message, pose) => {
         speak(message, false, { pose, face: 'happy' });
-        // A cena decide quando o balão fecha e quando a pose muda
+        // Falando em voz alta, a fala termina sozinha; com balão, a cena decide quando ele fecha
+        if (mascot.classList.contains('is-voice')) return;
         cancel('pose', 'hide');
         later('talk', Math.min(cfg.talkMax, 500 + message.length * cfg.talkPerChar), () => mascot.classList.remove('is-talking'));
       };
