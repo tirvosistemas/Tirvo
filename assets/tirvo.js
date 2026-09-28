@@ -1,99 +1,9 @@
-/* Tirvo · comportamento comum das páginas internas: cabeçalho, menu móvel, revelações, holofote e logos 3D */
+/* Tirvo · logos 3D da página de identidade visual (o restante vem do script da página inicial, assets/site.js) */
 (function () {
   'use strict';
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  /* Cabeçalho: ganha fundo de vidro ao rolar */
-  var header = $('[data-header]');
-  if (header) {
-    var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 8); };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-  }
-
-  /* Menu móvel com foco preso dentro do painel enquanto aberto */
-  var menu = $('[data-menu]');
-  var toggle = $('[data-menu-toggle]');
-  if (menu && toggle) {
-    var closeBtn = $('[data-menu-close]', menu);
-    var outside = $$('body > *:not([data-menu]):not(script)');
-    var lastFocus = null;
-    var clock = $('[data-menu-clock]', menu);
-    var tickClock = function () {
-      if (!clock) return;
-      try {
-        clock.textContent = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo' }).format(new Date());
-      } catch (e) { /* relógio é só decoração */ }
-    };
-    var open = function () {
-      lastFocus = document.activeElement;
-      menu.hidden = false;
-      tickClock();
-      requestAnimationFrame(function () { menu.classList.add('is-open'); });
-      toggle.setAttribute('aria-expanded', 'true');
-      document.documentElement.style.overflow = 'hidden';
-      outside.forEach(function (el) { el.inert = true; });
-      (closeBtn || menu).focus();
-    };
-    var close = function (restore) {
-      menu.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      document.documentElement.style.overflow = '';
-      outside.forEach(function (el) { el.inert = false; });
-      setTimeout(function () { if (!menu.classList.contains('is-open')) menu.hidden = true; }, 330);
-      if (restore !== false && lastFocus) lastFocus.focus();
-    };
-    toggle.addEventListener('click', open);
-    if (closeBtn) closeBtn.addEventListener('click', function () { close(); });
-    menu.addEventListener('click', function (event) {
-      if (event.target.closest('a')) close(false);
-    });
-    document.addEventListener('keydown', function (event) {
-      if (menu.hidden) return;
-      if (event.key === 'Escape') { close(); return; }
-      if (event.key !== 'Tab') return;
-      var items = $$('a[href], button:not([disabled])', menu).filter(function (el) { return el.offsetParent !== null; });
-      if (!items.length) return;
-      var first = items[0];
-      var last = items[items.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-    });
-    window.matchMedia('(min-width: 1024px)').addEventListener('change', function (mq) { if (mq.matches && !menu.hidden) close(false); });
-  }
-
-  /* Revelações ao entrar na tela */
-  var reveals = $$('[data-reveal]');
-  if ('IntersectionObserver' in window && reveals.length) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-revealed');
-        io.unobserve(entry.target);
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
-    reveals.forEach(function (el) { io.observe(el); });
-  } else {
-    reveals.forEach(function (el) { el.classList.add('is-revealed'); });
-  }
-  /* Rede de segurança: nada fica escondido se o observador falhar */
-  setTimeout(function () { reveals.forEach(function (el) { el.classList.add('is-revealed'); }); }, 4000);
-
-  /* Holofote que segue o ponteiro nos cartões */
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.addEventListener('pointermove', function (event) {
-      var card = event.target.closest && event.target.closest('[data-spotlight]');
-      if (!card) return;
-      var rect = card.getBoundingClientRect();
-      card.style.setProperty('--mx', (event.clientX - rect.left) + 'px');
-      card.style.setProperty('--my', (event.clientY - rect.top) + 'px');
-    }, { passive: true });
-  }
-
-  /* Ano corrente no rodapé */
-  $$('[data-year]').forEach(function (el) { el.textContent = String(new Date().getFullYear()); });
 
   /* Logos 3D: 36 quadros renderizados; giram devagar, seguem o mouse e dão um giro completo ao toque */
   var spins = $$('[data-spin]').map(function (card, index) {
@@ -156,8 +66,4 @@
     start();
   }
 
-  /* Aba em segundo plano: pausa animações contínuas */
-  document.addEventListener('visibilitychange', function () {
-    document.documentElement.classList.toggle('is-tab-hidden', document.hidden);
-  });
 })();

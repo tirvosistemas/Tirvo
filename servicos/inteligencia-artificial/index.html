@@ -68,7 +68,7 @@
           "@type": "ListItem",
           "position": 2,
           "name": "Serviços",
-          "item": "https://www.tirvo.com.br/servicos/"
+          "item": "https://www.tirvo.com.br/#servicos"
         },
         {
           "@type": "ListItem",
@@ -135,14 +135,17 @@
       if (f) { if (f.sheet) { f.media = 'all'; } else { f.addEventListener('load', function () { f.media = 'all'; }); } }
     })();
   </script>
-  <link rel="stylesheet" href="../../assets/tirvo.css?v=d04c37df">
+  <link rel="stylesheet" href="../../assets/site.css?v=1932f13d">
 </head>
 <body>
-  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-  <div class="progress" aria-hidden="true"><span class="progress__bar"></span></div>
+  <a class="skip-link" href="#conteudo" data-overlay-inert>Pular para o conteúdo</a>
+
+  <!-- Barra de progresso e granulação -->
+  <div class="progress" aria-hidden="true"><span class="progress__bar" data-progress></span></div>
   <div class="grain" aria-hidden="true"></div>
 
-  <header class="header" data-header>
+  <!-- ============ CABEÇALHO (igual em todas as páginas) ============ -->
+  <header class="header" data-header data-overlay-inert>
     <div class="container header__inner">
       <a class="header__logo" href="../../" aria-label="Tirvo — ir para a página inicial">
         <svg class="logo-anim" viewBox="0 0 601 260" aria-hidden="true" focusable="false">
@@ -163,15 +166,28 @@
       </a>
       <nav class="nav" aria-label="Navegação principal">
         <ul class="nav__list">
-          <li><a class="nav__link is-active" href="../../servicos/" aria-current="page"><span class="nav__num" aria-hidden="true">01</span>Serviços</a></li>
-          <li><a class="nav__link" href="../../#equipe"><span class="nav__num" aria-hidden="true">02</span>Equipe</a></li>
-          <li><a class="nav__link" href="../../#metodo"><span class="nav__num" aria-hidden="true">03</span>Método</a></li>
-          <li><a class="nav__link" href="../../#nexus"><span class="nav__num" aria-hidden="true">04</span>Nexus</a></li>
-          <li><a class="nav__link" href="../../#faq"><span class="nav__num" aria-hidden="true">05</span>FAQ</a></li>
+          <li><a class="nav__link" href="../../"><span class="nav__num" aria-hidden="true">01</span><span class="scr" data-scramble><span class="scr__ghost">Início</span><span class="scr__live" aria-hidden="true">Início</span></span></a></li>
+          <li class="nav__item--sub" data-sub-root>
+            <button class="nav__link nav__sub-toggle is-active" type="button" aria-expanded="false" aria-controls="submenu-servicos" data-sub-toggle><span class="nav__num" aria-hidden="true">02</span><span class="scr" data-scramble><span class="scr__ghost">Serviços</span><span class="scr__live" aria-hidden="true">Serviços</span></span><svg class="icon nav__chev" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+            <div class="subnav" id="submenu-servicos" data-sub hidden>
+              <p class="subnav__head" aria-hidden="true"><span>Serviços</span><span>05 frentes</span></p>
+              <ul class="subnav__list">
+              <li><a class="subnav__link" href="../../servicos/criacao-de-sites/"><svg class="icon" aria-hidden="true"><use href="#i-browser"/></svg><span class="subnav__text"><b>Criação de sites</b><span>Institucionais e landing pages</span></span><span class="subnav__idx" aria-hidden="true">01</span></a></li>
+              <li><a class="subnav__link" href="../../servicos/sistemas-e-automacoes/"><svg class="icon" aria-hidden="true"><use href="#i-system"/></svg><span class="subnav__text"><b>Sistemas e automações</b><span>Software, painéis e integrações</span></span><span class="subnav__idx" aria-hidden="true">02</span></a></li>
+              <li><a class="subnav__link" href="../../servicos/logotipo-e-identidade-visual/"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg><span class="subnav__text"><b>Logotipo e identidade visual</b><span>Marca, manual e aplicações</span></span><span class="subnav__idx" aria-hidden="true">03</span></a></li>
+              <li><a class="subnav__link" href="../../servicos/design-grafico/"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg><span class="subnav__text"><b>Design gráfico</b><span>Redes, banners e impressos</span></span><span class="subnav__idx" aria-hidden="true">04</span></a></li>
+              <li><a class="subnav__link is-active" href="../../servicos/inteligencia-artificial/" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-chip"/></svg><span class="subnav__text"><b>Engenharia de IA</b><span>Agentes e assistentes de IA</span></span><span class="subnav__idx" aria-hidden="true">05</span></a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a class="nav__link" href="../../equipe/"><span class="nav__num" aria-hidden="true">03</span><span class="scr" data-scramble><span class="scr__ghost">Equipe</span><span class="scr__live" aria-hidden="true">Equipe</span></span></a></li>
+          <li><a class="nav__link" href="../../metodo/"><span class="nav__num" aria-hidden="true">04</span><span class="scr" data-scramble><span class="scr__ghost">Método</span><span class="scr__live" aria-hidden="true">Método</span></span></a></li>
+          <li><a class="nav__link" href="../../nexus/"><span class="nav__num" aria-hidden="true">05</span><span class="scr" data-scramble><span class="scr__ghost">Nexus</span><span class="scr__live" aria-hidden="true">Nexus</span></span></a></li>
+          <li><a class="nav__link" href="../../faq/"><span class="nav__num" aria-hidden="true">06</span><span class="scr" data-scramble><span class="scr__ghost">FAQ</span><span class="scr__live" aria-hidden="true">FAQ</span></span></a></li>
         </ul>
       </nav>
       <div class="header__actions">
-        <a class="btn btn--primary btn--sm header__cta" href="../../#contato"><span class="btn__sheen" aria-hidden="true"></span>Iniciar projeto</a>
+        <a class="btn btn--primary btn--sm header__cta" href="../../#contato" data-magnetic><span class="btn__sheen" aria-hidden="true"></span>Iniciar projeto</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-movel" aria-label="Abrir menu" data-menu-toggle>
           <span class="menu-toggle__line"></span>
           <span class="menu-toggle__line"></span>
@@ -180,7 +196,8 @@
     </div>
   </header>
 
-  <div class="menu" id="menu-movel" role="dialog" aria-modal="true" aria-label="Menu de navegação" hidden data-menu tabindex="-1">
+  <!-- ============ MENU MÓVEL ============ -->
+  <div class="menu" id="menu-movel" role="dialog" aria-modal="true" aria-label="Menu de navegação" hidden data-menu>
     <div class="menu__bg" aria-hidden="true"><span class="menu__grid"></span><span class="menu__glow"></span><span class="menu__scan"></span></div>
     <div class="container menu__top">
       <span class="menu__logo"><svg class="logo-anim" viewBox="0 0 601 260" aria-hidden="true" focusable="false">
@@ -206,13 +223,21 @@
     <p class="container menu__status" aria-hidden="true"><span class="menu__dot"></span>Online<span class="menu__sep">/</span>Curitiba <span data-menu-clock>--:--</span></p>
     <nav class="container menu__nav" aria-label="Menu">
       <ol class="menu__list">
-        <li><a class="menu__link" href="../../" style="--i:0"><span class="menu__num" aria-hidden="true">01</span><span class="menu__text"><span class="menu__label">Início</span><span class="menu__desc">Página inicial da Tirvo</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
-        <li><a class="menu__link is-active" href="../../servicos/" style="--i:1" aria-current="page"><span class="menu__num" aria-hidden="true">02</span><span class="menu__text"><span class="menu__label">Serviços</span><span class="menu__desc">Sites, sistemas, marca e IA</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
-        <li><a class="menu__link" href="../../#equipe" style="--i:2"><span class="menu__num" aria-hidden="true">03</span><span class="menu__text"><span class="menu__label">Equipe</span><span class="menu__desc">Programadores raiz e IA</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
-        <li><a class="menu__link" href="../../#metodo" style="--i:3"><span class="menu__num" aria-hidden="true">04</span><span class="menu__text"><span class="menu__label">Método</span><span class="menu__desc">Descoberta, engenharia, lançamento</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
-        <li><a class="menu__link" href="../../#nexus" style="--i:4"><span class="menu__num" aria-hidden="true">05</span><span class="menu__text"><span class="menu__label">Nexus</span><span class="menu__desc">Enxame de agentes autônomos</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
-        <li><a class="menu__link" href="../../#faq" style="--i:5"><span class="menu__num" aria-hidden="true">06</span><span class="menu__text"><span class="menu__label">FAQ</span><span class="menu__desc">Respostas diretas</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
-        <li><a class="menu__link" href="../../#contato" style="--i:6"><span class="menu__num" aria-hidden="true">07</span><span class="menu__text"><span class="menu__label">Contato</span><span class="menu__desc">Seu projeto começa aqui</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        <li><a class="menu__link" href="../../" style="--i:0"><span class="menu__num" aria-hidden="true">01</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Início</span><span class="menu__desc">Página inicial da Tirvo</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        <li><button class="menu__link menu__sub-toggle is-active" type="button" style="--i:1" aria-expanded="false" aria-controls="menu-servicos" data-msub-toggle><span class="menu__num" aria-hidden="true">02</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Serviços</span><span class="menu__desc">Sites, sistemas, marca e IA</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+          <ul class="menu__sub" id="menu-servicos" hidden data-msub>
+            <li><a class="menu__sublink" href="../../servicos/criacao-de-sites/"><svg class="icon" aria-hidden="true"><use href="#i-browser"/></svg><span>Criação de sites</span></a></li>
+            <li><a class="menu__sublink" href="../../servicos/sistemas-e-automacoes/"><svg class="icon" aria-hidden="true"><use href="#i-system"/></svg><span>Sistemas e automações</span></a></li>
+            <li><a class="menu__sublink" href="../../servicos/logotipo-e-identidade-visual/"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg><span>Logotipo e identidade visual</span></a></li>
+            <li><a class="menu__sublink" href="../../servicos/design-grafico/"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg><span>Design gráfico</span></a></li>
+            <li><a class="menu__sublink is-active" href="../../servicos/inteligencia-artificial/" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-chip"/></svg><span>Engenharia de IA</span></a></li>
+          </ul>
+        </li>
+        <li><a class="menu__link" href="../../equipe/" style="--i:2"><span class="menu__num" aria-hidden="true">03</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Equipe</span><span class="menu__desc">Programadores raiz e IA</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        <li><a class="menu__link" href="../../metodo/" style="--i:3"><span class="menu__num" aria-hidden="true">04</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Método</span><span class="menu__desc">Descoberta, engenharia, lançamento</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        <li><a class="menu__link" href="../../nexus/" style="--i:4"><span class="menu__num" aria-hidden="true">05</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Nexus</span><span class="menu__desc">Enxame de agentes autônomos</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        <li><a class="menu__link" href="../../faq/" style="--i:5"><span class="menu__num" aria-hidden="true">06</span><span class="menu__text"><span class="menu__label" data-scramble-menu>FAQ</span><span class="menu__desc">Respostas diretas</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        <li><a class="menu__link" href="../../#contato" style="--i:6"><span class="menu__num" aria-hidden="true">07</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Contato</span><span class="menu__desc">Seu projeto começa aqui</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
       </ol>
     </nav>
     <div class="container menu__foot">
@@ -223,12 +248,12 @@
       <p class="menu__addr">Av. Silva Jardim, 1003 – Centro, Curitiba – PR</p>
     </div>
   </div>
-  <main id="conteudo">
+  <main id="conteudo" data-overlay-inert>
     <section class="page-hero" aria-labelledby="titulo-pagina">
       <div class="container page-hero__grid">
         <div class="page-hero__copy">
-          <nav aria-label="Trilha de navegação"><ol class="crumbs"><li><a href="../../">Início</a></li><li><a href="../../servicos/">Serviços</a></li><li><span aria-current="page">Engenharia de IA</span></li></ol></nav>
-          <p class="label"><span class="label__num">05</span> <span class="label__txt">Engenharia de IA</span></p>
+          <nav aria-label="Trilha de navegação"><ol class="crumbs"><li><a href="../../">Início</a></li><li><a href="../../#servicos">Serviços</a></li><li><span aria-current="page">Engenharia de IA</span></li></ol></nav>
+          <p class="label" data-decode><span class="label__num">05</span> <span class="label__txt">Engenharia de IA</span></p>
           <h1 class="page-hero__title" id="titulo-pagina">Inteligência artificial que <span class="hl-accent">executa tarefas</span> <span class="serif">na sua empresa</span>.</h1>
           <p class="lead">Aplicamos IA onde ela gera resultado: agentes autônomos que executam tarefas, assistentes que consultam os documentos da empresa e automações de atendimento integradas aos sistemas que você já usa.</p>
           <div class="page-hero__actions">
@@ -257,14 +282,14 @@
     <section class="p-sec" aria-labelledby="entregas-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label"><span class="label__num">01</span> <span class="label__txt">O que entregamos</span></p>
+          <p class="label" data-decode><span class="label__num">01</span> <span class="label__txt">O que entregamos</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
         <div class="p-sec__head p-sec__head--split">
           <h2 class="p-sec__title" id="entregas-titulo" data-reveal="title">IA aplicada ao que <span class="hl-accent">gera resultado</span>.</h2>
           <p class="lead" data-reveal>Agentes de IA que executam tarefas, em vez de apenas responder perguntas, sempre conectados aos seus dados e dentro de regras claras.</p>
         </div>
-        <div class="feat-grid">
+        <div class="feat-grid" data-stagger>
           <article class="card feat" data-spotlight data-reveal style="--i:0">
             <span class="feat__icon"><svg class="icon" aria-hidden="true"><use href="#i-chip"/></svg></span>
             <span class="feat__num" aria-hidden="true">01</span>
@@ -308,13 +333,13 @@
     <section class="p-sec p-sec--raised" aria-labelledby="para-quem-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label"><span class="label__num">02</span> <span class="label__txt">Para quem é</span></p>
+          <p class="label" data-decode><span class="label__num">02</span> <span class="label__txt">Para quem é</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
         <div class="p-sec__head">
           <h2 class="p-sec__title" id="para-quem-titulo" data-reveal="title">Onde a IA <span class="serif hl-accent">começa a pagar</span> o investimento.</h2>
         </div>
-        <ul class="fit">
+        <ul class="fit" data-stagger>
           <li data-reveal style="--i:0"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>A equipe responde as mesmas perguntas dezenas de vezes por dia.</span></li>
           <li data-reveal style="--i:1"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Informações importantes estão espalhadas em documentos que ninguém encontra.</span></li>
           <li data-reveal style="--i:0"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Pedidos chegam por vários canais e precisam ser organizados à mão.</span></li>
@@ -328,14 +353,14 @@
     <section class="p-sec" aria-labelledby="responsabilidade-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label"><span class="label__num">03</span> <span class="label__txt">Princípios</span></p>
+          <p class="label" data-decode><span class="label__num">03</span> <span class="label__txt">Princípios</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
         <div class="p-sec__head p-sec__head--split">
           <h2 class="p-sec__title" id="responsabilidade-titulo" data-reveal="title">IA com <span class="serif hl-accent">responsabilidade</span>.</h2>
           <p class="lead" data-reveal>Tecnologia poderosa pede regras claras. Três compromissos guiam cada projeto de IA da Tirvo.</p>
         </div>
-        <div class="trio">
+        <div class="trio" data-stagger>
           <div class="seal" data-reveal style="--i:0">
             <span class="seal__term">01</span><h3>Resultado antes da tecnologia</h3>
             <p>Começamos pelo problema e medimos o ganho. Se a IA não for a melhor resposta, dizemos isso com clareza.</p>
@@ -355,7 +380,7 @@
     <section class="p-sec p-sec--raised" aria-labelledby="nexus-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label"><span class="label__num">04</span> <span class="label__txt">Nexus</span></p>
+          <p class="label" data-decode><span class="label__num">04</span> <span class="label__txt">Nexus</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
         <div class="nexus-shot">
@@ -381,14 +406,14 @@
     <section class="p-sec" id="processo" aria-labelledby="processo-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label"><span class="label__num">05</span> <span class="label__txt">Como trabalhamos</span></p>
+          <p class="label" data-decode><span class="label__num">05</span> <span class="label__txt">Como trabalhamos</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
         <div class="p-sec__head p-sec__head--split">
           <h2 class="p-sec__title" id="processo-titulo" data-reveal="title">Da ideia ao agente <span class="hl-accent">em produção</span>.</h2>
           <p class="lead" data-reveal>Começamos pequeno, com dados reais, e só ampliamos quando o resultado está comprovado.</p>
         </div>
-        <ol class="steps steps--3">
+        <ol class="steps steps--3" data-stagger>
           <li class="step" data-reveal style="--i:0">
             <div class="timeline__body">
               <span class="step__n" aria-hidden="true">01</span>
@@ -445,7 +470,7 @@
     <section class="p-sec p-sec--raised faq" aria-labelledby="faq-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label"><span class="label__num">06</span> <span class="label__txt">Perguntas frequentes</span></p>
+          <p class="label" data-decode><span class="label__num">06</span> <span class="label__txt">Perguntas frequentes</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
         <div class="faq-wrap">
@@ -488,7 +513,7 @@
             <p>Descreva uma tarefa que consome tempo da equipe. A equipe retorna para avaliar se a IA resolve e qual o caminho mais seguro.</p>
           </div>
           <div class="cta-band__actions">
-            <a class="btn btn--primary btn--lg" href="https://api.whatsapp.com/send?phone=5541991933850&amp;text=Ol%C3%A1%2C%20Tirvo.%20Vim%20pela%20p%C3%A1gina%20de%20engenharia%20de%20IA%20e%20quero%20conversar%20sobre%20aplicar%20IA%20no%20meu%20neg%C3%B3cio." target="_blank" rel="noopener noreferrer"><span class="btn__sheen" aria-hidden="true"></span><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Conversar no WhatsApp</a>
+            <a class="btn btn--primary btn--lg" href="https://api.whatsapp.com/send?phone=5541991933850&amp;text=Ol%C3%A1%2C%20Tirvo.%20Vim%20pela%20p%C3%A1gina%20de%20engenharia%20de%20IA%20e%20quero%20conversar%20sobre%20aplicar%20IA%20no%20meu%20neg%C3%B3cio." target="_blank" rel="noopener noreferrer"><span class="btn__sheen" aria-hidden="true"></span><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Quero este serviço</a>
             <a class="btn btn--ghost btn--lg" href="../../?servico=ia#contato">Preencher o formulário<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
           </div>
         </div>
@@ -500,7 +525,7 @@
         <div class="p-sec__head">
           <h2 class="p-sec__title" id="outros-titulo" data-reveal="title">Outros <span class="hl-accent">serviços</span></h2>
         </div>
-        <div class="svc-links">
+        <div class="svc-links" data-stagger>
           <a class="card svc-link" href="../../servicos/criacao-de-sites/" data-spotlight data-reveal style="--i:0">
             <span class="svc-link__top"><svg class="icon" aria-hidden="true"><use href="#i-browser"/></svg><span class="svc-link__idx" aria-hidden="true">01</span></span>
             <h3>Criação de sites</h3>
@@ -530,7 +555,7 @@
     </section>
   </main>
 
-  <footer class="footer" id="rodape">
+  <footer class="footer" id="rodape" data-overlay-inert>
     <div class="container">
       <div class="l-grid footer__top">
         <p class="footer__closing">Seu futuro digital começa com <span class="footer__closing-accent">uma conversa</span>.</p>
@@ -546,11 +571,11 @@
           <p class="footer__heading">Navegação</p>
           <ul class="footer__links">
             <li><a href="../../">Início</a></li>
-            <li><a href="../../servicos/">Serviços</a></li>
-            <li><a href="../../#equipe">Equipe</a></li>
-            <li><a href="../../#metodo">Método</a></li>
-            <li><a href="../../#nexus">Nexus</a></li>
-            <li><a href="../../#faq">Perguntas frequentes</a></li>
+            <li><a href="../../#servicos">Serviços</a></li>
+            <li><a href="../../equipe/">Equipe</a></li>
+            <li><a href="../../metodo/">Método</a></li>
+            <li><a href="../../nexus/">Nexus</a></li>
+            <li><a href="../../faq/">Perguntas frequentes</a></li>
             <li><a href="../../#contato">Contato</a></li>
           </ul>
         </nav>
@@ -591,7 +616,7 @@
   </footer>
 
   <aside aria-label="Atalho para o WhatsApp">
-  <a class="wa-float" href="https://api.whatsapp.com/send?phone=5541991933850&amp;text=Ol%C3%A1%2C%20Tirvo.%20Vim%20pela%20p%C3%A1gina%20de%20engenharia%20de%20IA%20e%20quero%20conversar%20sobre%20aplicar%20IA%20no%20meu%20neg%C3%B3cio." target="_blank" rel="noopener noreferrer" aria-label="Conversar com a Tirvo no WhatsApp">
+  <a class="wa-float" href="https://api.whatsapp.com/send?phone=5541991933850&amp;text=Ol%C3%A1%2C%20Tirvo.%20Vim%20pela%20p%C3%A1gina%20de%20engenharia%20de%20IA%20e%20quero%20conversar%20sobre%20aplicar%20IA%20no%20meu%20neg%C3%B3cio." target="_blank" rel="noopener noreferrer" aria-label="Conversar com a Tirvo no WhatsApp" data-wa-float data-overlay-inert>
     <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
     <span class="wa-float__tip" aria-hidden="true">Fale com a gente</span>
   </a>
@@ -650,6 +675,6 @@
     <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
     <symbol id="i-cookie" viewBox="0 0 24 24"><path d="M20.5 12.5A8.5 8.5 0 1 1 11.5 3.5a3 3 0 0 0 4 3.5 3 3 0 0 0 5 5.5z"/><path d="M8.5 10h.01M9.5 15h.01M14 14h.01"/></symbol>
   </svg>
-  <script src="../../assets/tirvo.js?v=41eb190a" defer></script>
+  <script type="module" src="../../assets/site.js?v=acae94c6"></script>
 </body>
 </html>
