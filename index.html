@@ -89,6 +89,7 @@
                 "@type": "Service",
                 "name": "Sites profissionais",
                 "description": "Criação de sites institucionais, landing pages de alta conversão e sites para profissionais e prestadores de serviço, com design responsivo, SEO técnico e performance extrema. Entrega nos modelos Código entregue ou Gestão 360º.",
+                "url": "https://www.tirvo.com.br/servicos/criacao-de-sites/",
                 "provider": {
                   "@id": "https://www.tirvo.com.br/#organizacao"
                 },
@@ -104,6 +105,7 @@
                 "@type": "Service",
                 "name": "Sistemas sob medida e automações",
                 "description": "Desenvolvimento de software empresarial, sistemas internos e painéis, integrações e APIs, automação de processos e portais para clientes.",
+                "url": "https://www.tirvo.com.br/servicos/sistemas-e-automacoes/",
                 "provider": {
                   "@id": "https://www.tirvo.com.br/#organizacao"
                 },
@@ -119,6 +121,7 @@
                 "@type": "Service",
                 "name": "Logotipos, logomarcas e identidade visual",
                 "description": "Criação de logotipo e logomarca, paleta de cores, tipografia da marca, manual de marca, aplicações da identidade visual e rebranding.",
+                "url": "https://www.tirvo.com.br/servicos/logotipo-e-identidade-visual/",
                 "provider": {
                   "@id": "https://www.tirvo.com.br/#organizacao"
                 },
@@ -134,6 +137,7 @@
                 "@type": "Service",
                 "name": "Design gráfico e peças digitais",
                 "description": "Banners, conteúdo e templates para redes sociais, apresentações, materiais digitais e peças para impressão.",
+                "url": "https://www.tirvo.com.br/servicos/design-grafico/",
                 "provider": {
                   "@id": "https://www.tirvo.com.br/#organizacao"
                 },
@@ -149,6 +153,7 @@
                 "@type": "Service",
                 "name": "Engenharia de IA",
                 "description": "Agentes autônomos, IA integrada a sistemas e sites, automação inteligente de atendimento e processos, integrações com modelos de linguagem e assistentes internos de conhecimento.",
+                "url": "https://www.tirvo.com.br/servicos/inteligencia-artificial/",
                 "provider": {
                   "@id": "https://www.tirvo.com.br/#organizacao"
                 },
@@ -3247,6 +3252,8 @@
       .contact__form.is-busy .submit-label__idle { opacity: 0; }
       .contact__form.is-busy .submit-label__busy { opacity: 1; }
       .form__privacy { color: var(--text-tertiary); font-size: .82rem; line-height: 1.5; }
+      .form__privacy a { color: var(--text-secondary); text-decoration-color: var(--line-strong); }
+      .form__privacy a:hover { color: var(--text-primary); text-decoration-color: var(--accent); }
       @media (min-width: 640px) {
         .form__submit .btn { justify-self: start; }
       }
@@ -4884,6 +4891,12 @@
       window.tirvoIntro = { done: new Promise(function (resolve) { resolveDone = resolve; }) };
       if (!intro) { resolveDone(); return; }
       if (!d.classList.contains('js')) { intro.remove(); resolveDone(); return; }
+      // Já vista nesta sessão, vinda de outra página do site ou com âncora no endereço: entra direto no conteúdo
+      var seen = false;
+      try { seen = window.sessionStorage.getItem('tirvo:abertura') === '1'; } catch (e) { /* armazenamento indisponível */ }
+      try { if (document.referrer && new URL(document.referrer).origin === location.origin) seen = true; } catch (e) { /* referrer inválido */ }
+      if (location.hash.length > 1) seen = true;
+      if (seen) { intro.remove(); resolveDone(); return; }
 
       var video = intro.querySelector('[data-intro-video]');
       var soundBtn = intro.querySelector('[data-intro-sound]');
@@ -4911,6 +4924,7 @@
       function finish() {
         if (ended) return;
         ended = true;
+        try { window.sessionStorage.setItem('tirvo:abertura', '1'); } catch (e) { /* armazenamento indisponível */ }
         clearTimeout(watchdog);
         document.removeEventListener('keydown', onKey);
         document.removeEventListener('visibilitychange', onVisibility);
@@ -5373,6 +5387,7 @@
             </ul>
             <div class="svc__foot">
               <a class="link-arrow link-arrow--right" href="#contato" data-service-link="sites">Quero este serviço<span class="sr-only">: sites premium</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+              <a class="link-arrow link-arrow--right" href="/servicos/criacao-de-sites/">Ver detalhes<span class="sr-only"> de sites premium</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
             </div>
           </article>
 
@@ -5431,6 +5446,7 @@
             </ul>
             <div class="svc__foot">
               <a class="link-arrow link-arrow--right" href="#contato" data-service-link="sistemas">Quero este serviço<span class="sr-only">: sistemas sob medida e automações</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+              <a class="link-arrow link-arrow--right" href="/servicos/sistemas-e-automacoes/">Ver detalhes<span class="sr-only"> de sistemas sob medida e automações</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
             </div>
           </article>
 
@@ -5471,6 +5487,7 @@
             </ul>
             <div class="svc__foot">
               <a class="link-arrow link-arrow--right" href="#contato" data-service-link="identidade">Quero este serviço<span class="sr-only">: logotipos, logomarcas e identidade visual</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+              <a class="link-arrow link-arrow--right" href="/servicos/logotipo-e-identidade-visual/">Ver detalhes<span class="sr-only"> de logotipos, logomarcas e identidade visual</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
             </div>
           </article>
 
@@ -5516,6 +5533,7 @@
             </ul>
             <div class="svc__foot">
               <a class="link-arrow link-arrow--right" href="#contato" data-service-link="design">Quero este serviço<span class="sr-only">: design gráfico e peças digitais</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+              <a class="link-arrow link-arrow--right" href="/servicos/design-grafico/">Ver detalhes<span class="sr-only"> de design gráfico e peças digitais</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
             </div>
           </article>
 
@@ -5560,6 +5578,7 @@
             </ul>
             <div class="svc__foot">
               <a class="link-arrow link-arrow--right" href="#contato" data-service-link="ia">Quero este serviço<span class="sr-only">: engenharia de IA</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+              <a class="link-arrow link-arrow--right" href="/servicos/inteligencia-artificial/">Ver detalhes<span class="sr-only"> de engenharia de IA</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
               <a class="link-arrow" href="#nexus">Conheça o Nexus<svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
             </div>
           </article>
@@ -6218,7 +6237,7 @@
                     <span class="submit-label__busy" aria-hidden="true">Abrindo o WhatsApp…</span>
                   </span>
                 </button>
-                <p class="form__privacy">Ao enviar, você será direcionado ao WhatsApp com a mensagem pronta. Nenhum dado é armazenado neste site.</p>
+                <p class="form__privacy">Ao enviar, você será direcionado ao WhatsApp com a mensagem pronta. Nenhum dado é armazenado neste site. <a href="/privacidade/">Política de Privacidade</a>.</p>
               </div>
             </form>
 
@@ -6259,7 +6278,7 @@
           <p class="footer__heading">Navegação</p>
           <ul class="footer__links">
             <li><a href="#inicio">Início</a></li>
-            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="/servicos/">Serviços</a></li>
             <li><a href="#equipe">Equipe</a></li>
             <li><a href="#metodo">Método</a></li>
             <li><a href="#nexus">Nexus</a></li>
@@ -6270,11 +6289,11 @@
         <div>
           <p class="footer__heading">Serviços</p>
           <ul class="footer__links">
-            <li><a href="#servico-sites">Sites premium</a></li>
-            <li><a href="#servico-sistemas">Sistemas sob medida e automações</a></li>
-            <li><a href="#servico-marca">Logotipos, logomarcas e identidade visual</a></li>
-            <li><a href="#servico-design">Design gráfico e peças digitais</a></li>
-            <li><a href="#servico-ia">Engenharia de IA</a></li>
+            <li><a href="/servicos/criacao-de-sites/">Sites premium</a></li>
+            <li><a href="/servicos/sistemas-e-automacoes/">Sistemas sob medida e automações</a></li>
+            <li><a href="/servicos/logotipo-e-identidade-visual/">Logotipos, logomarcas e identidade visual</a></li>
+            <li><a href="/servicos/design-grafico/">Design gráfico e peças digitais</a></li>
+            <li><a href="/servicos/inteligencia-artificial/">Engenharia de IA</a></li>
           </ul>
         </div>
         <div>
@@ -6288,7 +6307,7 @@
 
       <div class="footer__bottom">
         <p>© <span data-year>2026</span> Tirvo. Todos os direitos reservados.</p>
-        <p>Curitiba – PR · Brasil</p>
+        <p>Curitiba – PR · Brasil · <a class="footer__privacy" href="/privacidade/">Política de Privacidade</a></p>
         <a href="#inicio">Voltar ao topo<svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
       </div>
     </div>
@@ -7014,7 +7033,21 @@
     function initAnchors() {
       // Seções adiadas têm altura estimada; antes de saltar para uma âncora, elas são renderizadas
       const renderAll = () => root.classList.add('is-cv-off');
-      if (window.location.hash.length > 1) renderAll();
+      if (window.location.hash.length > 1) {
+        renderAll();
+        // Chegando de outra página com âncora: as alturas reais mudam a posição, então o destino é reajustado
+        let target = null;
+        try { target = document.getElementById(decodeURIComponent(window.location.hash.slice(1))); } catch { target = null; }
+        if (target) {
+          let userMoved = false;
+          const stop = () => { userMoved = true; };
+          ['wheel', 'touchstart', 'keydown'].forEach((type) => window.addEventListener(type, stop, { once: true, passive: true }));
+          const jump = () => { if (!userMoved) target.scrollIntoView({ block: 'start', behavior: 'instant' }); };
+          requestAnimationFrame(jump);
+          setTimeout(jump, 450);
+          if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => setTimeout(jump, 60));
+        }
+      }
       document.addEventListener('click', (event) => {
         const link = event.target.closest('a[href^="#"]');
         if (!link || link.hash.length < 2 || root.classList.contains('is-cv-off')) return;
@@ -9192,6 +9225,13 @@
        LINKS DE SERVIÇO QUE PRÉ-SELECIONAM O FORMULÁRIO
        ========================================================== */
     function initServiceDeepLinks() {
+      // Vindo de uma página de serviço (/?servico=sites#contato): o serviço já chega marcado no formulário
+      const fromPage = new URLSearchParams(location.search).get('servico');
+      const preset = fromPage && /^[a-z]+$/.test(fromPage) ? $(`[data-service-chip="${fromPage}"]`) : null;
+      if (preset && !preset.checked) {
+        preset.checked = true;
+        preset.dispatchEvent(new Event('change', { bubbles: true }));
+      }
       $$('[data-service-link]').forEach((link) => {
         link.addEventListener('click', () => {
           const chip = $(`[data-service-chip="${link.dataset.serviceLink}"]`);
