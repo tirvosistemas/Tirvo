@@ -58,8 +58,6 @@
 
     @layer reset, tokens, base, layout, components, sections, utilities, motion;
 
-    @layer reset, tokens, base, layout, components, sections, utilities, motion;
-
     /* ==========================================================
        RESET
        ========================================================== */
@@ -1257,8 +1255,6 @@
       .faq__wa:hover { text-decoration-color: var(--accent); }
       .faq__wa .icon { color: var(--accent); }
 
-      .contact__stack.is-sent .contact__form { visibility: hidden; opacity: 0; }
-
       /* ---------- Rodapé ---------- */
       .footer {
         position: relative;
@@ -1379,8 +1375,8 @@
         .sig--anim.is-drawn.is-visible .sig__sweep { animation: sig-sweep 7s cubic-bezier(.45, 0, .25, 1) 2.9s infinite; }
       }
       @media (prefers-reduced-motion: reduce) { .sig__shine { display: none; } }
-
-      }
+      @keyframes sig-bob { from { translate: 0 0; } to { translate: 0 -12px; } }
+      @keyframes sig-sweep { 0% { transform: translateX(0); } 26%, 100% { transform: translateX(900px); } }
 
       /* ---------- WhatsApp flutuante ---------- */
       .wa-float {
@@ -1437,7 +1433,7 @@
         transform: scale(.85);
         pointer-events: none;
         transition: opacity var(--dur-2) ease, transform var(--dur-2) var(--ease-out), visibility 0s linear var(--dur-2);
-
+      }
     }
 
     /* ==========================================================
@@ -1539,8 +1535,8 @@
       @keyframes mic-ring { from { opacity: .8; transform: scale(1); } to { opacity: 0; transform: scale(1.5); } }
       @keyframes wave { 0%, 100% { transform: scaleY(.3); } 50% { transform: scaleY(1); } }
       @keyframes wa-ring { 0% { opacity: .7; transform: scale(1); } 66% { opacity: 0; transform: scale(1.75); } 100% { opacity: 0; transform: scale(1.75); } }
-
-      .agent__foot.is-hidden { opacity: 0; }
+      @keyframes chip-flash { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(1.18, 1.5); } }
+    }
 
       /* ==========================================================
          DESTAQUES TIPOGRÁFICOS E BLOCOS DE TEXTO
@@ -1944,6 +1940,7 @@
 
       @media (prefers-reduced-motion: reduce) {
         .hl-under::after, .hl-mark::before, .hl-strike::after, .hl-peak::after { transition: none; }
+      }
 
 /* ==========================================================
    PÁGINAS INTERNAS · componentes próprios (serviços, privacidade)
@@ -2263,10 +2260,10 @@ main { display: block; }
 .spin { width: clamp(96px, 22vw, 150px); aspect-ratio: 1; background-repeat: no-repeat; background-size: 600% 600%; background-position: 0 0; }
 .spin-card b { font-size: 1rem; font-weight: 600; letter-spacing: .08em; }
 .spin-card span { color: var(--text-tertiary); font-family: var(--font-mono); font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; }
-.spin--vetra { background-image: url("/vitrine-logo-vetra.webp"); background-image: image-set("/vitrine-logo-vetra.avif" type("image/avif"), "/vitrine-logo-vetra.webp" type("image/webp")); }
-.spin--orbe { background-image: url("/vitrine-logo-orbe.webp"); background-image: image-set("/vitrine-logo-orbe.avif" type("image/avif"), "/vitrine-logo-orbe.webp" type("image/webp")); }
-.spin--nativa { background-image: url("/vitrine-logo-nativa.webp"); background-image: image-set("/vitrine-logo-nativa.avif" type("image/avif"), "/vitrine-logo-nativa.webp" type("image/webp")); }
-.spin--kinto { background-image: url("/vitrine-logo-kinto.webp"); background-image: image-set("/vitrine-logo-kinto.avif" type("image/avif"), "/vitrine-logo-kinto.webp" type("image/webp")); }
+.spin--vetra { background-image: url("../vitrine-logo-vetra.webp"); background-image: image-set("../vitrine-logo-vetra.avif" type("image/avif"), "../vitrine-logo-vetra.webp" type("image/webp")); }
+.spin--orbe { background-image: url("../vitrine-logo-orbe.webp"); background-image: image-set("../vitrine-logo-orbe.avif" type("image/avif"), "../vitrine-logo-orbe.webp" type("image/webp")); }
+.spin--nativa { background-image: url("../vitrine-logo-nativa.webp"); background-image: image-set("../vitrine-logo-nativa.avif" type("image/avif"), "../vitrine-logo-nativa.webp" type("image/webp")); }
+.spin--kinto { background-image: url("../vitrine-logo-kinto.webp"); background-image: image-set("../vitrine-logo-kinto.avif" type("image/avif"), "../vitrine-logo-kinto.webp" type("image/webp")); }
 .spin-card--vetra { --glow: rgba(233, 180, 90, .28); } .spin-card--vetra b { font-family: Georgia, serif; font-weight: 400; letter-spacing: .3em; color: #f1d898; }
 .spin-card--orbe { --glow: rgba(255, 150, 110, .22); } .spin-card--orbe b { letter-spacing: -.04em; font-weight: 700; }
 .spin-card--nativa { --glow: rgba(60, 220, 140, .22); } .spin-card--nativa b { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: 0; color: #a8f0c8; font-size: 1.15rem; }
