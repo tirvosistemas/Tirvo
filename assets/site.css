@@ -4567,6 +4567,13 @@
       /* ==========================================================
          SUBMENU DE SERVIÇOS E CARTÕES-RESUMO DA PÁGINA INICIAL
          ========================================================== */
+      .nav__link { white-space: nowrap; }
+      /* Sete itens no menu: nas larguras intermediárias a numeração sai e o espaçamento aperta */
+      @media (min-width: 1024px) and (max-width: 1239.98px) {
+        .nav__num { display: none; }
+        .nav__link { padding-inline: .7rem; font-size: .84rem; }
+        .header__inner { gap: 1rem; }
+      }
       .nav__item--sub { position: relative; }
       .nav__sub-toggle { cursor: pointer; }
       .nav__chev { width: 14px; height: 14px; margin-left: -.1rem; color: var(--text-tertiary); transform: rotate(90deg); transition: transform var(--dur-2) var(--ease-out), color var(--dur-2) ease; }
