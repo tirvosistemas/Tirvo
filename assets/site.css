@@ -5097,3 +5097,28 @@ main { display: block; }
   .js .page-hero__show, .js .page-hero .hub-index, .js .nf__stage { animation-delay: .35s; }
 }
 @keyframes ph-rise { from { opacity: 0; transform: translate3d(0, 24px, 0); } }
+
+/* Fundo vivo do topo (em teste: grade, horizonte e combinação) */
+.hero-fx {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12%, #000 82%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 12%, #000 82%, transparent 100%);
+}
+.hero-fx.is-ready { opacity: 1; }
+.page-hero:has(> .hero-fx)::before, .mk-hero:has(> .hero-fx)::before { display: none; }
+@media (min-width: 1024px) {
+  /* No computador, o efeito fica mais forte do lado oposto ao texto */
+  .hero-fx {
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12%, #000 82%, transparent 100%), linear-gradient(90deg, rgba(0, 0, 0, .4) 0, rgba(0, 0, 0, .55) 35%, #000 62%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 12%, #000 82%, transparent 100%), linear-gradient(90deg, rgba(0, 0, 0, .4) 0, rgba(0, 0, 0, .55) 35%, #000 62%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+}

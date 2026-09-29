@@ -87,7 +87,7 @@
       if (f) { if (f.sheet) { f.media = 'all'; } else { f.addEventListener('load', function () { f.media = 'all'; }); } }
     })();
   </script>
-  <link rel="stylesheet" href="assets/site.css?v=5fe995f1">
+  <link rel="stylesheet" href="assets/site.css?v=3d4e4f68">
   <style>
     /* ============ Nossa marca: a anatomia da logo da Tirvo ============ */
     .mk-hero { position: relative; isolation: isolate; overflow: clip; min-height: min(100svh, 980px); display: grid; align-items: center;
@@ -460,6 +460,7 @@
   <main id="conteudo" data-overlay-inert>
     <!-- ============ TOPO ============ -->
     <section class="mk-hero" aria-labelledby="titulo-pagina">
+      <canvas class="hero-fx" aria-hidden="true" data-hero-fx="grid"></canvas>
       <div class="container mk-hero__grid">
         <div class="mk-hero__copy" data-seq>
           <nav aria-label="Trilha de navegação"><ol class="crumbs"><li><a href="./">Início</a></li><li><span aria-current="page">Nossa marca</span></li></ol></nav>
@@ -1309,6 +1310,7 @@
     <symbol id="i-cookie" viewBox="0 0 24 24"><path d="M20.5 12.5A8.5 8.5 0 1 1 11.5 3.5a3 3 0 0 0 4 3.5 3 3 0 0 0 5 5.5z"/><path d="M8.5 10h.01M9.5 15h.01M14 14h.01"/></symbol>
   </svg>
   <script src="assets/tlogo.js?v=e0021160" defer></script>
+  <script src="assets/herofx.js?v=5c72dc9a" defer></script>
   <script type="module" src="assets/site.js?v=2acb2ed6"></script>
 </body>
 </html>
