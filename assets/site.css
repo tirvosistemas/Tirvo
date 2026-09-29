@@ -310,7 +310,7 @@
        COMPONENTES
        ========================================================== */
     @layer components {
-      /* Abertura: logo animada com som, exibida uma vez ao abrir o site */
+      /* Abertura: logo animada com a frase e o Next, exibida uma vez ao abrir o site */
       .intro { display: none; }
       .js .intro {
         position: fixed;
@@ -318,21 +318,12 @@
         z-index: 2147483000;
         display: block;
         overflow: hidden;
-        background: #f7f3ed;
+        background: radial-gradient(55% 60% at 50% 50%, rgba(255, 85, 0, .09), transparent 70%), #09090b;
         transition: opacity 600ms var(--ease-out), visibility 0s linear 600ms;
       }
       .js .intro.is-leaving { opacity: 0; visibility: hidden; pointer-events: none; }
-      /* Cobre a tela no paisagem; no retrato, amplia até o logo ocupar a largura (o fundo do vídeo é o mesmo creme) */
-      .intro__video {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: max(100vw, min(200vw, 177.78vh));
-        max-width: none;
-        height: auto;
-        aspect-ratio: 16 / 9;
-        transform: translate(-50%, -50%);
-      }
+      .intro__stage { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .intro__stage:not(.is-live) { visibility: hidden; }
       .intro__controls {
         position: absolute;
         right: max(16px, env(safe-area-inset-right));
@@ -346,19 +337,17 @@
         gap: .5rem;
         min-height: 44px;
         padding: 0 1.1rem;
-        border: 1px solid rgb(34 28 43 / .16);
+        border: 1px solid rgb(255 255 255 / .16);
         border-radius: 999px;
-        background: rgb(255 255 255 / .55);
-        color: #221c2b;
+        background: rgb(255 255 255 / .05);
+        color: #f4f4f5;
         font: 500 .875rem/1 var(--font-sans);
         transition: background-color 200ms ease, border-color 200ms ease;
       }
-      .intro__btn:hover { background: #fff; border-color: rgb(34 28 43 / .3); }
+      .intro__btn:hover { background: rgb(255 255 255 / .1); border-color: #ff5500; }
       .intro__btn:focus-visible { outline-color: #ff5500; }
-      .intro__btn[hidden] { display: none; }
-      .intro__btn svg { width: 18px; height: 18px; }
       /* Enquanto a abertura roda, a página não rola e as animações de entrada esperam */
-      html.intro-on { overflow: hidden; background: #f7f3ed; }
+      html.intro-on { overflow: hidden; background: #09090b; }
       html.intro-on .header,
       html.intro-on .header *,
       html.intro-on .hero,
@@ -848,85 +837,17 @@
       }
       .header__logo img { width: auto; height: 30px; }
 
-      /* ---------- Logo animado do cabeçalho: o nome se forma traço a traço, em ciclo ---------- */
-      .header__logo .logo-anim { display: block; width: auto; height: 30px; overflow: visible; color: var(--text-primary); }
-      @media (min-width: 1024px) { .header__logo .logo-anim { height: 32px; } }
-      .logo-anim .lg-s { stroke-dasharray: 1 2; }
-      .logo-anim .lg-pin, .logo-anim .lg-pin-bob, .logo-anim .lg-ring { transform-box: fill-box; transform-origin: 50% 100%; }
-      .logo-anim .lg-ring { transform-origin: 50% 50%; opacity: 0; }
+      /* ---------- Logo animada do cabeçalho: a mira se fecha, o ponto acende e o nome se forma com o cursor ---------- */
+      .tl { display: block; overflow: visible; }
+      .header__logo .tl--header { width: auto; height: 26px; aspect-ratio: 3780 / 823; }
+      @media (min-width: 1240px) { .header__logo .tl--header { height: 28px; } }
+      /* Entre um ciclo e outro, o cursor pisca e o ponto respira (o script só anima a montagem) */
       @media (prefers-reduced-motion: no-preference) {
-        .logo-anim .lg-t1 { animation: lg-t1 9.0s linear infinite; }
-        .logo-anim .lg-t2 { animation: lg-t2 9.0s linear infinite; }
-        .logo-anim .lg-i1 { animation: lg-i1 9.0s linear infinite; }
-        .logo-anim .lg-r1 { animation: lg-r1 9.0s linear infinite; }
-        .logo-anim .lg-r2 { animation: lg-r2 9.0s linear infinite; }
-        .logo-anim .lg-v1 { animation: lg-v1 9.0s linear infinite; }
-        .logo-anim .lg-o1 { animation: lg-o1 9.0s linear infinite; }
-        .logo-anim .lg-pin { animation: lg-pin 9.0s linear infinite; }
-        .logo-anim .lg-pin-bob { animation: lg-bob 2.6s ease-in-out infinite alternate; }
-        .logo-anim .lg-ring { animation: lg-ring 9.0s linear infinite; }
+        .tl.is-idle [data-k="cur"], .tl.is-idle [data-k="curg"] { animation: tl-blink 1.1s steps(1) infinite; }
+        .tl.is-idle [data-k="halo"] { animation: tl-breathe 2.6s ease-in-out infinite; }
       }
-      @keyframes lg-t1 {
-        0%, 3.889% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        3.900% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        7.222%, 80.556% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        84.333% { stroke-dashoffset: -1; opacity: 1; }
-        84.444%, 100% { stroke-dashoffset: -1; opacity: 0; }
-      }
-      @keyframes lg-t2 {
-        0%, 6.444% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        6.456% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        8.889%, 81.333% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        85.111% { stroke-dashoffset: -1; opacity: 1; }
-        85.222%, 100% { stroke-dashoffset: -1; opacity: 0; }
-      }
-      @keyframes lg-i1 {
-        0%, 8.444% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        8.456% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        11.111%, 82.111% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        85.889% { stroke-dashoffset: -1; opacity: 1; }
-        86.000%, 100% { stroke-dashoffset: -1; opacity: 0; }
-      }
-      @keyframes lg-r1 {
-        0%, 10.444% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        10.456% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        12.889%, 82.889% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        86.667% { stroke-dashoffset: -1; opacity: 1; }
-        86.778%, 100% { stroke-dashoffset: -1; opacity: 0; }
-      }
-      @keyframes lg-r2 {
-        0%, 12.222% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        12.233% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        14.667%, 83.667% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        87.444% { stroke-dashoffset: -1; opacity: 1; }
-        87.556%, 100% { stroke-dashoffset: -1; opacity: 0; }
-      }
-      @keyframes lg-v1 {
-        0%, 13.778% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        13.789% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        17.778%, 84.444% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        88.222% { stroke-dashoffset: -1; opacity: 1; }
-        88.333%, 100% { stroke-dashoffset: -1; opacity: 0; }
-      }
-      @keyframes lg-o1 {
-        0%, 16.222% { stroke-dashoffset: 1; opacity: 0; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        16.233% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        21.778%, 85.222% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-        89.000% { stroke-dashoffset: -1; opacity: 1; }
-        89.111%, 100% { stroke-dashoffset: -1; opacity: 0; }
-      }
-      @keyframes lg-pin {
-        0% { transform: translateY(-70px) scale(.6); opacity: 0; animation-timing-function: cubic-bezier(.3, 0, .6, 1); }
-        3.333% { transform: translateY(6px) scale(1.04, .92); opacity: 1; animation-timing-function: cubic-bezier(.3, 1.4, .5, 1); }
-        5.778%, 85.556% { transform: none; opacity: 1; animation-timing-function: cubic-bezier(.5, 0, .75, 0); }
-        90.556%, 100% { transform: translateY(-60px) scale(.7); opacity: 0; }
-      }
-      @keyframes lg-ring {
-        0%, 3.333% { transform: scale(.4); opacity: 0; }
-        3.556% { transform: scale(.5); opacity: .7; animation-timing-function: cubic-bezier(.2, .6, .3, 1); }
-        12.778%, 100% { transform: scale(1.7); opacity: 0; }
-      }
-      @keyframes lg-bob { from { translate: 0 0; } to { translate: 0 -7px; } }
+      @keyframes tl-blink { 50% { opacity: 0; } }
+      @keyframes tl-breathe { 50% { opacity: .35; } }
 
 
       /* ---------- Navegação do computador: cápsula de vidro com indicador deslizante ---------- */
@@ -1091,7 +1012,7 @@
         opacity: 0;
       }
       .menu__top { display: flex; align-items: center; justify-content: space-between; }
-      .menu__logo .logo-anim { display: block; width: auto; height: 30px; overflow: visible; color: var(--text-primary); }
+      .menu__logo .tl--menu { width: auto; height: 26px; aspect-ratio: 3780 / 823; }
       .menu__status {
         display: flex;
         flex-wrap: wrap;
@@ -3025,7 +2946,7 @@
         .footer__cols { grid-template-columns: 4fr 2fr 3fr 3fr; }
       }
       .footer__brand { display: grid; gap: 1rem; align-content: start; }
-      .footer__brand img { width: auto; height: 34px; }
+      .footer__brand img { width: auto; height: 30px; }
       .footer__brand p { color: var(--text-secondary); font-size: .95rem; max-width: 18em; }
       .footer__heading {
         margin-bottom: 1rem;
@@ -3081,7 +3002,7 @@
         user-select: none;
       }
       /* ---------- Assinatura animada do rodapé: escrita a fogo, esfria e recebe um brilho de tempos em tempos ---------- */
-      .sig { display: block; aspect-ratio: 601 / 260; overflow: visible; pointer-events: none; -webkit-tap-highlight-color: transparent; }
+      .sig { display: block; aspect-ratio: 3391.78 / 900; overflow: visible; pointer-events: none; -webkit-tap-highlight-color: transparent; }
       .sig__base { opacity: .07; }
       .sig__pin { opacity: .3; }
       .sig__fire { display: none; }
@@ -3090,49 +3011,55 @@
       .sig__s { stroke-dasharray: 1 2; }
       @media (prefers-reduced-motion: no-preference) {
         .sig--anim .sig__fire { display: inline; }
-        /* Antes de entrar na tela: traços recolhidos e pino no alto (sem transição, para reiniciar na hora) */
+        /* Antes de entrar na tela: contornos recolhidos, marca apagada e ponto no alto (sem transição, para reiniciar na hora) */
         .sig--anim:not(.is-drawn) .sig__s { stroke-dashoffset: 1; opacity: 0; }
-        .sig--anim:not(.is-drawn) .sig__pin { opacity: 0; transform: translateY(-90px) scale(.6); }
+        .sig--anim:not(.is-drawn) .sig__base > .sig__l, .sig--anim:not(.is-drawn) .sig__shine > .sig__l { opacity: 0; }
+        .sig--anim:not(.is-drawn) .sig__pin { opacity: 0; transform: translateY(-405px) scale(.6); }
         .sig--anim.is-drawn .sig__s {
           stroke-dashoffset: 0;
           opacity: 1;
           transition: stroke-dashoffset var(--t) cubic-bezier(.65, 0, .35, 1) var(--d), opacity 0s linear var(--d);
         }
+        /* A letra preenche assim que o contorno em brasa termina de escrevê-la */
+        .sig--anim.is-drawn .sig__base > .sig__l, .sig--anim.is-drawn .sig__shine > .sig__l { opacity: 1; transition: opacity .45s ease calc(var(--d) + var(--t) * .8); }
         .sig--anim.is-drawn .sig__fire { opacity: 0; transition: opacity 1.3s ease 2.1s; }
         .sig--anim.is-drawn .sig__pin { transition: transform 750ms cubic-bezier(.3, 1.6, .5, 1) 1.45s, opacity 200ms ease 1.45s; }
         .sig--anim.is-drawn.is-visible .sig__pin-bob { animation: sig-bob 2.8s ease-in-out 2.3s infinite alternate; }
         .sig--anim.is-drawn.is-visible .sig__sweep { animation: sig-sweep 7s cubic-bezier(.45, 0, .25, 1) 2.9s infinite; }
       }
       @media (prefers-reduced-motion: reduce) { .sig__shine { display: none; } }
-      @keyframes sig-bob { from { translate: 0 0; } to { translate: 0 -12px; } }
-      @keyframes sig-sweep { 0% { transform: translateX(0); } 26%, 100% { transform: translateX(900px); } }
+      @keyframes sig-bob { from { translate: 0 0; } to { translate: 0 -54px; } }
+      @keyframes sig-sweep { 0% { transform: translateX(0); } 26%, 100% { transform: translateX(4892px); } }
 
-      /* ---------- Brincadeiras: cada letra é uma tecla com uma acrobacia própria ---------- */
+      /* ---------- Brincadeiras: cada letra é uma tecla com uma acrobacia própria; a mira trava de novo ---------- */
       .sig__hit { pointer-events: all; cursor: pointer; }
       .sig__flash { opacity: .95; }
-      /* O brilho fica nos traços; o movimento, no grupo da letra (assim os dois se somam) */
+      /* O brilho fica no desenho; o movimento, no grupo da letra (assim os dois se somam) */
       .sig__flash .sig__l > * { opacity: 0; }
       .sig__l { transform-box: view-box; transition: transform 320ms var(--ease-out); }
-      .sig__l--t { transform-origin: 56px 151px; }
-      .sig__l--i { transform-origin: 139px 255px; }
-      .sig__l--r { transform-origin: 233px 255px; }
-      .sig__l--v { transform-origin: 361px 255px; }
-      .sig__l--o { transform-origin: 518px 177px; }
+      .sig__l--t { transform-origin: 1386px -330px; }
+      .sig__l--i { transform-origin: 1690px 36px; }
+      .sig__l--r { transform-origin: 2026px 36px; }
+      .sig__l--v { transform-origin: 2462px 36px; }
+      .sig__l--o { transform-origin: 3006px -273px; }
+      .sig__l--icon { transform-origin: 392px -355px; }
       .sig.is-play-t .sig__flash .sig__l--t > *, .sig.is-play-i .sig__flash .sig__l--i > *, .sig.is-play-r .sig__flash .sig__l--r > *,
-      .sig.is-play-v .sig__flash .sig__l--v > *, .sig.is-play-o .sig__flash .sig__l--o > * { animation: sig-flash 900ms ease-out; }
+      .sig.is-play-v .sig__flash .sig__l--v > *, .sig.is-play-o .sig__flash .sig__l--o > *, .sig.is-play-pin .sig__flash .sig__l--icon > * { animation: sig-flash 900ms ease-out; }
       .sig.is-party .sig__flash .sig__l > * { animation: sig-flash 1.6s ease-out var(--wave, 0s) both; }
-      .sig__l--i { --wave: .09s; } .sig__l--r { --wave: .18s; } .sig__l--v { --wave: .27s; } .sig__l--o { --wave: .36s; }
+      .sig__l--t { --wave: .09s; } .sig__l--i { --wave: .18s; } .sig__l--r { --wave: .27s; } .sig__l--v { --wave: .36s; } .sig__l--o { --wave: .45s; }
       @media (prefers-reduced-motion: no-preference) {
         @media (hover: hover) and (pointer: fine) {
           /* Com o mouse por cima, a letra se oferece para a brincadeira */
           .sig:has(.sig__hit[data-letter="t"]:hover) .sig__l--t, .sig:has(.sig__hit[data-letter="i"]:hover) .sig__l--i,
           .sig:has(.sig__hit[data-letter="r"]:hover) .sig__l--r, .sig:has(.sig__hit[data-letter="v"]:hover) .sig__l--v,
-          .sig:has(.sig__hit[data-letter="o"]:hover) .sig__l--o { transform: translateY(-10px); }
-          .sig:has(.sig__hit[data-letter="pin"]:hover) .sig__pin-play { transform: translateY(-8px) rotate(-8deg); transition: transform 320ms var(--ease-out); }
+          .sig:has(.sig__hit[data-letter="o"]:hover) .sig__l--o { transform: translateY(-45px); }
+          .sig:has(.sig__hit[data-letter="pin"]:hover) .sig__l--icon { transform: scale(.94); }
+          .sig:has(.sig__hit[data-letter="pin"]:hover) .sig__pin-play { transform: scale(1.25); transition: transform 320ms var(--ease-out); }
         }
         .sig.is-play-t .sig__l--t { animation: sig-flip 900ms cubic-bezier(.4, 0, .2, 1); }
         .sig.is-play-i .sig__l--i { animation: sig-hop 800ms cubic-bezier(.3, 0, .3, 1); }
-        .sig.is-play-i .sig__pin-play, .sig.is-play-pin .sig__pin-play { animation: sig-pin-fly 1.1s cubic-bezier(.3, 0, .3, 1); }
+        .sig.is-play-pin .sig__l--icon { animation: sig-lock 1s cubic-bezier(.3, 0, .3, 1); }
+        .sig.is-play-pin .sig__pin-play { animation: sig-pin-fly 1.1s cubic-bezier(.3, 0, .3, 1); }
         .sig.is-play-r .sig__l--r { animation: sig-jelly 900ms ease-out; }
         .sig.is-play-v .sig__l--v { animation: sig-spring 850ms ease-out; }
         .sig.is-play-o .sig__l--o { animation: sig-roll 1.1s cubic-bezier(.45, 0, .3, 1); }
@@ -3141,32 +3068,37 @@
       }
       @keyframes sig-flash { 0% { opacity: 0; } 12% { opacity: 1; } 55% { opacity: .9; } 100% { opacity: 0; } }
       @keyframes sig-flip {
-        0% { transform: none; } 30% { transform: translateY(-70px) rotate(-180deg); }
-        62% { transform: translateY(-20px) rotate(-340deg); } 80% { transform: translateY(0) rotate(-360deg) scale(1.08, .9); }
+        0% { transform: none; } 30% { transform: translateY(-315px) rotate(-180deg); }
+        62% { transform: translateY(-90px) rotate(-340deg); } 80% { transform: translateY(0) rotate(-360deg) scale(1.08, .9); }
         100% { transform: rotate(-360deg); }
       }
       @keyframes sig-hop {
-        0% { transform: none; } 15% { transform: scale(1.1, .82); } 45% { transform: translateY(-80px) scale(.94, 1.08); }
+        0% { transform: none; } 15% { transform: scale(1.1, .82); } 45% { transform: translateY(-360px) scale(.94, 1.08); }
         75% { transform: translateY(0) scale(1.12, .84); } 100% { transform: none; }
       }
+      /* A mira abre e trava de novo no alvo, como na logo animada */
+      @keyframes sig-lock {
+        0% { transform: none; } 30% { transform: scale(1.22) rotate(-8deg); } 62% { transform: scale(.9) rotate(2deg); }
+        80% { transform: scale(1.04); } 100% { transform: none; }
+      }
       @keyframes sig-pin-fly {
-        0% { transform: none; } 12% { transform: scale(1.15, .8); } 50% { transform: translateY(-150px) rotate(360deg); }
-        78% { transform: translateY(0) rotate(720deg) scale(1.15, .85); } 90% { transform: translateY(-14px) rotate(720deg); }
-        100% { transform: rotate(720deg); }
+        0% { transform: none; } 12% { transform: scale(1.15, .8); } 50% { transform: translateY(-675px) scale(1.1); }
+        78% { transform: translateY(0) scale(1.25, .8); } 90% { transform: translateY(-63px); }
+        100% { transform: none; }
       }
       @keyframes sig-jelly {
         0% { transform: none; } 15% { transform: skewX(-16deg) scale(1.08, .9); } 32% { transform: skewX(12deg) scale(.94, 1.08); }
         50% { transform: skewX(-7deg) scale(1.04, .96); } 68% { transform: skewX(4deg); } 84% { transform: skewX(-2deg); } 100% { transform: none; }
       }
       @keyframes sig-spring {
-        0% { transform: none; } 18% { transform: scale(1.15, .55); } 40% { transform: scale(.9, 1.3) translateY(-24px); }
+        0% { transform: none; } 18% { transform: scale(1.15, .55); } 40% { transform: scale(.9, 1.3) translateY(-108px); }
         60% { transform: scale(1.06, .88); } 78% { transform: scale(.98, 1.06); } 100% { transform: none; }
       }
       @keyframes sig-roll {
-        0% { transform: none; } 40% { transform: translateX(90px) rotate(200deg); } 72% { transform: translateX(-30px) rotate(-60deg); }
-        88% { transform: translateX(8px) rotate(10deg); } 100% { transform: none; }
+        0% { transform: none; } 40% { transform: translateX(405px) rotate(200deg); } 72% { transform: translateX(-135px) rotate(-60deg); }
+        88% { transform: translateX(36px) rotate(10deg); } 100% { transform: none; }
       }
-      @keyframes sig-wave { 0%, 100% { transform: none; } 40% { transform: translateY(-46px) scale(.96, 1.06); } 70% { transform: translateY(0) scale(1.06, .92); } }
+      @keyframes sig-wave { 0%, 100% { transform: none; } 40% { transform: translateY(-207px) scale(.96, 1.06); } 70% { transform: translateY(0) scale(1.06, .92); } }
 
       /* ---------- Mascote: Next, o robô guia da Tirvo ---------- */
       .mascot {
@@ -3198,28 +3130,9 @@
         translate: 0 16px;
         transition: opacity var(--dur-2) ease, visibility 0s linear var(--dur-2), translate var(--dur-2) var(--ease-out);
       }
-      /* Na abertura: a âncora invisível marca onde o robô aparece sobre o palco do vídeo (mesma geometria de
-         .intro__video), ao lado do logo. O robô continua ancorado no canto e só é deslocado por transform até ela,
-         então a saída da abertura não gera deslocamento de layout (CLS). */
-      .mascot-anchor {
-        --sw: max(100vw, min(200vw, 177.78vh));
-        --sh: calc(var(--sw) * .5625);
-        --bot-w: min(calc(var(--sw) * .14), 280px);
-        position: fixed;
-        left: calc((100vw - var(--sw)) / 2 + var(--sw) * .13);
-        top: calc((100vh - var(--sh)) / 2 + var(--sh) * .22);
-        width: var(--bot-w);
-        aspect-ratio: 200 / 246;
-        visibility: hidden;
-        pointer-events: none;
-      }
+      /* Na abertura, o robô continua ancorado no canto e só é deslocado por transform até o retângulo-âncora do palco
+         da logo (ao lado dela no paisagem, embaixo da frase no retrato), então a saída não gera deslocamento de layout. */
       @media (max-aspect-ratio: 1 / 1) {
-        /* Retrato: o logo ocupa a largura, então o robô fica logo abaixo e aponta para cima */
-        .mascot-anchor {
-          --bot-w: min(calc(var(--sw) * .17), 190px);
-          left: calc(50vw - var(--bot-w) / 2);
-          top: min(calc((100vh - var(--sh)) / 2 + var(--sh) * .79), calc(100vh - 76px - var(--bot-w) * 1.23));
-        }
         .mascot.is-intro { --point: -168deg; }
       }
       .js .mascot.is-intro:not([hidden]),
@@ -3237,8 +3150,7 @@
       .mascot__pop, .mascot__jump, .mascot__breath { display: block; width: 100%; height: 100%; }
       .mascot__breath { transform-origin: 50% 94%; }
       .bot { width: 100%; height: 100%; overflow: visible; }
-      .bot__shadow { fill: #000; opacity: .2; }
-      .mascot:not(.is-intro) .bot__shadow { fill: #ff5500; opacity: .16; }
+      .bot__shadow { fill: #ff5500; opacity: .16; }
 
       /* Articulações: cada grupo gira em torno da própria origem local */
       .bot__part { transform-box: view-box; transform-origin: 0 0; }
@@ -4455,7 +4367,7 @@
       .compare__vs-a { color: var(--text-tertiary); text-decoration: line-through; text-decoration-color: rgba(255, 255, 255, .25); text-decoration-thickness: 2px; }
       .compare__vs-x { display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; border: 1px solid var(--line-strong); border-radius: 50%; color: var(--text-tertiary); font-size: .6em; }
       .compare__vs-b { display: inline-flex; align-items: center; gap: .35em; color: var(--text-primary); }
-      .compare__logo { width: auto; height: 1.35em; margin-top: -.28em; filter: drop-shadow(0 0 16px rgba(255, 85, 0, .35)); }
+      .compare__logo { width: auto; height: 1.05em; margin-top: -.2em; filter: drop-shadow(0 0 16px rgba(255, 85, 0, .35)); }
       .compare__generic { filter: grayscale(1); opacity: .9; }
       .compare__generic .compare__cell { font-size: .9rem; }
       .compare td.compare__tirvo, .compare th.compare__tirvo {

@@ -3192,7 +3192,7 @@
       const bubble = $('[data-mascot-bubble]', mascot);
       const foot = cfg.footer;
       // Onde ele pisa no topo de cada letra (T, R, V e O), em coordenadas do viewBox da assinatura
-      const PERCHES = [[49, 47], [233, 99], [403.5, 99], [518, 99]];
+      const PERCHES = [[1357.6, -660.2], [2064.6, -534.8], [2642.2, -534.8], [3005.8, -546.8]];
       const ROUTE = [0, 1, 2, 3];
       const FEET = 0.955; // altura da sola em relação à caixa do robô
       let sceneToken = 0;
@@ -3459,16 +3459,20 @@
         });
       };
 
-      /* ---------- Coreografia da abertura, sincronizada com o tempo do vídeo ---------- */
-      // [fim da fase (s), pose, expressão]: surge, "constrói" o logo apontando, comemora e acena
+      /* ---------- Coreografia da abertura, sincronizada com o tempo da logo animada ---------- */
+      // [fim da fase (s), pose, expressão]: surge, aponta para a mira que se forma, entra em foco quando ela trava,
+      // se assusta com o ponto que acende, "programa" o nome, acompanha a frase, comemora e acena
       const INTRO = [
-        [0.3, 'rest', 'happy'],
-        [1.9, 'build', 'focus'],
-        [3.2, 'cheer', 'happy'],
+        [0.55, 'rest', 'happy'],
+        [1.7, 'build', 'neutral'],
+        [2.1, 'build', 'focus'],
+        [2.45, 'build', 'surprised'],
+        [3.25, 'build', 'focus'],
+        [4.3, 'present', 'neutral'],
+        [5.05, 'cheer', 'happy'],
         [Infinity, 'wave', 'happy'],
       ];
       const intro = $('[data-intro]');
-      const video = $('[data-intro-video]');
       const anchor = $('[data-mascot-anchor]');
       // Leva o robô (ancorado no canto) até a âncora da abertura só com transform
       const placeOnAnchor = () => {
@@ -3491,7 +3495,7 @@
       addEventListener('resize', placeOnAnchor, { passive: true });
       let frame = 0;
       const tick = () => {
-        const time = video ? video.currentTime : 0;
+        const time = window.tirvoIntro?.time ? window.tirvoIntro.time() : 0;
         const [, pose, face] = INTRO.find(([end]) => time < end);
         setPose(pose);
         setFace(face);
