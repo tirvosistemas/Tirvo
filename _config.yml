@@ -1,0 +1,3 @@
+# Arquivos do repositório que não devem ser publicados em tirvo.tech
+exclude:
+  - CLAUDE.md
