@@ -39,6 +39,13 @@ export async function publicar(id, { trailers = [], log = console.log } = {}) {
     return rascunho;
   }
 
+  // Retoma uma publicação que parou depois de o container ficar pronto, sem hospedar de novo
+  const anterior = rascunho.publicacao?.etapa === 'container pronto' ? rascunho.publicacao.container : null;
+  if (anterior && (await api.statusDoContainer(anterior).catch(() => ({}))).status_code === 'FINISHED') {
+    log(`Retomando o container ${anterior}...`);
+    return concluir(rascunho, anterior, log);
+  }
+
   log('Enviando as mídias aprovadas ao GitHub para o Instagram buscar...');
   const { commit, urls } = await hospedar(rascunho, { trailers });
   registrar(rascunho, 'hospedado', { commit, urls });
@@ -75,7 +82,10 @@ export async function publicar(id, { trailers = [], log = console.log } = {}) {
     }
   }
   registrar(rascunho, 'container pronto', { container });
+  return concluir(rascunho, container, log);
+}
 
+async function concluir(rascunho, container, log) {
   log('Publicando...');
   const { id: idDaMidia } = await api.publicarContainer(container);
   registrar(rascunho, 'publicado', { id: idDaMidia, em: new Date().toISOString() });

@@ -98,8 +98,18 @@ export async function aguardarContainer(id, { limiteMs = 15 * 60 * 1000, aoAtual
   }
 }
 
-export function publicarContainer(idDoContainer) {
-  return chamar('POST', `${idDaConta()}/media_publish`, { creation_id: idDoContainer }, { tentativas: 1 });
+// Logo depois do FINISHED, o media_publish às vezes responde 9007/2207027 ("Media ID is not available").
+// Nesse caso nada foi publicado, então é seguro esperar e tentar de novo.
+export async function publicarContainer(idDoContainer, { tentativas = 6 } = {}) {
+  for (let tentativa = 1; ; tentativa++) {
+    try {
+      return await chamar('POST', `${idDaConta()}/media_publish`, { creation_id: idDoContainer }, { tentativas: 1 });
+    } catch (e) {
+      const naoPronto = e instanceof ErroApi && (e.codigo === 9007 || e.subcodigo === 2207027);
+      if (!naoPronto || tentativa >= tentativas) throw e;
+      await esperar(5000 * tentativa);
+    }
+  }
 }
 
 // Mídias e comentários
