@@ -1101,7 +1101,9 @@
         padding-block: 1.25rem calc(1.25rem + env(safe-area-inset-bottom));
         border-top: 1px solid var(--line);
       }
-      .menu__actions { display: grid; grid-template-columns: 1fr auto; gap: .6rem; }
+      .menu__actions { display: grid; grid-template-columns: 1fr auto auto; gap: .6rem; }
+      .menu__wa.menu__ig { width: 48px; padding-inline: 0; }
+      .menu__wa.menu__ig .icon { flex: none; width: 20px; height: 20px; }
       .menu__wa {
         display: inline-flex;
         align-items: center;
