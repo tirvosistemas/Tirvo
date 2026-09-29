@@ -1,0 +1,42 @@
+/* Destaque "Sobre a Tirvo": série longa tirada de sobre.html. Mesmo esqueleto dos outros stories. */
+@import url("../stories.css");
+
+/* Rótulo técnico acima do título, como os códigos P.01 e V.01 da página */
+.kicker { font-family: var(--font-mono); font-size: 26px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-tertiary); }
+
+.peca--vertical .titulo.grande { font-size: 132px; line-height: .98; letter-spacing: -.045em; }
+.peca--vertical .titulo.medio { font-size: 92px; }
+
+/* Capa: a retícula de foco da página, com o ponto laranja no centro */
+.reticula { width: 360px; height: 360px; }
+.reticula circle, .reticula line, .reticula path { fill: none; stroke: rgba(255, 255, 255, .22); stroke-width: 1.5; }
+.reticula .anel-fraco { stroke: rgba(255, 255, 255, .1); stroke-dasharray: 4 10; }
+.reticula .ponto { fill: var(--accent); stroke: none; filter: drop-shadow(0 0 18px var(--accent-glow)) drop-shadow(0 0 40px var(--accent-glow)); }
+
+/* Manifesto: o que fica do lado de fora, riscado em laranja */
+.riscos { list-style: none; display: grid; gap: 18px; }
+.riscos li { position: relative; justify-self: start; font-size: 120px; font-weight: 600; letter-spacing: -.04em; line-height: 1.05; color: var(--text-tertiary); }
+.riscos li::after { content: ""; position: absolute; left: -3%; right: -3%; top: 54%; height: 10px; border-radius: 10px; background: var(--accent); box-shadow: 0 0 22px var(--accent-glow); transform: rotate(-2deg); }
+.veredito { font-family: var(--font-serif); font-style: italic; font-size: 104px; line-height: 1; letter-spacing: -.01em; }
+
+/* Painel: leitura em Geist Mono */
+.painel { display: grid; }
+.painel div { display: flex; justify-content: space-between; align-items: baseline; padding-block: 34px; border-top: 1px solid var(--line); font-family: var(--font-mono); }
+.painel div:last-child { border-bottom: 1px solid var(--line); }
+.painel dt { font-size: 36px; letter-spacing: .04em; color: var(--text-tertiary); }
+.painel dd { font-size: 64px; font-weight: 500; letter-spacing: -.02em; }
+
+/* Lista só com os nomes */
+.lista--simples li { padding-block: 34px; }
+.lista--simples .n { grid-row: auto; padding-top: 16px; }
+.lista--simples b { font-size: 58px; }
+
+/* Citação: a barra laranja à esquerda é o detalhe da peça */
+.citacao { position: relative; display: grid; gap: 40px; padding-left: 56px; }
+.citacao::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 4px; border-radius: 4px; background: var(--accent); box-shadow: 0 0 24px var(--accent-glow); }
+.citacao .titulo { font-size: 100px; }
+.citacao cite { font-family: var(--font-mono); font-size: 26px; font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--text-tertiary); }
+
+/* Estágios da anatomia do hiperfoco: número vazado gigante */
+.estagio-n { font-family: var(--font-mono); font-size: 300px; font-weight: 500; line-height: .8; letter-spacing: -.06em; color: transparent; -webkit-text-stroke: 2px rgba(255, 255, 255, .2); }
+.peca--vertical .titulo.estagio { font-size: 168px; letter-spacing: -.05em; }
