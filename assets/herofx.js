@@ -278,15 +278,22 @@
       return { resize: resize, draw: draw };
     }
 
-    /* ---------- Equipe · cursores da equipe desenhando juntos, como num editor compartilhado ---------- */
-    function team() {
-      var names = ['Front-end', 'Back-end', 'UX/UI', 'Branding', 'IA', 'DevOps'];
-      var crew = [], blocks = [], step = 32, bg = null, wasOn = false;
+    /* ---------- Nexus · agentes como cursores de um editor compartilhado, desenhando molduras juntos ---------- */
+    function team(names) {
+      var bots = [], blocks = [], step = 32, bg = null, wasOn = false;
       function target(c) {
         if (ptr.on) {
           var a = Math.random() * TAU, d = rnd(70, 180);
           c.tx = ptr.x + Math.cos(a) * d; c.ty = ptr.y + Math.sin(a) * d;
-        } else { c.tx = rnd(W * 0.05, W * 0.95); c.ty = rnd(H * 0.12, H * 0.9); }
+        } else {
+          // Sem mouse, os agentes trabalham fora do título e do texto, para não atrapalhar a leitura
+          var hb = host.getBoundingClientRect(), txt = [].map.call(host.querySelectorAll('.page-hero__title, .lead'), function (el) { return el.getBoundingClientRect(); });
+          for (var k = 0; k < 30; k++) {
+            c.tx = rnd(W * 0.05, W * 0.95); c.ty = rnd(H * 0.12, H * 0.9);
+            var hit = txt.some(function (r) { return c.tx > r.left - hb.left - 110 && c.tx < r.right - hb.left + 20 && c.ty > r.top - hb.top - 40 && c.ty < r.bottom - hb.top + 20; });
+            if (!hit) break;
+          }
+        }
         c.tx = clamp(c.tx, 12, W - 90); c.ty = clamp(c.ty, Math.max(96, H * 0.12), H - 40);
         c.wait = 0;
       }
@@ -298,12 +305,12 @@
         b.scale(dpr, dpr);
         b.fillStyle = 'rgba(255,255,255,.075)';
         for (var y = step; y < H; y += step) for (var x = step; x < W; x += step) b.fillRect(x - 0.75, y - 0.75, 1.5, 1.5);
-        if (!crew.length) {
+        if (!bots.length) {
           for (var i = 0; i < names.length; i++) {
             var c = { name: names[i], x: rnd(W * 0.1, W * 0.9), y: rnd(H * 0.15, H * 0.9), vx: 0, vy: 0, trail: [], hot: i % 2 === 0 };
-            target(c); crew.push(c);
+            target(c); bots.push(c);
           }
-        } else crew.forEach(function (c) { c.x = clamp(c.x, 0, W); c.y = clamp(c.y, 0, H); target(c); });
+        } else bots.forEach(function (c) { c.x = clamp(c.x, 0, W); c.y = clamp(c.y, 0, H); target(c); });
         blocks = [];
       }
       function chip(c, x, y) {
@@ -319,7 +326,7 @@
         var s = Math.min(dt, 40) / 1000;
         ctx.drawImage(bg, 0, 0, W, H);
         // Quando o mouse entra, a equipe vem trabalhar perto de você
-        if (ptr.on !== wasOn) { wasOn = ptr.on; crew.forEach(target); }
+        if (ptr.on !== wasOn) { wasOn = ptr.on; bots.forEach(target); }
         // Molduras que cada um desenha e que se apagam com o tempo
         ctx.lineWidth = 1;
         for (var i = blocks.length - 1; i >= 0; i--) {
@@ -341,16 +348,16 @@
           }
         }
         // Linhas finas ligando quem trabalha perto
-        for (i = 0; i < crew.length; i++) {
-          for (var j = i + 1; j < crew.length; j++) {
-            var dx = crew[i].x - crew[j].x, dy = crew[i].y - crew[j].y, d = Math.sqrt(dx * dx + dy * dy);
+        for (i = 0; i < bots.length; i++) {
+          for (var j = i + 1; j < bots.length; j++) {
+            var dx = bots[i].x - bots[j].x, dy = bots[i].y - bots[j].y, d = Math.sqrt(dx * dx + dy * dy);
             if (d > 380) continue;
             ctx.strokeStyle = rgba(ORANGE, 0.1 * (1 - d / 380));
-            ctx.beginPath(); ctx.moveTo(crew[i].x, crew[i].y); ctx.lineTo(crew[j].x, crew[j].y); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(bots[i].x, bots[i].y); ctx.lineTo(bots[j].x, bots[j].y); ctx.stroke();
           }
         }
-        for (i = 0; i < crew.length; i++) {
-          var c = crew[i];
+        for (i = 0; i < bots.length; i++) {
+          var c = bots[i];
           if (c.wait > 0) { c.wait -= dt; if (c.wait <= 0) target(c); }
           var ax = (c.tx - c.x) * 7 - c.vx * 5, ay = (c.ty - c.y) * 7 - c.vy * 5;
           c.vx += ax * s; c.vy += ay * s;
@@ -385,6 +392,133 @@
           ctx.fill(); ctx.stroke();
           ctx.restore();
           chip(c, c.x + 12, c.y + 16);
+        }
+      }
+      return { resize: resize, draw: draw };
+    }
+
+    /* ---------- Equipe · pessoas ligadas em rede, passando o trabalho de mão em mão ---------- */
+    function crew() {
+      var people = [], batons = [], rings = [], top = 90;
+      function near(p, k) {
+        return people.filter(function (q) { return q !== p; })
+          .sort(function (a, b) { return Math.hypot(a.x - p.x, a.y - p.y) - Math.hypot(b.x - p.x, b.y - p.y); })
+          .slice(0, k);
+      }
+      function resize() {
+        var cols = W < 640 ? 3 : W < 1024 ? 5 : 7, rows = W < 640 ? 4 : 3;
+        top = Math.max(90, H * 0.14);
+        var cw = W / cols, rh = (H - top - 30) / rows;
+        people = [];
+        for (var r = 0; r < rows; r++) {
+          for (var c = 0; c < cols; c++) {
+            var x = cw * (c + 0.5 + (r % 2 ? 0.25 : -0.25)) + rnd(-cw, cw) * 0.18;
+            people.push({ x: clamp(x, 24, W - 24), y: top + rh * (r + 0.5) + rnd(-rh, rh) * 0.2, ph: Math.random() * TAU, lit: 0, talk: 0 });
+          }
+        }
+        // Ninguém fica em cima da órbita da equipe ao lado do texto
+        var hb = host.getBoundingClientRect(), sh = host.querySelector('.team-orbit'), r0 = sh && sh.getBoundingClientRect();
+        if (r0 && r0.width) {
+          var cx = r0.left - hb.left + r0.width / 2, cy = r0.top - hb.top + r0.height / 2, rr = Math.min(r0.width, r0.height) / 2 + 20;
+          people = people.filter(function (p) { return Math.hypot(p.x - cx, p.y - cy) > rr; });
+        }
+        people.forEach(function (p) { p.nb = near(p, 3); p.bx = p.x; p.by = p.y; });
+        batons = [];
+        var n = W < 640 ? 2 : 3;
+        for (var i = 0; i < n; i++) pass(people[(Math.random() * people.length) | 0], null, rnd(0, 900));
+      }
+      function pass(from, prev, delay) {
+        var opts = from.nb.filter(function (q) { return q !== prev; });
+        var to = opts[(Math.random() * opts.length) | 0] || from.nb[0];
+        var mx = (from.x + to.x) / 2, my = (from.y + to.y) / 2, dx = to.x - from.x, dy = to.y - from.y;
+        var bend = rnd(0.18, 0.32) * (Math.random() < 0.5 ? -1 : 1);
+        batons.push({ a: from, b: to, cx: mx - dy * bend, cy: my + dx * bend, t: -(delay || 0) / 1000, dur: rnd(1.1, 1.6) });
+      }
+      function person(p, glow) {
+        var a = 0.3 + 0.6 * glow;
+        ctx.lineWidth = 1.4;
+        ctx.strokeStyle = glow > 0.05 ? rgba(ORANGE, a) : 'rgba(233,233,238,.3)';
+        ctx.beginPath(); ctx.arc(p.x, p.y - 8, 6.5, 0, TAU); ctx.stroke();
+        ctx.beginPath(); ctx.arc(p.x, p.y + 14, 13, Math.PI * 1.08, Math.PI * 1.92); ctx.stroke();
+      }
+      function bubble(p, k) {
+        // Balão de "digitando" sobre quem acabou de receber o trabalho
+        var x = p.x + 10, y = p.y - 32;
+        ctx.fillStyle = 'rgba(233,233,238,' + 0.1 * k + ')';
+        roundRect(x, y, 26, 13, 6.5); ctx.fill();
+        for (var i = 0; i < 3; i++) {
+          var up = Math.max(0, Math.sin(time * 0.009 - i * 0.9));
+          ctx.fillStyle = rgba(ORANGE, (0.35 + 0.45 * up) * k);
+          ctx.beginPath(); ctx.arc(x + 7 + i * 6, y + 6.5 - up * 1.6, 1.4, 0, TAU); ctx.fill();
+        }
+      }
+      function draw(dt) {
+        var s = Math.min(dt, 40) / 1000;
+        // Cada pessoa respira no lugar
+        for (var i = 0; i < people.length; i++) {
+          var p = people[i];
+          p.x = p.bx + Math.sin(time * 0.0004 + p.ph) * 4;
+          p.y = p.by + Math.cos(time * 0.0005 + p.ph * 1.3) * 3;
+          p.lit = Math.max(0, p.lit - s * 0.7);
+          p.talk = Math.max(0, p.talk - s);
+        }
+        // Rede fina entre vizinhos
+        ctx.lineWidth = 1;
+        ctx.setLineDash([2, 5]);
+        ctx.strokeStyle = 'rgba(233,233,238,.1)';
+        ctx.beginPath();
+        people.forEach(function (p) { p.nb.forEach(function (q) { if (q.x > p.x || (q.x === p.x && q.y > p.y)) { ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); } }); });
+        ctx.stroke();
+        ctx.setLineDash([]);
+        // Com o mouse por perto, quem está perto se conecta a você
+        if (ptr.on) {
+          for (i = 0; i < people.length; i++) {
+            p = people[i];
+            var d = Math.hypot(p.x - ptr.x, p.y - ptr.y);
+            if (d > 200) continue;
+            var k = 1 - d / 200;
+            p.lit = Math.max(p.lit, k);
+            ctx.strokeStyle = rgba(ORANGE, 0.28 * k);
+            ctx.beginPath(); ctx.moveTo(ptr.x, ptr.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+          }
+        }
+        // O trabalho passa de mão em mão por um arco
+        for (i = batons.length - 1; i >= 0; i--) {
+          var b = batons[i];
+          b.t += s / b.dur;
+          if (b.t < 0) continue;
+          if (b.t >= 1) {
+            b.b.lit = 1; b.b.talk = 1.3;
+            rings.push({ x: b.b.x, y: b.b.y, t: 0 });
+            batons.splice(i, 1);
+            pass(b.b, b.a, rnd(700, 1400));
+            continue;
+          }
+          var e = ease(b.t), u = 1 - e;
+          ctx.strokeStyle = rgba(ORANGE, 0.3);
+          ctx.beginPath(); ctx.moveTo(b.a.x, b.a.y);
+          for (var j = 1; j <= 16; j++) {
+            var tt = e * j / 16, uu = 1 - tt;
+            ctx.lineTo(uu * uu * b.a.x + 2 * uu * tt * b.cx + tt * tt * b.b.x, uu * uu * b.a.y + 2 * uu * tt * b.cy + tt * tt * b.b.y);
+          }
+          ctx.stroke();
+          var bx = u * u * b.a.x + 2 * u * e * b.cx + e * e * b.b.x, by = u * u * b.a.y + 2 * u * e * b.cy + e * e * b.b.y;
+          ctx.fillStyle = rgba(ORANGE, 0.9);
+          ctx.fillRect(bx - 3, by - 3, 6, 6);
+          ctx.fillStyle = rgba(ORANGE, 0.18);
+          ctx.fillRect(bx - 6, by - 6, 12, 12);
+        }
+        // Anel de quem recebeu
+        for (i = rings.length - 1; i >= 0; i--) {
+          var r = rings[i];
+          r.t += s;
+          if (r.t > 1) { rings.splice(i, 1); continue; }
+          ctx.strokeStyle = rgba(ORANGE, 0.4 * (1 - r.t));
+          ctx.beginPath(); ctx.arc(r.x, r.y + 2, 14 + 22 * ease(r.t), 0, TAU); ctx.stroke();
+        }
+        for (i = 0; i < people.length; i++) {
+          person(people[i], people[i].lit);
+          if (people[i].talk > 0) bubble(people[i], Math.min(1, people[i].talk * 2));
         }
       }
       return { resize: resize, draw: draw };
@@ -470,102 +604,6 @@
             ctx.beginPath(); ctx.moveTo(p.x - vx * 0.14, p.y - p.vy * 0.14); ctx.lineTo(p.x, p.y); ctx.stroke();
             if (p.x > W + 30 || p.y < -30) spawn(p, false);
           }
-        }
-      }
-      return { resize: resize, draw: draw };
-    }
-
-    /* ---------- Nexus · enxame de agentes que recebe uma tarefa, voa até ela e a conclui ---------- */
-    function swarm() {
-      var bs = [], task = { x: 0, y: 0, t: 0, id: 11 }, rings = [];
-      function newTask() {
-        // A tarefa aparece num espaço livre do topo, nunca escondida atrás da imagem ao lado do texto
-        var hb = host.getBoundingClientRect(), show = host.querySelector('.page-hero__show'), r = show && show.getBoundingClientRect();
-        for (var i = 0; i < 24; i++) {
-          task.x = rnd(W >= 1024 ? W * 0.4 : W * 0.1, W * 0.94); task.y = rnd(H * 0.14, H * 0.9);
-          if (!r || task.x < r.left - hb.left - 30 || task.x > r.right - hb.left + 30 || task.y < r.top - hb.top - 30 || task.y > r.bottom - hb.top + 30) break;
-        }
-        task.t = 0; task.age = 0; task.id++;
-      }
-      function resize() {
-        var n = W < 640 ? 44 : 90;
-        if (bs.length !== n) {
-          bs = [];
-          for (var i = 0; i < n; i++) bs.push({ x: rnd(0, W), y: rnd(0, H), vx: rnd(-40, 40), vy: rnd(-40, 40), lead: i % 9 === 0 });
-        }
-        newTask();
-      }
-      function draw(dt) {
-        var s = Math.min(dt, 40) / 1000;
-        var tx = ptr.on ? ptr.x : task.x, ty = ptr.on ? ptr.y : task.y;
-        var near = 0, i, j, a, b;
-        // Ligações curtas: os agentes conversam entre si
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = 'rgba(233,233,238,.1)';
-        ctx.beginPath();
-        for (i = 0; i < bs.length; i++) {
-          a = bs[i];
-          var ax = 0, ay = 0, cx = 0, cy = 0, avx = 0, avy = 0, cnt = 0;
-          for (j = 0; j < bs.length; j++) {
-            if (i === j) continue;
-            b = bs[j];
-            var dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy;
-            if (d2 > 4900) continue;
-            cnt++; cx += b.x; cy += b.y; avx += b.vx; avy += b.vy;
-            if (d2 < 484) { var inv = 900 / Math.max(d2, 16); ax += dx * inv; ay += dy * inv; }
-            if (j > i && d2 < 1600) { ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); }
-          }
-          if (cnt) {
-            ax += (avx / cnt - a.vx) * 0.9 + (cx / cnt - a.x) * 0.45;
-            ay += (avy / cnt - a.vy) * 0.9 + (cy / cnt - a.y) * 0.45;
-          }
-          // Vai até a tarefa e circula em volta dela enquanto trabalha
-          var ex = tx - a.x, ey = ty - a.y, ed = Math.sqrt(ex * ex + ey * ey) || 1;
-          if (ed < 80) near++;
-          var orbit = ed < 110 ? 0.9 : 0.25;
-          var wantX = (ex / ed) * 130 + (-ey / ed) * 110 * orbit, wantY = (ey / ed) * 130 + (ex / ed) * 110 * orbit;
-          ax += (wantX - a.vx) * 1.1; ay += (wantY - a.vy) * 1.1;
-          a.vx += ax * s; a.vy += ay * s;
-          var sp = Math.sqrt(a.vx * a.vx + a.vy * a.vy);
-          var max = a.lead ? 170 : 150;
-          if (sp > max) { a.vx *= max / sp; a.vy *= max / sp; } else if (sp < 40) { a.vx *= 40 / (sp || 1); a.vy *= 40 / (sp || 1); }
-          a.x += a.vx * s; a.y += a.vy * s;
-        }
-        ctx.stroke();
-        if (!ptr.on) {
-          task.age += dt;
-          if (near > bs.length * 0.25) task.t += dt;
-          if (task.t > 1500 || task.age > 9000) { rings.push({ x: task.x, y: task.y, r: 10, a: 1 }); newTask(); }
-          // A tarefa: moldura tracejada com o número
-          var k = clamp(task.t / 1500, 0, 1);
-          ctx.setLineDash([3, 4]);
-          ctx.strokeStyle = rgba(ORANGE, 0.55);
-          ctx.strokeRect(task.x - 11, task.y - 11, 22, 22);
-          ctx.setLineDash([]);
-          ctx.fillStyle = rgba(ORANGE, 0.16 + 0.5 * k);
-          ctx.fillRect(task.x - 11, task.y + 14, 22 * k, 2);
-          ctx.font = '500 9px ' + MONO;
-          ctx.textBaseline = 'bottom';
-          ctx.fillStyle = 'rgba(233,233,238,.4)';
-          ctx.fillText('tarefa ' + String(task.id).padStart(3, '0'), task.x - 11, task.y - 16);
-        }
-        for (i = rings.length - 1; i >= 0; i--) {
-          var r = rings[i];
-          r.r += s * 90; r.a -= s * 0.8;
-          if (r.a <= 0) { rings.splice(i, 1); continue; }
-          ctx.strokeStyle = rgba(ORANGE, 0.5 * r.a);
-          ctx.beginPath(); ctx.arc(r.x, r.y, r.r, 0, TAU); ctx.stroke();
-        }
-        // Cada agente é uma pequena seta que aponta para onde vai
-        for (i = 0; i < bs.length; i++) {
-          a = bs[i];
-          var h = Math.atan2(a.vy, a.vx), z = a.lead ? 8 : 6.5;
-          ctx.fillStyle = a.lead ? rgba(ORANGE, 0.95) : 'rgba(233,233,238,.72)';
-          ctx.beginPath();
-          ctx.moveTo(a.x + Math.cos(h) * z, a.y + Math.sin(h) * z);
-          ctx.lineTo(a.x + Math.cos(h + 2.5) * z * 0.8, a.y + Math.sin(h + 2.5) * z * 0.8);
-          ctx.lineTo(a.x + Math.cos(h - 2.5) * z * 0.8, a.y + Math.sin(h - 2.5) * z * 0.8);
-          ctx.closePath(); ctx.fill();
         }
       }
       return { resize: resize, draw: draw };
@@ -1047,9 +1085,9 @@
       combo: function () { return codeField(true); },
       grid: precisionGrid,
       focus: focus,
-      team: team,
+      agents: function () { return team(['Planejador', 'Pesquisa', 'Código', 'Testes', 'Revisão', 'Entrega']); },
+      crew: crew,
       pipeline: pipeline,
-      swarm: swarm,
       wire: wire,
       flow: flow,
       pen: pen,
