@@ -278,121 +278,504 @@
       return { resize: resize, draw: draw };
     }
 
-    /* ---------- Nexus · agentes como cursores de um editor compartilhado, desenhando molduras juntos ---------- */
-    function team(names) {
-      var bots = [], blocks = [], step = 32, bg = null, wasOn = false;
-      function target(c) {
-        if (ptr.on) {
-          var a = Math.random() * TAU, d = rnd(70, 180);
-          c.tx = ptr.x + Math.cos(a) * d; c.ty = ptr.y + Math.sin(a) * d;
-        } else {
-          // Sem mouse, os agentes trabalham fora do título e do texto, para não atrapalhar a leitura
-          var hb = host.getBoundingClientRect(), txt = [].map.call(host.querySelectorAll('.page-hero__title, .lead'), function (el) { return el.getBoundingClientRect(); });
-          for (var k = 0; k < 30; k++) {
-            c.tx = rnd(W * 0.05, W * 0.95); c.ty = rnd(H * 0.12, H * 0.9);
-            var hit = txt.some(function (r) { return c.tx > r.left - hb.left - 110 && c.tx < r.right - hb.left + 20 && c.ty > r.top - hb.top - 40 && c.ty < r.bottom - hb.top + 20; });
-            if (!hit) break;
+    /* ---------- Nexus · o enxame ao vivo: equipes de agentes, cada uma montando uma parte do sistema ---------- */
+    // Cada equipe: área, parte do sistema que ela monta, tipo de peça, agentes, tarefas (uma palavra) e itens dessa parte
+    var SWARM = [
+      ['Arquitetura', 'plano de tarefas', 'graph', 'Atlas Titan Chronos Apex', 'planejando fatiando mapeando priorizando delegando', 'auth|api|banco|painel|filas|deploy|busca|app|e-mail|relatórios'],
+      ['DevOps', 'pipeline de deploy', 'pipe', 'Quantum Zenith Orion Astra Hype Flux Vulcan Thorin Odin Kael', 'implantando configurando escalando publicando empacotando orquestrando', 'build|testes|imagem|deploy|escala|backup|dns|ssl|cdn|rollback'],
+      ['Plataforma', 'núcleo do sistema', 'box', 'Cipher Bóris Sansão Buba Tito Zico Dru Caco Dino', 'compilando otimizando versionando refatorando integrando', 'filas|cache|eventos|jobs|config|logs|sessões|arquivos|agenda|plugins'],
+      ['Backend', 'api de pedidos', 'api', 'Nexa Vector Byte Zyn Dax Krix Nova Pulsar Nebula', 'codificando roteando validando autenticando processando', 'GET /pedidos|POST /login|PUT /perfil|GET /itens|POST /pedidos|DELETE /sessao|GET /notas|PATCH /estoque|POST /upload|GET /clientes'],
+      ['Banco de dados', 'modelo de dados', 'db', 'Photon Tex List Catatal Hermes Phoenix Castor Pollux', 'modelando indexando migrando consultando normalizando', 'usuarios|pedidos|produtos|estoque|clientes|notas|sessoes|pagamentos|enderecos|eventos'],
+      ['Integrações', 'conexões externas', 'box', 'Alexia Kiko Guto Lora Tita Mel Lola Duda', 'conectando importando exportando notificando acoplando', 'webhook|e-mail|erp|whatsapp|planilhas|crm|correios|nota fiscal|agenda|sms'],
+      ['Frontend', 'painel do cliente', 'ui', 'Pixel Vesper Raze Trix Prisma Eclipse Sol Lua Terra Iris', 'montando estilizando animando renderizando ajustando', 'cabeçalho|menu|cards|gráfico|tabela|formulário|busca|filtros|rodapé|modal'],
+      ['UI/UX', 'protótipo de telas', 'ui', 'Milo Dante Pingo Tico Teco', 'desenhando prototipando refinando alinhando', 'grade|tipografia|cores|ícones|estados|fluxos|botões|espaços'],
+      ['Mobile', 'versão mobile', 'ui', 'Lico Zeca Chico Nino Soneca', 'adaptando ajustando encaixando otimizando', 'login|início|carrinho|perfil|pedidos|alertas|busca|ajustes'],
+      ['QA', 'testes automatizados', 'test', 'Vex Enzo Maya Lara Zuri Kai Cleo Hugo Téo', 'testando validando reproduzindo verificando aprovando', 'login.spec|carrinho.spec|checkout.spec|api.spec|perfil.spec|busca.spec|estoque.spec|e2e.spec|admin.spec|upload.spec'],
+      ['Segurança', 'auditoria de segurança', 'sec', 'Liz Nora Breno Sofia Gaby Bidu Nico Joca', 'auditando blindando escaneando cifrando verificando', 'tokens|senhas|cabeçalhos|permissões|pacotes|entradas|sessões|cors|uploads|limites'],
+      ['Monitoramento', 'métricas ao vivo', 'spark', 'Scooby Simba Teddy Bento Mito', 'monitorando medindo alertando registrando rastreando', 'latência|erros|cpu|memória|requisições|uptime|fila|disco'],
+    ];
+
+    function swarm() {
+      var SANS = '"Geist", system-ui, -apple-system, "Segoe UI", sans-serif', CODE = '"Geist Mono", ' + MONO;
+      var INK = 'rgba(233,233,238,';
+      var teams = SWARM.map(function (t) {
+        return { area: t[0], part: t[1], kind: t[2], names: t[3].split(' '), jobs: t[4].split(' '), items: t[5].split('|'), next: (Math.random() * 9) | 0, on: false };
+      });
+      var queue = teams.slice().sort(function () { return Math.random() - 0.5; });
+      var zones = [], avs = {}, widths = {}, bg = null, sm = false, hot = null, hotZone = null;
+      var S, R, ROW, PH, HDR, CH, F_NAME, F_JOB, F_AREA, F_ITEM, F_HDR;
+
+      function tw(font, s) {
+        var k = font + '|' + s;
+        if (!(k in widths)) { ctx.font = font; widths[k] = ctx.measureText(s).width; }
+        return widths[k];
+      }
+      function pick(a) { return a[(Math.random() * a.length) | 0]; }
+      function shuffle(a) { return a.slice().sort(function () { return Math.random() - 0.5; }); }
+      function seeded(a) {
+        return function () {
+          a = (a + 0x6D2B79F5) | 0;
+          var t = Math.imul(a ^ (a >>> 15), 1 | a);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+
+      /* Avatar: uma cabeça de chip com uma matriz de LEDs 5x5 espelhada, única para cada nome */
+      function avatar(name) {
+        var key = name + '|' + S;
+        if (avs[key]) return avs[key];
+        var h = 2166136261;
+        for (var i = 0; i < name.length; i++) h = Math.imul(h ^ name.charCodeAt(i), 16777619);
+        var rand = seeded(h >>> 0), k = Math.min(dpr, 2);
+        var c = document.createElement('canvas');
+        c.width = c.height = Math.ceil(S * k);
+        var g = c.getContext('2d');
+        g.scale(k, k);
+        var r = S * 0.3, o = 0.5, w = S - 1;
+        g.beginPath();
+        g.moveTo(o + r, o); g.arcTo(o + w, o, o + w, o + w, r); g.arcTo(o + w, o + w, o, o + w, r);
+        g.arcTo(o, o + w, o, o, r); g.arcTo(o, o, o + w, o, r); g.closePath();
+        var gr = g.createLinearGradient(0, 0, S, S);
+        gr.addColorStop(0, '#26262e'); gr.addColorStop(1, '#0b0b0f');
+        g.fillStyle = gr; g.fill();
+        g.strokeStyle = 'rgba(233,233,238,.3)'; g.lineWidth = 1; g.stroke();
+        // Metade da matriz sorteada pelo nome e espelhada; a coluna do meio e alguns pontos acendem em laranja
+        var n = 5, pad = S * 0.21, cell = (S - pad * 2) / n, d = cell * 0.74, lit = [], cnt = 0;
+        for (var y = 0; y < n; y++) {
+          lit[y] = [];
+          for (var x = 0; x < 3; x++) { lit[y][x] = rand() < 0.5; if (lit[y][x]) cnt++; }
+        }
+        while (cnt < 5) { var ry = (rand() * n) | 0, rx = (rand() * 3) | 0; if (!lit[ry][rx]) { lit[ry][rx] = true; cnt++; } }
+        var live = null;
+        for (y = 0; y < n; y++) {
+          for (x = 0; x < n; x++) {
+            var hx = x < 3 ? x : n - 1 - x, on = lit[y][hx];
+            var px = pad + x * cell + (cell - d) / 2, py = pad + y * cell + (cell - d) / 2;
+            if (!on) { g.fillStyle = 'rgba(233,233,238,.07)'; g.fillRect(px, py, d, d); continue; }
+            var hotCell = hx === 2 || (y * 7 + hx * 3 + (h & 7)) % 5 === 0;
+            g.fillStyle = hotCell ? 'rgba(255,85,0,.95)' : 'rgba(233,233,238,.86)';
+            g.fillRect(px, py, d, d);
+            if (hotCell && !live) live = { x: px, y: py };
           }
         }
-        c.tx = clamp(c.tx, 12, W - 90); c.ty = clamp(c.ty, Math.max(96, H * 0.12), H - 40);
-        c.wait = 0;
+        avs[key] = { img: c, lx: live ? live.x : S / 2 - d / 2, ly: live ? live.y : S / 2 - d / 2, d: d };
+        return avs[key];
       }
+
+      /* Espaços livres do topo: tudo que não é texto, botão ou a tela do Nexus vira área de trabalho */
+      function where(el) {
+        var x = 0, y = 0, e = el;
+        while (e && e !== host) { x += e.offsetLeft; y += e.offsetTop; e = e.offsetParent; }
+        if (e !== host) {
+          var r = el.getBoundingClientRect(), hb = host.getBoundingClientRect();
+          return { l: r.left - hb.left, t: r.top - hb.top, r: r.right - hb.left, b: r.bottom - hb.top };
+        }
+        return { l: x, t: y, r: x + el.offsetWidth, b: y + el.offsetHeight };
+      }
+      function bestRect(grid, nc, nr, minW, minH) {
+        var hts = new Int16Array(nc), best = null, bs = 0;
+        for (var y = 0; y < nr; y++) {
+          for (var x = 0; x < nc; x++) hts[x] = grid[y * nc + x] ? 0 : hts[x] + 1;
+          var st = [];
+          for (x = 0; x <= nc; x++) {
+            var hh = x < nc ? hts[x] : 0, start = x;
+            while (st.length && st[st.length - 1][1] > hh) {
+              var tp = st.pop(), w = x - tp[0], h = tp[1];
+              if (w >= minW && h >= minH) {
+                var sc = Math.min(w, 120) * Math.min(h, 34) + w * h * 0.001;
+                if (sc > bs) { bs = sc; best = { x: tp[0], y: y - h + 1, w: w, h: h }; }
+              }
+              start = tp[0];
+            }
+            st.push([start, hh]);
+          }
+        }
+        return best;
+      }
+      function findZones() {
+        var cs = 8, nc = Math.ceil(W / cs), nr = Math.ceil(H / cs), grid = new Uint8Array(nc * nr);
+        var pad = sm ? 8 : 20, edge = sm ? 8 : 20;
+        function block(l, t, r, b) {
+          var c0 = clamp(Math.floor(l / cs), 0, nc), c1 = clamp(Math.ceil(r / cs), 0, nc);
+          var r0 = clamp(Math.floor(t / cs), 0, nr), r1 = clamp(Math.ceil(b / cs), 0, nr);
+          for (var y = r0; y < r1; y++) for (var x = c0; x < c1; x++) grid[y * nc + x] = 1;
+        }
+        var head = document.querySelector('.site-header'), top = head ? head.offsetHeight + 12 : 84;
+        block(0, 0, W, top);
+        block(0, H * 0.9, W, H);
+        block(0, 0, edge, H); block(W - edge, 0, W, H);
+        [].forEach.call(host.querySelectorAll('.crumbs, .label, .page-hero__title, .lead, .page-hero__actions > *, .page-hero__shot'), function (el) {
+          if (!el.offsetWidth) return;
+          var q = where(el);
+          block(q.l - pad, q.t - pad, q.r + pad, q.b + pad);
+        });
+        var minW = Math.ceil(((sm ? 44 : 90) + R) / cs), minH = Math.ceil((ROW + 6) / cs), out = [];
+        for (var k = 0; k < (sm ? 3 : 5); k++) {
+          var b = bestRect(grid, nc, nr, minW, minH);
+          if (!b) break;
+          block(b.x * cs - 24, b.y * cs - 24, (b.x + b.w) * cs + 24, (b.y + b.h) * cs + 24);
+          var zx = b.x * cs, zy = b.y * cs, zw = b.w * cs, zh = Math.min(b.h, 34) * cs;
+          // Faixas muito largas viram duas ou três equipes lado a lado
+          var parts = sm ? 1 : clamp(Math.floor(zw / 540), 1, 3), gap = 28, each = (zw - gap * (parts - 1)) / parts;
+          for (var j = 0; j < parts; j++) out.push(zone(zx + j * (each + gap), zy, each, zh));
+        }
+        return out;
+      }
+      function zone(x, y, w, h) {
+        var hdr = h >= HDR + ROW ? HDR : 0, rows = Math.max(1, Math.floor((h - hdr) / ROW));
+        var rh = Math.min(ROW * 1.35, (h - hdr) / rows), cols = Math.max(1, Math.floor(w / ((sm ? 44 : 90) + R)));
+        var sw = w / cols, z = { x: x, y: y, w: w, h: h, hdr: hdr, pw: Math.min(sm ? 90 : 170, sw - R), slots: [], pieces: [], agents: [], wait: [], team: null, st: 'build', t: 0 };
+        for (var r = 0; r < rows; r++) {
+          for (var c = 0; c < cols; c++) z.slots.push({ x: x + c * sw, y: y + hdr + r * rh + (rh + ROW) / 2 - S / 2 - 3 });
+        }
+        return z;
+      }
+
+      /* Peças: cada uma é desenhada da esquerda para a direita, com o agente puxando a ponta */
+      function piece(z, t, txt, sl, after, n) {
+        var row = t.kind === 'api' || t.kind === 'test' || t.kind === 'sec', ic = sm ? 10 : 12;
+        var pc = { kind: t.kind, txt: txt, row: row, x: sl.x, y: sl.y - PH / 2, h: PH, g: 0, go: false, dur: rnd(3, 5.2), by: null, done: false, flash: 0, ha: 1, hide: false, after: after, sl: sl, n: n };
+        if (row) {
+          while (ic + tw(F_ITEM, pc.txt) > z.pw && pc.txt.length > 4) pc.txt = pc.txt.slice(0, -1);
+          pc.w = ic + tw(F_ITEM, pc.txt);
+        } else pc.w = z.pw * rnd(0.8, 1);
+        if (t.kind === 'spark') { pc.pts = []; for (var i = 0; i < 10; i++) pc.pts.push(rnd(0.15, 0.85)); }
+        if (t.kind === 'ui') pc.bars = [rnd(0.5, 1), rnd(0.3, 0.8)];
+        return pc;
+      }
+      function tip(pc) {
+        var e = Math.min(1, pc.g);
+        return { x: pc.x + pc.w * e, y: pc.y + pc.h / 2 };
+      }
+
+      /* Agentes: entram, pegam uma peça livre, puxam a ponta até o fim e passam para a próxima */
+      function agent(t, name, x, y, delay) {
+        return { name: name, t: t, job: pick(t.jobs), x: x, y: y, vx: 0, vy: 0, p: null, a: 0, st: 'in', delay: delay || 0, av: avatar(name), ph: Math.random() * TAU };
+      }
+      function claim(z, ag) {
+        var best = null, bd = -1, seen = 0;
+        for (var i = 0; i < z.pieces.length && seen < 3; i++) {
+          var pc = z.pieces[i];
+          if (pc.by || pc.done || (pc.after && !pc.after.done)) continue;
+          seen++;
+          var d = 1e9;
+          for (var j = 0; j < z.agents.length; j++) {
+            var o = z.agents[j];
+            if (o === ag || o.st === 'out') continue;
+            var q = o.p ? tip(o.p) : o;
+            d = Math.min(d, Math.hypot(q.x - pc.x, q.y - pc.y));
+          }
+          if (d > bd) { bd = d; best = pc; }
+        }
+        if (best) {
+          best.by = ag; ag.p = best; ag.job = pick(ag.t.jobs);
+          if (best.after) best.after.hide = true;
+        } else ag.job = z.st === 'build' ? 'revisando' : 'concluído';
+        return best;
+      }
+      function load(z) {
+        var t = null;
+        for (var i = 0; i < queue.length; i++) if (!queue[i].on) { t = queue.splice(i, 1)[0]; queue.push(t); break; }
+        if (z.team) z.team.on = false;
+        if (!t) return;
+        t.on = true; z.team = t; z.st = 'build'; z.t = 0;
+        var items = shuffle(t.items), ns = z.slots.length;
+        var n = Math.min(items.length, Math.max(ns * 2, 4));
+        z.pieces = [];
+        for (i = 0; i < n; i++) z.pieces.push(piece(z, t, items[i], z.slots[i % ns], i >= ns ? z.pieces[i - ns] : null, i));
+        // Na tela ficam os que cabem; o resto da equipe entra no revezamento
+        var vis = Math.min(t.names.length, ns, sm ? 3 : 7);
+        z.agents = []; z.wait = [];
+        for (i = 0; i < t.names.length; i++) {
+          var name = t.names[(t.next + i) % t.names.length];
+          if (i >= vis) { z.wait.push(name); continue; }
+          var ag = agent(t, name, 0, 0, i * 240);
+          z.agents.push(ag);
+          if (claim(z, ag)) { var q = tip(ag.p); ag.x = q.x + S / 2 + 4; ag.y = q.y; }
+          else { ag.x = z.slots[i % ns].x + S; ag.y = z.slots[i % ns].y; }
+        }
+        t.next = (t.next + vis) % t.names.length;
+      }
+
       function resize() {
-        step = W < 640 ? 26 : 32;
+        sm = W < 640;
+        S = sm ? 20 : 30; CH = sm ? 26 : 30; ROW = sm ? 38 : 48; PH = sm ? 16 : 20; HDR = sm ? 18 : 22;
+        F_NAME = '600 ' + (sm ? 10 : 11) + 'px ' + SANS;
+        F_JOB = '400 ' + (sm ? 8.5 : 9.5) + 'px ' + CODE;
+        F_AREA = '500 ' + (sm ? 7.5 : 8) + 'px ' + CODE;
+        F_ITEM = '400 ' + (sm ? 8 : 9) + 'px ' + CODE;
+        F_HDR = '500 ' + (sm ? 8.5 : 9) + 'px ' + CODE;
+        // Reserva à direita de cada peça: a cabeça e o cartão mais largo possível
+        var card = 0;
+        teams.forEach(function (t) {
+          t.names.forEach(function (nm) { card = Math.max(card, tw(F_NAME, nm)); });
+          t.jobs.concat(['revisando', 'concluído']).forEach(function (j) { card = Math.max(card, tw(F_JOB, j) + 7); });
+        });
+        R = S + 10 + card + 16 + 6;
+        var step = sm ? 26 : 32;
         bg = document.createElement('canvas');
         bg.width = Math.round(W * dpr); bg.height = Math.round(H * dpr);
         var b = bg.getContext('2d');
         b.scale(dpr, dpr);
-        b.fillStyle = 'rgba(255,255,255,.075)';
+        b.fillStyle = 'rgba(255,255,255,.07)';
         for (var y = step; y < H; y += step) for (var x = step; x < W; x += step) b.fillRect(x - 0.75, y - 0.75, 1.5, 1.5);
-        if (!bots.length) {
-          for (var i = 0; i < names.length; i++) {
-            var c = { name: names[i], x: rnd(W * 0.1, W * 0.9), y: rnd(H * 0.15, H * 0.9), vx: 0, vy: 0, trail: [], hot: i % 2 === 0 };
-            target(c); bots.push(c);
+        teams.forEach(function (t) { t.on = false; });
+        zones = findZones();
+        // Cada equipe começa num ponto diferente do trabalho, para as partes não ficarem prontas ao mesmo tempo
+        zones.forEach(function (z, i) { load(z); for (var k = 0; k < i * 80; k++) update(z, 0.04); });
+      }
+
+      function update(z, s) {
+        z.t += s;
+        for (var i = z.agents.length - 1; i >= 0; i--) {
+          var ag = z.agents[i];
+          if (ag.delay > 0) { ag.delay -= s * 1000; continue; }
+          if (ag.st === 'out') { ag.a -= s * 2.6; if (ag.a <= 0) z.agents.splice(i, 1); continue; }
+          ag.a = Math.min(1, ag.a + s * 2.4);
+          if (!ag.p && z.st === 'build' && ag.job === 'revisando' && Math.random() < s * 2) claim(z, ag);
+          var tx = ag.x, ty = ag.y;
+          if (ag.p) { var q = tip(ag.p); tx = q.x + S / 2 + 4; ty = q.y; }
+          if (ag.p && ag.p.go) {
+            // Trabalhando: acompanha a ponta da peça de perto
+            var f = 1 - Math.pow(0.0004, s);
+            ag.x += (tx - ag.x) * f; ag.y += (ty - ag.y) * f; ag.vx = ag.vy = 0;
+            ag.p.g += s / ag.p.dur;
+            if (ag.p.g >= 1) {
+              var pc = ag.p;
+              pc.g = 1; pc.done = true; pc.flash = 1; pc.by = null; ag.p = null;
+              // Revezamento: às vezes quem terminou passa a vez para outro da equipe
+              if (z.wait.length && Math.random() < 0.45) {
+                ag.st = 'out'; z.wait.push(ag.name);
+                var nx = agent(z.team, z.wait.shift(), ag.x, ag.y, 260);
+                z.agents.push(nx); claim(z, nx);
+              } else claim(z, ag);
+            }
+          } else {
+            // A caminho: mola suave até o começo da próxima peça
+            var kx = 150 * (tx - ag.x) - 22 * ag.vx, ky = 150 * (ty - ag.y) - 22 * ag.vy;
+            ag.vx += kx * s; ag.vy += ky * s;
+            var sp = Math.hypot(ag.vx, ag.vy);
+            if (sp > 420) { ag.vx *= 420 / sp; ag.vy *= 420 / sp; }
+            ag.x += ag.vx * s; ag.y += ag.vy * s;
+            if (ag.p && Math.abs(tx - ag.x) < 5 && Math.abs(ty - ag.y) < 5) ag.p.go = true;
           }
-        } else bots.forEach(function (c) { c.x = clamp(c.x, 0, W); c.y = clamp(c.y, 0, H); target(c); });
-        blocks = [];
+        }
+        for (i = 0; i < z.pieces.length; i++) {
+          var p = z.pieces[i];
+          p.flash = Math.max(0, p.flash - s * 1.2);
+          if (p.hide) p.ha = Math.max(0, p.ha - s * 2.5);
+        }
+        if (z.st === 'build' && z.pieces.length && z.pieces.every(function (p) { return p.done; })) {
+          z.st = 'done'; z.t = 0;
+          z.agents.forEach(function (a) { if (a.st !== 'out') { a.job = 'concluído'; a.p = null; } });
+        } else if (z.st === 'done' && z.t > 1.9) {
+          z.st = 'fade'; z.t = 0;
+          z.agents.forEach(function (a) { a.st = 'out'; });
+        } else if (z.st === 'fade' && z.t > 0.9) load(z);
       }
-      function chip(c, x, y) {
-        ctx.font = '500 10px ' + MONO;
-        var w = ctx.measureText(c.name).width + 12;
-        ctx.fillStyle = c.hot ? 'rgba(255,85,0,.88)' : 'rgba(233,233,238,.82)';
-        roundRect(x, y, w, 17, 4); ctx.fill();
+
+      function frame(z, za) {
+        var l = sm ? 7 : 9, a = z === hotZone ? 0.5 : 0.2;
+        ctx.strokeStyle = z === hotZone ? rgba(ORANGE, 0.55) : INK + a + ')';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        [[z.x, z.y, 1, 1], [z.x + z.w, z.y, -1, 1], [z.x, z.y + z.h, 1, -1], [z.x + z.w, z.y + z.h, -1, -1]].forEach(function (c) {
+          ctx.moveTo(c[0] + c[2] * l, c[1] + 0.5 * c[3]); ctx.lineTo(c[0] + 0.5 * c[2], c[1] + 0.5 * c[3]); ctx.lineTo(c[0] + 0.5 * c[2], c[1] + c[3] * l);
+        });
+        ctx.stroke();
+        if (!z.hdr || !z.team) return;
+        var done = 0;
+        z.pieces.forEach(function (p) { done += Math.min(1, p.g); });
+        var prog = z.pieces.length ? done / z.pieces.length : 0, hy = z.y + (sm ? 8 : 10), x0 = z.x + l + 5;
+        ctx.font = F_HDR; ctx.textBaseline = 'middle';
+        ctx.fillStyle = rgba(ORANGE, (0.55 + 0.45 * Math.sin(time * 0.006)) * za);
+        ctx.beginPath(); ctx.arc(x0 + 2.5, hy, 2.5, 0, TAU); ctx.fill();
+        ctx.fillStyle = INK + 0.62 * za + ')';
+        ctx.fillText(z.team.part, x0 + 10, hy);
+        var right = z.st === 'build' ? Math.round(prog * 100) + '%' : 'pronto';
+        if (z.w > 300 || sm) right = z.team.names.length + ' agentes · ' + right;
+        if (z.w < 220) right = z.st === 'build' ? Math.round(prog * 100) + '%' : 'pronto';
+        ctx.fillStyle = z.st === 'build' ? INK + 0.4 * za + ')' : rgba(ORANGE, 0.9 * za);
+        ctx.fillText(right, z.x + z.w - l - 5 - tw(F_HDR, right), hy);
+        // Barra de progresso da parte
+        var by = hy + (sm ? 7 : 9);
+        ctx.fillStyle = INK + 0.06 * za + ')';
+        ctx.fillRect(x0, by, z.w - 2 * (l + 5), 1);
+        ctx.fillStyle = rgba(ORANGE, 0.6 * za);
+        ctx.fillRect(x0, by, (z.w - 2 * (l + 5)) * prog, 1);
+      }
+
+      function drawPiece(pc, za) {
+        var al = za * pc.ha;
+        if (al <= 0.01 || pc.g <= 0) return;
+        var e = Math.min(1, pc.g), x = pc.x, y = pc.y, w = pc.w, h = pc.h, cy = y + h / 2, fl = pc.flash;
+        ctx.font = F_ITEM; ctx.textBaseline = 'middle';
+        if (pc.row) {
+          var ic = sm ? 10 : 12, n = Math.ceil(pc.txt.length * e), tx = x + ic;
+          if (pc.kind === 'api') {
+            var sp = pc.txt.indexOf(' ');
+            ctx.fillStyle = rgba(ORANGE, 0.85 * al);
+            ctx.fillText(pc.txt.slice(0, Math.min(n, sp)), tx, cy);
+            if (n > sp) { ctx.fillStyle = INK + 0.55 * al + ')'; ctx.fillText(pc.txt.slice(sp, n), tx + tw(F_ITEM, pc.txt.slice(0, sp)), cy); }
+          } else {
+            ctx.fillStyle = INK + 0.55 * al + ')';
+            ctx.fillText(pc.txt.slice(0, n), tx, cy);
+          }
+          // Ícone do estado: ponto, teste rodando ou cadeado; laranja quando termina
+          var ix = x + 3.5;
+          ctx.strokeStyle = ctx.fillStyle = pc.done ? rgba(ORANGE, (0.7 + 0.3 * fl) * al) : INK + 0.35 * al + ')';
+          ctx.lineWidth = 1.2;
+          if (pc.kind === 'api') { ctx.beginPath(); ctx.arc(ix, cy, 2.2, 0, TAU); ctx.fill(); }
+          else if (pc.kind === 'test') {
+            ctx.beginPath();
+            if (pc.done) { ctx.moveTo(ix - 3, cy); ctx.lineTo(ix - 1, cy + 2.2); ctx.lineTo(ix + 3, cy - 2.4); }
+            else { var r0 = time * 0.008; ctx.arc(ix, cy, 3, r0, r0 + 4); }
+            ctx.stroke();
+          } else {
+            ctx.beginPath(); ctx.arc(ix, cy - 1.6, 2, Math.PI, 0); ctx.stroke();
+            ctx.fillRect(ix - 3, cy - 1.2, 6, 4.4);
+          }
+          ctx.lineWidth = 1;
+          if (pc.done && pc.kind !== 'api') {
+            ctx.fillStyle = rgba(ORANGE, 0.75 * al);
+            ctx.fillText('ok', x + w + 6, cy);
+          }
+          return;
+        }
+        var sx = x + w * e;
+        ctx.setLineDash(pc.done ? [] : [3, 3]);
+        ctx.strokeStyle = pc.done ? (fl > 0 ? rgba(ORANGE, (0.25 + 0.55 * fl) * al) : INK + 0.24 * al + ')') : INK + 0.34 * al + ')';
+        ctx.beginPath();
+        ctx.moveTo(sx, y + 0.5); ctx.lineTo(x + 0.5, y + 0.5); ctx.lineTo(x + 0.5, y + h - 0.5); ctx.lineTo(sx, y + h - 0.5);
+        if (pc.done) ctx.closePath();
+        ctx.stroke();
+        ctx.setLineDash([]);
+        if (pc.done && fl > 0) { ctx.fillStyle = rgba(ORANGE, 0.08 * fl * al); ctx.fillRect(x, y, w, h); }
+        if (!pc.done) { ctx.fillStyle = rgba(ORANGE, 0.7 * al); ctx.fillRect(sx - 1, y - 1, 2, h + 2); }
+        // O que já foi varrido aparece: rótulo e o detalhe de cada tipo de peça
+        ctx.save();
+        ctx.beginPath(); ctx.rect(x, y - 1, w * e, h + 2); ctx.clip();
+        var lx = x + 7, lab = pc.txt;
+        if (pc.kind === 'graph') {
+          ctx.fillStyle = rgba(ORANGE, 0.8 * al);
+          var id = 'T' + ('0' + (pc.n + 1)).slice(-2);
+          ctx.fillText(id, lx, cy); lx += tw(F_ITEM, id) + 5;
+        } else if (pc.kind === 'db') {
+          ctx.fillStyle = INK + 0.4 * al + ')';
+          ctx.fillRect(lx, cy - 3.5, 7, 1.5); ctx.fillRect(lx, cy - 0.75, 7, 1.5); ctx.fillRect(lx, cy + 2, 7, 1.5);
+          lx += 11;
+        }
+        ctx.fillStyle = INK + 0.6 * al + ')';
+        ctx.fillText(lab, lx, cy);
+        var dx = lx + tw(F_ITEM, lab) + 8, dw = x + w - 6 - dx;
+        if (dw > 6) {
+          if (pc.kind === 'ui') {
+            ctx.fillStyle = INK + 0.14 * al + ')';
+            ctx.fillRect(dx, cy - 3.5, dw * pc.bars[0], 2.5); ctx.fillRect(dx, cy + 1.5, dw * pc.bars[1], 2.5);
+          } else if (pc.kind === 'spark') {
+            ctx.strokeStyle = rgba(ORANGE, 0.65 * al);
+            ctx.beginPath();
+            for (var i = 0; i < pc.pts.length; i++) {
+              var px = dx + dw * i / (pc.pts.length - 1), py = y + 3 + (h - 6) * pc.pts[i];
+              if (i) ctx.lineTo(px, py); else ctx.moveTo(px, py);
+            }
+            ctx.stroke();
+          } else if (pc.kind === 'pipe') {
+            ctx.fillStyle = INK + 0.08 * al + ')'; ctx.fillRect(dx, cy - 1.5, dw, 3);
+            ctx.fillStyle = rgba(ORANGE, 0.55 * al); ctx.fillRect(dx, cy - 1.5, dw * e, 3);
+          } else if (pc.kind === 'db') {
+            ctx.strokeStyle = INK + 0.2 * al + ')';
+            for (var k = 0; k < 3 && k * 12 + 8 < dw; k++) ctx.strokeRect(dx + k * 12 + 0.5, cy - 3.5, 8, 7);
+          } else {
+            ctx.fillStyle = INK + 0.3 * al + ')';
+            for (k = 0; k < 3 && k * 6 < dw; k++) ctx.fillRect(dx + k * 6, cy - 1, 2, 2);
+          }
+        }
+        ctx.restore();
+      }
+
+      function links(z, za) {
+        var kd = z.team && z.team.kind;
+        if (kd !== 'pipe' && kd !== 'graph' && kd !== 'db') return;
+        ctx.strokeStyle = INK + 0.16 * za + ')';
+        ctx.beginPath();
+        for (var i = 1; i < z.pieces.length; i++) {
+          var a = z.pieces[i - 1], b = z.pieces[i];
+          if (!a.done || !b.done || a.hide || b.hide || a.sl === b.sl) continue;
+          var x1 = a.x + a.w, y1 = a.y + a.h / 2, x2 = b.x, y2 = b.y + b.h / 2;
+          if (Math.abs(y1 - y2) < 2 && x2 > x1) { ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); continue; }
+          var my = (y1 + y2) / 2;
+          ctx.moveTo(x1, y1); ctx.lineTo(x1 + 6, y1); ctx.lineTo(x1 + 6, my); ctx.lineTo(x2 - 6, my); ctx.lineTo(x2 - 6, y2); ctx.lineTo(x2, y2);
+        }
+        ctx.stroke();
+      }
+
+      function drawAgent(ag) {
+        var al = ag.a;
+        if (al <= 0.01 || ag.delay > 0) return;
+        var x = ag.x, y = ag.y, h2 = S / 2, work = ag.p && ag.p.go, isHot = ag === hot;
+        ctx.globalAlpha = al;
+        // Área da equipe em cima da cabeça
+        ctx.font = F_AREA; ctx.textBaseline = 'alphabetic';
+        ctx.fillStyle = isHot ? rgba(ORANGE, 0.9) : INK + '.5)';
+        ctx.fillText(ag.t.area.toUpperCase(), x - h2, y - h2 - 4);
+        // Anel girando enquanto trabalha
+        if (work || isHot) {
+          var r0 = time * 0.005 + ag.ph;
+          ctx.strokeStyle = rgba(ORANGE, isHot ? 0.95 : 0.7);
+          ctx.lineWidth = 1.4;
+          ctx.beginPath(); ctx.arc(x, y, h2 + 3.5, r0, r0 + (isHot ? TAU : 1.5)); ctx.stroke();
+          ctx.lineWidth = 1;
+        }
+        ctx.drawImage(ag.av.img, x - h2, y - h2, S, S);
+        if (work) {
+          ctx.fillStyle = rgba(ORANGE, 0.35 + 0.65 * Math.abs(Math.sin(time * 0.007 + ag.ph)));
+          ctx.fillRect(x - h2 + ag.av.lx - 0.6, y - h2 + ag.av.ly - 0.6, ag.av.d + 1.2, ag.av.d + 1.2);
+        }
+        // Ponto de estado no canto da cabeça
         ctx.fillStyle = '#0b0b0f';
+        ctx.beginPath(); ctx.arc(x + h2 - 1, y + h2 - 1, 3.8, 0, TAU); ctx.fill();
+        ctx.fillStyle = work ? rgba(ORANGE, 1) : INK + '.55)';
+        ctx.beginPath(); ctx.arc(x + h2 - 1, y + h2 - 1, 2.3, 0, TAU); ctx.fill();
+        // Cartão ao lado: nome e a tarefa do momento
+        var cx = x + h2 + 6, jw = tw(F_JOB, ag.job), cw = Math.max(tw(F_NAME, ag.name), jw + (work ? 7 : 0)) + 16;
+        roundRect(cx, y - CH / 2, cw, CH, 5);
+        ctx.fillStyle = 'rgba(13,13,17,.9)'; ctx.fill();
+        ctx.strokeStyle = isHot ? rgba(ORANGE, 0.85) : INK + '.14)'; ctx.stroke();
         ctx.textBaseline = 'middle';
-        ctx.fillText(c.name, x + 6, y + 9);
+        ctx.font = F_NAME; ctx.fillStyle = 'rgba(242,242,245,.96)';
+        ctx.fillText(ag.name, cx + 8, y - CH * 0.2);
+        ctx.font = F_JOB; ctx.fillStyle = ag.job === 'concluído' ? INK + '.6)' : rgba(ORANGE, 0.95);
+        ctx.fillText(ag.job, cx + 8, y + CH * 0.22);
+        if (work && time % 1000 < 560) ctx.fillText('_', cx + 9 + jw, y + CH * 0.22);
+        ctx.globalAlpha = 1;
       }
+
       function draw(dt) {
         var s = Math.min(dt, 40) / 1000;
         ctx.drawImage(bg, 0, 0, W, H);
-        // Quando o mouse entra, a equipe vem trabalhar perto de você
-        if (ptr.on !== wasOn) { wasOn = ptr.on; bots.forEach(target); }
-        // Molduras que cada um desenha e que se apagam com o tempo
-        ctx.lineWidth = 1;
-        for (var i = blocks.length - 1; i >= 0; i--) {
-          var b = blocks[i];
-          b.age += dt;
-          var g = ease(clamp(b.age / 520, 0, 1));
-          var a = clamp((7200 - b.age) / 1400, 0, 1);
-          if (a <= 0) { blocks.splice(i, 1); continue; }
-          var x0 = b.x - b.w * g, y0 = b.y - b.h * g;
-          ctx.setLineDash([4, 4]);
-          ctx.strokeStyle = b.hot ? rgba(ORANGE, 0.34 * a) : 'rgba(233,233,238,' + 0.16 * a + ')';
-          ctx.strokeRect(x0 + 0.5, y0 + 0.5, b.w * g, b.h * g);
-          ctx.setLineDash([]);
-          if (g >= 1) {
-            ctx.font = '500 9px ' + MONO;
-            ctx.textBaseline = 'bottom';
-            ctx.fillStyle = 'rgba(233,233,238,' + 0.28 * a + ')';
-            ctx.fillText(b.tag, x0 + 4, y0 - 3);
-          }
+        // Mouse por perto: o agente mais próximo e a área dele se destacam
+        hot = null; hotZone = null;
+        if (ptr.on) {
+          var bd = sm ? 50 : 70;
+          zones.forEach(function (z) {
+            if (ptr.x > z.x && ptr.x < z.x + z.w && ptr.y > z.y && ptr.y < z.y + z.h) hotZone = z;
+            z.agents.forEach(function (ag) {
+              var d = Math.hypot(ag.x - ptr.x, ag.y - ptr.y);
+              if (d < bd && ag.st !== 'out') { bd = d; hot = ag; hotZone = z; }
+            });
+          });
         }
-        // Linhas finas ligando quem trabalha perto
-        for (i = 0; i < bots.length; i++) {
-          for (var j = i + 1; j < bots.length; j++) {
-            var dx = bots[i].x - bots[j].x, dy = bots[i].y - bots[j].y, d = Math.sqrt(dx * dx + dy * dy);
-            if (d > 380) continue;
-            ctx.strokeStyle = rgba(ORANGE, 0.1 * (1 - d / 380));
-            ctx.beginPath(); ctx.moveTo(bots[i].x, bots[i].y); ctx.lineTo(bots[j].x, bots[j].y); ctx.stroke();
-          }
+        for (var i = 0; i < zones.length; i++) {
+          var z = zones[i];
+          update(z, s);
+          var za = z.st === 'fade' ? Math.max(0, 1 - z.t / 0.9) : z.st === 'build' ? Math.min(1, z.t / 0.5) : 1;
+          frame(z, za);
+          links(z, za);
+          z.pieces.forEach(function (p) { drawPiece(p, za); });
         }
-        for (i = 0; i < bots.length; i++) {
-          var c = bots[i];
-          if (c.wait > 0) { c.wait -= dt; if (c.wait <= 0) target(c); }
-          var ax = (c.tx - c.x) * 7 - c.vx * 5, ay = (c.ty - c.y) * 7 - c.vy * 5;
-          c.vx += ax * s; c.vy += ay * s;
-          var sp = Math.sqrt(c.vx * c.vx + c.vy * c.vy);
-          if (sp > 360) { c.vx *= 360 / sp; c.vy *= 360 / sp; }
-          c.x += c.vx * s; c.y += c.vy * s;
-          if (c.wait <= 0 && Math.abs(c.tx - c.x) < 4 && Math.abs(c.ty - c.y) < 4 && sp < 20) {
-            // Chegou: desenha uma moldura presa à grade, com o cursor no canto
-            if (Math.random() < 0.7) {
-              var bw = step * ((2 + Math.random() * 4) | 0), bh = step * ((1 + Math.random() * 3) | 0);
-              blocks.push({ x: Math.round(c.x / step) * step, y: Math.round(c.y / step) * step, w: bw, h: bh, age: 0, hot: c.hot, tag: c.name.toLowerCase() });
-              if (blocks.length > 16) blocks.shift();
-            }
-            c.wait = rnd(500, 1500);
-          }
-          c.trail.push(c.x, c.y);
-          if (c.trail.length > 48) c.trail.splice(0, 2);
-          if (c.trail.length > 4) {
-            ctx.strokeStyle = c.hot ? rgba(ORANGE, 0.22) : 'rgba(233,233,238,.14)';
-            ctx.beginPath(); ctx.moveTo(c.trail[0], c.trail[1]);
-            for (j = 2; j < c.trail.length; j += 2) ctx.lineTo(c.trail[j], c.trail[j + 1]);
-            ctx.stroke();
-          }
-          // Seta do cursor e o nome de quem está ali
-          ctx.save();
-          ctx.translate(c.x, c.y);
-          ctx.beginPath();
-          ctx.moveTo(0, 0); ctx.lineTo(0, 15); ctx.lineTo(4, 11.4); ctx.lineTo(7, 17.6); ctx.lineTo(9.4, 16.6); ctx.lineTo(6.6, 10.6); ctx.lineTo(11.6, 10.6);
-          ctx.closePath();
-          ctx.fillStyle = c.hot ? 'rgba(255,85,0,.92)' : 'rgba(233,233,238,.9)';
-          ctx.strokeStyle = 'rgba(11,11,15,.9)';
-          ctx.fill(); ctx.stroke();
-          ctx.restore();
-          chip(c, c.x + 12, c.y + 16);
-        }
+        for (i = 0; i < zones.length; i++) zones[i].agents.forEach(drawAgent);
       }
       return { resize: resize, draw: draw };
     }
@@ -1085,7 +1468,7 @@
       combo: function () { return codeField(true); },
       grid: precisionGrid,
       focus: focus,
-      agents: function () { return team(['Planejador', 'Pesquisa', 'Código', 'Testes', 'Revisão', 'Entrega']); },
+      agents: swarm,
       crew: crew,
       pipeline: pipeline,
       wire: wire,
