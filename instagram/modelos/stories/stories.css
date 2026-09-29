@@ -1,0 +1,36 @@
+/* Stories dos destaques: 1080 x 1920, mesma série visual. Topo e base livres para a interface do app. */
+@import url("../base.css");
+
+.topo { display: flex; justify-content: space-between; align-items: baseline; }
+
+.conteudo { margin-block: auto; display: grid; gap: 56px; }
+
+/* O único detalhe laranja da peça */
+.linha { width: 96px; height: 4px; background: var(--accent); box-shadow: 0 0 24px var(--accent-glow); }
+
+.peca--vertical .titulo { font-size: 112px; }
+.peca--vertical .texto { font-size: 40px; max-width: 22ch; }
+
+.lista { list-style: none; display: grid; }
+.lista li {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  row-gap: 8px;
+  padding-block: 30px;
+  border-top: 1px solid var(--line);
+}
+.lista li:last-child { border-bottom: 1px solid var(--line); }
+.lista .n { grid-row: span 2; font-family: var(--font-mono); font-size: 26px; letter-spacing: .06em; color: var(--text-tertiary); padding-top: 12px; }
+.lista b { font-size: 50px; font-weight: 600; letter-spacing: -.025em; }
+.lista span:not(.n) { font-size: 32px; line-height: 1.35; color: var(--text-secondary); }
+
+/* Dúvidas: pergunta e resposta */
+.pergunta { font-size: 92px; }
+.resposta { font-size: 42px; line-height: 1.45; letter-spacing: -.01em; color: var(--text-secondary); max-width: 23ch; }
+
+/* Contato */
+.canais { display: grid; gap: 40px; }
+.canal { display: grid; gap: 10px; padding-top: 32px; border-top: 1px solid var(--line); }
+.canal .rotulo { font-size: 24px; color: var(--text-tertiary); }
+.canal strong { font-size: 56px; font-weight: 600; letter-spacing: -.02em; }
+.canal span:not(.rotulo) { font-size: 34px; color: var(--text-secondary); }
