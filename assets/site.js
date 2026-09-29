@@ -1010,6 +1010,8 @@
         const cur = document.createElement('span');
         cur.className = 'tt-cur';
         cur.setAttribute('aria-hidden', 'true');
+        // Word joiner invisível: impede o navegador de quebrar a linha entre a última letra e o cursor
+        cur.textContent = '\u2060';
         let at = null;
         const moveCaret = (el, before) => {
           const key = before ? -1 : el;
