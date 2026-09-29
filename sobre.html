@@ -80,7 +80,7 @@
       if (f) { if (f.sheet) { f.media = 'all'; } else { f.addEventListener('load', function () { f.media = 'all'; }); } }
     })();
   </script>
-  <link rel="stylesheet" href="assets/site.css?v=bb1b6783">
+  <link rel="stylesheet" href="assets/site.css?v=5fe995f1">
   <style>
     /* ============ Sobre a Tirvo: hiperfoco e engenharia extrema ============ */
     .ab-hero { position: relative; isolation: isolate; overflow: clip; min-height: min(100svh, 980px); display: grid; align-items: center;
@@ -98,7 +98,6 @@
     /* Mesma calibração do título da página inicial: a troca de fonte não muda a quebra de linha (sem salto de layout) */
     .ab-title { font-family: "Geist", "Geist Display Fallback", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: clamp(2.6rem, 1.2rem + 5vw, 5.8rem); font-weight: 600; letter-spacing: -.045em; line-height: .98; font-kerning: none; }
     .ab-title .serif { font-size: 1.04em; }
-    .ab-w { display: inline-block; }
     .ab-line { display: block; white-space: nowrap; }
     .ab-hero .lead { max-width: 33em; }
     .ab-hero__meta { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; color: var(--text-tertiary); font-family: var(--font-mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; }
@@ -201,10 +200,8 @@
 
     /* Revelação sequencial própria da página: surge e sobe, um elemento de cada vez */
     @media (prefers-reduced-motion: no-preference) {
-      .js [data-seq] > * { opacity: 0; transform: translate3d(0, 28px, 0); transition: opacity 800ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: calc(var(--k, 0) * 110ms); }
-      .js [data-seq].is-seq > * { opacity: 1; transform: none; }
-      .js .ab-title .ab-w { opacity: 0; transform: translate3d(0, .5em, 0); filter: blur(6px); transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out), filter 700ms var(--ease-out); transition-delay: calc(var(--k, 0) * 70ms + 150ms); }
-      .js .ab-title.is-on .ab-w { opacity: 1; transform: none; filter: none; }
+      .js [data-seq] > :not(h1, h2) { opacity: 0; transform: translate3d(0, 28px, 0); transition: opacity 800ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: calc(var(--k, 0) * 110ms); }
+      .js [data-seq].is-seq > :not(h1, h2) { opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -302,7 +299,7 @@
         <div class="ab-hero__copy" data-seq>
           <nav aria-label="Trilha de navegação"><ol class="crumbs"><li><a href="./">Início</a></li><li><span aria-current="page">Sobre a Tirvo</span></li></ol></nav>
           <p class="label" data-decode><span class="label__num">00</span> <span class="label__txt">Sobre a Tirvo</span></p>
-          <h1 class="ab-title" id="titulo-pagina" data-ab-title><span class="ab-line">Hiperfoco</span> <span class="ab-line">convertido em</span> <span class="ab-line"><span class="hl-accent">engenharia</span></span> <span class="ab-line"><span class="serif">de elite</span>.</span></h1>
+          <h1 class="ab-title" id="titulo-pagina"><span class="ab-line">Hiperfoco</span> <span class="ab-line">convertido em</span> <span class="ab-line"><span class="hl-accent">engenharia</span></span> <span class="ab-line"><span class="serif">de elite</span>.</span></h1>
           <p class="lead">A Tirvo nasceu de uma mente neurodivergente que é incapaz de entregar algo raso. Cada site, sistema e agente de IA passa pelo mesmo crivo: é dissecado, aprofundado e lapidado até não restar nada a melhorar.</p>
           <div class="page-hero__actions">
             <a class="btn btn--primary btn--lg" href="https://api.whatsapp.com/send?phone=5541991933850&amp;text=Ol%C3%A1%2C%20Tirvo.%20Vim%20pela%20p%C3%A1gina%20Sobre%20a%20Tirvo%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer" data-magnetic><span class="btn__sheen" aria-hidden="true"></span>Falar com a Tirvo<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
@@ -534,37 +531,9 @@
   </a>
   </aside>
   <script>
-    /* Sobre a Tirvo: título palavra por palavra, revelação sequencial, manifesto riscado e retícula que segue o ponteiro */
+    /* Sobre a Tirvo: revelação sequencial, manifesto riscado e retícula que segue o ponteiro */
     (function () {
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var title = document.querySelector('[data-ab-title]');
-      if (title) {
-        // Quebra só os nós de texto em palavras, preservando os destaques (spans) do título
-        var k = 0;
-        var wrap = function (node) {
-          Array.prototype.slice.call(node.childNodes).forEach(function (child) {
-            if (child.nodeType === 3) {
-              var frag = document.createDocumentFragment();
-              child.textContent.split(/(\s+)/).forEach(function (part) {
-                if (!part) return;
-                if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
-                var w = document.createElement('span');
-                w.className = 'ab-w';
-                w.style.setProperty('--k', String(k++));
-                w.textContent = part;
-                frag.appendChild(w);
-              });
-              node.replaceChild(frag, child);
-            } else if (child.nodeType === 1) {
-              wrap(child);
-            }
-          });
-        };
-        title.setAttribute('aria-label', title.textContent.replace(/\s+/g, ' ').trim());
-        wrap(title);
-        Array.prototype.slice.call(title.querySelectorAll('.ab-w')).forEach(function (w) { w.setAttribute('aria-hidden', 'true'); });
-        requestAnimationFrame(function () { requestAnimationFrame(function () { title.classList.add('is-on'); }); });
-      }
 
       var groups = Array.prototype.slice.call(document.querySelectorAll('[data-seq]'));
       groups.forEach(function (group) {
@@ -664,6 +633,6 @@
     <symbol id="i-cookie" viewBox="0 0 24 24"><path d="M20.5 12.5A8.5 8.5 0 1 1 11.5 3.5a3 3 0 0 0 4 3.5 3 3 0 0 0 5 5.5z"/><path d="M8.5 10h.01M9.5 15h.01M14 14h.01"/></symbol>
   </svg>
   <script src="assets/tlogo.js?v=e0021160" defer></script>
-  <script type="module" src="assets/site.js?v=e3a16d55"></script>
+  <script type="module" src="assets/site.js?v=e51df100"></script>
 </body>
 </html>

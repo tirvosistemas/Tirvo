@@ -87,7 +87,7 @@
       if (f) { if (f.sheet) { f.media = 'all'; } else { f.addEventListener('load', function () { f.media = 'all'; }); } }
     })();
   </script>
-  <link rel="stylesheet" href="assets/site.css?v=bb1b6783">
+  <link rel="stylesheet" href="assets/site.css?v=5fe995f1">
   <style>
     /* ============ Nossa marca: a anatomia da logo da Tirvo ============ */
     .mk-hero { position: relative; isolation: isolate; overflow: clip; min-height: min(100svh, 980px); display: grid; align-items: center;
@@ -103,7 +103,6 @@
     .mk-hero__copy { display: grid; gap: 1.5rem; justify-items: start; min-width: 0; }
     .mk-title { font-size: clamp(2.6rem, 1.2rem + 5vw, 5.6rem); font-weight: 600; letter-spacing: -.045em; line-height: .98; font-kerning: none; }
     .mk-title .serif { font-size: 1.2em; line-height: .9; }
-    .mk-w { display: inline-block; }
     .mk-line { display: block; white-space: nowrap; }
     .mk-hero .lead { max-width: 34em; }
     .mk-hero .lead strong { color: var(--text-primary); font-weight: 560; }
@@ -366,10 +365,8 @@
 
     /* Revelação sequencial: surge e sobe, um elemento de cada vez */
     @media (prefers-reduced-motion: no-preference) {
-      .js [data-seq] > * { opacity: 0; transform: translate3d(0, 28px, 0); transition: opacity 800ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: calc(var(--k, 0) * 110ms); }
-      .js [data-seq].is-seq > * { opacity: 1; transform: none; }
-      .js .mk-title .mk-w { opacity: 0; transform: translate3d(0, .5em, 0); filter: blur(6px); transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out), filter 700ms var(--ease-out); transition-delay: calc(var(--k, 0) * 70ms + 150ms); }
-      .js .mk-title.is-on .mk-w { opacity: 1; transform: none; filter: none; }
+      .js [data-seq] > :not(h1, h2) { opacity: 0; transform: translate3d(0, 28px, 0); transition: opacity 800ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: calc(var(--k, 0) * 110ms); }
+      .js [data-seq].is-seq > :not(h1, h2) { opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -467,7 +464,7 @@
         <div class="mk-hero__copy" data-seq>
           <nav aria-label="Trilha de navegação"><ol class="crumbs"><li><a href="./">Início</a></li><li><span aria-current="page">Nossa marca</span></li></ol></nav>
           <p class="label" data-decode><span class="label__num">00</span> <span class="label__txt">Nossa marca</span></p>
-          <h1 class="mk-title" id="titulo-pagina" data-mk-title><span class="mk-line">A anatomia</span> <span class="mk-line">da <span class="hl-accent">perfeição</span></span> <span class="mk-line"><span class="serif">técnica</span>.</span></h1>
+          <h1 class="mk-title" id="titulo-pagina"><span class="mk-line">A anatomia</span> <span class="mk-line">da <span class="hl-accent">perfeição</span></span> <span class="mk-line"><span class="serif">técnica</span>.</span></h1>
           <p class="lead">Na Tirvo, nenhuma linha de código é escrita por acaso, e nenhum traço da nossa marca também. Ela é a nossa metodologia desenhada: <strong>engenharia pura, hiperfoco e precisão cirúrgica</strong>. Aqui você conhece a história por trás de cada detalhe e a promessa que ele faz a quem coloca um projeto nas nossas mãos.</p>
           <div class="page-hero__actions">
             <a class="btn btn--primary btn--lg" href="#criacao" data-magnetic><span class="btn__sheen" aria-hidden="true"></span>Ver a marca nascer<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
@@ -1018,40 +1015,11 @@
   </a>
   </aside>
   <script>
-    /* Nossa marca: título palavra por palavra, revelação sequencial, logo quadro a quadro, mira, terminal, frase decodificada e o Next */
+    /* Nossa marca: revelação sequencial, logo quadro a quadro, mira, terminal, frase decodificada e o Next */
     (function () {
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var hasIO = 'IntersectionObserver' in window;
       var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-
-      // Título do topo: palavra por palavra, preservando os destaques
-      var title = document.querySelector('[data-mk-title]');
-      if (title) {
-        var k = 0;
-        var wrap = function (node) {
-          Array.prototype.slice.call(node.childNodes).forEach(function (child) {
-            if (child.nodeType === 3) {
-              var frag = document.createDocumentFragment();
-              child.textContent.split(/(\s+)/).forEach(function (part) {
-                if (!part) return;
-                if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
-                var w = document.createElement('span');
-                w.className = 'mk-w';
-                w.setAttribute('aria-hidden', 'true');
-                w.style.setProperty('--k', String(k++));
-                w.textContent = part;
-                frag.appendChild(w);
-              });
-              node.replaceChild(frag, child);
-            } else if (child.nodeType === 1) {
-              wrap(child);
-            }
-          });
-        };
-        title.setAttribute('aria-label', title.textContent.replace(/\s+/g, ' ').trim());
-        wrap(title);
-        requestAnimationFrame(function () { requestAnimationFrame(function () { title.classList.add('is-on'); }); });
-      }
 
       // Revelação sequencial e gatilhos de entrada em cena (mira, terminal, frase)
       var groups = $$('[data-seq]');
@@ -1341,6 +1309,6 @@
     <symbol id="i-cookie" viewBox="0 0 24 24"><path d="M20.5 12.5A8.5 8.5 0 1 1 11.5 3.5a3 3 0 0 0 4 3.5 3 3 0 0 0 5 5.5z"/><path d="M8.5 10h.01M9.5 15h.01M14 14h.01"/></symbol>
   </svg>
   <script src="assets/tlogo.js?v=e0021160" defer></script>
-  <script type="module" src="assets/site.js?v=e3a16d55"></script>
+  <script type="module" src="assets/site.js?v=e51df100"></script>
 </body>
 </html>

@@ -1255,49 +1255,42 @@
         .hero__cue { display: flex; grid-column: 12 / span 1; }
       }
 
-      /* Máquina de escrever "ghost-compile": estado fantasma desde a primeira pintura */
+      /* Títulos escritos como a logo: códigos que se embaralham e viram letra, com o cursor do terminal deitado no fim */
       @media (prefers-reduced-motion: no-preference) {
-        .js .hero__title:not(.is-static) {
-          color: rgb(250 250 250 / var(--ghost));
-          animation: ghost-failsafe 1ms linear 4.5s forwards;
-        }
-        .js .hero__title:not(.is-static) .hero__accent {
-          background: none;
-          color: inherit;
-        }
-        .js .hero__title.is-typing { animation: none; }
+        .js main h1:not(.tt-on), .js main h2:not(.tt-on), .js .footer__closing:not(.tt-on) { visibility: hidden; animation: tt-failsafe 0s linear 4s forwards; }
       }
-      .tw__w { display: inline-block; white-space: nowrap; }
-      .tw__c {
-        position: relative;
-        color: var(--text-primary);
-        opacity: var(--ghost);
-        transition: opacity 90ms linear;
-      }
-      .tw__c--accent { color: var(--c, var(--accent)); }
-      .tw__c.is-lit { opacity: 1; }
-      .tw__c::after {
-        content: attr(data-c);
+      @keyframes tt-failsafe { to { visibility: visible; } }
+      .tt-c.is-hid, .tt-c.is-scr { visibility: hidden; }
+      .tt-c.is-scr { position: relative; }
+      .tt-c.is-scr::after {
+        content: attr(data-s);
         position: absolute;
-        left: 0;
+        left: 50%;
         top: 0;
-        color: var(--accent);
-        text-shadow: 0 0 .35em var(--accent-glow);
-        opacity: 0;
+        visibility: visible;
+        color: #ff5500;
+        -webkit-text-fill-color: #ff5500;
+        opacity: .6;
+        text-shadow: 0 0 .3em rgba(255, 85, 0, .45);
+        transform: translateX(-50%) scale(.8);
         pointer-events: none;
       }
-      .tw__c.is-lit::after { animation: tw-flash 280ms var(--ease-out) forwards; }
-      .tw__c.is-caret::before {
+      .tt-cur { position: relative; }
+      .tt-cur::before {
         content: "";
         position: absolute;
-        left: calc(100% + .05em);
-        top: .16em;
-        width: .55em;
-        height: .72em;
-        background: var(--accent);
-        box-shadow: 0 0 .4em rgba(255, 85, 0, .35);
+        left: .08em;
+        bottom: .3em;
+        width: .4em;
+        height: .085em;
+        min-height: 2px;
+        border-radius: 1px;
+        background: #ff5500;
+        box-shadow: 0 0 .4em rgba(255, 85, 0, .6);
+        pointer-events: none;
       }
-      .tw.is-done .tw__c.is-caret::before { animation: caret-blink 1.06s steps(1, end) infinite; }
+      .tt-wait .tt-cur::before, .tt-done .tt-cur::before { animation: tt-blink 1.1s steps(1) infinite; }
+      @keyframes tt-blink { 50% { opacity: 0; } }
 
       /* Letreiro */
       .marquee {
@@ -1338,7 +1331,7 @@
       [data-anim-scope].is-offscreen .marquee__track,
       [data-anim-scope].is-offscreen .chip__dot::after,
       [data-anim-scope].is-offscreen .hero__cue-line::after,
-      [data-anim-scope].is-offscreen .tw__c.is-caret::before { animation-play-state: paused; }
+      [data-anim-scope].is-offscreen .tt-cur::before { animation-play-state: paused; }
 
       /* ---------- Seção 2: o alerta ---------- */
       .alert__title { max-width: 9.6em; }
@@ -3524,8 +3517,6 @@
       @keyframes progress-grow { to { transform: scaleX(1); } }
       @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
       @keyframes rise-in { from { opacity: 0; transform: translate3d(0, 18px, 0); } to { opacity: 1; transform: none; } }
-      @keyframes ghost-failsafe { to { color: var(--text-primary); } }
-      @keyframes tw-flash { 0% { opacity: 1; } 32% { opacity: 1; } 100% { opacity: 0; } }
       @keyframes caret-blink { 0% { opacity: 1; } 50% { opacity: 0; } }
       @keyframes marquee-run { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
       @keyframes dot-pulse { 0% { opacity: .9; transform: scale(1); } 70% { opacity: 0; transform: scale(3.2); } 100% { opacity: 0; transform: scale(3.2); } }
@@ -5093,3 +5084,16 @@ main { display: block; }
 .phase-rail span { color: var(--accent); font-family: var(--font-mono); font-size: .7rem; letter-spacing: .1em; }
 .phase-rail b { font-size: 1.3rem; font-weight: 580; letter-spacing: -.02em; }
 .phase-rail i { color: var(--text-secondary); font-style: normal; font-size: .92rem; }
+
+/* Topo das páginas internas: o título é escrito como a logo; o que o acompanha surge em sequência, de baixo para cima */
+@media (prefers-reduced-motion: no-preference) {
+  .js .page-hero__copy > :not(h1), .js .page-hero__show, .js .page-hero .hub-index,
+  .js .nf__copy > :not(h1), .js .nf__stage { animation: ph-rise .9s var(--ease-out) both; animation-delay: .95s; }
+  .js .page-hero__copy > :nth-child(1), .js .nf__copy > :nth-child(1) { animation-delay: .05s; }
+  .js .page-hero__copy > :nth-child(2), .js .nf__copy > :nth-child(2) { animation-delay: .15s; }
+  .js .page-hero__copy > :nth-child(4), .js .nf__copy > :nth-child(4) { animation-delay: .6s; }
+  .js .page-hero__copy > :nth-child(5), .js .nf__copy > :nth-child(5) { animation-delay: .75s; }
+  .js .page-hero__copy > :nth-child(6), .js .nf__copy > :nth-child(6) { animation-delay: .9s; }
+  .js .page-hero__show, .js .page-hero .hub-index, .js .nf__stage { animation-delay: .35s; }
+}
+@keyframes ph-rise { from { opacity: 0; transform: translate3d(0, 24px, 0); } }

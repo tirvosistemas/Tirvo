@@ -8,8 +8,6 @@
       whatsappNumber: '5541991933850',
       whatsappEndpoint: 'https://api.whatsapp.com/send?phone=5541991933850&text=',
       // Opacidade do texto fantasma do H1. Usar 0 cria a máquina de escrever clássica, mas piora o LCP.
-      GHOST_OPACITY: 0.12,
-      typewriter: { startAt: 180, minChar: 26, maxChar: 42, punctuationPause: 160, maxTotal: 2600 },
       // Carrossel do Nexus
       AUTOPLAY_MS: 5000,
       RESUME_AFTER_MS: 8000,
@@ -954,121 +952,146 @@
     }
 
     /* ==========================================================
-       MÁQUINA DE ESCREVER "GHOST-COMPILE" (H1)
+       TÍTULOS ESCRITOS COMO A LOGO: códigos que se embaralham e viram letra, com o cursor do terminal
        ========================================================== */
-    function initTypewriter() {
-      const title = $('[data-typewriter]');
-      if (!title) return;
+    function initTitles() {
+      const titles = $$('main h1, main h2, .footer__closing');
+      if (!titles.length) return;
+      // Os mesmos símbolos que se embaralham na logo animada
+      const GLYPHS = ['0', '1', '<', '>', '/', '{', '}', '#', '$', '%', '&', '*', '+', '=', '?'];
+      const STEPS = 5;
+      const STEP_MS = 45;
+      titles.forEach((title) => {
+        // Sai o efeito antigo de surgir recortado: o título passa a ser escrito
+        if (title.dataset.reveal === 'title') delete title.dataset.reveal;
+        title.removeAttribute('data-typewriter');
+      });
+      const settle = (title) => {
+        title.classList.add('tt-on', 'is-revealed');
+      };
       if (prefersReducedMotion.value) {
-        title.classList.add('is-static');
+        titles.forEach(settle);
         return;
       }
-      root.style.setProperty('--ghost', String(CONFIG.GHOST_OPACITY));
 
-      // Coleta os caracteres, marcando os que pertencem a "futuro digital"
-      const segments = [];
-      title.childNodes.forEach((node) => {
-        const accent = node.nodeType === Node.ELEMENT_NODE && node.classList.contains('hero__accent');
-        for (const char of node.textContent) segments.push({ char, accent });
-      });
-      const normalized = [];
-      for (const segment of segments) {
-        const space = /\s/.test(segment.char);
-        const previous = normalized[normalized.length - 1];
-        if (space && (!previous || previous.space)) continue;
-        normalized.push({ ...segment, space });
-      }
-      while (normalized.length && normalized[normalized.length - 1].space) normalized.pop();
-
-      const fullText = title.textContent.replace(/\s+/g, ' ').trim();
-      const srText = document.createElement('span');
-      srText.className = 'sr-only';
-      srText.textContent = fullText;
-      const layer = document.createElement('span');
-      layer.className = 'tw';
-      layer.setAttribute('aria-hidden', 'true');
-
-      const chars = [];
-      const accentTotal = normalized.filter((s) => s.accent && !s.space).length;
-      let accentIndex = 0;
-      let word = null;
-      for (const segment of normalized) {
-        if (segment.space) {
-          if (word) layer.appendChild(word);
-          word = null;
-          layer.appendChild(document.createTextNode(' '));
-          continue;
-        }
-        if (!word) {
-          word = document.createElement('span');
-          word.className = 'tw__w';
-        }
-        const charEl = document.createElement('span');
-        charEl.className = 'tw__c';
-        charEl.textContent = segment.char;
-        charEl.dataset.c = segment.char;
-        if (segment.accent) {
-          // Interpola #ff5500 → #ff3300 caractere a caractere: o gradiente de ignição
-          const t = accentTotal > 1 ? accentIndex / (accentTotal - 1) : 0;
-          accentIndex += 1;
-          charEl.classList.add('tw__c--accent');
-          charEl.style.setProperty('--c', `rgb(255 ${Math.round(85 - 34 * t)} 0)`);
-        }
-        word.appendChild(charEl);
-        chars.push(charEl);
-      }
-      if (word) layer.appendChild(word);
-
-      title.classList.add('is-typing');
-      title.replaceChildren(srText, layer);
-
-      // Cronograma: 26–42 ms por caractere, +160 ms após pontuação, total ≤ 2,6 s
-      const cfg = CONFIG.typewriter;
-      const delays = chars.map(() => cfg.minChar + Math.random() * (cfg.maxChar - cfg.minChar));
-      chars.forEach((charEl, index) => {
-        if (/[.,;:!?]/.test(charEl.dataset.c) && index + 1 < delays.length) delays[index + 1] += cfg.punctuationPause;
-      });
-      const sum = delays.reduce((a, b) => a + b, 0);
-      const scale = Math.min(1, cfg.maxTotal / sum);
-      const times = [];
-      let accumulated = 0;
-      for (const delay of delays) {
-        accumulated += delay * scale;
-        times.push(accumulated);
-      }
-
-      let lit = 0;
-      let caret = null;
-      let startTime = 0;
-      let finished = false;
-      const moveCaret = (element) => {
-        if (caret === element) return;
-        caret?.classList.remove('is-caret');
-        caret = element;
-        caret?.classList.add('is-caret');
+      const split = (title) => {
+        title.setAttribute('aria-label', title.textContent.replace(/\s+/g, ' ').trim());
+        const chars = [];
+        const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT, {
+          acceptNode: (node) => (node.parentElement.closest('svg') || !node.textContent.trim() ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),
+        });
+        const nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach((node) => {
+          const frag = document.createDocumentFragment();
+          for (const char of node.textContent) {
+            if (/\s/.test(char)) {
+              frag.appendChild(document.createTextNode(char));
+              continue;
+            }
+            const span = document.createElement('span');
+            span.className = 'tt-c is-hid';
+            span.textContent = char;
+            frag.appendChild(span);
+            chars.push(span);
+          }
+          node.parentNode.replaceChild(frag, node);
+        });
+        title.classList.add('tt-on');
+        return chars;
       };
-      const finish = () => {
-        if (finished) return;
-        finished = true;
-        while (lit < chars.length) chars[lit++].classList.add('is-lit');
-        moveCaret(chars[chars.length - 1]);
-        layer.classList.add('is-done');
+
+      const type = (title, chars, wait) => {
+        const n = chars.length;
+        if (!n) { settle(title); return; }
+        // Títulos longos andam mais rápido: a escrita inteira fica entre meio segundo e um segundo e meio
+        const gap = Math.max(16, Math.min(60, 1400 / n));
+        // Um único cursor, deitado como o da logo, que anda logo depois da letra que está sendo escrita
+        const cur = document.createElement('span');
+        cur.className = 'tt-cur';
+        cur.setAttribute('aria-hidden', 'true');
+        let at = null;
+        const moveCaret = (el, before) => {
+          const key = before ? -1 : el;
+          if (at === key) return;
+          at = key;
+          if (before) el.before(cur); else el.after(cur);
+        };
+        moveCaret(chars[0], true);
+        title.classList.add('tt-wait');
+        const state = new Array(n).fill(-1);
+        let start = 0;
+        const tick = (now) => {
+          if (!start) start = now;
+          const t = now - start;
+          let head = -1;
+          let done = true;
+          for (let i = 0; i < n; i += 1) {
+            const local = t - i * gap;
+            let next;
+            if (local < 0) { next = -1; done = false; }
+            else if (local < STEPS * STEP_MS) { next = Math.floor(local / STEP_MS); done = false; head = i; }
+            else { next = STEPS; head = i; }
+            if (next === state[i]) continue;
+            const el = chars[i];
+            if (next < 0) {
+              el.classList.add('is-hid');
+            } else if (next < STEPS) {
+              el.classList.remove('is-hid');
+              el.classList.add('is-scr');
+              el.dataset.s = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+            } else {
+              el.classList.remove('is-hid', 'is-scr');
+              delete el.dataset.s;
+            }
+            state[i] = next;
+          }
+          if (head >= 0) moveCaret(chars[head]);
+          if (!done) { requestAnimationFrame(tick); return; }
+          moveCaret(chars[n - 1]);
+          title.classList.remove('tt-wait');
+          title.classList.add('tt-done', 'is-revealed');
+        };
+        // O cursor pisca um instante antes, como o terminal esperando o primeiro caractere
+        setTimeout(() => {
+          title.classList.remove('tt-wait');
+          requestAnimationFrame(tick);
+        }, wait);
       };
-      const tick = (now) => {
-        if (finished) return;
-        if (!startTime) startTime = now;
-        const elapsed = now - startTime;
-        while (lit < chars.length && times[lit] <= elapsed) chars[lit++].classList.add('is-lit');
-        if (lit) moveCaret(chars[lit - 1]);
-        if (lit < chars.length) requestAnimationFrame(tick);
-        else finish();
+
+      const hero = $('.hero__title');
+      const queue = new Map();
+      titles.forEach((title) => queue.set(title, split(title)));
+      const play = (title, wait) => {
+        const chars = queue.get(title);
+        if (!chars) return;
+        queue.delete(title);
+        type(title, chars, wait);
       };
-      // Espera a abertura terminar para a digitação acontecer à vista
-      (window.tirvoIntro?.done ?? Promise.resolve()).then(() => {
-        const startDelay = Math.max(cfg.startAt - performance.now(), window.tirvoIntro ? 250 : 0, 0);
-        setTimeout(() => requestAnimationFrame(tick), startDelay);
+      if (hero && queue.has(hero)) {
+        // Na página inicial, o título espera a abertura terminar para ser escrito à vista
+        const chars = queue.get(hero);
+        queue.delete(hero);
+        (window.tirvoIntro?.done ?? Promise.resolve()).then(() => type(hero, chars, window.tirvoIntro ? 450 : 350));
+      }
+      if (!hasIO) {
+        queue.forEach((_chars, title) => play(title, 250));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          observer.unobserve(entry.target);
+          play(entry.target, entry.target.tagName === 'H1' ? 450 : 260);
+        }
+      }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+      queue.forEach((_chars, title) => observer.observe(title));
+      prefersReducedMotion.subscribe((reduce) => {
+        if (!reduce) return;
+        observer.disconnect();
+        $$('.tt-c').forEach((el) => el.classList.remove('is-hid', 'is-scr'));
+        titles.forEach(settle);
       });
-      prefersReducedMotion.subscribe((reduce) => { if (reduce) finish(); });
     }
 
     /* ==========================================================
@@ -3873,7 +3896,7 @@
     root.classList.toggle('is-tab-hidden', document.hidden);
 
     // Etapa 1 — o que aparece na primeira dobra
-    run('initTypewriter', initTypewriter);
+    run('initTitles', initTitles);
     run('initMascot', initMascot);
     run('initAnchors', initAnchors);
     run('initHeader', initHeader);
