@@ -5084,6 +5084,46 @@ main { display: block; }
 .phase-rail span { color: var(--accent); font-family: var(--font-mono); font-size: .7rem; letter-spacing: .1em; }
 .phase-rail b { font-size: 1.3rem; font-weight: 580; letter-spacing: -.02em; }
 .phase-rail i { color: var(--text-secondary); font-style: normal; font-size: .92rem; }
+/* Cada fase ganha o seu ícone vivo; a fase ativa passa de uma para a outra, como o projeto */
+.phase-rail li { padding-right: 5.2rem; }
+.phase-ic { position: absolute; right: 1.1rem; top: 50%; width: 3.2rem; height: 3.2rem; margin-top: -1.6rem; color: rgba(233, 233, 238, .42); transition: color .4s ease; }
+.phase-ic svg { width: 100%; height: 100%; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.phase-ic .ph-dots { fill: currentColor; stroke: none; }
+.phase-rail::after { content: ""; position: absolute; left: .55rem; top: 1.2rem; bottom: 1.2rem; width: 2px; background: linear-gradient(transparent, #fff 70%, var(--accent)); transform: scaleY(0); transform-origin: top; opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .phase-rail::after { animation: pr-fill 9s linear infinite; }
+  .phase-rail li { animation: pr-card 9s ease-in-out infinite; }
+  .phase-rail li::before { animation: pr-dot 9s ease-in-out infinite; }
+  .phase-rail .phase-ic { animation: pr-ic 9s ease-in-out infinite; }
+  .phase-rail li:nth-child(2), .phase-rail li:nth-child(2)::before, .phase-rail li:nth-child(2) .phase-ic { animation-delay: 3s; }
+  .phase-rail li:nth-child(3), .phase-rail li:nth-child(3)::before, .phase-rail li:nth-child(3) .phase-ic { animation-delay: 6s; }
+  /* Descoberta: a lupa procura e os pontos acendem quando encontrados */
+  .ph-lens { animation: ph-seek 4.5s ease-in-out infinite; }
+  .ph-dots circle { animation: ph-blink 4.5s ease-in-out infinite; }
+  .ph-dots circle:nth-child(2) { animation-delay: .7s; }
+  .ph-dots circle:nth-child(3) { animation-delay: 1.5s; }
+  .ph-dots circle:nth-child(4) { animation-delay: 2.2s; }
+  .ph-dots circle:nth-child(5) { animation-delay: 3s; }
+  .ph-dots circle:nth-child(6) { animation-delay: 3.7s; }
+  /* Engenharia: as linhas de código são escritas entre as chaves */
+  .ph-code { stroke-dasharray: 1; stroke-dashoffset: 1; animation: ph-type 3s ease-in-out infinite; }
+  .ph-code:nth-of-type(3) { animation-delay: .35s; }
+  .ph-code:nth-of-type(4) { animation-delay: .7s; }
+  /* Lançamento: a seta decola e o rastro fica para trás */
+  .ph-arrow { animation: ph-lift 2.4s cubic-bezier(.5, 0, .3, 1) infinite; }
+  .ph-trail path { animation: ph-trail 2.4s ease-in infinite; }
+  .ph-trail path:nth-child(2) { animation-delay: .12s; }
+  .ph-trail path:nth-child(3) { animation-delay: .24s; }
+}
+@keyframes pr-fill { 0% { transform: scaleY(0); opacity: 1; } 92% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+@keyframes pr-card { 0%, 36%, 100% { border-color: var(--line); box-shadow: none; } 5%, 30% { border-color: rgba(255, 85, 0, .55); box-shadow: 0 0 0 1px rgba(255, 85, 0, .12), 0 20px 44px -26px rgba(255, 85, 0, .75); } }
+@keyframes pr-dot { 0%, 36%, 100% { transform: scale(1); box-shadow: 0 0 0 4px rgba(255, 85, 0, .2); } 5%, 30% { transform: scale(1.25); box-shadow: 0 0 0 6px rgba(255, 85, 0, .28), 0 0 18px var(--accent); } }
+@keyframes pr-ic { 0%, 36%, 100% { color: rgba(233, 233, 238, .42); } 5%, 30% { color: var(--accent); } }
+@keyframes ph-seek { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(9px, -5px); } 50% { transform: translate(5px, 9px); } 75% { transform: translate(-7px, 4px); } }
+@keyframes ph-blink { 0%, 70%, 100% { opacity: .25; } 80% { opacity: 1; } }
+@keyframes ph-type { 0% { stroke-dashoffset: 1; } 40%, 80% { stroke-dashoffset: 0; opacity: 1; } 95%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes ph-lift { 0% { transform: translateY(8px); opacity: 0; } 20% { opacity: 1; } 70% { transform: translateY(-6px); opacity: 1; } 100% { transform: translateY(-16px); opacity: 0; } }
+@keyframes ph-trail { 0%, 15% { opacity: 0; transform: translateY(-4px); } 45% { opacity: .9; } 100% { opacity: 0; transform: translateY(6px); } }
 
 /* Topo das páginas internas: o título é escrito como a logo; o que o acompanha surge em sequência, de baixo para cima */
 @media (prefers-reduced-motion: no-preference) {
@@ -5098,7 +5138,7 @@ main { display: block; }
 }
 @keyframes ph-rise { from { opacity: 0; transform: translate3d(0, 24px, 0); } }
 
-/* Fundo vivo do topo (em teste: grade, horizonte e combinação) */
+/* Fundo vivo do topo: ocupa o topo inteiro, de cima até embaixo; cada página tem o seu (herofx.js) */
 .hero-fx {
   position: absolute;
   inset: 0;
@@ -5108,16 +5148,18 @@ main { display: block; }
   pointer-events: none;
   opacity: 0;
   transition: opacity 1.2s ease;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12%, #000 82%, transparent 100%);
-  mask-image: linear-gradient(180deg, transparent 0, #000 12%, #000 82%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 5%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 5%, #000 92%, transparent 100%);
 }
 .hero-fx.is-ready { opacity: 1; }
 .page-hero:has(> .hero-fx)::before, .mk-hero:has(> .hero-fx)::before { display: none; }
+/* No Sobre, o fundo fica bem suave para não competir com a mira e o raio que gira em volta dela */
+.ab-hero > .hero-fx.is-ready { opacity: .85; }
 @media (min-width: 1024px) {
   /* No computador, o efeito fica mais forte do lado oposto ao texto */
   .hero-fx {
-    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12%, #000 82%, transparent 100%), linear-gradient(90deg, rgba(0, 0, 0, .4) 0, rgba(0, 0, 0, .55) 35%, #000 62%);
-    mask-image: linear-gradient(180deg, transparent 0, #000 12%, #000 82%, transparent 100%), linear-gradient(90deg, rgba(0, 0, 0, .4) 0, rgba(0, 0, 0, .55) 35%, #000 62%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 5%, #000 92%, transparent 100%), linear-gradient(90deg, rgba(0, 0, 0, .4) 0, rgba(0, 0, 0, .55) 35%, #000 62%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 5%, #000 92%, transparent 100%), linear-gradient(90deg, rgba(0, 0, 0, .4) 0, rgba(0, 0, 0, .55) 35%, #000 62%);
     -webkit-mask-composite: source-in;
     mask-composite: intersect;
   }
