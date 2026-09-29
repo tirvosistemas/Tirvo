@@ -1,0 +1,48 @@
+/* Destaque "Serviços": série longa tirada das cinco páginas de servicos/. Reaproveita a série "Sobre a Tirvo". */
+@import url("../sobre-a-tirvo/sobre-a-tirvo.css");
+
+/* Listas longas (6 a 9 itens) cabem entre as áreas livres do app */
+.lista--compacta li { padding-block: 24px; }
+.lista--compacta b { font-size: 46px; }
+.lista--compacta .n { padding-top: 12px; }
+
+/* Etapas e princípios: nome e uma linha curta */
+.lista--etapas li { padding-block: 26px; }
+.lista--etapas b { font-size: 46px; }
+.lista--etapas span:not(.n) { font-size: 30px; }
+
+/* Sinais: frases curtas com marcador em Geist Mono */
+.sinais { list-style: none; display: grid; }
+.sinais li { display: grid; grid-template-columns: 64px 1fr; padding-block: 26px; border-top: 1px solid var(--line); font-size: 38px; line-height: 1.3; letter-spacing: -.015em; }
+.sinais li:last-child { border-bottom: 1px solid var(--line); }
+.sinais li::before { content: ">"; font-family: var(--font-mono); font-size: 30px; line-height: 1.6; color: var(--text-tertiary); }
+
+/* Comparação: o lado de fora em cinza, o lado da Tirvo em branco com o ponto laranja */
+.versus { display: grid; gap: 48px; }
+.versus section { display: grid; gap: 18px; }
+.versus h2 { display: flex; align-items: center; gap: 16px; font-family: var(--font-mono); font-size: 26px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-tertiary); }
+.versus ul { list-style: none; display: grid; gap: 14px; }
+.versus li { display: grid; grid-template-columns: 52px 1fr; font-size: 38px; line-height: 1.3; letter-spacing: -.015em; }
+.versus .fora li { color: var(--text-tertiary); }
+.versus .fora li::before { content: "×"; font-family: var(--font-mono); color: var(--text-tertiary); }
+.versus .dentro h2 { color: var(--text-primary); }
+.versus .dentro h2::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 18px var(--accent-glow); }
+.versus .dentro li::before { content: "✓"; font-family: var(--font-mono); color: var(--text-secondary); }
+
+/* Fluxo e agente: passos em Geist Mono ligados por uma linha vertical */
+.fluxo { list-style: none; display: grid; position: relative; }
+.fluxo::before { content: ""; position: absolute; left: 13px; top: 40px; bottom: 40px; width: 2px; background: var(--line-strong); }
+.fluxo li { position: relative; display: grid; grid-template-columns: 64px 1fr auto; align-items: baseline; padding-block: 26px; }
+.fluxo li::before { content: ""; width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--line-strong); background: var(--bg-base); transform: translateY(4px); }
+.fluxo b { font-size: 46px; font-weight: 600; letter-spacing: -.025em; }
+.fluxo small { display: block; margin-top: 6px; font-size: 30px; color: var(--text-secondary); }
+.fluxo .ok { font-family: var(--font-mono); font-size: 28px; letter-spacing: .08em; color: var(--text-tertiary); }
+.fluxo .fim::before { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
+
+.tarefa { display: grid; gap: 14px; padding: 36px 40px; border: 1px solid var(--line-strong); border-radius: 20px; background: rgba(255, 255, 255, .03); }
+.tarefa .kicker { font-size: 22px; }
+.tarefa p:last-child { font-size: 42px; line-height: 1.3; letter-spacing: -.015em; }
+
+/* Lista de nove itens */
+.lista--densa li { padding-block: 17px; }
+.lista--densa b { font-size: 42px; }
