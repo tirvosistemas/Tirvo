@@ -1,0 +1,46 @@
+/* Capas dos destaques: 1080 x 1920, ícone no centro para caber no recorte circular do app */
+@import url("../base.css");
+
+.capa {
+  position: relative;
+  isolation: isolate;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 85, 0, .26), rgba(255, 85, 0, .08) 26%, transparent 46%),
+    var(--bg-base);
+}
+
+.capa::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  background-position: calc(50% - 36px) calc(50% - 36px);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 12%, transparent 42%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 12%, transparent 42%);
+}
+
+/* Moldura da mira: mesmos cantos do logotipo */
+.moldura { position: absolute; width: 600px; height: 600px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.moldura path { fill: #f4f4f5; }
+
+.icone { position: relative; display: grid; place-items: center; width: 600px; height: 600px; }
+
+.glifo {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 230px;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.laranja { color: var(--accent); text-shadow: 0 0 36px var(--accent-glow); }
