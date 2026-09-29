@@ -467,7 +467,7 @@
       .services { --cis: 3240px; }
       .team { --cis: 850px; }
       .method { --cis: 1000px; }
-      .nexus { --cis: 1060px; }
+      .hypercode { --cis: 1060px; }
       .numbers { --cis: 900px; }
       .faq { --cis: 750px; }
       .contact { --cis: 2000px; }
@@ -477,7 +477,7 @@
         .services { --cis: 3040px; }
         .team { --cis: 770px; }
         .method { --cis: 880px; }
-        .nexus { --cis: 1040px; }
+        .hypercode { --cis: 1040px; }
         .faq { --cis: 690px; }
         .contact { --cis: 1780px; }
       }
@@ -485,7 +485,7 @@
         .services { --cis: 2180px; }
         .team { --cis: 665px; }
         .method { --cis: 825px; }
-        .nexus { --cis: 1180px; }
+        .hypercode { --cis: 1180px; }
         .faq { --cis: 690px; }
         .contact { --cis: 1580px; }
         .footer { --cis: 1550px; }
@@ -498,7 +498,7 @@
         .services { --cis: 2080px; }
         .team { --cis: 980px; }
         .method { --cis: 790px; }
-        .nexus { --cis: 930px; }
+        .hypercode { --cis: 930px; }
         .numbers { --cis: 730px; }
         .faq { --cis: 560px; }
         .contact { --cis: 1120px; }
@@ -508,7 +508,7 @@
         .services { --cis: 1600px; }
         .team { --cis: 890px; }
         .method { --cis: 805px; }
-        .nexus { --cis: 1000px; }
+        .hypercode { --cis: 1000px; }
         .faq { --cis: 665px; }
       }
       /* Navegação por âncora: renderiza tudo para o destino ser exato */
@@ -2246,12 +2246,12 @@
       .seal p { color: var(--text-secondary); font-size: .92rem; line-height: 1.55; max-width: 19.2em; }
       [data-anim-scope].is-offscreen .seal__ring { animation-play-state: paused; }
 
-      /* ---------- Seção 6: Nexus ---------- */
-      .nexus {
+      /* ---------- Seção 6: Hypercode ---------- */
+      .hypercode {
         padding-block: calc(var(--section-y) * 1.2);
         background: var(--bg-void);
       }
-      .nexus__floor {
+      .hypercode__floor {
         position: absolute;
         left: -30%;
         right: -30%;
@@ -2268,16 +2268,16 @@
         -webkit-mask-image: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, .5) 40%, transparent 80%);
         mask-image: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, .5) 40%, transparent 80%);
       }
-      .nexus__scan {
+      .hypercode__scan {
         position: absolute;
         inset: 0;
         z-index: -1;
         pointer-events: none;
         background: repeating-linear-gradient(180deg, rgba(255, 255, 255, .018) 0 1px, transparent 1px 3px);
       }
-      .glow--nexus { top: 6%; right: -20%; }
-      .nexus__copy { display: grid; gap: 1.5rem; align-content: start; }
-      .nexus__claim {
+      .glow--hypercode { top: 6%; right: -20%; }
+      .hypercode__copy { display: grid; gap: 1.5rem; align-content: start; }
+      .hypercode__claim {
         padding-left: 1rem;
         border-left: 2px solid var(--accent);
         color: var(--text-primary);
@@ -2286,8 +2286,8 @@
         line-height: 1.6;
       }
       @media (min-width: 1024px) {
-        .nexus__copy { grid-column: 1 / span 5; }
-        .nexus__term { grid-column: 7 / span 6; align-self: center; }
+        .hypercode__copy { grid-column: 1 / span 5; }
+        .hypercode__term { grid-column: 7 / span 6; align-self: center; }
       }
 
       /* Terminal dos agentes */
@@ -2340,7 +2340,7 @@
         .js .term.is-armed .term__line { clip-path: inset(0 calc((1 - var(--p, 0)) * 100%) 0 0); }
       }
 
-      /* Pipeline do Nexus */
+      /* Pipeline do Hypercode */
       .pipeline {
         --icon: 52px;
         --pgap: 1.25rem;
@@ -2604,7 +2604,7 @@
         font-size: .85rem;
         letter-spacing: .08em;
       }
-      .nexus__cta { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+      .hypercode__cta { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
 
       /* Lightbox */
       .lightbox {
@@ -4454,7 +4454,7 @@
         .hl-peak { animation: peak-shine 5s ease-in-out 1.4s infinite; }
       }
       @keyframes peak-shine { 0%, 55% { background-position: 100% 0; } 85%, 100% { background-position: 0 0; } }
-      /* "Nexus 1.0" em cromo com reflexo */
+      /* "Hypercode 1.0" em cromo com reflexo */
       .hl-chrome {
         background: linear-gradient(180deg, #ffffff 0%, #d9dce3 45%, #8b8f99 52%, #f4f5f8 100%);
         -webkit-background-clip: text;
@@ -4522,8 +4522,8 @@
       .faq__punch { color: var(--text-secondary); font-size: clamp(1.25rem, 1rem + 1vw, 1.6rem); line-height: 1.35; letter-spacing: -.015em; }
       .faq__punch strong, .faq__punch .hl-mark { color: var(--text-primary); font-weight: 580; }
 
-      /* Nexus: linha de comando com cursor */
-      .nexus__claim {
+      /* Hypercode: linha de comando com cursor */
+      .hypercode__claim {
         position: relative;
         padding: .85rem 1rem .85rem 2.1rem;
         border: 1px solid rgba(255, 85, 0, .3);
@@ -4531,10 +4531,10 @@
         border-radius: 0 var(--r-md) var(--r-md) 0;
         background: linear-gradient(90deg, rgba(255, 85, 0, .1), rgba(255, 85, 0, .02));
       }
-      .nexus__claim::before { content: ">"; position: absolute; left: .9rem; color: var(--accent); }
-      .nexus__claim::after { content: ""; display: inline-block; width: .55em; height: 1.05em; margin-left: .3em; vertical-align: -.18em; background: var(--accent); }
+      .hypercode__claim::before { content: ">"; position: absolute; left: .9rem; color: var(--accent); }
+      .hypercode__claim::after { content: ""; display: inline-block; width: .55em; height: 1.05em; margin-left: .3em; vertical-align: -.18em; background: var(--accent); }
       @media (prefers-reduced-motion: no-preference) {
-        .nexus__claim::after { animation: caret-blink 1.1s steps(1) infinite; }
+        .hypercode__claim::after { animation: caret-blink 1.1s steps(1) infinite; }
       }
       @keyframes caret-blink { 50% { opacity: 0; } }
 
@@ -4823,7 +4823,7 @@
         66% { background-position: 40% 20%; } 75% { background-position: 60% 20%; } 83% { background-position: 80% 20%; } 91% { background-position: 100% 20%; }
       }
 
-      /* Blocos-resumo de equipe, método e Nexus */
+      /* Blocos-resumo de equipe, método e Hypercode */
       .teaser { position: relative; display: grid; gap: clamp(1.75rem, 4vw, 3rem); padding: clamp(1.5rem, 4vw, 3rem); align-items: center; }
       @media (min-width: 1024px) { .teaser { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } }
       .teaser__copy { display: grid; gap: 1.2rem; justify-items: start; }
@@ -4841,7 +4841,7 @@
       .teaser__shot { overflow: hidden; border-radius: 12px; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .95), 0 30px 70px -45px rgba(255, 85, 0, .5); }
       .teaser__shot img { width: 100%; height: auto; border: 1px solid var(--line-strong); border-top: 0; border-radius: 0 0 12px 12px; }
       .teaser__go--inline { position: relative; }
-      .nexus--teaser { background: radial-gradient(70% 60% at 80% 20%, rgba(255, 85, 0, .08), transparent 60%); }
+      .hypercode--teaser { background: radial-gradient(70% 60% at 80% 20%, rgba(255, 85, 0, .08), transparent 60%); }
         /* Fundo único com a logo em marca d'água: fixo atrás do conteúdo, a página rola por cima.
          O topo e o rodapé têm fundo próprio e cobrem o desenho. */
       body[data-bg]::before {
@@ -4859,7 +4859,7 @@
       body[data-bg] { background-color: transparent; }
       /* Faixas com fundo próprio ficam translúcidas, para a marca d'água aparecer de leve por baixo */
       body[data-bg] .p-sec--raised { background: linear-gradient(rgba(15, 15, 18, .72), rgba(9, 9, 11, .55)); }
-      body[data-bg] .nexus, body[data-bg] .ab-refuse, body[data-bg] .mk-band { background-color: rgba(0, 0, 0, .62); }
+      body[data-bg] .hypercode, body[data-bg] .ab-refuse, body[data-bg] .mk-band { background-color: rgba(0, 0, 0, .62); }
       body[data-bg] .nf { background-color: transparent; }
       @media print { body[data-bg]::before { display: none; } }
 </style>
@@ -4993,7 +4993,7 @@
           </li>
           <li><a class="nav__link" href="equipe/"><span class="nav__num" aria-hidden="true">05</span><span class="scr" data-scramble><span class="scr__ghost">Equipe</span><span class="scr__live" aria-hidden="true">Equipe</span></span></a></li>
           <li><a class="nav__link" href="metodo/"><span class="nav__num" aria-hidden="true">06</span><span class="scr" data-scramble><span class="scr__ghost">Método</span><span class="scr__live" aria-hidden="true">Método</span></span></a></li>
-          <li><a class="nav__link" href="nexus/"><span class="nav__num" aria-hidden="true">07</span><span class="scr" data-scramble><span class="scr__ghost">Nexus</span><span class="scr__live" aria-hidden="true">Nexus</span></span></a></li>
+          <li><a class="nav__link" href="hypercode/"><span class="nav__num" aria-hidden="true">07</span><span class="scr" data-scramble><span class="scr__ghost">Hypercode</span><span class="scr__live" aria-hidden="true">Hypercode</span></span></a></li>
           <li><a class="nav__link" href="faq/"><span class="nav__num" aria-hidden="true">08</span><span class="scr" data-scramble><span class="scr__ghost">FAQ</span><span class="scr__live" aria-hidden="true">FAQ</span></span></a></li>
         </ul>
       </nav>
@@ -5034,7 +5034,7 @@
         </li>
         <li><a class="menu__link" href="equipe/" style="--i:4"><span class="menu__num" aria-hidden="true">05</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Equipe</span><span class="menu__desc">Programadores raiz e IA</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
         <li><a class="menu__link" href="metodo/" style="--i:5"><span class="menu__num" aria-hidden="true">06</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Método</span><span class="menu__desc">Descoberta, engenharia, lançamento</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
-        <li><a class="menu__link" href="nexus/" style="--i:6"><span class="menu__num" aria-hidden="true">07</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Nexus</span><span class="menu__desc">Enxame de agentes autônomos</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        <li><a class="menu__link" href="hypercode/" style="--i:6"><span class="menu__num" aria-hidden="true">07</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Hypercode</span><span class="menu__desc">Enxame de agentes autônomos</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
         <li><a class="menu__link" href="faq/" style="--i:7"><span class="menu__num" aria-hidden="true">08</span><span class="menu__text"><span class="menu__label" data-scramble-menu>FAQ</span><span class="menu__desc">Respostas diretas</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
         <li><a class="menu__link" href="#contato" style="--i:8"><span class="menu__num" aria-hidden="true">09</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Contato</span><span class="menu__desc">Seu projeto começa aqui</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
       </ol>
@@ -5066,7 +5066,7 @@
           <p class="hero__lead" data-hero-step style="--d:450ms">Sites, sistemas, logotipos e inteligência artificial projetados com rigor de engenharia — para empresas que se recusam a parecer genéricas.</p>
           <div class="hero__actions" data-hero-step style="--d:600ms">
             <a class="btn btn--primary btn--lg" href="#contato" data-magnetic><span class="btn__sheen" aria-hidden="true"></span>Iniciar meu projeto<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-            <a class="link-arrow" href="nexus/">Conhecer o Nexus<svg class="icon" aria-hidden="true"><use href="#i-arrow-down-right"/></svg></a>
+            <a class="link-arrow" href="hypercode/">Conhecer o Hypercode<svg class="icon" aria-hidden="true"><use href="#i-arrow-down-right"/></svg></a>
           </div>
         </div>
         <div class="hero__cue" aria-hidden="true"><span>Role para explorar</span><span class="hero__cue-line"></span></div>
@@ -5321,18 +5321,18 @@
       </div>
     </section>
 
-    <!-- ============ 06 · NEXUS 1.0 (resumo) ============ -->
-    <section class="section section--cv nexus nexus--teaser" id="nexus" aria-labelledby="nexus-titulo">
-      <span class="glow glow--nexus" aria-hidden="true"></span>
+    <!-- ============ 06 · HYPERCODE 1.0 (resumo) ============ -->
+    <section class="section section--cv hypercode hypercode--teaser" id="hypercode" aria-labelledby="hypercode-titulo">
+      <span class="glow glow--hypercode" aria-hidden="true"></span>
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">06</span> <span class="label__txt">Nexus 1.0</span></p>
+          <p class="label" data-decode><span class="label__num">06</span> <span class="label__txt">Hypercode 1.0</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
           <span class="section-head__meta" aria-hidden="true">sistema autônomo</span>
         </div>
-        <article class="card teaser teaser--nexus" data-spotlight data-reveal>
+        <article class="card teaser teaser--hypercode" data-spotlight data-reveal>
           <div class="teaser__copy">
-            <h2 class="title" id="nexus-titulo" data-reveal="title"><span class="hl-chrome">Nexus 1.0</span>. <span class="hl-dim">Ele não conversa.</span> <span class="serif hl-accent hl-under">Ele entrega.</span></h2>
+            <h2 class="title" id="hypercode-titulo" data-reveal="title"><span class="hl-chrome">Hypercode 1.0</span>. <span class="hl-dim">Ele não conversa.</span> <span class="serif hl-accent hl-under">Ele entrega.</span></h2>
             <p class="lead">A IA proprietária da Tirvo: um <strong>enxame de agentes autônomos</strong> dedicado exclusivamente à programação. Recebe a tarefa e entrega o software pronto em um arquivo <code class="chip-code">.zip</code>.</p>
             <ol class="teaser__steps">
               <li><span>01</span>Recebe a tarefa</li>
@@ -5340,11 +5340,11 @@
               <li><span>03</span>Escreve o código</li>
               <li><span>04</span>Entrega em .zip</li>
             </ol>
-            <a class="teaser__go" href="nexus/">Conhecer o Nexus por dentro<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+            <a class="teaser__go" href="hypercode/">Conhecer o Hypercode por dentro<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
           </div>
           <figure class="teaser__shot" aria-hidden="true">
-            <span class="hsvc__bar"><i></i><i></i><i></i><span>nexus · agentes em execução</span></span>
-            <img src="nexus-03.webp" width="2000" height="1250" alt="" loading="lazy" decoding="async">
+            <span class="hsvc__bar"><i></i><i></i><i></i><span>hypercode · agentes em execução</span></span>
+            <img src="hypercode-03.webp" width="2000" height="1250" alt="" loading="lazy" decoding="async">
           </figure>
         </article>
       </div>
@@ -5567,7 +5567,7 @@
             <li><a href="#servicos">Serviços</a></li>
             <li><a href="equipe/">Equipe</a></li>
             <li><a href="metodo/">Método</a></li>
-            <li><a href="nexus/">Nexus</a></li>
+            <li><a href="hypercode/">Hypercode</a></li>
             <li><a href="faq/">Perguntas frequentes</a></li>
             <li><a href="#contato">Contato</a></li>
           </ul>
@@ -5869,7 +5869,7 @@
       whatsappNumber: '5541991933850',
       whatsappEndpoint: 'https://api.whatsapp.com/send?phone=5541991933850&text=',
       // Opacidade do texto fantasma do H1. Usar 0 cria a máquina de escrever clássica, mas piora o LCP.
-      // Carrossel do Nexus
+      // Carrossel do Hypercode
       AUTOPLAY_MS: 5000,
       RESUME_AFTER_MS: 8000,
       SWIPE_THRESHOLD: 50,
@@ -5925,7 +5925,7 @@
           servicos: ['São cinco frentes: sites, sistemas, marca, design e IA. Qual delas é a sua?', 'Toque em um cartão para ver tudo sobre o serviço na página dele.'],
           equipe: ['Aqui ninguém usa template: é gente que programa de verdade.', 'Programadores raiz lado a lado com especialistas em IA.'],
           metodo: ['Três fases, zero improviso: Descoberta, Engenharia e Lançamento.', 'Você sabe o que será entregue em cada etapa, e quando.'],
-          nexus: ['Esse é o Nexus: um enxame de agentes que escreve o código e entrega em .zip.', 'Toque no cartão para ver o Nexus por dentro, tela por tela.'],
+          hypercode: ['Esse é o Hypercode: um enxame de agentes que escreve o código e entrega em .zip.', 'Toque no cartão para ver o Hypercode por dentro, tela por tela.'],
           numeros: ['Zero código genérico. Tudo é projetado para o seu negócio.', 'Com a Gestão 360º, sua operação é monitorada 24/7.'],
           faq: ['Ficou alguma dúvida? Abra uma pergunta ou veja todas na página de FAQ.', 'Não achou o que procurava? Dá para falar direto no WhatsApp.'],
           contato: ['Conte o seu desafio em poucas linhas. A mensagem chega pronta no WhatsApp da equipe.', 'Nenhum dado fica guardado aqui: tudo vai direto para o WhatsApp.'],
@@ -7093,16 +7093,16 @@
     }
 
     /* ==========================================================
-       PIPELINE DO NEXUS (pulso de dados)
+       PIPELINE DO HYPERCODE (pulso de dados)
        ========================================================== */
-    function initNexusPipeline() {
-      observeScope($('#nexus[data-anim-scope]'));
+    function initHypercodePipeline() {
+      observeScope($('#hypercode[data-anim-scope]'));
     }
 
     /* ==========================================================
-       TERMINAL DOS AGENTES DO NEXUS
+       TERMINAL DOS AGENTES DO HYPERCODE
        ========================================================== */
-    function initNexusTerminal() {
+    function initHypercodeTerminal() {
       const terminal = $('[data-terminal]');
       if (!terminal) return;
       const lines = $$('.term__line', terminal);
@@ -7456,7 +7456,7 @@
     }
 
     /* ==========================================================
-       CARROSSEL DO NEXUS (laço infinito, padrão APG)
+       CARROSSEL DO HYPERCODE (laço infinito, padrão APG)
        ========================================================== */
     function initCarousel(lightbox) {
       const carousel = $('[data-carousel]');
@@ -7477,7 +7477,7 @@
         return { src: img.getAttribute('src'), alt: img.alt, caption: slide.dataset.caption || '' };
       });
       const updateMeta = (i) => {
-        addr.textContent = `NEXUS://tela-${pad(i + 1)}`;
+        addr.textContent = `HYPERCODE://tela-${pad(i + 1)}`;
         captionEl.textContent = items[i].caption;
         counterEl.textContent = `${pad(i + 1)} / ${pad(total)}`;
       };
@@ -9778,8 +9778,8 @@
       ['initServiceDeepLinks', initServiceDeepLinks],
       ['initTimeline', initTimeline],
       ['initSeals', initSeals],
-      ['initNexusPipeline', initNexusPipeline],
-      ['initNexusTerminal', initNexusTerminal],
+      ['initHypercodePipeline', initHypercodePipeline],
+      ['initHypercodeTerminal', initHypercodeTerminal],
       ['initCounters', initCounters],
       ['initFaq', initFaq],
       ['initLightbox', () => { lightbox = initLightbox(); }],
