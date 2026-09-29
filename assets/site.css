@@ -4480,8 +4480,8 @@
          SUBMENU DE SERVIÇOS E CARTÕES-RESUMO DA PÁGINA INICIAL
          ========================================================== */
       .nav__link { white-space: nowrap; }
-      /* Sete itens no menu: nas larguras intermediárias a numeração sai e o espaçamento aperta */
-      @media (min-width: 1024px) and (max-width: 1239.98px) {
+      /* Oito itens no menu: nas larguras intermediárias a numeração sai e o espaçamento aperta */
+      @media (min-width: 1024px) and (max-width: 1339.98px) {
         .nav__num { display: none; }
         .nav__link { padding-inline: .7rem; font-size: .84rem; }
         .header__inner { gap: 1rem; }
@@ -4541,6 +4541,7 @@
       .menu__sub-toggle[aria-expanded="true"] .menu__arrow { transform: rotate(-90deg); color: var(--accent); }
       .menu__sub { display: grid; gap: .15rem; margin: -.2rem 0 .8rem 2.85rem; padding: .3rem 0 .3rem .9rem; border-left: 1px solid rgba(255, 85, 0, .4); opacity: 0; transform: translateY(-6px); transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out); }
       .menu__sub.is-open { opacity: 1; transform: none; }
+      .menu__sub[hidden] { display: none; }
       .menu__sublink { display: flex; align-items: center; gap: .7rem; min-height: 46px; color: var(--text-secondary); font-size: 1.05rem; text-decoration: none; }
       .menu__sublink .icon { width: 20px; height: 20px; color: var(--accent); }
       .menu__sublink:hover, .menu__sublink.is-active { color: var(--text-primary); }
