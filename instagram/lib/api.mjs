@@ -105,7 +105,7 @@ export async function publicarContainer(idDoContainer, { tentativas = 6 } = {}) 
     try {
       return await chamar('POST', `${idDaConta()}/media_publish`, { creation_id: idDoContainer }, { tentativas: 1 });
     } catch (e) {
-      const naoPronto = e instanceof ErroApi && (e.codigo === 9007 || e.subcodigo === 2207027);
+      const naoPronto = e instanceof ErroApi && (e.codigo === 9007 || e.subcodigo === 2207027 || e.subcodigo === 2207006);
       if (!naoPronto || tentativa >= tentativas) throw e;
       await esperar(5000 * tentativa);
     }
