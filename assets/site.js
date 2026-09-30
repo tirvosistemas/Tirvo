@@ -8,7 +8,7 @@
       whatsappNumber: '5541991933850',
       whatsappEndpoint: 'https://api.whatsapp.com/send?phone=5541991933850&text=',
       // Opacidade do texto fantasma do H1. Usar 0 cria a máquina de escrever clássica, mas piora o LCP.
-      // Carrossel do Hypercode
+      // Carrossel do Hipercode
       AUTOPLAY_MS: 5000,
       RESUME_AFTER_MS: 8000,
       SWIPE_THRESHOLD: 50,
@@ -64,7 +64,7 @@
           servicos: ['São cinco frentes: sites, sistemas, marca, design e IA. Qual delas é a sua?', 'Toque em um cartão para ver tudo sobre o serviço na página dele.'],
           equipe: ['Aqui ninguém usa template: é gente que programa de verdade.', 'Programadores raiz lado a lado com especialistas em IA.'],
           metodo: ['Três fases, zero improviso: Descoberta, Engenharia e Lançamento.', 'Você sabe o que será entregue em cada etapa, e quando.'],
-          hypercode: ['Esse é o Hypercode: um enxame de agentes que escreve o código e entrega em .zip.', 'Toque no cartão para ver o Hypercode por dentro, tela por tela.'],
+          hipercode: ['Esse é o Hipercode: um enxame de agentes que escreve o código e entrega em .zip.', 'Toque no cartão para ver o Hipercode por dentro, tela por tela.'],
           numeros: ['Zero código genérico. Tudo é projetado para o seu negócio.', 'Com a Gestão 360º, sua operação é monitorada 24/7.'],
           faq: ['Ficou alguma dúvida? Abra uma pergunta ou veja todas na página de FAQ.', 'Não achou o que procurava? Dá para falar direto no WhatsApp.'],
           contato: ['Conte o seu desafio em poucas linhas. A mensagem chega pronta no WhatsApp da equipe.', 'Nenhum dado fica guardado aqui: tudo vai direto para o WhatsApp.'],
@@ -1232,16 +1232,16 @@
     }
 
     /* ==========================================================
-       PIPELINE DO HYPERCODE (pulso de dados)
+       PIPELINE DO HIPERCODE (pulso de dados)
        ========================================================== */
-    function initHypercodePipeline() {
-      observeScope($('#hypercode[data-anim-scope]'));
+    function initHipercodePipeline() {
+      observeScope($('#hipercode[data-anim-scope]'));
     }
 
     /* ==========================================================
-       TERMINAL DOS AGENTES DO HYPERCODE
+       TERMINAL DOS AGENTES DO HIPERCODE
        ========================================================== */
-    function initHypercodeTerminal() {
+    function initHipercodeTerminal() {
       const terminal = $('[data-terminal]');
       if (!terminal) return;
       const lines = $$('.term__line', terminal);
@@ -1595,7 +1595,7 @@
     }
 
     /* ==========================================================
-       CARROSSEL DO HYPERCODE (laço infinito, padrão APG)
+       CARROSSEL DO HIPERCODE (laço infinito, padrão APG)
        ========================================================== */
     function initCarousel(lightbox) {
       const carousel = $('[data-carousel]');
@@ -1616,7 +1616,7 @@
         return { src: img.getAttribute('src'), alt: img.alt, caption: slide.dataset.caption || '' };
       });
       const updateMeta = (i) => {
-        addr.textContent = `HYPERCODE://tela-${pad(i + 1)}`;
+        addr.textContent = `HIPERCODE://tela-${pad(i + 1)}`;
         captionEl.textContent = items[i].caption;
         counterEl.textContent = `${pad(i + 1)} / ${pad(total)}`;
       };
@@ -3917,8 +3917,8 @@
       ['initServiceDeepLinks', initServiceDeepLinks],
       ['initTimeline', initTimeline],
       ['initSeals', initSeals],
-      ['initHypercodePipeline', initHypercodePipeline],
-      ['initHypercodeTerminal', initHypercodeTerminal],
+      ['initHipercodePipeline', initHipercodePipeline],
+      ['initHipercodeTerminal', initHipercodeTerminal],
       ['initCounters', initCounters],
       ['initFaq', initFaq],
       ['initLightbox', () => { lightbox = initLightbox(); }],

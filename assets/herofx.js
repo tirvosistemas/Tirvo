@@ -278,7 +278,7 @@
       return { resize: resize, draw: draw };
     }
 
-    /* ---------- Hypercode · o enxame ao vivo: equipes de agentes, cada uma montando uma parte do sistema ---------- */
+    /* ---------- Hipercode · o enxame ao vivo: equipes de agentes, cada uma montando uma parte do sistema ---------- */
     // Cada equipe: área, parte do sistema que ela monta, tipo de peça, agentes, tarefas (uma palavra) e itens dessa parte
     var SWARM = [
       ['Arquitetura', 'plano de tarefas', 'graph', 'Atlas Titan Chronos Apex', 'planejando fatiando mapeando priorizando delegando', 'auth|api|banco|painel|filas|deploy|busca|app|e-mail|relatórios'],
@@ -363,7 +363,7 @@
         return avs[key];
       }
 
-      /* Espaços livres do topo: tudo que não é texto, botão ou a tela do Hypercode vira área de trabalho */
+      /* Espaços livres do topo: tudo que não é texto, botão ou a tela do Hipercode vira área de trabalho */
       function where(el) {
         var x = 0, y = 0, e = el;
         while (e && e !== host) { x += e.offsetLeft; y += e.offsetTop; e = e.offsetParent; }
