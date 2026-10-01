@@ -9370,14 +9370,27 @@
         const box = mascot.getBoundingClientRect();
         mascot.style.transform = `translate(${target.left - box.left}px, ${target.top - box.top}px) scale(${target.width / box.width})`;
       };
+      // Fim da abertura: o Next some junto com ela, em vez de voar para o canto
+      const leave = () => {
+        removeEventListener('resize', placeOnAnchor);
+        const bye = () => {
+          anchor?.remove();
+          mascot.hidden = true;
+          mascot.style.removeProperty('transform');
+          mascot.classList.remove('is-intro', 'is-entering');
+        };
+        if (prefersReducedMotion.value || typeof mascot.animate !== 'function') return bye();
+        mascot.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 400, fill: 'forwards' }).finished.catch(() => {}).then(bye);
+      };
       const introRunning = intro && root.classList.contains('intro-on') && window.tirvoIntro?.done;
 
-      mascot.hidden = false;
-      blink();
+      // Fora da abertura o Next não aparece: na página inicial ficam só os agentes do enxame
       if (!introRunning) {
-        dock(false);
+        mascot.hidden = true;
         return;
       }
+      mascot.hidden = false;
+      blink();
       mascot.classList.add('is-intro', 'is-entering');
       placeOnAnchor();
       addEventListener('resize', placeOnAnchor, { passive: true });
@@ -9392,7 +9405,7 @@
       tick();
       window.tirvoIntro.done.then(() => {
         cancelAnimationFrame(frame);
-        dock(true);
+        leave();
       });
     }
 
