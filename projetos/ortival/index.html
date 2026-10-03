@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ortival Engenharia | Projeto demonstrativo da Tirvo</title>
+  <meta name="description" content="Site demonstrativo criado pela Tirvo. A Ortival Engenharia é uma construtora fictícia: marca, textos, ilustrações e site foram feitos do zero para mostrar o nosso trabalho.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://tirvo.tech/projetos/ortival/">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#f4f2ee">
+  <meta name="color-scheme" content="light">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="icon" href="marca.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Ortival Engenharia | Projeto demonstrativo da Tirvo">
+  <meta property="og:description" content="Construtora fictícia criada pela Tirvo para mostrar marca, textos e site feitos do zero.">
+  <meta property="og:url" content="https://tirvo.tech/projetos/ortival/">
+  <style>
+    :root {
+      --paper: #f4f2ee;
+      --paper-2: #ebe8e2;
+      --paper-3: #e1ddd5;
+      --white: #fbfaf8;
+      --ink: #16171a;
+      --ink-2: #474b52;
+      --ink-3: #6d727a;
+      --line: rgba(22, 23, 26, .12);
+      --line-2: rgba(22, 23, 26, .22);
+      --accent: #b5532c;
+      --accent-2: #8f3f1f;
+      --night: #141518;
+      --night-2: #1c1d21;
+      --night-line: rgba(255, 255, 255, .1);
+      --f-sans: "Archivo", system-ui, sans-serif;
+      --f-mono: "JetBrains Mono", ui-monospace, monospace;
+      --wrap: 1200px;
+      --gut: clamp(16px, 4vw, 40px);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 96px; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--f-sans); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; }
+    h1, h2, h3 { margin: 0; font-stretch: 112%; font-weight: 700; letter-spacing: -.025em; line-height: 1.05; }
+    p { margin: 0; }
+    .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gut); }
+    .mono { font-family: var(--f-mono); font-size: 12.5px; letter-spacing: .04em; text-transform: uppercase; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .skip { position: absolute; left: 12px; top: -60px; background: var(--ink); color: var(--white); padding: 10px 16px; z-index: 100; text-decoration: none; }
+    .skip:focus { top: 12px; }
+
+    /* Faixa de projeto demonstrativo */
+    .demo { background: var(--night); color: #d9d9dc; font-size: 13.5px; line-height: 1.45; }
+    .demo .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 10px; padding-bottom: 10px; }
+    .demo__txt { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .demo__tag { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #ff7a3d; border: 1px solid rgba(255, 122, 61, .4); padding: 2px 8px; white-space: nowrap; }
+    .demo a { color: #fff; text-decoration: none; white-space: nowrap; border-bottom: 1px solid rgba(255, 255, 255, .35); }
+    .demo a:hover { border-color: #fff; }
+
+    /* Cabeçalho */
+    .head { position: sticky; top: 0; z-index: 50; background: rgba(244, 242, 238, .88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+    .head.is-scrolled { border-color: var(--line); }
+    .head .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo svg { width: 34px; height: 34px; flex: none; color: var(--ink); }
+    .foot .logo svg { color: #ececee; }
+    .logo__name { display: flex; flex-direction: column; line-height: 1; }
+    .logo__name b { font-size: 19px; font-weight: 750; font-stretch: 125%; letter-spacing: .06em; }
+    .logo__name span { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .32em; color: var(--ink-3); margin-top: 5px; }
+    .nav { display: flex; align-items: center; gap: 30px; }
+    .nav a { text-decoration: none; font-size: 15px; color: var(--ink-2); transition: color .2s; }
+    .nav a.btn { color: var(--white); }
+    .nav a:hover { color: var(--ink); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 48px; padding: 0 22px; font: 600 15px/1 var(--f-sans); text-decoration: none; border: 1px solid var(--ink); background: var(--ink); color: var(--white); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+    .btn:hover { background: var(--accent); border-color: var(--accent); }
+    .btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
+    .btn--ghost:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+    .btn--sm { height: 40px; padding: 0 16px; font-size: 14px; }
+    .btn svg { width: 16px; height: 16px; }
+    .menu-btn { display: none; width: 44px; height: 44px; border: 1px solid var(--line-2); background: transparent; cursor: pointer; position: relative; }
+    .menu-btn span { position: absolute; left: 12px; right: 12px; height: 1.5px; background: var(--ink); transition: transform .25s; }
+    .menu-btn span:first-child { top: 17px; }
+    .menu-btn span:last-child { top: 25px; }
+    .menu-btn[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+    .menu-btn[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+    /* Hero */
+    .hero { position: relative; padding: clamp(48px, 7vw, 96px) 0 0; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 48px 48px; opacity: .45; -webkit-mask-image: radial-gradient(ellipse 70% 80% at 70% 40%, #000 30%, transparent 75%); mask-image: radial-gradient(ellipse 70% 80% at 70% 40%, #000 30%, transparent 75%); pointer-events: none; }
+    .hero__grid { position: relative; display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: center; }
+    .kicker { display: inline-flex; align-items: center; gap: 10px; color: var(--ink-3); margin-bottom: 26px; }
+    .kicker::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
+    .hero h1 { font-size: clamp(38px, 4.7vw, 66px); }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero__lead { margin-top: 26px; font-size: clamp(17px, 1.4vw, 19px); color: var(--ink-2); max-width: 34em; }
+    .hero__cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
+    .hero__art { position: relative; }
+    .hero__art svg { width: 100%; height: auto; }
+    .cota { position: absolute; font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; color: var(--ink-3); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .cota::before { content: ""; width: 7px; height: 7px; border: 1px solid var(--accent); transform: rotate(45deg); }
+    .cota--a { top: 2%; left: 4%; }
+    .cota--b { bottom: 0; right: 4%; }
+    .cota--c { bottom: 18%; left: 0; }
+    .facts { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: clamp(40px, 6vw, 80px); border-top: 1px solid var(--line); }
+    .fact { padding: 26px 24px 30px 0; }
+    .fact + .fact { padding-left: 24px; border-left: 1px solid var(--line); }
+    .fact b { display: block; font-size: clamp(30px, 3.4vw, 44px); font-weight: 700; font-stretch: 112%; letter-spacing: -.03em; line-height: 1; }
+    .fact b small { font-size: .5em; color: var(--accent); margin-left: 2px; }
+    .fact span { display: block; margin-top: 10px; color: var(--ink-3); font-size: 14.5px; line-height: 1.4; }
+
+    /* Ilustração isométrica */
+    .iso path { stroke: var(--ink); stroke-width: 1.1; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+    .i-t { fill: var(--white); }
+    .i-r { fill: #e6e2db; }
+    .i-l { fill: #d4cfc6; }
+    .i-w { fill: #2b3038; }
+    .wl { fill: #3a414b; }
+    .slab.i-t { fill: var(--paper-2); }
+    .slab.i-r, .slab.i-l { fill: var(--paper-3); }
+    .pool.i-t { fill: #93b4bc; }
+    .col.i-r { fill: var(--accent); }
+    .col.i-l { fill: var(--accent-2); }
+    .col.i-t { fill: #cf6d43; }
+    .js .draw path { stroke-dasharray: 1; stroke-dashoffset: 1; fill-opacity: 0; }
+    .js .draw.is-on path { animation: line 1.4s cubic-bezier(.6, 0, .2, 1) forwards, fill .8s ease 1.1s forwards; }
+    @keyframes line { to { stroke-dashoffset: 0; } }
+    @keyframes fill { to { fill-opacity: 1; } }
+
+    /* Seções */
+    section { position: relative; }
+    .sec { padding: clamp(72px, 10vw, 128px) 0; }
+    .sec__head { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
+    .sec__head h2 { font-size: clamp(32px, 4vw, 52px); }
+    .sec__head > p { color: var(--ink-2); max-width: 32em; justify-self: end; }
+    .label { display: flex; align-items: center; gap: 12px; color: var(--ink-3); margin-bottom: 20px; }
+    .label b { color: var(--accent); font-weight: 500; }
+
+    /* Serviços */
+    .svc { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); }
+    .svc__item { padding: 30px 26px 36px 0; display: flex; flex-direction: column; gap: 14px; }
+    .svc__item + .svc__item { padding-left: 26px; border-left: 1px solid var(--line); }
+    .svc__num { color: var(--accent); }
+    .svc__item h3 { font-size: 22px; }
+    .svc__item p { color: var(--ink-2); font-size: 15.5px; }
+    .svc__icon { width: 44px; height: 44px; margin-bottom: 8px; }
+    .svc__icon path, .svc__icon rect, .svc__icon line, .svc__icon circle { fill: none; stroke: var(--ink); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+    .svc__icon .ac { stroke: var(--accent); }
+
+    /* Método */
+    .method { background: var(--night); color: #ececee; }
+    .method .label { color: #9a9ca3; }
+    .method .sec__head > p { color: #b4b6bc; }
+    .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); counter-reset: s; position: relative; }
+    .steps::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: var(--night-line); }
+    .steps li { position: relative; padding: 40px 22px 0 0; }
+    .steps li::before { content: ""; position: absolute; top: 0; left: 0; width: 15px; height: 15px; border: 1px solid var(--accent); background: var(--night); transform: rotate(45deg); }
+    .steps li:last-child::before { background: var(--accent); }
+    .steps .mono { color: #8f9198; }
+    .steps h3 { font-size: 20px; margin: 12px 0 10px; color: #fff; font-stretch: 105%; }
+    .steps p { font-size: 15px; color: #b4b6bc; }
+
+    /* Obras */
+    .works { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .work { background: var(--white); border: 1px solid var(--line); display: flex; flex-direction: column; transition: border-color .3s, transform .3s; }
+    .work:hover { border-color: var(--line-2); transform: translateY(-3px); }
+    .work__art { aspect-ratio: 4 / 3; display: grid; place-items: center; padding: 28px; background: linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 32px 32px, linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 32px 32px, var(--paper); border-bottom: 1px solid var(--line); }
+    .work__art svg { width: 100%; height: 100%; }
+    .work__body { padding: 24px 24px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .work__type { color: var(--accent); }
+    .work h3 { font-size: 22px; font-stretch: 108%; }
+    .work p { color: var(--ink-2); font-size: 15px; }
+    .work dl { display: grid; grid-template-columns: repeat(3, 1fr); margin: auto 0 0; padding-top: 18px; border-top: 1px solid var(--line); }
+    .work dt { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+    .work dd { margin: 4px 0 0; font-weight: 600; font-size: 15px; }
+
+    /* Acompanhamento */
+    .track { background: var(--paper-2); }
+    .track .wrap { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
+    .track h2 { font-size: clamp(32px, 4vw, 52px); }
+    .track__lead { margin-top: 22px; color: var(--ink-2); }
+    .checks { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 14px; }
+    .checks li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; }
+    .checks svg { width: 18px; height: 18px; margin-top: 4px; }
+    .checks svg path { stroke: var(--accent); stroke-width: 2; fill: none; }
+    .panel { background: var(--night); color: #ececee; border-radius: 14px; padding: 22px; box-shadow: 0 30px 60px -30px rgba(20, 21, 24, .55); font-size: 14px; }
+    .panel__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding-bottom: 18px; border-bottom: 1px solid var(--night-line); }
+    .panel__top b { display: block; font-size: 17px; font-stretch: 108%; }
+    .panel__top .mono { color: #8f9198; font-size: 11px; }
+    .pill { font-family: var(--f-mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: #8fd19e; background: rgba(143, 209, 158, .1); border: 1px solid rgba(143, 209, 158, .3); padding: 4px 9px; border-radius: 99px; white-space: nowrap; }
+    .bars { display: grid; gap: 13px; padding: 20px 0; border-bottom: 1px solid var(--night-line); }
+    .bar { display: grid; grid-template-columns: 110px 1fr 44px; gap: 12px; align-items: center; }
+    .bar span:first-child { color: #c4c6cb; }
+    .bar__track { height: 6px; background: rgba(255, 255, 255, .08); border-radius: 3px; overflow: hidden; }
+    .bar__fill { display: block; height: 100%; width: var(--v); background: var(--accent); border-radius: 3px; transform-origin: left; }
+    .bar__fill--done { background: #d6d7da; }
+    .js .bar__fill { transform: scaleX(0); transition: transform 1.2s cubic-bezier(.6, 0, .2, 1); }
+    .js .is-on .bar__fill { transform: scaleX(1); }
+    .bar span:last-child { font-family: var(--f-mono); font-size: 12px; color: #9a9ca3; text-align: right; }
+    .log { list-style: none; margin: 0; padding: 18px 0 0; display: grid; gap: 12px; }
+    .log li { display: grid; grid-template-columns: 54px 1fr; gap: 12px; color: #c4c6cb; }
+    .log time { font-family: var(--f-mono); font-size: 11.5px; color: #8f9198; padding-top: 2px; }
+
+    /* FAQ */
+    .faq .wrap { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(32px, 6vw, 88px); }
+    .faq h2 { font-size: clamp(32px, 4vw, 52px); }
+    .faq details { border-top: 1px solid var(--line-2); }
+    .faq details:last-child { border-bottom: 1px solid var(--line-2); }
+    .faq summary { list-style: none; cursor: pointer; padding: 22px 40px 22px 0; font-weight: 600; font-size: 18px; position: relative; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 12px; height: 12px; margin-top: -6px; background: linear-gradient(var(--ink), var(--ink)) center / 12px 1.5px no-repeat, linear-gradient(var(--ink), var(--ink)) center / 1.5px 12px no-repeat; transition: transform .25s; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq details p { padding: 0 40px 24px 0; color: var(--ink-2); }
+
+    /* Contato */
+    .contact { background: var(--night); color: #ececee; }
+    .contact .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 88px); }
+    .contact h2 { font-size: clamp(34px, 4.4vw, 58px); }
+    .contact h2 em { font-style: normal; color: #e07a4c; }
+    .contact__lead { margin-top: 22px; color: #b4b6bc; max-width: 30em; }
+    .contact__info { margin-top: 36px; display: grid; gap: 4px; color: #9a9ca3; font-size: 15px; }
+    .form { display: grid; gap: 16px; }
+    .form label { display: grid; gap: 8px; font-size: 14px; color: #c4c6cb; }
+    .form input, .form select, .form textarea { width: 100%; font: inherit; font-size: 16px; color: #ececee; background: var(--night-2); border: 1px solid var(--night-line); padding: 13px 14px; border-radius: 0; }
+    .form textarea { min-height: 120px; resize: vertical; }
+    .form [disabled] { opacity: .55; cursor: not-allowed; }
+    .form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .notice { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border: 1px dashed rgba(255, 122, 61, .5); color: #e6c5b5; font-size: 14px; line-height: 1.5; }
+    .notice svg { width: 18px; height: 18px; flex: none; margin-top: 2px; }
+    .notice svg path, .notice svg circle { stroke: #ff7a3d; fill: none; stroke-width: 1.6; }
+    .notice a { color: #fff; }
+    .contact .btn { background: #ececee; color: var(--night); border-color: #ececee; }
+    .contact .btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* Rodapé */
+    .foot { background: var(--night); color: #9a9ca3; border-top: 1px solid var(--night-line); font-size: 14px; }
+    .foot .wrap { display: grid; grid-template-columns: 1fr auto; gap: 24px 48px; padding-top: 40px; padding-bottom: 40px; align-items: center; }
+    .foot .logo__name b { color: #ececee; }
+    .foot .logo__name span { color: #7d8088; }
+    .foot__note { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid var(--night-line); line-height: 1.6; }
+    .foot__note a { color: #ececee; }
+    .foot__by { text-align: right; }
+    .foot__by a { color: #ececee; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, .3); }
+
+    /* Entrada suave */
+    .js [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); }
+    .js [data-reveal].is-on { opacity: 1; transform: none; }
+
+    @media (max-width: 1020px) {
+      .nav { position: fixed; inset: 72px 0 auto 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--paper); border-bottom: 1px solid var(--line); padding: 8px var(--gut) 24px; display: none; }
+      .nav.is-open { display: flex; }
+      .nav a { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 17px; color: var(--ink); }
+      .nav .btn { margin-top: 18px; height: 48px; color: var(--white); }
+      .menu-btn { display: block; }
+      .hero__grid, .track .wrap, .faq .wrap, .contact .wrap, .sec__head { grid-template-columns: 1fr; }
+      .sec__head > p { justify-self: start; }
+      .hero__art { max-width: 560px; margin: 0 auto; width: 100%; }
+      .facts, .svc { grid-template-columns: repeat(2, 1fr); }
+      .fact:nth-child(3) { padding-left: 0; border-left: 0; }
+      .fact:nth-child(n+3), .svc__item:nth-child(n+3) { border-top: 1px solid var(--line); }
+      .svc__item:nth-child(3) { padding-left: 0; border-left: 0; }
+      .steps { grid-template-columns: 1fr; gap: 32px; padding-left: 36px; }
+      .steps::before { left: 7px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+      .steps li { padding: 0; }
+      .steps li::before { left: -36px; top: 3px; }
+      .steps h3 { margin-top: 6px; }
+      .works { grid-template-columns: 1fr; max-width: 560px; }
+    }
+    @media (max-width: 620px) {
+      body { font-size: 16px; }
+      .demo .wrap { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .head .wrap > .btn { display: none; }
+      .facts, .svc { grid-template-columns: 1fr; }
+      .fact, .fact + .fact, .svc__item, .svc__item + .svc__item { padding-left: 0; border-left: 0; }
+      .fact + .fact, .svc__item + .svc__item { border-top: 1px solid var(--line); }
+      .cota--c { display: none; }
+      .form .row { grid-template-columns: 1fr; }
+      .bar { grid-template-columns: 92px 1fr 40px; }
+      .foot .wrap { grid-template-columns: 1fr; }
+      .foot__by { text-align: left; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .js .draw path { stroke-dasharray: none; stroke-dashoffset: 0; fill-opacity: 1; animation: none !important; }
+      .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+      .js .bar__fill { transform: none; transition: none; }
+    }
+  </style>
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <div class="demo" role="note" aria-label="Aviso de projeto demonstrativo">
+    <div class="wrap">
+      <p class="demo__txt"><span class="demo__tag">Projeto demonstrativo</span><span>A Ortival Engenharia é uma empresa fictícia. Marca, textos, ilustrações e site foram criados do zero pela Tirvo.</span></p>
+      <a href="https://tirvo.tech/">Conhecer a Tirvo</a>
+    </div>
+  </div>
+
+  <header class="head" data-head>
+    <div class="wrap">
+      <a class="logo" href="#topo" aria-label="Ortival Engenharia, voltar ao topo">
+        <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M0 0H48V30H39V9H9V39H30V48H0Z" fill="currentColor"/><path d="M39 39H48V48H39Z" fill="#b5532c"/></svg>
+        <span class="logo__name"><b>ORTIVAL</b><span>ENGENHARIA</span></span>
+      </a>
+      <nav class="nav" id="menu" aria-label="Navegação principal" data-nav>
+        <a href="#servicos">Serviços</a>
+        <a href="#metodo">Método</a>
+        <a href="#obras">Obras</a>
+        <a href="#acompanhamento">Acompanhamento</a>
+        <a href="#faq">Dúvidas</a>
+        <a class="btn btn--sm" href="#contato">Pedir orçamento</a>
+      </nav>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu" data-menu><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="topo">
+      <div class="wrap hero__grid">
+        <div>
+          <p class="kicker mono" data-reveal>Engenharia e construção · Curitiba e região</p>
+          <h1 data-reveal>Projeto fechado, custo previsto e <em>prazo no contrato.</em></h1>
+          <p class="hero__lead" data-reveal>A Ortival executa obras residenciais e comerciais de médio e alto padrão. Você acompanha cada etapa pelo celular, com fotos, medições e cronograma atualizados toda semana.</p>
+          <div class="hero__cta" data-reveal>
+            <a class="btn" href="#contato">Pedir orçamento <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+            <a class="btn btn--ghost" href="#obras">Ver obras</a>
+          </div>
+        </div>
+        <div class="hero__art">
+          <svg class="iso draw" viewBox="-281 -97 656 482" aria-hidden="true" focusable="false"><path class="i-t slab" pathLength="1" d="M0.0 0.0L358.5 207.0L93.5 360.0L-265.0 153.0Z"/><path class="i-r slab" pathLength="1" d="M358.5 216.0L93.5 369.0L93.5 360.0L358.5 207.0Z"/><path class="i-l slab" pathLength="1" d="M-265.0 162.0L93.5 369.0L93.5 360.0L-265.0 153.0Z"/><path class="i-t " pathLength="1" d="M-15.6 -36.0L155.9 63.0L-15.6 162.0L-187.1 63.0Z"/><path class="i-r " pathLength="1" d="M155.9 144.0L-15.6 243.0L-15.6 162.0L155.9 63.0Z"/><path class="i-l " pathLength="1" d="M-187.1 144.0L-15.6 243.0L-15.6 162.0L-187.1 63.0Z"/><path class="i-w wr" pathLength="1" d="M132.5 144.0L7.8 216.0L7.8 162.0L132.5 90.0Z"/><path class="i-w wl" pathLength="1" d="M-163.7 157.5L-116.9 184.5L-116.9 117.0L-163.7 90.0Z"/><path class="i-w wl" pathLength="1" d="M-93.5 180.0L-39.0 211.5L-39.0 162.0L-93.5 130.5Z"/><path class="i-t col" pathLength="1" d="M124.7 81.0L171.5 108.0L109.1 144.0L62.4 117.0Z"/><path class="i-r col" pathLength="1" d="M171.5 189.0L109.1 225.0L109.1 144.0L171.5 108.0Z"/><path class="i-l col" pathLength="1" d="M62.4 198.0L109.1 225.0L109.1 144.0L62.4 117.0Z"/><path class="i-t " pathLength="1" d="M93.5 -81.0L311.8 45.0L187.1 117.0L-31.2 -9.0Z"/><path class="i-r " pathLength="1" d="M311.8 117.0L187.1 189.0L187.1 117.0L311.8 45.0Z"/><path class="i-l " pathLength="1" d="M-31.2 63.0L187.1 189.0L187.1 117.0L-31.2 -9.0Z"/><path class="i-w wr" pathLength="1" d="M296.2 112.5L202.6 166.5L202.6 121.5L296.2 67.5Z"/><path class="i-w wl" pathLength="1" d="M-15.6 55.8L171.5 163.8L171.5 124.2L-15.6 16.2Z"/><path class="i-t pool" pathLength="1" d="M77.9 219.6L155.9 264.6L77.9 309.6L0.0 264.6Z"/><path class="i-r pool" pathLength="1" d="M155.9 270.0L77.9 315.0L77.9 309.6L155.9 264.6Z"/><path class="i-l pool" pathLength="1" d="M0.0 270.0L77.9 315.0L77.9 309.6L0.0 264.6Z"/></svg>
+          <span class="cota cota--a">RES. MIRANTE · 412 m²</span>
+          <span class="cota cota--c">BALANÇO 6,40 m</span>
+          <span class="cota cota--b">ENTREGA · SEMANA 58</span>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="facts" data-reveal>
+          <div class="fact"><b>18<small>anos</small></b><span>executando obras no Paraná</span></div>
+          <div class="fact"><b>140</b><span>projetos entregues com habite-se</span></div>
+          <div class="fact"><b>96<small>%</small></b><span>das obras entregues no prazo do contrato</span></div>
+          <div class="fact"><b>5<small>anos</small></b><span>de garantia estrutural, como prevê a lei</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="servicos">
+      <div class="wrap">
+        <div class="sec__head">
+          <div>
+            <p class="label mono" data-reveal><b>01</b> Serviços</p>
+            <h2 data-reveal>Do terreno vazio à entrega das chaves.</h2>
+          </div>
+          <p data-reveal>Uma equipe só responde por projeto, aprovação, compra de material e execução. Você fala com um engenheiro responsável do início ao fim.</p>
+        </div>
+        <div class="svc">
+          <article class="svc__item" data-reveal>
+            <svg class="svc__icon" viewBox="0 0 44 44" aria-hidden="true"><path d="M6 20 22 7l16 13"/><path d="M10 17v20h24V17"/><rect class="ac" x="18" y="25" width="8" height="12"/></svg>
+            <span class="svc__num mono">01</span>
+            <h3>Residencial</h3>
+            <p>Casas de médio e alto padrão, com acabamento acompanhado peça por peça.</p>
+          </article>
+          <article class="svc__item" data-reveal>
+            <svg class="svc__icon" viewBox="0 0 44 44" aria-hidden="true"><rect x="8" y="6" width="20" height="32"/><path d="M28 16h8v22h-8"/><path class="ac" d="M13 12h4M19 12h4M13 18h4M19 18h4M13 24h4M19 24h4"/><path d="M4 38h36"/></svg>
+            <span class="svc__num mono">02</span>
+            <h3>Comercial</h3>
+            <p>Lojas, escritórios e clínicas, com cronograma pensado para não parar a operação ao lado.</p>
+          </article>
+          <article class="svc__item" data-reveal>
+            <svg class="svc__icon" viewBox="0 0 44 44" aria-hidden="true"><path d="M8 38V14l14-8 14 8v24"/><path d="M8 26h28"/><path class="ac" d="M15 32l4-4 3 3 7-7"/></svg>
+            <span class="svc__num mono">03</span>
+            <h3>Reforma e retrofit</h3>
+            <p>Estrutura, instalações e fachada de imóveis existentes atualizadas com laudo antes e depois.</p>
+          </article>
+          <article class="svc__item" data-reveal>
+            <svg class="svc__icon" viewBox="0 0 44 44" aria-hidden="true"><rect x="8" y="8" width="28" height="28"/><path d="M8 16h28M16 8v28"/><path class="ac" d="M21 24l3 3 6-7"/></svg>
+            <span class="svc__num mono">04</span>
+            <h3>Gerenciamento</h3>
+            <p>Para quem já tem construtora: fiscalização, medições e controle de custo por um terceiro técnico.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec method" id="metodo">
+      <div class="wrap">
+        <div class="sec__head">
+          <div>
+            <p class="label mono" data-reveal><b>02</b> Método</p>
+            <h2 data-reveal>Cinco etapas, nenhuma surpresa no meio do caminho.</h2>
+          </div>
+          <p data-reveal>A maior parte dos atrasos nasce antes da obra, em projeto incompleto e orçamento vago. Por isso a Ortival só começa a construir depois que tudo está resolvido no papel.</p>
+        </div>
+        <ol class="steps">
+          <li data-reveal><span class="mono">Etapa 01</span><h3>Visita e estudo</h3><p>Análise do terreno, sondagem do solo e leitura da legislação do lote.</p></li>
+          <li data-reveal><span class="mono">Etapa 02</span><h3>Projeto compatibilizado</h3><p>Arquitetura, estrutura, elétrica e hidráulica revisadas juntas, antes de virar obra.</p></li>
+          <li data-reveal><span class="mono">Etapa 03</span><h3>Orçamento fechado</h3><p>Cada item quantificado. O que mudar depois passa por aditivo assinado.</p></li>
+          <li data-reveal><span class="mono">Etapa 04</span><h3>Execução</h3><p>Diário de obra, medição quinzenal e visita semanal com o engenheiro.</p></li>
+          <li data-reveal><span class="mono">Etapa 05</span><h3>Entrega</h3><p>Vistoria, manual do proprietário, habite-se e garantia por escrito.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sec" id="obras">
+      <div class="wrap">
+        <div class="sec__head">
+          <div>
+            <p class="label mono" data-reveal><b>03</b> Obras</p>
+            <h2 data-reveal>Três obras, três escalas.</h2>
+          </div>
+          <p data-reveal>Uma casa, um edifício e um galpão. Tipos de obra diferentes, com o mesmo cuidado com prazo e acabamento.</p>
+        </div>
+        <div class="works">
+          <article class="work" data-reveal>
+            <div class="work__art"><svg class="iso" viewBox="-182 -72 406 312" aria-hidden="true" focusable="false"><path class="i-t slab" pathLength="1" d="M0.0 0.0L207.8 120.0L41.6 216.0L-166.3 96.0Z"/><path class="i-r slab" pathLength="1" d="M207.8 128.0L41.6 224.0L41.6 216.0L207.8 120.0Z"/><path class="i-l slab" pathLength="1" d="M-166.3 104.0L41.6 224.0L41.6 216.0L-166.3 96.0Z"/><path class="i-t " pathLength="1" d="M-6.9 -28.0L103.9 36.0L-6.9 100.0L-117.8 36.0Z"/><path class="i-r " pathLength="1" d="M103.9 92.0L-6.9 156.0L-6.9 100.0L103.9 36.0Z"/><path class="i-l " pathLength="1" d="M-117.8 92.0L-6.9 156.0L-6.9 100.0L-117.8 36.0Z"/><path class="i-w wr" pathLength="1" d="M83.1 96.0L13.9 136.0L13.9 96.0L83.1 56.0Z"/><path class="i-w wl" pathLength="1" d="M-103.9 88.0L-20.8 136.0L-20.8 100.0L-103.9 52.0Z"/><path class="i-t " pathLength="1" d="M55.4 -56.0L166.3 8.0L83.1 56.0L-27.7 -8.0Z"/><path class="i-r " pathLength="1" d="M166.3 56.0L83.1 104.0L83.1 56.0L166.3 8.0Z"/><path class="i-l " pathLength="1" d="M-27.7 40.0L83.1 104.0L83.1 56.0L-27.7 -8.0Z"/><path class="i-w wr" pathLength="1" d="M152.4 56.0L97.0 88.0L97.0 56.0L152.4 24.0Z"/><path class="i-w wl" pathLength="1" d="M-13.9 38.4L69.3 86.4L69.3 56.0L-13.9 8.0Z"/></svg></div>
+            <div class="work__body">
+              <span class="work__type mono">Residencial</span>
+              <h3>Residência Mirante</h3>
+              <p>Dois volumes, com balanço em estrutura metálica sobre a área social.</p>
+              <dl><div><dt>Área</dt><dd>412 m²</dd></div><div><dt>Prazo</dt><dd>14 meses</dd></div><div><dt>Status</dt><dd>Entregue</dd></div></dl>
+            </div>
+          </article>
+          <article class="work" data-reveal>
+            <div class="work__art"><svg class="iso" viewBox="-156 -195 311 378" aria-hidden="true" focusable="false"><path class="i-t slab" pathLength="1" d="M0.0 0.0L139.6 80.6L0.0 161.2L-139.6 80.6Z"/><path class="i-r slab" pathLength="1" d="M139.6 86.8L0.0 167.4L0.0 161.2L139.6 80.6Z"/><path class="i-l slab" pathLength="1" d="M-139.6 86.8L0.0 167.4L0.0 161.2L-139.6 80.6Z"/><path class="i-t " pathLength="1" d="M0.0 0.0L96.6 55.8L0.0 111.6L-96.6 55.8Z"/><path class="i-r " pathLength="1" d="M96.6 80.6L0.0 136.4L0.0 111.6L96.6 55.8Z"/><path class="i-l " pathLength="1" d="M-96.6 80.6L0.0 136.4L0.0 111.6L-96.6 55.8Z"/><path class="i-w wr" pathLength="1" d="M91.3 80.0L5.4 129.6L5.4 112.2L91.3 62.6Z"/><path class="i-w wl" pathLength="1" d="M-91.3 80.0L-5.4 129.6L-5.4 112.2L-91.3 62.6Z"/><path class="i-t " pathLength="1" d="M0.0 -18.6L85.9 31.0L0.0 80.6L-85.9 31.0Z"/><path class="i-r " pathLength="1" d="M85.9 55.8L0.0 105.4L0.0 80.6L85.9 31.0Z"/><path class="i-l " pathLength="1" d="M-85.9 55.8L0.0 105.4L0.0 80.6L-85.9 31.0Z"/><path class="i-w wr" pathLength="1" d="M80.5 52.7L45.6 72.9L45.6 58.0L80.5 37.8Z"/><path class="i-w wr" pathLength="1" d="M40.3 76.0L5.4 96.1L5.4 81.2L40.3 61.1Z"/><path class="i-w wl" pathLength="1" d="M-80.5 52.7L-45.6 72.9L-45.6 58.0L-80.5 37.8Z"/><path class="i-w wl" pathLength="1" d="M-40.3 76.0L-5.4 96.1L-5.4 81.2L-40.3 61.1Z"/><path class="i-t " pathLength="1" d="M0.0 -43.4L85.9 6.2L0.0 55.8L-85.9 6.2Z"/><path class="i-r " pathLength="1" d="M85.9 31.0L0.0 80.6L0.0 55.8L85.9 6.2Z"/><path class="i-l " pathLength="1" d="M-85.9 31.0L0.0 80.6L0.0 55.8L-85.9 6.2Z"/><path class="i-w wr" pathLength="1" d="M80.5 27.9L45.6 48.1L45.6 33.2L80.5 13.0Z"/><path class="i-w wr" pathLength="1" d="M40.3 51.1L5.4 71.3L5.4 56.4L40.3 36.3Z"/><path class="i-w wl" pathLength="1" d="M-80.5 27.9L-45.6 48.1L-45.6 33.2L-80.5 13.0Z"/><path class="i-w wl" pathLength="1" d="M-40.3 51.1L-5.4 71.3L-5.4 56.4L-40.3 36.3Z"/><path class="i-t " pathLength="1" d="M0.0 -68.2L85.9 -18.6L0.0 31.0L-85.9 -18.6Z"/><path class="i-r " pathLength="1" d="M85.9 6.2L0.0 55.8L0.0 31.0L85.9 -18.6Z"/><path class="i-l " pathLength="1" d="M-85.9 6.2L0.0 55.8L0.0 31.0L-85.9 -18.6Z"/><path class="i-w wr" pathLength="1" d="M80.5 3.1L45.6 23.2L45.6 8.4L80.5 -11.8Z"/><path class="i-w wr" pathLength="1" d="M40.3 26.4L5.4 46.5L5.4 31.6L40.3 11.5Z"/><path class="i-w wl" pathLength="1" d="M-80.5 3.1L-45.6 23.2L-45.6 8.4L-80.5 -11.8Z"/><path class="i-w wl" pathLength="1" d="M-40.3 26.4L-5.4 46.5L-5.4 31.6L-40.3 11.5Z"/><path class="i-t " pathLength="1" d="M0.0 -93.0L85.9 -43.4L0.0 6.2L-85.9 -43.4Z"/><path class="i-r " pathLength="1" d="M85.9 -18.6L0.0 31.0L0.0 6.2L85.9 -43.4Z"/><path class="i-l " pathLength="1" d="M-85.9 -18.6L0.0 31.0L0.0 6.2L-85.9 -43.4Z"/><path class="i-w wr" pathLength="1" d="M80.5 -21.7L45.6 -1.6L45.6 -16.4L80.5 -36.6Z"/><path class="i-w wr" pathLength="1" d="M40.3 1.6L5.4 21.7L5.4 6.8L40.3 -13.3Z"/><path class="i-w wl" pathLength="1" d="M-80.5 -21.7L-45.6 -1.6L-45.6 -16.4L-80.5 -36.6Z"/><path class="i-w wl" pathLength="1" d="M-40.3 1.6L-5.4 21.7L-5.4 6.8L-40.3 -13.3Z"/><path class="i-t " pathLength="1" d="M0.0 -117.8L85.9 -68.2L0.0 -18.6L-85.9 -68.2Z"/><path class="i-r " pathLength="1" d="M85.9 -43.4L0.0 6.2L0.0 -18.6L85.9 -68.2Z"/><path class="i-l " pathLength="1" d="M-85.9 -43.4L0.0 6.2L0.0 -18.6L-85.9 -68.2Z"/><path class="i-w wr" pathLength="1" d="M80.5 -46.5L45.6 -26.4L45.6 -41.2L80.5 -61.4Z"/><path class="i-w wr" pathLength="1" d="M40.3 -23.2L5.4 -3.1L5.4 -18.0L40.3 -38.1Z"/><path class="i-w wl" pathLength="1" d="M-80.5 -46.5L-45.6 -26.4L-45.6 -41.2L-80.5 -61.4Z"/><path class="i-w wl" pathLength="1" d="M-40.3 -23.2L-5.4 -3.1L-5.4 -18.0L-40.3 -38.1Z"/><path class="i-t " pathLength="1" d="M0.0 -142.6L85.9 -93.0L0.0 -43.4L-85.9 -93.0Z"/><path class="i-r " pathLength="1" d="M85.9 -68.2L0.0 -18.6L0.0 -43.4L85.9 -93.0Z"/><path class="i-l " pathLength="1" d="M-85.9 -68.2L0.0 -18.6L0.0 -43.4L-85.9 -93.0Z"/><path class="i-w wr" pathLength="1" d="M80.5 -71.3L45.6 -51.1L45.6 -66.0L80.5 -86.2Z"/><path class="i-w wr" pathLength="1" d="M40.3 -48.1L5.4 -27.9L5.4 -42.8L40.3 -62.9Z"/><path class="i-w wl" pathLength="1" d="M-80.5 -71.3L-45.6 -51.1L-45.6 -66.0L-80.5 -86.2Z"/><path class="i-w wl" pathLength="1" d="M-40.3 -48.1L-5.4 -27.9L-5.4 -42.8L-40.3 -62.9Z"/><path class="i-t " pathLength="1" d="M0.0 -167.4L85.9 -117.8L0.0 -68.2L-85.9 -117.8Z"/><path class="i-r " pathLength="1" d="M85.9 -93.0L0.0 -43.4L0.0 -68.2L85.9 -117.8Z"/><path class="i-l " pathLength="1" d="M-85.9 -93.0L0.0 -43.4L0.0 -68.2L-85.9 -117.8Z"/><path class="i-w wr" pathLength="1" d="M80.5 -96.1L45.6 -76.0L45.6 -90.8L80.5 -111.0Z"/><path class="i-w wr" pathLength="1" d="M40.3 -72.9L5.4 -52.7L5.4 -67.6L40.3 -87.7Z"/><path class="i-w wl" pathLength="1" d="M-80.5 -96.1L-45.6 -76.0L-45.6 -90.8L-80.5 -111.0Z"/><path class="i-w wl" pathLength="1" d="M-40.3 -72.9L-5.4 -52.7L-5.4 -67.6L-40.3 -87.7Z"/><path class="i-t " pathLength="1" d="M0.0 -178.6L96.6 -122.8L0.0 -67.0L-96.6 -122.8Z"/><path class="i-r " pathLength="1" d="M96.6 -117.8L0.0 -62.0L0.0 -67.0L96.6 -122.8Z"/><path class="i-l " pathLength="1" d="M-96.6 -117.8L0.0 -62.0L0.0 -67.0L-96.6 -122.8Z"/></svg></div>
+            <div class="work__body">
+              <span class="work__type mono">Multifamiliar</span>
+              <h3>Edifício Alameda</h3>
+              <p>Oito pavimentos com térreo comercial e fachada ventilada em porcelanato.</p>
+              <dl><div><dt>Área</dt><dd>6.240 m²</dd></div><div><dt>Prazo</dt><dd>26 meses</dd></div><div><dt>Status</dt><dd>Entregue</dd></div></dl>
+            </div>
+          </article>
+          <article class="work" data-reveal>
+            <div class="work__art"><svg class="iso" viewBox="-182 -51 442 310" aria-hidden="true" focusable="false"><path class="i-t slab" pathLength="1" d="M0.0 0.0L243.9 140.8L77.6 236.8L-166.3 96.0Z"/><path class="i-r slab" pathLength="1" d="M243.9 147.2L77.6 243.2L77.6 236.8L243.9 140.8Z"/><path class="i-l slab" pathLength="1" d="M-166.3 102.4L77.6 243.2L77.6 236.8L-166.3 96.0Z"/><path class="i-t " pathLength="1" d="M-5.5 -35.2L182.9 73.6L72.1 137.6L-116.4 28.8Z"/><path class="i-r " pathLength="1" d="M182.9 131.2L72.1 195.2L72.1 137.6L182.9 73.6Z"/><path class="i-l " pathLength="1" d="M-116.4 86.4L72.1 195.2L72.1 137.6L-116.4 28.8Z"/><path class="i-w wr" pathLength="1" d="M166.3 140.8L133.0 160.0L133.0 118.4L166.3 99.2Z"/><path class="i-w wr" pathLength="1" d="M121.9 166.4L88.7 185.6L88.7 144.0L121.9 124.8Z"/><path class="i-w wl" pathLength="1" d="M-105.3 48.0L61.0 144.0L61.0 135.0L-105.3 39.0Z"/><path class="i-t " pathLength="1" d="M171.8 112.0L199.5 128.0L144.1 160.0L116.4 144.0Z"/><path class="i-r " pathLength="1" d="M199.5 153.6L144.1 185.6L144.1 160.0L199.5 128.0Z"/><path class="i-l " pathLength="1" d="M116.4 169.6L144.1 185.6L144.1 160.0L116.4 144.0Z"/><path class="i-w wr" pathLength="1" d="M188.4 153.6L155.2 172.8L155.2 160.0L188.4 140.8Z"/></svg></div>
+            <div class="work__body">
+              <span class="work__type mono">Industrial</span>
+              <h3>Centro Logístico Vale</h3>
+              <p>Galpão em estrutura pré-moldada com piso de alta resistência e docas.</p>
+              <dl><div><dt>Área</dt><dd>3.800 m²</dd></div><div><dt>Prazo</dt><dd>9 meses</dd></div><div><dt>Status</dt><dd>Em obra</dd></div></dl>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec track" id="acompanhamento">
+      <div class="wrap">
+        <div>
+          <p class="label mono" data-reveal><b>04</b> Acompanhamento</p>
+          <h2 data-reveal>A obra inteira no seu celular.</h2>
+          <p class="track__lead" data-reveal>Cada cliente recebe acesso ao painel da obra. Ali ficam o cronograma, as fotos da semana, as medições e os documentos assinados.</p>
+          <ul class="checks" data-reveal>
+            <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9"/></svg><span>Fotos e relatório do engenheiro toda sexta-feira</span></li>
+            <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9"/></svg><span>Avanço de cada etapa comparado ao cronograma</span></li>
+            <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9"/></svg><span>Notas fiscais e medições disponíveis para consulta</span></li>
+            <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9"/></svg><span>Aditivos aprovados por você, com registro de data</span></li>
+          </ul>
+        </div>
+        <div class="panel" data-reveal data-bars role="img" aria-label="Exemplo do painel da obra: Residência Mirante na semana 32, dentro do prazo, com fundação e estrutura concluídas, alvenaria em 92%, instalações em 64% e acabamento em 18%.">
+          <div class="panel__top">
+            <div><span class="mono">Painel da obra</span><b>Residência Mirante</b><span class="mono">Semana 32 de 58</span></div>
+            <span class="pill">No prazo</span>
+          </div>
+          <div class="bars">
+            <div class="bar"><span>Fundação</span><span class="bar__track"><span class="bar__fill bar__fill--done" style="--v:100%"></span></span><span>100%</span></div>
+            <div class="bar"><span>Estrutura</span><span class="bar__track"><span class="bar__fill bar__fill--done" style="--v:100%"></span></span><span>100%</span></div>
+            <div class="bar"><span>Alvenaria</span><span class="bar__track"><span class="bar__fill" style="--v:92%"></span></span><span>92%</span></div>
+            <div class="bar"><span>Instalações</span><span class="bar__track"><span class="bar__fill" style="--v:64%"></span></span><span>64%</span></div>
+            <div class="bar"><span>Acabamento</span><span class="bar__track"><span class="bar__fill" style="--v:18%"></span></span><span>18%</span></div>
+          </div>
+          <ul class="log">
+            <li><time>Sex</time><span>Concretagem da laje do balanço concluída. 14 fotos anexadas.</span></li>
+            <li><time>Qua</time><span>Medição quinzenal aprovada pelo cliente.</span></li>
+            <li><time>Seg</time><span>Entrega das esquadrias confirmada para a semana 35.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec faq" id="faq">
+      <div class="wrap">
+        <div>
+          <p class="label mono" data-reveal><b>05</b> Dúvidas</p>
+          <h2 data-reveal>Perguntas que todo cliente faz antes de começar.</h2>
+        </div>
+        <div data-reveal>
+          <details>
+            <summary>O orçamento é fechado mesmo?</summary>
+            <p>Sim. O orçamento sai com cada item quantificado a partir do projeto completo. Se você quiser mudar algo durante a obra, a diferença é apresentada antes e só entra com um aditivo assinado.</p>
+          </details>
+          <details>
+            <summary>Quem cuida do alvará e do habite-se?</summary>
+            <p>A Ortival. A aprovação do projeto na prefeitura, o alvará de construção e o habite-se fazem parte do contrato.</p>
+          </details>
+          <details>
+            <summary>Posso visitar a obra quando quiser?</summary>
+            <p>Pode, com agendamento. Além disso, toda semana há uma visita marcada com o engenheiro responsável para mostrar o que avançou.</p>
+          </details>
+          <details>
+            <summary>Vocês fazem só a obra, se eu já tiver o projeto?</summary>
+            <p>Fazemos. Antes de orçar, a equipe revisa o projeto e aponta o que falta compatibilizar, para evitar ajuste improvisado no canteiro.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec contact" id="contato">
+      <div class="wrap">
+        <div>
+          <p class="label mono" data-reveal><b>06</b> Contato</p>
+          <h2 data-reveal>Conte o que você quer construir. <em>A gente mede o resto.</em></h2>
+          <p class="contact__lead" data-reveal>Um engenheiro responde em até um dia útil para marcar a visita técnica.</p>
+          <div class="contact__info mono" data-reveal>
+            <span>Atendimento · Curitiba e região metropolitana</span>
+            <span>Segunda a sexta · 8h às 18h</span>
+          </div>
+        </div>
+        <form class="form" data-reveal aria-describedby="aviso-form">
+          <p class="notice" id="aviso-form"><svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="7.5"/><path d="M9 5v5M9 12.5v.5"/></svg><span>Formulário desativado. Este é um site demonstrativo e nenhuma mensagem é enviada. Para falar com quem fez este site, <a href="https://tirvo.tech/#contato">fale com a Tirvo</a>.</span></p>
+          <div class="row">
+            <label>Nome<input type="text" name="nome" autocomplete="off" disabled></label>
+            <label>Telefone<input type="tel" name="telefone" autocomplete="off" disabled></label>
+          </div>
+          <label>Tipo de obra
+            <select name="tipo" disabled>
+              <option>Residencial</option>
+              <option>Comercial</option>
+              <option>Reforma e retrofit</option>
+              <option>Gerenciamento</option>
+            </select>
+          </label>
+          <label>Conte sobre o projeto<textarea name="mensagem" disabled></textarea></label>
+          <button class="btn" type="submit" disabled>Enviar pedido</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <a class="logo" href="#topo" aria-label="Ortival Engenharia, voltar ao topo">
+        <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M0 0H48V30H39V9H9V39H30V48H0Z" fill="currentColor"/><path d="M39 39H48V48H39Z" fill="#b5532c"/></svg>
+        <span class="logo__name"><b>ORTIVAL</b><span>ENGENHARIA</span></span>
+      </a>
+      <p class="foot__by">Identidade visual e site por <a href="https://tirvo.tech/">Tirvo</a></p>
+      <p class="foot__note">A Ortival Engenharia não existe. Nomes, números, obras e o painel mostrado nesta página são fictícios e servem apenas para demonstrar o trabalho da Tirvo em marca, textos, ilustração e desenvolvimento web. <a href="https://tirvo.tech/">Conheça a Tirvo</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var head = document.querySelector('[data-head]');
+      var onScroll = function () { head.classList.toggle('is-scrolled', window.scrollY > 8); };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      var btn = document.querySelector('[data-menu]');
+      var nav = document.querySelector('[data-nav]');
+      var setMenu = function (open) {
+        btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+        nav.classList.toggle('is-open', open);
+      };
+      btn.addEventListener('click', function () { setMenu(btn.getAttribute('aria-expanded') !== 'true'); });
+      nav.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+      var items = document.querySelectorAll('[data-reveal], .draw, [data-bars]');
+      if (!('IntersectionObserver' in window)) { items.forEach(function (el) { el.classList.add('is-on'); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('is-on'); io.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+      items.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>
