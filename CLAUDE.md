@@ -10,7 +10,7 @@ Leia este guia antes de criar qualquer conteúdo da marca, como posts, carrossé
 - `marca.html`: a história e o significado de cada elemento da logo.
 - `marca/tirvo-logo.svg` e `marca/tirvo-logo.png`: o logotipo oficial. Use sempre esses arquivos, nunca redesenhe.
 - `marca/tirvo-capa-de-link.png`: exemplo de composição pronta.
-- `vitrine-*.webp` e `nexus-*.webp`: referências de estilo dos trabalhos.
+- `vitrine-*.webp` e `hipercode-*.webp`: referências de estilo dos trabalhos.
 - `index.html` e as pastas `servicos/`, `metodo/`, `equipe/` e `faq/`: tom de voz e conteúdo dos serviços.
 
 ## Cores

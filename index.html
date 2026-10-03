@@ -59,6 +59,7 @@
         "description": "Agência de tecnologia, design e inteligência artificial em Curitiba (PR), com atendimento em todo o Brasil: criação de sites profissionais, desenvolvimento de sistemas sob medida e automações, criação de logotipo, logomarca e identidade visual, design gráfico e engenharia de IA.",
         "telephone": "+55-41-99193-3850",
         "email": "engenharia@tirvo.tech",
+        "sameAs": ["https://www.instagram.com/tirvotech/"],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Silva Jardim, 1003 – Centro",
@@ -466,7 +467,7 @@
       .services { --cis: 3240px; }
       .team { --cis: 850px; }
       .method { --cis: 1000px; }
-      .nexus { --cis: 1060px; }
+      .hipercode { --cis: 1060px; }
       .numbers { --cis: 900px; }
       .faq { --cis: 750px; }
       .contact { --cis: 2000px; }
@@ -476,7 +477,7 @@
         .services { --cis: 3040px; }
         .team { --cis: 770px; }
         .method { --cis: 880px; }
-        .nexus { --cis: 1040px; }
+        .hipercode { --cis: 1040px; }
         .faq { --cis: 690px; }
         .contact { --cis: 1780px; }
       }
@@ -484,7 +485,7 @@
         .services { --cis: 2180px; }
         .team { --cis: 665px; }
         .method { --cis: 825px; }
-        .nexus { --cis: 1180px; }
+        .hipercode { --cis: 1180px; }
         .faq { --cis: 690px; }
         .contact { --cis: 1580px; }
         .footer { --cis: 1550px; }
@@ -497,7 +498,7 @@
         .services { --cis: 2080px; }
         .team { --cis: 980px; }
         .method { --cis: 790px; }
-        .nexus { --cis: 930px; }
+        .hipercode { --cis: 930px; }
         .numbers { --cis: 730px; }
         .faq { --cis: 560px; }
         .contact { --cis: 1120px; }
@@ -507,7 +508,7 @@
         .services { --cis: 1600px; }
         .team { --cis: 890px; }
         .method { --cis: 805px; }
-        .nexus { --cis: 1000px; }
+        .hipercode { --cis: 1000px; }
         .faq { --cis: 665px; }
       }
       /* Navegação por âncora: renderiza tudo para o destino ser exato */
@@ -1309,7 +1310,9 @@
         padding-block: 1.25rem calc(1.25rem + env(safe-area-inset-bottom));
         border-top: 1px solid var(--line);
       }
-      .menu__actions { display: grid; grid-template-columns: 1fr auto; gap: .6rem; }
+      .menu__actions { display: grid; grid-template-columns: 1fr auto auto; gap: .6rem; }
+      .menu__wa.menu__ig { width: 48px; padding-inline: 0; }
+      .menu__wa.menu__ig .icon { flex: none; width: 20px; height: 20px; }
       .menu__wa {
         display: inline-flex;
         align-items: center;
@@ -2243,12 +2246,12 @@
       .seal p { color: var(--text-secondary); font-size: .92rem; line-height: 1.55; max-width: 19.2em; }
       [data-anim-scope].is-offscreen .seal__ring { animation-play-state: paused; }
 
-      /* ---------- Seção 6: Nexus ---------- */
-      .nexus {
+      /* ---------- Seção 6: Hipercode ---------- */
+      .hipercode {
         padding-block: calc(var(--section-y) * 1.2);
         background: var(--bg-void);
       }
-      .nexus__floor {
+      .hipercode__floor {
         position: absolute;
         left: -30%;
         right: -30%;
@@ -2265,16 +2268,16 @@
         -webkit-mask-image: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, .5) 40%, transparent 80%);
         mask-image: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, .5) 40%, transparent 80%);
       }
-      .nexus__scan {
+      .hipercode__scan {
         position: absolute;
         inset: 0;
         z-index: -1;
         pointer-events: none;
         background: repeating-linear-gradient(180deg, rgba(255, 255, 255, .018) 0 1px, transparent 1px 3px);
       }
-      .glow--nexus { top: 6%; right: -20%; }
-      .nexus__copy { display: grid; gap: 1.5rem; align-content: start; }
-      .nexus__claim {
+      .glow--hipercode { top: 6%; right: -20%; }
+      .hipercode__copy { display: grid; gap: 1.5rem; align-content: start; }
+      .hipercode__claim {
         padding-left: 1rem;
         border-left: 2px solid var(--accent);
         color: var(--text-primary);
@@ -2283,8 +2286,8 @@
         line-height: 1.6;
       }
       @media (min-width: 1024px) {
-        .nexus__copy { grid-column: 1 / span 5; }
-        .nexus__term { grid-column: 7 / span 6; align-self: center; }
+        .hipercode__copy { grid-column: 1 / span 5; }
+        .hipercode__term { grid-column: 7 / span 6; align-self: center; }
       }
 
       /* Terminal dos agentes */
@@ -2337,7 +2340,7 @@
         .js .term.is-armed .term__line { clip-path: inset(0 calc((1 - var(--p, 0)) * 100%) 0 0); }
       }
 
-      /* Pipeline do Nexus */
+      /* Pipeline do Hipercode */
       .pipeline {
         --icon: 52px;
         --pgap: 1.25rem;
@@ -2601,7 +2604,7 @@
         font-size: .85rem;
         letter-spacing: .08em;
       }
-      .nexus__cta { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+      .hipercode__cta { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
 
       /* Lightbox */
       .lightbox {
@@ -4451,7 +4454,7 @@
         .hl-peak { animation: peak-shine 5s ease-in-out 1.4s infinite; }
       }
       @keyframes peak-shine { 0%, 55% { background-position: 100% 0; } 85%, 100% { background-position: 0 0; } }
-      /* "Nexus 1.0" em cromo com reflexo */
+      /* "Hipercode 1.0" em cromo com reflexo */
       .hl-chrome {
         background: linear-gradient(180deg, #ffffff 0%, #d9dce3 45%, #8b8f99 52%, #f4f5f8 100%);
         -webkit-background-clip: text;
@@ -4519,8 +4522,8 @@
       .faq__punch { color: var(--text-secondary); font-size: clamp(1.25rem, 1rem + 1vw, 1.6rem); line-height: 1.35; letter-spacing: -.015em; }
       .faq__punch strong, .faq__punch .hl-mark { color: var(--text-primary); font-weight: 580; }
 
-      /* Nexus: linha de comando com cursor */
-      .nexus__claim {
+      /* Hipercode: linha de comando com cursor */
+      .hipercode__claim {
         position: relative;
         padding: .85rem 1rem .85rem 2.1rem;
         border: 1px solid rgba(255, 85, 0, .3);
@@ -4528,10 +4531,10 @@
         border-radius: 0 var(--r-md) var(--r-md) 0;
         background: linear-gradient(90deg, rgba(255, 85, 0, .1), rgba(255, 85, 0, .02));
       }
-      .nexus__claim::before { content: ">"; position: absolute; left: .9rem; color: var(--accent); }
-      .nexus__claim::after { content: ""; display: inline-block; width: .55em; height: 1.05em; margin-left: .3em; vertical-align: -.18em; background: var(--accent); }
+      .hipercode__claim::before { content: ">"; position: absolute; left: .9rem; color: var(--accent); }
+      .hipercode__claim::after { content: ""; display: inline-block; width: .55em; height: 1.05em; margin-left: .3em; vertical-align: -.18em; background: var(--accent); }
       @media (prefers-reduced-motion: no-preference) {
-        .nexus__claim::after { animation: caret-blink 1.1s steps(1) infinite; }
+        .hipercode__claim::after { animation: caret-blink 1.1s steps(1) infinite; }
       }
       @keyframes caret-blink { 50% { opacity: 0; } }
 
@@ -4820,7 +4823,7 @@
         66% { background-position: 40% 20%; } 75% { background-position: 60% 20%; } 83% { background-position: 80% 20%; } 91% { background-position: 100% 20%; }
       }
 
-      /* Blocos-resumo de equipe, método e Nexus */
+      /* Blocos-resumo de equipe, método e Hipercode */
       .teaser { position: relative; display: grid; gap: clamp(1.75rem, 4vw, 3rem); padding: clamp(1.5rem, 4vw, 3rem); align-items: center; }
       @media (min-width: 1024px) { .teaser { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } }
       .teaser__copy { display: grid; gap: 1.2rem; justify-items: start; }
@@ -4838,7 +4841,7 @@
       .teaser__shot { overflow: hidden; border-radius: 12px; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .95), 0 30px 70px -45px rgba(255, 85, 0, .5); }
       .teaser__shot img { width: 100%; height: auto; border: 1px solid var(--line-strong); border-top: 0; border-radius: 0 0 12px 12px; }
       .teaser__go--inline { position: relative; }
-      .nexus--teaser { background: radial-gradient(70% 60% at 80% 20%, rgba(255, 85, 0, .08), transparent 60%); }
+      .hipercode--teaser { background: radial-gradient(70% 60% at 80% 20%, rgba(255, 85, 0, .08), transparent 60%); }
         /* Fundo único com a logo em marca d'água: fixo atrás do conteúdo, a página rola por cima.
          O topo e o rodapé têm fundo próprio e cobrem o desenho. */
       body[data-bg]::before {
@@ -4856,12 +4859,18 @@
       body[data-bg] { background-color: transparent; }
       /* Faixas com fundo próprio ficam translúcidas, para a marca d'água aparecer de leve por baixo */
       body[data-bg] .p-sec--raised { background: linear-gradient(rgba(15, 15, 18, .72), rgba(9, 9, 11, .55)); }
-      body[data-bg] .nexus, body[data-bg] .ab-refuse, body[data-bg] .mk-band { background-color: rgba(0, 0, 0, .62); }
+      body[data-bg] .hipercode, body[data-bg] .ab-refuse, body[data-bg] .mk-band { background-color: rgba(0, 0, 0, .62); }
       body[data-bg] .nf { background-color: transparent; }
       @media print { body[data-bg]::before { display: none; } }
+      .dev-note { display: inline-flex; align-items: center; gap: .6rem; justify-self: start; padding: .45rem .85rem; border: 1px solid rgba(255, 85, 0, .35); border-radius: 999px; background: linear-gradient(rgba(255, 85, 0, .08), rgba(255, 85, 0, .08)), #0f0f12; color: #fafafa; font: 500 .78rem/1.3 "Geist Mono", ui-monospace, monospace; letter-spacing: .02em; }
+      .dev-note__dot { width: .5rem; height: .5rem; flex: none; border-radius: 50%; background: #ff5500; box-shadow: 0 0 0 4px rgba(255, 85, 0, .18); }
+      @media (prefers-reduced-motion: no-preference) { .dev-note__dot { animation: dev-pulse 1.8s ease-in-out infinite; } }
+      @keyframes dev-pulse { 50% { opacity: .35; } }
 </style>
   <script src="assets/tlogo.js?v=e0021160" defer></script>
   <script src="assets/herofx.js?v=0e8c224d" defer></script>
+<script>(function(){var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('hb');setTimeout(function(){if(!window.__hbOK)d.classList.remove('hb')},3000)}})()</script>
+<style>html.hb [data-hb]:not(.hb-done){clip-path:inset(0 100% 0 0)}.hb-fx{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:90}</style>
 </head>
 <body data-bg="logo">
   <!-- ============ ABERTURA (logo animada, frase e o Next) ============ -->
@@ -4990,7 +4999,7 @@
           </li>
           <li><a class="nav__link" href="equipe/"><span class="nav__num" aria-hidden="true">05</span><span class="scr" data-scramble><span class="scr__ghost">Equipe</span><span class="scr__live" aria-hidden="true">Equipe</span></span></a></li>
           <li><a class="nav__link" href="metodo/"><span class="nav__num" aria-hidden="true">06</span><span class="scr" data-scramble><span class="scr__ghost">Método</span><span class="scr__live" aria-hidden="true">Método</span></span></a></li>
-          <li><a class="nav__link" href="nexus/"><span class="nav__num" aria-hidden="true">07</span><span class="scr" data-scramble><span class="scr__ghost">Nexus</span><span class="scr__live" aria-hidden="true">Nexus</span></span></a></li>
+          <li><a class="nav__link" href="hipercode/"><span class="nav__num" aria-hidden="true">07</span><span class="scr" data-scramble><span class="scr__ghost">Hipercode</span><span class="scr__live" aria-hidden="true">Hipercode</span></span></a></li>
           <li><a class="nav__link" href="faq/"><span class="nav__num" aria-hidden="true">08</span><span class="scr" data-scramble><span class="scr__ghost">FAQ</span><span class="scr__live" aria-hidden="true">FAQ</span></span></a></li>
         </ul>
       </nav>
@@ -5031,7 +5040,7 @@
         </li>
         <li><a class="menu__link" href="equipe/" style="--i:4"><span class="menu__num" aria-hidden="true">05</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Equipe</span><span class="menu__desc">Programadores raiz e IA</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
         <li><a class="menu__link" href="metodo/" style="--i:5"><span class="menu__num" aria-hidden="true">06</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Método</span><span class="menu__desc">Descoberta, engenharia, lançamento</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
-        <li><a class="menu__link" href="nexus/" style="--i:6"><span class="menu__num" aria-hidden="true">07</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Nexus</span><span class="menu__desc">Enxame de agentes autônomos</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        <li><a class="menu__link" href="hipercode/" style="--i:6"><span class="menu__num" aria-hidden="true">07</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Hipercode</span><span class="menu__desc">Enxame de agentes autônomos</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
         <li><a class="menu__link" href="faq/" style="--i:7"><span class="menu__num" aria-hidden="true">08</span><span class="menu__text"><span class="menu__label" data-scramble-menu>FAQ</span><span class="menu__desc">Respostas diretas</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
         <li><a class="menu__link" href="#contato" style="--i:8"><span class="menu__num" aria-hidden="true">09</span><span class="menu__text"><span class="menu__label" data-scramble-menu>Contato</span><span class="menu__desc">Seu projeto começa aqui</span></span><svg class="icon menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
       </ol>
@@ -5040,6 +5049,7 @@
       <div class="menu__actions">
         <a class="btn btn--primary" href="#contato"><span class="btn__sheen" aria-hidden="true"></span>Iniciar projeto</a>
         <a class="menu__wa" href="https://api.whatsapp.com/send?phone=5541991933850&amp;text=Ol%C3%A1%2C%20Tirvo.%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>WhatsApp<span class="sr-only">: +55 (41) 99193-3850</span></a>
+        <a class="menu__wa menu__ig" href="https://www.instagram.com/tirvotech/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Tirvo, @tirvotech (abre em nova aba)"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></a>
       </div>
       <p class="menu__addr">Av. Silva Jardim, 1003 – Centro, Curitiba – PR</p>
     </div>
@@ -5062,7 +5072,7 @@
           <p class="hero__lead" data-hero-step style="--d:450ms">Sites, sistemas, logotipos e inteligência artificial projetados com rigor de engenharia — para empresas que se recusam a parecer genéricas.</p>
           <div class="hero__actions" data-hero-step style="--d:600ms">
             <a class="btn btn--primary btn--lg" href="#contato" data-magnetic><span class="btn__sheen" aria-hidden="true"></span>Iniciar meu projeto<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-            <a class="link-arrow" href="nexus/">Conhecer o Nexus<svg class="icon" aria-hidden="true"><use href="#i-arrow-down-right"/></svg></a>
+            <a class="link-arrow" href="hipercode/">Conhecer o Hipercode<svg class="icon" aria-hidden="true"><use href="#i-arrow-down-right"/></svg></a>
           </div>
         </div>
         <div class="hero__cue" aria-hidden="true"><span>Role para explorar</span><span class="hero__cue-line"></span></div>
@@ -5317,30 +5327,31 @@
       </div>
     </section>
 
-    <!-- ============ 06 · NEXUS 1.0 (resumo) ============ -->
-    <section class="section section--cv nexus nexus--teaser" id="nexus" aria-labelledby="nexus-titulo">
-      <span class="glow glow--nexus" aria-hidden="true"></span>
+    <!-- ============ 06 · HIPERCODE 1.0 (resumo) ============ -->
+    <section class="section section--cv hipercode hipercode--teaser" id="hipercode" aria-labelledby="hipercode-titulo">
+      <span class="glow glow--hipercode" aria-hidden="true"></span>
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">06</span> <span class="label__txt">Nexus 1.0</span></p>
+          <p class="label" data-decode><span class="label__num">06</span> <span class="label__txt">Hipercode 1.0</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
           <span class="section-head__meta" aria-hidden="true">sistema autônomo</span>
         </div>
-        <article class="card teaser teaser--nexus" data-spotlight data-reveal>
+        <article class="card teaser teaser--hipercode" data-spotlight data-reveal>
           <div class="teaser__copy">
-            <h2 class="title" id="nexus-titulo" data-reveal="title"><span class="hl-chrome">Nexus 1.0</span>. <span class="hl-dim">Ele não conversa.</span> <span class="serif hl-accent hl-under">Ele entrega.</span></h2>
+            <h2 class="title" id="hipercode-titulo" data-reveal="title"><span class="hl-chrome">Hipercode 1.0</span>. <span class="hl-dim">Ele não conversa.</span> <span class="serif hl-accent hl-under">Ele entrega.</span></h2>
             <p class="lead">A IA proprietária da Tirvo: um <strong>enxame de agentes autônomos</strong> dedicado exclusivamente à programação. Recebe a tarefa e entrega o software pronto em um arquivo <code class="chip-code">.zip</code>.</p>
+            <p class="dev-note"><span class="dev-note__dot" aria-hidden="true"></span>Em desenvolvimento · estágio avançado, em fase final de testes</p>
             <ol class="teaser__steps">
               <li><span>01</span>Recebe a tarefa</li>
               <li><span>02</span>Navega e pesquisa</li>
               <li><span>03</span>Escreve o código</li>
               <li><span>04</span>Entrega em .zip</li>
             </ol>
-            <a class="teaser__go" href="nexus/">Conhecer o Nexus por dentro<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+            <a class="teaser__go" href="hipercode/">Conhecer o Hipercode por dentro<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
           </div>
           <figure class="teaser__shot" aria-hidden="true">
-            <span class="hsvc__bar"><i></i><i></i><i></i><span>nexus · agentes em execução</span></span>
-            <img src="nexus-03.webp" width="2000" height="1250" alt="" loading="lazy" decoding="async">
+            <span class="hsvc__bar"><i></i><i></i><i></i><span>hipercode · agentes em execução</span></span>
+            <img src="hipercode-03.webp" width="2000" height="1250" alt="" loading="lazy" decoding="async">
           </figure>
         </article>
       </div>
@@ -5448,6 +5459,7 @@
             <p class="direct__label">Contato direto</p>
             <a class="direct__link" href="https://api.whatsapp.com/send?phone=5541991933850&amp;text=Ol%C3%A1%2C%20Tirvo!%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg><span class="direct__phone">+55 (41) 99193-3850</span><span class="sr-only"> (WhatsApp, abre em nova aba)</span></a>
             <a class="direct__link" href="mailto:engenharia@tirvo.tech"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span>engenharia@tirvo.tech</span><span class="sr-only"> (enviar e-mail)</span></a>
+            <a class="direct__link" href="https://www.instagram.com/tirvotech/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg><span>@tirvotech</span><span class="sr-only"> (Instagram, abre em nova aba)</span></a>
             <a class="direct__link" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Silva+Jardim%2C+1003%2C+Curitiba+-+PR" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span>Av. Silva Jardim, 1003 – Centro, Curitiba – PR</span><span class="sr-only"> (ver no Google Maps, abre em nova aba)</span></a>
           </div>
         </div>
@@ -5562,7 +5574,7 @@
             <li><a href="#servicos">Serviços</a></li>
             <li><a href="equipe/">Equipe</a></li>
             <li><a href="metodo/">Método</a></li>
-            <li><a href="nexus/">Nexus</a></li>
+            <li><a href="hipercode/">Hipercode</a></li>
             <li><a href="faq/">Perguntas frequentes</a></li>
             <li><a href="#contato">Contato</a></li>
           </ul>
@@ -5582,6 +5594,7 @@
           <ul class="footer__links">
             <li><a href="https://api.whatsapp.com/send?phone=5541991933850&amp;text=Ol%C3%A1%2C%20Tirvo!%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>+55 (41) 99193-3850</a></li>
             <li><a href="mailto:engenharia@tirvo.tech"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>engenharia@tirvo.tech</a></li>
+            <li><a href="https://www.instagram.com/tirvotech/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>@tirvotech<span class="sr-only"> (Instagram, abre em nova aba)</span></a></li>
             <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Silva+Jardim%2C+1003%2C+Curitiba+-+PR" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Av. Silva Jardim, 1003 – Centro, Curitiba – PR · Atendimento em todo o Brasil</a></li>
           </ul>
         </div>
@@ -5838,6 +5851,7 @@
     <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5M13.5 5l-3 14"/></symbol>
     <symbol id="i-package" viewBox="0 0 24 24"><path d="M3.5 7.5L12 3l8.5 4.5v9L12 21l-8.5-4.5v-9z"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9M7.75 5.25l8.5 4.5"/></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="1.5"/><path d="M4 6.5l8 6 8-6"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.25"/></symbol>
     <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></symbol>
     <symbol id="i-bold" viewBox="0 0 24 24"><path d="M7 5h6a3.5 3.5 0 0 1 0 7H7V5zM7 12h7a3.5 3.5 0 0 1 0 7H7v-7z"/></symbol>
@@ -5862,7 +5876,7 @@
       whatsappNumber: '5541991933850',
       whatsappEndpoint: 'https://api.whatsapp.com/send?phone=5541991933850&text=',
       // Opacidade do texto fantasma do H1. Usar 0 cria a máquina de escrever clássica, mas piora o LCP.
-      // Carrossel do Nexus
+      // Carrossel do Hipercode
       AUTOPLAY_MS: 5000,
       RESUME_AFTER_MS: 8000,
       SWIPE_THRESHOLD: 50,
@@ -5918,7 +5932,7 @@
           servicos: ['São cinco frentes: sites, sistemas, marca, design e IA. Qual delas é a sua?', 'Toque em um cartão para ver tudo sobre o serviço na página dele.'],
           equipe: ['Aqui ninguém usa template: é gente que programa de verdade.', 'Programadores raiz lado a lado com especialistas em IA.'],
           metodo: ['Três fases, zero improviso: Descoberta, Engenharia e Lançamento.', 'Você sabe o que será entregue em cada etapa, e quando.'],
-          nexus: ['Esse é o Nexus: um enxame de agentes que escreve o código e entrega em .zip.', 'Toque no cartão para ver o Nexus por dentro, tela por tela.'],
+          hipercode: ['Esse é o Hipercode, a IA que a Tirvo está desenvolvendo: um enxame de agentes que escreve o código e entrega em .zip.', 'Toque no cartão para ver o Hipercode por dentro, tela por tela.'],
           numeros: ['Zero código genérico. Tudo é projetado para o seu negócio.', 'Com a Gestão 360º, sua operação é monitorada 24/7.'],
           faq: ['Ficou alguma dúvida? Abra uma pergunta ou veja todas na página de FAQ.', 'Não achou o que procurava? Dá para falar direto no WhatsApp.'],
           contato: ['Conte o seu desafio em poucas linhas. A mensagem chega pronta no WhatsApp da equipe.', 'Nenhum dado fica guardado aqui: tudo vai direto para o WhatsApp.'],
@@ -6829,7 +6843,10 @@
       }
 
       const split = (title) => {
-        title.setAttribute('aria-label', title.textContent.replace(/\s+/g, ' ').trim());
+        // Leitor de tela lê o texto real desde o início; as letras animadas ficam só para os olhos
+        const label = document.createElement('span');
+        label.className = 'sr-only';
+        label.textContent = title.textContent.replace(/\s+/g, ' ').trim();
         const chars = [];
         const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT, {
           acceptNode: (node) => (node.parentElement.closest('svg') || !node.textContent.trim() ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),
@@ -6845,12 +6862,14 @@
             }
             const span = document.createElement('span');
             span.className = 'tt-c is-hid';
+            span.setAttribute('aria-hidden', 'true');
             span.textContent = char;
             frag.appendChild(span);
             chars.push(span);
           }
           node.parentNode.replaceChild(frag, node);
         });
+        title.prepend(label);
         title.classList.add('tt-on');
         return chars;
       };
@@ -7086,16 +7105,16 @@
     }
 
     /* ==========================================================
-       PIPELINE DO NEXUS (pulso de dados)
+       PIPELINE DO HIPERCODE (pulso de dados)
        ========================================================== */
-    function initNexusPipeline() {
-      observeScope($('#nexus[data-anim-scope]'));
+    function initHipercodePipeline() {
+      observeScope($('#hipercode[data-anim-scope]'));
     }
 
     /* ==========================================================
-       TERMINAL DOS AGENTES DO NEXUS
+       TERMINAL DOS AGENTES DO HIPERCODE
        ========================================================== */
-    function initNexusTerminal() {
+    function initHipercodeTerminal() {
       const terminal = $('[data-terminal]');
       if (!terminal) return;
       const lines = $$('.term__line', terminal);
@@ -7449,7 +7468,7 @@
     }
 
     /* ==========================================================
-       CARROSSEL DO NEXUS (laço infinito, padrão APG)
+       CARROSSEL DO HIPERCODE (laço infinito, padrão APG)
        ========================================================== */
     function initCarousel(lightbox) {
       const carousel = $('[data-carousel]');
@@ -7470,7 +7489,7 @@
         return { src: img.getAttribute('src'), alt: img.alt, caption: slide.dataset.caption || '' };
       });
       const updateMeta = (i) => {
-        addr.textContent = `NEXUS://tela-${pad(i + 1)}`;
+        addr.textContent = `HIPERCODE://tela-${pad(i + 1)}`;
         captionEl.textContent = items[i].caption;
         counterEl.textContent = `${pad(i + 1)} / ${pad(total)}`;
       };
@@ -9361,14 +9380,27 @@
         const box = mascot.getBoundingClientRect();
         mascot.style.transform = `translate(${target.left - box.left}px, ${target.top - box.top}px) scale(${target.width / box.width})`;
       };
+      // Fim da abertura: o Next some junto com ela, em vez de voar para o canto
+      const leave = () => {
+        removeEventListener('resize', placeOnAnchor);
+        const bye = () => {
+          anchor?.remove();
+          mascot.hidden = true;
+          mascot.style.removeProperty('transform');
+          mascot.classList.remove('is-intro', 'is-entering');
+        };
+        if (prefersReducedMotion.value || typeof mascot.animate !== 'function') return bye();
+        mascot.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 400, fill: 'forwards' }).finished.catch(() => {}).then(bye);
+      };
       const introRunning = intro && root.classList.contains('intro-on') && window.tirvoIntro?.done;
 
-      mascot.hidden = false;
-      blink();
+      // Fora da abertura o Next não aparece: na página inicial ficam só os agentes do enxame
       if (!introRunning) {
-        dock(false);
+        mascot.hidden = true;
         return;
       }
+      mascot.hidden = false;
+      blink();
       mascot.classList.add('is-intro', 'is-entering');
       placeOnAnchor();
       addEventListener('resize', placeOnAnchor, { passive: true });
@@ -9383,7 +9415,7 @@
       tick();
       window.tirvoIntro.done.then(() => {
         cancelAnimationFrame(frame);
-        dock(true);
+        leave();
       });
     }
 
@@ -9771,8 +9803,8 @@
       ['initServiceDeepLinks', initServiceDeepLinks],
       ['initTimeline', initTimeline],
       ['initSeals', initSeals],
-      ['initNexusPipeline', initNexusPipeline],
-      ['initNexusTerminal', initNexusTerminal],
+      ['initHipercodePipeline', initHipercodePipeline],
+      ['initHipercodeTerminal', initHipercodeTerminal],
       ['initCounters', initCounters],
       ['initFaq', initFaq],
       ['initLightbox', () => { lightbox = initLightbox(); }],
@@ -9794,5 +9826,7 @@
     };
     whenIdle(pump);
   </script>
+<script src="assets/three.min.js?v=128" defer></script>
+<script src="assets/enxame.js?v=1" defer></script>
 </body>
 </html>
