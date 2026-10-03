@@ -25,8 +25,8 @@
     html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--void); }
     body { font-family: var(--sans); color: var(--t1); -webkit-font-smoothing: antialiased; }
 
-    /* Camada só de arte (fundo para o Canva): esconde os textos editáveis */
-    .so-arte [data-texto] { visibility: hidden; }
+    /* Camada de arte para o Canva: esconde só o que fica editável lá (título e botões) */
+    .so-arte [data-canva] { visibility: hidden; }
 
     .peca {
       position: relative;
@@ -65,7 +65,7 @@
     /* Título */
     .titulo { position: absolute; z-index: 3; left: 80px; top: 992px; font-weight: 700; font-size: 90px; line-height: .97; letter-spacing: -.05em; }
     .titulo em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.12em; letter-spacing: -.01em; color: var(--t1); }
-    .cursor { display: inline-block; width: 12px; height: 76px; margin-left: 12px; vertical-align: -4px; background: linear-gradient(180deg, #ff7a33, var(--or-hot)); box-shadow: 0 0 18px var(--or), 0 0 48px var(--or-glow); }
+    .cursor { position: absolute; z-index: 3; left: 257px; top: 1265px; width: 12px; height: 76px; background: linear-gradient(180deg, #ff7a33, var(--or-hot)); box-shadow: 0 0 18px var(--or), 0 0 48px var(--or-glow); }
 
     .local { position: absolute; z-index: 3; right: 84px; top: 1290px; display: flex; align-items: center; gap: 12px; font: 500 22px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t2); }
     .local .ico { font-size: 26px; color: var(--or); stroke-width: 1.8; }
@@ -131,29 +131,30 @@
       <g id="mira"></g>
     </svg>
 
-    <header class="topo" data-texto><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">01<i>/28</i></span></header>
+    <header class="topo"><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">01<i>/28</i></span></header>
     <svg class="regua" id="regua" width="912" height="14"></svg>
 
     <div class="etiqueta" style="left:84px; top:400px"><svg class="ico"><use href="#i-code"/></svg>entrada <b>ruído</b></div>
     <div class="etiqueta quente" style="left:752px; top:800px"><span class="led"></span>foco travado</div>
     <div class="etiqueta" style="left:84px; top:880px"><svg class="ico"><use href="#i-target"/></svg>saída <b>engenharia</b></div>
 
-    <h1 class="titulo" data-texto>Hiperfoco<br>convertido em<br>engenharia de<br><em>elite.</em><span class="cursor"></span></h1>
-    <p class="local"><svg class="ico"><use href="#i-pin"/></svg><span data-texto>curitiba · brasil</span></p>
+    <h1 class="titulo" data-canva>Hiperfoco<br>convertido em<br>engenharia de<br><em>elite.</em></h1>
+    <span class="cursor"></span>
+    <p class="local"><svg class="ico"><use href="#i-pin"/></svg><span>curitiba · brasil</span></p>
 
-    <p class="chamada" data-texto><i>//</i> fale direto com a engenharia</p>
+    <p class="chamada"><i>//</i> fale direto com a engenharia</p>
     <footer class="rodape">
       <span class="cantos"><i></i><i></i><i></i><i></i></span>
       <div class="marca">
         <img class="logo" src="../../../../marca/tirvo-logo.svg" alt="Tirvo">
         <div class="links">
-          <span><svg class="ico"><use href="#i-mail"/></svg><u data-texto>engenharia@tirvo.tech</u></span>
-          <span><svg class="ico"><use href="#i-globe"/></svg><u data-texto>tirvo.tech</u></span>
+          <span><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+          <span><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
         </div>
       </div>
       <div class="botoes">
-        <span class="botao cheio"><span data-texto>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
-        <span class="botao vazado"><span data-texto>Chame no direct</span><svg class="ico"><use href="#i-send"/></svg></span>
+        <span class="botao cheio"><span data-canva>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+        <span class="botao vazado"><span data-canva>Chame no direct</span><svg class="ico"><use href="#i-send"/></svg></span>
       </div>
     </footer>
 
