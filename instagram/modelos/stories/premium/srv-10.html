@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Story premium: Sistemas e automações 02</title>
+  <link rel="stylesheet" href="../../fontes/fontes.css">
+  <style>
+    :root {
+      --void: #000;
+      --bg: #09090b;
+      --or: #ff5500;
+      --or-hot: #ff3300;
+      --or-soft: #ff8a4c;
+      --or-glow: rgba(255, 85, 0, .45);
+      --bl: #5aa9ff;
+      --t1: #fafafa;
+      --t2: #a1a1aa;
+      --t3: #8a8a93;
+      --sans: "Geist", system-ui, sans-serif;
+      --mono: "Geist Mono", ui-monospace, monospace;
+      --serif: "Instrument Serif", Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--void); }
+    body { font-family: var(--sans); color: var(--t1); -webkit-font-smoothing: antialiased; }
+
+    .peca {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(520px 440px at 930px 360px, rgba(255, 85, 0, .22), transparent 70%),
+        radial-gradient(620px 520px at 1010px 1010px, rgba(255, 72, 0, .14), transparent 70%),
+        radial-gradient(560px 600px at 40px 1060px, rgba(56, 130, 255, .11), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .20), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+
+    .ico { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Camadas */
+    .arte, .ilus, .grao, .vinheta { position: absolute; pointer-events: none; }
+    .arte { inset: 0; z-index: 0; }
+    .grao { inset: 0; z-index: 8; mix-blend-mode: overlay; opacity: .55; }
+    .vinheta { inset: 0; z-index: 7; background: radial-gradient(140% 95% at 50% 46%, transparent 58%, rgba(0, 0, 0, .55) 100%); }
+
+    /* Moldura chanfrada desenhada pelo script: vidro recortado + linha com brilho */
+    [data-frame] { position: relative; }
+    .f-bg { position: absolute; inset: 0; z-index: 0; background: var(--vidro, linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .015) 45%, rgba(255, 255, 255, .03)), rgba(9, 9, 11, .55)); backdrop-filter: blur(18px) saturate(140%); }
+    .f-line { position: absolute; inset: 0; z-index: 1; overflow: visible; pointer-events: none; }
+    [data-frame] > :not(.f-bg):not(.f-line) { position: relative; z-index: 2; }
+
+    /* Cabeçalho e régua */
+    .topo { position: absolute; z-index: 3; left: 84px; right: 84px; top: 246px; display: flex; justify-content: space-between; align-items: center; font: 500 24px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--t2); }
+    .topo b { font-weight: 500; color: var(--or); text-shadow: 0 0 14px var(--or-glow); }
+    .topo .num { color: var(--t1); }
+    .topo .num i { font-style: normal; color: var(--t3); }
+    .regua { position: absolute; z-index: 3; left: 84px; top: 292px; width: 912px; height: 14px; }
+
+    /* Título */
+    .titulo { position: absolute; z-index: 3; left: 80px; top: 334px; font-weight: 650; font-size: 106px; line-height: .97; letter-spacing: -.052em; }
+    .titulo em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: -.012em; }
+    .cursor { display: inline-block; width: 12px; height: 88px; margin-left: 14px; vertical-align: -6px; background: linear-gradient(180deg, #ff7a33, var(--or-hot)); box-shadow: 0 0 18px var(--or), 0 0 48px var(--or-glow); }
+
+    /* Ilustração: o formulário do site que dispara o fluxo */
+    .ilus { z-index: 2; left: 754px; top: 316px; width: 330px; height: 299px; transform: perspective(1300px) rotateY(-24deg) rotateX(9deg) rotate(-1.5deg); filter: drop-shadow(0 34px 44px rgba(0, 0, 0, .7)) drop-shadow(0 0 34px rgba(255, 85, 0, .16)); }
+
+    /* Janela do fluxo */
+    .janela { position: absolute; z-index: 3; left: 84px; top: 706px; width: 912px; }
+    .barra { display: flex; align-items: center; gap: 20px; height: 74px; padding: 0 22px 0 30px; border-bottom: 1px solid rgba(255, 255, 255, .08); font: 500 20px/1 var(--mono); white-space: nowrap; }
+    .barra > * { flex: none; }
+    .pontos { display: flex; gap: 9px; }
+    .pontos i { width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, .16); }
+    .pontos i:last-child { background: var(--or); box-shadow: 0 0 10px var(--or); }
+    .arquivo { display: flex; align-items: center; gap: 12px; color: var(--t1); letter-spacing: .02em; }
+    .arquivo .ico { font-size: 24px; color: var(--t3); }
+    .arquivo em { font-style: normal; color: var(--t3); }
+    .ativo { margin-left: auto; display: flex; align-items: center; gap: 11px; padding: 10px 15px; border: 1px solid rgba(255, 85, 0, .35); border-radius: 999px; background: rgba(255, 85, 0, .08); font-size: 16px; letter-spacing: .16em; text-transform: uppercase; color: #ffb187; }
+    .ativo i { width: 10px; height: 10px; border-radius: 50%; background: var(--or); box-shadow: 0 0 0 5px rgba(255, 85, 0, .18), 0 0 14px var(--or); }
+
+    .passos { list-style: none; position: relative; padding: 10px 32px 0 0; }
+    .passos::before { content: ""; position: absolute; left: 47px; top: 60px; height: 300px; width: 2px; background: linear-gradient(180deg, #ff7a33, rgba(255, 85, 0, .3) 45%, rgba(255, 85, 0, .3) 60%, #ff7a33); box-shadow: 0 0 14px var(--or-glow); }
+    .passos li { position: relative; display: grid; grid-template-columns: 96px 84px 1fr auto; align-items: center; column-gap: 28px; height: 100px; }
+    .passos li + li::before { content: ""; position: absolute; left: 96px; right: 0; top: 0; border-top: 1px dashed rgba(255, 255, 255, .08); }
+    .no { justify-self: center; width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle, #ffd2b8 0 25%, var(--or) 45%); box-shadow: 0 0 0 7px rgba(255, 85, 0, .14), 0 0 18px var(--or); }
+    .pacote { position: absolute; z-index: 3; left: 45px; width: 6px; height: 46px; border-radius: 3px; background: linear-gradient(180deg, rgba(255, 122, 51, 0), #ff9a66 65%, #fff); box-shadow: 0 10px 14px -4px #ff6a1f; }
+    .peca-icone { display: grid; place-items: center; width: 84px; height: 84px; --vidro: radial-gradient(circle at 30% 22%, rgba(255, 85, 0, .30), rgba(255, 85, 0, .05) 72%), rgba(18, 9, 5, .7); }
+    .peca-icone .ico { font-size: 40px; color: #ff8c52; filter: drop-shadow(0 0 8px rgba(255, 85, 0, .6)); }
+    .texto b { display: block; font-size: 42px; font-weight: 620; letter-spacing: -.03em; line-height: 1.05; }
+    .texto small { display: block; margin-top: 6px; font-size: 28px; color: var(--t2); letter-spacing: -.01em; }
+    .ok { display: flex; align-items: center; gap: 8px; padding: 9px 14px 9px 12px; border: 1px solid rgba(255, 85, 0, .38); border-radius: 10px; background: rgba(255, 85, 0, .07); font: 500 21px/1 var(--mono); letter-spacing: .1em; color: #ffb187; }
+    .ok .ico { font-size: 22px; stroke-width: 2.2; color: var(--or); }
+
+    .metricas { display: grid; grid-template-columns: 1.2fr .75fr 1.05fr; margin-top: 12px; border-top: 1px solid rgba(255, 255, 255, .08); }
+    .metricas div { padding: 22px 0 22px 32px; }
+    .metricas div + div { border-left: 1px solid rgba(255, 255, 255, .07); }
+    .metricas dt { font: 500 18px/1 var(--mono); letter-spacing: .15em; text-transform: uppercase; color: var(--t3); }
+    .metricas dd { margin-top: 20px; font-size: 42px; font-weight: 620; letter-spacing: -.035em; line-height: 1; }
+        .alvo { position: relative; display: inline-block; padding: 8px 16px 10px; margin: -8px -16px -10px; }
+    .mira { position: absolute; inset: 0; pointer-events: none; }
+    .mira i { position: absolute; width: 14px; height: 14px; border: 0 solid #ff6a1f; filter: drop-shadow(0 0 5px rgba(255, 85, 0, .7)); }
+    .mira i:nth-child(1) { left: 0; top: 0; border-width: 2px 0 0 2px; }
+    .mira i:nth-child(2) { right: 0; top: 0; border-width: 2px 2px 0 0; }
+    .mira i:nth-child(3) { left: 0; bottom: 0; border-width: 0 0 2px 2px; }
+    .mira i:nth-child(4) { right: 0; bottom: 0; border-width: 0 2px 2px 0; }
+    .metricas .destaque dd { color: #ff6a1f; text-shadow: 0 0 24px rgba(255, 85, 0, .6); }
+
+    /* Rodapé: o próximo passo do fluxo */
+    .rodape { position: absolute; z-index: 3; left: 84px; top: 1392px; width: 912px; padding: 34px 36px 34px 40px; --vidro: linear-gradient(160deg, rgba(255, 85, 0, .10), rgba(255, 255, 255, .02) 38%, rgba(90, 169, 255, .07)), rgba(9, 9, 11, .6); }
+    .aba { position: absolute !important; right: 60px; top: -40px; display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 22px 0 18px; font: 500 18px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #ffb187; --vidro: linear-gradient(180deg, rgba(255, 85, 0, .16), rgba(255, 85, 0, .04)), rgba(12, 8, 6, .8); }
+    .aba .ico { font-size: 20px; color: var(--or); stroke-width: 2; }
+    .linha { display: flex; align-items: center; gap: 34px; }
+    .logo { height: 56px; width: auto; }
+    .divisor { width: 1px; height: 84px; background: linear-gradient(180deg, transparent, rgba(255, 255, 255, .2), transparent); }
+    .links { display: grid; gap: 14px; }
+    .links span { display: flex; align-items: center; gap: 14px; font-size: 30px; font-weight: 500; letter-spacing: -.01em; color: var(--bl); text-shadow: 0 0 18px rgba(90, 169, 255, .35); }
+    .links u { text-decoration-thickness: 2px; text-underline-offset: 7px; text-decoration-color: rgba(90, 169, 255, .55); }
+    .links .ico { font-size: 30px; }
+    .botoes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+    .botao { display: flex; align-items: center; justify-content: center; gap: 16px; height: 92px; font-size: 31px; font-weight: 600; letter-spacing: -.015em; }
+    .botao .ico { font-size: 32px; stroke-width: 1.9; }
+    .botao.vazado { --vidro: rgba(255, 255, 255, .04); }
+    .botao.vazado .ico { color: var(--or); }
+    .botao.cheio { --vidro: linear-gradient(135deg, #ff6a1f, #ff3300); box-shadow: 0 0 46px rgba(255, 85, 0, .45); text-shadow: 0 1px 0 rgba(120, 30, 0, .35); }
+    .botao.cheio .f-bg { backdrop-filter: none; }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <!-- Ícones do site (servicos/sistemas-e-automacoes) -->
+      <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-arrow-down-right" viewBox="0 0 24 24"><path d="M7 7l10 10M17 9v8H9"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+      <symbol id="i-browser" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="16" rx="2"/><path d="M2.5 8.5h19M6 6.25h.01M8.5 6.25h.01"/><path d="M6.5 12.5h6M6.5 15.5h9"/></symbol>
+      <symbol id="i-package" viewBox="0 0 24 24"><path d="M3.5 7.5L12 3l8.5 4.5v9L12 21l-8.5-4.5v-9z"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9M7.75 5.25l8.5 4.5"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="1.5"/><path d="M4 6.5l8 6 8-6"/></symbol>
+      <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 5.2a3.5 3.5 0 0 1 0 6.6M18 14.3a6.5 6.5 0 0 1 3.5 5.7"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.5 12a8 8 0 0 1-11.6 7.1L3.5 20.5l1.4-5A8 8 0 1 1 20.5 12z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3 10.5 13.5"/><path d="M21 3l-6.5 18-4-7.5L3 9.5 21 3z"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3.5H7a1.5 1.5 0 0 0-1.5 1.5v14A1.5 1.5 0 0 0 7 20.5h10a1.5 1.5 0 0 0 1.5-1.5V8L14 3.5z"/><path d="M14 3.5V8h4.5M8.5 13h7M8.5 16.5h4.5"/></symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v13c0 1.66 3.58 3 8 3s8-1.34 8-3v-13M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></symbol>
+    </defs>
+  </svg>
+
+  <main class="peca">
+    <!-- Fundo: grade, chão em perspectiva, trilhas de circuito e ícones distantes ligados ao tema -->
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="52%" cy="44%" r="62%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <radialGradient id="g-chao" cx="540" cy="1930" r="760" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset=".55" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-chao"><rect x="0" y="1596" width="1080" height="324" fill="url(#g-chao)"/></mask>
+        <filter id="brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="longe" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.4"/></filter>
+      </defs>
+
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+
+      <g mask="url(#m-chao)" fill="none" stroke="#ff5a14" stroke-width="1.3" opacity=".7">
+        <path d="M540 1430L-900 1920M540 1430L-660 1920M540 1430L-420 1920M540 1430L-180 1920M540 1430L60 1920M540 1430L300 1920M540 1430L540 1920M540 1430L780 1920M540 1430L1020 1920M540 1430L1260 1920M540 1430L1500 1920M540 1430L1740 1920M540 1430L1980 1920"/>
+        <path d="M0 1604H1080M0 1622H1080M0 1646H1080M0 1677H1080M0 1716H1080M0 1765H1080M0 1826H1080M0 1902H1080"/>
+      </g>
+
+      <!-- ícones distantes, desfocados -->
+      <g filter="url(#longe)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <use href="#i-chat" x="30" y="70" width="150" height="150" stroke="rgba(90,169,255,.24)" stroke-width="1"/>
+      </g>
+
+      <!-- trilhas -->
+      <g fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1080 150H986L954 182V250" stroke="rgba(255,100,30,.55)"/>
+        <path d="M934 596V706" stroke="rgba(255,100,30,.7)" stroke-dasharray="2 9"/>
+        <path d="M1050 760V972L1030 992V1236L1050 1256V1460" stroke="rgba(90,169,255,.38)"/>
+        <path d="M34 742V1096L54 1116V1372L34 1392V1700" stroke="rgba(255,100,30,.30)"/>
+        <path d="M131 1316V1392" stroke="rgba(255,100,30,.8)" stroke-dasharray="3 7"/>
+        <path d="M0 176H120L150 146H330" stroke="rgba(90,169,255,.30)"/>
+        <path d="M1080 1560H1010L980 1590V1720" stroke="rgba(255,100,30,.35)"/>
+      </g>
+      <g fill="#0b0b0e" stroke-width="1.6">
+        <circle cx="986" cy="150" r="4" stroke="rgba(255,100,30,.8)"/>
+        <circle cx="1050" cy="972" r="4" stroke="rgba(90,169,255,.6)"/>
+        <circle cx="1030" cy="1236" r="4" stroke="rgba(90,169,255,.6)"/>
+        <circle cx="54" cy="1116" r="4" stroke="rgba(255,100,30,.55)"/>
+        <circle cx="34" cy="1392" r="4" stroke="rgba(255,100,30,.55)"/>
+        <circle cx="150" cy="146" r="4" stroke="rgba(90,169,255,.55)"/>
+        <circle cx="980" cy="1590" r="4" stroke="rgba(255,100,30,.6)"/>
+      </g>
+      <!-- pacotes de dados correndo pelas trilhas -->
+      <g filter="url(#brilho)">
+        <circle cx="954" cy="214" r="3.5" fill="#ffd2b8"/>
+        <circle cx="934" cy="652" r="4" fill="#ffd2b8"/>
+        <circle cx="1030" cy="1110" r="3.5" fill="#cfe5ff"/>
+        <circle cx="54" cy="1240" r="3" fill="#ffd2b8"/>
+        <circle cx="250" cy="146" r="3" fill="#cfe5ff"/>
+        <circle cx="934" cy="706" r="6" fill="#ff7a33"/>
+        <circle cx="131" cy="1392" r="6" fill="#ff7a33"/>
+      </g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / sistemas e automações</span><span class="num">02<i>/08</i></span></header>
+    <svg class="regua" id="regua" width="912" height="14"></svg>
+
+    <h1 class="titulo">O trabalho<br>simplesmente<br><em>acontece.</em><span class="cursor"></span></h1>
+
+    <!-- Formulário enviado: o gatilho do fluxo -->
+    <svg class="ilus" viewBox="0 0 380 344" width="330" height="299">
+      <defs>
+        <linearGradient id="il-borda" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".42"/><stop offset=".45" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#ff6a1f" stop-opacity=".75"/></linearGradient>
+        <linearGradient id="il-botao" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7a33"/><stop offset="1" stop-color="#ff3300"/></linearGradient>
+        <filter id="il-brilho" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+      </defs>
+      <rect x="18" y="46" width="330" height="262" rx="18" fill="rgba(13,13,16,.92)" stroke="url(#il-borda)" stroke-width="1.6"/>
+      <path d="M18 86H348" stroke="rgba(255,255,255,.09)"/>
+      <circle cx="42" cy="66" r="5" fill="rgba(255,255,255,.2)"/><circle cx="59" cy="66" r="5" fill="rgba(255,255,255,.2)"/><circle cx="76" cy="66" r="5" fill="rgba(255,255,255,.2)"/>
+      <rect x="104" y="57" width="182" height="19" rx="9.5" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.12)"/>
+      <rect x="118" y="64" width="70" height="5" rx="2.5" fill="rgba(255,255,255,.22)"/>
+      <rect x="40" y="108" width="62" height="7" rx="3.5" fill="rgba(255,255,255,.3)"/>
+      <rect x="40" y="123" width="286" height="38" rx="9" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.16)"/>
+      <rect x="56" y="139" width="128" height="6" rx="3" fill="rgba(255,255,255,.5)"/>
+      <rect x="40" y="176" width="48" height="7" rx="3.5" fill="rgba(255,255,255,.3)"/>
+      <rect x="40" y="191" width="286" height="38" rx="9" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.16)"/>
+      <rect x="56" y="207" width="96" height="6" rx="3" fill="rgba(255,255,255,.5)"/>
+      <rect x="40" y="248" width="138" height="42" rx="10" fill="#ff5500" filter="url(#il-brilho)" opacity=".75"/>
+      <rect x="40" y="248" width="138" height="42" rx="10" fill="url(#il-botao)"/>
+      <text x="109" y="275" text-anchor="middle" font-family="Geist" font-weight="600" font-size="17" fill="#fff" letter-spacing=".2">enviar</text>
+      <g stroke="#ff8a4c" stroke-width="2.4" stroke-linecap="round"><path d="M176 236l-7 7M190 248h9M186 230l3-9"/></g>
+      <path d="M166 258v26l7-6 5 11 5-2-5-11h9z" fill="#fafafa" stroke="#09090b" stroke-width="1.6" stroke-linejoin="round"/>
+      <g transform="translate(214 18)">
+        <rect width="150" height="44" rx="13" fill="rgba(22,12,7,.95)" stroke="rgba(255,85,0,.65)" stroke-width="1.4"/>
+        <circle cx="24" cy="22" r="12" fill="#ff5500"/>
+        <path d="M18.5 22.5l3.8 3.8 7.2-7.6" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="46" y="28" font-family="Geist Mono" font-weight="500" font-size="16" fill="#fafafa" letter-spacing=".5">enviado</text>
+      </g>
+    </svg>
+
+    <section class="janela" data-frame="28,0,28,0" data-tone="laranja" data-acento="barra">
+      <div class="barra">
+        <span class="pontos"><i></i><i></i><i></i></span>
+        <span class="arquivo"><svg class="ico"><use href="#i-file"/></svg>pedido-novo.flow <em>· exemplo ilustrativo</em></span>
+        <span class="ativo"><i></i>fluxo ativo</span>
+      </div>
+      <ol class="passos">
+        <span class="pacote" style="top:88px"></span>
+        <span class="pacote" style="top:288px"></span>
+        <li><span class="no"></span><span class="peca-icone" data-frame="16,0,16,0" data-tone="laranja"><svg class="ico"><use href="#i-browser"/></svg></span><div class="texto"><b>Site</b><small>formulário enviado</small></div><span class="ok"><svg class="ico"><use href="#i-check"/></svg>ok</span></li>
+        <li><span class="no"></span><span class="peca-icone" data-frame="16,0,16,0" data-tone="laranja"><svg class="ico"><use href="#i-users"/></svg></span><div class="texto"><b>CRM</b><small>cliente criado</small></div><span class="ok"><svg class="ico"><use href="#i-check"/></svg>ok</span></li>
+        <li><span class="no"></span><span class="peca-icone" data-frame="16,0,16,0" data-tone="laranja"><svg class="ico"><use href="#i-package"/></svg></span><div class="texto"><b>ERP</b><small>estoque reservado</small></div><span class="ok"><svg class="ico"><use href="#i-check"/></svg>ok</span></li>
+        <li><span class="no"></span><span class="peca-icone" data-frame="16,0,16,0" data-tone="laranja"><svg class="ico"><use href="#i-whatsapp"/></svg></span><div class="texto"><b>WhatsApp</b><small>cliente avisado</small></div><span class="ok"><svg class="ico"><use href="#i-check"/></svg>ok</span></li>
+      </ol>
+      <dl class="metricas">
+        <div class="destaque"><dt>digitação manual</dt><dd><span class="alvo"><span class="mira"><i></i><i></i><i></i><i></i></span>zero</span></dd></div>
+        <div><dt>etapas</dt><dd>4</dd></div>
+        <div><dt>responsável</dt><dd>o sistema</dd></div>
+      </dl>
+    </section>
+
+    <footer class="rodape" data-frame="0,28,0,28" data-tone="misto" data-acento="porta">
+      <div class="aba" data-frame="0,14,0,0" data-tone="laranja"><svg class="ico"><use href="#i-arrow-down-right"/></svg><span>próximo passo</span></div>
+      <div class="linha">
+        <img class="logo" src="../../../../marca/tirvo-logo.svg" alt="Tirvo">
+        <span class="divisor"></span>
+        <div class="links">
+          <span><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+          <span><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+        </div>
+      </div>
+      <div class="botoes">
+        <span class="botao vazado" data-frame="16,0,16,0" data-tone="branco"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+        <span class="botao cheio" data-frame="16,0,16,0" data-tone="quente"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+      </div>
+    </footer>
+
+    <div class="vinheta"></div>
+    <svg class="grao" width="1080" height="1920"><filter id="ruido"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1080" height="1920" filter="url(#ruido)" opacity=".22"/></svg>
+  </main>
+
+  <script>
+    const NS = 'http://www.w3.org/2000/svg';
+    const TONS = {
+      laranja: [[0, '#ff7a33', 1], [.32, '#ff5500', .3], [.7, '#ff5500', .16], [1, '#ff6a1f', .8]],
+      branco: [[0, '#ffffff', .3], [.5, '#ffffff', .08], [1, '#ffffff', .22]],
+      misto: [[0, '#ff6a1f', .95], [.42, '#ff5500', .18], [.62, '#5aa9ff', .16], [1, '#5aa9ff', .85]],
+      quente: [[0, '#ffd0b4', .95], [.5, '#ff7a33', .5], [1, '#ffb28a', .9]],
+    };
+    const BRILHO = { laranja: .55, misto: .5, quente: .6, branco: 0 };
+
+    function cantos(w, h, [a, b, c, d]) {
+      return [[a, 0], [w - b, 0], [w, b], [w, h - c], [w - c, h], [d, h], [0, h - d], [0, a]];
+    }
+
+    function molduras() {
+      document.querySelectorAll('[data-frame]').forEach((el, i) => {
+        const w = el.offsetWidth, h = el.offsetHeight;
+        const corte = el.dataset.frame.split(',').map(Number);
+        let fundo = el.querySelector(':scope > .f-bg');
+        if (!fundo) { fundo = document.createElement('div'); fundo.className = 'f-bg'; el.prepend(fundo); }
+        fundo.style.clipPath = `polygon(${cantos(w, h, corte).map(([x, y]) => `${x}px ${y}px`).join(',')})`;
+
+        let svg = el.querySelector(':scope > svg.f-line');
+        if (!svg) { svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'f-line'); el.prepend(svg); }
+        svg.setAttribute('width', w); svg.setAttribute('height', h); svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+        const d = 'M' + cantos(w - 1.6, h - 1.6, corte).map(([x, y]) => `${(x + .8).toFixed(1)} ${(y + .8).toFixed(1)}`).join(' L') + ' Z';
+        const tom = el.dataset.tone || 'branco';
+        const id = 'f' + i;
+        const paradas = TONS[tom].map(([o, c, a]) => `<stop offset="${o}" stop-color="${c}" stop-opacity="${a}"/>`).join('');
+        let html = `<defs><linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${w}" y2="${h}">${paradas}</linearGradient>
+          <filter id="${id}b" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
+          <filter id="${id}c" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+        if (BRILHO[tom]) html += `<path d="${d}" fill="none" stroke="url(#${id})" stroke-width="8" opacity="${BRILHO[tom]}" filter="url(#${id}b)"/>`;
+        html += `<path d="${d}" fill="none" stroke="url(#${id})" stroke-width="1.6"/>`;
+
+        const acentos = (el.dataset.acento || '').split(',');
+        if (acentos.includes('barra')) {
+          html += `<path d="M${corte[0] + 30} 1.2H${corte[0] + 230}" stroke="#ff8a4c" stroke-width="3" stroke-linecap="round" filter="url(#${id}c)"/>`;
+          html += `<path d="M${w - 1.2} ${h - corte[2] - 40}V${h - corte[2] - 170}" stroke="#ff8a4c" stroke-width="3" stroke-linecap="round" filter="url(#${id}c)"/>`;
+        }
+        if (acentos.includes('riscos')) {
+          for (let k = 0; k < 5; k++) {
+            const x = w - 190 + k * 16;
+            html += `<path d="M${x} ${h - 14}l10 -12" stroke="#ff6a1f" stroke-opacity=".75" stroke-width="2.4" stroke-linecap="round"/>`;
+          }
+        }
+        if (acentos.includes('porta')) {
+          html += `<path d="M${corte[3] + 18} ${h - 1.2}H${corte[3] + 200}" stroke="#ff8a4c" stroke-width="3" stroke-linecap="round" filter="url(#${id}c)"/>`;
+          html += `<path d="M${w - 230} 1.2H${w - corte[1] - 22}" stroke="#7fbcff" stroke-width="3" stroke-linecap="round" filter="url(#${id}c)"/>`;
+        }
+        svg.innerHTML = html;
+      });
+    }
+
+    function regua() {
+      const r = document.getElementById('regua');
+      let html = '<path d="M0 7H912" stroke="rgba(255,255,255,.10)" stroke-width="1"/>';
+      for (let x = 0; x <= 912; x += 24) {
+        const maior = x % 96 === 0;
+        html += `<path d="M${x + .5} ${maior ? 1 : 4}V${maior ? 13 : 10}" stroke="rgba(255,255,255,${maior ? .22 : .10})" stroke-width="1"/>`;
+      }
+      html += '<path d="M0 7H96" stroke="#ff5500" stroke-width="3" style="filter:drop-shadow(0 0 6px #ff5500)"/>';
+      r.innerHTML = html;
+    }
+
+    regua();
+    molduras();
+    document.fonts.ready.then(molduras);
+  </script>
+</body>
+</html>
