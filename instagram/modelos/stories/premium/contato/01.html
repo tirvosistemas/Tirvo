@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Contato: fale direto com a engenharia</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(520px 460px at 860px 420px, rgba(255, 85, 0, .2), transparent 70%),
+        radial-gradient(800px 520px at 540px 900px, rgba(255, 72, 0, .08), transparent 70%),
+        radial-gradient(900px 420px at 540px 1930px, rgba(255, 70, 0, .22), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 104px; }
+    .sub { z-index: 4; left: 84px; top: 616px; width: 860px; }
+    .sub .corpo { font-size: 29px; }
+
+    .tiles { z-index: 4; left: 84px; top: 700px; width: 912px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .tile { height: 196px; padding: 24px 26px; display: grid; align-content: space-between; }
+    .tile .alto { display: flex; align-items: center; justify-content: space-between; }
+    .tile .ib { width: 66px; height: 66px; }
+    .tile .ib .ico { font-size: 32px; }
+    .tile .alto small { font: 500 15px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .tile .v { font-size: 30px; font-weight: 600; letter-spacing: -.02em; white-space: nowrap; }
+    .tile .lk { font-size: 29px; }
+    .tile.direct { --vidro: linear-gradient(135deg, #ff6a1f, #ff3300); box-shadow: 0 0 50px rgba(255, 85, 0, .4); }
+    .tile.direct .f-bg { backdrop-filter: none; }
+    .tile.direct .alto small { color: rgba(255, 255, 255, .85); }
+    .tile.direct .ib { --vidro: rgba(0, 0, 0, .25); }
+    .tile.direct .ib .ico { color: #fff; filter: none; }
+    .tile.direct .v { display: flex; align-items: center; justify-content: space-between; text-shadow: 0 1px 0 rgba(120, 30, 0, .35); }
+    .tile.direct .v .ico { font-size: 30px; }
+
+    .endereco { z-index: 4; left: 84px; top: 1120px; width: 912px; height: 108px; display: grid; grid-template-columns: 66px 1fr auto; align-items: center; gap: 22px; padding: 0 26px; }
+    .endereco .ib { width: 62px; height: 62px; }
+    .endereco .ib .ico { font-size: 30px; }
+    .endereco b { display: block; font-size: 25px; font-weight: 600; letter-spacing: -.015em; }
+    .endereco div > span { display: block; margin-top: 6px; font-size: 21px; color: var(--t2); }
+    .endereco .selo { padding: 10px 14px; font-size: 14px; }
+
+    .acao { z-index: 4; left: 84px; top: 1252px; width: 912px; height: 104px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 40px; border-radius: 52px; border: 2px solid #ff6a1f; background: rgba(14, 8, 5, .9); box-shadow: 0 0 30px rgba(255, 85, 0, .4), inset 0 0 20px rgba(255, 85, 0, .15); font-size: 34px; font-weight: 640; letter-spacing: -.02em; }
+    .acao .seta { display: grid; place-items: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #ff6a1f, #ff3300); }
+    .acao .seta .ico { font-size: 34px; color: #fff; stroke-width: 2; }
+
+    .assinatura { z-index: 4; left: 84px; top: 1394px; width: 912px; height: 250px; display: grid; justify-items: center; align-content: center; gap: 22px; text-align: center; }
+    .assinatura .cantos { position: absolute; inset: 0; }
+    .assinatura .cantos i { position: absolute; width: 34px; height: 34px; border: 0 solid #fafafa; }
+    .assinatura .cantos i:nth-child(1) { left: 0; top: 0; border-width: 3px 0 0 3px; }
+    .assinatura .cantos i:nth-child(2) { right: 0; top: 0; border-width: 3px 3px 0 0; }
+    .assinatura .cantos i:nth-child(3) { left: 0; bottom: 0; border-width: 0 0 3px 3px; }
+    .assinatura .cantos i:nth-child(4) { right: 0; bottom: 0; border-width: 0 3px 3px 0; }
+    .assinatura .logo { height: 56px; }
+    .assinatura p { font-size: 27px; letter-spacing: -.015em; line-height: 1.3; }
+    .assinatura p span { color: var(--t2); }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="46%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- ondas de sinal saindo da mira -->
+      <g fill="none" stroke-linecap="round">
+        <path d="M880 380a70 70 0 0 1 0 140M880 350a100 100 0 0 1 0 200M880 320a130 130 0 0 1 0 260" stroke="rgba(255,120,60,.5)" stroke-width="2"/>
+      </g>
+      <circle cx="884" cy="450" r="40" fill="#ff5500" opacity=".35" filter="url(#halo)"/>
+      <g fill="none" stroke="#fafafa" stroke-width="3">
+        <path d="M852 432V418H866M902 418H916V432M916 468V482H902M866 482H852V468"/>
+      </g>
+      <circle cx="884" cy="450" r="9" fill="#ff5500" style="filter:drop-shadow(0 0 8px #ff5500)"/>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / contato</span><span class="num">01<i>/01</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>//</i> contato</p>
+    <h1 class="titulo">Fale direto com<br>a <em>engenharia.</em></h1>
+    <div class="sub"><p class="corpo">Quem responde é <b>a mesma equipe que constrói os projetos.</b></p></div>
+
+    <div class="tiles">
+      <div class="tile direct" data-frame="22,0,0,0" data-tone="quente">
+        <div class="alto"><span class="ib" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-instagram"/></svg></span><small>direct</small></div>
+        <span class="v">Chame no direct<svg class="ico"><use href="#i-send"/></svg></span>
+      </div>
+      <div class="tile" data-frame="0,22,0,0" data-tone="laranja">
+        <div class="alto"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-whatsapp"/></svg></span><small>whatsapp</small></div>
+        <span class="v">+55 (41) 99193-3850</span>
+      </div>
+      <div class="tile" data-frame="0,0,0,22" data-tone="laranja">
+        <div class="alto"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-mail"/></svg></span><small>e-mail</small></div>
+        <span class="lk"><u>engenharia@tirvo.tech</u></span>
+      </div>
+      <div class="tile" data-frame="0,0,22,0" data-tone="laranja">
+        <div class="alto"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-globe"/></svg></span><small>site</small></div>
+        <span class="lk"><u>tirvo.tech</u></span>
+      </div>
+    </div>
+
+    <div class="endereco" data-frame="18,0,18,0" data-tone="branco">
+      <span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-pin"/></svg></span>
+      <div><b>Av. Silva Jardim, 1003 – Centro</b><span>Curitiba – PR</span></div>
+      <span class="selo"><span class="led"></span>todo o brasil</span>
+    </div>
+
+    <span class="acao">Visite nosso site<span class="seta"><svg class="ico"><use href="#i-arrow-up-right"/></svg></span></span>
+
+    <div class="assinatura">
+      <span class="cantos"><i></i><i></i><i></i><i></i></span>
+      <img class="logo" data-logo>
+      <p><span>Se algo pode ser melhorado,</span><br>ainda não está pronto.</p>
+    </div>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>
