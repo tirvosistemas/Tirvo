@@ -4862,6 +4862,10 @@
       body[data-bg] .hipercode, body[data-bg] .ab-refuse, body[data-bg] .mk-band { background-color: rgba(0, 0, 0, .62); }
       body[data-bg] .nf { background-color: transparent; }
       @media print { body[data-bg]::before { display: none; } }
+      .dev-note { display: inline-flex; align-items: center; gap: .6rem; justify-self: start; padding: .45rem .85rem; border: 1px solid rgba(255, 85, 0, .35); border-radius: 999px; background: linear-gradient(rgba(255, 85, 0, .08), rgba(255, 85, 0, .08)), #0f0f12; color: #fafafa; font: 500 .78rem/1.3 "Geist Mono", ui-monospace, monospace; letter-spacing: .02em; }
+      .dev-note__dot { width: .5rem; height: .5rem; flex: none; border-radius: 50%; background: #ff5500; box-shadow: 0 0 0 4px rgba(255, 85, 0, .18); }
+      @media (prefers-reduced-motion: no-preference) { .dev-note__dot { animation: dev-pulse 1.8s ease-in-out infinite; } }
+      @keyframes dev-pulse { 50% { opacity: .35; } }
 </style>
   <script src="assets/tlogo.js?v=e0021160" defer></script>
   <script src="assets/herofx.js?v=0e8c224d" defer></script>
@@ -5336,6 +5340,7 @@
           <div class="teaser__copy">
             <h2 class="title" id="hipercode-titulo" data-reveal="title"><span class="hl-chrome">Hipercode 1.0</span>. <span class="hl-dim">Ele não conversa.</span> <span class="serif hl-accent hl-under">Ele entrega.</span></h2>
             <p class="lead">A IA proprietária da Tirvo: um <strong>enxame de agentes autônomos</strong> dedicado exclusivamente à programação. Recebe a tarefa e entrega o software pronto em um arquivo <code class="chip-code">.zip</code>.</p>
+            <p class="dev-note"><span class="dev-note__dot" aria-hidden="true"></span>Em desenvolvimento · estágio avançado, em fase final de testes</p>
             <ol class="teaser__steps">
               <li><span>01</span>Recebe a tarefa</li>
               <li><span>02</span>Navega e pesquisa</li>
@@ -5927,7 +5932,7 @@
           servicos: ['São cinco frentes: sites, sistemas, marca, design e IA. Qual delas é a sua?', 'Toque em um cartão para ver tudo sobre o serviço na página dele.'],
           equipe: ['Aqui ninguém usa template: é gente que programa de verdade.', 'Programadores raiz lado a lado com especialistas em IA.'],
           metodo: ['Três fases, zero improviso: Descoberta, Engenharia e Lançamento.', 'Você sabe o que será entregue em cada etapa, e quando.'],
-          hipercode: ['Esse é o Hipercode: um enxame de agentes que escreve o código e entrega em .zip.', 'Toque no cartão para ver o Hipercode por dentro, tela por tela.'],
+          hipercode: ['Esse é o Hipercode, a IA que a Tirvo está desenvolvendo: um enxame de agentes que escreve o código e entrega em .zip.', 'Toque no cartão para ver o Hipercode por dentro, tela por tela.'],
           numeros: ['Zero código genérico. Tudo é projetado para o seu negócio.', 'Com a Gestão 360º, sua operação é monitorada 24/7.'],
           faq: ['Ficou alguma dúvida? Abra uma pergunta ou veja todas na página de FAQ.', 'Não achou o que procurava? Dá para falar direto no WhatsApp.'],
           contato: ['Conte o seu desafio em poucas linhas. A mensagem chega pronta no WhatsApp da equipe.', 'Nenhum dado fica guardado aqui: tudo vai direto para o WhatsApp.'],
@@ -6838,7 +6843,10 @@
       }
 
       const split = (title) => {
-        title.setAttribute('aria-label', title.textContent.replace(/\s+/g, ' ').trim());
+        // Leitor de tela lê o texto real desde o início; as letras animadas ficam só para os olhos
+        const label = document.createElement('span');
+        label.className = 'sr-only';
+        label.textContent = title.textContent.replace(/\s+/g, ' ').trim();
         const chars = [];
         const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT, {
           acceptNode: (node) => (node.parentElement.closest('svg') || !node.textContent.trim() ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),
@@ -6854,12 +6862,14 @@
             }
             const span = document.createElement('span');
             span.className = 'tt-c is-hid';
+            span.setAttribute('aria-hidden', 'true');
             span.textContent = char;
             frag.appendChild(span);
             chars.push(span);
           }
           node.parentNode.replaceChild(frag, node);
         });
+        title.prepend(label);
         title.classList.add('tt-on');
         return chars;
       };

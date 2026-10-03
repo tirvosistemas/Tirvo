@@ -975,7 +975,10 @@
       }
 
       const split = (title) => {
-        title.setAttribute('aria-label', title.textContent.replace(/\s+/g, ' ').trim());
+        // Leitor de tela lê o texto real desde o início; as letras animadas ficam só para os olhos
+        const label = document.createElement('span');
+        label.className = 'sr-only';
+        label.textContent = title.textContent.replace(/\s+/g, ' ').trim();
         const chars = [];
         const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT, {
           acceptNode: (node) => (node.parentElement.closest('svg') || !node.textContent.trim() ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),
@@ -991,12 +994,14 @@
             }
             const span = document.createElement('span');
             span.className = 'tt-c is-hid';
+            span.setAttribute('aria-hidden', 'true');
             span.textContent = char;
             frag.appendChild(span);
             chars.push(span);
           }
           node.parentNode.replaceChild(frag, node);
         });
+        title.prepend(label);
         title.classList.add('tt-on');
         return chars;
       };
