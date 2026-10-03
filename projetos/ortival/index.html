@@ -1,585 +1,315 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Ortival Engenharia | Projeto demonstrativo da Tirvo</title>
-  <meta name="description" content="Site demonstrativo criado pela Tirvo. A Ortival Engenharia é uma construtora fictícia: marca, textos, ilustrações e site foram feitos do zero para mostrar o nosso trabalho.">
-  <meta name="robots" content="noindex, follow">
-  <link rel="canonical" href="https://tirvo.tech/projetos/ortival/">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="theme-color" content="#f4f2ee">
-  <meta name="color-scheme" content="light">
-  <meta name="format-detection" content="telephone=no">
-  <link rel="icon" href="marca.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="pt_BR">
-  <meta property="og:title" content="Ortival Engenharia | Projeto demonstrativo da Tirvo">
-  <meta property="og:description" content="Construtora fictícia criada pela Tirvo para mostrar marca, textos e site feitos do zero.">
-  <meta property="og:url" content="https://tirvo.tech/projetos/ortival/">
-  <style>
-    :root {
-      --paper: #f4f2ee;
-      --paper-2: #ebe8e2;
-      --paper-3: #e1ddd5;
-      --white: #fbfaf8;
-      --ink: #16171a;
-      --ink-2: #474b52;
-      --ink-3: #6d727a;
-      --line: rgba(22, 23, 26, .12);
-      --line-2: rgba(22, 23, 26, .22);
-      --accent: #b5532c;
-      --accent-2: #8f3f1f;
-      --night: #141518;
-      --night-2: #1c1d21;
-      --night-line: rgba(255, 255, 255, .1);
-      --f-sans: "Archivo", system-ui, sans-serif;
-      --f-mono: "JetBrains Mono", ui-monospace, monospace;
-      --wrap: 1200px;
-      --gut: clamp(16px, 4vw, 40px);
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 96px; -webkit-text-size-adjust: 100%; }
-    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--f-sans); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-    img, svg { display: block; max-width: 100%; }
-    a { color: inherit; }
-    h1, h2, h3 { margin: 0; font-stretch: 112%; font-weight: 700; letter-spacing: -.025em; line-height: 1.05; }
-    p { margin: 0; }
-    .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gut); }
-    .mono { font-family: var(--f-mono); font-size: 12.5px; letter-spacing: .04em; text-transform: uppercase; }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    .skip { position: absolute; left: 12px; top: -60px; background: var(--ink); color: var(--white); padding: 10px 16px; z-index: 100; text-decoration: none; }
-    .skip:focus { top: 12px; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ortival Engenharia | Construção com prazo e custo no contrato</title>
+<meta name="description" content="Construtora em Curitiba com orçamento fechado por item, engenheiro responsável e acompanhamento online da obra. Projeto demonstrativo criado pela Tirvo.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://tirvo.tech/projetos/ortival/">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0c1924">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="./marca.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Barlow:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Ortival Engenharia (projeto demonstrativo da Tirvo)">
+<meta property="og:title" content="Ortival Engenharia | Construção com prazo e custo no contrato">
+<meta property="og:description" content="Construtora em Curitiba com orçamento fechado por item, engenheiro responsável e acompanhamento online da obra. Projeto demonstrativo criado pela Tirvo.">
+<meta property="og:url" content="https://tirvo.tech/projetos/ortival/">
+<meta property="og:image" content="https://tirvo.tech/projetos/ortival/assets/img/casa-wide-1600.webp">
 
-    /* Faixa de projeto demonstrativo */
-    .demo { background: var(--night); color: #d9d9dc; font-size: 13.5px; line-height: 1.45; }
-    .demo .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 10px; padding-bottom: 10px; }
-    .demo__txt { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-    .demo__tag { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #ff7a3d; border: 1px solid rgba(255, 122, 61, .4); padding: 2px 8px; white-space: nowrap; }
-    .demo a { color: #fff; text-decoration: none; white-space: nowrap; border-bottom: 1px solid rgba(255, 255, 255, .35); }
-    .demo a:hover { border-color: #fff; }
-
-    /* Cabeçalho */
-    .head { position: sticky; top: 0; z-index: 50; background: rgba(244, 242, 238, .88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .3s; }
-    .head.is-scrolled { border-color: var(--line); }
-    .head .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
-    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .logo svg { width: 34px; height: 34px; flex: none; color: var(--ink); }
-    .foot .logo svg { color: #ececee; }
-    .logo__name { display: flex; flex-direction: column; line-height: 1; }
-    .logo__name b { font-size: 19px; font-weight: 750; font-stretch: 125%; letter-spacing: .06em; }
-    .logo__name span { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .32em; color: var(--ink-3); margin-top: 5px; }
-    .nav { display: flex; align-items: center; gap: 30px; }
-    .nav a { text-decoration: none; font-size: 15px; color: var(--ink-2); transition: color .2s; }
-    .nav a.btn { color: var(--white); }
-    .nav a:hover { color: var(--ink); }
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 48px; padding: 0 22px; font: 600 15px/1 var(--f-sans); text-decoration: none; border: 1px solid var(--ink); background: var(--ink); color: var(--white); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
-    .btn:hover { background: var(--accent); border-color: var(--accent); }
-    .btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
-    .btn--ghost:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
-    .btn--sm { height: 40px; padding: 0 16px; font-size: 14px; }
-    .btn svg { width: 16px; height: 16px; }
-    .menu-btn { display: none; width: 44px; height: 44px; border: 1px solid var(--line-2); background: transparent; cursor: pointer; position: relative; }
-    .menu-btn span { position: absolute; left: 12px; right: 12px; height: 1.5px; background: var(--ink); transition: transform .25s; }
-    .menu-btn span:first-child { top: 17px; }
-    .menu-btn span:last-child { top: 25px; }
-    .menu-btn[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
-    .menu-btn[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
-
-    /* Hero */
-    .hero { position: relative; padding: clamp(48px, 7vw, 96px) 0 0; overflow: hidden; }
-    .hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 48px 48px; opacity: .45; -webkit-mask-image: radial-gradient(ellipse 70% 80% at 70% 40%, #000 30%, transparent 75%); mask-image: radial-gradient(ellipse 70% 80% at 70% 40%, #000 30%, transparent 75%); pointer-events: none; }
-    .hero__grid { position: relative; display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: center; }
-    .kicker { display: inline-flex; align-items: center; gap: 10px; color: var(--ink-3); margin-bottom: 26px; }
-    .kicker::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
-    .hero h1 { font-size: clamp(38px, 4.7vw, 66px); }
-    .hero h1 em { font-style: normal; color: var(--accent); }
-    .hero__lead { margin-top: 26px; font-size: clamp(17px, 1.4vw, 19px); color: var(--ink-2); max-width: 34em; }
-    .hero__cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
-    .hero__art { position: relative; }
-    .hero__art svg { width: 100%; height: auto; }
-    .cota { position: absolute; font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; color: var(--ink-3); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
-    .cota::before { content: ""; width: 7px; height: 7px; border: 1px solid var(--accent); transform: rotate(45deg); }
-    .cota--a { top: 2%; left: 4%; }
-    .cota--b { bottom: 0; right: 4%; }
-    .cota--c { bottom: 18%; left: 0; }
-    .facts { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: clamp(40px, 6vw, 80px); border-top: 1px solid var(--line); }
-    .fact { padding: 26px 24px 30px 0; }
-    .fact + .fact { padding-left: 24px; border-left: 1px solid var(--line); }
-    .fact b { display: block; font-size: clamp(30px, 3.4vw, 44px); font-weight: 700; font-stretch: 112%; letter-spacing: -.03em; line-height: 1; }
-    .fact b small { font-size: .5em; color: var(--accent); margin-left: 2px; }
-    .fact span { display: block; margin-top: 10px; color: var(--ink-3); font-size: 14.5px; line-height: 1.4; }
-
-    /* Ilustração isométrica */
-    .iso path { stroke: var(--ink); stroke-width: 1.1; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-    .i-t { fill: var(--white); }
-    .i-r { fill: #e6e2db; }
-    .i-l { fill: #d4cfc6; }
-    .i-w { fill: #2b3038; }
-    .wl { fill: #3a414b; }
-    .slab.i-t { fill: var(--paper-2); }
-    .slab.i-r, .slab.i-l { fill: var(--paper-3); }
-    .pool.i-t { fill: #93b4bc; }
-    .col.i-r { fill: var(--accent); }
-    .col.i-l { fill: var(--accent-2); }
-    .col.i-t { fill: #cf6d43; }
-    .js .draw path { stroke-dasharray: 1; stroke-dashoffset: 1; fill-opacity: 0; }
-    .js .draw.is-on path { animation: line 1.4s cubic-bezier(.6, 0, .2, 1) forwards, fill .8s ease 1.1s forwards; }
-    @keyframes line { to { stroke-dashoffset: 0; } }
-    @keyframes fill { to { fill-opacity: 1; } }
-
-    /* Seções */
-    section { position: relative; }
-    .sec { padding: clamp(72px, 10vw, 128px) 0; }
-    .sec__head { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
-    .sec__head h2 { font-size: clamp(32px, 4vw, 52px); }
-    .sec__head > p { color: var(--ink-2); max-width: 32em; justify-self: end; }
-    .label { display: flex; align-items: center; gap: 12px; color: var(--ink-3); margin-bottom: 20px; }
-    .label b { color: var(--accent); font-weight: 500; }
-
-    /* Serviços */
-    .svc { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); }
-    .svc__item { padding: 30px 26px 36px 0; display: flex; flex-direction: column; gap: 14px; }
-    .svc__item + .svc__item { padding-left: 26px; border-left: 1px solid var(--line); }
-    .svc__num { color: var(--accent); }
-    .svc__item h3 { font-size: 22px; }
-    .svc__item p { color: var(--ink-2); font-size: 15.5px; }
-    .svc__icon { width: 44px; height: 44px; margin-bottom: 8px; }
-    .svc__icon path, .svc__icon rect, .svc__icon line, .svc__icon circle { fill: none; stroke: var(--ink); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
-    .svc__icon .ac { stroke: var(--accent); }
-
-    /* Método */
-    .method { background: var(--night); color: #ececee; }
-    .method .label { color: #9a9ca3; }
-    .method .sec__head > p { color: #b4b6bc; }
-    .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); counter-reset: s; position: relative; }
-    .steps::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: var(--night-line); }
-    .steps li { position: relative; padding: 40px 22px 0 0; }
-    .steps li::before { content: ""; position: absolute; top: 0; left: 0; width: 15px; height: 15px; border: 1px solid var(--accent); background: var(--night); transform: rotate(45deg); }
-    .steps li:last-child::before { background: var(--accent); }
-    .steps .mono { color: #8f9198; }
-    .steps h3 { font-size: 20px; margin: 12px 0 10px; color: #fff; font-stretch: 105%; }
-    .steps p { font-size: 15px; color: #b4b6bc; }
-
-    /* Obras */
-    .works { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .work { background: var(--white); border: 1px solid var(--line); display: flex; flex-direction: column; transition: border-color .3s, transform .3s; }
-    .work:hover { border-color: var(--line-2); transform: translateY(-3px); }
-    .work__art { aspect-ratio: 4 / 3; display: grid; place-items: center; padding: 28px; background: linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 32px 32px, linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 32px 32px, var(--paper); border-bottom: 1px solid var(--line); }
-    .work__art svg { width: 100%; height: 100%; }
-    .work__body { padding: 24px 24px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-    .work__type { color: var(--accent); }
-    .work h3 { font-size: 22px; font-stretch: 108%; }
-    .work p { color: var(--ink-2); font-size: 15px; }
-    .work dl { display: grid; grid-template-columns: repeat(3, 1fr); margin: auto 0 0; padding-top: 18px; border-top: 1px solid var(--line); }
-    .work dt { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
-    .work dd { margin: 4px 0 0; font-weight: 600; font-size: 15px; }
-
-    /* Acompanhamento */
-    .track { background: var(--paper-2); }
-    .track .wrap { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
-    .track h2 { font-size: clamp(32px, 4vw, 52px); }
-    .track__lead { margin-top: 22px; color: var(--ink-2); }
-    .checks { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 14px; }
-    .checks li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; }
-    .checks svg { width: 18px; height: 18px; margin-top: 4px; }
-    .checks svg path { stroke: var(--accent); stroke-width: 2; fill: none; }
-    .panel { background: var(--night); color: #ececee; border-radius: 14px; padding: 22px; box-shadow: 0 30px 60px -30px rgba(20, 21, 24, .55); font-size: 14px; }
-    .panel__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding-bottom: 18px; border-bottom: 1px solid var(--night-line); }
-    .panel__top b { display: block; font-size: 17px; font-stretch: 108%; }
-    .panel__top .mono { color: #8f9198; font-size: 11px; }
-    .pill { font-family: var(--f-mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: #8fd19e; background: rgba(143, 209, 158, .1); border: 1px solid rgba(143, 209, 158, .3); padding: 4px 9px; border-radius: 99px; white-space: nowrap; }
-    .bars { display: grid; gap: 13px; padding: 20px 0; border-bottom: 1px solid var(--night-line); }
-    .bar { display: grid; grid-template-columns: 110px 1fr 44px; gap: 12px; align-items: center; }
-    .bar span:first-child { color: #c4c6cb; }
-    .bar__track { height: 6px; background: rgba(255, 255, 255, .08); border-radius: 3px; overflow: hidden; }
-    .bar__fill { display: block; height: 100%; width: var(--v); background: var(--accent); border-radius: 3px; transform-origin: left; }
-    .bar__fill--done { background: #d6d7da; }
-    .js .bar__fill { transform: scaleX(0); transition: transform 1.2s cubic-bezier(.6, 0, .2, 1); }
-    .js .is-on .bar__fill { transform: scaleX(1); }
-    .bar span:last-child { font-family: var(--f-mono); font-size: 12px; color: #9a9ca3; text-align: right; }
-    .log { list-style: none; margin: 0; padding: 18px 0 0; display: grid; gap: 12px; }
-    .log li { display: grid; grid-template-columns: 54px 1fr; gap: 12px; color: #c4c6cb; }
-    .log time { font-family: var(--f-mono); font-size: 11.5px; color: #8f9198; padding-top: 2px; }
-
-    /* FAQ */
-    .faq .wrap { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(32px, 6vw, 88px); }
-    .faq h2 { font-size: clamp(32px, 4vw, 52px); }
-    .faq details { border-top: 1px solid var(--line-2); }
-    .faq details:last-child { border-bottom: 1px solid var(--line-2); }
-    .faq summary { list-style: none; cursor: pointer; padding: 22px 40px 22px 0; font-weight: 600; font-size: 18px; position: relative; }
-    .faq summary::-webkit-details-marker { display: none; }
-    .faq summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 12px; height: 12px; margin-top: -6px; background: linear-gradient(var(--ink), var(--ink)) center / 12px 1.5px no-repeat, linear-gradient(var(--ink), var(--ink)) center / 1.5px 12px no-repeat; transition: transform .25s; }
-    .faq details[open] summary::after { transform: rotate(45deg); }
-    .faq details p { padding: 0 40px 24px 0; color: var(--ink-2); }
-
-    /* Contato */
-    .contact { background: var(--night); color: #ececee; }
-    .contact .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 88px); }
-    .contact h2 { font-size: clamp(34px, 4.4vw, 58px); }
-    .contact h2 em { font-style: normal; color: #e07a4c; }
-    .contact__lead { margin-top: 22px; color: #b4b6bc; max-width: 30em; }
-    .contact__info { margin-top: 36px; display: grid; gap: 4px; color: #9a9ca3; font-size: 15px; }
-    .form { display: grid; gap: 16px; }
-    .form label { display: grid; gap: 8px; font-size: 14px; color: #c4c6cb; }
-    .form input, .form select, .form textarea { width: 100%; font: inherit; font-size: 16px; color: #ececee; background: var(--night-2); border: 1px solid var(--night-line); padding: 13px 14px; border-radius: 0; }
-    .form textarea { min-height: 120px; resize: vertical; }
-    .form [disabled] { opacity: .55; cursor: not-allowed; }
-    .form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .notice { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border: 1px dashed rgba(255, 122, 61, .5); color: #e6c5b5; font-size: 14px; line-height: 1.5; }
-    .notice svg { width: 18px; height: 18px; flex: none; margin-top: 2px; }
-    .notice svg path, .notice svg circle { stroke: #ff7a3d; fill: none; stroke-width: 1.6; }
-    .notice a { color: #fff; }
-    .contact .btn { background: #ececee; color: var(--night); border-color: #ececee; }
-    .contact .btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-    /* Rodapé */
-    .foot { background: var(--night); color: #9a9ca3; border-top: 1px solid var(--night-line); font-size: 14px; }
-    .foot .wrap { display: grid; grid-template-columns: 1fr auto; gap: 24px 48px; padding-top: 40px; padding-bottom: 40px; align-items: center; }
-    .foot .logo__name b { color: #ececee; }
-    .foot .logo__name span { color: #7d8088; }
-    .foot__note { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid var(--night-line); line-height: 1.6; }
-    .foot__note a { color: #ececee; }
-    .foot__by { text-align: right; }
-    .foot__by a { color: #ececee; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, .3); }
-
-    /* Entrada suave */
-    .js [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); }
-    .js [data-reveal].is-on { opacity: 1; transform: none; }
-
-    @media (max-width: 1020px) {
-      .nav { position: fixed; inset: 72px 0 auto 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--paper); border-bottom: 1px solid var(--line); padding: 8px var(--gut) 24px; display: none; }
-      .nav.is-open { display: flex; }
-      .nav a { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 17px; color: var(--ink); }
-      .nav .btn { margin-top: 18px; height: 48px; color: var(--white); }
-      .menu-btn { display: block; }
-      .hero__grid, .track .wrap, .faq .wrap, .contact .wrap, .sec__head { grid-template-columns: 1fr; }
-      .sec__head > p { justify-self: start; }
-      .hero__art { max-width: 560px; margin: 0 auto; width: 100%; }
-      .facts, .svc { grid-template-columns: repeat(2, 1fr); }
-      .fact:nth-child(3) { padding-left: 0; border-left: 0; }
-      .fact:nth-child(n+3), .svc__item:nth-child(n+3) { border-top: 1px solid var(--line); }
-      .svc__item:nth-child(3) { padding-left: 0; border-left: 0; }
-      .steps { grid-template-columns: 1fr; gap: 32px; padding-left: 36px; }
-      .steps::before { left: 7px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
-      .steps li { padding: 0; }
-      .steps li::before { left: -36px; top: 3px; }
-      .steps h3 { margin-top: 6px; }
-      .works { grid-template-columns: 1fr; max-width: 560px; }
-    }
-    @media (max-width: 620px) {
-      body { font-size: 16px; }
-      .demo .wrap { flex-direction: column; align-items: flex-start; gap: 6px; }
-      .head .wrap > .btn { display: none; }
-      .facts, .svc { grid-template-columns: 1fr; }
-      .fact, .fact + .fact, .svc__item, .svc__item + .svc__item { padding-left: 0; border-left: 0; }
-      .fact + .fact, .svc__item + .svc__item { border-top: 1px solid var(--line); }
-      .cota--c { display: none; }
-      .form .row { grid-template-columns: 1fr; }
-      .bar { grid-template-columns: 92px 1fr 40px; }
-      .foot .wrap { grid-template-columns: 1fr; }
-      .foot__by { text-align: left; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .js .draw path { stroke-dasharray: none; stroke-dashoffset: 0; fill-opacity: 1; animation: none !important; }
-      .js [data-reveal] { opacity: 1; transform: none; transition: none; }
-      .js .bar__fill { transform: none; transition: none; }
-    }
-  </style>
-  <script>document.documentElement.classList.add('js');</script>
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<link rel="stylesheet" href="./assets/ortival.css?v=d865e16b">
 </head>
 <body>
-  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="gradRing" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd166"/><stop offset="1" stop-color="#f2b32a"/></linearGradient><linearGradient id="gradLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c98a0c"/><stop offset="1" stop-color="#ffd166"/></linearGradient><linearGradient id="gradArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2b32a" stop-opacity=".34"/><stop offset="1" stop-color="#f2b32a" stop-opacity="0"/></linearGradient></defs><symbol id="d-home" viewBox="0 0 48 48"><rect style="fill:currentColor;opacity:.35" x="4" y="40" width="40" height="3" rx="1.5"/><path style="fill:currentColor" fill-rule="evenodd" d="M11 23 24 12l13 11v17H11Zm9 6h8v11h-8Z"/><path style="fill:var(--duo2,#f2b32a)" d="M5 23.5 24 7l19 16.5-2.6 3L24 12.4 7.6 26.5Z"/><rect style="fill:currentColor;opacity:.35" x="30" y="27" width="4" height="4" rx=".6"/></symbol><symbol id="d-building" viewBox="0 0 48 48"><rect style="fill:currentColor;opacity:.35" x="4" y="40" width="40" height="3" rx="1.5"/><path style="fill:currentColor" fill-rule="evenodd" d="M10 9h20v31H10Zm4 5v4h4v-4Zm8 0v4h4v-4Zm-8 8v4h4v-4Zm8 0v4h4v-4Zm-8 8v4h4v-4Zm8 0v4h4v-4Z"/><path style="fill:currentColor;opacity:.35" d="M30 18h9v22h-9Z"/><path style="fill:var(--duo2,#f2b32a)" d="M8 6h24v4H8Z"/><rect style="fill:var(--duo2,#f2b32a)" x="32.5" y="22" width="4" height="3"/><rect style="fill:var(--duo2,#f2b32a)" x="32.5" y="28" width="4" height="3"/></symbol><symbol id="d-retrofit" viewBox="0 0 48 48"><rect style="fill:currentColor;opacity:.35" x="2" y="40" width="44" height="3" rx="1.5"/><path style="fill:currentColor" fill-rule="evenodd" d="M17 10h25v30H17Zm4 4v5h5v-5Zm9 0v5h5v-5Zm-9 9v5h5v-5Zm9 0v5h5v-5Zm-9 9v8h5v-8Zm9 0v5h5v-5Z"/><path style="fill:var(--duo2,#f2b32a)" d="M6 8h2.6v32H6Zm6 0h2.6v32H12ZM4 15h13v2.4H4Zm0 10h13v2.4H4Zm0 10h13v2.4H4Z"/></symbol><symbol id="d-helmet" viewBox="0 0 48 48"><path style="fill:currentColor" d="M8 31c0-10.5 7.2-18.5 16-18.5S40 20.5 40 31Z"/><path style="fill:currentColor;opacity:.35" d="M18 14.6c-3.6 2.7-5.8 7.4-6 13h4c.2-4.8 1.6-9 4-11.6Z"/><rect style="fill:var(--duo2,#f2b32a)" x="21.5" y="9" width="5" height="14" rx="2.5"/><rect style="fill:var(--duo2,#f2b32a)" x="4" y="31" width="40" height="6" rx="3"/><rect style="fill:currentColor;opacity:.35" x="10" y="39.5" width="28" height="3" rx="1.5"/></symbol><symbol id="d-blueprint" viewBox="0 0 48 48"><path style="fill:currentColor" fill-rule="evenodd" d="M13 9h29v28H13Zm4 4v20h21V13Zm3 3h7v6h-7Zm9 0h6v14h-6Zm-9 8h7v6h-7Z"/><path style="fill:var(--duo2,#f2b32a)" d="M6 11a4 4 0 0 1 8 0v28a4 4 0 0 0-8 0Z"/><rect style="fill:currentColor;opacity:.35" x="6" y="39" width="36" height="3" rx="1.5"/></symbol><symbol id="d-crane" viewBox="0 0 48 48"><path style="fill:currentColor" d="M14 12h5v30h-5Z"/><path style="fill:currentColor;opacity:.35" d="M14 17l5 5M14 24l5 5M14 31l5 5M19 17l-5 5M19 24l-5 5M19 31l-5 5" stroke="currentColor" stroke-width="1.2" fill="none"/><path style="fill:currentColor" d="M5 9h38v4H5Z"/><path style="fill:var(--duo2,#f2b32a)" d="M6 13h6v6H6Z"/><path style="fill:var(--duo2,#f2b32a)" d="M35.2 13h1.6v12h-1.6Z"/><path style="fill:var(--duo2,#f2b32a)" d="M33 25h6l-1.4 5h-3.2Z"/><rect style="fill:currentColor;opacity:.35" x="8" y="42" width="18" height="2.5" rx="1"/><path style="fill:var(--duo2,#f2b32a)" d="M16.5 3 26 9h-19Z"/></symbol><symbol id="d-shield" viewBox="0 0 48 48"><path style="fill:currentColor" d="M24 4 40 10v12c0 10.5-6.8 18.4-16 22-9.2-3.6-16-11.5-16-22V10Z"/><path style="fill:currentColor;opacity:.35" d="M24 8.3V39.6c-7-3.4-12-9.8-12-17.6V12.8Z"/><path style="fill:var(--duo2,#f2b32a)" d="m16.5 23.5 3-3 3.5 3.6 8-8.1 3 3L23 30Z"/></symbol><symbol id="d-chart" viewBox="0 0 48 48"><rect style="fill:currentColor;opacity:.35" x="4" y="40" width="40" height="3" rx="1.5"/><rect style="fill:currentColor" x="8" y="26" width="7" height="13" rx="1.5"/><rect style="fill:currentColor" x="19" y="19" width="7" height="20" rx="1.5"/><rect style="fill:currentColor" x="30" y="12" width="7" height="27" rx="1.5"/><path style="fill:var(--duo2,#f2b32a)" d="M6 20 17 11l7 5 13-11 2 2.6-15 12.6-7-5-9 7.4Z"/><path style="fill:var(--duo2,#f2b32a)" d="M33 4h8v8Z"/></symbol><symbol id="d-camera" viewBox="0 0 48 48"><path style="fill:currentColor" fill-rule="evenodd" d="M6 15h8l3-5h14l3 5h8v24H6Zm18 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16Z"/><circle style="fill:var(--duo2,#f2b32a)" cx="24" cy="27" r="5"/><rect style="fill:currentColor;opacity:.35" x="35" y="18" width="4" height="3" rx="1"/></symbol><symbol id="d-doc" viewBox="0 0 48 48"><path style="fill:currentColor" fill-rule="evenodd" d="M10 4h20l8 8v32H10Zm5 14v3h18v-3Zm0 6v3h18v-3Zm0 6v3h11v-3Z"/><path style="fill:currentColor;opacity:.35" d="M30 4v8h8Z"/><circle style="fill:var(--duo2,#f2b32a)" cx="33" cy="37" r="6"/><path fill="#fff" d="m30.6 37 1.6 1.6 3.4-3.4" stroke="#fff" stroke-width="1.6"/></symbol><symbol id="d-key" viewBox="0 0 48 48"><circle style="fill:var(--duo2,#f2b32a)" cx="15" cy="24" r="10"/><circle fill="#fff" cx="12.5" cy="24" r="3"/><path style="fill:currentColor" d="M23 21.5h21v5h-4v5h-5v-5h-3v4h-5v-4h-4Z"/></symbol><symbol id="d-ruler" viewBox="0 0 48 48"><path style="fill:currentColor" fill-rule="evenodd" d="M6 6h9v27h27v9H6Z"/><path style="fill:var(--duo2,#f2b32a)" d="M15 33 33 15l3 3-18 18Z"/><path style="fill:currentColor;opacity:.35" d="M8.5 12h4v2h-4Zm0 6h4v2h-4Zm0 6h4v2h-4Zm9 13v-4h2v4Zm6 0v-4h2v4Zm6 0v-4h2v4Z"/><circle style="fill:var(--duo2,#f2b32a)" cx="37" cy="11" r="4"/></symbol><symbol id="d-clock" viewBox="0 0 48 48"><circle style="fill:currentColor" cx="24" cy="24" r="19"/><circle fill="#fff" cx="24" cy="24" r="14.5" opacity=".14"/><path style="fill:var(--duo2,#f2b32a)" d="M22.5 11h3v12.4l8 5-1.6 2.6-9.4-5.8Z"/><circle style="fill:var(--duo2,#f2b32a)" cx="24" cy="24" r="2.6"/></symbol><symbol id="d-calendar" viewBox="0 0 48 48"><path style="fill:currentColor" fill-rule="evenodd" d="M6 10h36v32H6Zm4 10v18h28V20Z"/><rect style="fill:currentColor;opacity:.35" x="13" y="24" width="5" height="4" rx="1"/><rect style="fill:currentColor;opacity:.35" x="21.5" y="24" width="5" height="4" rx="1"/><rect style="fill:currentColor;opacity:.35" x="13" y="31" width="5" height="4" rx="1"/><rect style="fill:var(--duo2,#f2b32a)" x="30" y="31" width="5" height="4" rx="1"/><rect style="fill:var(--duo2,#f2b32a)" x="13" y="5" width="4" height="9" rx="2"/><rect style="fill:var(--duo2,#f2b32a)" x="31" y="5" width="4" height="9" rx="2"/></symbol><symbol id="d-layers" viewBox="0 0 48 48"><path style="fill:currentColor;opacity:.35" d="m24 32 18-9 2 5-20 10L4 28l2-5Z"/><path style="fill:currentColor" d="m24 26 18-9 2 5-20 10L4 22l2-5Z" opacity=".7"/><path style="fill:var(--duo2,#f2b32a)" d="M24 6 44 16 24 26 4 16Z"/></symbol><symbol id="d-users" viewBox="0 0 48 48"><circle style="fill:currentColor" cx="18" cy="15" r="7"/><path style="fill:currentColor" d="M5 40c0-8 5.8-14 13-14s13 6 13 14Z"/><circle style="fill:var(--duo2,#f2b32a)" cx="33" cy="17" r="5.5"/><path style="fill:var(--duo2,#f2b32a)" d="M28 28.5c1.5-.9 3.2-1.5 5-1.5 5.5 0 10 4.6 10 11h-10c0-3.8-1.8-7.2-5-9.5Z"/></symbol><symbol id="d-target" viewBox="0 0 48 48"><circle style="fill:currentColor" cx="24" cy="24" r="19"/><circle fill="#fff" cx="24" cy="24" r="13" opacity=".2"/><circle style="fill:currentColor" cx="24" cy="24" r="9"/><circle style="fill:var(--duo2,#f2b32a)" cx="24" cy="24" r="4.5"/><path style="fill:var(--duo2,#f2b32a)" d="m26 22 13-13 2.5 2.5-13 13Z"/><path style="fill:var(--duo2,#f2b32a)" d="M36 4h8v8h-4V8h-4Z"/></symbol><symbol id="d-eye" viewBox="0 0 48 48"><path style="fill:currentColor" d="M2 24C7 14.5 15 9 24 9s17 5.5 22 15c-5 9.5-13 15-22 15S7 33.5 2 24Z"/><circle fill="#fff" cx="24" cy="24" r="10" opacity=".22"/><circle style="fill:var(--duo2,#f2b32a)" cx="24" cy="24" r="6.5"/><circle fill="#fff" cx="26" cy="22" r="2"/></symbol><symbol id="d-diamond" viewBox="0 0 48 48"><path style="fill:currentColor" d="M14 7h20l9 11-19 24L5 18Z"/><path style="fill:var(--duo2,#f2b32a)" d="M5 18h38l-19 24Z"/><path style="fill:currentColor;opacity:.35" d="M14 7l5 11h10l5-11Z"/></symbol><symbol id="d-truck" viewBox="0 0 48 48"><path style="fill:currentColor" d="M3 12h26v20H3Z"/><path style="fill:var(--duo2,#f2b32a)" d="M29 18h8l6 7v7H29Z"/><circle style="fill:currentColor" cx="12" cy="35" r="4.5"/><circle style="fill:currentColor" cx="35" cy="35" r="4.5"/><circle fill="#fff" cx="12" cy="35" r="1.6"/><circle fill="#fff" cx="35" cy="35" r="1.6"/><rect style="fill:currentColor;opacity:.35" x="32" y="20.5" width="4" height="4" rx=".8"/></symbol><symbol id="d-leaf" viewBox="0 0 48 48"><path style="fill:currentColor" d="M40 6C22 6 9 14 9 29c0 3 .6 5.6 1.6 7.8C16 26 24 20 33 16 25 22 18 29 14 40c2.8 1.4 6 2 9.4 2C36 42 42 30 40 6Z"/><path style="fill:var(--duo2,#f2b32a)" d="M6 42c4-12 12-21 27-26-11 6-18 15-22 27Z"/></symbol><symbol id="d-cog" viewBox="0 0 48 48"><path style="fill:currentColor" fill-rule="evenodd" d="m21 4h6l1.2 5.4 4 1.7 4.6-3 4.3 4.3-3 4.6 1.7 4 5.2 1v6l-5.2 1.2-1.7 4 3 4.6-4.3 4.3-4.6-3-4 1.7L27 44h-6l-1.2-5.2-4-1.7-4.6 3-4.3-4.3 3-4.6-1.7-4L4 27v-6l5.2-1 1.7-4-3-4.6 4.3-4.3 4.6 3 4-1.7Zm3 12a8 8 0 1 0 0 16 8 8 0 0 0 0-16Z"/><circle style="fill:var(--duo2,#f2b32a)" cx="24" cy="24" r="4.5"/></symbol><symbol id="d-pin" viewBox="0 0 48 48"><path style="fill:currentColor" d="M24 3c8.3 0 15 6.4 15 14.6C39 28.4 24 45 24 45S9 28.4 9 17.6C9 9.4 15.7 3 24 3Z"/><circle style="fill:var(--duo2,#f2b32a)" cx="24" cy="17.5" r="6"/></symbol><symbol id="d-hammer" viewBox="0 0 48 48"><path style="fill:currentColor" d="m20.5 21 5.5 5.5L10 42.5 4.5 37Z"/><path style="fill:var(--duo2,#f2b32a)" d="M23 7h11l9 9-4 4-6-6-3 3 3 3-5 5-11-11Z"/></symbol><symbol id="d-handshake" viewBox="0 0 48 48"><path style="fill:currentColor" d="M3 16h8l9-5 9 1 7 4h9v14h-6l-11 9a3 3 0 0 1-4.2-.4l-.8-1-2 1.4a3 3 0 0 1-4-.6L11 30H3Z"/><path style="fill:var(--duo2,#f2b32a)" d="m21 18 6-3 9 7-3 3-7-5-3 2a3 3 0 0 1-4-1Z"/></symbol><symbol id="d-bolt" viewBox="0 0 48 48"><path style="fill:currentColor" d="M27 3 8 27h13l-3 18 22-26H26Z"/><path style="fill:var(--duo2,#f2b32a)" d="M27 3 22 19h4l14 0Z" opacity=".9"/></symbol><symbol id="d-drop" viewBox="0 0 48 48"><path style="fill:currentColor" d="M24 4s14 15 14 25a14 14 0 0 1-28 0C10 19 24 4 24 4Z"/><path style="fill:var(--duo2,#f2b32a)" d="M17 30a7 7 0 0 0 7 7v-4a3 3 0 0 1-3-3Z"/></symbol><symbol id="d-sun" viewBox="0 0 48 48"><circle style="fill:var(--duo2,#f2b32a)" cx="24" cy="24" r="9"/><path style="fill:currentColor" d="M22.5 3h3v7h-3Zm0 35h3v7h-3ZM3 22.5h7v3H3Zm35 0h7v3h-7ZM8.5 10.6l2.1-2.1 5 5-2.1 2.1Zm23.8 23.8 2.1-2.1 5 5-2.1 2.1ZM8.5 37.4l5-5 2.1 2.1-5 5Zm23.8-23.8 5-5 2.1 2.1-5 5Z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M3 12h17M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol><symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol><symbol id="i-pin-s" viewBox="0 0 24 24"><path d="M12 21s7-6.6 7-12a7 7 0 0 0-14 0c0 5.4 7 12 7 12Z" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="9" r="2.6" fill="currentColor"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 3.5h3l1.6 4.5-2.2 1.6a12 12 0 0 0 5.4 5.4l1.6-2.2 4.5 1.6v3a2 2 0 0 1-2.1 2A16.6 16.6 0 0 1 4.6 5.6a2 2 0 0 1 2-2.1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol><symbol id="i-clock-s" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol><symbol id="i-area" viewBox="0 0 24 24"><path d="M4 4h16v16H4Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 9h3M4 14h3M9 20v-3M14 20v-3" stroke="currentColor" stroke-width="1.6"/></symbol><symbol id="i-cal-s" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol><symbol id="i-floors" viewBox="0 0 24 24"><path d="M5 20V8l7-4 7 4v12M5 12h14M5 16h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol><symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2.5 14 10l7.5 2-7.5 2-2 7.5-2-7.5L2.5 12 10 10Z" fill="currentColor"/></symbol><symbol id="i-dia" viewBox="0 0 24 24"><path d="M12 3 21 12 12 21 3 12Z" fill="currentColor"/></symbol><symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2.2a9.7 9.7 0 0 0-8.4 14.6L2.3 21.7l5-1.3A9.7 9.7 0 1 0 12 2.2Zm0 17.7a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9Zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.1 11.1 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.5 2.5 0 0 0 1.7-1.2 2 2 0 0 0 .1-1.2c0-.1-.2-.2-.5-.3Z" fill="currentColor"/></symbol><symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></symbol><symbol id="i-in" viewBox="0 0 24 24"><path d="M4.5 9h3.3v10.5H4.5ZM6.15 3.8a1.9 1.9 0 1 1 0 3.8 1.9 1.9 0 0 1 0-3.8ZM10 9h3.1v1.5c.5-.9 1.6-1.8 3.3-1.8 3.4 0 4.1 2.2 4.1 5.2v5.6h-3.3v-5c0-1.2 0-2.7-1.7-2.7s-2 1.3-2 2.6v5.1H10Z" fill="currentColor"/></symbol><symbol id="i-fb" viewBox="0 0 24 24"><path d="M13.6 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3a21 21 0 0 0-2.3-.1c-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21Z" fill="currentColor"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol></svg>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<div class="demo" role="note" aria-label="Aviso de projeto demonstrativo"><div class="wrap"><p class="demo__txt"><span class="demo__tag">Projeto demonstrativo</span><span>A Ortival Engenharia é uma empresa fictícia. Marca, textos, imagens 3D e site foram criados do zero pela Tirvo.</span></p><a href="https://tirvo.tech/">Conhecer a Tirvo</a></div></div>
+<header class="head" data-head><div class="wrap">
+<a class="logo" href="./" data-logo aria-label="Ortival Engenharia, página inicial">
+  <svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path class="lb lb--l" d="M0 9h9v30H0Z"/><path class="lb lb--t" d="M0 0h48v9H0Z"/><path class="lb lb--r" d="M39 9h9v21h-9Z"/><path class="lb lb--b" d="M0 39h30v9H0Z"/><path class="lk" d="M39 39h9v9h-9Z"/><path class="ll" d="M-4 43.5h56"/></svg>
+  <span class="logo__name"><b>ORTIVAL</b><small>ENGENHARIA</small></span>
+</a>
+<nav class="nav" aria-label="Navegação principal"><ul class="nav__list"><li><a class="nav__link is-active" aria-current="page" href="./"><span class="nav__num" aria-hidden="true">01</span><span class="scr"><span class="scr__ghost">Início</span><span class="scr__live" aria-hidden="true">Início</span></span></a></li><li><a class="nav__link" href="./sobre/"><span class="nav__num" aria-hidden="true">02</span><span class="scr"><span class="scr__ghost">Sobre</span><span class="scr__live" aria-hidden="true">Sobre</span></span></a></li><li class="sub" data-sub><button class="nav__link" type="button" aria-expanded="false" aria-controls="subnav" data-sub-toggle><span class="nav__num" aria-hidden="true">03</span><span class="scr"><span class="scr__ghost">Serviços</span><span class="scr__live" aria-hidden="true">Serviços</span></span><svg class="nav__chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
+<div class="subnav" id="subnav"><div class="subnav__head mono"><span>Serviços</span><span>04 frentes</span></div><div class="subnav__grid"><a class="subnav__item" href="./servicos/residencial/"><img src="./assets/img/casa-wide-360.webp" width="360" height="225" alt="" loading="lazy"><span><b>Residencial</b><span>Casas e edifícios multifamiliares</span></span></a><a class="subnav__item" href="./servicos/comercial-e-industrial/"><img src="./assets/img/comercial-wide-360.webp" width="360" height="225" alt="" loading="lazy"><span><b>Comercial e industrial</b><span>Lojas, clínicas, escritórios e galpões</span></span></a><a class="subnav__item" href="./servicos/reforma-e-retrofit/"><img src="./assets/img/retrofit-wide-360.webp" width="360" height="225" alt="" loading="lazy"><span><b>Reforma e retrofit</b><span>Prédios existentes, atualizados</span></span></a><a class="subnav__item" href="./servicos/gerenciamento-de-obra/"><img src="./assets/img/obra-wide-360.webp" width="360" height="225" alt="" loading="lazy"><span><b>Gerenciamento de obra</b><span>Fiscalização, medição e custo</span></span></a></div><a class="subnav__all" href="./servicos/">Ver todos os serviços e o que está incluso <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div></li><li><a class="nav__link" href="./obras/"><span class="nav__num" aria-hidden="true">04</span><span class="scr"><span class="scr__ghost">Obras</span><span class="scr__live" aria-hidden="true">Obras</span></span></a></li><li><a class="nav__link" href="./metodo/"><span class="nav__num" aria-hidden="true">05</span><span class="scr"><span class="scr__ghost">Método</span><span class="scr__live" aria-hidden="true">Método</span></span></a></li><li><a class="nav__link" href="./acompanhamento/"><span class="nav__num" aria-hidden="true">06</span><span class="scr"><span class="scr__ghost">Acompanhamento</span><span class="scr__live" aria-hidden="true">Acompanhamento</span></span></a></li><li><a class="nav__link" href="./duvidas/"><span class="nav__num" aria-hidden="true">07</span><span class="scr"><span class="scr__ghost">Dúvidas</span><span class="scr__live" aria-hidden="true">Dúvidas</span></span></a></li></ul></nav>
+<div class="head__actions"><a class="btn btn--primary btn--sm" href="./contato/" data-magnetic><span class="btn__sheen" aria-hidden="true"></span>Pedir orçamento<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a><button class="menu-btn" type="button" aria-expanded="false" aria-controls="mmenu" aria-label="Abrir menu" data-menu><span></span><span></span></button></div>
+</div></header>
+<div class="mmenu" id="mmenu" data-mmenu><nav class="mmenu__list" aria-label="Menu"><a href="./" class=is-active><span>01</span>Início</a><a href="./sobre/"><span>02</span>Sobre</a><a href="./servicos/"><span>03</span>Serviços</a><a href="./obras/"><span>04</span>Obras</a><a href="./metodo/"><span>05</span>Método</a><a href="./acompanhamento/"><span>06</span>Acompanhamento</a><a href="./duvidas/"><span>07</span>Dúvidas</a><a href="./contato/"><span>08</span>Contato</a></nav>
+<div class="mmenu__foot"><a class="btn btn--primary" href="./contato/" data-magnetic><span class="btn__sheen" aria-hidden="true"></span>Pedir orçamento<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a><div class="socials"><a class="social social--ig" href="#" data-demo="Perfil fictício: a Ortival não existe, então este Instagram não leva a uma conta real." aria-label="Instagram da Ortival (@ortival.engenharia), perfil fictício"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-ig"/></svg></span><span>@ortival.engenharia</span></a><a class="social social--in" href="#" data-demo="Perfil fictício: a Ortival não existe, então este LinkedIn não leva a uma conta real." aria-label="LinkedIn da Ortival (Ortival Engenharia), perfil fictício"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-in"/></svg></span><span>Ortival Engenharia</span></a><a class="social social--fb" href="#" data-demo="Perfil fictício: a Ortival não existe, então este Facebook não leva a uma conta real." aria-label="Facebook da Ortival (/ortivalengenharia), perfil fictício"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-fb"/></svg></span><span>/ortivalengenharia</span></a></div></div></div>
+<main id="conteudo">
 
-  <div class="demo" role="note" aria-label="Aviso de projeto demonstrativo">
-    <div class="wrap">
-      <p class="demo__txt"><span class="demo__tag">Projeto demonstrativo</span><span>A Ortival Engenharia é uma empresa fictícia. Marca, textos, ilustrações e site foram criados do zero pela Tirvo.</span></p>
-      <a href="https://tirvo.tech/">Conhecer a Tirvo</a>
-    </div>
+<section class="hero">
+<div class="hero__media"><img src="./assets/img/casa-wide-1600.webp" srcset="./assets/img/casa-wide-900.webp 900w, ./assets/img/casa-wide-1600.webp 1600w" sizes="100vw" width="1600" height="1000" alt="Residência Mirante ao entardecer, imagem 3D criada pela Tirvo" loading="eager" fetchpriority="high" decoding="async"></div>
+<div class="hero__shade"></div><div class="hero__grid"></div><div class="hero__scan"></div>
+<div class="wrap">
+<div class="hero__inner">
+<div>
+<p class="hero__kicker mono" data-fx="drop"><i aria-hidden="true"></i>Engenharia e construção · Curitiba e região</p>
+<h1>Sua obra entregue <span class="nowrap"><span class="cota">no dia combinado<span class="cota__line" aria-hidden="true"></span><span class="cota__tag">DESVIO: 0 DIAS</span></span>,</span> pelo <span class="serif">preço assinado.</span></h1>
+<p class="hero__lead" data-fx="blur" style="--d:900">Há 18 anos a Ortival projeta e executa obras residenciais, comerciais e industriais de médio e alto padrão. Orçamento fechado por item, engenheiro responsável do início ao fim e a obra inteira acompanhada pelo celular.</p>
+<div class="hero__cta" data-fx="rise" style="--d:1100"><a class="btn btn--primary" href="./contato/" data-magnetic><span class="btn__sheen" aria-hidden="true"></span>Pedir orçamento<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a><a class="btn btn--ghost" href="./obras/" data-magnetic>Ver obras<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-ur"/></svg></a></div>
+</div>
+<div class="hero__side">
+<div class="live glass" data-fx="right" style="--d:1300">
+<div class="live__top mono"><span class="live__dot">Obra ao vivo</span><span>Semana 41/64</span></div>
+<div class="live__row"><div class="ring" style="--off:58.8"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="ring__bg" cx="32" cy="32" r="26"/><circle class="ring__fg" cx="32" cy="32" r="26"/></svg><b>64%</b></div><div><strong>Residencial Bosque</strong><span>7 pavimentos · Ecoville</span></div></div>
+<div class="live__bars"><div class="live__bar"><span>Estrutura</span><i style="--v:100%"></i><em>100%</em></div><div class="live__bar"><span>Alvenaria</span><i style="--v:78%"></i><em>78%</em></div><div class="live__bar"><span>Instalações</span><i style="--v:52%"></i><em>52%</em></div></div>
+</div>
+<div class="chip glass" data-fx="right" style="--d:1500"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-shield"/></svg><span><b>96%</b> das obras entregues<br>no prazo do contrato</span></div>
+</div>
+</div>
+</div>
+<div class="hero__foot"><div class="wrap"><div class="hero__stats" data-stagger>
+<div class="hstat"><b><span data-count="18">18</span><small>anos</small></b><span>executando obras no Paraná</span></div>
+<div class="hstat"><b><span data-count="140">140</span></b><span>obras entregues com habite-se</span></div>
+<div class="hstat"><b><span data-count="312">312</span><small>mil m²</small></b><span>construídos desde 2008</span></div>
+<div class="hstat"><b><span data-count="96">96</span><small>%</small></b><span>das obras entregues no prazo</span></div>
+</div></div></div>
+<span class="scroll-cue mono" aria-hidden="true">Role</span>
+</section>
+
+<div class="marquee-wrap" aria-label="Diferenciais da Ortival">
+<div class="marquee"><div class="marquee__track" data-loop><span class="marquee__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-dia"/></svg>Orçamento fechado por item</span><span class="marquee__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-dia"/></svg>Engenheiro responsável do início ao fim</span><span class="marquee__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-dia"/></svg>Garantia estrutural de 5 anos</span><span class="marquee__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-dia"/></svg>Diário de obra toda semana</span><span class="marquee__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-dia"/></svg>ART registrada em cada etapa</span><span class="marquee__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-dia"/></svg>Projeto compatibilizado antes da obra</span><span class="marquee__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-dia"/></svg>Alvará e habite-se no contrato</span></div></div>
+<div class="marquee marquee--alt" aria-hidden="true"><div class="marquee__track" data-loop><span class="marquee__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-spark"/></svg>140 obras entregues</span><span class="marquee__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-spark"/></svg>312.000 m² construídos</span><span class="marquee__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-spark"/></svg>Curitiba e região metropolitana</span><span class="marquee__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-spark"/></svg>Residencial · Comercial · Industrial · Retrofit</span><span class="marquee__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-spark"/></svg>Canteiro limpo e organizado</span><span class="marquee__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-spark"/></svg>Atendimento de segunda a sexta, 8h às 18h</span></div></div>
+</div>
+
+<section class="sec bg-paper"><div class="wrap">
+<div class="manifest">
+<div>
+<p class="label mono" data-fx="left"><b>01</b>Quem somos</p>
+<p class="scrub">A maior parte dos problemas de uma obra nasce antes do primeiro tijolo: projeto incompleto, orçamento vago e prazo estimado no olho. A Ortival resolve no papel <span class="hl">o que muitas construtoras deixam para resolver no improviso.</span></p>
+<div class="manifest__foot" data-fx="rise">
+<a class="btn btn--dark" href="./sobre/" data-magnetic>Conhecer a Ortival<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+<div class="sig"><span class="sig__avatar" aria-hidden="true">14</span><span><b>Engenheiros e arquitetos</b><span>na equipe técnica própria</span></span></div>
+</div>
+</div>
+<div class="manifest__media floors"><img src="./assets/img/obra-det-900.webp" srcset="./assets/img/obra-det-900.webp 900w, ./assets/img/obra-det-1600.webp 1600w" sizes="(max-width: 1100px) 100vw, 40vw" width="1600" height="1000" alt="Residencial Bosque em construção, imagem 3D criada pela Tirvo" loading="lazy" decoding="async">
+<div class="manifest__badge glass"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-helmet"/></svg><span><b>Engenheiro na obra toda semana</b><span>Visita técnica com relatório e fotos</span></span></div></div>
+</div>
+</div></section>
+
+<section class="sec bg-sand"><div class="wrap">
+<div class="sec-head"><div><p class="label mono" data-fx="left"><b>02</b>Serviços</p><h2 class="h2">Quatro frentes, <span class="serif">um só</span> responsável.</h2></div>
+<div class="sec-head__aside"><p data-fx="blur">Uma equipe responde por projeto, aprovação na prefeitura, compra de material e execução. Você fala com um engenheiro só, do primeiro estudo à vistoria final.</p><a class="link-arrow" href="./servicos/">Ver serviços e o que está incluso <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div></div>
+<div class="svc-grid"><a class="svc" href="./servicos/residencial/" data-tilt data-fx="lift" style="--d:0">
+<div class="svc__img"><img src="./assets/img/casa-wide-900.webp" srcset="./assets/img/casa-wide-900.webp 900w, ./assets/img/casa-wide-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 50vw" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div>
+<div class="svc__top"><span class="svc__num">01 / 04</span><span class="svc__ico"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-home"/></svg></span></div>
+<div class="svc__body"><h3>Residencial</h3><p>Casas de médio e alto padrão e edifícios multifamiliares, do estudo do terreno à entrega das chaves.</p><div class="svc__tags"><span>Casas</span><span>Sobrados</span><span>Edifícios</span><span>Condomínios</span></div><span class="svc__more"><i><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-ur"/></svg></i>Conhecer o serviço</span></div>
+</a><a class="svc" href="./servicos/comercial-e-industrial/" data-tilt data-fx="lift" style="--d:110">
+<div class="svc__img"><img src="./assets/img/comercial-wide-900.webp" srcset="./assets/img/comercial-wide-900.webp 900w, ./assets/img/comercial-wide-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 50vw" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div>
+<div class="svc__top"><span class="svc__num">02 / 04</span><span class="svc__ico"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-building"/></svg></span></div>
+<div class="svc__body"><h3>Comercial e industrial</h3><p>Clínicas, lojas, escritórios e galpões com cronograma pensado para a operação começar no dia marcado.</p><div class="svc__tags"><span>Clínicas</span><span>Escritórios</span><span>Lojas</span><span>Galpões</span></div><span class="svc__more"><i><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-ur"/></svg></i>Conhecer o serviço</span></div>
+</a><a class="svc" href="./servicos/reforma-e-retrofit/" data-tilt data-fx="lift" style="--d:220">
+<div class="svc__img"><img src="./assets/img/retrofit-wide-900.webp" srcset="./assets/img/retrofit-wide-900.webp 900w, ./assets/img/retrofit-wide-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 50vw" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div>
+<div class="svc__top"><span class="svc__num">03 / 04</span><span class="svc__ico"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-retrofit"/></svg></span></div>
+<div class="svc__body"><h3>Reforma e retrofit</h3><p>Prédios existentes com estrutura, fachada e instalações atualizadas, muitas vezes com o imóvel em uso.</p><div class="svc__tags"><span>Laudo</span><span>Fachada</span><span>Instalações</span><span>Acessibilidade</span></div><span class="svc__more"><i><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-ur"/></svg></i>Conhecer o serviço</span></div>
+</a><a class="svc" href="./servicos/gerenciamento-de-obra/" data-tilt data-fx="lift" style="--d:330">
+<div class="svc__img"><img src="./assets/img/obra-wide-900.webp" srcset="./assets/img/obra-wide-900.webp 900w, ./assets/img/obra-wide-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 50vw" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div>
+<div class="svc__top"><span class="svc__num">04 / 04</span><span class="svc__ico"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-helmet"/></svg></span></div>
+<div class="svc__body"><h3>Gerenciamento de obra</h3><p>Para quem já contratou a construtora: fiscalização técnica, medições e controle de custo por um terceiro.</p><div class="svc__tags"><span>Fiscalização</span><span>Medições</span><span>Custo</span><span>Prazo</span></div><span class="svc__more"><i><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-ur"/></svg></i>Conhecer o serviço</span></div>
+</a></div>
+</div></section>
+
+<section class="sec bg-night"><div class="wrap">
+<div class="sec-head"><div><p class="label mono" data-fx="left"><b>03</b>Resultados</p><h2 class="h2">Números que <span class="serif">se medem</span> em obra entregue.</h2></div>
+<div class="sec-head__aside"><p data-fx="blur">Prazo e custo são acompanhados em todas as obras, semana a semana. É assim que dá para prometer data e preço no contrato.</p></div></div>
+<div class="charts">
+<div class="chart" data-fx="rise"><div class="chart__head"><div><h3>Área construída por ano</h3><p>Em mil m², obras entregues de 2017 a 2025</p></div><div class="chart__big">51 mil<small>+16% sobre 2024</small></div></div>
+<svg class="lc" viewBox="0 0 600 250" role="img" aria-label="Gráfico de linha"><g class="grid"><line x1="34" x2="586" y1="22.0" y2="22.0"/><line x1="34" x2="586" y1="71.5" y2="71.5"/><line x1="34" x2="586" y1="121.0" y2="121.0"/><line x1="34" x2="586" y1="170.5" y2="170.5"/><line x1="34" x2="586" y1="220.0" y2="220.0"/></g><g class="axis"><text x="34.0" y="242" text-anchor="middle">17</text><text x="103.0" y="242" text-anchor="middle">18</text><text x="172.0" y="242" text-anchor="middle">19</text><text x="241.0" y="242" text-anchor="middle">20</text><text x="310.0" y="242" text-anchor="middle">21</text><text x="379.0" y="242" text-anchor="middle">22</text><text x="448.0" y="242" text-anchor="middle">23</text><text x="517.0" y="242" text-anchor="middle">24</text><text x="586.0" y="242" text-anchor="middle">25</text><text x="26" y="25.0" text-anchor="end">59</text><text x="26" y="74.5" text-anchor="end">44</text><text x="26" y="124.0" text-anchor="end">29</text><text x="26" y="173.5" text-anchor="end">15</text><text x="26" y="223.0" text-anchor="end">0</text></g><path class="area" d="M34.0 166.0 C45.5 164.3 80.0 157.0 103.0 155.9 C126.0 154.7 149.0 162.0 172.0 159.2 C195.0 156.4 218.0 145.2 241.0 139.0 C264.0 132.8 287.0 127.2 310.0 122.1 C333.0 117.0 356.0 113.7 379.0 108.6 C402.0 103.5 425.0 97.9 448.0 91.7 C471.0 85.5 494.0 78.8 517.0 71.5 C540.0 64.1 574.5 51.8 586.0 47.8 L586.0 220 L34.0 220Z"/><path class="line" pathLength="1" d="M34.0 166.0 C45.5 164.3 80.0 157.0 103.0 155.9 C126.0 154.7 149.0 162.0 172.0 159.2 C195.0 156.4 218.0 145.2 241.0 139.0 C264.0 132.8 287.0 127.2 310.0 122.1 C333.0 117.0 356.0 113.7 379.0 108.6 C402.0 103.5 425.0 97.9 448.0 91.7 C471.0 85.5 494.0 78.8 517.0 71.5 C540.0 64.1 574.5 51.8 586.0 47.8"/><circle class="pt" style="--i:0" cx="34.0" cy="166.0" r="5"><title>17: 16 mil m²</title></circle><circle class="pt" style="--i:1" cx="103.0" cy="155.9" r="5"><title>18: 19 mil m²</title></circle><circle class="pt" style="--i:2" cx="172.0" cy="159.2" r="5"><title>19: 18 mil m²</title></circle><circle class="pt" style="--i:3" cx="241.0" cy="139.0" r="5"><title>20: 24 mil m²</title></circle><circle class="pt" style="--i:4" cx="310.0" cy="122.1" r="5"><title>21: 29 mil m²</title></circle><circle class="pt" style="--i:5" cx="379.0" cy="108.6" r="5"><title>22: 33 mil m²</title></circle><circle class="pt" style="--i:6" cx="448.0" cy="91.7" r="5"><title>23: 38 mil m²</title></circle><circle class="pt" style="--i:7" cx="517.0" cy="71.5" r="5"><title>24: 44 mil m²</title></circle><circle class="pt" style="--i:8" cx="586.0" cy="47.8" r="5"><title>25: 51 mil m²</title></circle><g class="tip"><rect x="494.0" y="9.8" width="84" height="24" rx="6"/><text x="536.0" y="25.8" text-anchor="middle">51 mil m²</text></g></svg></div>
+<div class="chart" data-fx="rise" style="--d:150"><div class="chart__head"><div><h3>Orçado x realizado</h3><p>Custo final das seis últimas obras entregues</p></div></div>
+<div class="bars2"><div class="bars2__row"><span>Mirante<br><small style="font-family:var(--f-mono);color:#8fe0a6">-1,4%</small></span><div class="bars2__pair"><i style="--v:88%;--i:0"></i><i style="--v:86.8%;--i:0"></i></div></div><div class="bars2__row"><span>Alameda<br><small style="font-family:var(--f-mono);color:#ffe08a">+1,2%</small></span><div class="bars2__pair"><i style="--v:88%;--i:1"></i><i style="--v:89.1%;--i:1"></i></div></div><div class="bars2__row"><span>Pátio<br><small style="font-family:var(--f-mono);color:#8fe0a6">-0,9%</small></span><div class="bars2__pair"><i style="--v:88%;--i:2"></i><i style="--v:87.2%;--i:2"></i></div></div><div class="bars2__row"><span>Casa Lago<br><small style="font-family:var(--f-mono);color:#8fe0a6">-2,2%</small></span><div class="bars2__pair"><i style="--v:88%;--i:3"></i><i style="--v:86.1%;--i:3"></i></div></div><div class="bars2__row"><span>Clínica Sul<br><small style="font-family:var(--f-mono);color:#ffe08a">+0,4%</small></span><div class="bars2__pair"><i style="--v:88%;--i:4"></i><i style="--v:88.4%;--i:4"></i></div></div><div class="bars2__row"><span>Galpão Rio<br><small style="font-family:var(--f-mono);color:#8fe0a6">-0,7%</small></span><div class="bars2__pair"><i style="--v:88%;--i:5"></i><i style="--v:87.4%;--i:5"></i></div></div></div>
+<div class="legend"><span>Orçado</span><span>Realizado</span></div></div>
+</div>
+<div class="gauges">
+<div class="gauge" data-fx="zoom"><div class="ring" style="--off:6.5"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="ring__bg" cx="32" cy="32" r="26"/><circle class="ring__fg" cx="32" cy="32" r="26"/></svg><b>96%</b></div><div><h3>Entregas no prazo</h3><p>Obras entregues até a data do contrato nos últimos 5 anos</p></div></div>
+<div class="gauge" data-fx="zoom" style="--d:120"><div class="ring" style="--off:3.3"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="ring__bg" cx="32" cy="32" r="26"/><circle class="ring__fg" cx="32" cy="32" r="26"/></svg><b>98%</b></div><div><h3>Custo dentro de 2%</h3><p>Obras que fecharam com desvio menor que 2% do orçamento</p></div></div>
+<div class="gauge" data-fx="zoom" style="--d:240"><div class="ring" style="--off:0.0"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="ring__bg" cx="32" cy="32" r="26"/><circle class="ring__fg" cx="32" cy="32" r="26"/></svg><b>100%</b></div><div><h3>Canteiros sem afastamento</h3><p>Nenhum acidente com afastamento registrado desde 2019</p></div></div>
+</div>
+<p class="charts__note">Dados fictícios, criados para este projeto demonstrativo.</p>
+</div></section>
+
+<section class="sec bg-paper"><div class="wrap">
+<div class="sec-head"><div><p class="label mono" data-fx="left"><b>04</b>Obras</p><h2 class="h2">Obras que falam <span class="serif">por nós.</span></h2></div>
+<div class="sec-head__aside"><p data-fx="blur">Casa, edifício, prédio comercial e galpão. Escalas diferentes, com o mesmo controle de prazo, custo e acabamento.</p><a class="link-arrow" href="./obras/">Ver todas as obras <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div></div>
+<div class="works"><article class="work" data-cat="residencial entregue" data-fx="rise" style="--d:0">
+<div class="work__media floors"><img src="./assets/img/casa-wide-900.webp" srcset="./assets/img/casa-wide-900.webp 900w, ./assets/img/casa-wide-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 50vw" width="1600" height="1000" alt="Residência Mirante, imagem 3D criada pela Tirvo" loading="lazy" decoding="async"><div class="work__badges"><span class="badge badge--num">01</span><span class="badge badge--done">Entregue</span></div></div>
+<div class="work__body">
+<span class="work__type mono"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-home"/></svg>Residencial</span>
+<h3>Residência Mirante</h3>
+<span class="work__loc"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin-s"/></svg>Santa Felicidade · Curitiba</span>
+<p class="work__desc">Dois volumes sobrepostos, com balanço de 7 metros em estrutura metálica sobre a área social e fachada em ripado de madeira.</p>
+<div class="work__feat"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Balanço de 7 m</span><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Piscina com borda de pedra</span><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Automação de iluminação</span></div>
+
+<dl class="spec"><div><dt><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-area"/></svg>Área</dt><dd>412<small>m²</small></dd></div><div><dt><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-cal-s"/></svg>Prazo</dt><dd>14<small>meses</small></dd></div><div><dt><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-floors"/></svg>Pavimentos</dt><dd>2<small></small></dd></div></dl>
+</div></article><article class="work" data-cat="residencial andamento" data-fx="rise" style="--d:120">
+<div class="work__media floors"><img src="./assets/img/obra-wide-900.webp" srcset="./assets/img/obra-wide-900.webp 900w, ./assets/img/obra-wide-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 50vw" width="1600" height="1000" alt="Residencial Bosque, imagem 3D criada pela Tirvo" loading="lazy" decoding="async"><div class="work__badges"><span class="badge badge--num">02</span><span class="badge badge--live">Em andamento</span></div></div>
+<div class="work__body">
+<span class="work__type mono"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-crane"/></svg>Multifamiliar</span>
+<h3>Residencial Bosque</h3>
+<span class="work__loc"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin-s"/></svg>Ecoville · Curitiba</span>
+<p class="work__desc">Sete pavimentos em estrutura de concreto armado. A estrutura está concluída até o sexto andar e a alvenaria avança pelos pavimentos de baixo.</p>
+<div class="work__feat"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Grua de 38 m</span><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Alvenaria em bloco cerâmico</span><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Entrega prevista: semana 64</span></div>
+<div class="prog"><div class="prog__top"><span>Semana 41 de 64</span><b>64% concluído</b></div><div class="prog__bar"><i style="--v:64%"></i></div></div>
+<dl class="spec"><div><dt><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-area"/></svg>Área</dt><dd>5.100<small>m²</small></dd></div><div><dt><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-cal-s"/></svg>Prazo</dt><dd>16<small>meses</small></dd></div><div><dt><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-floors"/></svg>Pavimentos</dt><dd>7<small></small></dd></div></dl>
+</div></article><article class="work" data-cat="comercial entregue" data-fx="rise" style="--d:0">
+<div class="work__media floors"><img src="./assets/img/comercial-wide-900.webp" srcset="./assets/img/comercial-wide-900.webp 900w, ./assets/img/comercial-wide-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 50vw" width="1600" height="1000" alt="Centro Empresarial Pátio, imagem 3D criada pela Tirvo" loading="lazy" decoding="async"><div class="work__badges"><span class="badge badge--num">03</span><span class="badge badge--done">Entregue</span></div></div>
+<div class="work__body">
+<span class="work__type mono"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-building"/></svg>Comercial</span>
+<h3>Centro Empresarial Pátio</h3>
+<span class="work__loc"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin-s"/></svg>Batel · Curitiba</span>
+<p class="work__desc">Prédio de escritórios com térreo envidraçado e brises verticais de madeira que filtram o sol da tarde.</p>
+<div class="work__feat"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Brises de madeira</span><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Térreo em pele de vidro</span><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Laje técnica</span></div>
+
+<dl class="spec"><div><dt><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-area"/></svg>Área</dt><dd>2.900<small>m²</small></dd></div><div><dt><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-cal-s"/></svg>Prazo</dt><dd>15<small>meses</small></dd></div><div><dt><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-floors"/></svg>Pavimentos</dt><dd>3<small></small></dd></div></dl>
+</div></article><article class="work" data-cat="comercial andamento" data-fx="rise" style="--d:120">
+<div class="work__media floors"><img src="./assets/img/galpao-wide-900.webp" srcset="./assets/img/galpao-wide-900.webp 900w, ./assets/img/galpao-wide-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 50vw" width="1600" height="1000" alt="Centro Logístico Vale, imagem 3D criada pela Tirvo" loading="lazy" decoding="async"><div class="work__badges"><span class="badge badge--num">04</span><span class="badge badge--live">Em andamento</span></div></div>
+<div class="work__body">
+<span class="work__type mono"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-truck"/></svg>Industrial</span>
+<h3>Centro Logístico Vale</h3>
+<span class="work__loc"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin-s"/></svg>São José dos Pinhais · PR</span>
+<p class="work__desc">Galpão com dez docas e estrutura metálica em montagem na ampliação de 20 metros, com piso de alta resistência.</p>
+<div class="work__feat"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>10 docas niveladoras</span><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Piso de 6 t/m²</span><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Ampliação em aço</span></div>
+<div class="prog"><div class="prog__top"><span>Semana 19 de 40</span><b>48% concluído</b></div><div class="prog__bar"><i style="--v:48%"></i></div></div>
+<dl class="spec"><div><dt><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-area"/></svg>Área</dt><dd>4.800<small>m²</small></dd></div><div><dt><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-cal-s"/></svg>Prazo</dt><dd>10<small>meses</small></dd></div><div><dt><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-floors"/></svg>Pé-direito</dt><dd>12<small>m</small></dd></div></dl>
+</div></article></div>
+</div></section>
+
+<section class="sec bg-graphite"><div class="wrap">
+<div class="sec-head"><div><p class="label mono" data-fx="left"><b>05</b>Método</p><h2 class="h2">Cinco etapas. <span class="serif">Nenhuma surpresa</span> no caminho.</h2></div>
+<div class="sec-head__aside"><p data-fx="blur">A obra só começa quando projeto, orçamento e cronograma estão fechados. Cada etapa termina com uma entrega concreta e aprovada por você.</p><a class="link-arrow" href="./metodo/" style="color:#fff">Ver o método completo <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div></div>
+<div class="steps"><span class="steps__fill" aria-hidden="true"></span>
+<div class="step" style="--i:0"><span class="step__ico"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-ruler"/></svg></span><span class="mono">Etapa 01</span><h3>Visita e estudo</h3><p>Leitura do terreno, sondagem do solo e da legislação do lote.</p><span class="step__out"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Estudo de viabilidade</span></div>
+<div class="step" style="--i:1"><span class="step__ico"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-blueprint"/></svg></span><span class="mono">Etapa 02</span><h3>Projeto compatibilizado</h3><p>Arquitetura, estrutura e instalações revisadas juntas antes da obra.</p><span class="step__out"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Projeto executivo</span></div>
+<div class="step" style="--i:2"><span class="step__ico"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-doc"/></svg></span><span class="mono">Etapa 03</span><h3>Orçamento fechado</h3><p>Cada item quantificado. Mudança só entra com aditivo assinado.</p><span class="step__out"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Contrato com prazo</span></div>
+<div class="step" style="--i:3"><span class="step__ico"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-crane"/></svg></span><span class="mono">Etapa 04</span><h3>Execução</h3><p>Diário de obra, medição quinzenal e visita semanal do engenheiro.</p><span class="step__out"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Painel da obra</span></div>
+<div class="step" style="--i:4"><span class="step__ico"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-key"/></svg></span><span class="mono">Etapa 05</span><h3>Entrega</h3><p>Vistoria, manual do proprietário, habite-se e garantia por escrito.</p><span class="step__out"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Chaves e garantia</span></div>
+</div>
+</div></section>
+
+<section class="sec bg-sand"><div class="wrap">
+<div class="app">
+<div>
+<p class="label mono" data-fx="left"><b>06</b>Acompanhamento</p>
+<h2 class="h2">A obra inteira <span class="serif">no seu bolso.</span></h2>
+<p class="lead" data-fx="blur" style="margin-top:22px">Cada cliente recebe acesso ao painel da obra. Ali estão o cronograma, as fotos da semana, as medições e todos os documentos assinados.</p>
+<ul class="app__list" data-stagger>
+<li><span><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-camera"/></svg></span><span><b>Fotos e relatório toda sexta-feira</b><small>Enviados pelo engenheiro responsável</small></span></li>
+<li><span><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-chart"/></svg></span><span><b>Avanço real x planejado</b><small>Curva de cada etapa atualizada semanalmente</small></span></li>
+<li><span><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-doc"/></svg></span><span><b>Medições e notas fiscais</b><small>Tudo o que foi pago, com comprovante</small></span></li>
+<li><span><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-handshake"/></svg></span><span><b>Aditivos aprovados por você</b><small>Nenhuma mudança entra sem a sua assinatura</small></span></li>
+</ul>
+<div style="margin-top:30px" data-fx="rise"><a class="btn btn--dark" href="./acompanhamento/" data-magnetic>Ver como funciona<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div>
+</div>
+<div class="device" data-io>
+<div class="phone"><div class="phone__screen"><span class="phone__notch"></span>
+<div class="phone__hero"><img src="./assets/img/obra-det-360.webp" srcset="./assets/img/obra-det-900.webp 900w, ./assets/img/obra-det-1600.webp 1600w" sizes="300px" width="1600" height="1000" alt="" loading="lazy" decoding="async"><span class="badge badge--live">Ao vivo</span></div>
+<span class="mono">Painel da obra · Semana 41 de 64</span>
+<h4>Residencial Bosque</h4>
+<div class="ptabs"><span>Cronograma</span><span>Fotos</span><span>Medições</span><span>Docs</span></div>
+<div class="pbars">
+<div class="pbar"><span>Fundação</span><i style="--v:100%;--i:0;--c:#d6d7da"></i><em>100%</em></div>
+<div class="pbar"><span>Estrutura</span><i style="--v:100%;--i:1;--c:#d6d7da"></i><em>100%</em></div>
+<div class="pbar"><span>Alvenaria</span><i style="--v:78%;--i:2"></i><em>78%</em></div>
+<div class="pbar"><span>Instalações</span><i style="--v:52%;--i:3"></i><em>52%</em></div>
+<div class="pbar"><span>Acabamento</span><i style="--v:14%;--i:4"></i><em>14%</em></div>
+</div>
+<div class="notes">
+<div class="note" style="--i:0"><span><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-camera"/></svg></span><span>18 fotos da laje do 6º andar<small>Sexta, 17:40 · Eng. responsável</small></span></div>
+<div class="note" style="--i:1"><span><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-doc"/></svg></span><span>Medição quinzenal disponível<small>Quarta, 10:12 · Aguardando aprovação</small></span></div>
+<div class="note" style="--i:2"><span><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-calendar"/></svg></span><span>Visita técnica confirmada<small>Sábado, 9:00 · Canteiro</small></span></div>
+</div>
+</div></div>
+<div class="float-card float-card--a glass"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-shield"/></svg><span><b>No prazo</b>desvio de 0 dias</span></div>
+<div class="float-card float-card--b glass"><svg class="ico-d" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#d-chart"/></svg><span><b>98,6%</b>do orçamento usado</span></div>
+</div>
+</div>
+</div></section>
+
+<section class="sec bg-paper"><div class="wrap">
+<div class="sec-head sec-head--center"><p class="label mono" data-fx="left"><b>07</b>Clientes</p><h2 class="h2">Empresas e famílias que <span class="serif">já receberam as chaves.</span></h2><p class="lead" data-fx="blur">Mais de 140 obras entregues para incorporadoras, clínicas, escolas, indústrias e famílias de Curitiba e região.</p></div>
+</div>
+<div class="clients" role="list" aria-label="Clientes atendidos (fictícios)"><div class="clients__row"><div class="clients__track" data-loop><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="#1f6f78"/><circle cx="22" cy="22" r="9" fill="none" stroke="#fff" stroke-width="3"/></svg><span><b>Tessaro Saúde</b><small>Clínica · 2.100 m²</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="12" fill="#d9572b"/><path d="M12 14l10 8-10 8M22 14l10 8-10 8" fill="none" stroke="#fff" stroke-width="3.2" stroke-linejoin="round"/></svg><span><b>Ambrel Logística</b><small>Galpão · 4.800 m²</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="12" fill="#2b2d42"/><path d="M14 34V14h8v20M24 34V20h7v14" fill="none" stroke="#fff" stroke-width="3"/></svg><span><b>Corvenna Incorporações</b><small>3 edifícios</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="#8a5a2b"/><path d="M13 30c0-10 7-16 18-16 0 11-6 17-16 17" fill="none" stroke="#fff" stroke-width="3"/></svg><span><b>Lucatto Alimentos</b><small>Fábrica · 3.200 m²</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="22" fill="#3f5e96"/><path d="M11 15h9c1.5 0 2 1 2 2v13c0-1-.5-2-2-2h-9ZM33 15h-9c-1.5 0-2 1-2 2v13c0-1 .5-2 2-2h9Z" fill="#fff"/></svg><span><b>Fiorne Educação</b><small>Escola · 2.600 m²</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="10" fill="#7a3b5e"/><path d="M13 34V22a9 9 0 0 1 18 0v12" fill="none" stroke="#fff" stroke-width="3.4"/></svg><span><b>Brisotta Hotéis</b><small>Retrofit · 48 quartos</small></span></div></div></div><div class="clients__row"><div class="clients__track" data-loop><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="12" fill="#b8892b"/><path d="M12 12h9v9h-9ZM23 23h9v9h-9Z" fill="#fff"/><path d="M23 12h9v9h-9ZM12 23h9v9h-9Z" fill="#fff" opacity=".45"/></svg><span><b>Marlevo Varejo</b><small>6 lojas</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 2 40 12v20L22 42 4 32V12Z" fill="#2e7d5b"/><path d="M22 13 31 18v9l-9 5-9-5v-9Z" fill="none" stroke="#fff" stroke-width="3"/></svg><span><b>Ostrana Tecnologia</b><small>Escritório · 1.400 m²</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="#4b8fb8"/><path d="M22 11s8 8.5 8 13.5a8 8 0 0 1-16 0C14 19.5 22 11 22 11Z" fill="#fff"/></svg><span><b>Pellane Odonto</b><small>Clínica · 380 m²</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="14" fill="#6b7a2b"/><path d="M9 20c4-4 9 4 13 0s9 4 13 0M9 28c4-4 9 4 13 0s9 4 13 0" fill="none" stroke="#fff" stroke-width="3"/></svg><span><b>Quirena Agro</b><small>Armazém · 5.000 m²</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="#a33d2b"/><circle cx="22" cy="22" r="7" fill="none" stroke="#fff" stroke-width="4"/><path d="M22 8v5M22 31v5M8 22h5M31 22h5" stroke="#fff" stroke-width="4"/></svg><span><b>Sorvel Indústria</b><small>Galpão · 6.200 m²</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="12" fill="#2b7a78"/><path d="M22 11v22M11 22h22" stroke="#fff" stroke-width="5"/></svg><span><b>Druzza Farmácias</b><small>9 unidades</small></span></div></div></div><div class="clients__row"><div class="clients__track" data-loop><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="12" fill="#46494f"/><path d="M12 14l10 8-10 8M22 14l10 8-10 8" fill="none" stroke="#fff" stroke-width="3.2" stroke-linejoin="round"/></svg><span><b>Graviel Transportes</b><small>Pátio e oficina</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="#875f3c"/><circle cx="22" cy="22" r="7" fill="none" stroke="#fff" stroke-width="4"/><path d="M22 8v5M22 31v5M8 22h5M31 22h5" stroke="#fff" stroke-width="4"/></svg><span><b>Hartmo Metalurgia</b><small>Ampliação · 2.000 m²</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="22" fill="#c4693b"/><path d="M11 15h9c1.5 0 2 1 2 2v13c0-1-.5-2-2-2h-9ZM33 15h-9c-1.5 0-2 1-2 2v13c0-1 .5-2 2-2h9Z" fill="#fff"/></svg><span><b>Montessa Escola</b><small>Bloco de salas</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="#5b3a29"/><circle cx="22" cy="22" r="9" fill="none" stroke="#fff" stroke-width="3"/></svg><span><b>Novaro Cafés</b><small>Torrefação</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="10" fill="#2f4858"/><path d="M13 34V22a9 9 0 0 1 18 0v12" fill="none" stroke="#fff" stroke-width="3.4"/></svg><span><b>Orlenna Residencial</b><small>Condomínio · 24 casas</small></span></div><div class="client" role="listitem"><svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="22" fill="#d19a1f"/><path d="M24 9 14 25h8l-2 10 10-16h-8Z" fill="#fff"/></svg><span><b>Kervano Energia</b><small>Subestação civil</small></span></div></div></div></div>
+<div class="wrap"><p class="charts__note" style="text-align:center;color:var(--ink-3);margin-top:30px">Clientes fictícios, criados para este projeto demonstrativo.</p></div>
+</section>
+
+<section class="sec sec--tight bg-paper"><div class="wrap">
+<div class="cta" data-fx="zoom">
+<div class="cta__media"><img src="./assets/img/torre-det-1600.webp" srcset="./assets/img/torre-det-900.webp 900w, ./assets/img/torre-det-1600.webp 1600w" sizes="100vw" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div>
+<div><h2 data-notype>Tem um terreno ou um projeto na gaveta?</h2><p>Conte o que você quer construir. Um engenheiro analisa o seu caso, marca a visita técnica e apresenta o caminho mais seguro para tirar a obra do papel.</p></div>
+<div class="cta__actions"><a class="btn btn--primary" href="./contato/" data-magnetic><span class="btn__sheen" aria-hidden="true"></span>Pedir orçamento<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a><a class="btn btn--ghost" href="#" data-demo="Botão demonstrativo: o WhatsApp da Ortival é fictício." data-magnetic><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wa"/></svg> Falar no WhatsApp</a><span class="cta__note"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Um engenheiro responde em até 1 dia útil</span></div>
+</div></div></section>
+
+<section class="sec bg-night"><div class="wrap">
+<div class="sec-head"><div><p class="label mono" data-fx="left"><b>09</b>Onde estamos</p><h2 class="h2">Escritório no papel, <span class="serif">engenheiros no canteiro.</span></h2></div>
+<div class="sec-head__aside"><p>Atendemos Curitiba e região metropolitana. Visitas ao escritório e às obras são feitas com agendamento.</p><div class="socials"><a class="social social--ig" href="#" data-demo="Perfil fictício: a Ortival não existe, então este Instagram não leva a uma conta real." aria-label="Instagram da Ortival (@ortival.engenharia), perfil fictício"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-ig"/></svg></span><span>@ortival.engenharia</span></a><a class="social social--in" href="#" data-demo="Perfil fictício: a Ortival não existe, então este LinkedIn não leva a uma conta real." aria-label="LinkedIn da Ortival (Ortival Engenharia), perfil fictício"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-in"/></svg></span><span>Ortival Engenharia</span></a><a class="social social--fb" href="#" data-demo="Perfil fictício: a Ortival não existe, então este Facebook não leva a uma conta real." aria-label="Facebook da Ortival (/ortivalengenharia), perfil fictício"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-fb"/></svg></span><span>/ortivalengenharia</span></a></div></div></div>
+<div class="contact">
+<div data-fx="left"><div class="map" data-fx="zoom">
+<svg class="map__svg" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<rect width="800" height="520" fill="#ebe7df"/>
+<path d="M-20 420 C120 380 200 450 330 410 S560 330 820 380 V540 H-20Z" fill="#cfe0e6"/>
+<path d="M-20 430 C120 390 200 460 330 420 S560 340 820 390" fill="none" stroke="#b9d2da" stroke-width="3"/>
+<rect x="520" y="60" width="190" height="130" rx="18" fill="#d6e6c8"/>
+<circle cx="600" cy="120" r="20" fill="#c6dcb4"/>
+<g fill="#f6f4ef"><rect x="30" y="30" width="140" height="90" rx="6"/><rect x="190" y="30" width="120" height="90" rx="6"/><rect x="330" y="30" width="160" height="90" rx="6"/><rect x="30" y="140" width="100" height="110" rx="6"/><rect x="150" y="140" width="160" height="110" rx="6"/><rect x="330" y="140" width="160" height="110" rx="6"/><rect x="730" y="30" width="90" height="160" rx="6"/><rect x="520" y="210" width="120" height="110" rx="6"/><rect x="660" y="210" width="140" height="110" rx="6"/><rect x="30" y="270" width="140" height="100" rx="6"/><rect x="190" y="270" width="120" height="100" rx="6"/><rect x="330" y="270" width="160" height="100" rx="6"/><rect x="520" y="340" width="120" height="40" rx="6"/></g>
+<g fill="#e3ded3"><rect x="40" y="40" width="50" height="30" rx="3"/><rect x="100" y="40" width="60" height="30" rx="3"/><rect x="200" y="45" width="40" height="60" rx="3"/><rect x="250" y="45" width="50" height="25" rx="3"/><rect x="340" y="40" width="70" height="30" rx="3"/><rect x="420" y="40" width="60" height="60" rx="3"/><rect x="40" y="150" width="80" height="40" rx="3"/><rect x="160" y="150" width="60" height="40" rx="3"/><rect x="230" y="150" width="70" height="90" rx="3"/><rect x="340" y="150" width="140" height="30" rx="3"/><rect x="340" y="190" width="60" height="50" rx="3"/><rect x="530" y="220" width="50" height="40" rx="3"/><rect x="590" y="220" width="40" height="90" rx="3"/><rect x="670" y="220" width="120" height="40" rx="3"/><rect x="40" y="280" width="60" height="80" rx="3"/><rect x="110" y="280" width="50" height="40" rx="3"/><rect x="200" y="280" width="100" height="40" rx="3"/><rect x="340" y="280" width="70" height="80" rx="3"/></g>
+<g stroke="#fff" stroke-linecap="round" fill="none">
+<path d="M0 130 H800" stroke-width="16"/><path d="M0 260 H800" stroke-width="12"/><path d="M180 0 V520" stroke-width="12"/><path d="M500 0 V520" stroke-width="18"/><path d="M320 0 V400" stroke-width="9"/><path d="M640 200 V520" stroke-width="9"/>
+</g>
+<path d="M500 0 V520" stroke="#f3d48a" stroke-width="5"/>
+<path d="M0 130 H800" stroke="#f3d48a" stroke-width="4"/>
+<g font-family="Archivo, sans-serif" font-size="12" fill="#7c7f86" font-weight="600">
+<text x="40" y="126">Rua Prumo Alto</text><text x="520" y="256">Rua Nível Certo</text>
+<text transform="translate(496 470) rotate(-90)">Av. das Fundações</text><text x="560" y="128" fill="#6a8a58">Praça do Esquadro</text>
+</g>
+<path d="M432 132 v-10 m0 0 h40" stroke="#c25a2c" stroke-width="0" />
+</svg>
+<span class="map__pulse" aria-hidden="true"></span>
+<span class="map__pin" aria-hidden="true"><svg viewBox="0 0 46 58"><path d="M23 1C11 1 1 10.6 1 22.6 1 38.6 23 57 23 57s22-18.4 22-34.4C45 10.6 35 1 23 1Z" fill="#f2b32a"/><path d="M15 15h16v5h-3v-2H18v12h4v3h-7Z" fill="#fff"/><rect x="25" y="25" width="6" height="6" fill="#0f1d29"/></svg></span>
+<div class="map__card"><b>Ortival Engenharia</b>Rua Prumo Alto, 1450 · Mercês · Curitiba/PR<br><small style="color:#8a8d94">Endereço fictício, mapa ilustrativo</small><br><a class="btn btn--dark" href="#" data-demo="Mapa ilustrativo: o endereço da Ortival é fictício."><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin-s"/></svg> Como chegar</a></div>
+<span class="map__tag">Mapa ilustrativo</span>
+<div class="map__ctrl" aria-hidden="true"><span>+</span><span>−</span></div>
+</div></div>
+<div data-fx="right" style="--d:150">
+<div class="channels" style="margin-top:0">
+<a class="channel channel--wa" href="#" data-demo="Botão demonstrativo: o WhatsApp da Ortival é fictício."><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wa"/></svg></span><span><b>WhatsApp</b><small>(41) 90000-0000 · resposta no mesmo dia</small></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+<a class="channel" href="#" data-demo="Número fictício: a Ortival não existe."><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg></span><span><b>Telefone</b><small>(41) 0000-0000 · segunda a sexta, 8h às 18h</small></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+<a class="channel" href="./contato/"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-cal-s"/></svg></span><span><b>Visita técnica</b><small>Agende uma visita ao terreno ou ao imóvel</small></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+<a class="channel" href="#" data-demo="Mapa ilustrativo: o endereço da Ortival é fictício."><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin-s"/></svg></span><span><b>Escritório</b><small>Rua Prumo Alto, 1450 · Mercês · Curitiba/PR</small></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+</div></div></div></div></section>
+
+</main>
+<footer class="foot">
+<div class="wrap">
+  <div class="foot__top">
+    <p class="foot__claim">Toda obra começa no papel. <span class="serif">A nossa termina no prazo.</span></p>
+    <div class="foot__cta"><a class="btn btn--primary" href="./contato/" data-magnetic><span class="btn__sheen" aria-hidden="true"></span>Pedir orçamento<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a><a class="link-arrow" style="color:#e3e4e7" href="./obras/">Ver obras entregues <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div>
   </div>
-
-  <header class="head" data-head>
-    <div class="wrap">
-      <a class="logo" href="#topo" aria-label="Ortival Engenharia, voltar ao topo">
-        <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M0 0H48V30H39V9H9V39H30V48H0Z" fill="currentColor"/><path d="M39 39H48V48H39Z" fill="#b5532c"/></svg>
-        <span class="logo__name"><b>ORTIVAL</b><span>ENGENHARIA</span></span>
-      </a>
-      <nav class="nav" id="menu" aria-label="Navegação principal" data-nav>
-        <a href="#servicos">Serviços</a>
-        <a href="#metodo">Método</a>
-        <a href="#obras">Obras</a>
-        <a href="#acompanhamento">Acompanhamento</a>
-        <a href="#faq">Dúvidas</a>
-        <a class="btn btn--sm" href="#contato">Pedir orçamento</a>
-      </nav>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu" data-menu><span></span><span></span></button>
-    </div>
-  </header>
-
-  <main id="conteudo">
-    <section class="hero" id="topo">
-      <div class="wrap hero__grid">
-        <div>
-          <p class="kicker mono" data-reveal>Engenharia e construção · Curitiba e região</p>
-          <h1 data-reveal>Projeto fechado, custo previsto e <em>prazo no contrato.</em></h1>
-          <p class="hero__lead" data-reveal>A Ortival executa obras residenciais e comerciais de médio e alto padrão. Você acompanha cada etapa pelo celular, com fotos, medições e cronograma atualizados toda semana.</p>
-          <div class="hero__cta" data-reveal>
-            <a class="btn" href="#contato">Pedir orçamento <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
-            <a class="btn btn--ghost" href="#obras">Ver obras</a>
-          </div>
-        </div>
-        <div class="hero__art">
-          <svg class="iso draw" viewBox="-281 -97 656 482" aria-hidden="true" focusable="false"><path class="i-t slab" pathLength="1" d="M0.0 0.0L358.5 207.0L93.5 360.0L-265.0 153.0Z"/><path class="i-r slab" pathLength="1" d="M358.5 216.0L93.5 369.0L93.5 360.0L358.5 207.0Z"/><path class="i-l slab" pathLength="1" d="M-265.0 162.0L93.5 369.0L93.5 360.0L-265.0 153.0Z"/><path class="i-t " pathLength="1" d="M-15.6 -36.0L155.9 63.0L-15.6 162.0L-187.1 63.0Z"/><path class="i-r " pathLength="1" d="M155.9 144.0L-15.6 243.0L-15.6 162.0L155.9 63.0Z"/><path class="i-l " pathLength="1" d="M-187.1 144.0L-15.6 243.0L-15.6 162.0L-187.1 63.0Z"/><path class="i-w wr" pathLength="1" d="M132.5 144.0L7.8 216.0L7.8 162.0L132.5 90.0Z"/><path class="i-w wl" pathLength="1" d="M-163.7 157.5L-116.9 184.5L-116.9 117.0L-163.7 90.0Z"/><path class="i-w wl" pathLength="1" d="M-93.5 180.0L-39.0 211.5L-39.0 162.0L-93.5 130.5Z"/><path class="i-t col" pathLength="1" d="M124.7 81.0L171.5 108.0L109.1 144.0L62.4 117.0Z"/><path class="i-r col" pathLength="1" d="M171.5 189.0L109.1 225.0L109.1 144.0L171.5 108.0Z"/><path class="i-l col" pathLength="1" d="M62.4 198.0L109.1 225.0L109.1 144.0L62.4 117.0Z"/><path class="i-t " pathLength="1" d="M93.5 -81.0L311.8 45.0L187.1 117.0L-31.2 -9.0Z"/><path class="i-r " pathLength="1" d="M311.8 117.0L187.1 189.0L187.1 117.0L311.8 45.0Z"/><path class="i-l " pathLength="1" d="M-31.2 63.0L187.1 189.0L187.1 117.0L-31.2 -9.0Z"/><path class="i-w wr" pathLength="1" d="M296.2 112.5L202.6 166.5L202.6 121.5L296.2 67.5Z"/><path class="i-w wl" pathLength="1" d="M-15.6 55.8L171.5 163.8L171.5 124.2L-15.6 16.2Z"/><path class="i-t pool" pathLength="1" d="M77.9 219.6L155.9 264.6L77.9 309.6L0.0 264.6Z"/><path class="i-r pool" pathLength="1" d="M155.9 270.0L77.9 315.0L77.9 309.6L155.9 264.6Z"/><path class="i-l pool" pathLength="1" d="M0.0 270.0L77.9 315.0L77.9 309.6L0.0 264.6Z"/></svg>
-          <span class="cota cota--a">RES. MIRANTE · 412 m²</span>
-          <span class="cota cota--c">BALANÇO 6,40 m</span>
-          <span class="cota cota--b">ENTREGA · SEMANA 58</span>
-        </div>
-      </div>
-      <div class="wrap">
-        <div class="facts" data-reveal>
-          <div class="fact"><b>18<small>anos</small></b><span>executando obras no Paraná</span></div>
-          <div class="fact"><b>140</b><span>projetos entregues com habite-se</span></div>
-          <div class="fact"><b>96<small>%</small></b><span>das obras entregues no prazo do contrato</span></div>
-          <div class="fact"><b>5<small>anos</small></b><span>de garantia estrutural, como prevê a lei</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec" id="servicos">
-      <div class="wrap">
-        <div class="sec__head">
-          <div>
-            <p class="label mono" data-reveal><b>01</b> Serviços</p>
-            <h2 data-reveal>Do terreno vazio à entrega das chaves.</h2>
-          </div>
-          <p data-reveal>Uma equipe só responde por projeto, aprovação, compra de material e execução. Você fala com um engenheiro responsável do início ao fim.</p>
-        </div>
-        <div class="svc">
-          <article class="svc__item" data-reveal>
-            <svg class="svc__icon" viewBox="0 0 44 44" aria-hidden="true"><path d="M6 20 22 7l16 13"/><path d="M10 17v20h24V17"/><rect class="ac" x="18" y="25" width="8" height="12"/></svg>
-            <span class="svc__num mono">01</span>
-            <h3>Residencial</h3>
-            <p>Casas de médio e alto padrão, com acabamento acompanhado peça por peça.</p>
-          </article>
-          <article class="svc__item" data-reveal>
-            <svg class="svc__icon" viewBox="0 0 44 44" aria-hidden="true"><rect x="8" y="6" width="20" height="32"/><path d="M28 16h8v22h-8"/><path class="ac" d="M13 12h4M19 12h4M13 18h4M19 18h4M13 24h4M19 24h4"/><path d="M4 38h36"/></svg>
-            <span class="svc__num mono">02</span>
-            <h3>Comercial</h3>
-            <p>Lojas, escritórios e clínicas, com cronograma pensado para não parar a operação ao lado.</p>
-          </article>
-          <article class="svc__item" data-reveal>
-            <svg class="svc__icon" viewBox="0 0 44 44" aria-hidden="true"><path d="M8 38V14l14-8 14 8v24"/><path d="M8 26h28"/><path class="ac" d="M15 32l4-4 3 3 7-7"/></svg>
-            <span class="svc__num mono">03</span>
-            <h3>Reforma e retrofit</h3>
-            <p>Estrutura, instalações e fachada de imóveis existentes atualizadas com laudo antes e depois.</p>
-          </article>
-          <article class="svc__item" data-reveal>
-            <svg class="svc__icon" viewBox="0 0 44 44" aria-hidden="true"><rect x="8" y="8" width="28" height="28"/><path d="M8 16h28M16 8v28"/><path class="ac" d="M21 24l3 3 6-7"/></svg>
-            <span class="svc__num mono">04</span>
-            <h3>Gerenciamento</h3>
-            <p>Para quem já tem construtora: fiscalização, medições e controle de custo por um terceiro técnico.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec method" id="metodo">
-      <div class="wrap">
-        <div class="sec__head">
-          <div>
-            <p class="label mono" data-reveal><b>02</b> Método</p>
-            <h2 data-reveal>Cinco etapas, nenhuma surpresa no meio do caminho.</h2>
-          </div>
-          <p data-reveal>A maior parte dos atrasos nasce antes da obra, em projeto incompleto e orçamento vago. Por isso a Ortival só começa a construir depois que tudo está resolvido no papel.</p>
-        </div>
-        <ol class="steps">
-          <li data-reveal><span class="mono">Etapa 01</span><h3>Visita e estudo</h3><p>Análise do terreno, sondagem do solo e leitura da legislação do lote.</p></li>
-          <li data-reveal><span class="mono">Etapa 02</span><h3>Projeto compatibilizado</h3><p>Arquitetura, estrutura, elétrica e hidráulica revisadas juntas, antes de virar obra.</p></li>
-          <li data-reveal><span class="mono">Etapa 03</span><h3>Orçamento fechado</h3><p>Cada item quantificado. O que mudar depois passa por aditivo assinado.</p></li>
-          <li data-reveal><span class="mono">Etapa 04</span><h3>Execução</h3><p>Diário de obra, medição quinzenal e visita semanal com o engenheiro.</p></li>
-          <li data-reveal><span class="mono">Etapa 05</span><h3>Entrega</h3><p>Vistoria, manual do proprietário, habite-se e garantia por escrito.</p></li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="sec" id="obras">
-      <div class="wrap">
-        <div class="sec__head">
-          <div>
-            <p class="label mono" data-reveal><b>03</b> Obras</p>
-            <h2 data-reveal>Três obras, três escalas.</h2>
-          </div>
-          <p data-reveal>Uma casa, um edifício e um galpão. Tipos de obra diferentes, com o mesmo cuidado com prazo e acabamento.</p>
-        </div>
-        <div class="works">
-          <article class="work" data-reveal>
-            <div class="work__art"><svg class="iso" viewBox="-182 -72 406 312" aria-hidden="true" focusable="false"><path class="i-t slab" pathLength="1" d="M0.0 0.0L207.8 120.0L41.6 216.0L-166.3 96.0Z"/><path class="i-r slab" pathLength="1" d="M207.8 128.0L41.6 224.0L41.6 216.0L207.8 120.0Z"/><path class="i-l slab" pathLength="1" d="M-166.3 104.0L41.6 224.0L41.6 216.0L-166.3 96.0Z"/><path class="i-t " pathLength="1" d="M-6.9 -28.0L103.9 36.0L-6.9 100.0L-117.8 36.0Z"/><path class="i-r " pathLength="1" d="M103.9 92.0L-6.9 156.0L-6.9 100.0L103.9 36.0Z"/><path class="i-l " pathLength="1" d="M-117.8 92.0L-6.9 156.0L-6.9 100.0L-117.8 36.0Z"/><path class="i-w wr" pathLength="1" d="M83.1 96.0L13.9 136.0L13.9 96.0L83.1 56.0Z"/><path class="i-w wl" pathLength="1" d="M-103.9 88.0L-20.8 136.0L-20.8 100.0L-103.9 52.0Z"/><path class="i-t " pathLength="1" d="M55.4 -56.0L166.3 8.0L83.1 56.0L-27.7 -8.0Z"/><path class="i-r " pathLength="1" d="M166.3 56.0L83.1 104.0L83.1 56.0L166.3 8.0Z"/><path class="i-l " pathLength="1" d="M-27.7 40.0L83.1 104.0L83.1 56.0L-27.7 -8.0Z"/><path class="i-w wr" pathLength="1" d="M152.4 56.0L97.0 88.0L97.0 56.0L152.4 24.0Z"/><path class="i-w wl" pathLength="1" d="M-13.9 38.4L69.3 86.4L69.3 56.0L-13.9 8.0Z"/></svg></div>
-            <div class="work__body">
-              <span class="work__type mono">Residencial</span>
-              <h3>Residência Mirante</h3>
-              <p>Dois volumes, com balanço em estrutura metálica sobre a área social.</p>
-              <dl><div><dt>Área</dt><dd>412 m²</dd></div><div><dt>Prazo</dt><dd>14 meses</dd></div><div><dt>Status</dt><dd>Entregue</dd></div></dl>
-            </div>
-          </article>
-          <article class="work" data-reveal>
-            <div class="work__art"><svg class="iso" viewBox="-156 -195 311 378" aria-hidden="true" focusable="false"><path class="i-t slab" pathLength="1" d="M0.0 0.0L139.6 80.6L0.0 161.2L-139.6 80.6Z"/><path class="i-r slab" pathLength="1" d="M139.6 86.8L0.0 167.4L0.0 161.2L139.6 80.6Z"/><path class="i-l slab" pathLength="1" d="M-139.6 86.8L0.0 167.4L0.0 161.2L-139.6 80.6Z"/><path class="i-t " pathLength="1" d="M0.0 0.0L96.6 55.8L0.0 111.6L-96.6 55.8Z"/><path class="i-r " pathLength="1" d="M96.6 80.6L0.0 136.4L0.0 111.6L96.6 55.8Z"/><path class="i-l " pathLength="1" d="M-96.6 80.6L0.0 136.4L0.0 111.6L-96.6 55.8Z"/><path class="i-w wr" pathLength="1" d="M91.3 80.0L5.4 129.6L5.4 112.2L91.3 62.6Z"/><path class="i-w wl" pathLength="1" d="M-91.3 80.0L-5.4 129.6L-5.4 112.2L-91.3 62.6Z"/><path class="i-t " pathLength="1" d="M0.0 -18.6L85.9 31.0L0.0 80.6L-85.9 31.0Z"/><path class="i-r " pathLength="1" d="M85.9 55.8L0.0 105.4L0.0 80.6L85.9 31.0Z"/><path class="i-l " pathLength="1" d="M-85.9 55.8L0.0 105.4L0.0 80.6L-85.9 31.0Z"/><path class="i-w wr" pathLength="1" d="M80.5 52.7L45.6 72.9L45.6 58.0L80.5 37.8Z"/><path class="i-w wr" pathLength="1" d="M40.3 76.0L5.4 96.1L5.4 81.2L40.3 61.1Z"/><path class="i-w wl" pathLength="1" d="M-80.5 52.7L-45.6 72.9L-45.6 58.0L-80.5 37.8Z"/><path class="i-w wl" pathLength="1" d="M-40.3 76.0L-5.4 96.1L-5.4 81.2L-40.3 61.1Z"/><path class="i-t " pathLength="1" d="M0.0 -43.4L85.9 6.2L0.0 55.8L-85.9 6.2Z"/><path class="i-r " pathLength="1" d="M85.9 31.0L0.0 80.6L0.0 55.8L85.9 6.2Z"/><path class="i-l " pathLength="1" d="M-85.9 31.0L0.0 80.6L0.0 55.8L-85.9 6.2Z"/><path class="i-w wr" pathLength="1" d="M80.5 27.9L45.6 48.1L45.6 33.2L80.5 13.0Z"/><path class="i-w wr" pathLength="1" d="M40.3 51.1L5.4 71.3L5.4 56.4L40.3 36.3Z"/><path class="i-w wl" pathLength="1" d="M-80.5 27.9L-45.6 48.1L-45.6 33.2L-80.5 13.0Z"/><path class="i-w wl" pathLength="1" d="M-40.3 51.1L-5.4 71.3L-5.4 56.4L-40.3 36.3Z"/><path class="i-t " pathLength="1" d="M0.0 -68.2L85.9 -18.6L0.0 31.0L-85.9 -18.6Z"/><path class="i-r " pathLength="1" d="M85.9 6.2L0.0 55.8L0.0 31.0L85.9 -18.6Z"/><path class="i-l " pathLength="1" d="M-85.9 6.2L0.0 55.8L0.0 31.0L-85.9 -18.6Z"/><path class="i-w wr" pathLength="1" d="M80.5 3.1L45.6 23.2L45.6 8.4L80.5 -11.8Z"/><path class="i-w wr" pathLength="1" d="M40.3 26.4L5.4 46.5L5.4 31.6L40.3 11.5Z"/><path class="i-w wl" pathLength="1" d="M-80.5 3.1L-45.6 23.2L-45.6 8.4L-80.5 -11.8Z"/><path class="i-w wl" pathLength="1" d="M-40.3 26.4L-5.4 46.5L-5.4 31.6L-40.3 11.5Z"/><path class="i-t " pathLength="1" d="M0.0 -93.0L85.9 -43.4L0.0 6.2L-85.9 -43.4Z"/><path class="i-r " pathLength="1" d="M85.9 -18.6L0.0 31.0L0.0 6.2L85.9 -43.4Z"/><path class="i-l " pathLength="1" d="M-85.9 -18.6L0.0 31.0L0.0 6.2L-85.9 -43.4Z"/><path class="i-w wr" pathLength="1" d="M80.5 -21.7L45.6 -1.6L45.6 -16.4L80.5 -36.6Z"/><path class="i-w wr" pathLength="1" d="M40.3 1.6L5.4 21.7L5.4 6.8L40.3 -13.3Z"/><path class="i-w wl" pathLength="1" d="M-80.5 -21.7L-45.6 -1.6L-45.6 -16.4L-80.5 -36.6Z"/><path class="i-w wl" pathLength="1" d="M-40.3 1.6L-5.4 21.7L-5.4 6.8L-40.3 -13.3Z"/><path class="i-t " pathLength="1" d="M0.0 -117.8L85.9 -68.2L0.0 -18.6L-85.9 -68.2Z"/><path class="i-r " pathLength="1" d="M85.9 -43.4L0.0 6.2L0.0 -18.6L85.9 -68.2Z"/><path class="i-l " pathLength="1" d="M-85.9 -43.4L0.0 6.2L0.0 -18.6L-85.9 -68.2Z"/><path class="i-w wr" pathLength="1" d="M80.5 -46.5L45.6 -26.4L45.6 -41.2L80.5 -61.4Z"/><path class="i-w wr" pathLength="1" d="M40.3 -23.2L5.4 -3.1L5.4 -18.0L40.3 -38.1Z"/><path class="i-w wl" pathLength="1" d="M-80.5 -46.5L-45.6 -26.4L-45.6 -41.2L-80.5 -61.4Z"/><path class="i-w wl" pathLength="1" d="M-40.3 -23.2L-5.4 -3.1L-5.4 -18.0L-40.3 -38.1Z"/><path class="i-t " pathLength="1" d="M0.0 -142.6L85.9 -93.0L0.0 -43.4L-85.9 -93.0Z"/><path class="i-r " pathLength="1" d="M85.9 -68.2L0.0 -18.6L0.0 -43.4L85.9 -93.0Z"/><path class="i-l " pathLength="1" d="M-85.9 -68.2L0.0 -18.6L0.0 -43.4L-85.9 -93.0Z"/><path class="i-w wr" pathLength="1" d="M80.5 -71.3L45.6 -51.1L45.6 -66.0L80.5 -86.2Z"/><path class="i-w wr" pathLength="1" d="M40.3 -48.1L5.4 -27.9L5.4 -42.8L40.3 -62.9Z"/><path class="i-w wl" pathLength="1" d="M-80.5 -71.3L-45.6 -51.1L-45.6 -66.0L-80.5 -86.2Z"/><path class="i-w wl" pathLength="1" d="M-40.3 -48.1L-5.4 -27.9L-5.4 -42.8L-40.3 -62.9Z"/><path class="i-t " pathLength="1" d="M0.0 -167.4L85.9 -117.8L0.0 -68.2L-85.9 -117.8Z"/><path class="i-r " pathLength="1" d="M85.9 -93.0L0.0 -43.4L0.0 -68.2L85.9 -117.8Z"/><path class="i-l " pathLength="1" d="M-85.9 -93.0L0.0 -43.4L0.0 -68.2L-85.9 -117.8Z"/><path class="i-w wr" pathLength="1" d="M80.5 -96.1L45.6 -76.0L45.6 -90.8L80.5 -111.0Z"/><path class="i-w wr" pathLength="1" d="M40.3 -72.9L5.4 -52.7L5.4 -67.6L40.3 -87.7Z"/><path class="i-w wl" pathLength="1" d="M-80.5 -96.1L-45.6 -76.0L-45.6 -90.8L-80.5 -111.0Z"/><path class="i-w wl" pathLength="1" d="M-40.3 -72.9L-5.4 -52.7L-5.4 -67.6L-40.3 -87.7Z"/><path class="i-t " pathLength="1" d="M0.0 -178.6L96.6 -122.8L0.0 -67.0L-96.6 -122.8Z"/><path class="i-r " pathLength="1" d="M96.6 -117.8L0.0 -62.0L0.0 -67.0L96.6 -122.8Z"/><path class="i-l " pathLength="1" d="M-96.6 -117.8L0.0 -62.0L0.0 -67.0L-96.6 -122.8Z"/></svg></div>
-            <div class="work__body">
-              <span class="work__type mono">Multifamiliar</span>
-              <h3>Edifício Alameda</h3>
-              <p>Oito pavimentos com térreo comercial e fachada ventilada em porcelanato.</p>
-              <dl><div><dt>Área</dt><dd>6.240 m²</dd></div><div><dt>Prazo</dt><dd>26 meses</dd></div><div><dt>Status</dt><dd>Entregue</dd></div></dl>
-            </div>
-          </article>
-          <article class="work" data-reveal>
-            <div class="work__art"><svg class="iso" viewBox="-182 -51 442 310" aria-hidden="true" focusable="false"><path class="i-t slab" pathLength="1" d="M0.0 0.0L243.9 140.8L77.6 236.8L-166.3 96.0Z"/><path class="i-r slab" pathLength="1" d="M243.9 147.2L77.6 243.2L77.6 236.8L243.9 140.8Z"/><path class="i-l slab" pathLength="1" d="M-166.3 102.4L77.6 243.2L77.6 236.8L-166.3 96.0Z"/><path class="i-t " pathLength="1" d="M-5.5 -35.2L182.9 73.6L72.1 137.6L-116.4 28.8Z"/><path class="i-r " pathLength="1" d="M182.9 131.2L72.1 195.2L72.1 137.6L182.9 73.6Z"/><path class="i-l " pathLength="1" d="M-116.4 86.4L72.1 195.2L72.1 137.6L-116.4 28.8Z"/><path class="i-w wr" pathLength="1" d="M166.3 140.8L133.0 160.0L133.0 118.4L166.3 99.2Z"/><path class="i-w wr" pathLength="1" d="M121.9 166.4L88.7 185.6L88.7 144.0L121.9 124.8Z"/><path class="i-w wl" pathLength="1" d="M-105.3 48.0L61.0 144.0L61.0 135.0L-105.3 39.0Z"/><path class="i-t " pathLength="1" d="M171.8 112.0L199.5 128.0L144.1 160.0L116.4 144.0Z"/><path class="i-r " pathLength="1" d="M199.5 153.6L144.1 185.6L144.1 160.0L199.5 128.0Z"/><path class="i-l " pathLength="1" d="M116.4 169.6L144.1 185.6L144.1 160.0L116.4 144.0Z"/><path class="i-w wr" pathLength="1" d="M188.4 153.6L155.2 172.8L155.2 160.0L188.4 140.8Z"/></svg></div>
-            <div class="work__body">
-              <span class="work__type mono">Industrial</span>
-              <h3>Centro Logístico Vale</h3>
-              <p>Galpão em estrutura pré-moldada com piso de alta resistência e docas.</p>
-              <dl><div><dt>Área</dt><dd>3.800 m²</dd></div><div><dt>Prazo</dt><dd>9 meses</dd></div><div><dt>Status</dt><dd>Em obra</dd></div></dl>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec track" id="acompanhamento">
-      <div class="wrap">
-        <div>
-          <p class="label mono" data-reveal><b>04</b> Acompanhamento</p>
-          <h2 data-reveal>A obra inteira no seu celular.</h2>
-          <p class="track__lead" data-reveal>Cada cliente recebe acesso ao painel da obra. Ali ficam o cronograma, as fotos da semana, as medições e os documentos assinados.</p>
-          <ul class="checks" data-reveal>
-            <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9"/></svg><span>Fotos e relatório do engenheiro toda sexta-feira</span></li>
-            <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9"/></svg><span>Avanço de cada etapa comparado ao cronograma</span></li>
-            <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9"/></svg><span>Notas fiscais e medições disponíveis para consulta</span></li>
-            <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9"/></svg><span>Aditivos aprovados por você, com registro de data</span></li>
-          </ul>
-        </div>
-        <div class="panel" data-reveal data-bars role="img" aria-label="Exemplo do painel da obra: Residência Mirante na semana 32, dentro do prazo, com fundação e estrutura concluídas, alvenaria em 92%, instalações em 64% e acabamento em 18%.">
-          <div class="panel__top">
-            <div><span class="mono">Painel da obra</span><b>Residência Mirante</b><span class="mono">Semana 32 de 58</span></div>
-            <span class="pill">No prazo</span>
-          </div>
-          <div class="bars">
-            <div class="bar"><span>Fundação</span><span class="bar__track"><span class="bar__fill bar__fill--done" style="--v:100%"></span></span><span>100%</span></div>
-            <div class="bar"><span>Estrutura</span><span class="bar__track"><span class="bar__fill bar__fill--done" style="--v:100%"></span></span><span>100%</span></div>
-            <div class="bar"><span>Alvenaria</span><span class="bar__track"><span class="bar__fill" style="--v:92%"></span></span><span>92%</span></div>
-            <div class="bar"><span>Instalações</span><span class="bar__track"><span class="bar__fill" style="--v:64%"></span></span><span>64%</span></div>
-            <div class="bar"><span>Acabamento</span><span class="bar__track"><span class="bar__fill" style="--v:18%"></span></span><span>18%</span></div>
-          </div>
-          <ul class="log">
-            <li><time>Sex</time><span>Concretagem da laje do balanço concluída. 14 fotos anexadas.</span></li>
-            <li><time>Qua</time><span>Medição quinzenal aprovada pelo cliente.</span></li>
-            <li><time>Seg</time><span>Entrega das esquadrias confirmada para a semana 35.</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec faq" id="faq">
-      <div class="wrap">
-        <div>
-          <p class="label mono" data-reveal><b>05</b> Dúvidas</p>
-          <h2 data-reveal>Perguntas que todo cliente faz antes de começar.</h2>
-        </div>
-        <div data-reveal>
-          <details>
-            <summary>O orçamento é fechado mesmo?</summary>
-            <p>Sim. O orçamento sai com cada item quantificado a partir do projeto completo. Se você quiser mudar algo durante a obra, a diferença é apresentada antes e só entra com um aditivo assinado.</p>
-          </details>
-          <details>
-            <summary>Quem cuida do alvará e do habite-se?</summary>
-            <p>A Ortival. A aprovação do projeto na prefeitura, o alvará de construção e o habite-se fazem parte do contrato.</p>
-          </details>
-          <details>
-            <summary>Posso visitar a obra quando quiser?</summary>
-            <p>Pode, com agendamento. Além disso, toda semana há uma visita marcada com o engenheiro responsável para mostrar o que avançou.</p>
-          </details>
-          <details>
-            <summary>Vocês fazem só a obra, se eu já tiver o projeto?</summary>
-            <p>Fazemos. Antes de orçar, a equipe revisa o projeto e aponta o que falta compatibilizar, para evitar ajuste improvisado no canteiro.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec contact" id="contato">
-      <div class="wrap">
-        <div>
-          <p class="label mono" data-reveal><b>06</b> Contato</p>
-          <h2 data-reveal>Conte o que você quer construir. <em>A gente mede o resto.</em></h2>
-          <p class="contact__lead" data-reveal>Um engenheiro responde em até um dia útil para marcar a visita técnica.</p>
-          <div class="contact__info mono" data-reveal>
-            <span>Atendimento · Curitiba e região metropolitana</span>
-            <span>Segunda a sexta · 8h às 18h</span>
-          </div>
-        </div>
-        <form class="form" data-reveal aria-describedby="aviso-form">
-          <p class="notice" id="aviso-form"><svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="7.5"/><path d="M9 5v5M9 12.5v.5"/></svg><span>Formulário desativado. Este é um site demonstrativo e nenhuma mensagem é enviada. Para falar com quem fez este site, <a href="https://tirvo.tech/#contato">fale com a Tirvo</a>.</span></p>
-          <div class="row">
-            <label>Nome<input type="text" name="nome" autocomplete="off" disabled></label>
-            <label>Telefone<input type="tel" name="telefone" autocomplete="off" disabled></label>
-          </div>
-          <label>Tipo de obra
-            <select name="tipo" disabled>
-              <option>Residencial</option>
-              <option>Comercial</option>
-              <option>Reforma e retrofit</option>
-              <option>Gerenciamento</option>
-            </select>
-          </label>
-          <label>Conte sobre o projeto<textarea name="mensagem" disabled></textarea></label>
-          <button class="btn" type="submit" disabled>Enviar pedido</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="foot">
-    <div class="wrap">
-      <a class="logo" href="#topo" aria-label="Ortival Engenharia, voltar ao topo">
-        <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M0 0H48V30H39V9H9V39H30V48H0Z" fill="currentColor"/><path d="M39 39H48V48H39Z" fill="#b5532c"/></svg>
-        <span class="logo__name"><b>ORTIVAL</b><span>ENGENHARIA</span></span>
-      </a>
-      <p class="foot__by">Identidade visual e site por <a href="https://tirvo.tech/">Tirvo</a></p>
-      <p class="foot__note">A Ortival Engenharia não existe. Nomes, números, obras e o painel mostrado nesta página são fictícios e servem apenas para demonstrar o trabalho da Tirvo em marca, textos, ilustração e desenvolvimento web. <a href="https://tirvo.tech/">Conheça a Tirvo</a>.</p>
-    </div>
-  </footer>
-
-  <script>
-    (function () {
-      var head = document.querySelector('[data-head]');
-      var onScroll = function () { head.classList.toggle('is-scrolled', window.scrollY > 8); };
-      onScroll();
-      window.addEventListener('scroll', onScroll, { passive: true });
-
-      var btn = document.querySelector('[data-menu]');
-      var nav = document.querySelector('[data-nav]');
-      var setMenu = function (open) {
-        btn.setAttribute('aria-expanded', String(open));
-        btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-        nav.classList.toggle('is-open', open);
-      };
-      btn.addEventListener('click', function () { setMenu(btn.getAttribute('aria-expanded') !== 'true'); });
-      nav.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
-
-      var items = document.querySelectorAll('[data-reveal], .draw, [data-bars]');
-      if (!('IntersectionObserver' in window)) { items.forEach(function (el) { el.classList.add('is-on'); }); return; }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) { en.target.classList.add('is-on'); io.unobserve(en.target); }
-        });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
-      items.forEach(function (el) { io.observe(el); });
-    })();
-  </script>
+  <div class="foot__cols">
+    <div class="foot__about"><a class="logo" href="./" data-logo aria-label="Ortival Engenharia, página inicial">
+  <svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path class="lb lb--l" d="M0 9h9v30H0Z"/><path class="lb lb--t" d="M0 0h48v9H0Z"/><path class="lb lb--r" d="M39 9h9v21h-9Z"/><path class="lb lb--b" d="M0 39h30v9H0Z"/><path class="lk" d="M39 39h9v9h-9Z"/><path class="ll" d="M-4 43.5h56"/></svg>
+  <span class="logo__name"><b>ORTIVAL</b><small>ENGENHARIA</small></span>
+</a><p>Engenharia e construção em Curitiba e região. Obras residenciais, comerciais e industriais com orçamento fechado, engenheiro responsável e acompanhamento online.</p><div class="socials"><a class="social social--ig social--round" href="#" data-demo="Perfil fictício: a Ortival não existe, então este Instagram não leva a uma conta real." aria-label="Instagram da Ortival (@ortival.engenharia), perfil fictício"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-ig"/></svg></span></a><a class="social social--in social--round" href="#" data-demo="Perfil fictício: a Ortival não existe, então este LinkedIn não leva a uma conta real." aria-label="LinkedIn da Ortival (Ortival Engenharia), perfil fictício"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-in"/></svg></span></a><a class="social social--fb social--round" href="#" data-demo="Perfil fictício: a Ortival não existe, então este Facebook não leva a uma conta real." aria-label="Facebook da Ortival (/ortivalengenharia), perfil fictício"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-fb"/></svg></span></a></div></div>
+    <div><h4>Navegação</h4><ul><li><a href="./">Início</a></li><li><a href="./sobre/">Sobre</a></li><li><a href="./servicos/">Serviços</a></li><li><a href="./obras/">Obras</a></li><li><a href="./metodo/">Método</a></li><li><a href="./acompanhamento/">Acompanhamento</a></li><li><a href="./duvidas/">Dúvidas</a></li><li><a href="./contato/">Contato</a></li></ul></div>
+    <div><h4>Serviços</h4><ul><li><a href="./servicos/residencial/">Residencial</a></li><li><a href="./servicos/comercial-e-industrial/">Comercial e industrial</a></li><li><a href="./servicos/reforma-e-retrofit/">Reforma e retrofit</a></li><li><a href="./servicos/gerenciamento-de-obra/">Gerenciamento de obra</a></li></ul></div>
+    <div class="foot__info"><h4>Contato</h4><ul>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin-s"/></svg><span>Rua Prumo Alto, 1450 · Mercês · Curitiba/PR<br><small style="color:#8a8d94">Endereço fictício</small></span></li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span>(41) 0000-0000</span></li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wa"/></svg><span>WhatsApp (41) 90000-0000</span></li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock-s"/></svg><span>Segunda a sexta, 8h às 18h</span></li>
+    </ul></div>
+  </div>
+  <p class="foot__note"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"/></svg><span>A Ortival Engenharia não existe. Nomes, números, endereço, obras, clientes, gráficos e perfis de redes sociais desta página são fictícios e servem para demonstrar o trabalho da Tirvo em marca, textos, imagens 3D e desenvolvimento web. <a href="https://tirvo.tech/">Conheça a Tirvo</a>.</span></p>
+  <div class="foot__bottom"><span>© <span data-year>2026</span> Ortival Engenharia · empresa fictícia</span><span>Identidade visual, imagens 3D e site por <a href="https://tirvo.tech/">Tirvo</a></span></div>
+</div>
+<div class="foot__mega" aria-hidden="true">ORTIVAL</div>
+</footer>
+<div class="wa"><div class="wa__bubble" role="status"><b>Ortival Engenharia</b>Quer orçar uma obra? Fale direto com um engenheiro.</div><button class="wa__btn" type="button" aria-label="Falar pelo WhatsApp (botão demonstrativo)" data-demo="Botão demonstrativo: o WhatsApp da Ortival é fictício."><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wa"/></svg></button></div>
+<script src="./assets/ortival.js?v=fac3330f" defer></script>
 </body>
 </html>
