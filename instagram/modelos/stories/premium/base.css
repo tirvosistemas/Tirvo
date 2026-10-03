@@ -1,0 +1,109 @@
+/* Base dos stories premium da Tirvo (1080 x 1920).
+   Cada peça traz só a própria arte e o próprio layout; o que se repete fica aqui. */
+
+@import url("../../fontes/fontes.css");
+
+:root {
+  --void: #000;
+  --bg: #09090b;
+  --bg2: #0f0f12;
+  --bg3: #16161a;
+  --or: #ff5500;
+  --or-hot: #ff3300;
+  --or-soft: #ff8a4c;
+  --or-pale: #ffb187;
+  --or-glow: rgba(255, 85, 0, .45);
+  --link: #5aa9ff; /* só nos links (e-mail e site) */
+  --t1: #fafafa;
+  --t2: #a1a1aa;
+  --t3: #8a8a93;
+  --sans: "Geist", system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, monospace;
+  --serif: "Instrument Serif", Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--void); }
+body { font-family: var(--sans); color: var(--t1); -webkit-font-smoothing: antialiased; }
+ul, ol { list-style: none; }
+
+.peca { position: relative; width: 1080px; height: 1920px; overflow: hidden; isolation: isolate; background: linear-gradient(180deg, #050506 0%, #09090b 50%, #050506 100%); }
+.peca > * { position: absolute; }
+
+.ico { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Camadas fixas */
+.arte, .grao, .vinheta { pointer-events: none; }
+.arte { inset: 0; z-index: 0; }
+.vinheta { inset: 0; z-index: 7; background: radial-gradient(135% 92% at 50% 46%, transparent 56%, rgba(0, 0, 0, .62) 100%); }
+.grao { inset: 0; z-index: 8; mix-blend-mode: overlay; opacity: .5; }
+
+/* Traço neon para as ilustrações em SVG */
+.neon { fill: none; stroke: #ff6a1f; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 5px rgba(255, 85, 0, .85)) drop-shadow(0 0 16px rgba(255, 85, 0, .35)); }
+.fio { fill: none; stroke: rgba(255, 255, 255, .5); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.longe { filter: blur(3px); opacity: .45; }
+.mais-longe { filter: blur(6px); opacity: .3; }
+
+/* Cabeçalho e régua: iguais em toda a série */
+.topo { z-index: 4; left: 84px; right: 84px; top: 246px; display: flex; justify-content: space-between; align-items: center; font: 500 24px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--t2); }
+.topo b { font-weight: 500; color: var(--or); text-shadow: 0 0 14px var(--or-glow); }
+.topo .num { color: var(--t1); }
+.topo .num i { font-style: normal; color: var(--t3); }
+.regua { z-index: 4; left: 84px; top: 292px; width: 912px; height: 14px; }
+
+/* Tipografia */
+.titulo { z-index: 4; font-weight: 680; font-size: 100px; line-height: .98; letter-spacing: -.05em; }
+.titulo em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.12em; letter-spacing: -.012em; line-height: .8; }
+.titulo .cinza { color: var(--t2); }
+.titulo .laranja { color: var(--or); text-shadow: 0 0 34px rgba(255, 85, 0, .55); }
+.cursor { display: inline-block; width: .12em; height: .86em; margin-left: .14em; vertical-align: -.08em; background: linear-gradient(180deg, #ff7a33, var(--or-hot)); box-shadow: 0 0 18px var(--or), 0 0 48px var(--or-glow); }
+.rotulo { font: 500 21px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--t3); }
+.rotulo i { font-style: normal; color: var(--or); }
+.corpo { font-size: 34px; line-height: 1.38; letter-spacing: -.012em; color: var(--t2); }
+.corpo b { font-weight: 600; color: var(--t1); }
+.corpo mark { background: none; color: var(--or-pale); }
+
+/* Moldura chanfrada (data-frame="sup-esq,sup-dir,inf-dir,inf-esq") desenhada pelo base.js */
+[data-frame] { position: relative; isolation: isolate; }
+.peca > [data-frame] { position: absolute; }
+.f-bg { position: absolute; inset: 0; z-index: -1; background: var(--vidro, linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .015) 45%, rgba(255, 255, 255, .03)), rgba(9, 9, 11, .58)); backdrop-filter: blur(18px) saturate(140%); }
+.f-line { position: absolute; inset: 0; z-index: 1; overflow: visible; pointer-events: none; }
+[data-frame] > :where(:not(.f-bg):not(.f-line)) { position: relative; z-index: 2; }
+
+/* Vidro arredondado simples */
+.vidro { border: 1px solid rgba(255, 255, 255, .1); border-radius: 18px; background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .015)), rgba(9, 9, 11, .6); backdrop-filter: blur(18px) saturate(140%); box-shadow: 0 30px 60px rgba(0, 0, 0, .5); }
+
+/* Caixa de ícone */
+.ib { display: grid; place-items: center; flex: none; width: 92px; height: 92px; --vidro: radial-gradient(circle at 30% 22%, rgba(255, 85, 0, .28), rgba(255, 85, 0, .05) 72%), rgba(18, 9, 5, .72); }
+.ib .ico { font-size: 44px; color: #ff8c52; filter: drop-shadow(0 0 8px rgba(255, 85, 0, .65)); }
+
+/* Mira em volta de uma palavra */
+.alvo { position: relative; display: inline-block; padding: 6px 16px 10px; margin: -6px -16px -10px; }
+.alvo > .mira { position: absolute; inset: 0; pointer-events: none; }
+.alvo > .mira i { position: absolute; width: 16px; height: 16px; border: 0 solid #ff6a1f; filter: drop-shadow(0 0 5px rgba(255, 85, 0, .7)); }
+.alvo > .mira i:nth-child(1) { left: 0; top: 0; border-width: 2px 0 0 2px; }
+.alvo > .mira i:nth-child(2) { right: 0; top: 0; border-width: 2px 2px 0 0; }
+.alvo > .mira i:nth-child(3) { left: 0; bottom: 0; border-width: 0 0 2px 2px; }
+.alvo > .mira i:nth-child(4) { right: 0; bottom: 0; border-width: 0 2px 2px 0; }
+
+/* Selo pequeno */
+.selo { display: inline-flex; align-items: center; gap: 11px; padding: 11px 16px; border: 1px solid rgba(255, 85, 0, .38); border-radius: 999px; background: rgba(255, 85, 0, .08); font: 500 18px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--or-pale); white-space: nowrap; }
+.selo .led, .led { width: 10px; height: 10px; border-radius: 50%; flex: none; background: var(--or); box-shadow: 0 0 0 5px rgba(255, 85, 0, .18), 0 0 14px var(--or); }
+
+/* Rodapé: peças que se combinam de jeitos diferentes em cada story */
+.logo { display: block; height: 52px; width: auto; }
+.lk { display: inline-flex; align-items: center; gap: 13px; font-size: 29px; font-weight: 500; letter-spacing: -.01em; color: var(--link); white-space: nowrap; }
+.lk u { text-decoration-thickness: 2px; text-underline-offset: 7px; text-decoration-color: rgba(90, 169, 255, .6); }
+.lk .ico { font-size: 1em; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 16px; height: 88px; padding: 0 34px; font-size: 30px; font-weight: 600; letter-spacing: -.015em; white-space: nowrap; color: var(--t1); }
+.btn .ico { font-size: 31px; stroke-width: 1.9; }
+.btn.cheio { --vidro: linear-gradient(135deg, #ff6a1f, #ff3300); background: var(--vidro); box-shadow: 0 0 46px rgba(255, 85, 0, .45), inset 0 1px 0 rgba(255, 220, 200, .45); text-shadow: 0 1px 0 rgba(120, 30, 0, .35); }
+.btn.cheio[data-frame] { background: none; }
+.btn.cheio .f-bg { backdrop-filter: none; }
+.btn.vazado { --vidro: rgba(255, 255, 255, .04); border: 1px solid rgba(255, 255, 255, .22); background: var(--vidro); }
+.btn.vazado[data-frame] { border: 0; background: none; }
+.btn.vazado .ico { color: var(--or); }
+.btn.neon { border: 2px solid #ff6a1f; background: rgba(255, 85, 0, .06); box-shadow: 0 0 22px rgba(255, 85, 0, .45), inset 0 0 18px rgba(255, 85, 0, .18); color: #ffd2b8; }
+.btn.neon .ico { color: #ff8a4c; }
+.divisor-v { width: 1px; align-self: stretch; background: linear-gradient(180deg, transparent, rgba(255, 255, 255, .2), transparent); }
+.divisor-h { height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .16), transparent); }

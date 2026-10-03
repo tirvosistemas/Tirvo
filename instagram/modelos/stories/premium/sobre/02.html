@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Sobre a Tirvo 02: o crivo</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(520px 460px at 900px 430px, rgba(255, 85, 0, .16), transparent 70%),
+        radial-gradient(560px 520px at 780px 980px, rgba(255, 72, 0, .16), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .titulo { left: 80px; top: 336px; font-size: 94px; }
+    .titulo em { color: var(--or); text-shadow: 0 0 34px rgba(255, 85, 0, .5); }
+
+    /* Etapas do crivo */
+    .etapas { z-index: 4; left: 84px; top: 728px; width: 410px; display: grid; gap: 30px; }
+    .etapa { display: grid; grid-template-columns: 84px 1fr; align-items: center; gap: 22px; height: 124px; padding: 0 20px; }
+    .etapa .ib { width: 84px; height: 84px; }
+    .etapa .ib .ico { font-size: 40px; }
+    .etapa small { display: block; font: 500 17px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--or); }
+    .etapa b { display: block; margin-top: 10px; font-size: 38px; font-weight: 640; letter-spacing: -.03em; line-height: 1; }
+    .etapa span.txt { display: block; margin-top: 8px; font-size: 22px; line-height: 1.25; color: var(--t2); letter-spacing: -.01em; }
+
+    .entrada { z-index: 4; right: 84px; top: 648px; display: flex; gap: 8px; }
+    .entrada .selo { gap: 8px; padding: 8px 11px; font-size: 14px; letter-spacing: .12em; border-color: rgba(255, 255, 255, .16); background: rgba(9, 9, 11, .7); color: var(--t2); backdrop-filter: blur(8px); }
+    .entrada .selo .ico { font-size: 18px; color: var(--or); stroke-width: 2; }
+    .saida { z-index: 4; left: 672px; top: 1204px; }
+
+    .texto { z-index: 4; left: 84px; top: 1250px; width: 912px; padding: 30px 40px 26px; }
+    .texto .corpo { font-size: 29px; }
+
+    /* Rodapé em duas faixas */
+    .rodape { z-index: 4; left: 84px; top: 1448px; width: 912px; display: grid; gap: 14px; }
+    .faixa { display: flex; align-items: center; height: 96px; padding: 0 30px; border: 1px solid rgba(255, 255, 255, .1); border-radius: 16px; background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .015)), rgba(9, 9, 11, .66); backdrop-filter: blur(16px); }
+    .faixa .logo { height: 44px; }
+    .faixa .divisor-v { margin: 22px 30px; }
+    .faixa .lk { font-size: 25px; gap: 11px; }
+    .faixa.acao { justify-content: space-between; padding: 0 10px 0 30px; height: 104px; }
+    .direct { display: flex; align-items: center; gap: 16px; font-size: 30px; font-weight: 560; letter-spacing: -.015em; }
+    .direct .ico { font-size: 40px; color: var(--or); filter: drop-shadow(0 0 8px rgba(255, 85, 0, .6)); }
+    .faixa .btn { height: 82px; border-radius: 12px; padding: 0 36px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" id="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.045)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="62%" cy="44%" r="60%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".3"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <filter id="brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+        <filter id="d2" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2.2"/></filter>
+        <linearGradient id="g-placa" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff5500" stop-opacity=".02"/><stop offset=".5" stop-color="#ff5500" stop-opacity=".12"/><stop offset="1" stop-color="#ff5500" stop-opacity=".02"/></linearGradient>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- cérebro em neon, ao fundo: a mente neurodivergente -->
+      <g transform="translate(700 300) scale(13.5)" class="neon" style="stroke-width:.16; opacity:.5"><use href="#i-brain" width="24" height="24"/></g>
+      <g transform="translate(700 300) scale(13.5)" class="mais-longe" style="fill:none; stroke:#ff5500; stroke-width:.5"><use href="#i-brain" width="24" height="24"/></g>
+      <g id="crivo"></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">02<i>/15</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <h1 class="titulo">Uma mente<br>incapaz de<br>entregar algo<br><em>raso.</em></h1>
+
+    <div class="entrada">
+      <span class="selo"><svg class="ico"><use href="#i-browser"/></svg>site</span>
+      <span class="selo"><svg class="ico"><use href="#i-workflow"/></svg>sistema</span>
+      <span class="selo"><svg class="ico"><use href="#i-bot"/></svg>agente de IA</span>
+    </div>
+
+    <ol class="etapas">
+      <li class="etapa" data-frame="18,0,18,0" data-tone="laranja"><span class="ib" data-frame="14,0,14,0" data-tone="laranja"><svg class="ico"><use href="#i-scissors"/></svg></span><div><small>crivo 01</small><b>Dissecado</b><span class="txt">até a última regra</span></div></li>
+      <li class="etapa" data-frame="18,0,18,0" data-tone="laranja"><span class="ib" data-frame="14,0,14,0" data-tone="laranja"><svg class="ico"><use href="#i-microscope"/></svg></span><div><small>crivo 02</small><b>Aprofundado</b><span class="txt">contexto e restrições</span></div></li>
+      <li class="etapa" data-frame="18,0,18,0" data-tone="neon"><span class="ib" data-frame="14,0,14,0" data-tone="neon"><svg class="ico"><use href="#i-gem"/></svg></span><div><small>crivo 03</small><b>Lapidado</b><span class="txt">até não restar nada</span></div></li>
+    </ol>
+
+    <span class="selo saida"><span class="led"></span>nada a melhorar</span>
+
+    <div class="texto" data-frame="0,0,26,0" data-tone="branco" data-acento="riscos-topo">
+      <p class="corpo">A Tirvo nasceu de uma <b>mente neurodivergente</b>. Cada site, sistema e agente de IA passa pelo mesmo crivo até não restar <mark>nada a melhorar</mark>.</p>
+    </div>
+
+    <footer class="rodape">
+      <div class="faixa">
+        <img class="logo" data-logo>
+        <span class="divisor-v"></span>
+        <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+        <span class="divisor-v"></span>
+        <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+      </div>
+      <div class="faixa acao">
+        <span class="direct"><svg class="ico"><use href="#i-chat"/></svg>Chame no direct</span>
+        <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+      </div>
+    </footer>
+  </main>
+
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      const rnd = Tirvo.semear(11);
+      const CX = 790, W = 420, H = 140, NIVEIS = [790, 944, 1098];
+      const losango = (cy, w = W, h = H) => `M${CX - w / 2} ${cy}L${CX} ${cy - h / 2}L${CX + w / 2} ${cy}L${CX} ${cy + h / 2}Z`;
+      let h = '';
+      // fio central por onde passa o material
+      h += `<path d="M${CX} 700V1200" stroke="rgba(255,120,60,.35)" stroke-width="1.4" stroke-dasharray="2 8"/>`;
+      NIVEIS.forEach((cy, i) => {
+        const ultimo = i === NIVEIS.length - 1;
+        // espessura da placa (perspectiva)
+        h += `<path d="M${CX - W / 2} ${cy}V${cy + 14}L${CX} ${cy + H / 2 + 14}L${CX + W / 2} ${cy + 14}V${cy}L${CX} ${cy + H / 2}Z" fill="rgba(255,85,0,.06)" stroke="rgba(255,120,60,.25)" stroke-width="1"/>`;
+        h += `<path d="${losango(cy)}" fill="url(#g-placa)" stroke="none"/>`;
+        // malha da peneira, cada vez mais fina
+        const n = 6 + i * 4;
+        let malha = '';
+        for (let k = 1; k < n; k++) {
+          const t = k / n;
+          const ax = CX - W / 2 + t * W / 2, ay = cy - t * H / 2;
+          const bx = CX + t * W / 2, by = cy + H / 2 - t * H / 2;
+          malha += `M${ax.toFixed(1)} ${ay.toFixed(1)}L${(ax + W / 2).toFixed(1)} ${(ay + H / 2).toFixed(1)}`;
+          malha += `M${(CX - W / 2 + t * W / 2).toFixed(1)} ${(cy + t * H / 2).toFixed(1)}L${(CX + t * W / 2).toFixed(1)} ${(cy - H / 2 + t * H / 2).toFixed(1)}`;
+        }
+        h += `<path d="${malha}" stroke="rgba(255,150,100,${.12 + i * .04})" stroke-width="1"/>`;
+        h += `<path d="${losango(cy)}" fill="none" stroke="#ff5500" stroke-width="8" opacity="${ultimo ? .6 : .35}" filter="url(#halo)"/>`;
+        h += `<path d="${losango(cy)}" fill="none" stroke="${ultimo ? '#ff8a4c' : 'rgba(255,130,70,.8)'}" stroke-width="${ultimo ? 2.4 : 1.8}"/>`;
+        // ligação com a etiqueta da etapa à esquerda
+        const ey = 728 + 62 + i * 154;
+        h += `<path d="M494 ${ey}H${CX - W / 2 - 40}L${CX - W / 2} ${cy}" fill="none" stroke="rgba(255,120,60,.5)" stroke-width="1.4"/>`;
+        h += `<circle cx="${CX - W / 2}" cy="${cy}" r="5" fill="#ff7a33" filter="url(#brilho)"/>`;
+      });
+      // material: muito ruído em cima, quase nada embaixo
+      const lista = '01<>/{}#$%&*+=?', esc = { '<': '&lt;', '>': '&gt;', '&': '&amp;' };
+      const faixas = [[690, 772, 34], [818, 926, 16], [972, 1080, 7]];
+      faixas.forEach(([y0, y1, qtd], f) => {
+        for (let i = 0; i < qtd; i++) {
+          const y = y0 + rnd() * (y1 - y0);
+          const meia = f === 0 ? 170 : 150 - f * 30;
+          const x = CX + (rnd() * 2 - 1) * meia * (f === 0 ? 1 : .8);
+          const c = lista[Math.floor(rnd() * lista.length)];
+          const quente = rnd() < (f === 0 ? .25 : .6);
+          const tam = f === 0 ? 18 + rnd() * 16 : 18 + rnd() * 8;
+          h += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-family="Geist Mono" font-weight="500" font-size="${tam.toFixed(0)}" text-anchor="middle" fill="${quente ? '#ff7a33' : `rgba(255,255,255,${(.18 + rnd() * .3).toFixed(2)})`}"${f === 0 && rnd() < .4 ? ' filter="url(#d2)"' : ''}>${esc[c] || c}</text>`;
+        }
+      });
+      // o que sobra: a gema lapidada
+      h += `<circle cx="${CX}" cy="1180" r="40" fill="#ff5500" opacity=".35" filter="url(#halo)"/>`;
+      h += `<g transform="translate(${CX - 30} 1148) scale(2.5)" class="neon" style="stroke-width:1"><use href="#i-gem" width="24" height="24"/></g>`;
+      document.getElementById('crivo').innerHTML = h;
+    })();
+  </script>
+</body>
+</html>

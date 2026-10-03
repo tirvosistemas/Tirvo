@@ -10,12 +10,12 @@ Regras de cada arte:
 - Cores da marca (preto, laranja #ff5500, branco, cinzas). Azul só nos links.
 - Áreas livres do app: nada importante acima de 246 px nem abaixo de 1672 px.
 
-Fontes (código): `instagram/modelos/stories/premium/`. Saída: `instagram/destaques/<destaque>/NN.jpg`.
+Fontes (código): `instagram/modelos/stories/premium/<destaque>/NN.html`, com a base comum em `premium/base.css` e `premium/base.js`. Saída: `instagram/destaques/<destaque>/NN.jpg`.
 
 | Ordem | Destaque | Status |
 |---|---|---|
 | — | Serviços | Pronto e postado. Não mexer. |
-| 1 | Sobre a Tirvo | Em produção (refazer tudo, conteúdo de sobre.html) |
-| 2 | Método | A fazer (conteúdo de metodo/) |
+| 1 | Sobre a Tirvo | Pronto: 15 stories (`premium/sobre/01–15`), zip entregue |
+| 2 | Método | Em produção (conteúdo de metodo/) |
 | 3 | Dúvidas | A fazer (conteúdo de faq/) |
 | 4 | Contato | A fazer (um story, talvez dois) |

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Sobre a Tirvo 07: o sistema inteiro</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(600px 300px at 540px 790px, rgba(255, 85, 0, .2), transparent 70%),
+        radial-gradient(700px 520px at 540px 1200px, rgba(255, 72, 0, .1), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 100px; }
+
+    /* O que os outros veem */
+    .janela { z-index: 4; left: 300px; top: 626px; width: 480px; height: 124px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, .16); background: rgba(14, 14, 17, .85); box-shadow: 0 24px 50px rgba(0, 0, 0, .6); overflow: hidden; }
+    .janela .barra { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 14px; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+    .janela .barra i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255, 255, 255, .18); }
+    .janela .barra span { margin-left: 12px; width: 180px; height: 14px; border-radius: 7px; background: rgba(255, 255, 255, .06); }
+    .janela .conteudo { display: grid; grid-template-columns: 1fr 120px; gap: 16px; padding: 16px 18px; }
+    .janela .conteudo i { display: block; height: 10px; border-radius: 5px; background: rgba(255, 255, 255, .14); }
+    .janela .conteudo i + i { margin-top: 10px; width: 70%; }
+    .janela .conteudo b { grid-row: span 2; border-radius: 8px; background: rgba(255, 255, 255, .06); }
+    .veem { z-index: 4; left: 800px; top: 668px; font: 500 16px/1.4 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--t3); }
+    .veem::before { content: ""; position: absolute; left: -22px; top: 11px; width: 14px; height: 1px; background: rgba(255, 255, 255, .3); }
+    .superficie { z-index: 4; left: 84px; top: 776px; width: 912px; display: flex; align-items: center; gap: 14px; font: 500 16px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: #ffb187; }
+    .superficie::before, .superficie::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 120, 60, .7)); }
+    .superficie::after { background: linear-gradient(90deg, rgba(255, 120, 60, .7), transparent); }
+
+    /* Camadas abaixo da superfície */
+    .camadas { z-index: 4; left: 0; top: 822px; width: 1080px; display: grid; justify-items: center; gap: 12px; }
+    .camada { display: grid; grid-template-columns: 76px 1fr auto; align-items: center; column-gap: 24px; height: 92px; padding: 0 30px 0 18px; }
+    .camada .ib { width: 64px; height: 64px; }
+    .camada .ib .ico { font-size: 32px; }
+    .camada b { font-size: 33px; font-weight: 620; letter-spacing: -.03em; }
+    .camada small { font: 500 16px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .camada:nth-child(1) { width: 912px; }
+    .camada:nth-child(2) { width: 880px; opacity: .96; }
+    .camada:nth-child(3) { width: 848px; opacity: .92; }
+    .camada:nth-child(4) { width: 816px; opacity: .9; }
+    .camada:nth-child(5) { width: 784px; }
+    .camada:nth-child(5) small { color: var(--or); }
+
+    .texto { z-index: 4; left: 84px; top: 1366px; width: 912px; text-align: center; }
+    .texto .corpo { font-size: 30px; }
+
+    /* Rodapé: pílula grande + linha de contato */
+    .pilula { z-index: 4; left: 84px; top: 1440px; width: 912px; height: 104px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 44px; border-radius: 52px; background: linear-gradient(135deg, #ff6a1f, #ff3300); box-shadow: 0 0 60px rgba(255, 85, 0, .45), inset 0 1px 0 rgba(255, 220, 200, .5); font-size: 36px; font-weight: 640; letter-spacing: -.02em; text-shadow: 0 1px 0 rgba(120, 30, 0, .35); }
+    .pilula .seta { display: grid; place-items: center; width: 80px; height: 80px; border-radius: 50%; background: rgba(9, 9, 11, .9); }
+    .pilula .seta .ico { font-size: 34px; color: #ff7a33; stroke-width: 2; }
+    .contato { z-index: 4; left: 84px; top: 1570px; width: 912px; display: flex; align-items: center; justify-content: space-between; }
+    .contato .logo { height: 44px; }
+    .contato .links { display: grid; gap: 8px; }
+    .contato .lk { font-size: 24px; gap: 10px; }
+    .balao { position: relative; display: flex; align-items: center; gap: 12px; padding: 18px 22px; border: 1px solid rgba(255, 255, 255, .2); border-radius: 22px 22px 6px 22px; background: rgba(255, 255, 255, .04); font-size: 25px; font-weight: 560; white-space: nowrap; }
+    .balao .ico { font-size: 27px; color: var(--or); }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,.045)" stroke-width="1"/></pattern>
+        <linearGradient id="g-grade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".35" stop-color="#fff" stop-opacity=".2"/><stop offset=".45" stop-color="#fff" stop-opacity=".9"/><stop offset=".75" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <linearGradient id="g-feixe" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5500" stop-opacity="0"/><stop offset=".5" stop-color="#ff5500" stop-opacity=".22"/><stop offset="1" stop-color="#ff5500" stop-opacity="0"/></linearGradient>
+        <linearGradient id="g-raio" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5500" stop-opacity=".18"/><stop offset="1" stop-color="#ff5500" stop-opacity="0"/></linearGradient>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- feixe de varredura na superfície e o raio que desce pelas camadas -->
+      <rect x="0" y="740" width="1080" height="100" fill="url(#g-feixe)"/>
+      <path d="M300 790L84 1340H996L780 790Z" fill="url(#g-raio)"/>
+      <g stroke="rgba(255,120,60,.18)" stroke-width="1"><path d="M300 790L84 1340M780 790L996 1340"/></g>
+      <!-- código ao fundo, desfocado, nas laterais -->
+      <g font-family="Geist Mono" font-size="20" fill="rgba(255,255,255,.18)" class="longe">
+        <text x="12" y="470">if (regra) {</text><text x="36" y="500">validar();</text><text x="12" y="530">}</text>
+        <text x="860" y="1500">cache: 0ms</text><text x="884" y="1530">tls: 1.3</text>
+      </g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">07<i>/15</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>//</i> onde outros veem um projeto simples</p>
+    <h1 class="titulo">Nós vemos o<br><em>sistema inteiro.</em></h1>
+
+    <div class="janela"><div class="barra"><i></i><i></i><i></i><span></span></div><div class="conteudo"><div><i></i><i></i></div><b></b></div></div>
+    <p class="veem">o que<br>os outros<br>veem</p>
+    <p class="superficie">abaixo da superfície</p>
+
+    <ol class="camadas">
+      <li class="camada" data-frame="14,0,14,0" data-tone="branco"><span class="ib" data-frame="10,0,10,0" data-tone="laranja"><svg class="ico"><use href="#i-workflow"/></svg></span><b>Regras de negócio</b><small>camada 01</small></li>
+      <li class="camada" data-frame="14,0,14,0" data-tone="branco"><span class="ib" data-frame="10,0,10,0" data-tone="laranja"><svg class="ico"><use href="#i-pointer"/></svg></span><b>Comportamento de quem usa</b><small>camada 02</small></li>
+      <li class="camada" data-frame="14,0,14,0" data-tone="branco"><span class="ib" data-frame="10,0,10,0" data-tone="laranja"><svg class="ico"><use href="#i-gauge"/></svg></span><b>Performance</b><small>camada 03</small></li>
+      <li class="camada" data-frame="14,0,14,0" data-tone="branco"><span class="ib" data-frame="10,0,10,0" data-tone="laranja"><svg class="ico"><use href="#i-shield-check"/></svg></span><b>Segurança</b><small>camada 04</small></li>
+      <li class="camada" data-frame="14,0,14,0" data-tone="neon"><span class="ib" data-frame="10,0,10,0" data-tone="neon"><svg class="ico"><use href="#i-trending-up"/></svg></span><b>Conversão</b><small>camada 05</small></li>
+    </ol>
+
+    <div class="texto"><p class="corpo">Tudo é <b>dissecado, aprofundado e lapidado</b> até a perfeição.</p></div>
+
+    <span class="pilula">Visite nosso site<span class="seta"><svg class="ico"><use href="#i-arrow-up-right"/></svg></span></span>
+    <div class="contato">
+      <img class="logo" data-logo>
+      <div class="links">
+        <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+        <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+      </div>
+      <span class="balao"><svg class="ico"><use href="#i-chat"/></svg>Chame no direct</span>
+    </div>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>

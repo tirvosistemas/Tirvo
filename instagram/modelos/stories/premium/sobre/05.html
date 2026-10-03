@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Sobre a Tirvo 05: princípio</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(520px 420px at 900px 440px, rgba(255, 85, 0, .16), transparent 70%),
+        radial-gradient(620px 460px at 760px 1060px, rgba(255, 72, 0, .14), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .aspas { z-index: 1; left: 790px; top: 300px; font: italic 400 520px/1 var(--serif); color: #ff5500; opacity: .2; filter: blur(2px); text-shadow: 0 0 60px rgba(255, 85, 0, .8); }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; display: flex; align-items: center; gap: 12px; }
+    .rotulo.sobre .ico { font-size: 24px; color: var(--or); }
+    .titulo { left: 80px; top: 392px; font-size: 92px; }
+    .titulo .cinza { font-weight: 540; }
+
+    /* Gráfico dos ciclos */
+    .ciclos { z-index: 4; left: 84px; top: 816px; width: 912px; height: 420px; }
+    .ciclos .cab { display: flex; align-items: center; justify-content: space-between; padding: 30px 34px 0; }
+    .ciclos .cab b { display: flex; align-items: center; gap: 14px; font-size: 32px; font-weight: 640; letter-spacing: -.03em; }
+    .ciclos .cab b .ico { font-size: 30px; color: var(--or); }
+    .ciclos svg.grafico { position: absolute; left: 0; top: 0; }
+
+    .texto { z-index: 4; left: 84px; top: 1266px; width: 912px; }
+    .texto .corpo { font-size: 31px; }
+
+    /* Rodapé: ingresso destacável */
+    .rodape { z-index: 4; left: 84px; top: 1420px; width: 912px; height: 236px; display: grid; grid-template-columns: 250px 1fr; }
+    .canhoto { display: grid; place-items: center; align-content: center; gap: 18px; border-right: 2px dashed rgba(255, 255, 255, .16); }
+    .canhoto .logo { height: 46px; }
+    .canhoto small { font: 500 15px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--t3); }
+    .principal { display: grid; align-content: center; gap: 22px; padding: 0 30px 0 34px; }
+    .principal .links { display: flex; gap: 30px; }
+    .principal .lk { font-size: 26px; gap: 10px; }
+    .principal .acoes { display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; }
+    .principal .btn { height: 80px; padding: 0 22px; font-size: 27px; border-radius: 40px; gap: 12px; }
+    .principal .btn .ico { font-size: 27px; }
+    .furo { z-index: 5; width: 40px; height: 40px; border-radius: 50%; background: #060607; border: 1px solid rgba(255, 255, 255, .12); }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- contornos de refino: cada volta mais justa que a anterior -->
+      <g id="contornos" fill="none"></g>
+    </svg>
+
+    <span class="aspas">“</span>
+
+    <header class="topo"><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">05<i>/15</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><svg class="ico"><use href="#i-quote"/></svg>princípio da tirvo</p>
+    <h1 class="titulo"><span class="cinza">Se algo pode ser<br>melhorado,</span><br>ainda não está<br><em>pronto.</em><span class="cursor"></span></h1>
+
+    <section class="ciclos" data-frame="0,32,0,32" data-tone="laranja" data-acento="topo,base">
+      <svg class="grafico" id="grafico" width="912" height="420" viewBox="0 0 912 420"></svg>
+      <div class="cab">
+        <b><svg class="ico"><use href="#i-refresh"/></svg>Ciclos de refino</b>
+        <span class="selo"><span class="led"></span>até o ápice</span>
+      </div>
+    </section>
+
+    <div class="texto"><p class="corpo">E é simples assim: <b>nós não paramos até que ele atinja o seu ápice.</b></p></div>
+
+    <footer class="rodape" data-frame="20,20,20,20" data-tone="branco" data-acento="topo">
+      <div class="canhoto"><img class="logo" data-logo><small>engenharia</small></div>
+      <div class="principal">
+        <div class="links">
+          <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+          <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+        </div>
+        <div class="acoes">
+          <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+          <span class="btn vazado"><svg class="ico"><use href="#i-chat"/></svg><span>Chame no direct</span></span>
+        </div>
+      </div>
+    </footer>
+    <span class="furo" style="left:314px; top:1400px"></span>
+    <span class="furo" style="left:314px; top:1636px"></span>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      // contornos de refino ao fundo
+      let c = '';
+      for (let i = 0; i < 9; i++) {
+        const w = 980 - i * 92, h = 560 - i * 50, x = 540 - w / 2 + i * 6, y = 1040 - h / 2 - i * 4;
+        c += `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${60 - i * 4}" stroke="rgba(255,${120 + i * 10},${60 + i * 8},${(.05 + i * .03).toFixed(2)})" stroke-width="1.2"${i % 3 === 2 ? ' stroke-dasharray="3 9"' : ''}/>`;
+      }
+      document.getElementById('contornos').innerHTML = c;
+
+      // degraus de qualidade por ciclo
+      const g = document.getElementById('grafico');
+      const X0 = 70, X1 = 850, Y = [340, 300, 262, 232, 208, 180];
+      const passo = (X1 - X0) / (Y.length - 1);
+      let d = `M${X0} ${Y[0]}`;
+      Y.forEach((y, i) => { if (i) d += `H${X0 + passo * i}V${y}`; });
+      d += `H${X1 + 10}`;
+      let h = `<defs>
+        <linearGradient id="g-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5500" stop-opacity=".28"/><stop offset="1" stop-color="#ff5500" stop-opacity="0"/></linearGradient>
+        <filter id="g-halo" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+        <filter id="g-brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+      // eixos e grade
+      for (let k = 0; k < 5; k++) h += `<path d="M${X0} ${160 + k * 48}H${X1 + 10}" stroke="rgba(255,255,255,.06)" stroke-dasharray="2 6"/>`;
+      h += `<path d="M${X0} 150V372H${X1 + 10}" fill="none" stroke="rgba(255,255,255,.18)"/>`;
+      h += `<path d="M${X0} 156H${X1 + 10}" stroke="rgba(255,140,80,.5)" stroke-dasharray="6 6"/>`;
+      h += `<text x="${X0 + 8}" y="146" text-anchor="start" font-family="Geist Mono" font-size="15" fill="#ffb187" letter-spacing="2">ÁPICE</text>`;
+      h += `<path d="${d}V372H${X0}Z" fill="url(#g-area)"/>`;
+      h += `<path d="${d}" fill="none" stroke="#ff5500" stroke-width="8" opacity=".5" filter="url(#g-halo)"/>`;
+      h += `<path d="${d}" fill="none" stroke="#ff7a33" stroke-width="2.6" stroke-linejoin="round"/>`;
+      Y.forEach((y, i) => {
+        const x = X0 + passo * i, fim = i === Y.length - 1;
+        h += `<text x="${x}" y="398" text-anchor="middle" font-family="Geist Mono" font-size="15" fill="rgba(255,255,255,.4)" letter-spacing="1">C.${String(i + 1).padStart(2, '0')}</text>`;
+        if (fim) {
+          h += `<circle cx="${x}" cy="${y}" r="11" fill="#ff5500" filter="url(#g-brilho)"/><circle cx="${x}" cy="${y}" r="4" fill="#ffd2b8"/>`;
+          h += `<g transform="translate(${x - 120} ${y - 64})"><rect width="132" height="40" rx="10" fill="rgba(255,85,0,.16)" stroke="rgba(255,120,60,.8)"/><text x="66" y="26" text-anchor="middle" font-family="Geist Mono" font-weight="500" font-size="17" fill="#fff" letter-spacing="2">PRONTO</text></g>`;
+        } else {
+          h += `<circle cx="${x}" cy="${y}" r="6" fill="#0b0b0e" stroke="#ff7a33" stroke-width="2"/>`;
+          if (i) h += `<text x="${x + 12}" y="${y - 14}" font-family="Geist Mono" font-size="13" fill="rgba(255,255,255,.38)" letter-spacing="1">+ refino</text>`;
+        }
+      });
+      g.innerHTML = h;
+    })();
+  </script>
+</body>
+</html>

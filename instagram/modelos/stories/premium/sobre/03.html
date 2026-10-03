@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Sobre a Tirvo 03: recusados na entrada</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(460px 420px at 880px 440px, rgba(255, 70, 0, .2), transparent 70%),
+        radial-gradient(700px 520px at 120px 980px, rgba(255, 72, 0, .08), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #0a0909 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 344px; }
+    .titulo { left: 80px; top: 388px; font-size: 112px; line-height: .92; }
+    .titulo em { font-size: 1.18em; }
+    .codigo { z-index: 4; left: 770px; top: 572px; width: 226px; text-align: center; font: 600 22px/1 var(--mono); letter-spacing: .3em; color: #ff8a4c; text-shadow: 0 0 16px rgba(255, 85, 0, .8); }
+
+    /* Registro da entrada */
+    .registro { z-index: 4; left: 84px; top: 650px; width: 912px; }
+    .barra { display: flex; align-items: center; gap: 18px; height: 72px; padding: 0 22px 0 30px; border-bottom: 1px solid rgba(255, 255, 255, .08); font: 500 19px/1 var(--mono); white-space: nowrap; color: var(--t1); }
+    .pontos { display: flex; gap: 9px; }
+    .pontos i { width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, .16); }
+    .pontos i:last-child { background: var(--or); box-shadow: 0 0 10px var(--or); }
+    .barra em { font-style: normal; color: var(--t3); }
+    .barra .selo { margin-left: auto; padding: 9px 14px; font-size: 15px; }
+    .linhas { position: relative; padding: 4px 26px 0 0; }
+    .linhas::before { content: ""; position: absolute; left: 50px; top: 52px; bottom: 52px; width: 2px; background: linear-gradient(180deg, rgba(255, 85, 0, .7), rgba(255, 85, 0, .2)); }
+    .linhas li { position: relative; display: grid; grid-template-columns: 100px 84px 1fr auto; align-items: center; column-gap: 24px; height: 116px; }
+    .linhas li + li::before { content: ""; position: absolute; left: 100px; right: 0; top: 0; border-top: 1px dashed rgba(255, 255, 255, .08); }
+    .no { justify-self: center; width: 18px; height: 18px; border-radius: 50%; background: #0b0b0e; border: 2px solid #ff6a1f; box-shadow: 0 0 12px rgba(255, 85, 0, .7); }
+    .linhas .ib { width: 80px; height: 80px; --vidro: rgba(255, 255, 255, .03); }
+    .linhas .ib .ico { font-size: 38px; color: var(--t2); filter: none; }
+    .item b { position: relative; display: inline-block; font-size: 44px; font-weight: 620; letter-spacing: -.035em; line-height: 1; color: #e4e4e7; }
+    .item b::after { content: ""; position: absolute; left: -4px; right: -6px; top: 54%; height: 3px; background: #ff5a14; box-shadow: 0 0 10px rgba(255, 85, 0, .8); transform: rotate(-2deg); }
+    .item small { display: block; margin-top: 10px; font: 500 18px/1 var(--mono); letter-spacing: .1em; color: var(--t3); }
+    .negado { display: flex; align-items: center; gap: 9px; padding: 10px 14px 10px 12px; border: 1px solid rgba(255, 85, 0, .45); border-radius: 10px; background: rgba(255, 85, 0, .08); font: 500 19px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: #ffb187; }
+    .negado .ico { font-size: 22px; color: var(--or); stroke-width: 2.2; }
+    .liberado { display: flex; align-items: center; gap: 18px; height: 78px; margin-top: 4px; padding: 0 30px; border-top: 1px solid rgba(255, 255, 255, .08); font: 500 19px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t3); white-space: nowrap; }
+    .liberado span { display: inline-flex; align-items: center; gap: 9px; color: var(--t1); }
+    .liberado .ico { font-size: 22px; color: var(--or); stroke-width: 2.2; }
+
+    .frase { z-index: 4; left: 84px; top: 1308px; width: 912px; padding-left: 30px; border-left: 3px solid var(--or); }
+    .frase .corpo { font-size: 32px; line-height: 1.32; }
+
+    /* Rodapé: crachá de acesso */
+    .rodape { z-index: 4; left: 84px; top: 1428px; width: 912px; height: 228px; display: grid; grid-template-columns: 1fr 380px; align-items: center; padding: 0 30px 0 44px; }
+    .rodape .esq { display: grid; gap: 22px; }
+    .rodape .topo-cracha { display: flex; align-items: center; gap: 18px; }
+    .rodape .logo { height: 48px; }
+    .rodape .links { display: grid; gap: 12px; }
+    .rodape .lk { font-size: 27px; }
+    .rodape .dir { display: grid; gap: 20px; justify-items: stretch; }
+    .rodape .btn.neon { height: 84px; border-radius: 14px; justify-content: space-between; padding: 0 28px 0 32px; }
+    .rodape .direct { display: flex; align-items: center; justify-content: center; gap: 14px; font-size: 28px; font-weight: 560; color: var(--t1); }
+    .rodape .direct .ico { font-size: 30px; color: var(--or); }
+    .rodape .direct u { text-decoration-color: rgba(255, 255, 255, .3); text-underline-offset: 7px; text-decoration-thickness: 1px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.045)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="70%" cy="26%" r="60%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <pattern id="listras" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="26" fill="rgba(255,85,0,.5)"/></pattern>
+        <linearGradient id="g-listras" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <mask id="m-listras"><rect x="560" y="596" width="520" height="22" fill="url(#g-listras)"/></mask>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
+        <filter id="brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+
+      <!-- portal em perspectiva com a barreira de laser -->
+      <g fill="none" stroke-linecap="round">
+        <path d="M720 330H1060V610H720Z" stroke="rgba(255,255,255,.08)"/>
+        <path d="M770 360H1010V580H770Z" stroke="rgba(255,255,255,.12)"/>
+        <path d="M720 330L770 360M1060 330L1010 360M720 610L770 580M1060 610L1010 580" stroke="rgba(255,255,255,.1)"/>
+        <path d="M720 380H1060M720 440H1060M720 500H1060M720 560H1060" stroke="#ff5500" stroke-width="6" opacity=".35" filter="url(#halo)"/>
+        <path d="M720 380H1060M720 440H1060M720 500H1060M720 560H1060" stroke="rgba(255,120,60,.55)" stroke-width="1.2"/>
+      </g>
+      <circle cx="884" cy="462" r="96" fill="#ff5500" opacity=".22" filter="url(#halo)"/>
+      <g transform="translate(818 384) scale(5.5)" class="neon" style="stroke-width:.5"><use href="#i-shield" width="24" height="24"/></g>
+      <g transform="translate(851 418) scale(2.75)" class="neon" style="stroke-width:.9"><use href="#i-x" width="24" height="24"/></g>
+      <rect x="560" y="596" width="520" height="22" fill="url(#listras)" mask="url(#m-listras)"/>
+
+      <!-- moldes genéricos barrados, ao fundo e desfocados -->
+      <g fill="none" stroke="rgba(255,255,255,.3)" stroke-width=".9" class="longe">
+        <use href="#i-template" width="24" height="24" transform="translate(20 1220) scale(5)"/>
+      </g>
+      <g fill="none" stroke="rgba(255,255,255,.3)" stroke-width=".7" class="mais-longe">
+        <use href="#i-copy" width="24" height="24" transform="translate(900 1160) scale(6)"/>
+        <use href="#i-template" width="24" height="24" transform="translate(-30 600) scale(4.5)"/>
+      </g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">03<i>/15</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>//</i> política de entrada</p>
+    <h1 class="titulo"><em>Recusados</em><br>na entrada.</h1>
+    <p class="codigo">403</p>
+
+    <section class="registro" data-frame="26,0,26,0" data-tone="laranja" data-acento="barra">
+      <div class="barra">
+        <span class="pontos"><i></i><i></i><i></i></span>
+        <span>entrada.log <em>· padrão tirvo</em></span>
+        <span class="selo"><span class="led"></span>filtro ativo</span>
+      </div>
+      <ol class="linhas">
+        <li><span class="no"></span><span class="ib" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-square"/></svg></span><div class="item"><b>O básico.</b><small>inaceitável aqui</small></div><span class="negado"><svg class="ico"><use href="#i-x"/></svg>recusado</span></li>
+        <li><span class="no"></span><span class="ib" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-waves"/></svg></span><div class="item"><b>O raso.</b><small>sem camadas a fundo</small></div><span class="negado"><svg class="ico"><use href="#i-x"/></svg>recusado</span></li>
+        <li><span class="no"></span><span class="ib" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-template"/></svg></span><div class="item"><b>O template.</b><small>fórmula pronta</small></div><span class="negado"><svg class="ico"><use href="#i-x"/></svg>recusado</span></li>
+        <li><span class="no"></span><span class="ib" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-copy"/></svg></span><div class="item"><b>O genérico.</b><small>feito sem intenção</small></div><span class="negado"><svg class="ico"><use href="#i-x"/></svg>recusado</span></li>
+      </ol>
+      <div class="liberado">entra só
+        <span><svg class="ico"><use href="#i-check"/></svg>profundidade</span>
+        <span><svg class="ico"><use href="#i-check"/></svg>rigor</span>
+        <span><svg class="ico"><use href="#i-check"/></svg>intenção</span>
+      </div>
+    </section>
+
+    <div class="frase"><p class="corpo">Na Tirvo, o básico é inaceitável<br>e a <b>mediocridade não tem espaço.</b></p></div>
+
+    <footer class="rodape" data-frame="0,30,0,30" data-tone="branco" data-acento="topo">
+      <div class="esq">
+        <img class="logo" data-logo>
+        <div class="links">
+          <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+          <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+        </div>
+      </div>
+      <div class="dir">
+        <span class="btn neon"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-up-right"/></svg></span>
+        <span class="direct"><svg class="ico"><use href="#i-send"/></svg><u>Chame no direct</u></span>
+      </div>
+    </footer>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>

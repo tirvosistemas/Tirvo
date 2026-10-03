@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Sobre a Tirvo 15: nível máximo</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(420px 420px at 900px 500px, rgba(255, 85, 0, .2), transparent 70%),
+        radial-gradient(800px 420px at 540px 1300px, rgba(255, 72, 0, .1), transparent 70%),
+        radial-gradient(900px 420px at 540px 1930px, rgba(255, 70, 0, .24), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 94px; }
+    .medidor { z-index: 4; right: 84px; top: 372px; width: 170px; }
+    .medidor .barras { display: flex; align-items: flex-end; gap: 8px; height: 236px; }
+    .medidor .barras i { flex: 1; border-radius: 3px; background: rgba(255, 255, 255, .08); }
+    .medidor .barras i.on { background: linear-gradient(180deg, #ff8a4c, #ff3300); box-shadow: 0 0 14px rgba(255, 85, 0, .6); }
+    .medidor .barras i.max { background: linear-gradient(180deg, #ffd2b8, #ff5500); box-shadow: 0 0 22px #ff5500, 0 0 50px rgba(255, 85, 0, .5); }
+    .medidor p { display: flex; justify-content: space-between; margin-top: 12px; font: 500 15px/1 var(--mono); letter-spacing: .14em; color: var(--t3); }
+    .medidor p b { font-weight: 500; color: #ffb187; }
+
+    .texto { z-index: 4; left: 84px; top: 724px; width: 912px; }
+    .texto .corpo { font-size: 32px; }
+
+    /* Painel de contato completo */
+    .painel { z-index: 4; left: 84px; top: 880px; width: 912px; }
+    .painel .cab { display: flex; align-items: center; justify-content: space-between; height: 76px; padding: 0 30px; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+    .painel .cab .logo { height: 38px; }
+    .painel .canais li { display: grid; grid-template-columns: 64px 150px 1fr; align-items: center; gap: 22px; height: 84px; padding: 0 30px; }
+    .painel .canais li + li { border-top: 1px dashed rgba(255, 255, 255, .07); }
+    .painel .ib { width: 64px; height: 64px; }
+    .painel .ib .ico { font-size: 30px; }
+    .painel .canais small { font: 500 16px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .painel .canais span.v { font-size: 30px; font-weight: 560; letter-spacing: -.015em; }
+    .painel .canais .lk { font-size: 30px; }
+
+    .acoes { z-index: 4; left: 84px; top: 1414px; width: 912px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .acoes .btn { height: 100px; font-size: 31px; }
+    .acoes .btn.neon { background: rgba(14, 8, 5, .88); }
+    .final { z-index: 4; left: 84px; top: 1560px; width: 912px; display: flex; align-items: center; justify-content: center; gap: 16px; font-size: 30px; letter-spacing: -.02em; color: var(--t2); }
+    .final em { font-family: var(--serif); font-style: italic; font-size: 1.2em; color: var(--t1); }
+    .final::before, .final::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .2)); }
+    .final::after { background: linear-gradient(90deg, rgba(255, 255, 255, .2), transparent); }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <radialGradient id="g-chao" cx="540" cy="1920" r="900" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset=".55" stop-color="#fff" stop-opacity=".4"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-chao"><rect x="0" y="1380" width="1080" height="540" fill="url(#g-chao)"/></mask>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+      </defs>
+      <!-- chão em perspectiva -->
+      <g mask="url(#m-chao)" fill="none" stroke="#ff5a14" stroke-width="1.3" opacity=".65">
+        <path d="M540 1300L-900 1920M540 1300L-660 1920M540 1300L-420 1920M540 1300L-180 1920M540 1300L60 1920M540 1300L300 1920M540 1300L540 1920M540 1300L780 1920M540 1300L1020 1920M540 1300L1260 1920M540 1300L1500 1920M540 1300L1740 1920M540 1300L1980 1920"/>
+        <path d="M0 1400H1080M0 1420H1080M0 1446H1080M0 1480H1080M0 1524H1080M0 1580H1080M0 1650H1080M0 1740H1080M0 1850H1080"/>
+      </g>
+      <!-- mira grande ao fundo, desfocada -->
+      <g class="longe" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3">
+        <path d="M790 372V342H820M1002 342H1032V372M1032 634V664H1002M820 664H790V634"/>
+      </g>
+      <circle cx="900" cy="470" r="70" fill="#ff5500" opacity=".2" filter="url(#halo)"/>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">15<i>/15</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>//</i> próximo passo</p>
+    <h1 class="titulo">Traga o seu<br>projeto para o<br><em>nível máximo.</em></h1>
+
+    <div class="medidor">
+      <div class="barras">
+        <i class="on" style="height:22%"></i><i class="on" style="height:34%"></i><i class="on" style="height:46%"></i><i class="on" style="height:58%"></i><i class="on" style="height:70%"></i><i class="on" style="height:84%"></i><i class="max" style="height:100%"></i>
+      </div>
+      <p><span>nível</span><b>máx</b></p>
+    </div>
+
+    <div class="texto"><p class="corpo">Conte o seu desafio. Ele vai receber a mesma <b>atenção obsessiva</b> que dedicamos a cada linha de código.</p></div>
+
+    <section class="painel" data-frame="30,0,30,0" data-tone="neon" data-acento="barra">
+      <div class="cab"><img class="logo" data-logo><span class="selo"><span class="led"></span>fale com a engenharia</span></div>
+      <ul class="canais">
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-send"/></svg></span><small>direct</small><span class="v">@tirvotech</span></li>
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-mail"/></svg></span><small>e-mail</small><span class="lk"><u>engenharia@tirvo.tech</u></span></li>
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-globe"/></svg></span><small>site</small><span class="lk"><u>tirvo.tech</u></span></li>
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-whatsapp"/></svg></span><small>whatsapp</small><span class="v">+55 (41) 99193-3850</span></li>
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-pin"/></svg></span><small>base</small><span class="v">Curitiba · todo o Brasil</span></li>
+      </ul>
+    </section>
+
+    <div class="acoes">
+      <span class="btn cheio" data-frame="18,0,18,0" data-tone="quente"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      <span class="btn neon"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+    </div>
+    <p class="final"><span>Seu futuro digital começa com <em>uma conversa.</em></span></p>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>

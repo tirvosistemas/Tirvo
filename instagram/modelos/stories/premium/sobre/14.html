@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Sobre a Tirvo 14: valores 3 e 4</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(420px 360px at 300px 780px, rgba(255, 85, 0, .16), transparent 70%),
+        radial-gradient(420px 360px at 780px 780px, rgba(255, 85, 0, .16), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 100px; }
+    .contagem { z-index: 4; right: 84px; top: 540px; font: 500 18px/1 var(--mono); letter-spacing: .16em; color: var(--t3); }
+    .contagem b { font-weight: 500; color: var(--or); }
+
+    .colunas { z-index: 4; left: 84px; top: 636px; width: 912px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .valor { height: 646px; padding: 0 30px; }
+    .valor svg.ilus { display: block; margin: 6px -30px 4px; width: calc(100% + 60px); height: 290px; }
+    .valor small { display: block; font: 500 17px/1 var(--mono); letter-spacing: .18em; color: var(--or); }
+    .valor h2 { margin-top: 12px; font-size: 42px; font-weight: 650; letter-spacing: -.035em; line-height: 1.02; }
+    .valor h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.14em; letter-spacing: -.01em; }
+    .valor p.corpo { margin-top: 18px; font-size: 26px; line-height: 1.4; }
+
+    /* Rodapé dividido: metade botão, metade contato */
+    .rodape { z-index: 4; left: 84px; top: 1336px; width: 912px; height: 270px; display: grid; grid-template-columns: 1fr 1fr; }
+    .visite { position: relative; display: grid; align-content: space-between; padding: 32px 34px 30px; clip-path: polygon(28px 0, 100% 0, 100% 100%, 0 100%, 0 28px); background: linear-gradient(140deg, #ff6a1f, #ff3300 70%); box-shadow: inset 0 1px 0 rgba(255, 220, 200, .5); }
+    .visite small { font: 500 16px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: rgba(255, 255, 255, .8); }
+    .visite b { font-size: 46px; font-weight: 680; letter-spacing: -.035em; line-height: 1; text-shadow: 0 1px 0 rgba(120, 30, 0, .3); }
+    .visite .seta { position: absolute; right: 26px; bottom: 26px; display: grid; place-items: center; width: 74px; height: 74px; border-radius: 50%; background: #0b0b0e; }
+    .visite .seta .ico { font-size: 32px; color: #ff7a33; stroke-width: 2; }
+    .brilho-visite { z-index: 3; left: 84px; top: 1336px; width: 456px; height: 270px; box-shadow: 0 0 70px rgba(255, 85, 0, .4); clip-path: none; pointer-events: none; }
+    .contato { display: grid; align-content: center; gap: 16px; padding: 0 28px 0 30px; border: 1px solid rgba(255, 255, 255, .1); border-left: 0; background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .015)), rgba(9, 9, 11, .7); }
+    .contato .logo { height: 40px; margin-bottom: 4px; }
+    .contato .lk { font-size: 23px; gap: 10px; }
+    .contato .direct { display: flex; align-items: center; gap: 12px; height: 62px; margin-top: 4px; padding: 0 20px; border: 1px solid rgba(255, 255, 255, .2); border-radius: 10px; font-size: 24px; font-weight: 580; white-space: nowrap; }
+    .contato .direct .ico { font-size: 25px; color: var(--or); }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="46%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- trilhas de circuito ao fundo -->
+      <g fill="none" stroke="rgba(255,110,40,.22)" stroke-width="1.4" class="longe">
+        <path d="M1080 360H990L960 390V600"/><path d="M1080 420H1010L990 440V560"/><path d="M0 1240H60L80 1220V1000"/>
+      </g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">14<i>/15</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>P.03</i> · código de conduta</p>
+    <h1 class="titulo">Na fronteira,<br>com foco <em>total.</em></h1>
+    <p class="contagem"><b>V.03–04</b> / 04</p>
+
+    <div class="colunas">
+      <section class="valor" data-frame="26,0,26,0" data-tone="laranja" data-acento="topo">
+        <svg class="ilus" id="chip" viewBox="0 0 448 270" preserveAspectRatio="xMidYMid meet"></svg>
+        <small>V.03</small>
+        <h2>Engenharia<br><em>extrema</em></h2>
+        <p class="corpo">Operamos na fronteira da tecnologia, com <b>IA autônoma e engenharia de prompt</b> em um nível que poucos dominam.</p>
+      </section>
+      <section class="valor" data-frame="0,26,0,26" data-tone="neon" data-acento="base">
+        <svg class="ilus" id="alvo" viewBox="0 0 448 270"></svg>
+        <small>V.04</small>
+        <h2>Foco e<br><em>resiliência</em></h2>
+        <p class="corpo">O hiperfoco é o nosso diferencial. A dedicação é <b>total, do primeiro dia à entrega.</b></p>
+      </section>
+    </div>
+
+    <div class="brilho-visite"></div>
+    <footer class="rodape">
+      <div class="visite">
+        <small>próximo passo</small>
+        <b>Visite<br>nosso site</b>
+        <span class="seta"><svg class="ico"><use href="#i-arrow-up-right"/></svg></span>
+      </div>
+      <div class="contato">
+        <img class="logo" data-logo>
+        <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+        <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+        <span class="direct"><svg class="ico"><use href="#i-send"/></svg>Chame no direct</span>
+      </div>
+    </footer>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      const defs = id => `<defs><filter id="${id}h" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter><filter id="${id}b" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+
+      // V.03: chip com trilhas saindo para todos os lados
+      const cx = 224, cy = 140;
+      let c = defs('c');
+      c += `<circle cx="${cx}" cy="${cy}" r="90" fill="#ff5500" opacity=".22" filter="url(#ch)"/>`;
+      const trilhas = [];
+      for (let i = 0; i < 5; i++) {
+        const o = -48 + i * 24;
+        trilhas.push(`M${cx + o} ${cy - 52}V${cy - 80 - (i % 2) * 18}L${cx + o + (o < 0 ? -20 : 20)} ${cy - 100 - (i % 2) * 18}V${cy - 124}`);
+        trilhas.push(`M${cx + o} ${cy + 52}V${cy + 80 + (i % 2) * 18}L${cx + o + (o < 0 ? -20 : 20)} ${cy + 100 + (i % 2) * 18}V${cy + 124}`);
+        trilhas.push(`M${cx - 52} ${cy + o}H${cx - 100 - (i % 2) * 30}L${cx - 120 - (i % 2) * 30} ${cy + o + (o < 0 ? -16 : 16)}H${cx - 200}`);
+        trilhas.push(`M${cx + 52} ${cy + o}H${cx + 100 + (i % 2) * 30}L${cx + 120 + (i % 2) * 30} ${cy + o + (o < 0 ? -16 : 16)}H${cx + 200}`);
+      }
+      c += `<path d="${trilhas.join('')}" fill="none" stroke="rgba(255,130,70,.5)" stroke-width="1.4"/>`;
+      [[cx - 48, cy - 124], [cx + 72, cy + 142], [cx - 200, cy + 40], [cx + 200, cy - 40], [cx + 24, cy - 104]].forEach(([x, y]) => { c += `<circle cx="${x}" cy="${y}" r="3.5" fill="#ffd2b8" filter="url(#cb)"/>`; });
+      c += `<rect x="${cx - 56}" y="${cy - 56}" width="112" height="112" rx="14" fill="rgba(20,10,6,.95)" stroke="#ff7a33" stroke-width="2.4" style="filter:drop-shadow(0 0 10px rgba(255,85,0,.8))"/>`;
+      c += `<rect x="${cx - 30}" y="${cy - 30}" width="60" height="60" rx="8" fill="rgba(255,85,0,.14)" stroke="rgba(255,150,100,.7)" stroke-width="1.4"/>`;
+      c += `<text x="${cx}" y="${cy + 8}" text-anchor="middle" font-family="Geist Mono" font-weight="600" font-size="22" fill="#fff" letter-spacing="1">IA</text>`;
+      document.getElementById('chip').innerHTML = c;
+
+      // V.04: alvo travado com anéis e a linha do primeiro dia à entrega
+      let a = defs('a');
+      const ax = 224, ay = 128;
+      a += `<circle cx="${ax}" cy="${ay}" r="80" fill="#ff5500" opacity=".22" filter="url(#ah)"/>`;
+      [96, 68, 40].forEach((r, i) => { a += `<circle cx="${ax}" cy="${ay}" r="${r}" fill="none" stroke="rgba(255,${130 + i * 20},80,${.3 + i * .2})" stroke-width="${i === 2 ? 2 : 1.3}"${i === 1 ? ' stroke-dasharray="3 6"' : ''}/>`; });
+      a += `<path d="M${ax - 120} ${ay}H${ax - 48}M${ax + 48} ${ay}H${ax + 120}M${ax} ${ay - 112}V${ay - 48}M${ax} ${ay + 48}V${ay + 112}" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>`;
+      const s = 58, k = 18;
+      a += `<path fill="none" stroke="#fafafa" stroke-width="3" d="M${ax - s} ${ay - s + k}V${ay - s}H${ax - s + k}M${ax + s - k} ${ay - s}H${ax + s}V${ay - s + k}M${ax + s} ${ay + s - k}V${ay + s}H${ax + s - k}M${ax - s + k} ${ay + s}H${ax - s}V${ay + s - k}"/>`;
+      a += `<circle cx="${ax}" cy="${ay}" r="10" fill="#ff5500" filter="url(#ab)"/><circle cx="${ax}" cy="${ay}" r="3.5" fill="#ffd2b8"/>`;
+      // linha do tempo
+      a += `<path d="M40 248H408" stroke="rgba(255,255,255,.15)"/>`;
+      a += `<path d="M40 248H408" stroke="#ff7a33" stroke-width="3" style="filter:drop-shadow(0 0 6px #ff5500)"/>`;
+      a += `<circle cx="40" cy="248" r="5" fill="#0b0b0e" stroke="#ff7a33" stroke-width="2"/><circle cx="408" cy="248" r="7" fill="#ff5500" filter="url(#ab)"/>`;
+      a += `<text x="40" y="232" font-family="Geist Mono" font-size="13" letter-spacing="1.5" fill="rgba(255,255,255,.5)">DIA 1</text>`;
+      a += `<text x="408" y="232" text-anchor="end" font-family="Geist Mono" font-size="13" letter-spacing="1.5" fill="#ffb187">ENTREGA</text>`;
+      a += `<text x="224" y="270" text-anchor="middle" font-family="Geist Mono" font-size="13" letter-spacing="1.5" fill="rgba(255,255,255,.4)">FOCO 100%</text>`;
+      document.getElementById('alvo').innerHTML = a;
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Sobre a Tirvo 04: laboratório</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(440px 460px at 900px 480px, rgba(255, 85, 0, .2), transparent 70%),
+        radial-gradient(520px 420px at 820px 1000px, rgba(255, 72, 0, .12), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 384px; font-size: 90px; }
+    .titulo .cinza { font-weight: 560; }
+
+    /* Comparação */
+    .compara { z-index: 4; left: 84px; top: 788px; width: 912px; display: grid; grid-template-columns: 1fr 1fr; }
+    .coluna { padding: 34px 34px 30px; }
+    .coluna + .coluna { border-left: 1px solid rgba(255, 255, 255, .08); }
+    .cab { display: flex; align-items: center; gap: 18px; padding-bottom: 26px; margin-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+    .cab .ib { width: 72px; height: 72px; }
+    .cab .ib .ico { font-size: 34px; }
+    .cab small { display: block; font: 500 16px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .cab b { display: block; margin-top: 9px; font-size: 31px; font-weight: 640; letter-spacing: -.03em; line-height: 1; }
+    .coluna li { display: flex; align-items: center; gap: 14px; height: 70px; font-size: 27px; letter-spacing: -.015em; }
+    .coluna li + li { border-top: 1px dashed rgba(255, 255, 255, .07); }
+    .coluna li .ico { font-size: 26px; stroke-width: 2; }
+    .serie { color: var(--t3); }
+    .serie .ib { --vidro: rgba(255, 255, 255, .03); }
+    .serie .ib .ico { color: var(--t3); filter: none; }
+    .serie .cab b { color: var(--t2); }
+    .serie li .ico { color: #6b6b73; }
+    .lab li { color: var(--t1); }
+    .lab li .ico { color: var(--or); filter: drop-shadow(0 0 6px rgba(255, 85, 0, .7)); }
+    .lab .cab small { color: var(--or); }
+    .vs { z-index: 5; left: 508px; top: 756px; width: 64px; height: 64px; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid rgba(255, 120, 60, .7); background: radial-gradient(circle, rgba(255, 85, 0, .3), rgba(14, 8, 5, .95) 70%); box-shadow: 0 0 26px rgba(255, 85, 0, .45); font: italic 400 38px/1 var(--serif); color: #fff; padding-bottom: 6px; }
+
+    .texto { z-index: 4; left: 84px; top: 1236px; width: 912px; }
+    .texto .corpo { font-size: 31px; }
+
+    /* Rodapé: terminal */
+    .rodape { z-index: 4; left: 84px; top: 1358px; width: 912px; }
+    .rodape .barra { display: flex; align-items: center; gap: 16px; height: 62px; padding: 0 28px; border-bottom: 1px solid rgba(255, 255, 255, .08); font: 500 18px/1 var(--mono); letter-spacing: .04em; color: var(--t3); }
+    .rodape .barra b { font-weight: 500; color: var(--t1); }
+    .rodape .barra .logo { height: 30px; margin-left: auto; }
+    .rodape .pontos { display: flex; gap: 8px; }
+    .rodape .pontos i { width: 11px; height: 11px; border-radius: 50%; background: rgba(255, 255, 255, .16); }
+    .rodape .pontos i:last-child { background: var(--or); box-shadow: 0 0 10px var(--or); }
+    .rodape .cmd { display: grid; gap: 10px; padding: 22px 30px 20px; }
+    .rodape .cmd p { display: flex; align-items: center; gap: 18px; font: 500 21px/1 var(--mono); color: var(--t3); }
+    .rodape .cmd p > i { font-style: normal; color: var(--or); }
+    .rodape .cmd .k { width: 92px; letter-spacing: .08em; }
+    .rodape .cmd .lk { font-family: var(--sans); font-size: 28px; }
+    .rodape .acoes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 22px 22px; }
+    .rodape .btn { height: 84px; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.045)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="70%" cy="30%" r="60%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <linearGradient id="g-liquido" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff7a33" stop-opacity=".55"/><stop offset="1" stop-color="#ff3300" stop-opacity=".15"/></linearGradient>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
+        <filter id="brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="f-longe" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3.5"/></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+
+      <!-- frasco do laboratório em neon -->
+      <circle cx="880" cy="520" r="120" fill="#ff5500" opacity=".2" filter="url(#halo)"/>
+      <path d="M842 352V452L752 612a20 20 0 0 0 18 30H990a20 20 0 0 0 18-30L918 452V352" fill="none" stroke="#ff5500" stroke-width="10" opacity=".35" filter="url(#halo)"/>
+      <path d="M770 560H990L1008 612a20 20 0 0 1-18 30H770a20 20 0 0 1-18-30Z" fill="url(#g-liquido)"/>
+      <g class="neon" style="stroke-width:3">
+        <path d="M842 352V452L752 612a20 20 0 0 0 18 30H990a20 20 0 0 0 18-30L918 452V352"/>
+        <path d="M826 352H934"/>
+        <path d="M778 560H982"/>
+      </g>
+      <g fill="none" stroke="#ffb187" stroke-width="2" class="neon" style="stroke:#ffb187">
+        <circle cx="850" cy="600" r="8"/><circle cx="905" cy="584" r="5"/><circle cx="878" cy="530" r="6"/><circle cx="896" cy="492" r="4"/><circle cx="872" cy="456" r="3"/>
+      </g>
+      <!-- marcas de medida do frasco -->
+      <g stroke="rgba(255,255,255,.35)" stroke-width="1.4"><path d="M842 400h18M842 424h10M918 400h-18M918 424h-10"/></g>
+      <g font-family="Geist Mono" font-size="14" fill="rgba(255,255,255,.4)" letter-spacing="1"><text x="1020" y="566">200</text><text x="1020" y="614">100</text></g>
+
+      <!-- esteira da linha de montagem, cinza, ao fundo -->
+      <g filter="url(#f-longe)" opacity=".55">
+        <path d="M-40 1330L560 1190M-40 1380L620 1226" stroke="rgba(255,255,255,.35)" stroke-width="2" fill="none"/>
+        <g fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2">
+          <path d="M40 1268l60-14 34 16-60 14z M40 1268v40l34 16v-40 M134 1270v40l-60 14"/>
+          <path d="M190 1234l60-14 34 16-60 14z M190 1234v40l34 16v-40 M284 1236v40l-60 14"/>
+          <path d="M340 1200l60-14 34 16-60 14z M340 1200v40l34 16v-40 M434 1202v40l-60 14"/>
+        </g>
+      </g>
+
+      <!-- microscópio ao fundo, à direita -->
+      <g class="longe" style="opacity:.35"><g transform="translate(860 1180) scale(7)" class="neon" style="stroke-width:.6"><use href="#i-microscope" width="24" height="24"/></g></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">04<i>/15</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>01</i> · quem somos</p>
+    <h1 class="titulo">Um laboratório<br>de <em>excelência,</em><br><span class="cinza">não uma linha<br>de montagem.</span></h1>
+
+    <section class="compara" data-frame="30,0,30,0" data-tone="laranja" data-acento="barra">
+      <div class="coluna serie">
+        <div class="cab"><span class="ib" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-factory"/></svg></span><div><small>mercado</small><b>Em série</b></div></div>
+        <ul>
+          <li><svg class="ico"><use href="#i-x"/></svg>fórmula pronta</li>
+          <li><svg class="ico"><use href="#i-x"/></svg>peça repetida</li>
+          <li><svg class="ico"><use href="#i-x"/></svg>de qualquer jeito</li>
+        </ul>
+      </div>
+      <div class="coluna lab">
+        <div class="cab"><span class="ib" data-frame="12,0,12,0" data-tone="neon"><svg class="ico"><use href="#i-flask"/></svg></span><div><small>tirvo</small><b>Laboratório</b></div></div>
+        <ul>
+          <li><svg class="ico"><use href="#i-check"/></svg>engenharia própria</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>sob medida</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>lapidado até o fim</li>
+        </ul>
+      </div>
+    </section>
+    <span class="vs">vs</span>
+
+    <div class="texto"><p class="corpo">Uma agência de tecnologia e IA construída como um <b>laboratório de excelência absoluta.</b></p></div>
+
+    <footer class="rodape" data-frame="22,0,22,0" data-tone="branco" data-acento="base">
+      <div class="barra">
+        <span class="pontos"><i></i><i></i><i></i></span>
+        <span>~/tirvo <b>$ contato</b></span>
+        <img class="logo" data-logo>
+      </div>
+      <div class="cmd">
+        <p><i>&gt;</i><span class="k">site</span><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span></p>
+        <p><i>&gt;</i><span class="k">e-mail</span><span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span></p>
+      </div>
+      <div class="acoes">
+        <span class="btn cheio" data-frame="14,0,14,0" data-tone="quente"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+        <span class="btn vazado" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      </div>
+    </footer>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>

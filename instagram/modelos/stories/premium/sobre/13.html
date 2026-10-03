@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Sobre a Tirvo 13: valores 1 e 2</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(520px 380px at 860px 800px, rgba(255, 85, 0, .14), transparent 70%),
+        radial-gradient(520px 380px at 220px 1200px, rgba(255, 72, 0, .14), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 104px; }
+    .contagem { z-index: 4; right: 84px; top: 540px; font: 500 18px/1 var(--mono); letter-spacing: .16em; color: var(--t3); }
+    .contagem b { font-weight: 500; color: var(--or); }
+
+    .valor { z-index: 4; left: 84px; width: 912px; height: 340px; padding: 34px 36px 0 38px; }
+    .valor .cab { display: flex; align-items: center; gap: 22px; }
+    .valor .ib { width: 88px; height: 88px; }
+    .valor .ib .ico { font-size: 42px; }
+    .valor small { display: block; font: 500 18px/1 var(--mono); letter-spacing: .18em; color: var(--or); }
+    .valor h2 { margin-top: 10px; font-size: 46px; font-weight: 650; letter-spacing: -.035em; line-height: 1; }
+    .valor h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.14em; letter-spacing: -.01em; }
+    .valor p.corpo { margin-top: 24px; width: 600px; font-size: 27px; line-height: 1.4; }
+    .valor .arte-v { position: absolute; z-index: 1; pointer-events: none; overflow: visible; }
+
+    /* V.01: medidor de profundidade */
+    .prof { right: 34px; top: 30px; width: 200px; height: 300px; }
+    /* V.02: ciclo refinar, medir, refinar */
+    .ciclo { right: 20px; top: 34px; width: 260px; height: 280px; }
+
+    /* Rodapé em três colunas */
+    .rodape { z-index: 4; left: 84px; top: 1430px; width: 912px; height: 220px; display: grid; grid-template-columns: 232px 1fr 324px; align-items: center; }
+    .rodape > div { height: 100%; display: grid; align-content: center; padding: 0 26px; }
+    .rodape > div + div { border-left: 1px solid rgba(255, 255, 255, .08); }
+    .rodape .logo { height: 44px; }
+    .rodape .status { display: flex; align-items: center; gap: 10px; margin-top: 18px; font: 500 15px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--t2); }
+    .rodape .status .led { width: 8px; height: 8px; box-shadow: 0 0 0 4px rgba(255, 85, 0, .18), 0 0 10px var(--or); }
+    .rodape .links { gap: 16px; }
+    .rodape .lk { font-size: 24px; gap: 10px; }
+    .rodape .acoes { gap: 14px; }
+    .rodape .btn { height: 70px; padding: 0 20px; border-radius: 10px; font-size: 24px; justify-content: space-between; }
+    .rodape .btn .ico { font-size: 26px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- ondas de profundidade e facetas, ao fundo -->
+      <g fill="none" stroke="rgba(255,120,60,.12)" stroke-width="1.2" class="longe">
+        <path d="M0 640c90-30 180 30 270 0s180-30 270 0 180 30 270 0 180-30 270 0"/>
+        <path d="M0 680c90-30 180 30 270 0s180-30 270 0 180 30 270 0 180-30 270 0"/>
+        <path d="M0 720c90-30 180 30 270 0s180-30 270 0 180 30 270 0 180-30 270 0"/>
+      </g>
+      <g fill="none" stroke="rgba(255,140,80,.16)" stroke-width="1.2" class="longe" transform="translate(-80 1290) scale(14)"><use href="#i-gem" width="24" height="24"/></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">13<i>/15</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>P.03</i> · código de conduta</p>
+    <h1 class="titulo">Os nossos<br><em>valores.</em></h1>
+    <p class="contagem"><b>V.01–02</b> / 04</p>
+
+    <section class="valor" style="top:640px" data-frame="30,0,30,0" data-tone="laranja" data-acento="barra">
+      <svg class="arte-v prof" id="prof" viewBox="0 0 200 300" width="200" height="300"></svg>
+      <div class="cab"><span class="ib" data-frame="14,0,14,0" data-tone="laranja"><svg class="ico"><use href="#i-layers"/></svg></span><div><small>V.01</small><h2>Profundidade <em>absoluta</em></h2></div></div>
+      <p class="corpo">Recusamos o raso, o template e o genérico. Cada projeto é executado em <b>todas as camadas, inclusive as que ninguém vê.</b></p>
+    </section>
+
+    <section class="valor" style="top:1016px" data-frame="0,30,0,30" data-tone="neon" data-acento="base">
+      <svg class="arte-v ciclo" id="ciclo" viewBox="0 0 260 280" width="260" height="280"></svg>
+      <div class="cab"><span class="ib" data-frame="14,0,14,0" data-tone="neon"><svg class="ico"><use href="#i-gem"/></svg></span><div><small>V.02</small><h2>Obsessão pela <em>perfeição</em></h2></div></div>
+      <p class="corpo">Bom nunca é suficiente. Refinamos, medimos<br>e refinamos de novo, <b>até chegar ao<br>estado da arte.</b></p>
+    </section>
+
+    <footer class="rodape" data-frame="22,0,22,0" data-tone="branco" data-acento="topo">
+      <div><img class="logo" data-logo><p class="status"><span class="led"></span>engenharia</p></div>
+      <div class="links">
+        <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+        <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+      </div>
+      <div class="acoes">
+        <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+        <span class="btn vazado"><span>Chame no direct</span><svg class="ico"><use href="#i-send"/></svg></span>
+      </div>
+    </footer>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      // medidor de profundidade: camadas visíveis e as que ninguém vê
+      let p = '<path d="M40 14V286" stroke="rgba(255,255,255,.25)"/>';
+      const niveis = ['00', '01', '02', '03', '04', '05', '06'];
+      niveis.forEach((n, i) => {
+        const y = 22 + i * 42, oculto = i >= 3;
+        p += `<path d="M34 ${y}H46" stroke="rgba(255,255,255,.4)"/>`;
+        p += `<text x="26" y="${y + 5}" text-anchor="end" font-family="Geist Mono" font-size="13" fill="rgba(255,255,255,.4)">${n}</text>`;
+        p += `<rect x="60" y="${y - 12}" width="${130 - i * 6}" height="24" rx="5" fill="${oculto ? 'rgba(255,85,0,.12)' : 'rgba(255,255,255,.05)'}" stroke="${oculto ? 'rgba(255,120,60,.6)' : 'rgba(255,255,255,.18)'}"${oculto ? ' stroke-dasharray="4 4"' : ''}/>`;
+      });
+      p += `<path d="M54 140H196" stroke="#ff7a33" stroke-dasharray="3 4"/>`;
+      p += `<text x="196" y="132" text-anchor="end" font-family="Geist Mono" font-size="12" letter-spacing="1.5" fill="#ffb187">NINGUÉM VÊ ↓</text>`;
+      p += `<circle cx="40" cy="274" r="6" fill="#ff5500" style="filter:drop-shadow(0 0 6px #ff5500)"/>`;
+      document.getElementById('prof').innerHTML = p;
+
+      // ciclo de refino
+      const cx = 130, cy = 140, r = 86;
+      let c = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(255,120,60,.25)" stroke-width="1.2"/>`;
+      c += `<path d="M${cx} ${cy - r}A${r} ${r} 0 1 1 ${cx - r * .87} ${cy - r * .5}" fill="none" stroke="#ff7a33" stroke-width="3" style="filter:drop-shadow(0 0 6px #ff5500)"/>`;
+      c += `<path d="M${cx - r * .87 - 8} ${cy - r * .5 + 12}L${cx - r * .87} ${cy - r * .5}L${cx - r * .87 + 13} ${cy - r * .5 + 5}" fill="none" stroke="#ff7a33" stroke-width="3" stroke-linecap="round"/>`;
+      [['REFINAR', -90], ['MEDIR', 30], ['REFINAR', 150]].forEach(([t, a]) => {
+        const x = cx + Math.cos(a * Math.PI / 180) * r, y = cy + Math.sin(a * Math.PI / 180) * r;
+        c += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="7" fill="#0b0b0e" stroke="#ff7a33" stroke-width="2"/>`;
+        const lx = a === -90 ? x : a === 30 ? x + 14 : x - 14, ly = a === -90 ? y - 18 : y + 26;
+        c += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${a === -90 ? 'middle' : a === 30 ? 'start' : 'end'}" font-family="Geist Mono" font-weight="500" font-size="13" letter-spacing="1.5" fill="rgba(255,255,255,.65)">${t}</text>`;
+      });
+      c += `<text x="${cx}" y="${cy + 8}" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="30" fill="#fafafa">∞</text>`;
+      document.getElementById('ciclo').innerHTML = c;
+    })();
+  </script>
+</body>
+</html>

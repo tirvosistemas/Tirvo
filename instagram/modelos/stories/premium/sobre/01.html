@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Sobre a Tirvo 01: hiperfoco</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(400px 400px at 540px 590px, rgba(255, 85, 0, .22), transparent 70%),
+        radial-gradient(900px 700px at 540px 590px, rgba(255, 60, 0, .07), transparent 70%),
+        radial-gradient(700px 360px at 540px 1940px, rgba(255, 70, 0, .16), transparent 70%),
+        linear-gradient(180deg, #050506 0%, #09090b 50%, #050506 100%);
+    }
+
+    /* Etiquetas presas à mira (o painel de foco do site) */
+    .etiqueta { z-index: 4; display: flex; align-items: center; gap: 12px; padding: 12px 18px; border: 1px solid rgba(255, 255, 255, .14); border-radius: 10px; background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .015)), rgba(9, 9, 11, .74); backdrop-filter: blur(14px); font: 500 19px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t3); white-space: nowrap; box-shadow: 0 18px 40px rgba(0, 0, 0, .5); }
+    .etiqueta b { font-weight: 500; color: var(--t1); }
+    .etiqueta .ico { font-size: 22px; color: var(--or); stroke-width: 2; }
+    .etiqueta.quente { border-color: rgba(255, 85, 0, .5); background: linear-gradient(180deg, rgba(255, 85, 0, .18), rgba(255, 85, 0, .04)), rgba(14, 8, 5, .82); color: #ffb187; box-shadow: 0 0 30px rgba(255, 85, 0, .2), 0 18px 40px rgba(0, 0, 0, .5); }
+    .etiqueta.quente b { color: #fff; }
+
+    /* Bloco do título */
+    .bloco { z-index: 4; left: 84px; top: 918px; width: 912px; height: 420px; display: grid; grid-template-columns: 1fr 250px; }
+    .titulo { position: relative; z-index: 2; padding: 50px 0 0 46px; font-size: 86px; line-height: .97; }
+    .titulo em { font-size: 1.16em; }
+    .ficha { display: grid; align-content: center; padding: 0 28px 0 0; }
+    .ficha li { display: grid; grid-template-columns: 58px 1fr; align-items: center; gap: 16px; padding: 22px 0; font: 500 17px/1.35 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t2); }
+    .ficha li + li { border-top: 1px dashed rgba(255, 255, 255, .12); }
+    .ficha .ib { width: 58px; height: 58px; }
+    .ficha .ib .ico { font-size: 28px; }
+    .ficha::before { content: ""; position: absolute; left: -28px; top: 46px; bottom: 46px; width: 1px; background: linear-gradient(180deg, transparent, rgba(255, 255, 255, .18), transparent); }
+
+    /* Rodapé: painel enquadrado pelos cantos da mira */
+    .chamada { z-index: 4; left: 84px; right: 84px; top: 1374px; display: flex; align-items: center; gap: 16px; font: 500 19px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--t3); }
+    .chamada::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0)); }
+    .chamada i { font-style: normal; color: var(--or); }
+    .rodape { z-index: 4; left: 84px; top: 1414px; width: 912px; height: 236px; display: grid; grid-template-columns: 1fr 392px; align-items: center; column-gap: 34px; padding: 0 30px 0 40px; border: 1px solid rgba(255, 255, 255, .09); border-radius: 6px; background: linear-gradient(120deg, rgba(255, 85, 0, .1), rgba(255, 255, 255, .02) 42%, rgba(255, 255, 255, .03)), rgba(9, 9, 11, .7); backdrop-filter: blur(18px) saturate(140%); box-shadow: 0 30px 60px rgba(0, 0, 0, .55); }
+    .cantos { position: absolute; inset: 0; pointer-events: none; }
+    .cantos i { position: absolute; width: 30px; height: 30px; border: 0 solid #ff6a1f; filter: drop-shadow(0 0 6px rgba(255, 85, 0, .8)); }
+    .cantos i:nth-child(1) { left: -9px; top: -9px; border-width: 3px 0 0 3px; }
+    .cantos i:nth-child(2) { right: -9px; top: -9px; border-width: 3px 3px 0 0; }
+    .cantos i:nth-child(3) { left: -9px; bottom: -9px; border-width: 0 0 3px 3px; }
+    .cantos i:nth-child(4) { right: -9px; bottom: -9px; border-width: 0 3px 3px 0; }
+    .rodape .marca { display: grid; gap: 24px; }
+    .rodape .links { display: grid; gap: 14px; }
+    .rodape .lk { font-size: 28px; }
+    .rodape .botoes { display: grid; gap: 16px; }
+    .rodape .btn { justify-content: space-between; height: 80px; padding: 0 26px 0 30px; border-radius: 4px; font-size: 29px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="32%" r="60%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".3"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <linearGradient id="g-arco" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb08a"/><stop offset=".5" stop-color="#ff5500"/><stop offset="1" stop-color="#ff3300" stop-opacity=".2"/></linearGradient>
+        <radialGradient id="g-lente" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ff5500" stop-opacity=".22"/><stop offset=".55" stop-color="#ff5500" stop-opacity=".05"/><stop offset="1" stop-color="#ff5500" stop-opacity="0"/></radialGradient>
+        <filter id="brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+        <filter id="d1" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="1"/></filter>
+        <filter id="d2" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2.4"/></filter>
+        <filter id="d3" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="4.5"/></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <g stroke="rgba(255,255,255,.05)" stroke-width="1"><path d="M0 596H1080"/><path d="M540 320V900"/></g>
+      <g id="simbolos" font-family="Geist Mono" font-weight="500" text-anchor="middle"></g>
+      <g id="mira"></g>
+      <!-- trilha que desce da mira até o título -->
+      <path d="M540 880V918" stroke="rgba(255,120,60,.7)" stroke-width="1.6" stroke-dasharray="2 7"/>
+      <circle cx="540" cy="918" r="5" fill="#ff7a33" filter="url(#brilho)"/>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">01<i>/15</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <div class="etiqueta" style="left:84px; top:378px"><svg class="ico"><use href="#i-crosshair"/></svg>foco <b>100%</b></div>
+    <div class="etiqueta" style="right:84px; top:378px"><svg class="ico"><use href="#i-layers"/></svg>camadas <b>todas</b></div>
+    <div class="etiqueta" style="left:84px; top:790px"><svg class="ico"><use href="#i-ban"/></svg>atalhos <b>0</b></div>
+    <div class="etiqueta quente" style="right:84px; top:790px"><span class="led"></span>rigor <b>máximo</b></div>
+
+    <section class="bloco" data-frame="36,0,36,0" data-tone="laranja" data-acento="barra">
+      <h1 class="titulo">Hiperfoco<br>convertido em<br>engenharia de<br><em>elite.</em><span class="cursor"></span></h1>
+      <ul class="ficha">
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-pin"/></svg></span>Curitiba<br>Brasil</li>
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-cpu"/></svg></span>Tecnologia<br>e IA</li>
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-ruler"/></svg></span>Rigor de<br>engenharia</li>
+      </ul>
+    </section>
+
+    <p class="chamada"><i>//</i> fale direto com a engenharia</p>
+    <footer class="rodape">
+      <span class="cantos"><i></i><i></i><i></i><i></i></span>
+      <div class="marca">
+        <img class="logo" data-logo>
+        <div class="links">
+          <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+          <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+        </div>
+      </div>
+      <div class="botoes">
+        <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+        <span class="btn vazado"><span>Chame no direct</span><svg class="ico"><use href="#i-send"/></svg></span>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const CX = 540, CY = 596, K = .86;
+  </script>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      const rnd = Tirvo.semear(7);
+      // Símbolos de código (o ruído) que ficam nítidos e laranja ao chegar perto do foco
+      const lista = '01<>/{}#$%&*+=?', esc = { '<': '&lt;', '>': '&gt;', '&': '&amp;' };
+      let html = '';
+      for (let i = 0; i < 130; i++) {
+        const ang = rnd() * Math.PI * 2;
+        const r = (250 + Math.pow(rnd(), .8) * 560) * K;
+        const x = CX + Math.cos(ang) * r, y = CY + Math.sin(ang) * r * .92;
+        const c = lista[Math.floor(rnd() * lista.length)];
+        const tam = r < 290 ? 24 : (20 + rnd() * 24);
+        const op = (.12 + rnd() * .2).toFixed(2);
+        if (y < 330 || y > 880 || x < 20 || x > 1060) continue;
+        const perto = r < 290;
+        const filtro = r > 540 ? 'd3' : r > 410 ? 'd2' : r > 315 ? 'd1' : '';
+        const cor = perto ? '#ff7a33' : r < 370 ? 'rgba(255,190,150,.55)' : `rgba(255,255,255,${op})`;
+        html += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${tam.toFixed(0)}" fill="${cor}"${filtro ? ` filter="url(#${filtro})"` : ''}${perto ? ' style="filter:drop-shadow(0 0 6px #ff5500)"' : ''}>${esc[c] || c}</text>`;
+        if (r > 260 && r < 480 && rnd() < .35) {
+          const r2 = r - 60 - rnd() * 50;
+          html += `<path d="M${x.toFixed(1)} ${y.toFixed(1)}L${(CX + Math.cos(ang) * r2).toFixed(1)} ${(CY + Math.sin(ang) * r2 * .92).toFixed(1)}" stroke="rgba(255,120,60,.28)" stroke-width="1.2" stroke-dasharray="2 6"/>`;
+        }
+      }
+      document.getElementById('simbolos').innerHTML = html;
+
+      // A mira: lente, escala de graus, arco de foco, cruz com marcas, cantos do logotipo e o ponto laranja
+      const R = v => v * K;
+      const p = (a, r) => [CX + Math.cos((a - 90) * Math.PI / 180) * r, CY + Math.sin((a - 90) * Math.PI / 180) * r];
+      const arco = (r, a0, a1) => { const [x0, y0] = p(a0, r), [x1, y1] = p(a1, r); return `M${x0.toFixed(1)} ${y0.toFixed(1)}A${r} ${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`; };
+      let h = `<circle cx="${CX}" cy="${CY}" r="${R(300)}" fill="url(#g-lente)"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="${R(318)}" fill="none" stroke="rgba(255,255,255,.10)"/>`;
+      for (let a = 0; a < 360; a += 3) {
+        const maior = a % 30 === 0, medio = a % 15 === 0;
+        const [x1, y1] = p(a, R(318)), [x2, y2] = p(a, R(318) - (maior ? 20 : medio ? 12 : 6));
+        h += `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="rgba(255,255,255,${maior ? .45 : medio ? .25 : .13})" stroke-width="${maior ? 1.6 : 1}"/>`;
+        if (maior && a % 90 !== 0) {
+          const [tx, ty] = p(a, R(318) + 22);
+          h += `<text x="${tx.toFixed(1)}" y="${(ty + 5).toFixed(1)}" font-family="Geist Mono" font-size="14" font-weight="500" fill="rgba(255,255,255,.32)" text-anchor="middle" letter-spacing="1">${String(a).padStart(3, '0')}</text>`;
+        }
+      }
+      h += `<path d="${arco(R(282), 300, 430)}" fill="none" stroke="#ff5500" stroke-width="10" opacity=".55" filter="url(#halo)"/>`;
+      h += `<path d="${arco(R(282), 300, 430)}" fill="none" stroke="url(#g-arco)" stroke-width="3" stroke-linecap="round"/>`;
+      h += `<path d="${arco(R(282), 120, 160)}" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-linecap="round"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="${R(230)}" fill="rgba(9,9,11,.35)" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="${R(230)}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="14" stroke-dasharray="1.5 9"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="${R(150)}" fill="none" stroke="rgba(255,255,255,.12)" stroke-dasharray="6 8"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="${R(74)}" fill="none" stroke="rgba(255,140,80,.55)" stroke-width="1.4"/>`;
+      const g0 = R(92), g1 = R(300);
+      h += `<path d="M${CX - g1} ${CY}H${CX - g0}M${CX + g0} ${CY}H${CX + g1}M${CX} ${CY - g1}V${CY - g0}M${CX} ${CY + g0}V${CY + g1}" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>`;
+      for (let k = 1; k <= 8; k++) {
+        const d = R(92 + k * 24), t = k % 4 === 0 ? 11 : 5;
+        h += `<path d="M${CX - d} ${CY - t}V${CY + t}M${CX + d} ${CY - t}V${CY + t}M${CX - t} ${CY - d}H${CX + t}M${CX - t} ${CY + d}H${CX + t}" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>`;
+      }
+      const s = R(120), c = R(34);
+      h += `<path fill="none" stroke="#fafafa" stroke-width="3" stroke-linecap="square" d="M${CX - s} ${CY - s + c}V${CY - s}H${CX - s + c}M${CX + s - c} ${CY - s}H${CX + s}V${CY - s + c}M${CX + s} ${CY + s - c}V${CY + s}H${CX + s - c}M${CX - s + c} ${CY + s}H${CX - s}V${CY + s - c}"/>`;
+      h += `<path stroke="#fafafa" stroke-width="3" d="M${CX} ${CY - s - 12}V${CY - s + 6}M${CX} ${CY + s - 6}V${CY + s + 12}M${CX - s - 12} ${CY}H${CX - s + 6}M${CX + s - 6} ${CY}H${CX + s + 12}"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="30" fill="#ff5500" opacity=".5" filter="url(#halo)"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="13" fill="#ff5500" filter="url(#brilho)"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="4.5" fill="#ffd2b8"/>`;
+      // linhas de chamada até as etiquetas
+      const pino = (x, y, quente) => `<circle cx="${x}" cy="${y}" r="4" fill="#09090b" stroke="${quente ? '#ff7a33' : 'rgba(255,255,255,.55)'}" stroke-width="1.4"/>`;
+      h += `<g fill="none" stroke-width="1.4">
+        <path d="M262 403H330L${CX - 80} ${CY - 80}" stroke="rgba(255,255,255,.3)"/>${pino(CX - 80, CY - 80)}
+        <path d="M756 403H736L${CX + 80} ${CY - 80}" stroke="rgba(255,255,255,.3)"/>${pino(CX + 80, CY - 80)}
+        <path d="M246 815H320L${CX - 52} ${CY + 52}" stroke="rgba(255,255,255,.3)"/>${pino(CX - 52, CY + 52)}
+        <path d="M778 815H756L${CX + 52} ${CY + 52}" stroke="rgba(255,120,60,.65)"/>${pino(CX + 52, CY + 52, 1)}</g>`;
+      document.getElementById('mira').innerHTML = h;
+    })();
+  </script>
+</body>
+</html>

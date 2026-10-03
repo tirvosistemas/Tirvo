@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Sobre a Tirvo 06: horas de foco</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(420px 420px at 900px 420px, rgba(255, 85, 0, .16), transparent 70%),
+        radial-gradient(700px 420px at 540px 930px, rgba(255, 72, 0, .14), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 390px; font-size: 88px; }
+    .titulo .cinza { font-weight: 560; }
+
+    /* Monitor inclinado com a curva de atenção */
+    .monitor { z-index: 4; left: 84px; top: 718px; width: 912px; height: 420px; transform: perspective(1500px) rotateX(13deg); transform-origin: 50% 100%; }
+    .monitor .cab { display: flex; align-items: center; gap: 16px; padding: 26px 30px 0; font: 500 18px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--t3); }
+    .monitor .cab b { font-weight: 500; color: var(--t1); }
+    .monitor .cab .legenda { margin-left: auto; display: flex; gap: 22px; }
+    .monitor .cab .legenda span { display: flex; align-items: center; gap: 9px; }
+    .monitor .cab .legenda i { width: 26px; height: 3px; border-radius: 2px; background: #ff6a1f; box-shadow: 0 0 8px #ff5500; }
+    .monitor .cab .legenda i.cinza { background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 6px, transparent 6px 10px); box-shadow: none; }
+    .monitor svg.curva { position: absolute; left: 0; top: 0; }
+    .reflexo { z-index: 3; left: 120px; top: 1140px; width: 840px; height: 70px; background: radial-gradient(50% 100% at 50% 0, rgba(255, 85, 0, .22), transparent 70%); filter: blur(8px); }
+
+    /* Os três traços do fundador */
+    .tracos { z-index: 4; left: 84px; top: 1172px; width: 912px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .traco { height: 204px; padding: 24px 24px 0; }
+    .traco .ib { width: 64px; height: 64px; }
+    .traco .ib .ico { font-size: 32px; }
+    .traco small { display: block; margin-top: 20px; font: 500 15px/1 var(--mono); letter-spacing: .16em; color: var(--or); }
+    .traco b { display: block; margin-top: 10px; font-size: 29px; font-weight: 620; letter-spacing: -.03em; line-height: 1.08; }
+
+    /* Rodapé: botões em cima, faixa de contato embaixo */
+    .acoes { z-index: 4; left: 84px; top: 1414px; width: 912px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .acoes .btn { height: 88px; border-radius: 16px; }
+    .acoes .btn.direct { border: 1px solid rgba(255, 255, 255, .2); background: rgba(9, 9, 11, .6); }
+    .acoes .btn.direct .ico { color: var(--or); }
+    .acoes .btn.neon { justify-content: space-between; padding: 0 30px 0 36px; }
+    .faixa { z-index: 4; left: 84px; top: 1530px; width: 912px; height: 112px; display: flex; align-items: center; padding: 0 30px; border-top: 1px solid rgba(255, 255, 255, .1); border-bottom: 1px solid rgba(255, 255, 255, .1); background: linear-gradient(90deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, 0)); }
+    .faixa .logo { height: 46px; }
+    .faixa .divisor-v { margin: 26px 28px; }
+    .faixa .lk { font-size: 25px; gap: 10px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="70%" cy="24%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- mostrador de relógio e ampulheta ao fundo -->
+      <g id="relogio"></g>
+      <circle cx="915" cy="500" r="70" fill="#ff5500" opacity=".18" filter="url(#halo)"/>
+      <g transform="translate(863 448) scale(4.33)" class="neon" style="stroke-width:.5; opacity:.8"><use href="#i-hourglass" width="24" height="24"/></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">06<i>/15</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>//</i> tempo de análise</p>
+    <h1 class="titulo">Por <em>horas,</em><br><span class="cinza">onde a maioria<br>para em minutos.</span></h1>
+
+    <section class="monitor" data-frame="24,0,24,0" data-tone="laranja" data-acento="topo">
+      <svg class="curva" id="curva" width="912" height="420" viewBox="0 0 912 420"></svg>
+      <div class="cab"><b>atenção</b> × tempo
+        <span class="legenda"><span><i></i>hiperfoco</span><span><i class="cinza"></i>a maioria</span></span>
+      </div>
+    </section>
+    <div class="reflexo"></div>
+
+    <ul class="tracos">
+      <li class="traco" data-frame="16,0,16,0" data-tone="branco"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-brain"/></svg></span><small>01</small><b>Fundador<br>neurodivergente</b></li>
+      <li class="traco" data-frame="16,0,16,0" data-tone="branco"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-sparkles"/></svg></span><small>02</small><b>Altas<br>habilidades</b></li>
+      <li class="traco" data-frame="16,0,16,0" data-tone="neon"><span class="ib" data-frame="12,0,12,0" data-tone="neon"><svg class="ico"><use href="#i-crosshair"/></svg></span><small>03</small><b>Hiperfoco<br>sustentado</b></li>
+    </ul>
+
+    <div class="acoes">
+      <span class="btn direct"><svg class="ico"><use href="#i-send"/></svg>Chame no direct</span>
+      <span class="btn neon"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+    </div>
+    <div class="faixa">
+      <img class="logo" data-logo>
+      <span class="divisor-v"></span>
+      <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+      <span class="divisor-v"></span>
+      <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+    </div>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      // mostrador de relógio ao fundo
+      let r = '';
+      const CX = 915, CY = 500;
+      for (let a = 0; a < 360; a += 6) {
+        const maior = a % 30 === 0, rad = a * Math.PI / 180;
+        const r1 = 150, r2 = r1 - (maior ? 18 : 7);
+        r += `<path d="M${(CX + Math.cos(rad) * r1).toFixed(1)} ${(CY + Math.sin(rad) * r1).toFixed(1)}L${(CX + Math.cos(rad) * r2).toFixed(1)} ${(CY + Math.sin(rad) * r2).toFixed(1)}" stroke="rgba(255,255,255,${maior ? .3 : .12})" stroke-width="${maior ? 2 : 1}"/>`;
+      }
+      r += `<circle cx="${CX}" cy="${CY}" r="150" fill="none" stroke="rgba(255,255,255,.08)"/><circle cx="${CX}" cy="${CY}" r="112" fill="none" stroke="rgba(255,255,255,.06)" stroke-dasharray="3 8"/>`;
+      r += `<path d="M${CX} ${CY - 150}A150 150 0 1 1 ${CX - 149} ${CY - 15}" fill="none" stroke="#ff6a1f" stroke-width="3" opacity=".7" style="filter:drop-shadow(0 0 6px #ff5500)"/>`;
+      document.getElementById('relogio').innerHTML = r;
+
+      // curvas de atenção
+      const X0 = 70, X1 = 870, Y0 = 350, Y1 = 110;
+      const xt = t => X0 + t * (X1 - X0);              // t em 0..1 (0 a 4 h)
+      const ya = v => Y0 - v * (Y0 - Y1);              // v em 0..1
+      let foco = '', maioria = '';
+      for (let i = 0; i <= 200; i++) {
+        const t = i / 200;
+        const vf = Math.min(1, t * 18) * (.93 + .03 * Math.sin(t * 40) + .02 * Math.sin(t * 13));
+        const vm = .78 * Math.exp(-t * 14) + .03 * Math.sin(t * 30) * Math.exp(-t * 6) + .03;
+        foco += (i ? 'L' : 'M') + xt(t).toFixed(1) + ' ' + ya(vf).toFixed(1);
+        maioria += (i ? 'L' : 'M') + xt(t).toFixed(1) + ' ' + ya(Math.max(.02, vm)).toFixed(1);
+      }
+      let h = `<defs>
+        <linearGradient id="c-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5500" stop-opacity=".26"/><stop offset="1" stop-color="#ff5500" stop-opacity="0"/></linearGradient>
+        <filter id="c-halo" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+        <filter id="c-brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+      for (let k = 0; k <= 4; k++) h += `<path d="M${X0} ${(Y1 + k * 60)}H${X1}" stroke="rgba(255,255,255,.06)" stroke-dasharray="2 6"/>`;
+      const marcas = [[.0625, '15 min'], [.25, '1 h'], [.5, '2 h'], [.75, '3 h'], [1, '4 h']];
+      marcas.forEach(([t, txt]) => {
+        h += `<path d="M${xt(t)} ${Y0}V${Y0 + 8}" stroke="rgba(255,255,255,.3)"/>`;
+        h += `<text x="${xt(t)}" y="${Y0 + 34}" text-anchor="${t === 1 ? 'end' : 'middle'}" font-family="Geist Mono" font-size="15" fill="rgba(255,255,255,.42)" letter-spacing="1">${txt.toUpperCase()}</text>`;
+      });
+      h += `<path d="M${X0} ${Y1 - 20}V${Y0}H${X1}" fill="none" stroke="rgba(255,255,255,.2)"/>`;
+      h += `<path d="${foco}L${X1} ${Y0}L${X0} ${Y0}Z" fill="url(#c-area)"/>`;
+      h += `<path d="${maioria}" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-dasharray="7 6"/>`;
+      h += `<path d="${foco}" fill="none" stroke="#ff5500" stroke-width="9" opacity=".5" filter="url(#c-halo)"/>`;
+      h += `<path d="${foco}" fill="none" stroke="#ff7a33" stroke-width="3"/>`;
+      // marcador onde a maioria desiste
+      const xd = xt(.0625 * 1.4);
+      h += `<path d="M${xd} ${Y0 - 6}V${Y1 + 70}" stroke="rgba(255,255,255,.3)" stroke-dasharray="3 5"/>`;
+      h += `<g transform="translate(${xd + 12} ${Y1 + 62})"><rect width="196" height="36" rx="8" fill="rgba(9,9,11,.9)" stroke="rgba(255,255,255,.2)"/><text x="98" y="24" text-anchor="middle" font-family="Geist Mono" font-size="15" fill="rgba(255,255,255,.65)" letter-spacing="1.5">A MAIORIA PARA</text></g>`;
+      const yf = ya(.95);
+      h += `<circle cx="${X1}" cy="${yf}" r="9" fill="#ff5500" filter="url(#c-brilho)"/><circle cx="${X1}" cy="${yf}" r="3.5" fill="#ffd2b8"/>`;
+      h += `<g transform="translate(${X1 - 196} ${yf + 22})"><rect width="184" height="36" rx="8" fill="rgba(255,85,0,.16)" stroke="rgba(255,120,60,.8)"/><text x="92" y="24" text-anchor="middle" font-family="Geist Mono" font-weight="500" font-size="15" fill="#fff" letter-spacing="1.5">FOCO SEGUE</text></g>`;
+      document.getElementById('curva').innerHTML = h;
+    })();
+  </script>
+</body>
+</html>

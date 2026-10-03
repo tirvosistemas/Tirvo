@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Sobre a Tirvo 09: com intenção</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(460px 460px at 330px 860px, rgba(255, 85, 0, .2), transparent 70%),
+        radial-gradient(520px 420px at 800px 880px, rgba(255, 72, 0, .08), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 104px; }
+
+    /* Editor de código */
+    .editor { z-index: 4; left: 556px; top: 690px; width: 440px; transform: perspective(1400px) rotateY(-12deg); transform-origin: 100% 50%; box-shadow: 0 34px 60px rgba(0, 0, 0, .6); }
+    .editor .barra { display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 18px; border-bottom: 1px solid rgba(255, 255, 255, .08); font: 500 16px/1 var(--mono); color: var(--t1); }
+    .editor .barra .ico { font-size: 18px; color: var(--or); }
+    .editor .barra em { font-style: normal; color: var(--t3); margin-left: auto; letter-spacing: .1em; }
+    .editor ol { padding: 14px 0 16px; counter-reset: l; }
+    .editor li { position: relative; display: block; padding: 0 16px 0 58px; font: 500 17.5px/1.75 var(--mono); color: var(--t2); white-space: pre; counter-increment: l; }
+    .editor li::before { content: counter(l); position: absolute; left: 0; width: 40px; text-align: right; color: rgba(255, 255, 255, .22); }
+    .editor .p { color: #ffb187; }
+    .editor .v { color: var(--t1); }
+    .editor .s { color: #ff8a4c; }
+    .editor li.marcada { background: linear-gradient(90deg, rgba(255, 85, 0, .2), rgba(255, 85, 0, .02)); box-shadow: inset 3px 0 0 #ff6a1f; }
+
+    /* Régua do primeiro ao último detalhe */
+    .percurso { z-index: 4; left: 84px; top: 1154px; width: 912px; }
+    .percurso .rotulos { display: flex; justify-content: space-between; font: 500 17px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .percurso .rotulos b { font-weight: 500; color: var(--t1); }
+    .percurso svg { display: block; margin-top: 14px; }
+    .percurso .itens { display: flex; justify-content: space-between; margin-top: 12px; }
+    .percurso .itens span { display: flex; align-items: center; gap: 10px; font-size: 23px; color: var(--t2); letter-spacing: -.01em; }
+    .percurso .itens span:last-child { color: var(--t1); }
+    .percurso .itens .ico { font-size: 24px; color: var(--or); }
+
+    /* Rodapé centralizado */
+    .rodape { z-index: 4; left: 84px; top: 1356px; width: 912px; height: 300px; display: grid; justify-items: center; align-content: center; gap: 22px; }
+    .rodape .logo { height: 50px; }
+    .rodape .links { display: flex; align-items: center; gap: 22px; }
+    .rodape .links i { width: 6px; height: 6px; border-radius: 50%; background: var(--or); box-shadow: 0 0 8px var(--or); }
+    .rodape .lk { font-size: 27px; gap: 10px; }
+    .rodape .acoes { display: flex; gap: 18px; margin-top: 6px; }
+    .rodape .btn { height: 82px; border-radius: 41px; padding: 0 34px; font-size: 28px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="rgba(255,255,255,.035)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="40%" cy="45%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <clipPath id="lente"><circle cx="330" cy="868" r="206"/></clipPath>
+        <radialGradient id="g-vidro" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
+        <filter id="brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <g id="lupa"></g>
+      <!-- ligação entre o pixel e a linha de código -->
+      <path d="M536 868H556" stroke="#ff7a33" stroke-width="1.6" stroke-dasharray="3 5"/>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">09<i>/15</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>//</i> do primeiro ao último detalhe</p>
+    <h1 class="titulo">Pixels e código<br>com <em>intenção.</em></h1>
+
+    <div class="editor" data-frame="16,0,16,0" data-tone="laranja">
+      <div class="barra"><svg class="ico"><use href="#i-file-code"/></svg>mira.css<em>css</em></div>
+      <ol>
+        <li><span class="s">.ponto</span> {</li>
+        <li>  <span class="p">width</span>: <span class="v">20px</span>;</li>
+        <li class="marcada">  <span class="p">background</span>: <span class="s">#ff5500</span>;</li>
+        <li>  <span class="p">border-radius</span>: <span class="v">50%</span>;</li>
+        <li>  <span class="p">box-shadow</span>: <span class="v">0 0 24px</span></li>
+        <li>    <span class="v">rgba(255,85,0,.45)</span>;</li>
+        <li>}</li>
+      </ol>
+    </div>
+
+    <section class="percurso">
+      <p class="rotulos"><span>primeiro detalhe</span><b>último detalhe</b></p>
+      <svg id="trilha" width="912" height="40"></svg>
+      <p class="itens">
+        <span><svg class="ico"><use href="#i-ruler"/></svg>medida</span>
+        <span><svg class="ico"><use href="#i-pen-tool"/></svg>forma</span>
+        <span><svg class="ico"><use href="#i-code"/></svg>código</span>
+        <span><svg class="ico"><use href="#i-check"/></svg>entrega</span>
+      </p>
+    </section>
+
+    <footer class="rodape" data-frame="30,30,30,30" data-tone="branco" data-acento="aba">
+      <img class="logo" data-logo>
+      <div class="links">
+        <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+        <i></i>
+        <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+      </div>
+      <div class="acoes">
+        <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+        <span class="btn vazado"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      </div>
+    </footer>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      // Lupa sobre a mira do logotipo: pixels ampliados e medidas
+      const LX = 330, LY = 868, P = 26;
+      let dentro = '';
+      dentro += `<rect x="${LX - 220}" y="${LY - 220}" width="440" height="440" fill="#0b0b0e"/>`;
+      // canto da mira em pixels (forma de L) e o ponto
+      const pix = (cx, cy, cor, op = 1) => `<rect x="${cx}" y="${cy}" width="${P - 2}" height="${P - 2}" rx="3" fill="${cor}" opacity="${op}"/>`;
+      const ox = LX - 182, oy = LY - 182;
+      for (let i = 0; i < 6; i++) { dentro += pix(ox + i * P, oy, '#e8e8ea'); dentro += pix(ox, oy + i * P, '#e8e8ea'); }
+      for (let i = 1; i < 6; i++) { dentro += pix(ox + i * P, oy + P, '#e8e8ea', .9); dentro += pix(ox + P, oy + i * P, '#e8e8ea', .9); }
+      // ponto laranja em pixels (círculo rasterizado)
+      const pcx = LX + 30, pcy = LY + 30, R = 3.2;
+      for (let gx = -4; gx <= 4; gx++) for (let gy = -4; gy <= 4; gy++) {
+        const d = Math.hypot(gx, gy);
+        if (d <= R + .4) dentro += pix(pcx + gx * P - P / 2, pcy + gy * P - P / 2, d < R - .6 ? '#ff5500' : '#ff7a33', d < R - .6 ? 1 : .55);
+        else if (d <= R + 1.6) dentro += pix(pcx + gx * P - P / 2, pcy + gy * P - P / 2, '#ff5500', .14);
+      }
+      // grade dos pixels
+      let grade = '';
+      for (let k = -9; k <= 9; k++) grade += `M${LX - 220} ${LY + k * P + 13}H${LX + 220}M${LX + k * P + 13} ${LY - 220}V${LY + 220}`;
+      dentro += `<path d="${grade}" stroke="rgba(255,255,255,.06)" stroke-width="1"/>`;
+      // medidas em laranja
+      dentro += `<g stroke="#ff8a4c" stroke-width="1.6" fill="none"><path d="M${pcx - 4.5 * P} ${pcy + 4.8 * P}H${pcx + 4.5 * P}M${pcx - 4.5 * P} ${pcy + 4.5 * P}v12M${pcx + 4.5 * P} ${pcy + 4.5 * P}v12"/><path d="M${ox - 14} ${oy}V${oy + 6 * P}M${ox - 20} ${oy}h12M${ox - 20} ${oy + 6 * P}h12"/></g>`;
+      dentro += `<g font-family="Geist Mono" font-size="15" font-weight="500" fill="#ffb187" letter-spacing="1"><text x="${pcx}" y="${pcy + 4.8 * P - 8}" text-anchor="middle">20 PX</text></g>`;
+      dentro += `<rect x="${LX - 220}" y="${LY - 220}" width="440" height="440" fill="url(#g-vidro)"/>`;
+      let h = `<circle cx="${LX}" cy="${LY}" r="230" fill="#ff5500" opacity=".18" filter="url(#halo)"/>`;
+      // cabo da lupa
+      h += `<path d="M${LX - 150} ${LY + 150}L${LX - 250} ${LY + 250}" stroke="rgba(255,255,255,.18)" stroke-width="30" stroke-linecap="round"/>`;
+      h += `<path d="M${LX - 150} ${LY + 150}L${LX - 250} ${LY + 250}" stroke="#ff6a1f" stroke-width="2.2" stroke-linecap="round" opacity=".8"/>`;
+      h += `<g clip-path="url(#lente)">${dentro}</g>`;
+      h += `<circle cx="${LX}" cy="${LY}" r="206" fill="none" stroke="#ff6a1f" stroke-width="10" opacity=".45" filter="url(#halo)"/>`;
+      h += `<circle cx="${LX}" cy="${LY}" r="206" fill="none" stroke="#ff7a33" stroke-width="3"/>`;
+      h += `<circle cx="${LX}" cy="${LY}" r="218" fill="none" stroke="rgba(255,255,255,.14)" stroke-dasharray="2 7"/>`;
+      // marcador "400%"
+      h += `<g transform="translate(${LX + 92} ${LY - 236})"><rect width="110" height="36" rx="8" fill="rgba(14,8,5,.92)" stroke="rgba(255,120,60,.7)"/><text x="55" y="24" text-anchor="middle" font-family="Geist Mono" font-weight="500" font-size="16" fill="#fff" letter-spacing="2">400%</text></g>`;
+      document.getElementById('lupa').innerHTML = h;
+
+      // trilha do primeiro ao último detalhe
+      const trilha = () => {
+      let t = '<defs><linearGradient id="t-g" x1="0" x2="1"><stop offset="0" stop-color="#ff5500" stop-opacity=".25"/><stop offset="1" stop-color="#ff7a33"/></linearGradient></defs>';
+      for (let x = 0; x <= 912; x += 12) {
+        const maior = x % 96 === 0;
+        t += `<path d="M${x + .5} ${maior ? 6 : 12}V${maior ? 34 : 28}" stroke="rgba(255,255,255,${maior ? .25 : .1})"/>`;
+      }
+      t += `<path d="M2 20H910" stroke="url(#t-g)" stroke-width="3" style="filter:drop-shadow(0 0 6px #ff5500)"/>`;
+      const base = document.querySelector('.percurso').getBoundingClientRect().left;
+      const xs = [...document.querySelectorAll('.percurso .itens span')].map(e => { const r = e.getBoundingClientRect(); return r.left - base + r.width / 2; });
+      xs.forEach((x, i) => { t += `<circle cx="${x}" cy="20" r="${i === 3 ? 8 : 5}" fill="${i === 3 ? '#ff5500' : '#0b0b0e'}" stroke="#ff7a33" stroke-width="2"${i === 3 ? ' style="filter:drop-shadow(0 0 8px #ff5500)"' : ''}/>`; });
+      document.getElementById('trilha').innerHTML = t;
+    };
+    window.tirvoPronto.then(trilha);
+    })();
+  </script>
+</body>
+</html>

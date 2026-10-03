@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Sobre a Tirvo 12: visão</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(520px 520px at 700px 960px, rgba(255, 85, 0, .16), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 94px; }
+
+    /* Motores do futuro */
+    .motores { z-index: 5; left: 84px; top: 724px; width: 430px; }
+    .motores .cab { display: flex; align-items: center; gap: 12px; padding: 22px 26px 16px; font: 500 16px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--or); }
+    .motores .cab .ico { font-size: 20px; }
+    .motores li { display: grid; grid-template-columns: 62px 1fr; align-items: center; gap: 18px; padding: 16px 26px; border-top: 1px solid rgba(255, 255, 255, .07); }
+    .motores .ib { width: 62px; height: 62px; }
+    .motores .ib .ico { font-size: 30px; }
+    .motores b { font-size: 26px; font-weight: 600; letter-spacing: -.025em; line-height: 1.12; }
+    .curitiba { z-index: 5; display: flex; align-items: center; gap: 10px; padding: 10px 14px; border: 1px solid rgba(255, 120, 60, .7); border-radius: 10px; background: rgba(14, 8, 5, .9); font: 500 16px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #fff; box-shadow: 0 0 22px rgba(255, 85, 0, .35); }
+    .curitiba .ico { font-size: 18px; color: var(--or); stroke-width: 2; }
+
+    .texto { z-index: 4; left: 84px; top: 1300px; width: 912px; }
+    .texto .corpo { font-size: 30px; }
+
+    /* Rodapé: cartão de visita inclinado + botões */
+    .cartao { z-index: 5; left: 84px; top: 1420px; width: 540px; height: 236px; display: grid; align-content: space-between; padding: 30px 32px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, .16); background: linear-gradient(140deg, rgba(255, 85, 0, .14), rgba(255, 255, 255, .03) 46%), #0d0d10; box-shadow: 0 40px 70px rgba(0, 0, 0, .7), 0 0 0 1px rgba(0, 0, 0, .5); transform: perspective(1200px) rotateY(12deg) rotateZ(-1.5deg); transform-origin: 0 50%; }
+    .cartao .alto { display: flex; align-items: center; justify-content: space-between; }
+    .cartao .logo { height: 44px; }
+    .cartao .alto small { font: 500 14px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .cartao .links { display: grid; gap: 10px; }
+    .cartao .lk { font-size: 25px; gap: 10px; }
+    .botoes { z-index: 4; left: 660px; top: 1440px; width: 336px; display: grid; gap: 18px; }
+    .botoes .btn { height: 92px; border-radius: 12px; padding: 0 26px; justify-content: space-between; font-size: 28px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <radialGradient id="g-globo" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#1a0d06"/><stop offset=".7" stop-color="#0b0807"/><stop offset="1" stop-color="#060505"/></radialGradient>
+        <radialGradient id="g-atmos" cx="50%" cy="50%" r="50%"><stop offset=".86" stop-color="#ff5500" stop-opacity="0"/><stop offset=".93" stop-color="#ff5500" stop-opacity=".35"/><stop offset="1" stop-color="#ff5500" stop-opacity="0"/></radialGradient>
+        <filter id="brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="halo" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>
+      </defs>
+      <!-- estrelas/pontos distantes -->
+      <g id="poeira"></g>
+      <g id="globo"></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">12<i>/15</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>P.02</i> · horizonte · visão</p>
+    <h1 class="titulo">Referência máxima,<br>no Brasil e<br>no <em>mundo.</em></h1>
+
+    <section class="motores" data-frame="22,0,22,0" data-tone="laranja" data-acento="topo">
+      <p class="cab"><svg class="ico"><use href="#i-zap"/></svg>motores do futuro</p>
+      <ul>
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-ban"/></svg></span><b>Inconformismo<br>com o comum</b></li>
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-crosshair"/></svg></span><b>Hiperfoco</b></li>
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="neon"><svg class="ico"><use href="#i-search"/></svg></span><b>Obsessão pelos<br>detalhes</b></li>
+      </ul>
+    </section>
+    <span class="curitiba" id="curitiba"><svg class="ico"><use href="#i-pin"/></svg>curitiba · br</span>
+
+    <div class="texto"><p class="corpo">Uma fundação digital erguida por <b>mentes e máquinas</b> no mais alto nível de exigência.</p></div>
+
+    <div class="cartao">
+      <div class="alto"><img class="logo" data-logo><small>engenharia</small></div>
+      <div class="links">
+        <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+        <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+      </div>
+    </div>
+    <div class="botoes">
+      <span class="btn cheio" data-frame="16,0,16,0" data-tone="quente"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+      <span class="btn vazado" data-frame="16,0,16,0" data-tone="laranja"><span>Chame no direct</span><svg class="ico"><use href="#i-send"/></svg></span>
+    </div>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      const CX = 700, CY = 960, R = 330, F0 = -12 * Math.PI / 180, L0 = -42 * Math.PI / 180;
+      const rad = g => g * Math.PI / 180;
+      const proj = (lat, lon, alt = 0) => {
+        const f = rad(lat), l = rad(lon), k = R * (1 + alt);
+        const cosc = Math.sin(F0) * Math.sin(f) + Math.cos(F0) * Math.cos(f) * Math.cos(l - L0);
+        return { x: CX + k * Math.cos(f) * Math.sin(l - L0), y: CY - k * (Math.cos(F0) * Math.sin(f) - Math.sin(F0) * Math.cos(f) * Math.cos(l - L0)), v: cosc };
+      };
+      let h = '';
+      h += `<circle cx="${CX}" cy="${CY}" r="${R + 36}" fill="url(#g-atmos)"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="${R}" fill="url(#g-globo)" stroke="rgba(255,120,60,.6)" stroke-width="1.6"/>`;
+      // grade de latitude e longitude
+      const linha = pontos => { let d = '', dentro = false; pontos.forEach(p => { if (p.v > 0) { d += (dentro ? 'L' : 'M') + p.x.toFixed(1) + ' ' + p.y.toFixed(1); dentro = true; } else dentro = false; }); return d; };
+      let grade = '';
+      for (let lon = -180; lon < 180; lon += 20) { const p = []; for (let lat = -90; lat <= 90; lat += 3) p.push(proj(lat, lon)); grade += linha(p); }
+      for (let lat = -60; lat <= 60; lat += 20) { const p = []; for (let lon = -180; lon <= 180; lon += 3) p.push(proj(lat, lon)); grade += linha(p); }
+      h += `<path d="${grade}" fill="none" stroke="rgba(255,140,90,.14)" stroke-width="1"/>`;
+      // continentes em pontos
+      const terras = [
+        [[12,-72],[10,-62],[5,-52],[0,-50],[-5,-35],[-8,-35],[-13,-39],[-23,-42],[-25,-48],[-33,-52],[-38,-57],[-41,-63],[-46,-67],[-52,-69],[-55,-68],[-53,-72],[-46,-75],[-38,-73],[-30,-71],[-18,-70],[-14,-76],[-5,-81],[0,-80],[5,-77],[9,-77],[12,-72]],
+        [[35,-6],[37,10],[32,32],[12,43],[11,51],[-2,41],[-11,40],[-26,33],[-34,26],[-34,18],[-17,12],[-6,12],[4,9],[5,-5],[10,-15],[21,-17],[28,-13],[35,-6]],
+        [[36,-9],[43,-9],[48,-5],[51,2],[54,8],[57,10],[60,5],[64,10],[70,25],[70,40],[55,40],[45,40],[41,29],[37,24],[38,15],[44,12],[38,-1],[36,-9]],
+        [[70,-160],[60,-165],[55,-130],[48,-124],[40,-124],[32,-117],[23,-110],[16,-95],[8,-80],[10,-76],[20,-87],[21,-97],[29,-95],[30,-84],[25,-80],[35,-75],[42,-70],[45,-61],[52,-56],[60,-64],[62,-75],[68,-80],[72,-95],[70,-130],[70,-160]],
+      ];
+      const dentroPoli = (lat, lon, poli) => { let c = false; for (let i = 0, j = poli.length - 1; i < poli.length; j = i++) { const [yi, xi] = poli[i], [yj, xj] = poli[j]; if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi) c = !c; } return c; };
+      let pontos = '';
+      for (let lat = -58; lat <= 74; lat += 2.6) for (let lon = -170; lon <= 60; lon += 2.6) {
+        if (!terras.some(p => dentroPoli(lat, lon, p))) continue;
+        const p = proj(lat, lon);
+        if (p.v <= .08) continue;
+        const br = lat < 13 && lat > -56 && lon < -34 && lon > -82;
+        pontos += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${(2.6 * Math.sqrt(p.v)).toFixed(2)}" fill="${br ? `rgba(255,140,80,${(.4 + .5 * p.v).toFixed(2)})` : `rgba(255,255,255,${(.12 + .3 * p.v).toFixed(2)})`}"/>`;
+      }
+      h += pontos;
+      // arcos saindo de Curitiba
+      const CWB = [-25.4, -49.3];
+      const destinos = [[38.7, -9.1], [40.7, -74], [19.4, -99.1], [6.5, 3.4], [-33.4, -70.6]];
+      const vet = (lat, lon) => { const f = rad(lat), l = rad(lon); return [Math.cos(f) * Math.cos(l), Math.cos(f) * Math.sin(l), Math.sin(f)]; };
+      destinos.forEach(([la, lo], i) => {
+        const a = vet(...CWB), b = vet(la, lo);
+        const om = Math.acos(a[0] * b[0] + a[1] * b[1] + a[2] * b[2]);
+        let d = '';
+        for (let k = 0; k <= 40; k++) {
+          const t = k / 40, s1 = Math.sin((1 - t) * om) / Math.sin(om), s2 = Math.sin(t * om) / Math.sin(om);
+          const v = [a[0] * s1 + b[0] * s2, a[1] * s1 + b[1] * s2, a[2] * s1 + b[2] * s2];
+          const lat = Math.asin(v[2]) * 180 / Math.PI, lon = Math.atan2(v[1], v[0]) * 180 / Math.PI;
+          const p = proj(lat, lon, .16 * Math.sin(Math.PI * t) * om);
+          d += (k ? 'L' : 'M') + p.x.toFixed(1) + ' ' + p.y.toFixed(1);
+        }
+        h += `<path d="${d}" fill="none" stroke="#ff5500" stroke-width="5" opacity=".35" filter="url(#halo)"/>`;
+        h += `<path d="${d}" fill="none" stroke="${i % 2 ? '#ffb187' : '#ff7a33'}" stroke-width="1.8"/>`;
+        const p = proj(la, lo);
+        if (p.v > 0) h += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4" fill="#ffd2b8" filter="url(#brilho)"/>`;
+      });
+      const c = proj(...CWB);
+      h += `<circle cx="${c.x}" cy="${c.y}" r="22" fill="none" stroke="rgba(255,120,60,.6)" stroke-width="1.4"/>`;
+      h += `<circle cx="${c.x}" cy="${c.y}" r="38" fill="none" stroke="rgba(255,120,60,.25)" stroke-dasharray="2 5"/>`;
+      h += `<circle cx="${c.x}" cy="${c.y}" r="8" fill="#ff5500" filter="url(#brilho)"/><circle cx="${c.x}" cy="${c.y}" r="3" fill="#ffd2b8"/>`;
+      // brilho na borda do globo
+      h += `<path d="M${CX - R * .7} ${CY - R * .71}A${R} ${R} 0 0 1 ${CX + R * .98} ${CY + R * .2}" fill="none" stroke="#ff7a33" stroke-width="2.4" opacity=".8" style="filter:drop-shadow(0 0 8px #ff5500)"/>`;
+      document.getElementById('globo').innerHTML = h;
+      const et = document.getElementById('curitiba');
+      et.style.left = (c.x + 30) + 'px'; et.style.top = (c.y + 26) + 'px';
+
+      // poeira de pontos ao fundo
+      const rnd = Tirvo.semear(5);
+      let p = '';
+      for (let i = 0; i < 90; i++) { const x = rnd() * 1080, y = 320 + rnd() * 1100; if (Math.hypot(x - CX, y - CY) < R + 40) continue; p += `<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${(rnd() * 1.6 + .4).toFixed(1)}" fill="rgba(255,255,255,${(rnd() * .3 + .05).toFixed(2)})"/>`; }
+      document.getElementById('poeira').innerHTML = p;
+    })();
+  </script>
+</body>
+</html>
