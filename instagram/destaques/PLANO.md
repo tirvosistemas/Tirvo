@@ -16,6 +16,6 @@ Fontes (código): `instagram/modelos/stories/premium/<destaque>/NN.html`, com a 
 |---|---|---|
 | — | Serviços | Pronto e postado. Não mexer. |
 | 1 | Sobre a Tirvo | Pronto: 15 stories (`premium/sobre/01–15`), zip entregue |
-| 2 | Método | Em produção (conteúdo de metodo/) |
-| 3 | Dúvidas | A fazer (conteúdo de faq/) |
+| 2 | Método | Pronto: 9 stories (`premium/metodo/01–09`), zip entregue |
+| 3 | Dúvidas | Em produção (conteúdo de faq/) |
 | 4 | Contato | A fazer (um story, talvez dois) |

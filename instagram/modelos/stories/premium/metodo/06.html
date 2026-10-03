@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Método 06: segurança e performance</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(420px 360px at 860px 470px, rgba(255, 85, 0, .2), transparent 70%),
+        radial-gradient(800px 520px at 540px 1000px, rgba(255, 72, 0, .08), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 100px; }
+    .velocimetro { z-index: 3; left: 700px; top: 360px; width: 300px; height: 240px; }
+
+    .tiles { z-index: 4; left: 84px; top: 640px; width: 912px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .tile { height: 330px; padding: 28px 28px 0; }
+    .tile .alto { display: flex; align-items: center; justify-content: space-between; }
+    .tile .ib { width: 72px; height: 72px; }
+    .tile .ib .ico { font-size: 36px; }
+    .tile .alto small { font: 500 18px/1 var(--mono); letter-spacing: .1em; color: rgba(255, 255, 255, .3); }
+    .tile h2 { margin-top: 26px; font-size: 36px; font-weight: 650; letter-spacing: -.035em; line-height: 1.04; }
+    .tile h2 mark { background: none; color: #ff7a33; text-shadow: 0 0 20px rgba(255, 85, 0, .5); }
+    .tile p { margin-top: 14px; font-size: 22.5px; line-height: 1.38; color: var(--t2); letter-spacing: -.005em; }
+    .nota { z-index: 4; left: 84px; top: 1318px; font: 500 15px/1.4 var(--mono); letter-spacing: .08em; color: var(--t3); }
+
+    /* Rodapé em células com ícone em cima */
+    .rodape { z-index: 4; left: 84px; top: 1380px; width: 912px; height: 270px; display: grid; grid-template-rows: 1fr 92px; }
+    .celulas { display: grid; grid-template-columns: 1.05fr 1fr 1.45fr 1.1fr; }
+    .celulas > * { display: grid; justify-items: center; align-content: center; gap: 12px; text-align: center; }
+    .celulas > * + * { border-left: 1px solid rgba(255, 255, 255, .08); }
+    .celulas .logo { height: 40px; }
+    .celulas .ico.top { font-size: 34px; color: var(--or); }
+    .celulas .lk { font-size: 22px; }
+    .celulas .direct .ico.top { color: var(--or); }
+    .celulas .direct span { font-size: 22px; font-weight: 600; }
+    .rodape .btn { height: 92px; border-radius: 0; font-size: 31px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 26px), calc(100% - 26px) 100%, 26px 100%, 0 calc(100% - 26px)); }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <g class="mais-longe" fill="none" stroke="rgba(255,140,80,.5)" stroke-width=".8"><use href="#i-shield" width="24" height="24" transform="translate(-60 1040) scale(12)"/></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / método</span><span class="num">06<i>/09</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>//</i> padrão de entrega</p>
+    <h1 class="titulo">Segurança e<br><em>performance.</em></h1>
+    <svg class="velocimetro" id="velocimetro" viewBox="0 0 300 240" width="300" height="240"></svg>
+
+    <div class="tiles">
+      <div class="tile" data-frame="22,0,22,0" data-tone="laranja">
+        <div class="alto"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-fingerprint"/></svg></span><small>01</small></div>
+        <h2>Adequação à <mark>LGPD</mark></h2>
+        <p>Coleta mínima de dados, transparência e privacidade desde o projeto.</p>
+      </div>
+      <div class="tile" data-frame="0,22,0,22" data-tone="laranja">
+        <div class="alto"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-lock"/></svg></span><small>02</small></div>
+        <h2>SSL de <mark>256 bits</mark></h2>
+        <p>Conexão protegida por criptografia SSL/TLS de ponta a ponta.</p>
+      </div>
+      <div class="tile" data-frame="0,22,0,22" data-tone="laranja">
+        <div class="alto"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-server"/></svg></span><small>03</small></div>
+        <h2>Uptime de <mark>99,9%</mark></h2>
+        <p>Infraestrutura monitorada 24/7 nos projetos com Gestão 360º.</p>
+      </div>
+      <div class="tile" data-frame="22,0,22,0" data-tone="neon">
+        <div class="alto"><span class="ib" data-frame="12,0,12,0" data-tone="neon"><svg class="ico"><use href="#i-gauge"/></svg></span><small>04</small></div>
+        <h2>Velocidade <mark>extrema</mark></h2>
+        <p>Otimização rigorosa para as Core Web Vitals e o PageSpeed do Google.</p>
+      </div>
+    </div>
+
+    <footer class="rodape" data-frame="24,24,26,26" data-tone="branco" data-acento="topo">
+      <div class="celulas">
+        <div><img class="logo" data-logo></div>
+        <div><svg class="ico top"><use href="#i-globe"/></svg><span class="lk"><u>tirvo.tech</u></span></div>
+        <div><svg class="ico top"><use href="#i-mail"/></svg><span class="lk"><u>engenharia@tirvo.tech</u></span></div>
+        <div class="direct"><svg class="ico top"><use href="#i-send"/></svg><span>Chame no direct</span></div>
+      </div>
+      <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+    </footer>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      // velocímetro quase no máximo
+      const cx = 150, cy = 170, r = 120;
+      const p = (a, rr) => [cx + Math.cos(a) * rr, cy + Math.sin(a) * rr];
+      let h = '<defs><linearGradient id="v-g" x1="0" x2="1"><stop offset="0" stop-color="#ff5500" stop-opacity=".2"/><stop offset="1" stop-color="#ff7a33"/></linearGradient><filter id="v-h" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6"/></filter></defs>';
+      const arco = (a0, a1, rr) => { const [x0, y0] = p(a0, rr), [x1, y1] = p(a1, rr); return `M${x0.toFixed(1)} ${y0.toFixed(1)}A${rr} ${rr} 0 ${a1 - a0 > Math.PI ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`; };
+      const A0 = Math.PI * .85, A1 = Math.PI * 2.15;
+      h += `<path d="${arco(A0, A1, r)}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="14" stroke-linecap="round"/>`;
+      const fim = A0 + (A1 - A0) * .94;
+      h += `<path d="${arco(A0, fim, r)}" fill="none" stroke="#ff5500" stroke-width="14" opacity=".5" filter="url(#v-h)"/>`;
+      h += `<path d="${arco(A0, fim, r)}" fill="none" stroke="url(#v-g)" stroke-width="14" stroke-linecap="round"/>`;
+      for (let k = 0; k <= 20; k++) {
+        const a = A0 + (A1 - A0) * k / 20, maior = k % 5 === 0;
+        const [x1, y1] = p(a, r - 20), [x2, y2] = p(a, r - (maior ? 36 : 28));
+        h += `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="rgba(255,255,255,${maior ? .45 : .2})" stroke-width="${maior ? 2 : 1}"/>`;
+      }
+      const [nx, ny] = p(fim, r - 30);
+      h += `<path d="M${cx} ${cy}L${nx.toFixed(1)} ${ny.toFixed(1)}" stroke="#fafafa" stroke-width="3.5" stroke-linecap="round"/>`;
+      h += `<circle cx="${cx}" cy="${cy}" r="12" fill="#ff5500" style="filter:drop-shadow(0 0 8px #ff5500)"/><circle cx="${cx}" cy="${cy}" r="4" fill="#ffd2b8"/>`;
+      h += `<text x="${cx}" y="${cy + 54}" text-anchor="middle" font-family="Geist Mono" font-weight="500" font-size="14" letter-spacing="3" fill="#ffb187">PERFORMANCE</text>`;
+      document.getElementById('velocimetro').innerHTML = h;
+    })();
+  </script>
+</body>
+</html>

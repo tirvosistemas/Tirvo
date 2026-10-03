@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Método 04: engenharia</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(520px 380px at 540px 780px, rgba(255, 85, 0, .16), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 98px; }
+
+    /* Painéis de design e código */
+    .painel { z-index: 4; top: 636px; width: 424px; height: 300px; overflow: hidden; }
+    .painel .barra { display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 16px; border-bottom: 1px solid rgba(255, 255, 255, .08); font: 500 15px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t3); }
+    .painel .barra .ico { font-size: 18px; color: var(--or); }
+    .design { left: 84px; transform: perspective(1200px) rotateY(10deg); transform-origin: 100% 50%; }
+    .codigo { right: 84px; transform: perspective(1200px) rotateY(-10deg); transform-origin: 0 50%; }
+    .codigo pre { padding: 14px 18px; font: 500 16px/1.7 var(--mono); color: var(--t2); white-space: pre; }
+    .codigo pre i { font-style: normal; color: #ff8a4c; }
+    .codigo pre b { font-weight: 500; color: var(--t1); }
+    .codigo pre u { text-decoration: none; color: var(--t3); }
+    .costura { z-index: 5; left: 516px; top: 640px; width: 48px; height: 292px; }
+
+    .grade4 { z-index: 4; left: 84px; top: 972px; width: 912px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .bloco { display: grid; grid-template-columns: 70px 1fr; align-items: center; gap: 20px; height: 150px; padding: 0 22px; }
+    .bloco .ib { width: 70px; height: 70px; }
+    .bloco .ib .ico { font-size: 34px; }
+    .bloco small { display: block; font: 500 14px/1 var(--mono); letter-spacing: .16em; color: var(--or); }
+    .bloco b { display: block; margin-top: 8px; font-size: 27px; font-weight: 600; letter-spacing: -.025em; line-height: 1.14; }
+    .fim-fase { z-index: 4; left: 84px; top: 1310px; display: flex; align-items: center; gap: 14px; font: 500 18px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--t3); }
+    .fim-fase b { font-weight: 500; color: #ffb187; }
+    .fim-fase .ico { font-size: 22px; color: var(--or); stroke-width: 2; }
+
+    /* Rodapé: paleta de comandos */
+    .paleta { z-index: 4; left: 84px; top: 1362px; width: 912px; border-radius: 18px; border: 1px solid rgba(255, 255, 255, .14); background: rgba(12, 12, 15, .9); box-shadow: 0 40px 80px rgba(0, 0, 0, .7), 0 0 0 6px rgba(255, 255, 255, .02); overflow: hidden; }
+    .paleta .busca { display: flex; align-items: center; gap: 16px; height: 70px; padding: 0 24px; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+    .paleta .busca .logo { height: 32px; }
+    .paleta .busca span { font-size: 23px; color: var(--t3); }
+    .paleta .busca kbd { margin-left: auto; padding: 6px 10px; border: 1px solid rgba(255, 255, 255, .16); border-radius: 6px; font: 500 15px/1 var(--mono); color: var(--t3); }
+    .paleta li { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 16px; height: 64px; margin: 5px 10px; padding: 0 16px; border-radius: 12px; }
+    .paleta li > .ico { font-size: 28px; color: var(--or); }
+    .paleta li b { font-size: 27px; font-weight: 600; letter-spacing: -.015em; }
+    .paleta li .lk { font-size: 24px; gap: 8px; }
+    .paleta li.sel { background: linear-gradient(135deg, #ff6a1f, #ff3300); box-shadow: 0 0 34px rgba(255, 85, 0, .4), inset 0 1px 0 rgba(255, 220, 200, .45); }
+    .paleta li.sel > .ico, .paleta li.sel b { color: #fff; }
+    .paleta li.sel kbd { padding: 6px 10px; border-radius: 6px; background: rgba(0, 0, 0, .25); font: 500 16px/1 var(--mono); color: #fff; }
+    .paleta li em { font-style: normal; font: 500 18px/1 var(--mono); color: var(--t2); letter-spacing: .04em; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="42%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <g class="longe" fill="none" stroke="rgba(255,140,80,.4)" stroke-width="1"><use href="#i-pen-tool" width="24" height="24" transform="translate(820 330) scale(7)"/></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / método</span><span class="num">04<i>/09</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>fase 02</i> · engenharia</p>
+    <h1 class="titulo">Design e código<br>avançam <em>juntos.</em></h1>
+
+    <div class="painel design" data-frame="14,0,14,0" data-tone="laranja">
+      <p class="barra"><svg class="ico"><use href="#i-pen-tool"/></svg>interface</p>
+      <svg width="424" height="254" viewBox="0 0 424 254">
+        <rect x="20" y="18" width="384" height="40" rx="8" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+        <rect x="34" y="32" width="70" height="12" rx="6" fill="rgba(255,255,255,.3)"/>
+        <rect x="300" y="28" width="90" height="20" rx="10" fill="#ff5500"/>
+        <rect x="20" y="72" width="230" height="16" rx="8" fill="rgba(255,255,255,.55)"/>
+        <rect x="20" y="98" width="180" height="16" rx="8" fill="rgba(255,255,255,.3)"/>
+        <rect x="20" y="134" width="118" height="100" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+        <rect x="153" y="134" width="118" height="100" rx="10" fill="rgba(255,85,0,.1)" stroke="rgba(255,120,60,.7)"/>
+        <rect x="286" y="134" width="118" height="100" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+        <g stroke="#ff8a4c" stroke-width="1.2" fill="none"><path d="M153 126h118M153 122v8M271 122v8"/></g>
+        <text x="212" y="120" text-anchor="middle" font-family="Geist Mono" font-size="11" fill="#ffb187">118</text>
+        <circle cx="212" cy="174" r="16" fill="none" stroke="#ff8a4c" stroke-width="1.6"/><rect x="176" y="204" width="72" height="8" rx="4" fill="rgba(255,255,255,.4)"/>
+      </svg>
+    </div>
+    <div class="painel codigo" data-frame="0,14,0,14" data-tone="laranja">
+      <p class="barra"><svg class="ico"><use href="#i-code"/></svg>código</p>
+<pre><u>01</u> <i>.card</i> {
+<u>02</u>   <b>width</b>: 118px;
+<u>03</u>   <b>border</b>: 1px solid <i>#ff5500</i>;
+<u>04</u>   <b>border-radius</b>: 10px;
+<u>05</u> }
+<u>06</u> <i>.card</i>:hover {
+<u>07</u>   <b>transform</b>: none;
+<u>08</u> }</pre>
+    </div>
+    <svg class="costura" id="costura" width="48" height="292" viewBox="0 0 48 292"></svg>
+
+    <div class="grade4">
+      <div class="bloco" data-frame="16,0,16,0" data-tone="laranja"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-template"/></svg></span><div><small>01</small><b>Design system<br>e interface</b></div></div>
+      <div class="bloco" data-frame="0,16,0,16" data-tone="laranja"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-code"/></svg></span><div><small>02</small><b>Código<br>sob medida</b></div></div>
+      <div class="bloco" data-frame="16,0,16,0" data-tone="laranja"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-workflow"/></svg></span><div><small>03</small><b>Integrações</b></div></div>
+      <div class="bloco" data-frame="0,16,0,16" data-tone="neon"><span class="ib" data-frame="12,0,12,0" data-tone="neon"><svg class="ico"><use href="#i-shield-check"/></svg></span><div><small>04</small><b>Testes de performance,<br>acessibilidade e segurança</b></div></div>
+    </div>
+    <p class="fim-fase"><svg class="ico"><use href="#i-circle-check"/></svg>validação em cada etapa · <b>você aprova o design</b></p>
+
+    <div class="paleta">
+      <div class="busca"><img class="logo" data-logo><span>O que você quer fazer?</span><kbd>⌘ K</kbd></div>
+      <ul>
+        <li class="sel"><svg class="ico"><use href="#i-arrow-up-right"/></svg><b>Visite nosso site</b><kbd>↵</kbd></li>
+        <li><svg class="ico"><use href="#i-send"/></svg><b>Chame no direct</b><em>@tirvotech</em></li>
+        <li><svg class="ico"><use href="#i-globe"/></svg><span class="lk"><u>tirvo.tech</u></span><span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span></li>
+      </ul>
+    </div>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      let c = '<path d="M24 0V292" stroke="#ff7a33" stroke-width="2" stroke-dasharray="4 6" style="filter:drop-shadow(0 0 6px #ff5500)"/>';
+      [50, 120, 190, 260].forEach(y => {
+        c += `<circle cx="24" cy="${y}" r="15" fill="#140a06" stroke="#ff7a33" stroke-width="2" style="filter:drop-shadow(0 0 8px rgba(255,85,0,.8))"/>`;
+        c += `<path d="M17 ${y}l5 5 9-10" fill="none" stroke="#ffb187" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+      });
+      document.getElementById('costura').innerHTML = c;
+    })();
+  </script>
+</body>
+</html>

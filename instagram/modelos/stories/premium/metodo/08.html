@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Método 08: tudo começa com uma conversa</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(460px 520px at 300px 960px, rgba(255, 85, 0, .16), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 98px; }
+
+    /* Celular com a conversa */
+    .celular { z-index: 4; left: 96px; top: 652px; width: 400px; height: 640px; padding: 16px; border-radius: 52px; border: 2px solid rgba(255, 255, 255, .18); background: #0c0c0f; box-shadow: 0 50px 90px rgba(0, 0, 0, .7), 0 0 0 8px rgba(255, 255, 255, .03), 0 0 60px rgba(255, 85, 0, .18); transform: perspective(1400px) rotateY(16deg) rotateZ(-2deg); transform-origin: 0 50%; }
+    .tela { position: relative; height: 100%; border-radius: 38px; overflow: hidden; background: linear-gradient(180deg, #121215, #0b0b0e); }
+    .tela .cab { display: flex; align-items: center; gap: 12px; height: 78px; padding: 0 20px; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+    .tela .avatar { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #09090b; border: 1.5px solid #ff6a1f; }
+    .tela .avatar svg { width: 26px; height: 26px; }
+    .tela .cab b { font-size: 19px; font-weight: 600; }
+    .tela .cab small { display: block; font: 500 13px/1 var(--mono); color: var(--t3); margin-top: 4px; }
+    .msgs { display: grid; gap: 12px; padding: 18px 16px; }
+    .msg { max-width: 82%; padding: 13px 16px; border-radius: 20px; font-size: 18.5px; line-height: 1.32; letter-spacing: -.005em; }
+    .msg.eu { justify-self: end; border-bottom-right-radius: 6px; background: linear-gradient(135deg, #ff6a1f, #ff3300); color: #fff; }
+    .msg.tirvo { justify-self: start; border-bottom-left-radius: 6px; background: rgba(255, 255, 255, .08); color: var(--t1); }
+    .msg.tirvo b { color: #ffb187; font-weight: 600; }
+    .digitando { justify-self: start; display: flex; gap: 6px; padding: 14px 16px; border-radius: 20px; background: rgba(255, 255, 255, .06); }
+    .digitando i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, .45); }
+    .digitando i:nth-child(2) { opacity: .7; } .digitando i:nth-child(3) { opacity: .4; }
+    .exemplo { z-index: 4; left: 110px; top: 1318px; font: 500 14px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--t3); }
+
+    .passos { z-index: 4; left: 560px; top: 676px; width: 436px; display: grid; gap: 22px; }
+    .passo { padding: 22px 22px 24px; }
+    .passo .n { display: flex; align-items: center; gap: 12px; font: 500 16px/1 var(--mono); letter-spacing: .16em; color: var(--or); }
+    .passo .n .ico { font-size: 22px; }
+    .passo b { display: block; margin-top: 12px; font-size: 27px; font-weight: 620; letter-spacing: -.025em; line-height: 1.14; }
+    .passo p { margin-top: 8px; font-size: 20px; line-height: 1.35; color: var(--t2); }
+
+    /* Rodapé: cartão de perfil */
+    .perfil { z-index: 4; left: 84px; top: 1370px; width: 912px; height: 282px; display: grid; grid-template-columns: 150px 1fr; grid-template-rows: auto auto; column-gap: 28px; row-gap: 22px; align-content: center; padding: 0 30px; }
+    .perfil .foto { grid-row: span 1; display: grid; place-items: center; width: 140px; height: 140px; border-radius: 50%; padding: 5px; background: conic-gradient(from 200deg, #ff3300, #ff8a4c, #ffd2b8, #ff5500, #ff3300); }
+    .perfil .foto span { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: #09090b; border: 4px solid #09090b; }
+    .perfil .foto svg { width: 70px; height: 70px; }
+    .perfil .dados { display: grid; align-content: center; gap: 8px; }
+    .perfil .dados .logo { height: 40px; }
+    .perfil .dados small { font: 500 17px/1 var(--mono); color: var(--t2); letter-spacing: .02em; }
+    .perfil .dados .links { display: flex; gap: 22px; margin-top: 6px; }
+    .perfil .lk { font-size: 23px; gap: 8px; }
+    .perfil .acoes { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .perfil .btn { height: 70px; border-radius: 12px; font-size: 26px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- balões de conversa ao fundo -->
+      <g class="longe" fill="none" stroke="rgba(255,140,80,.45)" stroke-width="1"><use href="#i-chat" width="24" height="24" transform="translate(830 330) scale(7)"/></g>
+      <g class="mais-longe" fill="none" stroke="rgba(255,255,255,.35)" stroke-width=".8"><use href="#i-chat" width="24" height="24" transform="translate(760 500) scale(4)"/></g>
+      <!-- ligação dos passos -->
+      <path d="M548 740V1240" stroke="rgba(255,120,60,.5)" stroke-width="2" stroke-dasharray="4 7"/>
+      <g fill="#0b0b0e" stroke="#ff7a33" stroke-width="2"><circle cx="548" cy="740" r="6"/><circle cx="548" cy="960" r="6"/><circle cx="548" cy="1180" r="6"/></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / método</span><span class="num">08<i>/09</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>03</i> · o primeiro passo</p>
+    <h1 class="titulo">Tudo começa com<br><em>uma conversa.</em></h1>
+
+    <div class="celular">
+      <div class="tela">
+        <div class="cab"><span class="avatar"><svg viewBox="0 0 100 100"><path fill="#f4f4f5" d="M6.5 35.5V6.5H35.5V13.5H13.5V35.5Z M93.5 35.5V6.5H64.5V13.5H86.5V35.5Z M6.5 64.5V93.5H35.5V86.5H13.5V64.5Z M93.5 64.5V93.5H64.5V86.5H86.5V64.5Z"/><path fill="#f4f4f5" fill-opacity=".45" d="M48.5 22h3v12h-3Z M48.5 66h3v12h-3Z M22 48.5h12v3h-12Z M66 48.5h12v3h-12Z"/><circle cx="50" cy="50" r="10" fill="#ff5500"/></svg></span><div><b>Tirvo</b><small>@tirvotech</small></div></div>
+        <div class="msgs">
+          <p class="msg eu">Oi. Tenho um desafio no meu negócio e queria entender como vocês trabalham.</p>
+          <p class="msg tirvo">Conte o contexto. A equipe vai entender o seu desafio antes de qualquer proposta.</p>
+          <p class="msg tirvo">Depois vem a <b>Descoberta</b>, com escopo e cronograma claros.</p>
+          <span class="digitando"><i></i><i></i><i></i></span>
+        </div>
+      </div>
+    </div>
+    <p class="exemplo">exemplo ilustrativo</p>
+
+    <div class="passos">
+      <div class="passo" data-frame="16,0,16,0" data-tone="laranja"><p class="n"><svg class="ico"><use href="#i-chat"/></svg>01</p><b>Você conta o desafio</b><p>Pelo formulário ou pelo WhatsApp.</p></div>
+      <div class="passo" data-frame="16,0,16,0" data-tone="laranja"><p class="n"><svg class="ico"><use href="#i-users"/></svg>02</p><b>A equipe retorna</b><p>Para entender o contexto do projeto.</p></div>
+      <div class="passo" data-frame="16,0,16,0" data-tone="neon"><p class="n"><svg class="ico"><use href="#i-search"/></svg>03</p><b>Começa a Descoberta</b><p>Escopo e cronograma claros antes do código.</p></div>
+    </div>
+
+    <div class="perfil" data-frame="26,0,26,0" data-tone="branco" data-acento="topo">
+      <span class="foto"><span><svg viewBox="0 0 100 100"><path fill="#f4f4f5" d="M6.5 35.5V6.5H35.5V13.5H13.5V35.5Z M93.5 35.5V6.5H64.5V13.5H86.5V35.5Z M6.5 64.5V93.5H35.5V86.5H13.5V64.5Z M93.5 64.5V93.5H64.5V86.5H86.5V64.5Z"/><path fill="#f4f4f5" fill-opacity=".45" d="M48.5 22h3v12h-3Z M48.5 66h3v12h-3Z M22 48.5h12v3h-12Z M66 48.5h12v3h-12Z"/><circle cx="50" cy="50" r="10" fill="#ff5500"/></svg></span></span>
+      <div class="dados">
+        <img class="logo" data-logo>
+        <small>@tirvotech · engenharia</small>
+        <div class="links">
+          <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+          <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+        </div>
+      </div>
+      <div class="acoes">
+        <span class="btn cheio"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+        <span class="btn vazado"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+      </div>
+    </div>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>

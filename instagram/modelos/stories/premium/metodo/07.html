@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Método 07: as decisões ficam com você</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(420px 360px at 880px 460px, rgba(255, 85, 0, .18), transparent 70%),
+        radial-gradient(700px 520px at 540px 1000px, rgba(255, 72, 0, .08), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 100px; }
+    .sub { z-index: 4; left: 84px; top: 606px; width: 820px; }
+    .sub .corpo { font-size: 30px; }
+
+    .aprovacao { z-index: 4; left: 84px; width: 912px; height: 186px; display: grid; grid-template-columns: 84px 1fr 150px; align-items: center; gap: 24px; padding: 0 22px 0 24px; }
+    .aprovacao .ib { width: 80px; height: 80px; }
+    .aprovacao .ib .ico { font-size: 38px; }
+    .aprovacao small { font: 500 15px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--or); }
+    .aprovacao b { display: block; margin-top: 8px; font-size: 32px; font-weight: 640; letter-spacing: -.03em; line-height: 1.05; }
+    .aprovacao p { margin-top: 8px; font-size: 21px; line-height: 1.34; color: var(--t2); }
+    .carimbo { justify-self: center; display: grid; place-items: center; width: 132px; height: 132px; border-radius: 50%; border: 2.5px solid rgba(255, 120, 60, .85); transform: rotate(-12deg); box-shadow: 0 0 22px rgba(255, 85, 0, .35), inset 0 0 18px rgba(255, 85, 0, .2); }
+    .carimbo::before { content: ""; position: absolute; inset: 9px; border-radius: 50%; border: 1px dashed rgba(255, 120, 60, .6); }
+    .carimbo span { display: grid; justify-items: center; gap: 6px; font: 600 15px/1 var(--mono); letter-spacing: .14em; color: #ffb187; text-transform: uppercase; }
+    .carimbo .ico { font-size: 34px; color: var(--or); stroke-width: 2.4; }
+
+    /* Rodapé: janela de confirmação */
+    .dialogo { z-index: 4; left: 84px; top: 1372px; width: 912px; height: 280px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, .14); background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .015)), rgba(12, 12, 15, .9); box-shadow: 0 40px 80px rgba(0, 0, 0, .7); overflow: hidden; }
+    .dialogo .barra { display: flex; align-items: center; justify-content: space-between; height: 70px; padding: 0 26px; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+    .dialogo .logo { height: 36px; }
+    .dialogo .barra .x { font-size: 24px; color: var(--t3); }
+    .dialogo .meio { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 28px 0; }
+    .dialogo .pergunta { font-size: 27px; font-weight: 600; letter-spacing: -.02em; }
+    .dialogo .links { display: grid; gap: 6px; justify-items: end; }
+    .dialogo .lk { font-size: 22px; gap: 8px; }
+    .dialogo .acoes { position: absolute; left: 28px; right: 28px; bottom: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .dialogo .btn { height: 80px; border-radius: 12px; font-size: 28px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- botão de aprovar com o cursor, ao fundo -->
+      <g class="longe" style="opacity:.55">
+        <rect x="770" y="420" width="230" height="74" rx="14" fill="rgba(255,85,0,.25)" stroke="#ff7a33" stroke-width="2"/>
+        <text x="885" y="467" text-anchor="middle" font-family="Geist" font-weight="600" font-size="26" fill="#ffd2b8">aprovar</text>
+        <g transform="translate(930 470) scale(3)" fill="#fafafa" stroke="#09090b" stroke-width="1"><path d="M3.688 3.037a.497.497 0 0 0-.651.651l6.5 15.999a.501.501 0 0 0 .947-.062l1.569-6.083a2 2 0 0 1 1.448-1.479l6.124-1.579a.5.5 0 0 0 .063-.947z"/></g>
+      </g>
+      <circle cx="885" cy="457" r="70" fill="#ff5500" opacity=".18" filter="url(#halo)"/>
+      <!-- fio que liga as três aprovações -->
+      <path d="M126 760V1260" stroke="rgba(255,120,60,.5)" stroke-width="2" stroke-dasharray="4 7"/>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / método</span><span class="num">07<i>/09</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>02</i> · decisões</p>
+    <h1 class="titulo">As decisões<br>ficam <em>com você.</em></h1>
+    <div class="sub"><p class="corpo">Em três momentos, <b>nada avança sem a sua aprovação.</b></p></div>
+
+    <div class="aprovacao" style="top:686px" data-frame="20,0,20,0" data-tone="laranja">
+      <span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-file-code"/></svg></span>
+      <div><small>fim da descoberta</small><b>Aprovação do escopo</b><p>Você revisa o que será construído, as etapas e o cronograma.</p></div>
+      <span class="carimbo"><span><svg class="ico"><use href="#i-check"/></svg>escopo</span></span>
+    </div>
+    <div class="aprovacao" style="top:890px" data-frame="20,0,20,0" data-tone="laranja">
+      <span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-pen-tool"/></svg></span>
+      <div><small>durante a engenharia</small><b>Aprovação do design</b><p>Telas e identidade ajustadas antes da programação final.</p></div>
+      <span class="carimbo"><span><svg class="ico"><use href="#i-check"/></svg>design</span></span>
+    </div>
+    <div class="aprovacao" style="top:1094px" data-frame="20,0,20,0" data-tone="neon">
+      <span class="ib" data-frame="12,0,12,0" data-tone="neon"><svg class="ico"><use href="#i-globe"/></svg></span>
+      <div><small>antes do lançamento</small><b>Aprovação da publicação</b><p>Você testa o resultado e só então o projeto vai ao ar.</p></div>
+      <span class="carimbo"><span><svg class="ico"><use href="#i-check"/></svg>no ar</span></span>
+    </div>
+    <p class="rotulo" style="z-index:4; left:84px; top:1310px"><i>//</i> fim sem surpresas</p>
+
+    <div class="dialogo">
+      <div class="barra"><img class="logo" data-logo><svg class="ico x"><use href="#i-x"/></svg></div>
+      <div class="meio">
+        <span class="pergunta">Pronto para o próximo passo?</span>
+        <div class="links">
+          <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+          <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+        </div>
+      </div>
+      <div class="acoes">
+        <span class="btn vazado"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+        <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+      </div>
+    </div>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>

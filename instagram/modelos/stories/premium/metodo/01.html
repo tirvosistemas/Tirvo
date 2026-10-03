@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Método 01: como acontece</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(460px 380px at 860px 520px, rgba(255, 85, 0, .16), transparent 70%),
+        radial-gradient(700px 520px at 540px 1100px, rgba(255, 72, 0, .1), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 96px; }
+    .texto { z-index: 4; left: 84px; top: 704px; width: 860px; }
+    .texto .corpo { font-size: 30px; }
+
+    .fase { z-index: 4; display: grid; grid-template-columns: 1fr; width: 470px; padding: 22px 28px; }
+    .fase small { font: 500 16px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--or); }
+    .fase b { display: block; margin-top: 10px; font-size: 40px; font-weight: 650; letter-spacing: -.035em; line-height: 1; }
+    .fase span { display: block; margin-top: 10px; font-size: 24px; color: var(--t2); letter-spacing: -.01em; }
+    .no { z-index: 5; display: grid; place-items: center; width: 104px; height: 104px; border-radius: 50%; border: 2px solid #ff7a33; background: radial-gradient(circle at 35% 30%, rgba(255, 85, 0, .35), rgba(14, 8, 5, .95) 70%); box-shadow: 0 0 30px rgba(255, 85, 0, .5), inset 0 0 18px rgba(255, 85, 0, .3); }
+    .no .ico { font-size: 44px; color: #ffb187; filter: drop-shadow(0 0 6px rgba(255, 85, 0, .8)); }
+    .no i { position: absolute; top: -12px; right: -12px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #0b0b0e; border: 1px solid rgba(255, 255, 255, .25); font: 600 16px/1 var(--mono); font-style: normal; color: var(--t1); }
+
+    /* Rodapé em aba de pasta */
+    .aba { z-index: 4; left: 84px; top: 1402px; height: 64px; display: flex; align-items: center; gap: 16px; padding: 0 30px 0 26px; clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 100%, 0 100%); background: linear-gradient(180deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .05)); border-top-left-radius: 14px; }
+    .aba .logo { height: 34px; }
+    .aba small { font: 500 15px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .pasta { z-index: 4; left: 84px; top: 1466px; width: 912px; height: 186px; display: grid; grid-template-columns: 1fr 360px; align-items: center; gap: 24px; padding: 0 26px 0 32px; border-radius: 0 16px 16px 16px; background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .02)), rgba(12, 12, 15, .8); border-top: 1px solid rgba(255, 255, 255, .1); box-shadow: 0 30px 60px rgba(0, 0, 0, .5); }
+    .pasta .links { display: grid; gap: 14px; }
+    .pasta .lk { font-size: 27px; }
+    .pasta .botoes { display: grid; gap: 12px; }
+    .pasta .btn { height: 74px; border-radius: 10px; padding: 0 24px; justify-content: space-between; font-size: 27px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,.045)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="58%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+        <filter id="brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- cotas de planta técnica -->
+      <g stroke="rgba(255,255,255,.18)" stroke-width="1" fill="none">
+        <path d="M84 870V1370M78 870H90M78 1370H90"/>
+        <path d="M1010 870V1370M1004 870H1016M1004 1370H1016"/>
+      </g>
+      <g font-family="Geist Mono" font-size="13" fill="rgba(255,255,255,.35)" letter-spacing="2">
+        <text x="66" y="1124" transform="rotate(-90 66 1124)" text-anchor="middle">INÍCIO → FIM</text>
+      </g>
+      <!-- rota das três fases -->
+      <g transform="translate(0 -22)">
+      <path id="rota" d="M196 930C196 1060 884 980 884 1120S196 1180 196 1310" fill="none" stroke="#ff5500" stroke-width="8" opacity=".35" filter="url(#halo)"/>
+      <path d="M196 930C196 1060 884 980 884 1120S196 1180 196 1310" fill="none" stroke="#ff7a33" stroke-width="2.4" stroke-dasharray="10 8"/>
+      <g filter="url(#brilho)"><circle cx="540" cy="1024" r="4" fill="#ffd2b8"/><circle cx="540" cy="1216" r="4" fill="#ffd2b8"/><circle cx="760" cy="1060" r="3" fill="#ffd2b8"/></g>
+      </g>
+      <!-- marcas de escala ao lado da rota -->
+      <g class="longe" fill="none" stroke="rgba(255,140,80,.4)" stroke-width="1"><use href="#i-compass" width="24" height="24" transform="translate(860 360) scale(6.5)"/></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / método</span><span class="num">01<i>/09</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>05</i> · método</p>
+    <h1 class="titulo">Como um projeto<br>da Tirvo<br><em>acontece.</em><span class="cursor"></span></h1>
+    <div class="texto"><p class="corpo">Três fases com começo, meio e fim claros, <b>antes de qualquer linha de código.</b></p></div>
+
+    <span class="no" style="left:144px; top:856px"><svg class="ico"><use href="#i-search"/></svg><i>01</i></span>
+    <div class="fase" style="left:278px; top:840px" data-frame="18,0,18,0" data-tone="laranja"><small>fase 01</small><b>Descoberta</b><span>Escopo e cronograma claros</span></div>
+
+    <span class="no" style="left:832px; top:1046px"><svg class="ico"><use href="#i-code"/></svg><i>02</i></span>
+    <div class="fase" style="left:334px; top:1030px" data-frame="0,18,0,18" data-tone="laranja"><small>fase 02</small><b>Engenharia</b><span>Design e código juntos</span></div>
+
+    <span class="no" style="left:144px; top:1236px"><svg class="ico"><use href="#i-globe"/></svg><i>03</i></span>
+    <div class="fase" style="left:278px; top:1220px" data-frame="18,0,18,0" data-tone="neon"><small>fase 03</small><b>Lançamento</b><span>Publicação e acompanhamento</span></div>
+
+    <div class="aba"><img class="logo" data-logo><small>/ contato</small></div>
+    <div class="pasta">
+      <div class="links">
+        <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+        <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+      </div>
+      <div class="botoes">
+        <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+        <span class="btn vazado"><span>Chame no direct</span><svg class="ico"><use href="#i-chat"/></svg></span>
+      </div>
+    </div>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>

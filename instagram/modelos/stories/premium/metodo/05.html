@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Método 05: lançamento</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(520px 420px at 540px 960px, rgba(255, 85, 0, .14), transparent 70%),
+        radial-gradient(420px 300px at 860px 420px, rgba(255, 85, 0, .14), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 100px; }
+    .sub { z-index: 4; left: 84px; top: 604px; width: 860px; }
+    .sub .corpo { font-size: 30px; }
+
+    .etapa { z-index: 4; left: 190px; width: 700px; height: 104px; display: grid; grid-template-columns: 68px 1fr auto; align-items: center; gap: 22px; padding: 0 24px 0 18px; }
+    .etapa .ib { width: 68px; height: 68px; }
+    .etapa .ib .ico { font-size: 32px; }
+    .etapa b { font-size: 32px; font-weight: 620; letter-spacing: -.03em; }
+    .estado { display: flex; align-items: center; gap: 9px; font: 500 16px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t3); }
+    .estado .ico { font-size: 20px; color: var(--or); stroke-width: 2.4; }
+    .estado.vivo { color: #ffb187; }
+    .ramo { z-index: 4; top: 1172px; width: 400px; height: 128px; display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 18px; padding: 0 22px; }
+    .ramo .ib { width: 64px; height: 64px; }
+    .ramo .ib .ico { font-size: 30px; }
+    .ramo b { font-size: 28px; font-weight: 620; letter-spacing: -.025em; line-height: 1.1; }
+    .ou { z-index: 5; left: 508px; top: 1204px; width: 64px; height: 64px; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid rgba(255, 120, 60, .7); background: #0d0806; font: italic 400 32px/1 var(--serif); color: #fff; padding-bottom: 4px; box-shadow: 0 0 20px rgba(255, 85, 0, .4); }
+
+    /* Rodapé: página de status */
+    .rodape { z-index: 4; left: 84px; top: 1360px; width: 912px; height: 292px; display: grid; grid-template-rows: 84px 1fr; }
+    .rodape .alto { display: flex; align-items: center; justify-content: space-between; padding: 0 30px; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+    .rodape .logo { height: 42px; }
+    .rodape .baixo { display: grid; grid-template-columns: 1fr 360px; align-items: center; gap: 24px; padding: 0 26px 0 30px; }
+    .rodape .links { display: grid; gap: 14px; }
+    .rodape .lk { font-size: 27px; }
+    .rodape .botoes { display: grid; gap: 12px; }
+    .rodape .btn { height: 76px; border-radius: 38px; padding: 0 26px; justify-content: space-between; font-size: 27px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <linearGradient id="g-pulso" x1="640" x2="1080" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ff5500" stop-opacity="0"/><stop offset=".55" stop-color="#ff7a33" stop-opacity="1"/><stop offset="1" stop-color="#ff5500" stop-opacity=".2"/></linearGradient>
+        <filter id="halo" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- pulso do monitoramento atravessando a peça -->
+      <path id="pulso" d="" fill="none" stroke="url(#g-pulso)" stroke-width="2.4"/>
+      <path id="pulso2" d="" fill="none" stroke="#ff5500" stroke-width="6" opacity=".3" filter="url(#halo)"/>
+      <!-- trilho do pipeline -->
+      <g fill="none" stroke-width="2">
+        <path d="M150 740V1110" stroke="rgba(255,120,60,.6)" stroke-dasharray="4 6"/>
+        <path d="M150 1110V1140H290V1172M150 1140H790V1172" stroke="rgba(255,120,60,.6)" stroke-dasharray="4 6"/>
+      </g>
+      <g fill="#0b0b0e" stroke="#ff7a33" stroke-width="2"><circle cx="150" cy="742" r="7"/><circle cx="150" cy="862" r="7"/><circle cx="150" cy="982" r="7"/><circle cx="150" cy="1110" r="7"/></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / método</span><span class="num">05<i>/09</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>fase 03</i> · lançamento</p>
+    <h1 class="titulo">No ar, com<br><em>segurança.</em></h1>
+    <div class="sub"><p class="corpo">Publicamos e <b>acompanhamos o que acontece depois.</b></p></div>
+
+    <div class="etapa" style="top:690px" data-frame="16,0,16,0" data-tone="laranja"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-lock"/></svg></span><b>Publicação com SSL</b><span class="estado"><svg class="ico"><use href="#i-check"/></svg>ok</span></div>
+    <div class="etapa" style="top:810px" data-frame="16,0,16,0" data-tone="laranja"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-search"/></svg></span><b>SEO técnico</b><span class="estado"><svg class="ico"><use href="#i-check"/></svg>ok</span></div>
+    <div class="etapa" style="top:930px" data-frame="16,0,16,0" data-tone="neon"><span class="ib" data-frame="12,0,12,0" data-tone="neon"><svg class="ico"><use href="#i-activity"/></svg></span><b>Monitoramento</b><span class="estado vivo"><span class="led"></span>ativo</span></div>
+
+    <p class="rotulo" style="z-index:4; left:190px; top:1080px"><i>//</i> depois que vai ao ar</p>
+    <div class="ramo" style="left:84px" data-frame="16,0,16,0" data-tone="branco"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-file-code"/></svg></span><b>Entrega<br>do código</b></div>
+    <span class="ou">ou</span>
+    <div class="ramo" style="right:84px" data-frame="0,16,0,16" data-tone="laranja"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-refresh"/></svg></span><b>Início da<br>Gestão 360º</b></div>
+
+    <footer class="rodape" data-frame="0,28,0,28" data-tone="branco" data-acento="topo">
+      <div class="alto"><img class="logo" data-logo><span class="selo"><span class="led"></span>tirvo.tech no ar</span></div>
+      <div class="baixo">
+        <div class="links">
+          <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+          <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+        </div>
+        <div class="botoes">
+          <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+          <span class="btn vazado"><span>Chame no direct</span><svg class="ico"><use href="#i-send"/></svg></span>
+        </div>
+      </div>
+    </footer>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      // batimento do monitoramento
+      let d = 'M640 452', x = 640;
+      const picos = [720, 890];
+      while (x < 1080) {
+        const pico = picos.find(p => x >= p && x < p + 60);
+        if (pico !== undefined) {
+          d += `L${pico + 8} 452L${pico + 18} 412L${pico + 30} 504L${pico + 42} 392L${pico + 52} 452`;
+          x = pico + 60;
+        } else { x += 20; d += `L${x} 452`; }
+      }
+      document.getElementById('pulso').setAttribute('d', d);
+      document.getElementById('pulso2').setAttribute('d', d);
+    })();
+  </script>
+</body>
+</html>

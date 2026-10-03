@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Método 02: zero improviso</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(620px 300px at 760px 820px, rgba(255, 85, 0, .16), transparent 70%),
+        radial-gradient(600px 460px at 540px 1120px, rgba(255, 72, 0, .08), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 100px; }
+    .titulo .cinza { font-weight: 560; }
+    .legenda-linha { z-index: 4; top: 862px; font: 500 15px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+
+    .sabe { z-index: 4; left: 84px; top: 930px; width: 912px; }
+    .sabe .cab { display: flex; align-items: center; gap: 14px; padding: 26px 32px 18px; font-size: 30px; font-weight: 620; letter-spacing: -.025em; }
+    .sabe .cab .ico { font-size: 30px; color: var(--or); }
+    .sabe li { display: grid; grid-template-columns: 72px 1fr auto; align-items: center; gap: 24px; height: 96px; padding: 0 32px; border-top: 1px solid rgba(255, 255, 255, .07); }
+    .sabe .ib { width: 66px; height: 66px; }
+    .sabe .ib .ico { font-size: 32px; }
+    .sabe li b { font-size: 33px; font-weight: 600; letter-spacing: -.03em; }
+    .sabe li .ok { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 85, 0, .12); border: 1px solid rgba(255, 120, 60, .6); }
+    .sabe li .ok .ico { font-size: 24px; color: var(--or); stroke-width: 2.4; }
+
+    .frase { z-index: 4; left: 84px; top: 1318px; width: 912px; display: flex; align-items: center; justify-content: center; gap: 18px; font-size: 38px; font-weight: 600; letter-spacing: -.03em; }
+    .frase em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.16em; letter-spacing: -.01em; }
+
+    /* Rodapé: logo no topo e grade 2 x 2 */
+    .rodape { z-index: 4; left: 84px; top: 1414px; width: 912px; height: 242px; display: grid; grid-template-rows: 76px 1fr; }
+    .rodape .alto { display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+    .rodape .logo { height: 40px; }
+    .rodape .grade2 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+    .rodape .grade2 > * { display: flex; align-items: center; justify-content: center; }
+    .rodape .grade2 > :nth-child(odd) { border-right: 1px solid rgba(255, 255, 255, .08); }
+    .rodape .grade2 > :nth-child(-n+2) { border-bottom: 1px solid rgba(255, 255, 255, .08); }
+    .rodape .lk { font-size: 26px; gap: 10px; }
+    .rodape .acao { gap: 14px; font-size: 27px; font-weight: 600; letter-spacing: -.015em; }
+    .rodape .acao .ico { font-size: 28px; color: var(--or); }
+    .rodape .acao.cheia { color: #fff; background: linear-gradient(135deg, #ff6a1f, #ff3300); box-shadow: inset 0 1px 0 rgba(255, 220, 200, .4); clip-path: polygon(0 0, 100% 0, 100% 100%, 24px 100%, 0 calc(100% - 24px)); }
+    .rodape .acao.cheia .ico { color: #fff; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="46%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+        <filter id="brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="borrao" x="-10%" y="-30%" width="120%" height="160%"><feGaussianBlur stdDeviation="1.6"/></filter>
+        <linearGradient id="g-rabisco" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#fff" stop-opacity=".45"/></linearGradient>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <g id="linha"></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / método</span><span class="num">02<i>/09</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>01</i> · um método, três fases</p>
+    <h1 class="titulo"><span class="cinza">Um método.<br>Três fases.</span><br>Zero <em>improviso.</em></h1>
+
+    <p class="legenda-linha" style="left:84px">improviso</p>
+    <p class="legenda-linha" style="right:84px; color:#ffb187">método tirvo</p>
+
+    <section class="sabe" data-frame="26,0,26,0" data-tone="laranja" data-acento="barra">
+      <p class="cab"><svg class="ico"><use href="#i-eye"/></svg>Você sabe</p>
+      <ul>
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-layers"/></svg></span><b>o que acontece em cada etapa</b><span class="ok"><svg class="ico"><use href="#i-check"/></svg></span></li>
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-package"/></svg></span><b>o que será entregue</b><span class="ok"><svg class="ico"><use href="#i-check"/></svg></span></li>
+        <li><span class="ib" data-frame="12,0,12,0" data-tone="neon"><svg class="ico"><use href="#i-circle-check"/></svg></span><b>quando decidir</b><span class="ok"><svg class="ico"><use href="#i-check"/></svg></span></li>
+      </ul>
+    </section>
+
+    <p class="frase"><span>Transparência é parte da <em>engenharia.</em></span></p>
+
+    <footer class="rodape" data-frame="24,24,24,24" data-tone="branco" data-acento="aba">
+      <div class="alto"><img class="logo" data-logo></div>
+      <div class="grade2">
+        <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+        <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+        <span class="acao cheia">Visite nosso site<svg class="ico"><use href="#i-arrow-right"/></svg></span>
+        <span class="acao"><svg class="ico"><use href="#i-send"/></svg>Chame no direct</span>
+      </div>
+    </footer>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      // rabisco do improviso que vira uma linha reta com as três fases
+      const rnd = Tirvo.semear(21);
+      let d = 'M84 800', x = 84;
+      while (x < 440) {
+        x += 14 + rnd() * 18;
+        const amp = 60 * (1 - (x - 84) / 380);
+        d += `Q${(x - 8 + rnd() * 16).toFixed(0)} ${(800 + (rnd() * 2 - 1) * amp * 1.6).toFixed(0)} ${x.toFixed(0)} ${(800 + (rnd() * 2 - 1) * amp).toFixed(0)}`;
+      }
+      d += 'L470 800';
+      let h = `<path d="${d}" fill="none" stroke="url(#g-rabisco)" stroke-width="2" filter="url(#borrao)"/>`;
+      h += `<path d="M470 800H996" stroke="#ff5500" stroke-width="7" opacity=".45" filter="url(#halo)"/>`;
+      h += `<path d="M470 800H996" stroke="#ff7a33" stroke-width="3"/>`;
+      [560, 760, 960].forEach((cx, i) => {
+        h += `<circle cx="${cx}" cy="800" r="${i === 2 ? 11 : 9}" fill="${i === 2 ? '#ff5500' : '#0b0b0e'}" stroke="#ff7a33" stroke-width="2.4"${i === 2 ? ' filter="url(#brilho)"' : ''}/>`;
+        h += `<text x="${cx}" y="772" text-anchor="middle" font-family="Geist Mono" font-weight="500" font-size="15" letter-spacing="2" fill="rgba(255,255,255,.6)">0${i + 1}</text>`;
+      });
+      // régua sob a linha
+      for (let k = 470; k <= 996; k += 12) h += `<path d="M${k} ${k % 48 === 2 ? 812 : 816}V822" stroke="rgba(255,255,255,.18)"/>`;
+      document.getElementById('linha').innerHTML = h;
+    })();
+  </script>
+</body>
+</html>

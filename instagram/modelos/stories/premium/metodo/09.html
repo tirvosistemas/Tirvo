@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Método 09: pronto para a Descoberta</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(520px 480px at 540px 640px, rgba(255, 85, 0, .2), transparent 70%),
+        radial-gradient(900px 600px at 540px 640px, rgba(255, 60, 0, .06), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .2), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 0; right: 0; top: 352px; text-align: center; }
+    .titulo { left: 0; right: 0; top: 432px; text-align: center; font-size: 118px; line-height: .94; }
+    .titulo em { font-size: 1.16em; }
+    .texto { z-index: 4; left: 140px; right: 140px; top: 846px; text-align: center; }
+    .texto .corpo { font-size: 30px; }
+
+    .fases { z-index: 4; left: 84px; top: 1010px; width: 912px; display: grid; grid-template-columns: 1fr 40px 1fr 40px 1fr; align-items: center; }
+    .fases .f { display: grid; justify-items: center; gap: 10px; padding: 18px 8px; }
+    .fases .f small { font: 500 15px/1 var(--mono); letter-spacing: .16em; color: var(--t3); }
+    .fases .f b { font-size: 25px; font-weight: 600; letter-spacing: -.02em; color: var(--t2); }
+    .fases .f.atual b { color: var(--t1); }
+    .fases .f.atual small { color: var(--or); }
+    .fases .f .aqui { display: flex; align-items: center; gap: 8px; font: 500 13px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #ffb187; }
+    .fases .f .aqui .led { width: 8px; height: 8px; box-shadow: 0 0 0 4px rgba(255, 85, 0, .18), 0 0 10px var(--or); }
+    .fases > .ico { justify-self: center; font-size: 26px; color: rgba(255, 255, 255, .3); }
+
+    .grandes { z-index: 4; left: 84px; top: 1200px; width: 912px; display: grid; gap: 16px; }
+    .grandes .btn { height: 104px; font-size: 34px; justify-content: space-between; padding: 0 34px 0 40px; }
+    .grandes .btn.neon { background: rgba(14, 8, 5, .85); }
+
+    .faixa { z-index: 4; left: 84px; top: 1452px; width: 912px; height: 196px; display: grid; justify-items: center; align-content: center; gap: 20px; }
+    .faixa .logo { height: 46px; }
+    .faixa .linha { display: flex; align-items: center; gap: 26px; }
+    .faixa .lk { font-size: 24px; gap: 9px; }
+    .faixa .wa { display: inline-flex; align-items: center; gap: 9px; font-size: 24px; font-weight: 560; color: var(--t1); white-space: nowrap; }
+    .faixa .wa .ico { font-size: 24px; color: var(--or); }
+    .faixa .ponto { width: 5px; height: 5px; border-radius: 50%; background: rgba(255, 255, 255, .3); }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.045)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="34%" r="50%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- raios saindo do centro -->
+      <g id="raios"></g>
+      <!-- cantos da mira enquadrando o título -->
+      <g fill="none" stroke-linecap="square">
+        <path d="M110 470V400H180M900 400H970V470M970 900V970H900M180 970H110V900" stroke="#ff5500" stroke-width="10" opacity=".4" filter="url(#halo)"/>
+        <path d="M110 470V400H180M900 400H970V470M970 900V970H900M180 970H110V900" stroke="#fafafa" stroke-width="4"/>
+        <path d="M540 384V408M540 962V986M94 685H118M962 685H986" stroke="rgba(255,255,255,.6)" stroke-width="3"/>
+      </g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / método</span><span class="num">09<i>/09</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>//</i> a próxima fase é a sua</p>
+    <h1 class="titulo">Pronto<br>para a<br><em>Descoberta?</em></h1>
+    <div class="texto"><p class="corpo">Conte o seu desafio. <b>A equipe retorna para entender o contexto e propor o escopo.</b></p></div>
+
+    <div class="fases">
+      <div class="f atual" data-frame="14,0,14,0" data-tone="neon"><small>01</small><b>Descoberta</b><span class="aqui"><span class="led"></span>início</span></div>
+      <svg class="ico"><use href="#i-chevron-right"/></svg>
+      <div class="f" data-frame="14,0,14,0" data-tone="branco"><small>02</small><b>Engenharia</b><span class="aqui" style="color:var(--t3)">depois</span></div>
+      <svg class="ico"><use href="#i-chevron-right"/></svg>
+      <div class="f" data-frame="14,0,14,0" data-tone="branco"><small>03</small><b>Lançamento</b><span class="aqui" style="color:var(--t3)">no ar</span></div>
+    </div>
+
+    <div class="grandes">
+      <span class="btn cheio" data-frame="22,0,22,0" data-tone="quente"><span>Chame no direct</span><svg class="ico"><use href="#i-send"/></svg></span>
+      <span class="btn neon"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-up-right"/></svg></span>
+    </div>
+
+    <div class="faixa" data-frame="0,0,26,26" data-tone="branco" data-acento="aba">
+      <img class="logo" data-logo>
+      <div class="linha">
+        <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+        <span class="ponto"></span>
+        <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+        <span class="ponto"></span>
+        <span class="wa"><svg class="ico"><use href="#i-whatsapp"/></svg>(41) 99193-3850</span>
+      </div>
+    </div>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      let r = '';
+      for (let i = 0; i < 48; i++) {
+        const a = i / 48 * Math.PI * 2, r1 = 470, r2 = 560 + (i % 3) * 40;
+        if (685 + Math.sin(a) * (560 + (i % 3) * 40) < 340) continue;
+        r += `<path d="M${(540 + Math.cos(a) * r1).toFixed(1)} ${(685 + Math.sin(a) * r1).toFixed(1)}L${(540 + Math.cos(a) * r2).toFixed(1)} ${(685 + Math.sin(a) * r2).toFixed(1)}" stroke="rgba(255,${120 + (i % 4) * 20},70,${i % 6 === 0 ? .4 : .14})" stroke-width="${i % 6 === 0 ? 2 : 1}"/>`;
+      }
+      r += `<circle cx="540" cy="685" r="440" fill="none" stroke="rgba(255,255,255,.06)" stroke-dasharray="2 8"/>`;
+      document.getElementById('raios').innerHTML = r;
+    })();
+  </script>
+</body>
+</html>
