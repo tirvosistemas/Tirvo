@@ -1,7 +1,7 @@
 /* Enxame Tirvo: o Hipercode e mais três agentes em 3D fofo constroem a página na rolagem. Os três mudam a cada visita, em rodízio. */
 (function(){
 if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-const POOL=['pixel','loop','nano','bit','debug','cifra','query','prosa','babel','orbita','crivo','neon','eco','cron','next'];
+const POOL=['pixel','loop','nano','bit','debug','cifra','query','prosa','babel','orbita','crivo','neon','eco','cron'];
 const SQ=(()=>{let n=0;try{n=+localStorage.getItem('tirvo-enxame')||0;localStorage.setItem('tirvo-enxame',String(n+3))}catch(e){n=Math.floor(Math.random()*POOL.length)}
   return [0,1,2].map(k=>POOL[(n+k)%POOL.length])})();
 window.HC3D=(()=>{if(!window.THREE)return null;const RM=false,DPR=Math.min(2,devicePixelRatio||1);
