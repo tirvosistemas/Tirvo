@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Story premium: Sobre a Tirvo 01</title>
+  <link rel="stylesheet" href="../../fontes/fontes.css">
+  <style>
+    :root {
+      --void: #000;
+      --bg: #09090b;
+      --or: #ff5500;
+      --or-hot: #ff3300;
+      --or-glow: rgba(255, 85, 0, .45);
+      --bl: #5aa9ff;
+      --t1: #fafafa;
+      --t2: #a1a1aa;
+      --t3: #8a8a93;
+      --sans: "Geist", system-ui, sans-serif;
+      --mono: "Geist Mono", ui-monospace, monospace;
+      --serif: "Instrument Serif", Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--void); }
+    body { font-family: var(--sans); color: var(--t1); -webkit-font-smoothing: antialiased; }
+
+    /* Camada só de arte (fundo para o Canva): esconde os textos editáveis */
+    .so-arte [data-texto] { visibility: hidden; }
+
+    .peca {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(420px 420px at 560px 640px, rgba(255, 85, 0, .20), transparent 70%),
+        radial-gradient(900px 700px at 560px 640px, rgba(255, 60, 0, .07), transparent 70%),
+        radial-gradient(700px 360px at 540px 1940px, rgba(255, 70, 0, .16), transparent 70%),
+        linear-gradient(180deg, #050506 0%, #09090b 50%, #050506 100%);
+    }
+
+    .ico { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+    .arte, .grao, .vinheta { position: absolute; pointer-events: none; }
+    .arte { inset: 0; z-index: 0; }
+    .grao { inset: 0; z-index: 8; mix-blend-mode: overlay; opacity: .5; }
+    .vinheta { inset: 0; z-index: 7; background: radial-gradient(130% 90% at 52% 40%, transparent 56%, rgba(0, 0, 0, .6) 100%); }
+
+    /* Cabeçalho */
+    .topo { position: absolute; z-index: 3; left: 84px; right: 84px; top: 246px; display: flex; justify-content: space-between; align-items: center; font: 500 24px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--t2); }
+    .topo b { font-weight: 500; color: var(--or); text-shadow: 0 0 14px var(--or-glow); }
+    .topo .num { color: var(--t1); }
+    .topo .num i { font-style: normal; color: var(--t3); }
+    .regua { position: absolute; z-index: 3; left: 84px; top: 292px; width: 912px; height: 14px; }
+
+    /* Etiquetas presas à mira */
+    .etiqueta { position: absolute; z-index: 3; display: flex; align-items: center; gap: 10px; padding: 11px 16px; border: 1px solid rgba(255, 255, 255, .14); border-radius: 10px; background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .015)), rgba(9, 9, 11, .72); backdrop-filter: blur(14px); font: 500 19px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t2); white-space: nowrap; box-shadow: 0 18px 40px rgba(0, 0, 0, .5); }
+    .etiqueta b { font-weight: 500; color: var(--t1); }
+    .etiqueta .ico { font-size: 22px; color: var(--or); stroke-width: 2; }
+    .etiqueta.quente { border-color: rgba(255, 85, 0, .45); background: linear-gradient(180deg, rgba(255, 85, 0, .16), rgba(255, 85, 0, .04)), rgba(14, 8, 5, .8); color: #ffb187; box-shadow: 0 0 30px rgba(255, 85, 0, .18), 0 18px 40px rgba(0, 0, 0, .5); }
+    .etiqueta .led { width: 10px; height: 10px; border-radius: 50%; background: var(--or); box-shadow: 0 0 0 5px rgba(255, 85, 0, .18), 0 0 14px var(--or); }
+
+    /* Título */
+    .titulo { position: absolute; z-index: 3; left: 80px; top: 992px; font-weight: 700; font-size: 90px; line-height: .97; letter-spacing: -.05em; }
+    .titulo em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.12em; letter-spacing: -.01em; color: var(--t1); }
+    .cursor { display: inline-block; width: 12px; height: 76px; margin-left: 12px; vertical-align: -4px; background: linear-gradient(180deg, #ff7a33, var(--or-hot)); box-shadow: 0 0 18px var(--or), 0 0 48px var(--or-glow); }
+
+    .local { position: absolute; z-index: 3; right: 84px; top: 1290px; display: flex; align-items: center; gap: 12px; font: 500 22px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t2); }
+    .local .ico { font-size: 26px; color: var(--or); stroke-width: 1.8; }
+
+    /* Rodapé: painel enquadrado pela mira */
+    .chamada { position: absolute; z-index: 3; left: 84px; right: 84px; top: 1392px; display: flex; align-items: center; gap: 16px; font: 500 19px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--t3); }
+    .chamada::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0)); }
+    .chamada i { font-style: normal; color: var(--or); }
+    .rodape { position: absolute; z-index: 3; left: 84px; top: 1432px; width: 912px; height: 230px; display: grid; grid-template-columns: 1fr 400px; align-items: center; column-gap: 36px; padding: 0 30px 0 40px; border: 1px solid rgba(255, 255, 255, .09); border-radius: 6px; background: linear-gradient(120deg, rgba(255, 85, 0, .09), rgba(255, 255, 255, .02) 42%, rgba(255, 255, 255, .03)), rgba(9, 9, 11, .66); backdrop-filter: blur(18px) saturate(140%); box-shadow: 0 30px 60px rgba(0, 0, 0, .55); }
+    .cantos { position: absolute; inset: 0; pointer-events: none; }
+    .cantos i { position: absolute; width: 30px; height: 30px; border: 0 solid #ff6a1f; filter: drop-shadow(0 0 6px rgba(255, 85, 0, .8)); }
+    .cantos i:nth-child(1) { left: -9px; top: -9px; border-width: 3px 0 0 3px; }
+    .cantos i:nth-child(2) { right: -9px; top: -9px; border-width: 3px 3px 0 0; }
+    .cantos i:nth-child(3) { left: -9px; bottom: -9px; border-width: 0 0 3px 3px; }
+    .cantos i:nth-child(4) { right: -9px; bottom: -9px; border-width: 0 3px 3px 0; }
+    .marca { display: grid; gap: 26px; }
+    .logo { height: 50px; width: auto; }
+    .links { display: grid; gap: 14px; }
+    .links span { display: flex; align-items: center; gap: 13px; font-size: 28px; font-weight: 500; letter-spacing: -.01em; color: var(--bl); }
+    .links u { text-decoration-thickness: 2px; text-underline-offset: 7px; text-decoration-color: rgba(90, 169, 255, .55); }
+    .links .ico { font-size: 28px; }
+    .botoes { display: grid; gap: 16px; }
+    .botao { display: flex; align-items: center; justify-content: space-between; height: 80px; padding: 0 26px 0 30px; border-radius: 4px; font-size: 29px; font-weight: 600; letter-spacing: -.015em; }
+    .botao .ico { font-size: 30px; stroke-width: 1.9; }
+    .botao.cheio { background: linear-gradient(135deg, #ff6a1f, #ff3300); box-shadow: 0 0 44px rgba(255, 85, 0, .45), inset 0 1px 0 rgba(255, 220, 200, .45); }
+    .botao.vazado { border: 1px solid rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .04); }
+    .botao.vazado .ico { color: var(--or); }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="1.5"/><path d="M4 6.5l8 6 8-6"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3 10.5 13.5"/><path d="M21 3l-6.5 18-4-7.5L3 9.5 21 3z"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4"/></symbol>
+      <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.5 7 3.5 12l5 5M15.5 7l5 5-5 5M13.5 4.5l-3 15"/></symbol>
+    </defs>
+  </svg>
+
+  <main class="peca">
+    <svg class="arte" id="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="52%" cy="36%" r="60%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".3"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <linearGradient id="g-arco" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb08a"/><stop offset=".5" stop-color="#ff5500"/><stop offset="1" stop-color="#ff3300" stop-opacity=".2"/></linearGradient>
+        <radialGradient id="g-lente" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ff5500" stop-opacity=".22"/><stop offset=".55" stop-color="#ff5500" stop-opacity=".05"/><stop offset="1" stop-color="#ff5500" stop-opacity="0"/></radialGradient>
+        <filter id="brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+        <filter id="d1" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="1"/></filter>
+        <filter id="d2" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2.4"/></filter>
+        <filter id="d3" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="4.5"/></filter>
+      </defs>
+
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- linhas de varredura horizontais, finas, cruzando a mira -->
+      <g stroke="rgba(255,255,255,.05)" stroke-width="1"><path d="M0 640H1080"/><path d="M560 250V1010"/></g>
+
+      <g id="simbolos" font-family="Geist Mono" font-weight="500" text-anchor="middle"></g>
+      <g id="mira"></g>
+    </svg>
+
+    <header class="topo" data-texto><span>tirvo<b>_</b> / sobre a tirvo</span><span class="num">01<i>/28</i></span></header>
+    <svg class="regua" id="regua" width="912" height="14"></svg>
+
+    <div class="etiqueta" style="left:84px; top:400px"><svg class="ico"><use href="#i-code"/></svg>entrada <b>ruído</b></div>
+    <div class="etiqueta quente" style="left:752px; top:800px"><span class="led"></span>foco travado</div>
+    <div class="etiqueta" style="left:84px; top:880px"><svg class="ico"><use href="#i-target"/></svg>saída <b>engenharia</b></div>
+
+    <h1 class="titulo" data-texto>Hiperfoco<br>convertido em<br>engenharia de<br><em>elite.</em><span class="cursor"></span></h1>
+    <p class="local"><svg class="ico"><use href="#i-pin"/></svg><span data-texto>curitiba · brasil</span></p>
+
+    <p class="chamada" data-texto><i>//</i> fale direto com a engenharia</p>
+    <footer class="rodape">
+      <span class="cantos"><i></i><i></i><i></i><i></i></span>
+      <div class="marca">
+        <img class="logo" src="../../../../marca/tirvo-logo.svg" alt="Tirvo">
+        <div class="links">
+          <span><svg class="ico"><use href="#i-mail"/></svg><u data-texto>engenharia@tirvo.tech</u></span>
+          <span><svg class="ico"><use href="#i-globe"/></svg><u data-texto>tirvo.tech</u></span>
+        </div>
+      </div>
+      <div class="botoes">
+        <span class="botao cheio"><span data-texto>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+        <span class="botao vazado"><span data-texto>Chame no direct</span><svg class="ico"><use href="#i-send"/></svg></span>
+      </div>
+    </footer>
+
+    <div class="vinheta"></div>
+    <svg class="grao" width="1080" height="1920"><filter id="ruido"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1080" height="1920" filter="url(#ruido)" opacity=".22"/></svg>
+  </main>
+
+  <script>
+    const CX = 560, CY = 640;
+
+    // Gerador fixo, para a peça sair igual a cada renderização
+    let semente = 7;
+    const aleatorio = () => (semente = (semente * 16807) % 2147483647) / 2147483647;
+
+    // Símbolos de código espalhados (o ruído) que ficam nítidos e laranja ao chegar perto do foco
+    function simbolos() {
+      const g = document.getElementById('simbolos');
+      const lista = '01<>/{}#$%&*+=?';
+      let html = '', c;
+      for (let i = 0; i < 120; i++) {
+        const ang = aleatorio() * Math.PI * 2;
+        const r = 250 + Math.pow(aleatorio(), .8) * 560;
+        const x = CX + Math.cos(ang) * r, y = CY + Math.sin(ang) * r * .92;
+        if (y < 320 || y > 1000 || x < 20 || x > 1060) continue;
+        const perto = r < 330;
+        const filtro = r > 620 ? 'd3' : r > 470 ? 'd2' : r > 360 ? 'd1' : '';
+        const tam = (perto ? 26 : 22 + aleatorio() * 26).toFixed(0);
+        const cor = perto ? '#ff7a33' : r < 430 ? 'rgba(255,190,150,.55)' : `rgba(255,255,255,${(.12 + aleatorio() * .2).toFixed(2)})`;
+        html += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${tam}" fill="${cor}"${filtro ? ` filter="url(#${filtro})"` : ''}${perto ? ' style="filter:drop-shadow(0 0 6px #ff5500)"' : ''}>${({'<':'&lt;','>':'&gt;','&':'&amp;'})[c = lista[Math.floor(aleatorio() * lista.length)]] || c}</text>`;
+        // rastro em direção ao centro
+        if (r > 300 && r < 560 && aleatorio() < .35) {
+          const r2 = r - 70 - aleatorio() * 60;
+          const x2 = CX + Math.cos(ang) * r2, y2 = CY + Math.sin(ang) * r2 * .92;
+          html += `<path d="M${x.toFixed(1)} ${y.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="rgba(255,120,60,.28)" stroke-width="1.2" stroke-dasharray="2 6"/>`;
+        }
+      }
+      g.innerHTML = html;
+    }
+
+    // A mira: anéis de lente, escala de graus, cruz com marcas e o ponto laranja
+    function mira() {
+      const g = document.getElementById('mira');
+      let h = '';
+      h += `<circle cx="${CX}" cy="${CY}" r="300" fill="url(#g-lente)"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="318" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="1"/>`;
+      // escala de graus no anel externo
+      for (let a = 0; a < 360; a += 3) {
+        const maior = a % 30 === 0, medio = a % 15 === 0;
+        const r1 = 318, r2 = r1 - (maior ? 22 : medio ? 13 : 7);
+        const rad = (a - 90) * Math.PI / 180;
+        h += `<path d="M${(CX + Math.cos(rad) * r1).toFixed(1)} ${(CY + Math.sin(rad) * r1).toFixed(1)}L${(CX + Math.cos(rad) * r2).toFixed(1)} ${(CY + Math.sin(rad) * r2).toFixed(1)}" stroke="rgba(255,255,255,${maior ? .45 : medio ? .25 : .13})" stroke-width="${maior ? 1.6 : 1}"/>`;
+        if (maior && a % 180 !== 0) {
+          const rt = 342;
+          h += `<text x="${(CX + Math.cos(rad) * rt).toFixed(1)}" y="${(CY + Math.sin(rad) * rt + 6).toFixed(1)}" font-family="Geist Mono" font-size="15" font-weight="500" fill="rgba(255,255,255,.32)" text-anchor="middle" letter-spacing="1">${String(a).padStart(3, '0')}</text>`;
+        }
+      }
+      // arco de foco laranja
+      const arco = (r, a0, a1) => {
+        const p = a => [(CX + Math.cos((a - 90) * Math.PI / 180) * r).toFixed(1), (CY + Math.sin((a - 90) * Math.PI / 180) * r).toFixed(1)];
+        const [x0, y0] = p(a0), [x1, y1] = p(a1);
+        return `M${x0} ${y0}A${r} ${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1} ${y1}`;
+      };
+      h += `<path d="${arco(282, 300, 430)}" fill="none" stroke="#ff5500" stroke-width="10" opacity=".55" filter="url(#halo)"/>`;
+      h += `<path d="${arco(282, 300, 430)}" fill="none" stroke="url(#g-arco)" stroke-width="3" stroke-linecap="round"/>`;
+      h += `<path d="${arco(282, 120, 160)}" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-linecap="round"/>`;
+      // anéis internos
+      h += `<circle cx="${CX}" cy="${CY}" r="230" fill="rgba(9,9,11,.35)" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="230" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="16" stroke-dasharray="1.5 9"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="150" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1" stroke-dasharray="6 8"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="74" fill="none" stroke="rgba(255,140,80,.55)" stroke-width="1.4"/>`;
+      // cruz com intervalo no centro e marcas de medida
+      h += `<g stroke="rgba(255,255,255,.4)" stroke-width="1.4"><path d="M${CX - 300} ${CY}H${CX - 92}M${CX + 92} ${CY}H${CX + 300}M${CX} ${CY - 300}V${CY - 92}M${CX} ${CY + 92}V${CY + 300}"/></g>`;
+      for (let k = 1; k <= 8; k++) {
+        const d = 92 + k * 24, t = k % 4 === 0 ? 12 : 6;
+        h += `<g stroke="rgba(255,255,255,.35)" stroke-width="1.2"><path d="M${CX - d} ${CY - t}V${CY + t}M${CX + d} ${CY - t}V${CY + t}M${CX - t} ${CY - d}H${CX + t}M${CX - t} ${CY + d}H${CX + t}"/></g>`;
+      }
+      // os quatro cantos da mira (do logotipo), em volta do foco
+      const s = 120, c = 34;
+      h += `<g fill="none" stroke="#fafafa" stroke-width="3" stroke-linecap="square">
+        <path d="M${CX - s} ${CY - s + c}V${CY - s}H${CX - s + c}M${CX + s - c} ${CY - s}H${CX + s}V${CY - s + c}M${CX + s} ${CY + s - c}V${CY + s}H${CX + s - c}M${CX - s + c} ${CY + s}H${CX - s}V${CY + s - c}"/></g>`;
+      // marcas de medida da mira
+      h += `<g stroke="#fafafa" stroke-width="3"><path d="M${CX} ${CY - s - 14}V${CY - s + 6}M${CX} ${CY + s - 6}V${CY + s + 14}M${CX - s - 14} ${CY}H${CX - s + 6}M${CX + s - 6} ${CY}H${CX + s + 14}"/></g>`;
+      // ponto laranja
+      h += `<circle cx="${CX}" cy="${CY}" r="34" fill="#ff5500" opacity=".5" filter="url(#halo)"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="15" fill="#ff5500" filter="url(#brilho)"/>`;
+      h += `<circle cx="${CX}" cy="${CY}" r="5" fill="#ffd2b8"/>`;
+      // linhas de chamada até as etiquetas
+      h += `<g fill="none" stroke-width="1.4"><path d="M330 425H${CX - 150}L${CX - 104} ${CY - 104}" stroke="rgba(255,255,255,.3)"/><circle cx="${CX - 104}" cy="${CY - 104}" r="4" fill="#09090b" stroke="rgba(255,255,255,.5)"/>
+        <path d="M752 826H${CX + 150}L${CX + 92} ${CY + 92}" stroke="rgba(255,120,60,.6)"/><circle cx="${CX + 92}" cy="${CY + 92}" r="4" fill="#09090b" stroke="#ff7a33"/>
+        <path d="M352 905H${CX - 120}L${CX - 40} ${CY + 40}" stroke="rgba(255,255,255,.3)"/><circle cx="${CX - 40}" cy="${CY + 40}" r="4" fill="#09090b" stroke="rgba(255,255,255,.5)"/></g>`;
+      g.innerHTML = h;
+    }
+
+    function regua() {
+      const r = document.getElementById('regua');
+      let html = '<path d="M0 7H912" stroke="rgba(255,255,255,.10)" stroke-width="1"/>';
+      for (let x = 0; x <= 912; x += 24) {
+        const maior = x % 96 === 0;
+        html += `<path d="M${x + .5} ${maior ? 1 : 4}V${maior ? 13 : 10}" stroke="rgba(255,255,255,${maior ? .22 : .10})" stroke-width="1"/>`;
+      }
+      html += '<path d="M0 7H96" stroke="#ff5500" stroke-width="3" style="filter:drop-shadow(0 0 6px #ff5500)"/>';
+      r.innerHTML = html;
+    }
+
+    simbolos();
+    mira();
+    regua();
+  </script>
+</body>
+</html>
