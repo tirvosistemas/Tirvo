@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Dúvidas 06: logotipo e logomarca</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(520px 380px at 540px 880px, rgba(255, 85, 0, .14), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 100px; }
+    .dois { z-index: 4; left: 84px; top: 606px; display: flex; align-items: baseline; gap: 18px; }
+    .dois b { font: italic 400 66px/1 var(--serif); color: #fff; text-shadow: 0 0 30px rgba(255, 85, 0, .5); }
+    .dois span { font-size: 27px; color: var(--t2); }
+
+    .pares { z-index: 4; left: 84px; top: 712px; width: 912px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .par { height: 330px; padding: 24px 26px; display: grid; grid-template-rows: auto 1fr auto; }
+    .par small { font: 500 15px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--or); }
+    .vitrine { position: relative; display: grid; place-items: center; }
+    .vitrine::before { content: ""; position: absolute; inset: 14px 0; border: 1px dashed rgba(255, 255, 255, .14); border-radius: 8px; }
+    .recorte { position: relative; height: 70px; overflow: hidden; }
+    .recorte img { display: block; height: 70px; width: auto; }
+    .so-nome { width: 181px; }
+    .so-nome img { margin-left: -104px; }
+    .par b { font-size: 33px; font-weight: 640; letter-spacing: -.03em; }
+    .par p { margin-top: 6px; font-size: 21px; line-height: 1.32; color: var(--t2); }
+    .cota { position: absolute; z-index: 2; font: 500 12px/1 var(--mono); letter-spacing: .14em; color: #ffb187; }
+
+    .identidade { z-index: 4; left: 84px; top: 1068px; width: 912px; }
+    .identidade .cab { display: flex; align-items: center; gap: 12px; font-size: 27px; font-weight: 620; letter-spacing: -.025em; }
+    .identidade .cab .ico { font-size: 27px; color: var(--or); }
+    .identidade .grade4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 18px; }
+    .peca-id { height: 186px; padding: 18px 16px; display: grid; align-content: space-between; }
+    .peca-id span { font-size: 21px; font-weight: 600; letter-spacing: -.015em; line-height: 1.15; }
+    .cores { display: flex; gap: 6px; }
+    .cores i { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .18); }
+    .tipos { display: flex; align-items: baseline; gap: 10px; font-size: 38px; line-height: 1; }
+    .tipos em { font-family: var(--serif); font-style: italic; font-size: 44px; }
+    .tipos i { font-family: var(--mono); font-style: normal; font-size: 30px; color: var(--t2); }
+    .peca-id > .ico { font-size: 40px; color: var(--or); filter: drop-shadow(0 0 6px rgba(255, 85, 0, .6)); }
+
+    /* Rodapé: página de manual de marca */
+    .rodape { z-index: 4; left: 84px; top: 1384px; width: 912px; height: 268px; display: grid; grid-template-columns: 330px 1fr; }
+    .area { position: relative; display: grid; place-items: center; border-right: 1px solid rgba(255, 255, 255, .08); }
+    .area .respiro { position: relative; padding: 30px 32px; border: 1px dashed rgba(255, 120, 60, .55); }
+    .area .respiro .logo { height: 46px; }
+    .area .respiro i { position: absolute; width: 10px; height: 10px; border: 0 solid #ff7a33; }
+    .area .respiro i:nth-child(2) { left: -6px; top: -6px; border-width: 2px 0 0 2px; }
+    .area .respiro i:nth-child(3) { right: -6px; top: -6px; border-width: 2px 2px 0 0; }
+    .area .respiro i:nth-child(4) { left: -6px; bottom: -6px; border-width: 0 0 2px 2px; }
+    .area .respiro i:nth-child(5) { right: -6px; bottom: -6px; border-width: 0 2px 2px 0; }
+    .area small { position: absolute; bottom: 18px; font: 500 12px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .contato { display: grid; align-content: center; gap: 14px; padding: 0 26px 0 30px; }
+    .contato .lk { font-size: 25px; }
+    .contato .acoes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+    .contato .btn { height: 72px; padding: 0 14px; border-radius: 10px; font-size: 23px; gap: 10px; }
+    .contato .btn .ico { font-size: 24px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="rgba(255,255,255,.035)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <g class="longe" fill="none" stroke="rgba(255,140,80,.45)" stroke-width="1"><use href="#i-pen-tool" width="24" height="24" transform="translate(840 340) scale(6.5)"/></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / dúvidas</span><span class="num">06<i>/11</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>P.</i> marca</p>
+    <h1 class="titulo">Logotipo ou<br><em>logomarca?</em></h1>
+    <p class="dois"><b>Criamos os dois.</b><span>Veja a diferença.</span></p>
+
+    <div class="pares">
+      <div class="par" data-frame="18,0,18,0" data-tone="branco">
+        <small>logotipo</small>
+        <div class="vitrine"><span class="recorte so-nome"><img data-logo></span></div>
+        <div><b>Só o nome</b><p>A representação tipográfica do nome da marca.</p></div>
+      </div>
+      <div class="par" data-frame="0,18,0,18" data-tone="neon">
+        <small>logomarca</small>
+        <div class="vitrine"><span class="recorte"><img data-logo></span></div>
+        <div><b>Símbolo + nome</b><p>O termo popular no Brasil para a combinação dos dois.</p></div>
+      </div>
+    </div>
+
+    <section class="identidade">
+      <p class="cab"><svg class="ico"><use href="#i-layers"/></svg>E a identidade visual completa</p>
+      <div class="grade4">
+        <div class="peca-id" data-frame="12,0,12,0" data-tone="laranja"><div class="cores"><i style="background:#ff5500"></i><i style="background:#09090b"></i><i style="background:#fafafa"></i><i style="background:#a1a1aa"></i></div><span>Paleta<br>de cores</span></div>
+        <div class="peca-id" data-frame="12,0,12,0" data-tone="laranja"><div class="tipos">Aa<em>Aa</em><i>Aa</i></div><span>Tipografia</span></div>
+        <div class="peca-id" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-file-code"/></svg><span>Manual<br>de marca</span></div>
+        <div class="peca-id" data-frame="12,0,12,0" data-tone="neon"><svg class="ico"><use href="#i-smartphone"/></svg><span>Aplicações<br>reais</span></div>
+      </div>
+    </section>
+
+    <footer class="rodape" data-frame="0,24,0,24" data-tone="branco" data-acento="topo">
+      <div class="area"><span class="respiro"><img class="logo" data-logo><i></i><i></i><i></i><i></i></span><small>área de respiro</small></div>
+      <div class="contato">
+        <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+        <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+        <div class="acoes">
+          <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+          <span class="btn vazado"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+        </div>
+      </div>
+    </footer>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>

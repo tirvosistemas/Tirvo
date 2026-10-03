@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Dúvidas 05: suporte e manutenção</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(480px 480px at 540px 900px, rgba(255, 85, 0, .2), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 92px; }
+
+    .centro { z-index: 5; left: 440px; top: 800px; width: 200px; height: 200px; display: grid; place-items: center; align-content: center; text-align: center; }
+    .centro b { font: 600 62px/1 var(--mono); letter-spacing: -.04em; color: #fff; text-shadow: 0 0 26px rgba(255, 85, 0, .8); }
+    .centro small { margin-top: 10px; font: 500 14px/1.3 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #ffb187; }
+    .orbita { z-index: 5; display: flex; align-items: center; gap: 12px; padding: 14px 18px; border: 1px solid rgba(255, 120, 60, .5); border-radius: 12px; background: rgba(14, 9, 6, .9); backdrop-filter: blur(10px); font-size: 24px; font-weight: 600; letter-spacing: -.02em; white-space: nowrap; box-shadow: 0 16px 34px rgba(0, 0, 0, .5); }
+    .orbita .ico { font-size: 26px; color: var(--or); }
+    .tag360 { z-index: 4; left: 0; right: 0; top: 1150px; text-align: center; font: 500 17px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--t3); }
+    .tag360 b { font-weight: 500; color: var(--or); }
+
+    .nota { z-index: 4; left: 84px; top: 1196px; width: 912px; display: grid; grid-template-columns: 70px 1fr; align-items: center; gap: 22px; padding: 22px 28px; }
+    .nota .ib { width: 66px; height: 66px; }
+    .nota .ib .ico { font-size: 32px; color: var(--t1); filter: none; }
+    .nota small { font: 500 15px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .nota p { margin-top: 8px; font-size: 25px; line-height: 1.32; color: var(--t2); }
+    .nota p b { color: var(--t1); font-weight: 600; }
+
+    /* Rodapé: recibo */
+    .recibo { z-index: 4; left: 84px; top: 1388px; width: 912px; height: 270px; padding: 34px 32px 0; background: #111114; -webkit-mask: radial-gradient(circle 9px at 50% 0, transparent 98%, #000) 0 0 / 26px 100% repeat-x; box-shadow: 0 30px 60px rgba(0, 0, 0, .5); }
+    .recibo .alto { display: flex; align-items: center; justify-content: space-between; }
+    .recibo .logo { height: 40px; }
+    .recibo .alto small { font: 500 14px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .recibo .linha { display: flex; align-items: center; gap: 12px; margin-top: 14px; font: 500 17px/1 var(--mono); letter-spacing: .12em; color: var(--t3); }
+    .recibo .linha i { flex: 1; height: 1px; border-top: 2px dotted rgba(255, 255, 255, .18); }
+    .recibo .linha .lk { font-family: var(--sans); font-size: 24px; letter-spacing: -.01em; }
+    .recibo .acoes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+    .recibo .btn { height: 72px; border-radius: 8px; font-size: 26px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="48%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <g id="relogio"></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / dúvidas</span><span class="num">05<i>/11</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>P.</i> depois da entrega</p>
+    <h1 class="titulo">Como funcionam<br>o suporte e a<br><em>manutenção?</em></h1>
+
+    <div class="centro"><b>24/7</b><small>operação<br>tirvo</small></div>
+    <span class="orbita" style="left:84px; top:700px"><svg class="ico"><use href="#i-activity"/></svg>Monitoramento</span>
+    <span class="orbita" style="right:84px; top:700px"><svg class="ico"><use href="#i-shield-check"/></svg>Atualizações</span>
+    <span class="orbita" style="left:84px; top:1036px"><svg class="ico"><use href="#i-db"/></svg>Backups</span>
+    <span class="orbita" style="right:84px; top:1036px"><svg class="ico"><use href="#i-gear"/></svg>Manutenção contínua</span>
+    <p class="tag360">no modelo <b>gestão 360º</b>, a operação é nossa</p>
+
+    <div class="nota" data-frame="16,0,16,0" data-tone="branco">
+      <span class="ib" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-file-code"/></svg></span>
+      <div><small>no código entregue</small><p>O projeto passa para a sua equipe. <b>Precisou evoluir? É só voltar a falar com a gente.</b></p></div>
+    </div>
+
+    <div class="recibo">
+      <div class="alto"><img class="logo" data-logo><small>contato · engenharia</small></div>
+      <p class="linha">SITE<i></i><span class="lk"><u>tirvo.tech</u></span></p>
+      <p class="linha">E-MAIL<i></i><span class="lk"><u>engenharia@tirvo.tech</u></span></p>
+      <div class="acoes">
+        <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+        <span class="btn vazado"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      </div>
+    </div>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      const cx = 540, cy = 900;
+      let h = `<circle cx="${cx}" cy="${cy}" r="120" fill="#ff5500" opacity=".22" filter="url(#halo)"/>`;
+      for (let k = 0; k < 24; k++) {
+        const a = k / 24 * Math.PI * 2 - Math.PI / 2, maior = k % 6 === 0;
+        const r1 = 196, r2 = r1 - (maior ? 22 : 10);
+        h += `<path d="M${(cx + Math.cos(a) * r1).toFixed(1)} ${(cy + Math.sin(a) * r1).toFixed(1)}L${(cx + Math.cos(a) * r2).toFixed(1)} ${(cy + Math.sin(a) * r2).toFixed(1)}" stroke="rgba(255,255,255,${maior ? .5 : .2})" stroke-width="${maior ? 2.4 : 1.2}"/>`;
+        if (maior) h += `<text x="${(cx + Math.cos(a) * 222).toFixed(1)}" y="${(cy + Math.sin(a) * 222 + 5).toFixed(1)}" text-anchor="middle" font-family="Geist Mono" font-size="14" fill="rgba(255,255,255,.45)">${String(k).padStart(2, '0')}h</text>`;
+      }
+      h += `<circle cx="${cx}" cy="${cy}" r="196" fill="none" stroke="rgba(255,255,255,.1)"/>`;
+      h += `<circle cx="${cx}" cy="${cy}" r="150" fill="rgba(12,8,6,.8)" stroke="#ff7a33" stroke-width="2.4" style="filter:drop-shadow(0 0 10px rgba(255,85,0,.7))"/>`;
+      h += `<circle cx="${cx}" cy="${cy}" r="164" fill="none" stroke="rgba(255,120,60,.35)" stroke-dasharray="3 7"/>`;
+      // órbitas até as etiquetas
+      [[300, 728], [780, 728], [230, 1064], [760, 1064]].forEach(([x, y]) => {
+        const dx = x - cx, dy = y - cy, d = Math.hypot(dx, dy);
+        h += `<path d="M${(cx + dx / d * 150).toFixed(1)} ${(cy + dy / d * 150).toFixed(1)}L${x} ${y}" stroke="rgba(255,120,60,.5)" stroke-width="1.4" stroke-dasharray="3 6"/>`;
+      });
+      document.getElementById('relogio').innerHTML = h;
+    })();
+  </script>
+</body>
+</html>

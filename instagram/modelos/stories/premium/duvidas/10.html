@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Dúvidas 10: Hipercode</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(480px 440px at 540px 900px, rgba(255, 85, 0, .2), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 100px; }
+    .sub { z-index: 4; left: 84px; top: 612px; width: 880px; }
+    .sub .corpo { font-size: 29px; }
+
+    .etapa { z-index: 5; top: 820px; width: 220px; display: grid; justify-items: center; gap: 12px; text-align: center; }
+    .etapa .caixa { display: grid; place-items: center; width: 120px; height: 120px; }
+    .etapa .caixa .ico { font-size: 52px; color: #ffb187; filter: drop-shadow(0 0 8px rgba(255, 85, 0, .7)); }
+    .etapa small { font: 500 15px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--or); }
+    .etapa b { font-size: 25px; font-weight: 600; letter-spacing: -.02em; line-height: 1.12; }
+    .zip { font: 600 34px/1 var(--mono); color: #fff; letter-spacing: -.02em; text-shadow: 0 0 18px rgba(255, 85, 0, .8); }
+
+    .status { z-index: 4; left: 84px; top: 1130px; width: 912px; padding: 24px 28px; }
+    .status .alto { display: flex; align-items: center; justify-content: space-between; }
+    .status .alto b { font-size: 27px; font-weight: 620; letter-spacing: -.025em; }
+    .barra-teste { margin-top: 18px; height: 12px; border-radius: 6px; background: rgba(255, 255, 255, .06); overflow: hidden; }
+    .barra-teste i { display: block; width: 88%; height: 100%; border-radius: 6px; background: repeating-linear-gradient(135deg, #ff6a1f 0 12px, #ff3300 12px 24px); box-shadow: 0 0 14px rgba(255, 85, 0, .6); }
+    .status .marcos { display: flex; justify-content: space-between; margin-top: 10px; font: 500 14px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t3); }
+    .status .marcos b { font-weight: 500; color: #ffb187; }
+    .avisos { z-index: 4; left: 84px; top: 1300px; width: 912px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .avisos span { display: flex; align-items: center; gap: 12px; height: 62px; padding: 0 18px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, .12); background: rgba(255, 255, 255, .03); font-size: 21px; color: var(--t2); }
+    .avisos .ico { font-size: 22px; color: var(--t3); }
+
+    /* Rodapé: notificações */
+    .avisos-celular { z-index: 4; left: 84px; top: 1398px; width: 912px; display: grid; gap: 12px; }
+    .notif { display: grid; grid-template-columns: 64px 1fr auto; align-items: center; gap: 18px; height: 116px; padding: 0 22px 0 18px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, .12); background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .03)), rgba(16, 16, 19, .85); backdrop-filter: blur(20px); box-shadow: 0 24px 50px rgba(0, 0, 0, .5); }
+    .notif .app { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 16px; background: #09090b; border: 1px solid rgba(255, 255, 255, .16); }
+    .notif .app svg { width: 38px; height: 38px; }
+    .notif .txt small { display: flex; align-items: center; gap: 10px; font: 500 14px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t3); }
+    .notif .txt small .logo { height: 18px; }
+    .notif .txt .lk { margin-top: 8px; font-size: 22px; gap: 8px; }
+    .notif .btn { height: 72px; border-radius: 36px; padding: 0 24px; font-size: 25px; gap: 10px; }
+    .notif .btn .ico { font-size: 26px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="48%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+        <filter id="brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <g id="enxame"></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / dúvidas</span><span class="num">10<i>/11</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>P.</i> ia proprietária</p>
+    <h1 class="titulo">O que é o<br><em>Hipercode?</em></h1>
+    <div class="sub"><p class="corpo">A IA que a Tirvo está desenvolvendo: <b>um enxame de agentes autônomos dedicado à programação.</b></p></div>
+
+    <div class="etapa" style="left:84px"><span class="caixa" data-frame="18,0,18,0" data-tone="laranja"><svg class="ico"><use href="#i-file-code"/></svg></span><small>entrada</small><b>Recebe<br>a tarefa</b></div>
+    <div class="etapa" style="left:430px"><small style="margin-top:122px">o enxame</small><b>Escreve<br>o código</b></div>
+    <div class="etapa" style="right:84px"><span class="caixa" data-frame="18,0,18,0" data-tone="neon"><span class="zip">.zip</span></span><small>saída</small><b>Entrega<br>o projeto</b></div>
+
+    <section class="status" data-frame="20,0,20,0" data-tone="branco">
+      <div class="alto"><b>Estágio avançado</b><span class="selo"><span class="led"></span>fase final de testes</span></div>
+      <div class="barra-teste"><i></i></div>
+      <p class="marcos"><span>início</span><b>testes finais</b><span>lançamento</span></p>
+    </section>
+    <div class="avisos">
+      <span><svg class="ico"><use href="#i-lock"/></svg>Ainda não disponível ao público</span>
+      <span><svg class="ico"><use href="#i-ban"/></svg>Não usado em projetos de clientes</span>
+    </div>
+
+    <div class="avisos-celular">
+      <div class="notif">
+        <span class="app"><svg viewBox="0 0 100 100"><path fill="#f4f4f5" d="M6.5 35.5V6.5H35.5V13.5H13.5V35.5Z M93.5 35.5V6.5H64.5V13.5H86.5V35.5Z M6.5 64.5V93.5H35.5V86.5H13.5V64.5Z M93.5 64.5V93.5H64.5V86.5H86.5V64.5Z"/><path fill="#f4f4f5" fill-opacity=".45" d="M48.5 22h3v12h-3Z M48.5 66h3v12h-3Z M22 48.5h12v3h-12Z M66 48.5h12v3h-12Z"/><circle cx="50" cy="50" r="10" fill="#ff5500"/></svg></span>
+        <div class="txt"><small><img class="logo" data-logo>· site</small><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span></div>
+        <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+      </div>
+      <div class="notif">
+        <span class="app"><svg viewBox="0 0 24 24" style="width:34px;height:34px" fill="none" stroke="#ff7a33" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-send"/></svg></span>
+        <div class="txt"><small>@tirvotech · e-mail</small><span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span></div>
+        <span class="btn vazado"><span>Chame no direct</span><svg class="ico"><use href="#i-send"/></svg></span>
+      </div>
+    </div>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      // enxame de agentes entre a tarefa e o .zip
+      const rnd = Tirvo.semear(31);
+      const CX = 540, CY = 862;
+      const nos = [];
+      for (let i = 0; i < 26; i++) {
+        const a = rnd() * Math.PI * 2, r = Math.sqrt(rnd()) * 120;
+        nos.push([CX + Math.cos(a) * r * 1.2, CY + Math.sin(a) * r * .62]);
+      }
+      let h = `<circle cx="${CX}" cy="${CY}" r="110" fill="#ff5500" opacity=".18" filter="url(#halo)"/>`;
+      nos.forEach(([x, y], i) => nos.slice(i + 1).forEach(([x2, y2]) => { if (Math.hypot(x - x2, y - y2) < 70) h += `<path d="M${x.toFixed(1)} ${y.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="rgba(255,130,70,.35)" stroke-width="1"/>`; }));
+      nos.forEach(([x, y], i) => {
+        const s = 8 + (i % 3) * 3;
+        const hex = Array.from({ length: 6 }, (_, k) => [x + Math.cos(k * Math.PI / 3) * s, y + Math.sin(k * Math.PI / 3) * s].map(v => v.toFixed(1)).join(' ')).join('L');
+        h += `<path d="M${hex}Z" fill="${i % 5 === 0 ? '#ff5500' : 'rgba(20,10,6,.9)'}" stroke="#ff7a33" stroke-width="1.4"${i % 5 === 0 ? ' filter="url(#brilho)"' : ''}/>`;
+      });
+      // fluxo entrada → enxame → saída
+      h += `<path d="M270 880H390M690 880H806" stroke="#ff7a33" stroke-width="2.4" stroke-dasharray="6 6"/>`;
+      h += `<path d="M382 872l10 8-10 8M798 872l10 8-10 8" fill="none" stroke="#ff7a33" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+      document.getElementById('enxame').innerHTML = h;
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Dúvidas 11: a sua pergunta</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(520px 460px at 700px 820px, rgba(255, 85, 0, .18), transparent 70%),
+        radial-gradient(900px 420px at 540px 1930px, rgba(255, 70, 0, .22), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 104px; }
+
+    .balao { z-index: 4; max-width: 520px; padding: 20px 24px; border-radius: 26px; font-size: 25px; line-height: 1.3; letter-spacing: -.01em; box-shadow: 0 24px 50px rgba(0, 0, 0, .5); }
+    .balao.cliente { border-bottom-right-radius: 8px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .12); color: var(--t1); backdrop-filter: blur(10px); }
+    .balao.longe { filter: blur(2.5px); opacity: .45; transform: scale(.9); }
+    .balao.medio { filter: blur(1px); opacity: .7; }
+    .resposta { z-index: 5; left: 84px; top: 1016px; width: 660px; padding: 22px 26px; border-radius: 26px; border-bottom-left-radius: 8px; background: linear-gradient(135deg, rgba(255, 106, 31, .2), rgba(255, 51, 0, .08)), rgba(18, 9, 5, .9); border: 1px solid rgba(255, 120, 60, .6); box-shadow: 0 0 40px rgba(255, 85, 0, .25); }
+    .resposta small { display: flex; align-items: center; gap: 10px; font: 500 14px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #ffb187; }
+    .resposta small .logo { height: 18px; }
+    .resposta p { margin-top: 10px; font-size: 28px; line-height: 1.3; font-weight: 560; letter-spacing: -.015em; }
+
+    /* Rodapé de encerramento */
+    .canais { z-index: 4; left: 84px; top: 1206px; width: 912px; }
+    .canais .barra { display: flex; align-items: center; justify-content: space-between; height: 78px; padding: 0 28px; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+    .canais .logo { height: 40px; }
+    .canais .tiles { display: grid; grid-template-columns: 1fr 1.35fr 1fr; }
+    .canais .tile { display: grid; gap: 10px; padding: 22px 24px; }
+    .canais .tile + .tile { border-left: 1px solid rgba(255, 255, 255, .07); }
+    .canais .tile small { display: flex; align-items: center; gap: 8px; font: 500 14px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .canais .tile small .ico { font-size: 18px; color: var(--or); }
+    .canais .lk { font-size: 23px; }
+    .canais .v { font-size: 23px; font-weight: 560; white-space: nowrap; }
+    .acoes { z-index: 4; left: 84px; top: 1432px; width: 912px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .acoes .btn { height: 104px; border-radius: 18px; font-size: 32px; }
+    .acoes .btn.neon { background: rgba(14, 8, 5, .88); }
+    .assinatura { z-index: 4; left: 0; right: 0; top: 1576px; text-align: center; font-size: 26px; color: var(--t2); }
+    .assinatura em { font-family: var(--serif); font-style: italic; font-size: 1.2em; color: var(--t1); }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="46%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <text x="1010" y="760" text-anchor="end" font-family="Instrument Serif" font-style="italic" font-size="420" fill="none" stroke="rgba(255,120,60,.3)" stroke-width="2">?</text>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / dúvidas</span><span class="num">11<i>/11</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>//</i> ainda com dúvidas</p>
+    <h1 class="titulo">Não encontrou<br>a sua <em>pergunta?</em></h1>
+
+    <p class="balao cliente longe" style="right:84px; top:640px">E se o meu projeto for diferente de tudo?</p>
+    <p class="balao cliente medio" style="right:120px; top:760px">Dá para integrar com o sistema que eu já uso?</p>
+    <p class="balao cliente" style="right:84px; top:880px">Como fica depois da entrega?</p>
+    <div class="resposta"><small><img class="logo" data-logo>· engenharia</small><p>Mande a sua dúvida. Quem responde é a mesma equipe que constrói os projetos.</p></div>
+
+    <section class="canais" data-frame="24,0,24,0" data-tone="branco" data-acento="topo">
+      <div class="barra"><img class="logo" data-logo><span class="selo"><span class="led"></span>resposta da engenharia</span></div>
+      <div class="tiles">
+        <div class="tile"><small><svg class="ico"><use href="#i-globe"/></svg>site</small><span class="lk"><u>tirvo.tech</u></span></div>
+        <div class="tile"><small><svg class="ico"><use href="#i-mail"/></svg>e-mail</small><span class="lk"><u>engenharia@tirvo.tech</u></span></div>
+        <div class="tile"><small><svg class="ico"><use href="#i-whatsapp"/></svg>whatsapp</small><span class="v">(41) 99193-3850</span></div>
+      </div>
+    </section>
+    <div class="acoes">
+      <span class="btn cheio" data-frame="20,0,20,0" data-tone="quente"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      <span class="btn neon"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+    </div>
+    <p class="assinatura">Seu futuro digital começa com <em>uma conversa.</em></p>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>

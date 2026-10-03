@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Dúvidas 07: custo e prazo</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(420px 380px at 540px 1130px, rgba(255, 85, 0, .22), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 90px; }
+
+    .perguntas { z-index: 4; left: 84px; top: 684px; width: 912px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .pergunta { height: 330px; padding: 26px 26px 0; }
+    .pergunta .alto { display: flex; align-items: center; gap: 14px; }
+    .pergunta .ib { width: 62px; height: 62px; }
+    .pergunta .ib .ico { font-size: 30px; }
+    .pergunta h2 { font-size: 33px; font-weight: 650; letter-spacing: -.03em; line-height: 1.05; }
+    .pergunta .curta { margin-top: 22px; font: italic 400 40px/1 var(--serif); color: #ffb187; }
+    .pergunta p { margin-top: 12px; font-size: 22px; line-height: 1.36; color: var(--t2); }
+    .pergunta p b { color: var(--t1); font-weight: 600; }
+
+    .no { z-index: 5; left: 450px; top: 1060px; width: 180px; height: 180px; display: grid; place-items: center; align-content: center; gap: 6px; border-radius: 50%; border: 2px solid #ff7a33; background: radial-gradient(circle at 35% 30%, rgba(255, 85, 0, .35), rgba(14, 8, 5, .96) 70%); box-shadow: 0 0 44px rgba(255, 85, 0, .5); text-align: center; }
+    .no .ico { font-size: 44px; color: #ffd2b8; }
+    .no b { font-size: 24px; font-weight: 650; letter-spacing: -.02em; }
+    .no small { font: 500 12px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #ffb187; }
+    .saidas { z-index: 4; display: flex; align-items: center; gap: 10px; font: 500 16px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t2); }
+    .saidas .ico { font-size: 20px; color: var(--or); stroke-width: 2.2; }
+
+    /* Rodapé: dock */
+    .dock { z-index: 4; left: 84px; top: 1426px; width: 912px; height: 214px; display: grid; grid-template-columns: repeat(3, 1fr) 1.4fr; gap: 12px; align-items: center; padding: 18px; border-radius: 34px; border: 1px solid rgba(255, 255, 255, .14); background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02)), rgba(12, 12, 15, .82); backdrop-filter: blur(20px); box-shadow: 0 40px 70px rgba(0, 0, 0, .6); }
+    .tecla { height: 100%; display: grid; justify-items: center; align-content: center; gap: 12px; border-radius: 22px; background: rgba(255, 255, 255, .04); border: 1px solid rgba(255, 255, 255, .08); text-align: center; }
+    .tecla .icone { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 18px; background: rgba(255, 85, 0, .1); border: 1px solid rgba(255, 120, 60, .4); }
+    .tecla .icone .ico { font-size: 32px; color: #ff8c52; }
+    .tecla .lk { font-size: 19px; gap: 0; }
+    .tecla .v { font-size: 19px; font-weight: 600; }
+    .tecla .logo { height: 34px; }
+    .dock .btn { height: 100%; border-radius: 22px; flex-direction: column; gap: 10px; font-size: 28px; white-space: normal; text-align: center; line-height: 1.05; }
+    .dock .btn .ico { font-size: 36px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="56%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- as duas perguntas convergem para a Descoberta -->
+      <g fill="none">
+        <path d="M312 1014V1080Q312 1150 450 1150M768 1014V1080Q768 1150 630 1150" stroke="#ff5500" stroke-width="6" opacity=".35" filter="url(#halo)"/>
+        <path d="M312 1014V1080Q312 1150 450 1150M768 1014V1080Q768 1150 630 1150" stroke="#ff7a33" stroke-width="2.2" stroke-dasharray="6 6"/>
+      </g>
+      <g fill="#0b0b0e" stroke="#ff7a33" stroke-width="2"><circle cx="312" cy="1014" r="6"/><circle cx="768" cy="1014" r="6"/></g>
+      <circle cx="540" cy="1150" r="120" fill="none" stroke="rgba(255,120,60,.25)" stroke-dasharray="2 6"/>
+      <circle cx="540" cy="1150" r="150" fill="none" stroke="rgba(255,255,255,.06)"/>
+      <g class="longe" fill="none" stroke="rgba(255,140,80,.45)" stroke-width="1"><use href="#i-hourglass" width="24" height="24" transform="translate(850 340) scale(6)"/></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / dúvidas</span><span class="num">07<i>/11</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>P.</i> custo e prazo</p>
+    <h1 class="titulo">As duas respostas<br>nascem na<br><em>Descoberta.</em></h1>
+
+    <div class="perguntas">
+      <section class="pergunta" data-frame="20,0,20,0" data-tone="laranja">
+        <div class="alto"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-file-code"/></svg></span><h2>Quanto custa?</h2></div>
+        <p class="curta">Sob medida.</p>
+        <p>Orçado depois da Descoberta, com o escopo real. <b>Sem compromisso: você decide com calma.</b></p>
+      </section>
+      <section class="pergunta" data-frame="0,20,0,20" data-tone="laranja">
+        <div class="alto"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-clock"/></svg></span><h2>Quanto tempo leva?</h2></div>
+        <p class="curta">Depende do escopo.</p>
+        <p>O cronograma sai na Descoberta e <b>você recebe antes de o trabalho começar.</b></p>
+      </section>
+    </div>
+
+    <div class="no"><svg class="ico"><use href="#i-search"/></svg><b>Descoberta</b><small>fase 01</small></div>
+    <p class="saidas" style="left:84px; top:1290px"><svg class="ico"><use href="#i-check"/></svg>proposta sem compromisso</p>
+    <p class="saidas" style="right:84px; top:1290px"><svg class="ico"><use href="#i-check"/></svg>cronograma por fase</p>
+
+    <div class="dock">
+      <div class="tecla"><img class="logo" data-logo></div>
+      <div class="tecla"><span class="icone"><svg class="ico"><use href="#i-globe"/></svg></span><span class="lk"><u>tirvo.tech</u></span></div>
+      <div class="tecla"><span class="icone"><svg class="ico"><use href="#i-send"/></svg></span><span class="v">Chame no direct</span></div>
+      <span class="btn cheio"><svg class="ico"><use href="#i-arrow-up-right"/></svg>Visite nosso site</span>
+    </div>
+    <p class="saidas" style="left:0; right:0; top:1370px; justify-content:center; text-transform:none; letter-spacing:0; font-family:var(--sans); font-size:24px"><span class="lk" style="font-size:24px"><svg class="ico" style="font-size:24px;color:var(--link)"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span></p>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>

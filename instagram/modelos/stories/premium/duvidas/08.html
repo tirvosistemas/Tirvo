@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Dúvidas 08: Google e SEO</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(460px 380px at 820px 460px, rgba(255, 85, 0, .18), transparent 70%),
+        radial-gradient(700px 480px at 540px 960px, rgba(255, 72, 0, .08), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 96px; }
+
+    .base-tec { z-index: 4; left: 84px; top: 652px; width: 912px; }
+    .base-tec .cab { padding: 24px 30px 14px; }
+    .base-tec .cab small { font: 500 15px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--or); }
+    .base-tec .cab b { display: block; margin-top: 10px; font-size: 31px; font-weight: 630; letter-spacing: -.03em; }
+    .base-tec ul { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(255, 255, 255, .07); }
+    .base-tec li { display: flex; align-items: center; gap: 14px; height: 84px; padding: 0 30px; font-size: 25px; font-weight: 560; letter-spacing: -.015em; }
+    .base-tec li:nth-child(odd) { border-right: 1px solid rgba(255, 255, 255, .07); }
+    .base-tec li:nth-child(-n+2) { border-bottom: 1px solid rgba(255, 255, 255, .07); }
+    .base-tec li .ico { font-size: 26px; color: var(--or); }
+
+    .verdade { z-index: 4; left: 84px; top: 1000px; width: 912px; display: grid; grid-template-columns: 1fr 360px; gap: 26px; align-items: center; }
+    .verdade blockquote { font-size: 40px; font-weight: 640; letter-spacing: -.035em; line-height: 1.08; }
+    .verdade blockquote em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.14em; color: #ffb187; }
+    .fatores small { display: block; margin-bottom: 12px; font: 500 15px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .fatores span { display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 16px; margin-bottom: 8px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, .12); background: rgba(255, 255, 255, .03); font-size: 22px; color: var(--t2); }
+    .fatores span .ico { font-size: 22px; color: var(--t3); }
+    .entrega { z-index: 4; left: 84px; top: 1262px; width: 912px; }
+    .entrega .corpo { font-size: 28px; }
+
+    /* Rodapé como resultado de busca */
+    .resultado { z-index: 4; left: 84px; top: 1372px; width: 912px; height: 280px; padding: 26px 30px 0; }
+    .resultado .url { display: flex; align-items: center; gap: 14px; }
+    .resultado .fav { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #09090b; border: 1px solid rgba(255, 255, 255, .2); }
+    .resultado .fav svg { width: 26px; height: 26px; }
+    .resultado .url .lk { font-size: 24px; }
+    .resultado .url > .lk { font-size: 23px; gap: 8px; }
+    .resultado .url small { font: 500 14px/1 var(--mono); color: var(--t3); letter-spacing: .06em; }
+    .resultado h3 { margin-top: 14px; display: flex; align-items: center; gap: 18px; font-size: 30px; font-weight: 600; letter-spacing: -.02em; }
+    .resultado h3 .logo { height: 34px; }
+    .resultado .meta { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; }
+    .resultado .meta .lk { font-size: 23px; gap: 8px; }
+    .resultado .acoes { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .resultado .btn { height: 76px; padding: 0 22px; border-radius: 38px; font-size: 27px; gap: 12px; }
+    .resultado .btn .ico { font-size: 25px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <g transform="translate(850 318) scale(6)" class="neon" style="stroke-width:.45; opacity:.6"><use href="#i-search" width="24" height="24"/></g>
+      <!-- linhas de resultados genéricos, ao fundo -->
+      <g class="mais-longe" fill="rgba(255,255,255,.4)">
+        <rect x="640" y="560" width="300" height="10" rx="5"/><rect x="640" y="582" width="220" height="8" rx="4"/>
+      </g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / dúvidas</span><span class="num">08<i>/11</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>P.</i> google e seo</p>
+    <h1 class="titulo">Meu site vai<br>aparecer no <em>Google?</em></h1>
+
+    <section class="base-tec" data-frame="24,0,24,0" data-tone="laranja" data-acento="barra">
+      <div class="cab"><small>todo site da tirvo nasce com</small><b>SEO técnico integrado</b></div>
+      <ul>
+        <li><svg class="ico"><use href="#i-code"/></svg>Estrutura semântica</li>
+        <li><svg class="ico"><use href="#i-file-code"/></svg>Metadados</li>
+        <li><svg class="ico"><use href="#i-db"/></svg>Dados estruturados</li>
+        <li><svg class="ico"><use href="#i-gauge"/></svg>Alta performance</li>
+      </ul>
+    </section>
+
+    <div class="verdade">
+      <blockquote>Ninguém sério pode prometer uma <em>posição.</em></blockquote>
+      <div class="fatores"><small>ela depende de</small>
+        <span><svg class="ico"><use href="#i-users"/></svg>concorrência</span>
+        <span><svg class="ico"><use href="#i-file-code"/></svg>conteúdo</span>
+        <span><svg class="ico"><use href="#i-award"/></svg>autoridade do domínio</span>
+      </div>
+    </div>
+    <div class="entrega"><p class="corpo">O que entregamos é a <b>base técnica correta para o Google encontrar e entender o seu site.</b></p></div>
+
+    <div class="resultado" data-frame="0,24,0,24" data-tone="branco" data-acento="topo">
+      <div class="url">
+        <span class="fav"><svg viewBox="0 0 100 100"><path fill="#f4f4f5" d="M6.5 35.5V6.5H35.5V13.5H13.5V35.5Z M93.5 35.5V6.5H64.5V13.5H86.5V35.5Z M6.5 64.5V93.5H35.5V86.5H13.5V64.5Z M93.5 64.5V93.5H64.5V86.5H86.5V64.5Z"/><circle cx="50" cy="50" r="12" fill="#ff5500"/></svg></span>
+        <div><span class="lk"><u>tirvo.tech</u></span><br><small>https://tirvo.tech</small></div>
+        <span class="lk" style="margin-left:auto"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+      </div>
+      <h3><img class="logo" data-logo>· engenharia de sites, sistemas e IA</h3>
+      <div class="meta">
+        <div class="acoes">
+          <span class="btn vazado"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+          <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>

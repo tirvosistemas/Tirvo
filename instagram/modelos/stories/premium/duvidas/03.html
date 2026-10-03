@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Dúvidas 03: templates e WordPress</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(460px 420px at 800px 900px, rgba(255, 85, 0, .18), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 84px; }
+    .nao { z-index: 4; left: 84px; top: 664px; display: flex; align-items: baseline; gap: 22px; }
+    .nao span { font: italic 400 150px/.9 var(--serif); color: #fff; text-shadow: 0 0 40px rgba(255, 85, 0, .55); }
+    .nao p { max-width: 640px; font-size: 29px; line-height: 1.36; color: var(--t2); }
+    .nao p b { color: var(--t1); font-weight: 600; }
+
+    .pilhas { z-index: 4; left: 84px; top: 900px; width: 912px; height: 360px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .pilha { position: relative; padding: 22px 26px; }
+    .pilha .cab small { display: block; font: 500 15px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .pilha .cab b { display: block; margin-top: 8px; font-size: 28px; font-weight: 620; letter-spacing: -.025em; }
+    .pilha .blocos { position: absolute; left: 26px; right: 26px; bottom: 24px; display: grid; gap: 7px; }
+    .pilha .blocos i { display: flex; align-items: center; justify-content: space-between; height: 30px; padding: 0 12px; border-radius: 6px; font: 500 13px/1 var(--mono); font-style: normal; letter-spacing: .1em; text-transform: uppercase; }
+    .pronto .blocos i { background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .12); color: var(--t3); }
+    .pronto .blocos i:nth-child(odd) { margin-right: 22px; }
+    .pronto .blocos i:nth-child(3n) { margin-left: 30px; margin-right: 0; }
+    .pronto .cab b { color: var(--t2); }
+    .risco { position: absolute; z-index: 3; left: 18px; right: 18px; top: 50%; height: 3px; background: #ff5a14; box-shadow: 0 0 12px rgba(255, 85, 0, .8); transform: rotate(-24deg); }
+    .medida .blocos i { height: 52px; background: linear-gradient(90deg, rgba(255, 85, 0, .2), rgba(255, 85, 0, .05)); border: 1px solid rgba(255, 120, 60, .7); color: #ffb187; box-shadow: 0 0 16px rgba(255, 85, 0, .2); }
+    .medida .cab small { color: var(--or); }
+    .peso { font-family: var(--mono); color: inherit; }
+
+    .ganhos { z-index: 4; left: 84px; top: 1284px; width: 912px; display: flex; justify-content: space-between; }
+    .ganhos span { display: flex; align-items: center; gap: 10px; font-size: 25px; font-weight: 560; letter-spacing: -.015em; }
+    .ganhos .ico { font-size: 27px; color: var(--or); stroke-width: 2; }
+
+    /* Rodapé em folha que sobe da base */
+    .folha { z-index: 4; left: 64px; top: 1378px; width: 952px; height: 300px; padding: 22px 34px 0; border-radius: 40px 40px 0 0; border: 1px solid rgba(255, 255, 255, .12); border-bottom: 0; background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .02) 60%), rgba(12, 12, 15, .92); box-shadow: 0 -30px 60px rgba(0, 0, 0, .5); }
+    .folha .alca { width: 80px; height: 6px; margin: 0 auto 22px; border-radius: 3px; background: rgba(255, 255, 255, .25); }
+    .folha .alto { display: flex; align-items: center; justify-content: space-between; }
+    .folha .logo { height: 44px; }
+    .folha .links { display: flex; gap: 24px; }
+    .folha .lk { font-size: 23px; gap: 8px; }
+    .folha .acoes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 26px; }
+    .folha .btn { height: 84px; border-radius: 20px; font-size: 28px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <g class="longe" fill="none" stroke="rgba(255,140,80,.4)" stroke-width="1"><use href="#i-code" width="24" height="24" transform="translate(840 340) scale(6.5)"/></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / dúvidas</span><span class="num">03<i>/11</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>P.</i> como é feito</p>
+    <h1 class="titulo">Vocês usam templates,<br>WordPress ou<br>construtores <em>prontos?</em></h1>
+
+    <div class="nao"><span>Não.</span><p>Cada projeto nasce com <b>código sob medida</b>, a partir dos objetivos do seu negócio.</p></div>
+
+    <div class="pilhas">
+      <div class="pilha pronto" data-frame="18,0,18,0" data-tone="branco">
+        <div class="cab"><small>tema pronto</small><b>Peso que ninguém pediu</b></div>
+        <div class="blocos"><i>plugin<span>+</span></i><i>plugin<span>+</span></i><i>construtor<span>+</span></i><i>tema<span>+</span></i><i>plugin<span>+</span></i><i>plugin<span>+</span></i></div>
+        <span class="risco"></span>
+      </div>
+      <div class="pilha medida" data-frame="0,18,0,18" data-tone="neon">
+        <div class="cab"><small>tirvo</small><b>Só o que o negócio precisa</b></div>
+        <div class="blocos"><i>interface<span class="peso">&lt;/&gt;</span></i><i>regras do negócio<span class="peso">&lt;/&gt;</span></i><i>integrações<span class="peso">&lt;/&gt;</span></i></div>
+      </div>
+    </div>
+
+    <div class="ganhos">
+      <span><svg class="ico"><use href="#i-zap"/></svg>mais leve</span>
+      <span><svg class="ico"><use href="#i-shield-check"/></svg>mais seguro</span>
+      <span><svg class="ico"><use href="#i-trending-up"/></svg>fácil de evoluir</span>
+    </div>
+
+    <div class="folha">
+      <div class="alca"></div>
+      <div class="alto">
+        <img class="logo" data-logo>
+        <div class="links">
+          <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+          <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+        </div>
+      </div>
+      <div class="acoes">
+        <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+        <span class="btn vazado"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      </div>
+    </div>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>

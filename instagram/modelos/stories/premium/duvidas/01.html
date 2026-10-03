@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Dúvidas 01: respostas diretas</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(480px 460px at 880px 470px, rgba(255, 85, 0, .2), transparent 70%),
+        radial-gradient(760px 520px at 540px 1030px, rgba(255, 72, 0, .08), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .interrogacao { z-index: 1; right: 50px; top: 310px; font: italic 400 470px/1 var(--serif); color: transparent; -webkit-text-stroke: 2.5px rgba(255, 120, 60, .55); filter: drop-shadow(0 0 22px rgba(255, 85, 0, .45)); }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 92px; }
+
+    .indice { z-index: 4; left: 84px; top: 724px; width: 912px; }
+    .indice .cab { display: flex; align-items: center; justify-content: space-between; padding: 26px 32px 18px; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+    .indice .cab b { display: flex; align-items: center; gap: 12px; font-size: 29px; font-weight: 620; letter-spacing: -.025em; }
+    .indice .cab b .ico { font-size: 28px; color: var(--or); }
+    .indice ol { display: grid; grid-template-columns: 1fr 1fr; grid-auto-flow: column; grid-template-rows: repeat(5, 1fr); padding: 10px 0 14px; }
+    .indice li { display: grid; grid-template-columns: 50px 1fr; align-items: center; height: 88px; padding: 0 22px 0 32px; }
+    .indice li:nth-child(n+6) { border-left: 1px solid rgba(255, 255, 255, .07); }
+    .indice li small { font: 500 17px/1 var(--mono); color: var(--or); letter-spacing: .06em; }
+    .indice li span { font-size: 25px; font-weight: 560; letter-spacing: -.02em; line-height: 1.12; }
+
+    /* Rodapé editorial */
+    .rodape { z-index: 4; left: 84px; top: 1388px; width: 912px; height: 264px; display: grid; grid-template-rows: 1fr 104px; border-top: 2px solid rgba(255, 255, 255, .14); }
+    .rodape::before { content: ""; position: absolute; left: 0; top: -2px; width: 120px; height: 2px; background: var(--or); box-shadow: 0 0 10px var(--or); }
+    .colunas { display: grid; grid-template-columns: .8fr 1.35fr .9fr; align-items: center; }
+    .colunas > div { display: grid; gap: 12px; }
+    .colunas small { font: 500 15px/1 var(--mono); letter-spacing: .18em; color: var(--t3); }
+    .colunas .lk { font-size: 25px; }
+    .colunas .v { font-size: 25px; font-weight: 560; letter-spacing: -.01em; }
+    .base { display: flex; align-items: center; gap: 14px; padding: 0 0 6px; }
+    .base .logo { height: 46px; margin-right: auto; }
+    .base .btn { height: 76px; border-radius: 38px; padding: 0 30px; font-size: 26px; }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <!-- balões de pergunta e resposta ao fundo -->
+    </svg>
+
+    <span class="interrogacao">?</span>
+
+    <header class="topo"><span>tirvo<b>_</b> / dúvidas</span><span class="num">01<i>/11</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>08</i> · perguntas frequentes</p>
+    <h1 class="titulo">Respostas diretas<br>para uma decisão<br><em>segura.</em><span class="cursor"></span></h1>
+
+    <section class="indice" data-frame="26,0,26,0" data-tone="laranja" data-acento="barra">
+      <div class="cab"><b><svg class="ico"><use href="#i-layers"/></svg>Nesta sequência</b><span class="selo"><span class="led"></span>10 respostas</span></div>
+      <ol>
+        <li><small>02</small><span>Atendimento no Brasil</span></li>
+        <li><small>03</small><span>Templates e WordPress</span></li>
+        <li><small>04</small><span>Modelos de entrega</span></li>
+        <li><small>05</small><span>Suporte e manutenção</span></li>
+        <li><small>06</small><span>Logotipo × logomarca</span></li>
+        <li><small>07</small><span>Custo e prazo</span></li>
+        <li><small>08</small><span>Google e SEO</span></li>
+        <li><small>09</small><span>IA no seu negócio</span></li>
+        <li><small>10</small><span>O que é o Hipercode</span></li>
+        <li><small>11</small><span>A sua pergunta</span></li>
+      </ol>
+    </section>
+
+    <footer class="rodape">
+      <div class="colunas">
+        <div><small>SITE</small><span class="lk"><u>tirvo.tech</u></span></div>
+        <div><small>E-MAIL</small><span class="lk"><u>engenharia@tirvo.tech</u></span></div>
+        <div><small>DIRECT</small><span class="v">@tirvotech</span></div>
+      </div>
+      <div class="base">
+        <img class="logo" data-logo>
+        <span class="btn vazado"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+        <span class="btn cheio"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-right"/></svg></span>
+      </div>
+    </footer>
+  </main>
+  <script src="../base.js"></script>
+</body>
+</html>

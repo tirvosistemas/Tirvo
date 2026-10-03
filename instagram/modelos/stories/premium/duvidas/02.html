@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <title>Dúvidas 02: todo o Brasil</title>
+  <link rel="stylesheet" href="../base.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(560px 560px at 740px 940px, rgba(255, 85, 0, .14), transparent 70%),
+        radial-gradient(760px 380px at 540px 1930px, rgba(255, 70, 0, .18), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 45%, #060607 100%);
+    }
+    .rotulo.sobre { z-index: 4; left: 84px; top: 342px; }
+    .titulo { left: 80px; top: 386px; font-size: 94px; }
+    .resposta { z-index: 4; left: 84px; top: 650px; width: 380px; }
+    .resposta .sim { font: italic 400 170px/.9 var(--serif); letter-spacing: -.02em; color: #fff; text-shadow: 0 0 40px rgba(255, 85, 0, .55); }
+    .resposta .corpo { margin-top: 18px; font-size: 29px; }
+    .online { z-index: 4; left: 84px; top: 1000px; width: 380px; display: grid; gap: 12px; }
+    .online li { display: grid; grid-template-columns: 58px 1fr; align-items: center; gap: 16px; height: 86px; padding: 0 18px; }
+    .online .ib { width: 58px; height: 58px; }
+    .online .ib .ico { font-size: 28px; }
+    .online b { font-size: 24px; font-weight: 600; letter-spacing: -.02em; line-height: 1.1; }
+    .online b small { display: block; margin-top: 4px; font: 500 14px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--or); }
+    .cwb { z-index: 5; display: flex; align-items: center; gap: 10px; padding: 10px 14px; border: 1px solid rgba(255, 120, 60, .75); border-radius: 10px; background: rgba(14, 8, 5, .92); font: 500 15px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #fff; box-shadow: 0 0 22px rgba(255, 85, 0, .35); }
+    .cwb .ico { font-size: 18px; color: var(--or); stroke-width: 2; }
+    .frase { z-index: 4; left: 84px; top: 1306px; width: 912px; }
+    .frase .corpo { font-size: 30px; }
+
+    /* Rodapé com controle segmentado */
+    .rodape { z-index: 4; left: 84px; top: 1404px; width: 912px; height: 248px; display: grid; grid-template-rows: 1fr 106px; padding: 0 26px 22px; }
+    .rodape .alto { display: flex; align-items: center; justify-content: space-between; padding: 0 6px; }
+    .rodape .logo { height: 46px; }
+    .rodape .links { display: grid; gap: 10px; justify-items: end; }
+    .rodape .lk { font-size: 25px; gap: 10px; }
+    .segmentos { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px; border-radius: 53px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .12); }
+    .segmentos span { display: flex; align-items: center; justify-content: center; gap: 14px; border-radius: 47px; font-size: 28px; font-weight: 600; letter-spacing: -.015em; }
+    .segmentos span .ico { font-size: 29px; }
+    .segmentos .ativo { background: linear-gradient(135deg, #ff6a1f, #ff3300); box-shadow: 0 0 34px rgba(255, 85, 0, .45), inset 0 1px 0 rgba(255, 220, 200, .45); }
+    .segmentos .outro .ico { color: var(--or); }
+  </style>
+</head>
+<body>
+  <main class="peca">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="62%" cy="50%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1920" fill="url(#g-grade)"/></mask>
+        <filter id="brilho" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="halo" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#m-grade)"/>
+      <g id="mapa"></g>
+    </svg>
+
+    <header class="topo"><span>tirvo<b>_</b> / dúvidas</span><span class="num">02<i>/11</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+
+    <p class="rotulo sobre"><i>P.</i> atendimento</p>
+    <h1 class="titulo">Vocês atendem<br>fora de <em>Curitiba?</em></h1>
+
+    <div class="resposta"><p class="sim">Sim.</p><p class="corpo">Base em Curitiba (PR), <b>projetos em todo o Brasil.</b></p></div>
+
+    <ul class="online">
+      <li data-frame="14,0,14,0" data-tone="laranja"><span class="ib" data-frame="10,0,10,0" data-tone="laranja"><svg class="ico"><use href="#i-users"/></svg></span><b><small>online</small>Reuniões</b></li>
+      <li data-frame="14,0,14,0" data-tone="laranja"><span class="ib" data-frame="10,0,10,0" data-tone="laranja"><svg class="ico"><use href="#i-circle-check"/></svg></span><b><small>online</small>Aprovações</b></li>
+      <li data-frame="14,0,14,0" data-tone="neon"><span class="ib" data-frame="10,0,10,0" data-tone="neon"><svg class="ico"><use href="#i-activity"/></svg></span><b><small>online</small>Acompanhamento</b></li>
+    </ul>
+    <span class="cwb" id="cwb"><svg class="ico"><use href="#i-pin"/></svg>curitiba · base</span>
+
+    <div class="frase"><p class="corpo">Com a mesma proximidade de um <b>atendimento presencial.</b></p></div>
+
+    <footer class="rodape" data-frame="24,0,24,0" data-tone="branco" data-acento="topo">
+      <div class="alto">
+        <img class="logo" data-logo>
+        <div class="links">
+          <span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span>
+          <span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span>
+        </div>
+      </div>
+      <div class="segmentos">
+        <span class="ativo">Visite nosso site<svg class="ico"><use href="#i-arrow-right"/></svg></span>
+        <span class="outro"><svg class="ico"><use href="#i-send"/></svg>Chame no direct</span>
+      </div>
+    </footer>
+  </main>
+  <script src="../base.js"></script>
+  <script>
+    (() => {
+      const LON0 = -74.5, LAT0 = 5.6, K = 13.8, X0 = 440, Y0 = 650;
+      const xy = (lat, lon) => [X0 + (lon - LON0) * K, Y0 + (LAT0 - lat) * K * 1.04];
+      const brasil = [[5.2,-60.2],[4.5,-51.6],[2,-50],[-1,-48],[-1.5,-44],[-2.8,-41],[-3.5,-38.5],[-5,-35.2],[-8,-34.8],[-11,-37],[-13,-38.5],[-16,-39],[-19.5,-39.7],[-22.9,-41.9],[-23.5,-45],[-25.5,-48.3],[-28.5,-48.8],[-30.5,-50.3],[-33.7,-53.4],[-32,-53.8],[-30.2,-57.6],[-27.3,-55.5],[-26,-54.6],[-24,-54.3],[-22.5,-55.8],[-20,-58],[-16.3,-58.3],[-15.4,-60.2],[-13.5,-61.8],[-12.4,-64.5],[-11,-65.3],[-9.7,-66.6],[-10,-70.5],[-9.4,-72.7],[-7.4,-73.9],[-4.3,-70],[-2,-69.5],[-1,-70],[1.7,-69.4],[1.2,-66.9],[2.2,-63.9],[4.5,-64.5],[5.2,-60.2]];
+      const dentro = (lat, lon) => { let c = false; for (let i = 0, j = brasil.length - 1; i < brasil.length; j = i++) { const [yi, xi] = brasil[i], [yj, xj] = brasil[j]; if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi) c = !c; } return c; };
+      let h = '';
+      // contorno
+      h += `<path d="M${brasil.map(p => xy(...p).map(v => v.toFixed(1)).join(' ')).join('L')}Z" fill="rgba(255,85,0,.04)" stroke="rgba(255,130,70,.4)" stroke-width="1.4"/>`;
+      // pontos
+      for (let lat = 5; lat >= -34; lat -= 1.3) for (let lon = -74; lon <= -34; lon += 1.3) {
+        if (!dentro(lat, lon)) continue;
+        const [x, y] = xy(lat, lon);
+        h += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.6" fill="rgba(255,150,100,.45)"/>`;
+      }
+      // Curitiba e as capitais
+      const cwb = xy(-25.43, -49.27);
+      const capitais = [[-3.1, -60.0], [-1.46, -48.5], [-3.73, -38.5], [-8.05, -34.9], [-12.97, -38.5], [-15.79, -47.88], [-23.55, -46.63], [-22.9, -43.2], [-30.03, -51.23], [-20.44, -54.65], [-16.68, -49.25], [-9.97, -67.8]];
+      capitais.forEach(([la, lo]) => {
+        const [x, y] = xy(la, lo);
+        const mx = (cwb[0] + x) / 2, my = (cwb[1] + y) / 2 - Math.hypot(x - cwb[0], y - cwb[1]) * .28;
+        const d = `M${cwb[0].toFixed(1)} ${cwb[1].toFixed(1)}Q${mx.toFixed(1)} ${my.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}`;
+        h += `<path d="${d}" fill="none" stroke="#ff5500" stroke-width="4" opacity=".3" filter="url(#halo)"/>`;
+        h += `<path d="${d}" fill="none" stroke="#ff8a4c" stroke-width="1.6"/>`;
+        h += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4" fill="#ffd2b8" filter="url(#brilho)"/>`;
+      });
+      h += `<circle cx="${cwb[0]}" cy="${cwb[1]}" r="24" fill="none" stroke="rgba(255,120,60,.6)" stroke-width="1.4"/><circle cx="${cwb[0]}" cy="${cwb[1]}" r="42" fill="none" stroke="rgba(255,120,60,.25)" stroke-dasharray="2 5"/>`;
+      h += `<circle cx="${cwb[0]}" cy="${cwb[1]}" r="9" fill="#ff5500" filter="url(#brilho)"/><circle cx="${cwb[0]}" cy="${cwb[1]}" r="3.5" fill="#ffd2b8"/>`;
+      document.getElementById('mapa').innerHTML = h;
+      const et = document.getElementById('cwb');
+      et.style.left = (cwb[0] - 250) + 'px'; et.style.top = (cwb[1] + 36) + 'px';
+    })();
+  </script>
+</body>
+</html>
