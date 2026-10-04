@@ -1,7 +1,8 @@
-// node render.mjs <ID> [--de s] [--ate s] [--quadros s1,s2,...] [--rapido]
+// node render.mjs <ID> [--de s] [--ate s] [--quadros s1,s2,...] [--audio] [--arquivo saida.mp4]
 // Renderiza instagram/modelos/reels/<ID>.html em MP4 1080x1920 a 30 fps, mixa trilha e efeitos e salva a capa.
 // Saída: instagram/plano-30-dias/midia/<ID>/01.mp4 (vídeo) e 02.jpg (capa).
 // --quadros só tira fotos dos instantes pedidos (para conferir), sem gerar vídeo.
+// --audio refaz só a mixagem a partir de saida/<ID>-mudo.mp4; --arquivo grava o MP4 em outro lugar.
 import { createRequire } from 'node:module';
 import { execFileSync, spawn } from 'node:child_process';
 import http from 'node:http';
@@ -97,9 +98,31 @@ if (quadros) {
     filtros.push(`[${k}:a]adelay=${ms}|${ms},volume=${s.vol}[s${k}]`);
     rotulos.push(`[s${k}]`); k++;
   }
-  filtros.push(`${rotulos.join('')}amix=inputs=${rotulos.length}:normalize=0:dropout_transition=0,atrim=0:${dur},loudnorm=I=-14:TP=-1.2:LRA=11,aresample=48000[a]`);
+  // Narração (audio/narracao/<ID>/falas.json): a voz entra por cima e a trilha abaixa enquanto ela fala
+  const pastaVoz = resolve(AQUI, 'audio/narracao', id);
+  const falas = existsSync(`${pastaVoz}/falas.json`) ? JSON.parse(await readFile(`${pastaVoz}/falas.json`, 'utf8')) : [];
+  const vozes = [];
+  for (const f of falas) {
+    const arq = `${pastaVoz}/${f.arq}`;
+    if (!existsSync(arq)) { console.log(id, 'fala ausente:', f.arq); continue; }
+    const ms = Math.max(0, Math.round((f.t - de) * 1000));
+    if (ms > dur * 1000) continue;
+    ins.push('-i', arq);
+    filtros.push(`[${k}:a]aresample=48000,adelay=${ms}|${ms},volume=${info.volumeVoz ?? 1.6}[v${k}]`);
+    vozes.push(`[v${k}]`); k++;
+  }
+  const fim = `atrim=0:${dur},loudnorm=I=-14:TP=-1.2:LRA=11,aresample=48000[a]`;
+  if (vozes.length) {
+    filtros.push(`${rotulos.join('')}amix=inputs=${rotulos.length}:normalize=0:dropout_transition=0,volume=0.8[fundo]`);
+    filtros.push(`${vozes.join('')}amix=inputs=${vozes.length}:normalize=0:dropout_transition=0,apad,asplit[voz][chave]`);
+    filtros.push(`[fundo][chave]sidechaincompress=threshold=0.02:ratio=6:attack=15:release=400:makeup=1[baixo]`);
+    filtros.push(`[baixo][voz]amix=inputs=2:normalize=0:dropout_transition=0,${fim}`);
+  } else {
+    filtros.push(`${rotulos.join('')}amix=inputs=${rotulos.length}:normalize=0:dropout_transition=0,${fim}`);
+  }
+  const destino = opt('--arquivo') ? resolve(opt('--arquivo')) : `${OUT}/01.mp4`;
   execFileSync(FF, ['-hide_banner', '-loglevel', 'error', '-y', ...ins, '-filter_complex', filtros.join(';'), '-map', '0:v', '-map', '[a]',
-    '-c:v', 'libx264', '-preset', 'slow', '-crf', '21', '-maxrate', '3.6M', '-bufsize', '7.2M', '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', '-shortest', `${OUT}/01.mp4`]);
-  console.log(id, 'pronto', `${((Date.now() - t0) / 1000).toFixed(0)} s`, info.sons.length, 'efeitos');
+    '-c:v', 'libx264', '-preset', 'slow', '-crf', '21', '-maxrate', '3.6M', '-bufsize', '7.2M', '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', '-shortest', destino]);
+  console.log(id, 'pronto', `${((Date.now() - t0) / 1000).toFixed(0)} s`, info.sons.length, 'efeitos', vozes.length, 'falas');
 }
 await b.close(); srv.close();

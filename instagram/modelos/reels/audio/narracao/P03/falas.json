@@ -1,0 +1,9 @@
+[
+  { "t": 0.2, "arq": "1.mp3", "texto": "Esse layout também está no site do seu concorrente." },
+  { "t": 3.25, "arq": "2.mp3", "texto": "Você troca o logo, a cor e a foto. O resto é igual." },
+  { "t": 7.25, "arq": "3.mp3", "texto": "Por trás, é a mesma estrutura de quem comprou o mesmo tema." },
+  { "t": 11.7, "arq": "4.mp3", "texto": "E vem tudo que o tema oferece. Até o que você nunca vai usar." },
+  { "t": 16.2, "arq": "5.mp3", "texto": "E o cliente sente: lentidão no celular e mudança que quebra." },
+  { "t": 20.7, "arq": "6.mp3", "texto": "Na Tirvo, o código é escrito do zero para o seu negócio." },
+  { "t": 25.2, "arq": "7.mp3", "texto": "E o seu site? É template ou projeto?" }
+]
