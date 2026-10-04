@@ -338,7 +338,34 @@
     play.addEventListener('click', function () { setSound(true); start(); });
     v.addEventListener('click', function () { if (v.paused) start(); else v.pause(); });
     tog.addEventListener('click', function () { if (v.paused) start(); else v.pause(); });
-    full.addEventListener('click', function () { var f = fig.querySelector('.film__frame'); (f.requestFullscreen || f.webkitRequestFullscreen || function () { v.webkitEnterFullscreen && v.webkitEnterFullscreen(); }).call(f); });
+    var frame = fig.querySelector('.film__frame'), closeB = fig.querySelector('[data-film="close"]');
+    function fsEl() { return d.fullscreenElement || d.webkitFullscreenElement; }
+    function setFull(on) {
+      frame.classList.toggle('is-full', on);
+      full.setAttribute('aria-label', on ? 'Sair da tela cheia' : 'Tela cheia');
+      full.innerHTML = '<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-' + (on ? 'shrink' : 'expand') + '"/></svg>';
+      if (on) closeB.focus({preventScroll: true}); else full.focus({preventScroll: true});
+    }
+    function openFull() {
+      var req = frame.requestFullscreen || frame.webkitRequestFullscreen;
+      if (!req) { if (v.webkitEnterFullscreen) { if (v.paused) start(); v.webkitEnterFullscreen(); } return; }
+      setFull(true);
+      var r = req.call(frame);
+      if (r && r.then) r.then(function () {
+        if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(function () {});
+      }, function () { setFull(false); });
+    }
+    function closeFull() {
+      if (fsEl()) { (d.exitFullscreen || d.webkitExitFullscreen).call(d); }
+      if (screen.orientation && screen.orientation.unlock) { try { screen.orientation.unlock(); } catch (e) {} }
+      setFull(false);
+    }
+    full.addEventListener('click', function () { if (frame.classList.contains('is-full')) closeFull(); else openFull(); });
+    closeB.addEventListener('click', closeFull);
+    ['fullscreenchange', 'webkitfullscreenchange'].forEach(function (ev) {
+      d.addEventListener(ev, function () { if (!fsEl() && frame.classList.contains('is-full')) closeFull(); });
+    });
+    d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && frame.classList.contains('is-full')) closeFull(); });
     if (mq.addEventListener) mq.addEventListener('change', pick);
     pick();
     if (!reduce && 'IntersectionObserver' in window) {
