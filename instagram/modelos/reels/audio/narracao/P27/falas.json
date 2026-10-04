@@ -1,0 +1,32 @@
+[
+  {
+    "t": 0.15,
+    "arq": "1.mp3",
+    "texto": "Logotipo e logomarca não são a mesma coisa."
+  },
+  {
+    "t": 3.2,
+    "arq": "2.mp3",
+    "texto": "Logotipo é o nome desenhado. Só tipografia."
+  },
+  {
+    "t": 7.2,
+    "arq": "3.mp3",
+    "texto": "Símbolo é a marca sem palavras."
+  },
+  {
+    "t": 11.2,
+    "arq": "4.mp3",
+    "texto": "Logomarca é símbolo e nome, juntos."
+  },
+  {
+    "t": 15.2,
+    "arq": "5.mp3",
+    "texto": "E identidade visual é o sistema que mantém tudo igual."
+  },
+  {
+    "t": 19.2,
+    "arq": "6.mp3",
+    "texto": "Salve para o dia do briefing."
+  }
+]

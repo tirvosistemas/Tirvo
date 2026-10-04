@@ -1,0 +1,32 @@
+[
+  {
+    "t": 0.15,
+    "arq": "1.mp3",
+    "texto": "Uma IA que não conversa. Ela entrega."
+  },
+  {
+    "t": 3.4,
+    "arq": "2.mp3",
+    "texto": "Esse é o Hipercode, a IA que a Tirvo está construindo."
+  },
+  {
+    "t": 7.8,
+    "arq": "3.mp3",
+    "texto": "Não é um chatbot. É um enxame de agentes, todos programando."
+  },
+  {
+    "t": 12.4,
+    "arq": "4.mp3",
+    "texto": "Recebe a tarefa, pesquisa, escreve o código e entrega o projeto pronto."
+  },
+  {
+    "t": 17.6,
+    "arq": "5.mp3",
+    "texto": "Cada execução é revisada e corrigida. Ainda está em teste."
+  },
+  {
+    "t": 22.0,
+    "arq": "6.mp3",
+    "texto": "Siga a Tirvo para ver os próximos testes."
+  }
+]

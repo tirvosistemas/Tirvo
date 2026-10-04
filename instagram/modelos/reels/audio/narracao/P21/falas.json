@@ -1,0 +1,42 @@
+[
+  {
+    "t": 0.15,
+    "arq": "1.mp3",
+    "texto": "Nenhuma linha de código antes desta conversa."
+  },
+  {
+    "t": 3.2,
+    "arq": "2.mp3",
+    "texto": "Projeto que começa pelo código costuma terminar no atraso."
+  },
+  {
+    "t": 7.2,
+    "arq": "3.mp3",
+    "texto": "Por isso, todo projeto da Tirvo começa pela Descoberta."
+  },
+  {
+    "t": 11.7,
+    "arq": "4.mp3",
+    "texto": "Primeiro, o negócio, os objetivos e o público."
+  },
+  {
+    "t": 15.6,
+    "arq": "5.mp3",
+    "texto": "Depois, cada página e o que ela precisa fazer."
+  },
+  {
+    "t": 19.2,
+    "arq": "6.mp3",
+    "texto": "Sai um escopo e um cronograma. Você aprova antes."
+  },
+  {
+    "t": 23.2,
+    "arq": "7.mp3",
+    "texto": "Só então começa a Engenharia."
+  },
+  {
+    "t": 25.7,
+    "arq": "8.mp3",
+    "texto": "Quer começar pela Descoberta? Manda descoberta no direct."
+  }
+]

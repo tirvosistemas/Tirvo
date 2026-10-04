@@ -1,0 +1,42 @@
+[
+  {
+    "t": 0.1,
+    "arq": "1.mp3",
+    "texto": "Um site, do zero ao ar."
+  },
+  {
+    "t": 2.45,
+    "arq": "2.mp3",
+    "texto": "Descoberta: entender o negócio antes do código."
+  },
+  {
+    "t": 6.05,
+    "arq": "3.mp3",
+    "texto": "Arquitetura: cada página no lugar."
+  },
+  {
+    "t": 9.65,
+    "arq": "4.mp3",
+    "texto": "Design: cor, tipo e a cara da marca."
+  },
+  {
+    "t": 13.25,
+    "arq": "5.mp3",
+    "texto": "Código sob medida, testado antes de publicar."
+  },
+  {
+    "t": 16.85,
+    "arq": "6.mp3",
+    "texto": "Lançamento: no ar e monitorado."
+  },
+  {
+    "t": 20.4,
+    "arq": "7.mp3",
+    "texto": "E você aprova três vezes."
+  },
+  {
+    "t": 22.2,
+    "arq": "8.mp3",
+    "texto": "Siga para ver os próximos bastidores."
+  }
+]

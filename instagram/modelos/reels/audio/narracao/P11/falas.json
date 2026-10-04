@@ -1,0 +1,37 @@
+[
+  {
+    "t": 0.15,
+    "arq": "1.mp3",
+    "texto": "Seu site carrega. E o cliente já foi."
+  },
+  {
+    "t": 3.4,
+    "arq": "2.mp3",
+    "texto": "Passou de três segundos, mais da metade desiste."
+  },
+  {
+    "t": 7.8,
+    "arq": "3.mp3",
+    "texto": "Ele não reclama. Só volta e abre o concorrente."
+  },
+  {
+    "t": 12.2,
+    "arq": "4.mp3",
+    "texto": "De onde vem o peso? Quase sempre, do que a página nem usa."
+  },
+  {
+    "t": 17.2,
+    "arq": "5.mp3",
+    "texto": "Código sob medida carrega só o que a tela precisa."
+  },
+  {
+    "t": 21.8,
+    "arq": "6.mp3",
+    "texto": "Faça o teste: abra o seu site no quatro G."
+  },
+  {
+    "t": 25.4,
+    "arq": "7.mp3",
+    "texto": "Manda pra quem cuida do seu site."
+  }
+]

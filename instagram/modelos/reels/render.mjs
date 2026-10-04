@@ -103,7 +103,7 @@ if (quadros) {
   const falas = existsSync(`${pastaVoz}/falas.json`) ? JSON.parse(await readFile(`${pastaVoz}/falas.json`, 'utf8')) : [];
   const vozes = [];
   for (const f of falas) {
-    const arq = `${pastaVoz}/${f.arq}`;
+    const arq = resolve(pastaVoz, f.arq);
     if (!existsSync(arq)) { console.log(id, 'fala ausente:', f.arq); continue; }
     const ms = Math.max(0, Math.round((f.t - de) * 1000));
     if (ms > dur * 1000) continue;
