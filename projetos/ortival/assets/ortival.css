@@ -950,7 +950,6 @@ body.page-light .head:not(.is-scrolled) .menu-btn span { background: var(--ink);
 .film__steps li { border-top: 2px solid var(--night-line-2); padding-top: 12px; }
 .film__steps b { color: var(--accent); margin-right: 8px; }
 @media (max-width: 760px) {
-  .film__frame { aspect-ratio: 9 / 16; width: min(100%, calc(82vh * 9 / 16)); margin: 0 auto; }
   .film__play { width: 76px; height: 76px; margin: -38px 0 0 -38px; }
   .film__bar { opacity: 1; transform: none; }
   .film__steps { grid-template-columns: repeat(3, 1fr); row-gap: 16px; }
