@@ -81,8 +81,20 @@ window.PLANO_MIDIA = {
   "midia/P12/07.jpg",
   "midia/P12/08.jpg"
  ],
+ "P13": [
+  "midia/P13/01.mp4",
+  "midia/P13/02.jpg"
+ ],
+ "P15": [
+  "midia/P15/01.mp4",
+  "midia/P15/02.jpg"
+ ],
  "P16": [
   "midia/P16/01.jpg"
+ ],
+ "P17": [
+  "midia/P17/01.mp4",
+  "midia/P17/02.jpg"
  ],
  "P18": [
   "midia/P18/01.jpg",
@@ -93,6 +105,10 @@ window.PLANO_MIDIA = {
   "midia/P18/06.jpg",
   "midia/P18/07.jpg",
   "midia/P18/08.jpg"
+ ],
+ "P19": [
+  "midia/P19/01.mp4",
+  "midia/P19/02.jpg"
  ],
  "P20": [
   "midia/P20/01.jpg",
@@ -116,6 +132,10 @@ window.PLANO_MIDIA = {
   "midia/P24/06.jpg",
   "midia/P24/07.jpg",
   "midia/P24/08.jpg"
+ ],
+ "P25": [
+  "midia/P25/01.mp4",
+  "midia/P25/02.jpg"
  ],
  "P26": [
   "midia/P26/01.jpg",
