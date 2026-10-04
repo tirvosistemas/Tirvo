@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="feed">
+  <meta name="tirvo:slides" content="7">
+  <title>P26: domínio, hospedagem e SSL</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .peca { background: radial-gradient(560px 460px at 540px 640px, rgba(255, 85, 0, .14), transparent 70%), linear-gradient(180deg, #060607 0%, #09090b 50%, #060607 100%); }
+    .chaves { display: flex; gap: 30px; }
+    .chaves span { display: grid; justify-items: center; gap: 16px; width: 220px; padding: 30px 0; font: 500 20px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t2); }
+    .chaves .ico { font-size: 80px; color: #ff8c52; stroke-width: 1.2; filter: drop-shadow(0 0 10px rgba(255,85,0,.5)); }
+    .certidao { width: 700px; padding: 40px 44px; display: grid; gap: 18px; }
+    .certidao small { font: 500 17px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--t3); }
+    .certidao b { font: 500 40px/1 var(--mono); color: #fafafa; }
+    .certidao .tit { display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; border-radius: 12px; border: 2px solid #ff6a1f; box-shadow: 0 0 16px rgba(255,85,0,.3); font-size: 30px; font-weight: 600; }
+    .barra-url { display: grid; gap: 24px; width: 760px; }
+    .barra-url span { display: flex; align-items: center; gap: 18px; height: 96px; padding: 0 30px; border-radius: 48px; border: 2px solid rgba(255,255,255,.2); background: #0f0f12; font: 500 30px/1 var(--mono); }
+    .barra-url .ico { font-size: 34px; }
+    .pedido { width: 720px; padding: 36px 40px; display: grid; gap: 20px; }
+    .pedido span { display: flex; align-items: center; gap: 18px; font-size: 30px; font-weight: 560; }
+    .pedido .ico { font-size: 32px; color: #ff8a4c; }
+    .dois { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: 840px; }
+    .dois > div { height: 330px; padding: 32px; display: grid; align-content: start; gap: 16px; }
+    .dois small { font: 500 17px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--or-pale); }
+    .dois b { font-size: 40px; font-weight: 680; letter-spacing: -.035em; line-height: 1; }
+    .dois p { font-size: 24px; line-height: 1.38; color: var(--t2); }
+  </style>
+</head>
+<body>
+  <main class="peca feed lista" data-n="1">
+    <header class="cab"><span>tirvo<b>_</b> / propriedade</span><span class="num">01<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> quem é o dono do seu site?</p>
+    <h1 class="titulo capa-t" style="font-size:86px">Domínio, hospedagem<br>e SSL: <em>quem é o dono<br>do seu site?</em></h1>
+    <div style="position:absolute;z-index:3;left:120px;top:700px"><div class="chaves"><span data-frame="20,0,20,0" data-tone="laranja"><svg class="ico"><use href="#i-globe"/></svg>domínio</span><span data-frame="20,0,20,0" data-tone="branco"><svg class="ico"><use href="#i-server"/></svg>hospedagem</span><span data-frame="20,0,20,0" data-tone="branco"><svg class="ico"><use href="#i-lock"/></svg>ssl</span></div></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+  <main class="peca feed lista" data-n="2">
+    <header class="cab"><span>tirvo<b>_</b> / propriedade</span><span class="num">02<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="grande-num">01</span>
+    <div class="ilustra"><div class="certidao" data-frame="22,0,22,0" data-tone="branco"><small>registro de domínio</small><b>seunegocio.com.br</b><span class="tit">Titular: a sua empresa<svg class="ico" style="color:#ff8a4c;font-size:34px"><use href="#i-check"/></svg></span></div></div>
+    <div class="txt"><h2><em>Domínio</em></h2><p class="corpo">É o endereço. <b>Precisa estar no nome da empresa,</b> não do fornecedor.</p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+  <main class="peca feed lista" data-n="3">
+    <header class="cab"><span>tirvo<b>_</b> / propriedade</span><span class="num">03<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="grande-num">02</span>
+    <div class="ilustra"><div class="ic-comp"><svg class="anel" viewBox="0 0 470 470"><circle cx="235" cy="235" r="150" fill="rgba(255,85,0,.06)" stroke="rgba(255,122,51,.45)" stroke-width="2"/><circle cx="235" cy="235" r="200" fill="none" stroke="rgba(255,122,51,.2)" stroke-width="2" stroke-dasharray="4 10"/><circle cx="235" cy="235" r="228" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="1.5"/><g fill="none" stroke="#fafafa" stroke-width="5"><path d="M95 135V95H135M335 95H375V135M375 335V375H335M135 375H95V335"/></g><circle cx="435" cy="235" r="7" fill="#ff5500" style="filter:drop-shadow(0 0 8px #ff5500)"/><circle cx="64" cy="170" r="4" fill="#ff8a4c"/></svg><svg class="icone-g"><use href="#i-server"/></svg></div></div>
+    <div class="txt"><h2><em>Hospedagem</em></h2><p class="corpo">É onde o site mora. <b>Saiba onde fica e quem tem o acesso.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+  <main class="peca feed lista" data-n="4">
+    <header class="cab"><span>tirvo<b>_</b> / propriedade</span><span class="num">04<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="grande-num">03</span>
+    <div class="ilustra"><div class="barra-url"><span style="color:#a1a1aa"><svg class="ico" style="color:#ff8a4c"><use href="#i-lock"/></svg>https://seunegocio.com.br</span><span style="color:#71717a;border-style:dashed"><svg class="ico" style="color:#71717a"><use href="#i-x"/></svg>não seguro · seunegocio.com.br</span></div></div>
+    <div class="txt"><h2><em>SSL</em></h2><p class="corpo">É o cadeado do navegador. <b>Sem ele, o navegador avisa que o site não é seguro.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+  <main class="peca feed lista" data-n="5">
+    <header class="cab"><span>tirvo<b>_</b> / propriedade</span><span class="num">05<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> não sabe responder?</p>
+    <div class="ilustra"><div class="pedido" data-frame="22,0,22,0" data-tone="laranja" data-acento="topo"><span><svg class="ico"><use href="#i-mail"/></svg>Acessos ao domínio</span><span><svg class="ico"><use href="#i-mail"/></svg>Acessos à hospedagem</span><span><svg class="ico"><use href="#i-mail"/></svg>Nome do titular</span></div></div>
+    <div class="txt"><h2>Peça hoje ao seu fornecedor.</h2></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+  <main class="peca feed lista" data-n="6">
+    <header class="cab"><span>tirvo<b>_</b> / propriedade</span><span class="num">06<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> na tirvo, você escolhe</p>
+    <div class="ilustra"><div class="dois"><div data-frame="22,0,22,0" data-tone="branco"><small>modelo 01</small><b>Código entregue</b><p>Tudo fica com você: código, domínio e infraestrutura.</p></div><div data-frame="0,22,0,22" data-tone="laranja"><small>modelo 02</small><b>Gestão 360º</b><p>A Tirvo opera, e o projeto continua sendo seu.</p></div></div></div>
+    <div class="txt"><h2>O projeto é <em>sempre seu.</em></h2></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+  <main class="peca feed lista final" data-n="7">
+    <header class="cab"><span>tirvo<b>_</b> / propriedade</span><span class="num">07<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> compartilhe</p>
+    <h1 class="titulo">Mande para quem<br>contratou o <em>site<br>da sua empresa.</em></h1>
+    <p class="corpo"></p>
+    <div class="fim">
+      <div class="divisor-h"></div>
+      <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span><span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span></div>
+      <div class="acoes">
+        <span class="btn cheio" data-frame="18,0,18,0" data-tone="quente"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-up-right"/></svg></span>
+        <span class="btn vazado" data-frame="0,18,0,18" data-tone="branco"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      </div>
+    </div>
+    <footer class="rod"><span class="dica">@tirvotech</span><img class="logo" data-logo></footer>
+  </main>
+  <script src="slide.js"></script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>

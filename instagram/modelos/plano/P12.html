@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="feed">
+  <meta name="tirvo:slides" content="8">
+  <title>P12: 7 lugares onde a sua marca aparece</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .peca { background: radial-gradient(560px 480px at 540px 600px, rgba(255, 85, 0, .14), transparent 70%), linear-gradient(180deg, #060607 0%, #09090b 50%, #060607 100%); }
+    .rotulo.r { z-index: 4; left: 96px; top: 190px; }
+    .capa .titulo { left: 92px; top: 236px; font-size: 92px; }
+    .orbita { z-index: 3; left: 140px; top: 600px; width: 800px; height: 600px; }
+    .orbita .no { position: absolute; width: 112px; height: 112px; margin: -56px; display: grid; place-items: center; }
+    .orbita .no .ico { font-size: 46px; color: #ff8c52; filter: drop-shadow(0 0 8px rgba(255, 85, 0, .6)); }
+    .orbita .no small { position: absolute; top: 122px; white-space: nowrap; font: 500 15px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--t3); }
+    .grande-num { z-index: 3; left: 84px; top: 170px; }
+    .ilustra { z-index: 3; left: 96px; top: 380px; width: 888px; height: 500px; display: grid; place-items: center; }
+    .txt { z-index: 4; left: 96px; top: 904px; width: 888px; display: grid; gap: 22px; }
+    .txt h2 { font-size: 64px; font-weight: 680; letter-spacing: -.045em; line-height: 1.02; }
+    .txt h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: -.01em; }
+    .txt .corpo { font-size: 33px; }
+    /* peças ilustrativas da "Marca X" (genérica) */
+    .tel { width: 230px; height: 430px; border-radius: 34px; border: 2px solid rgba(255, 255, 255, .28); background: #0d0d10; padding: 44px 16px 16px; display: grid; align-content: start; gap: 10px; }
+    .tel .pf { display: flex; gap: 10px; align-items: center; }
+    .tel .pf i { width: 46px; height: 46px; border-radius: 50%; background: #ff5500; box-shadow: 0 0 0 3px #0d0d10, 0 0 0 5px rgba(255, 122, 51, .6); }
+    .tel .pf b { flex: 1; height: 10px; border-radius: 5px; background: rgba(255, 255, 255, .2); }
+    .tel .gr { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+    .tel .gr span { aspect-ratio: 4 / 5; border-radius: 3px; background: #1a1a1f; border-top: 3px solid #ff5500; }
+    .tel .gr span:nth-child(even) { background: #ff5500; opacity: .85; border: 0; }
+    .nav { width: 620px; height: 400px; border-radius: 18px; border: 2px solid rgba(255, 255, 255, .22); background: #0e0e11; overflow: hidden; }
+    .nav .bh { height: 40px; border-bottom: 1px solid rgba(255, 255, 255, .1); display: flex; gap: 8px; align-items: center; padding: 0 16px; }
+    .nav .bh i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, .2); }
+    .nav .hero { margin: 26px; display: grid; gap: 14px; }
+    .nav .hero b { width: 70%; height: 30px; border-radius: 8px; background: rgba(255, 255, 255, .2); }
+    .nav .hero p { width: 50%; height: 12px; border-radius: 6px; background: rgba(255, 255, 255, .08); }
+    .nav .hero .bt { width: 170px; height: 46px; border-radius: 10px; background: #ff5500; box-shadow: 0 0 16px rgba(255, 85, 0, .5); }
+    .nav .pal { margin: 30px 26px 0; display: flex; gap: 10px; }
+    .nav .pal span { width: 46px; height: 46px; border-radius: 10px; }
+    .chat { width: 540px; display: grid; gap: 14px; }
+    .chat .topo-c { display: flex; align-items: center; gap: 16px; padding: 18px 22px; border-radius: 16px; background: rgba(255, 255, 255, .04); border: 1px solid rgba(255, 255, 255, .1); font-size: 26px; font-weight: 600; }
+    .chat .topo-c i { width: 54px; height: 54px; border-radius: 50%; background: #ff5500; }
+    .chat .topo-c small { display: block; font: 500 15px/1.4 var(--mono); color: var(--t3); }
+    .chat .b { max-width: 400px; padding: 16px 20px; border-radius: 20px; font-size: 23px; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .1); color: var(--t2); }
+    .chat .b.cat { justify-self: end; display: grid; grid-template-columns: repeat(3, 70px); gap: 8px; padding: 12px; }
+    .chat .b.cat span { height: 70px; border-radius: 8px; background: #1a1a1f; border-bottom: 3px solid #ff5500; }
+    .pdf { position: relative; width: 340px; height: 440px; border-radius: 10px; background: #f4f4f5; color: #09090b; padding: 40px 34px; display: grid; align-content: space-between; box-shadow: 0 40px 70px rgba(0, 0, 0, .6); transform: rotate(-3deg); }
+    .pdf b { font-size: 40px; font-weight: 700; letter-spacing: -.04em; line-height: 1; }
+    .pdf i { display: block; width: 60px; height: 8px; background: #ff5500; margin-top: 18px; }
+    .pdf small { font: 500 14px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #52525b; }
+    .pdf.cinza { position: absolute; transform: rotate(5deg) translate(170px, 10px); background: #2a2a30; color: #a1a1aa; z-index: -1; }
+    .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; width: 888px; }
+    .trio > div { height: 340px; display: grid; justify-items: center; align-content: center; gap: 18px; }
+    .trio .ico { font-size: 70px; color: #ff8c52; filter: drop-shadow(0 0 10px rgba(255, 85, 0, .55)); stroke-width: 1.3; }
+    .trio b { font-size: 28px; font-weight: 600; letter-spacing: -.02em; }
+    .trio small { font: 500 16px/1 var(--mono); letter-spacing: .14em; color: var(--t3); }
+    .manual { display: flex; gap: 18px; perspective: 1200px; }
+    .manual .pg { width: 250px; height: 340px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, .16); background: linear-gradient(180deg, #16161a, #0d0d10); padding: 24px; display: grid; align-content: start; gap: 14px; }
+    .manual .pg small { font: 500 14px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--or-pale); }
+    .manual .pg i { display: block; height: 10px; border-radius: 5px; background: rgba(255, 255, 255, .1); }
+    .final .titulo { left: 92px; top: 240px; font-size: 100px; }
+    .final .corpo { z-index: 4; left: 96px; top: 600px; width: 860px; }
+    .final .fim { top: 960px; }
+  </style>
+</head>
+<body>
+  <main class="peca feed capa" data-n="1">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">01<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> confira um por um</p>
+    <h1 class="titulo">7 lugares onde a sua<br>marca aparece <em>e pode<br>se desmontar.</em></h1>
+    <div class="orbita">
+      <svg viewBox="0 0 800 600" style="position:absolute;inset:0"><ellipse cx="400" cy="300" rx="330" ry="230" fill="none" stroke="rgba(255,122,51,.3)" stroke-width="2" stroke-dasharray="6 9"/><g transform="translate(400 300)"><g fill="none" stroke="#fafafa" stroke-width="7"><path d="M-46 -22V-46H-22M22 -46H46V-22M46 22V46H22M-22 46H-46V22"/></g><circle r="14" fill="#ff5500" style="filter:drop-shadow(0 0 10px #ff5500)"/></g></svg>
+      <span class="no" data-frame="16,0,16,0" data-tone="laranja" style="left:400px;top:70px"><svg class="ico"><use href="#i-smartphone"/></svg><small>perfil</small></span>
+      <span class="no" data-frame="16,0,16,0" data-tone="laranja" style="left:680px;top:150px"><svg class="ico"><use href="#i-browser"/></svg><small>site</small></span>
+      <span class="no" data-frame="16,0,16,0" data-tone="laranja" style="left:730px;top:360px"><svg class="ico"><use href="#i-whatsapp"/></svg><small>whatsapp</small></span>
+      <span class="no" data-frame="16,0,16,0" data-tone="laranja" style="left:540px;top:520px"><svg class="ico"><use href="#i-file-code"/></svg><small>proposta</small></span>
+      <span class="no" data-frame="16,0,16,0" data-tone="laranja" style="left:260px;top:520px"><svg class="ico"><use href="#i-copy"/></svg><small>cartão</small></span>
+      <span class="no" data-frame="16,0,16,0" data-tone="laranja" style="left:70px;top:360px"><svg class="ico"><use href="#i-landmark"/></svg><small>fachada</small></span>
+      <span class="no" data-frame="16,0,16,0" data-tone="laranja" style="left:120px;top:150px"><svg class="ico"><use href="#i-package"/></svg><small>embalagem</small></span>
+    </div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="2">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">02<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="grande-num">01</span>
+    <div class="ilustra"><div class="tel"><div class="pf"><i></i><b></b></div><div class="gr"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div></div>
+    <div class="txt"><h2>Perfil nas <em>redes.</em></h2><p class="corpo">Foto, destaques e posts precisam <b>falar a mesma língua visual.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="3">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">03<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="grande-num">02</span>
+    <div class="ilustra"><div class="nav"><div class="bh"><i></i><i></i><i></i></div><div class="hero"><b></b><p></p><p style="width:40%"></p><div class="bt"></div></div><div class="pal"><span style="background:#09090b;border:1px solid rgba(255,255,255,.2)"></span><span style="background:#ff5500"></span><span style="background:#fafafa"></span></div></div></div>
+    <div class="txt"><h2><em>Site.</em></h2><p class="corpo">Cores, fontes e tom iguais aos do perfil. <b>O cliente percebe quando muda.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="4">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">04<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="grande-num">03</span>
+    <div class="ilustra"><div class="chat"><div class="topo-c"><i></i><span>Sua marca<small>conta comercial · catálogo</small></span></div><p class="b">Olá. Aqui é a equipe da sua marca. Como podemos ajudar?</p><div class="b cat"><span></span><span></span><span></span></div></div></div>
+    <div class="txt"><h2><em>WhatsApp.</em></h2><p class="corpo">Foto, mensagem de saudação e catálogo <b>também são marca.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="5">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">05<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="grande-num">04</span>
+    <div class="ilustra"><div style="position:relative"><div class="pdf cinza"><small>proposta.pdf</small><b>Proposta<br>comercial</b><small>modelo genérico</small></div><div class="pdf"><small>sua marca</small><span><b>Proposta<br>comercial</b><i></i></span><small>com a identidade aplicada</small></div></div></div>
+    <div class="txt"><h2>Proposta <em>comercial.</em></h2><p class="corpo">Um PDF genérico <b>apaga tudo o que o site construiu.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="6">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">06<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="grande-num">05–07</span>
+    <div class="ilustra"><div class="trio">
+      <div data-frame="20,0,20,0" data-tone="branco"><svg class="ico"><use href="#i-copy"/></svg><b>Cartão e impressos</b><small>05</small></div>
+      <div data-frame="20,0,20,0" data-tone="branco"><svg class="ico"><use href="#i-landmark"/></svg><b>Fachada</b><small>06</small></div>
+      <div data-frame="20,0,20,0" data-tone="branco"><svg class="ico"><use href="#i-package"/></svg><b>Uniforme e embalagem</b><small>07</small></div>
+    </div></div>
+    <div class="txt"><h2>No mundo <em>físico.</em></h2><p class="corpo">É onde a marca mais se desmonta: <b>cada fornecedor aplica de um jeito.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="7">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">07<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> o que mantém tudo igual</p>
+    <div class="ilustra"><div class="manual">
+      <div class="pg" style="transform:rotateY(14deg)"><small>cores</small><span style="display:flex;gap:8px"><b style="width:44px;height:44px;border-radius:8px;background:#ff5500"></b><b style="width:44px;height:44px;border-radius:8px;background:#fafafa"></b><b style="width:44px;height:44px;border-radius:8px;background:#09090b;border:1px solid #333"></b></span><i></i><i style="width:70%"></i></div>
+      <div class="pg"><small>respiro</small><span style="display:grid;place-items:center;height:150px;border:2px dashed rgba(255,122,51,.55);border-radius:8px"><img data-logo style="height:26px"></span><i style="width:80%"></i></div>
+      <div class="pg" style="transform:rotateY(-14deg)"><small>tipografia</small><span style="font:680 64px/1 var(--sans)">Aa</span><i></i><i style="width:60%"></i></div>
+    </div></div>
+    <div class="txt"><h2>Um <em>manual de marca.</em></h2><p class="corpo">Cores, fontes, respiro e usos. <b>As mesmas regras em qualquer mão.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed final" data-n="8">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">08<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> sua vez</p>
+    <h1 class="titulo">Salve e confira<br>os 7, <em>um por um.</em></h1>
+    <p class="corpo"><b>Onde a sua marca está diferente?</b> Conte nos comentários.</p>
+    <div class="fim">
+      <div class="divisor-h"></div>
+      <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span><span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span></div>
+      <div class="acoes">
+        <span class="btn cheio" data-frame="18,0,18,0" data-tone="quente"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-up-right"/></svg></span>
+        <span class="btn vazado" data-frame="0,18,0,18" data-tone="branco"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      </div>
+    </div>
+    <footer class="rod"><span class="dica">@tirvotech</span><img class="logo" data-logo></footer>
+  </main>
+  <script src="slide.js"></script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="feed">
+  <meta name="tirvo:slides" content="1">
+  <title>P16: a anatomia da mira</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .peca { background: radial-gradient(520px 520px at 380px 700px, rgba(255, 85, 0, .16), transparent 70%), linear-gradient(180deg, #060607 0%, #09090b 50%, #060607 100%); }
+    .rotulo.r { z-index: 4; left: 96px; top: 196px; }
+    .titulo { left: 92px; top: 240px; font-size: 100px; }
+    .mira-g { z-index: 3; left: 70px; top: 500px; width: 500px; height: 500px; }
+    .partes { z-index: 4; left: 612px; top: 530px; width: 372px; display: grid; gap: 30px; }
+    .partes div { display: grid; gap: 10px; }
+    .partes b { font: 500 20px/1 var(--mono); letter-spacing: .14em; color: var(--or); }
+    .partes h3 { font-size: 34px; font-weight: 640; letter-spacing: -.03em; line-height: 1.05; }
+    .partes p { font-size: 23px; line-height: 1.38; color: var(--t2); }
+    .rodape-txt { z-index: 4; left: 96px; top: 1090px; width: 888px; font-size: 32px; font-weight: 600; letter-spacing: -.025em; color: var(--t2); }
+    .rodape-txt em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.14em; color: var(--t1); }
+  </style>
+</head>
+<body>
+  <main class="peca feed" data-n="1">
+    <svg class="arte" viewBox="0 0 1080 1350" width="1080" height="1350">
+      <defs><pattern id="grade" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="rgba(255,255,255,.035)" stroke-width="1"/></pattern>
+        <radialGradient id="gg" cx="34%" cy="57%" r="40%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><mask id="mg"><rect width="1080" height="1350" fill="url(#gg)"/></mask></defs>
+      <rect width="1080" height="1350" fill="url(#grade)" mask="url(#mg)"/>
+      <!-- linhas de cota até as legendas -->
+      <g stroke="rgba(255,255,255,.3)" stroke-width="1.4" fill="none"><path d="M520 556H596"/><path d="M432 750H520L560 712H596"/><path d="M362 790C420 880 520 900 596 900"/></g>
+      <g fill="#ff6a1f"><circle cx="520" cy="556" r="5"/><circle cx="432" cy="750" r="5"/><circle cx="362" cy="790" r="5"/></g>
+    </svg>
+    <svg class="mira-g" viewBox="-5 -5 110 110">
+      <defs><filter id="halo" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3"/></filter></defs>
+      <path fill="#f4f4f5" d="M6.5 35.5V6.5H35.5V13.5H13.5V35.5Z M93.5 35.5V6.5H64.5V13.5H86.5V35.5Z M6.5 64.5V93.5H35.5V86.5H13.5V64.5Z M93.5 64.5V93.5H64.5V86.5H86.5V64.5Z"/>
+      <path fill="#f4f4f5" fill-opacity="0.45" d="M48.5 22h3v12h-3Z M48.5 66h3v12h-3Z M22 48.5h12v3h-12Z M66 48.5h12v3h-12Z"/>
+      <circle cx="50" cy="50" r="10" fill="#ff5500" opacity=".85" filter="url(#halo)"/><circle cx="50" cy="50" r="10" fill="#ff5500"/>
+      <g stroke="rgba(255,122,51,.6)" stroke-width=".35" fill="none" stroke-dasharray="1.2 1.2"><path d="M0 -2H100M0 102H100M-2 0V100M102 0V100"/></g>
+    </svg>
+    <header class="cab"><span>tirvo<b>_</b> / nossa marca</span><span class="num">fig. 01</span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> por que a logo é assim</p>
+    <h1 class="titulo">A anatomia<br>da <em>mira.</em></h1>
+    <div class="partes">
+      <div><b>01</b><h3>Quatro cantos</h3><p>Cercam o problema por todos os lados.</p></div>
+      <div><b>02</b><h3>Quatro marcas de medida</h3><p>Conferem cada detalhe antes da entrega.</p></div>
+      <div><b>03</b><h3>O ponto laranja</h3><p>O alvo encontrado. Pulsa e não se apaga.</p></div>
+    </div>
+    <p class="rodape-txt">Enquanto um projeto está com a gente, <em>ele ocupa o centro da mira.</em></p>
+    <footer class="rod"><span class="dica">@tirvotech</span><img class="logo" data-logo></footer>
+  </main>
+  <script src="slide.js"></script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>

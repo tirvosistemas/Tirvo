@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <meta name="tirvo:slides" content="4">
+  <title>S12: a mira da logo, por dentro</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="story.css">
+  <style>
+    .peca { background: radial-gradient(560px 560px at 540px 720px, rgba(255, 85, 0, .16), transparent 70%), radial-gradient(900px 420px at 540px 1930px, rgba(255, 70, 0, .2), transparent 70%), linear-gradient(180deg, #050506 0%, #09090b 50%, #050506 100%); }
+    .mira-g { z-index: 3; left: 190px; top: 360px; width: 700px; height: 700px; }
+  </style>
+</head>
+<body>
+  <!-- A mira desenhada com as mesmas proporções do logotipo oficial (viewBox 100) -->
+  <template id="mira">
+    <defs><filter id="halo" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3"/></filter></defs>
+    <g class="cantos"><path d="M6.5 35.5V6.5H35.5V13.5H13.5V35.5Z M93.5 35.5V6.5H64.5V13.5H86.5V35.5Z M6.5 64.5V93.5H35.5V86.5H13.5V64.5Z M93.5 64.5V93.5H64.5V86.5H86.5V64.5Z"/></g>
+    <g class="medidas"><path d="M48.5 22h3v12h-3Z M48.5 66h3v12h-3Z M22 48.5h12v3h-12Z M66 48.5h12v3h-12Z"/></g>
+    <g class="ponto"><circle cx="50" cy="50" r="10" fill="#ff5500" opacity=".85" filter="url(#halo)"/><circle cx="50" cy="50" r="10" fill="#ff5500"/></g>
+  </template>
+
+  <main class="peca st" data-n="1">
+    <header class="topo"><span>tirvo<b>_</b> / nossa marca</span><span class="num">01<i>/04</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+    <svg class="mira-g" viewBox="-14 -14 128 128" data-mira data-on="cantos medidas ponto">
+      <g font-family="Geist Mono" font-size="3.4" fill="#ffb187"><text x="-2" y="-6">01</text><text x="96" y="-6">02</text><text x="96" y="109">03</text><text x="-2" y="109">04</text><text x="53" y="19">05</text><text x="53" y="85">06</text><text x="14" y="46">07</text><text x="80" y="46">08</text><text x="62" y="58">09</text></g>
+    </svg>
+    <div class="txt" style="top:1120px"><p class="grande">Esta logo tem 9 peças. <em>Nenhuma por acaso.</em></p></div>
+    <div class="parte"><i class="on"></i><i></i><i></i><i></i></div>
+    <div class="st-rod" data-frame="20,0,20,0" data-tone="branco"><img class="logo" data-logo><span class="lks"><span class="lk"><u>tirvo.tech</u></span><span class="arroba">@tirvotech</span></span></div>
+  </main>
+
+  <main class="peca st" data-n="2">
+    <header class="topo"><span>tirvo<b>_</b> / nossa marca</span><span class="num">02<i>/04</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+    <svg class="mira-g" viewBox="-14 -14 128 128" data-mira data-on="cantos medidas"></svg>
+    <div class="txt" style="top:1100px"><p class="grande">Quatro cantos cercam o problema. <span class="cinza">Quatro marcas <em>conferem cada detalhe.</em></span></p></div>
+    <div class="parte"><i class="on"></i><i class="on"></i><i></i><i></i></div>
+    <div class="st-rod" data-frame="20,0,20,0" data-tone="branco"><img class="logo" data-logo><span class="lks"><span class="lk"><u>tirvo.tech</u></span><span class="arroba">@tirvotech</span></span></div>
+  </main>
+
+  <main class="peca st" data-n="3">
+    <header class="topo"><span>tirvo<b>_</b> / nossa marca</span><span class="num">03<i>/04</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+    <svg class="mira-g" viewBox="-14 -14 128 128" data-mira data-on="ponto" data-onda></svg>
+    <div class="txt" style="top:1100px"><p class="grande">O ponto laranja é o alvo encontrado. <em>Ele não se apaga.</em></p></div>
+    <div class="parte"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+    <div class="st-rod" data-frame="20,0,20,0" data-tone="branco"><img class="logo" data-logo><span class="lks"><span class="lk"><u>tirvo.tech</u></span><span class="arroba">@tirvotech</span></span></div>
+  </main>
+
+  <main class="peca st" data-n="4">
+    <header class="topo"><span>tirvo<b>_</b> / nossa marca</span><span class="num">04<i>/04</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+    <p class="rotulo r"><i>//</i> a história completa</p>
+    <h1 class="titulo" style="font-size:96px">A história de<br>cada traço está<br><em>no site.</em></h1>
+    <div class="figurinha" style="top:800px;height:380px"><i></i><i></i><i></i><i></i></div>
+    <div class="st-fim">
+      <div class="divisor-h"></div>
+      <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech/marca.html</u></span><span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span></div>
+      <div class="acoes">
+        <span class="btn cheio" data-frame="18,0,18,0" data-tone="quente"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-up-right"/></svg></span>
+        <span class="btn vazado" data-frame="0,18,0,18" data-tone="branco"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      </div>
+      <div class="base"><img class="logo" data-logo><span>@tirvotech</span></div>
+    </div>
+  </main>
+  <script src="slide.js"></script>
+  <script>
+    // Monta a mira em cada SVG marcado, acendendo só as partes pedidas
+    document.querySelectorAll('svg[data-mira]').forEach((svg) => {
+      const on = svg.dataset.on.split(' ');
+      const t = document.getElementById('mira').innerHTML;
+      let h = t.replace('class="cantos"', `class="cantos" fill="${on.includes('cantos') ? '#f4f4f5' : 'rgba(244,244,245,.12)'}"`)
+               .replace('class="medidas"', `class="medidas" fill="${on.includes('medidas') ? 'rgba(255,138,76,.95)' : 'rgba(244,244,245,.12)'}"`);
+      if (!on.includes('ponto')) h = h.replace('<g class="ponto">', '<g class="ponto" opacity=".25">');
+      if (svg.hasAttribute('data-onda')) h += '<circle cx="50" cy="50" r="18" fill="none" stroke="rgba(255,122,51,.5)" stroke-width=".6"/><circle cx="50" cy="50" r="28" fill="none" stroke="rgba(255,122,51,.28)" stroke-width=".5"/><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,122,51,.14)" stroke-width=".5"/>';
+      svg.insertAdjacentHTML('afterbegin', h);
+    });
+  </script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>
