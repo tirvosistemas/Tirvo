@@ -79,6 +79,11 @@
     var setM = function (open) {
       mBtn.setAttribute('aria-expanded', String(open));
       mBtn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+      if (open && head) {
+        var r = head.getBoundingClientRect(), top = r.top;
+        if (head.classList.contains('is-hidden')) top = 0;
+        mm.style.setProperty('--mm-top', Math.max(0, top) + head.offsetHeight + 'px');
+      }
       mm.classList.toggle('is-open', open);
       root.classList.toggle('menu-open', open);
       d.body.style.overflow = open ? 'hidden' : '';
