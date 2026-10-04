@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>P21: nenhuma linha de código antes desta conversa</title>
+  <link rel="stylesheet" href="motor.css">
+  <style>
+    .editor { width: 900px; height: 620px; overflow: hidden; }
+    .editor .bar { position: absolute; left: 0; right: 0; top: 0; height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 22px; border-bottom: 1px solid rgba(255,255,255,.08); font: 500 19px/1 var(--mono); color: var(--t3); }
+    .editor .bar i { width: 14px; height: 14px; border-radius: 50%; background: #3f3f46; }
+    .editor .bar span { margin-left: 14px; color: var(--t2); }
+    .editor .cod { position: absolute; left: 0; right: 0; top: 64px; bottom: 0; padding: 26px 0; font: 500 24px/1.75 var(--mono); }
+    .editor .cod div { display: grid; grid-template-columns: 70px 1fr; white-space: pre; }
+    .editor .cod div b { font-weight: 500; text-align: right; padding-right: 22px; color: #3f3f46; }
+    .editor .cod .k { color: #ff8a4c; } .editor .cod .s { color: #d4d4d8; } .editor .cod .c { color: #6b6b74; }
+    .editor .cur { display: inline-block; width: 13px; height: 30px; background: #ff5500; box-shadow: 0 0 12px #ff5500; vertical-align: -6px; }
+    #c1 .h { left: 80px; top: 372px; width: 920px; font-size: 96px; }
+    #c1 .editor { left: 90px; top: 760px; }
+    #c2 .h { left: 80px; top: 372px; width: 920px; font-size: 80px; }
+    #c2 .linha-t { left: 80px; top: 900px; width: 920px; height: 300px; }
+    #c3 .rot { left: 80px; top: 380px; }
+    #c3 .h { left: 80px; top: 440px; width: 920px; font-size: 84px; }
+    #c3 .fases { left: 80px; top: 800px; width: 920px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    #c3 .fase { height: 220px; padding: 26px; display: grid; align-content: space-between; }
+    #c3 .fase b { font: 500 22px/1 var(--mono); color: var(--t3); letter-spacing: .1em; }
+    #c3 .fase span { font-size: 38px; font-weight: 680; letter-spacing: -.03em; color: var(--t2); }
+    #c3 .fase.on b { color: #ff6a1f; } #c3 .fase.on span { color: #fff; }
+    #c4 .rot, #c5 .rot { left: 80px; top: 380px; }
+    #c4 .h, #c5 .h { left: 80px; top: 440px; width: 920px; font-size: 76px; }
+    #c5 .c { left: 80px; top: 750px; width: 900px; font-size: 32px; }
+    #c6 .h { left: 80px; top: 372px; width: 920px; font-size: 80px; }
+    #c6 .doc { left: 160px; top: 760px; width: 760px; height: 560px; padding: 40px 44px; }
+    #c6 .doc h4 { font: 500 20px/1 var(--mono); letter-spacing: .16em; color: var(--t3); text-transform: uppercase; margin-bottom: 26px; }
+    #c6 .doc .lin { display: flex; justify-content: space-between; padding: 18px 0; border-top: 1px solid rgba(255,255,255,.08); font-size: 30px; }
+    #c6 .doc .lin span { color: var(--t2); } #c6 .doc .lin b { font-weight: 600; font: 500 24px/1.3 var(--mono); color: var(--t1); }
+    #c6 .carimbo { left: 470px; top: 1070px; padding: 20px 34px; border: 7px solid #ff5500; border-radius: 14px; font: 700 64px/1 var(--mono); letter-spacing: .12em; color: #ff6a1f; transform: rotate(-12deg); box-shadow: 0 0 40px rgba(255,85,0,.35), inset 0 0 30px rgba(255,85,0,.15); text-shadow: 0 0 20px rgba(255,85,0,.6); }
+    #c7 .h { left: 80px; top: 372px; width: 920px; font-size: 92px; }
+    #c7 .editor { left: 90px; top: 700px; }
+    #c8 .fim-card .cta .h { font-size: 76px; text-align: center; }
+    #c8 .palavra { position: absolute; left: 50%; top: 1190px; transform: translateX(-50%); display: flex; align-items: center; gap: 22px; padding: 22px 40px; white-space: nowrap; }
+    #c8 .palavra b { font: 600 50px/1 var(--mono); letter-spacing: .08em; color: #fff; text-shadow: 0 0 20px rgba(255,85,0,.7); }
+    #c8 .palavra span { font-size: 28px; color: var(--t2); }
+  </style>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/SplitText.min.js"></script>
+  <script src="vendor/CustomEase.min.js"></script>
+  <script src="vendor/DrawSVGPlugin.min.js"></script>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+</head>
+<body>
+<div class="reel">
+  <div id="palco">
+    <section class="cena" id="c1">
+      <h1 class="h"><span class="linha"><span>Nenhuma linha</span></span><span class="linha"><span>de código antes</span></span><span class="linha"><span class="lar"><em>desta conversa.</em></span></span></h1>
+      <div class="editor" data-frame="20,0,20,0" data-tone="branco"><div class="bar"><i></i><i></i><i></i><span>projeto/index.html</span></div>
+        <div class="cod"><div><b>1</b><span><span class="cur" id="cur1"></span></span></div><div><b>2</b><span></span></div><div><b>3</b><span></span></div><div><b>4</b><span></span></div><div><b>5</b><span></span></div><div><b>6</b><span></span></div><div><b>7</b><span></span></div></div></div>
+    </section>
+    <section class="cena" id="c2">
+      <h2 class="h"><span class="linha"><span>Projeto que começa</span></span><span class="linha"><span>pelo código costuma</span></span><span class="linha"><span class="lar"><em>terminar no atraso.</em></span></span></h2>
+      <svg class="linha-t" viewBox="0 0 920 300">
+        <text x="0" y="40" font-family="Geist Mono" font-size="20" letter-spacing="3" fill="#8a8a93">CRONOGRAMA</text>
+        <line x1="0" y1="140" x2="920" y2="140" stroke="rgba(255,255,255,.12)" stroke-width="2"/>
+        <path id="tlBarra" d="M0 140 H900" stroke="#ff5500" stroke-width="16" stroke-linecap="round" style="filter:drop-shadow(0 0 10px #ff5500)"/>
+        <g id="prazo"><line x1="560" y1="80" x2="560" y2="200" stroke="#fafafa" stroke-width="3" stroke-dasharray="6 8"/><text x="560" y="240" text-anchor="middle" font-family="Geist Mono" font-size="20" letter-spacing="3" fill="#fafafa">PRAZO</text></g>
+        <text id="estouro" x="900" y="240" text-anchor="end" font-family="Geist Mono" font-size="20" letter-spacing="3" fill="#ff8a4c">+ REFAÇÃO + AJUSTE</text>
+      </svg>
+    </section>
+    <section class="cena" id="c3">
+      <p class="rot"><i>//</i> o método da tirvo</p>
+      <h2 class="h"><span class="linha"><span>Por isso, todo</span></span><span class="linha"><span>projeto começa pela</span></span><span class="linha"><span class="lar"><em>Descoberta.</em></span></span></h2>
+      <div class="fases"><div class="fase on" data-frame="18,0,18,0" data-tone="laranja" data-acento="topo"><b>01</b><span>Descoberta</span></div><div class="fase" data-frame="18,0,18,0" data-tone="branco"><b>02</b><span>Engenharia</span></div><div class="fase" data-frame="18,0,18,0" data-tone="branco"><b>03</b><span>Lançamento</span></div></div>
+    </section>
+    <section class="cena" id="c4">
+      <p class="rot"><i>//</i> 01 · imersão</p>
+      <h2 class="h"><span class="linha"><span>O negócio,</span></span><span class="linha"><span>os objetivos</span></span><span class="linha"><span class="lar"><em>e o público.</em></span></span></h2>
+    </section>
+    <section class="cena" id="c5">
+      <p class="rot"><i>//</i> 02 · arquitetura e diagnóstico</p>
+      <h2 class="h"><span class="linha"><span>Cada página e</span></span><span class="linha"><span>o que ela precisa</span></span><span class="linha"><span class="lar"><em>fazer.</em></span></span></h2>
+      <p class="c">E o diagnóstico técnico: <b>o que existe, o que muda, o que fica.</b></p>
+    </section>
+    <section class="cena" id="c6">
+      <h2 class="h"><span class="linha"><span>Sai um escopo e</span></span><span class="linha"><span>um cronograma.</span></span><span class="linha"><span class="lar"><em>Você aprova antes.</em></span></span></h2>
+      <div class="doc" data-frame="24,0,24,0" data-tone="branco"><h4>escopo · cronograma</h4>
+        <div class="lin"><span>O que será feito</span><b>definido</b></div>
+        <div class="lin"><span>Etapas</span><b>3 fases</b></div>
+        <div class="lin"><span>Prazo de cada etapa</span><b>combinado</b></div>
+        <div class="lin"><span>Sua aprovação</span><b style="color:#ff8a4c">pendente</b></div>
+      </div>
+      <div class="carimbo" id="carimbo">APROVADO</div>
+    </section>
+    <section class="cena" id="c7">
+      <h2 class="h"><span class="linha"><span>Só então começa</span></span><span class="linha"><span class="lar"><em>a Engenharia.</em></span></span></h2>
+      <div class="editor" data-frame="20,0,20,0" data-tone="laranja"><div class="bar"><i></i><i></i><i></i><span>projeto/index.html</span></div>
+        <div class="cod" id="cod2"></div></div>
+    </section>
+    <section class="cena" id="c8">
+      <div class="fim-card">
+        <img class="logo-g" src="../../../marca/tirvo-logo.svg" alt="Tirvo">
+        <p class="slogan">Se algo pode ser melhorado, <b>ainda não está pronto.</b></p>
+        <div class="cta"><h2 class="h"><span class="linha"><span>Quer começar</span></span><span class="linha"><span class="lar"><em>pela Descoberta?</em></span></span></h2></div>
+        <div class="palavra" data-frame="18,0,18,0" data-tone="quente"><b>DESCOBERTA</b><span>no direct</span></div>
+        <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech/metodo</u></span><span class="ar">@tirvotech</span></div>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="../stories/premium/base.js"></script>
+<script type="module">
+import { iniciar, semente } from './motor.js';
+const M = iniciar({ id: 'P21', duracao: 28.5, trilha: 'trilha-P21.mp3', capitulos: [0, 3, 7, 11.5, 15.5, 19, 23, 25.5], capa: 2.4, rotuloHud: 'método · descoberta', semente: 21 });
+const { tl } = M;
+const $ = (s) => document.querySelector(s);
+
+// Código da cena 7
+const LINHAS = [
+  ['<span class="c">&lt;!-- escopo aprovado: começa a engenharia --&gt;</span>'],
+  ['<span class="k">&lt;header</span> <span class="s">class="topo"</span><span class="k">&gt;</span>'],
+  ['  <span class="k">&lt;nav</span> <span class="s">aria-label="principal"</span><span class="k">&gt;</span>'],
+  ['  <span class="k">&lt;h1&gt;</span>Sua empresa, em 1 toque<span class="k">&lt;/h1&gt;</span>'],
+  ['<span class="k">&lt;/header&gt;</span>'],
+  ['<span class="k">&lt;main</span> <span class="s">id="conteudo"</span><span class="k">&gt;</span>'],
+  ['  <span class="k">&lt;form</span> <span class="s">action="/orcamento"</span><span class="k">&gt;</span>'],
+];
+$('#cod2').innerHTML = LINHAS.map((l, i) => `<div><b>${i + 1}</b><span>${l[0]}</span></div>`).join('');
+
+/* ---------- 3D: mapa de ideias que vira mapa do site ---------- */
+M.tres(({ THREE, scene, camera, textura }) => {
+  camera.position.set(0, -4, 30);
+  const rotulos = ['negócio', 'objetivos', 'público', 'Início', 'Serviços', 'Sobre', 'Contato', 'Orçamento', 'FAQ', 'Método', 'Projetos', 'Blog'];
+  const N = 30;
+  const rr = semente(211);
+  const nos = [];
+  const esfera = new THREE.SphereGeometry(.22, 20, 20);
+  for (let i = 0; i < N; i++) {
+    const m = new THREE.Mesh(esfera, new THREE.MeshBasicMaterial({ color: i < 3 ? '#ff6a1f' : '#a8a8b0', toneMapped: false, transparent: true }));
+    m.scale.setScalar(i < 3 ? 2.2 : i < 12 ? 1.4 : .8);
+    scene.add(m);
+    // posição 1: nuvem (mapa de ideias)
+    const a = rr() * Math.PI * 2, r = i < 3 ? 2.4 : 3.5 + rr() * 5.5;
+    const p1 = new THREE.Vector3(Math.cos(a) * r * .8, -6 + Math.sin(a) * r * 1.1, (rr() - .5) * 6);
+    nos.push({ m, p1, p2: new THREE.Vector3(), f: rr() * 6 });
+  }
+  // posição 2: árvore (mapa do site)
+  nos[3].p2.set(0, -2.4, 0);
+  const filhos = [4, 5, 6, 7, 8, 9];
+  filhos.forEach((k, j) => nos[k].p2.set((j - 2.5) * 2.3, -6, 0));
+  let netos = 10;
+  for (let j = 0; j < filhos.length && netos < N; j++) for (let q = 0; q < 3 && netos < N; q++) { nos[netos].p2.set((j - 2.5) * 2.3 + (q - 1) * .65, -8.8 - q * 1, 0); netos++; }
+  [0, 1, 2].forEach((k, j) => nos[k].p2.set(-6 + j * 6, 3.5, -6));
+  // ligações
+  const pares = [];
+  for (let i = 3; i < N; i++) pares.push([i, i < 10 ? (i === 3 ? 0 : 3) : 4 + Math.floor((i - 10) / 3)]);
+  for (let i = 0; i < 3; i++) pares.push([i, (i + 1) % 3]);
+  const lgeo = new THREE.BufferGeometry(); const lp = new Float32Array(pares.length * 6); lgeo.setAttribute('position', new THREE.BufferAttribute(lp, 3));
+  const linhas = new THREE.LineSegments(lgeo, new THREE.LineBasicMaterial({ color: '#ff8a4c', transparent: true, opacity: 0, toneMapped: false })); scene.add(linhas);
+  // rótulos em sprite
+  const sprites = rotulos.map((txt, i) => {
+    const tx = textura(512, 96, (g) => { g.font = (i < 3 ? '600 52px Geist' : '500 40px "Geist Mono"'); g.fillStyle = i < 3 ? '#ffb187' : '#d4d4d8'; g.fillText(i < 3 ? txt : txt.toUpperCase(), 10, 66); });
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tx, transparent: true, opacity: 0, toneMapped: false }));
+    sp.scale.set(i < 3 ? 4 : 2.6, i < 3 ? .75 : .49, 1); sp.center.set(0, .5); scene.add(sp); return sp;
+  });
+  const S = { mapa: 0, arvore: 0, op: 0, lig: 0, cz: 30, y: 0 };
+  tl.to(S, { op: 1, mapa: 1, duration: 1.4, ease: 'expo.out' }, 11.5);
+  tl.to(S, { lig: 1, duration: 1.2 }, 12.2);
+  M.som(11.6, 'rede', .6);
+  tl.to(S, { arvore: 1, duration: 1.4, ease: 'expo.inOut' }, 15.5);
+  M.som(15.5, 'whoosh-longo', .5);
+  tl.to(S, { op: 0, lig: 0, duration: .5 }, 18.9);
+
+  const v = new THREE.Vector3();
+  return (t) => {
+    camera.position.set(Math.sin(t * .3) * 1.4, -4, S.cz); camera.lookAt(0, -4.5, 0);
+    nos.forEach((n, i) => {
+      v.copy(n.p1).lerp(n.p2, S.arvore);
+      v.y += Math.sin(t * 1.2 + n.f) * .12 * (1 - S.arvore);
+      const sx = (1 - S.mapa) * (n.p1.x * 1.8);
+      n.m.position.set(v.x + sx, v.y, v.z);
+      n.m.material.opacity = S.op;
+      n.m.visible = S.op > .01;
+    });
+    pares.forEach(([a, b], k) => { const A = nos[a].m.position, B = nos[b].m.position; lp.set([A.x, A.y, A.z, B.x, B.y, B.z], k * 6); });
+    lgeo.attributes.position.needsUpdate = true; linhas.material.opacity = S.lig * .45;
+    sprites.forEach((sp, i) => {
+      const idx = i < 3 ? i : i;
+      const n = nos[idx]; sp.position.set(n.m.position.x + .45, n.m.position.y - (i < 3 ? 0 : .5), n.m.position.z);
+      sp.material.opacity = S.op * (i < 3 ? 1 - S.arvore * .5 : S.arvore);
+      sp.visible = S.op > .01;
+    });
+  };
+}, { bloom: .45, limiar: .75, raio: .4 });
+
+/* ---------- Cena 1 ---------- */
+M.cena('#c1', 0, 3);
+M.sobe($('#c1 .h'), .1, { stagger: .3 });
+M.entra('#c1 .editor', .4, { y: 40 });
+tl.to('#cur1', { opacity: 0, duration: .01, repeat: 5, yoyo: true, repeatDelay: .45 }, .5);
+M.som(.5, 'clique', .3); M.som(1.5, 'clique', .3);
+M.trans(3, 'varre');
+
+/* ---------- Cena 2 ---------- */
+M.cena('#c2', 3, 7);
+M.sobe($('#c2 .h'), 3.05, { stagger: .2 });
+tl.fromTo('#tlBarra', { drawSVG: '0%' }, { drawSVG: '100%', duration: 2.4, ease: 'power1.in' }, 4);
+M.entra('#c2 .linha-t', 3.6, { y: 20 });
+tl.fromTo('#estouro', { opacity: 0 }, { opacity: 1, duration: .3 }, 5.8);
+M.som(5.6, 'erro', .55);
+M.trans(7, 'glitch');
+
+/* ---------- Cena 3 ---------- */
+M.cena('#c3', 7, 11.5);
+M.entra('#c3 .rot', 7.05, { y: 10 });
+M.sobe($('#c3 .h'), 7.1, { stagger: .2 });
+M.entra('#c3 .fase', 8.4, { y: 30, stagger: .2 });
+tl.fromTo('#c3 .fase.on', { boxShadow: '0 0 0 rgba(255,85,0,0)' }, { boxShadow: '0 0 60px rgba(255,85,0,.35)', duration: .6 }, 9.3);
+M.som(9.3, 'confirma', .6);
+M.trans(11.5, 'flash');
+
+/* ---------- Cena 4 ---------- */
+M.cena('#c4', 11.5, 15.5);
+M.entra('#c4 .rot', 11.55, { y: 10 });
+M.sobe($('#c4 .h'), 11.6, { stagger: .3 });
+M.trans(15.5, 'corte');
+
+/* ---------- Cena 5 ---------- */
+M.cena('#c5', 15.5, 19);
+M.entra('#c5 .rot', 15.55, { y: 10 });
+M.sobe($('#c5 .h'), 15.6, { stagger: .2 });
+M.palavras($('#c5 .c'), 16.9);
+M.trans(19, 'zoom');
+
+/* ---------- Cena 6 ---------- */
+M.cena('#c6', 19, 23);
+M.sobe($('#c6 .h'), 19.05, { stagger: .2 });
+M.entra('#c6 .doc', 19.5, { y: 40 });
+tl.fromTo('#carimbo', { scale: 3.2, opacity: 0, rotate: -4 }, { scale: 1, opacity: 1, rotate: -12, duration: .32, ease: 'power4.in' }, 20.9);
+tl.fromTo('#palco', { y: 0 }, { immediateRender: false, y: 14, duration: .06, yoyo: true, repeat: 3 }, 21.22);
+M.som(21.18, 'carimbo', 1); M.som(21.2, 'impacto', .5);
+tl.call(() => { const b = document.querySelector('#c6 .doc .lin:last-child b'); b.textContent = 'feita'; b.style.color = '#3ccf8e'; }, null, 21.25);
+tl.call(() => { const b = document.querySelector('#c6 .doc .lin:last-child b'); b.textContent = 'pendente'; b.style.color = '#ff8a4c'; }, null, 19.4);
+M.trans(23, 'flash');
+
+/* ---------- Cena 7 ---------- */
+M.cena('#c7', 23, 25.5);
+M.sobe($('#c7 .h'), 23.05, { stagger: .2 });
+M.entra('#c7 .editor', 23.2, { y: 40 });
+tl.fromTo('#cod2 > div', { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .2, stagger: .18 }, 23.6);
+M.som(23.6, 'decodificar', .5);
+M.trans(25.5, 'mira');
+
+/* ---------- Final ---------- */
+M.cena('#c8', 25.5);
+tl.set(['#hud .tc', '#hud .capitulos'], { opacity: .35 }, 25.5);
+M.entra('#c8 .logo-g', 25.55, { scale: .92, y: 0, blur: 24, dur: 1.1 });
+M.som(25.55, 'brilho', .8);
+M.entra('#c8 .slogan', 26, { y: 14 });
+M.sobe($('#c8 .cta .h'), 26.2, { stagger: .12 });
+M.entra('#c8 .palavra', 26.8, { y: 20 });
+M.entra('#c8 .links', 27.1, { y: 12 });
+tl.to('#fundo .b1', { x: 250, y: 550, duration: 9, ease: 'suave' }, 0).to('#fundo .b1', { x: -200, y: 150, duration: 10, ease: 'suave' }, 9).to('#fundo .b1', { x: 0, y: 0, duration: 9.5, ease: 'suave' }, 19);
+tl.to({}, { duration: 28.5 }, 0);
+M.pronto();
+</script>
+</body>
+</html>

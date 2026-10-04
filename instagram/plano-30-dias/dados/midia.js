@@ -16,6 +16,10 @@ window.PLANO_MIDIA = {
   "midia/P02/07.jpg",
   "midia/P02/08.jpg"
  ],
+ "P03": [
+  "midia/P03/01.mp4",
+  "midia/P03/02.jpg"
+ ],
  "P04": [
   "midia/P04/01.jpg",
   "midia/P04/02.jpg",
@@ -62,6 +66,10 @@ window.PLANO_MIDIA = {
  ],
  "P10": [
   "midia/P10/01.jpg"
+ ],
+ "P11": [
+  "midia/P11/01.mp4",
+  "midia/P11/02.jpg"
  ],
  "P12": [
   "midia/P12/01.jpg",

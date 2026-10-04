@@ -4,7 +4,7 @@
 
   add({
     id: 'P11', dia: 8, hora: '12:15', formato: 'reels', pilar: 'autoridade',
-    titulo: 'Seu site carrega. O cliente já foi.',
+    titulo: "Seu site carrega. O cliente já foi.",
     alavanca: 'Aversão à perda', metrica: 'Retenção e envios', cta: 'Enviar para quem cuida do site da empresa',
     ficha: {
       nicho: 'Performance de sites',
@@ -14,23 +14,24 @@
       tom: 'Direto, com tensão',
     },
     ganchos: [
-      ['Quebra de padrão', 'O seu site perde clientes antes de aparecer.'],
-      ['Dor aguda', 'Seu site carrega. O cliente já foi.', 'É o gancho de dor da semana e cabe em 2 segundos de leitura.'],
-      ['Ganho rápido', 'Abra o seu site no 4G antes do próximo cliente.'],
+      ["Dor aguda", "Seu site carrega. O cliente já foi.", "Cabe em 2 segundos de leitura e abre um ciclo: para onde ele foi? O dado do Google fecha na sequência."],
+      ["Quebra de padrão", "Metade das visitas desiste antes da página abrir."],
+      ["Ganho rápido", "Um teste de 10 segundos no seu site."],
     ],
     roteiro: {
-      duracao: '20 s', palavras: 48, audio: 'Sem narração. Faixa instrumental com batida marcada, escolhida no app.',
+      duracao: "28 s", palavras: 72, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
       linhas: [
-        ['0–2 s', 'Seu site carrega. O cliente já foi.', 'Celular com a tela branca e uma barra de carregamento lenta. Um polegar desliza para voltar.'],
-        ['2–5 s', 'Quem pesquisa no celular não espera tela branca.', 'Página de busca, outros resultados abrindo rápido ao lado.'],
-        ['5–9 s', 'O peso vem de imagens enormes, scripts e plugins sem uso.', 'Blocos pesados caem dentro da página e ela afunda.'],
-        ['9–13 s', 'Código sob medida carrega só o que a página precisa.', 'Os blocos somem, a página sobe leve. Contador de carregamento zera.'],
-        ['13–17 s', 'Teste hoje: abra o seu site no 4G, longe do Wi-Fi.', 'Ícone de 4G com a mira em volta.'],
-        ['17–20 s', 'Manda para quem cuida do site da sua empresa.', 'Cartão final com a logo e o cursor.'],
+        ["0–3,2 s", "Seu site carrega. O cliente já foi.", "Celular 3D com tela branca e barra de carregamento; cronômetro de tela branca; a seta de voltar risca a tela."],
+        ["3,2–7,6 s", "53% das visitas no celular são abandonadas quando a página passa de 3 segundos.", "Contador até 53%, grade de 100 pontos com 53 apagando e o relógio chegando a 3 s. Fonte na tela: Google."],
+        ["7,6–12 s", "Ele não reclama. Não manda mensagem. Só volta e abre o concorrente.", "Resultados de busca: o seu girando, o próximo abre e recebe o toque."],
+        ["12–17 s", "De onde vem o peso?", "Blocos 3D caem sobre a página: imagem gigante, script sem uso, plugin esquecido. O medidor sobe e a página afunda."],
+        ["17–21,6 s", "Código sob medida carrega só o que a tela precisa.", "Os blocos se desfazem; o celular volta e carrega em um toque."],
+        ["21,6–25,2 s", "Abra o seu site no 4G, fora do Wi-Fi. Passou de 3? O cliente também.", "Ícone de 4G na mira e cronômetro contando."],
+        ["25,2–28 s", "Manda pra quem cuida do site da sua empresa.", "Cartão final com a logo e o slogan."],
       ],
     },
-    capa: 'Tela branca de celular com a barra de carregamento e o título "Seu site carrega. O cliente já foi."',
-    alt: 'Reels que mostra um site lento perdendo o visitante e explica de onde vem o peso e como um código sob medida resolve.',
+    capa: "Quadro de 1,9 s: o título \"Seu site carrega. O cliente já foi.\" sobre o celular de tela branca, com o cronômetro correndo.",
+    alt: "Vídeo com um celular em 3D preso numa tela branca, o dado do Google sobre abandono acima de 3 segundos e blocos pesados afundando uma página, até o site sob medida carregar em um toque.",
     linhas: [
       'Ninguém reclama de site lento. A pessoa só fecha e abre o próximo resultado.',
       'O cliente não avisa que desistiu. Ele só volta para o Google.',
@@ -44,7 +45,8 @@ Teste hoje: abra o seu site no 4G, longe do Wi-Fi, e conte quanto tempo a tela f
 Manda para quem cuida do site da sua empresa.`,
     hashtags: '#performanceweb #velocidadedosite #criacaodesites #corewebvitals',
     teste: 'Variável da semana: gancho de dor. Compare a retenção nos 3 primeiros segundos com o P13 (contra-intuitivo).',
-    instrucoes: ['Vídeo produzido depois do plano.', 'Compartilhe no story.'],
+    instrucoes: ['Baixe o 01.mp4 (vídeo) e o 02.jpg (capa).', 'No app, escolha o 02.jpg como capa do Reels.', 'Poste com o áudio original do vídeo, sem adicionar música do app.', 'Cole a legenda com as hashtags.'],
+    obs: "Dado usado: Google (Think with Google, 2016): 53% das visitas em sites no celular são abandonadas quando a página leva mais de 3 segundos para carregar. A fonte aparece na tela.",
     midia: { qtd: 2, video: true },
   });
 
@@ -138,23 +140,23 @@ Salve e confira os 7 no seu negócio.`,
       tom: 'Bastidores, contra-intuitivo',
     },
     ganchos: [
-      ['Quebra de padrão', 'Uma IA que não conversa. Ela entrega.', 'É o gancho contra-intuitivo da semana e tem moeda social: quem envia parece estar à frente.'],
-      ['Dor aguda', 'Cansou de IA que só responde pergunta?'],
-      ['Ganho rápido', 'Como um enxame de agentes escreve um software.'],
+      ["Quebra de padrão", "Uma IA que não conversa. Ela entrega.", "Contraria o que todo mundo espera de IA e tem moeda social: quem envia parece estar à frente."],
+      ["Dor aguda", "Cansou de IA que só responde pergunta?"],
+      ["Ganho rápido", "Como um enxame de agentes escreve um software."],
     ],
     roteiro: {
-      duracao: '22 s', palavras: 52, audio: 'Sem narração. Faixa eletrônica discreta, escolhida no app.',
+      duracao: "27 s", palavras: 67, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
       linhas: [
-        ['0–2 s', 'Uma IA que não conversa. Ela entrega.', 'Tela de chat vazia que se apaga. O cursor laranja pisca.'],
-        ['2–6 s', 'Hipercode: a IA própria que a Tirvo está construindo.', 'Hexágonos acendem um a um, formando o enxame.'],
-        ['6–10 s', 'Um enxame de agentes autônomos dedicado à programação.', 'Linhas ligam os agentes; cada um ganha um rótulo de tarefa.'],
-        ['10–15 s', 'Recebe a tarefa. Pesquisa. Escreve o código. Entrega em .zip.', 'Quatro etapas em sequência; no fim, o ícone de .zip.'],
-        ['15–19 s', 'Em fase final de testes. Ainda não disponível ao público.', 'Barra de progresso quase cheia, selo "em testes".'],
-        ['19–22 s', 'Siga para acompanhar os testes.', 'Cartão final com a logo e o cursor.'],
+        ["0–3,2 s", "Uma IA que não conversa. Ela entrega.", "Um chat comum aparece e é riscado em laranja."],
+        ["3,2–7,6 s", "Hipercode: a IA própria que a Tirvo está construindo.", "Hexágonos 3D se juntam num favo: o enxame se forma. Selo \"em testes internos\"."],
+        ["7,6–12,2 s", "Não é um chatbot. É um enxame de agentes autônomos, dedicados à programação.", "Agentes acendem em laranja e se ligam por linhas com pulsos de luz."],
+        ["12,2–17,4 s", "Recebe a tarefa. Pesquisa. Escreve o código. Entrega o projeto.", "Quatro etapas acendem uma a uma; no fim, o arquivo projeto.zip."],
+        ["17,4–21,8 s", "Cada execução é revisada, corrigida e aperfeiçoada. Estágio avançado, últimos testes, lançamento ainda não.", "Três linhas de status: feito, agora, ainda não."],
+        ["21,8–27 s", "Siga para ver os próximos testes. O Hipercode ainda não está disponível ao público.", "Cartão final com a logo; o enxame desce."],
       ],
     },
-    capa: 'Enxame de hexágonos laranja com o título "Uma IA que não conversa. Ela entrega."',
-    alt: 'Reels que apresenta o Hipercode, a IA proprietária em desenvolvimento pela Tirvo, ainda em fase final de testes e não disponível ao público.',
+    capa: "Quadro de 2,3 s: o título \"Uma IA que não conversa. Ela entrega.\" com o chat sendo riscado.",
+    alt: "Vídeo com um enxame de hexágonos em 3D que se acendem e se conectam, mostrando como a IA própria da Tirvo, em testes internos, recebe uma tarefa, pesquisa, escreve código e entrega o projeto.",
     linhas: [
       'A maioria das IAs responde perguntas. Estamos construindo uma que entrega software.',
       'Bastidor da Tirvo: uma IA própria, em fase final de testes.',
@@ -168,7 +170,8 @@ Está em estágio avançado, na fase final de testes. Ainda não está disponív
 Siga o perfil para acompanhar os próximos passos.`,
     hashtags: '#inteligenciaartificial #agentesautonomos #engenhariadesoftware #tirvotech',
     teste: 'Variável da semana: gancho contra-intuitivo. Compare a retenção nos 3 primeiros segundos com P11 e P15.',
-    instrucoes: ['Vídeo produzido depois do plano.', 'Só vitrine: nenhuma oferta e nenhuma chamada para contratar o Hipercode.'],
+    instrucoes: ['Baixe o 01.mp4 (vídeo) e o 02.jpg (capa).', 'No app, escolha o 02.jpg como capa do Reels.', 'Poste com o áudio original do vídeo, sem adicionar música do app.', 'Cole a legenda com as hashtags.'],
+    obs: "Vitrine apenas. Não oferece o Hipercode, não diz que ele é usado em projetos de clientes e deixa claro que ainda não está disponível. As capturas de tela do site não foram usadas porque mostram o nome antigo do produto.",
     midia: { qtd: 2, video: true },
   });
 
@@ -264,37 +267,43 @@ A Tirvo agora cuida também das suas redes, com o mesmo rigor dos sites. Chame n
       tom: 'Direto, visual',
     },
     ganchos: [
-      ['Quebra de padrão', 'Cada plugin que você instala, o seu cliente carrega.'],
-      ['Dor aguda', 'Seu site tem plugins que ninguém lembra para que servem?', 'Gancho de dor da semana, que a maioria dos donos reconhece.'],
-      ['Ganho rápido', 'Faça a conta dos plugins do seu site.'],
+      ["Quebra de padrão", "Cada plugin que você instala, o seu cliente carrega.", "Inverte o ponto de vista: o custo do plugin cai em quem visita, e a torre 3D mostra o peso somando."],
+      ["Dor aguda", "Seu site tem plugin que ninguém lembra para que serve?"],
+      ["Ganho rápido", "Revise os plugins do seu site em 10 minutos."],
     ],
     roteiro: {
-      duracao: '20 s', palavras: 47, audio: 'Sem narração. Faixa instrumental, volume baixo.',
+      duracao: "28 s", palavras: 71, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
       linhas: [
-        ['0–2 s', 'Seu site tem plugins que ninguém lembra para que servem?', 'Lista de plugins rolando sem fim.'],
-        ['2–6 s', 'Cada um carrega código em todas as páginas.', 'Peças de código empilham sobre a página.'],
-        ['6–10 s', 'Mais peso no celular. Mais portas para atualizar.', 'Velocímetro cai; cadeados abertos piscam.'],
-        ['10–14 s', 'Sob medida, a página leva só o que usa.', 'Peças somem; sobra a página limpa.'],
-        ['14–18 s', 'Menos peso. Menos superfície de ataque.', 'Velocímetro sobe; escudo com a mira.'],
-        ['18–20 s', 'Salve para revisar os plugins do seu site.', 'Cartão final com a logo e o cursor.'],
+        ["0–3,2 s", "Cada plugin que você instala, o seu cliente carrega.", "Blocos de plugin começam a cair sobre a página."],
+        ["3,2–7,6 s", "Um de cada vez. Ninguém percebe o peso somando.", "A torre cresce: formulário, pop-up, galeria, chat, contador, slider, SEO, cache, backup, tradução, mapa, cookies."],
+        ["7,6–12 s", "Cada um soma código em todas as páginas. Até onde nem aparece.", "O velocímetro de \"velocidade no celular\" despenca."],
+        ["12–16,5 s", "E cada um é mais uma porta para manter atualizada.", "Cadeados abrem em laranja, um por um."],
+        ["16,5–21 s", "Sob medida, a página leva só o que usa. Nada sobrando.", "A torre se desfaz e sobra a página limpa."],
+        ["21–24,5 s", "Para cada plugin, pergunte: para que serve? Está atualizado? Alguém usa de verdade?", "Checklist com três caixas marcando."],
+        ["24,5–28 s", "Salve e revise os plugins esta semana.", "Cartão final com a logo e o botão de salvar."],
       ],
     },
-    capa: 'Pilha de plugins sobre um site com o título "O peso escondido do site pronto".',
-    alt: 'Reels que mostra como plugins acumulados deixam um site mais lento e mais vulnerável, comparado com um site sob medida.',
+    capa: "Quadro de 2,4 s: o título \"Cada plugin que você instala, o seu cliente carrega.\" com a torre de plugins começando a subir.",
+    alt: "Vídeo com uma torre de blocos de plugins em 3D crescendo sobre uma página, um velocímetro caindo e cadeados abrindo, terminando com um checklist de três perguntas para revisar plugins.",
     linhas: [
-      'Plugin resolve rápido e cobra depois, em velocidade e em segurança.',
-      'O site fica lento aos poucos, um plugin de cada vez.',
+      "Plugin resolve rápido e cobra depois, em velocidade e em segurança.",
+      "Cada plugin que você instala, o seu cliente carrega.",
     ],
     legenda: `Plugin resolve rápido e cobra depois, em velocidade e em segurança.
 
-Cada um carrega código nas páginas, mesmo onde não é usado, e precisa de atualização para não virar uma porta aberta.
+Cada um soma código nas páginas, até onde não aparece, e é mais uma porta para manter atualizada.
 
-Num site sob medida, a página leva só o que usa: menos peso no celular e menos superfície de ataque.
+Revisão de 10 minutos, plugin por plugin:
+1. Para que ele serve?
+2. Está atualizado?
+3. Alguém usa de verdade?
 
-Salve para revisar os plugins do seu site.`,
+Num site sob medida, a página leva só o que usa.
+
+Salve para revisar os plugins do seu site esta semana.`,
     hashtags: '#sitesobmedida #segurancadigital #desenvolvimentoweb #performanceweb',
     teste: 'Gancho de dor. Compare com P11 e P13.',
-    instrucoes: ['Vídeo produzido depois do plano.'],
+    instrucoes: ['Baixe o 01.mp4 (vídeo) e o 02.jpg (capa).', 'No app, escolha o 02.jpg como capa do Reels.', 'Poste com o áudio original do vídeo, sem adicionar música do app.', 'Cole a legenda com as hashtags.'],
     midia: { qtd: 2, video: true },
   });
 

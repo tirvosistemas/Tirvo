@@ -1,0 +1,122 @@
+/* Motor dos Reels da Tirvo (1080 x 1920, 30 fps).
+   Camadas, de trás para a frente: fundo (gradientes, grade em perspectiva, partículas), 3D (three.js),
+   palco (cenas com texto e interface), moldura de HUD fixa, transições, grão e vinheta.
+   Área segura do Reels: texto entre y 250 e y 1480 e entre x 80 e x 940 (botões do app à direita). */
+
+@import url("../stories/premium/base.css");
+
+html, body { background: #000; }
+.reel { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #050506; isolation: isolate; }
+.reel > * { position: absolute; }
+
+/* ---------- Fundo ---------- */
+#fundo { inset: 0; z-index: 0; overflow: hidden; }
+#fundo .base { position: absolute; inset: 0; background: radial-gradient(120% 70% at 50% 40%, #0d0d10 0%, #070708 55%, #030304 100%); }
+#fundo .brilho { position: absolute; width: 1400px; height: 1400px; left: -160px; top: 200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 85, 0, .26) 0%, rgba(255, 70, 0, .10) 32%, transparent 66%); will-change: transform; }
+#fundo .brilho.b2 { width: 1100px; height: 1100px; left: 300px; top: 1100px; background: radial-gradient(circle, rgba(255, 51, 0, .16) 0%, transparent 62%); }
+#fundo .brilho.frio { width: 1000px; height: 1000px; left: -300px; top: -260px; background: radial-gradient(circle, rgba(170, 180, 210, .07) 0%, transparent 60%); }
+#fundo .piso { position: absolute; left: -900px; right: -900px; top: 1180px; height: 1500px; transform-origin: 50% 0; transform: perspective(700px) rotateX(74deg);
+  background-image: linear-gradient(rgba(255, 255, 255, .07) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(255, 255, 255, .07) 1.5px, transparent 1.5px);
+  background-size: 96px 96px; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 55%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 55%, transparent 100%); }
+#fundo .teto { position: absolute; left: -900px; right: -900px; bottom: 1260px; height: 1200px; transform-origin: 50% 100%; transform: perspective(700px) rotateX(-74deg);
+  background-image: linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+  background-size: 96px 96px; -webkit-mask-image: linear-gradient(0deg, transparent 0%, #000 30%, transparent 100%); mask-image: linear-gradient(0deg, transparent 0%, #000 30%, transparent 100%); }
+#fundo .malha { position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, .028) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .028) 1px, transparent 1px);
+  background-size: 24px 24px; -webkit-mask-image: radial-gradient(70% 50% at 50% 45%, #000, transparent 75%); mask-image: radial-gradient(70% 50% at 50% 45%, #000, transparent 75%); }
+#particulas { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+#glifos { position: absolute; inset: 0; font: 500 20px/1 var(--mono); color: rgba(255, 255, 255, .16); }
+#glifos span { position: absolute; white-space: pre; letter-spacing: .3em; }
+#glifos span.q { color: rgba(255, 138, 76, .34); }
+
+/* ---------- 3D ---------- */
+#tres { left: 0; top: 0; width: 1080px; height: 1920px; z-index: 2; pointer-events: none; }
+#tres canvas { width: 1080px !important; height: 1920px !important; display: block; }
+
+#veu { inset: 0; z-index: 3; pointer-events: none; }
+#veu i { position: absolute; left: 0; right: 0; }
+#veu .topo { top: 0; height: 1000px; background: linear-gradient(180deg, rgba(4,4,5,.92) 0%, rgba(4,4,5,.86) 40%, rgba(4,4,5,.55) 68%, transparent 100%); }
+#veu .base { bottom: 0; height: 1100px; opacity: 0; background: linear-gradient(0deg, rgba(4,4,5,.95) 0%, rgba(4,4,5,.85) 45%, rgba(4,4,5,.5) 72%, transparent 100%); }
+
+/* ---------- Palco ---------- */
+#palco { inset: 0; z-index: 4; will-change: transform, filter; }
+.cena { position: absolute; inset: 0; visibility: hidden; }
+.cena > * { position: absolute; }
+
+/* ---------- Moldura de HUD (fixa em todo o vídeo) ---------- */
+#hud { inset: 0; z-index: 6; pointer-events: none; }
+#hud .logo-topo { position: absolute; left: 80px; top: 236px; height: 46px; }
+#hud .tc { position: absolute; right: 150px; top: 250px; font: 500 19px/1 var(--mono); letter-spacing: .14em; color: var(--t3); display: flex; gap: 14px; align-items: center; }
+#hud .tc .rec { width: 10px; height: 10px; border-radius: 50%; background: #ff5500; box-shadow: 0 0 10px #ff5500; }
+#hud .capitulos { position: absolute; left: 80px; right: 150px; top: 312px; height: 4px; display: flex; gap: 8px; }
+#hud .capitulos i { flex: 1; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, .12); overflow: hidden; position: relative; }
+#hud .capitulos i b { position: absolute; inset: 0; background: linear-gradient(90deg, #ff6a1f, #ff3300); transform-origin: 0 50%; transform: scaleX(0); box-shadow: 0 0 8px rgba(255, 85, 0, .7); }
+#hud .canto { position: absolute; width: 46px; height: 46px; border-color: rgba(255, 255, 255, .5); border-style: solid; border-width: 0; }
+#hud .canto.c1 { left: 34px; top: 196px; border-left-width: 3px; border-top-width: 3px; }
+#hud .canto.c2 { right: 34px; top: 196px; border-right-width: 3px; border-top-width: 3px; }
+#hud .canto.c3 { left: 34px; bottom: 372px; border-left-width: 3px; border-bottom-width: 3px; }
+#hud .canto.c4 { right: 34px; bottom: 372px; border-right-width: 3px; border-bottom-width: 3px; }
+#hud .regua-v { position: absolute; left: 30px; top: 420px; width: 30px; height: 1000px; }
+#hud .lateral { position: absolute; right: 30px; top: 1180px; transform-origin: 100% 0; transform: rotate(-90deg) translateX(0); font: 500 15px/1 var(--mono); letter-spacing: .32em; color: rgba(255, 255, 255, .22); white-space: nowrap; }
+#hud .coord { position: absolute; left: 80px; bottom: 380px; font: 500 15px/1.5 var(--mono); letter-spacing: .14em; color: rgba(255, 255, 255, .26); }
+#hud .coord b { color: rgba(255, 138, 76, .7); font-weight: 500; }
+
+/* ---------- Transições e acabamento ---------- */
+#trans { inset: 0; z-index: 8; pointer-events: none; }
+#trans .flash { position: absolute; inset: 0; opacity: 0; background: radial-gradient(70% 50% at 50% 45%, rgba(255, 220, 190, .95), rgba(255, 85, 0, .55) 45%, rgba(255, 51, 0, 0) 80%); mix-blend-mode: screen; }
+#trans .branco { position: absolute; inset: 0; opacity: 0; background: #fff; mix-blend-mode: overlay; }
+#trans .varre { position: absolute; top: 0; bottom: 0; width: 280px; left: -400px; opacity: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 85, 0, .0) 20%, rgba(255, 120, 40, .55) 48%, rgba(255, 240, 220, .95) 50%, rgba(255, 120, 40, .55) 52%, rgba(255, 85, 0, 0) 80%, transparent); mix-blend-mode: screen; }
+#trans .faixas { position: absolute; inset: 0; opacity: 0; }
+#trans .faixas i { position: absolute; left: 0; right: 0; background: rgba(255, 106, 31, .5); mix-blend-mode: screen; }
+#trans .mira-t { position: absolute; inset: 0; opacity: 0; }
+#trans .mira-t i { position: absolute; width: 120px; height: 120px; border: 0 solid #fafafa; }
+#trans .mira-t i:nth-child(1) { border-left-width: 8px; border-top-width: 8px; }
+#trans .mira-t i:nth-child(2) { border-right-width: 8px; border-top-width: 8px; }
+#trans .mira-t i:nth-child(3) { border-left-width: 8px; border-bottom-width: 8px; }
+#trans .mira-t i:nth-child(4) { border-right-width: 8px; border-bottom-width: 8px; }
+#trans .cortina { position: absolute; inset: 0; background: #050506; opacity: 0; }
+#grao2 { inset: 0; z-index: 9; width: 1080px; height: 1920px; mix-blend-mode: soft-light; opacity: .32; pointer-events: none; }
+#vinheta2 { inset: 0; z-index: 9; pointer-events: none; background: radial-gradient(140% 95% at 50% 46%, transparent 55%, rgba(0, 0, 0, .7) 100%); }
+#aberracao { inset: 0; z-index: 9; pointer-events: none; opacity: 0; mix-blend-mode: screen;
+  background: linear-gradient(90deg, rgba(255, 0, 60, .14), transparent 12%, transparent 88%, rgba(0, 160, 255, .14)); }
+
+/* ---------- Tipografia em camadas ---------- */
+.rot { display: flex; align-items: center; gap: 16px; font: 500 21px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--t3); white-space: nowrap; }
+.rot i { font-style: normal; color: #ff6a1f; }
+.rot .n { padding: 8px 12px; border: 1px solid rgba(255, 106, 31, .5); border-radius: 6px; color: var(--or-pale); background: rgba(255, 85, 0, .08); letter-spacing: .1em; }
+.rot .tr { width: 60px; height: 1.5px; background: linear-gradient(90deg, rgba(255, 255, 255, .4), transparent); }
+.h { font-weight: 700; letter-spacing: -.05em; line-height: .98; color: var(--t1); }
+.h em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -.015em; font-size: 1.1em; color: #fff; }
+.h .lar { color: #ff6a1f; text-shadow: 0 0 40px rgba(255, 85, 0, .55); }
+.h .cz { color: #8a8a93; }
+.h .sub { text-decoration: none; background: linear-gradient(90deg, #ff6a1f, #ff3300) no-repeat 0 92% / var(--s, 0%) 7px; }
+.h .linha { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
+.h .linha > span { display: inline-block; }
+.c { font-size: 36px; line-height: 1.36; letter-spacing: -.012em; color: var(--t2); }
+.c b { color: var(--t1); font-weight: 600; }
+.c mark { background: none; color: var(--or-pale); }
+.eco { font: 800 300px/.86 var(--sans); letter-spacing: -.06em; color: transparent; -webkit-text-stroke: 2px rgba(255, 255, 255, .07); white-space: nowrap; pointer-events: none; }
+.eco.lar { -webkit-text-stroke: 2px rgba(255, 106, 31, .22); }
+.div { height: 14px; }
+.div::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 1.5px; background: linear-gradient(90deg, rgba(255, 255, 255, .28), rgba(255, 255, 255, .05)); transform-origin: 0 50%; transform: scaleX(var(--d, 1)); }
+.div::after { content: ""; position: absolute; left: 0; top: 5px; width: 120px; height: 5px; background: #ff5500; box-shadow: 0 0 12px #ff5500; transform-origin: 0 50%; transform: scaleX(var(--d, 1)); }
+.div { position: absolute; }
+.chip { display: inline-flex; align-items: center; gap: 12px; height: 58px; padding: 0 22px; font: 500 22px/1 var(--mono); letter-spacing: .08em; color: var(--t1); white-space: nowrap; }
+.chip .ico { font-size: 28px; color: #ff8a4c; }
+.num-g { font: 700 260px/.8 var(--sans); letter-spacing: -.07em; color: transparent; -webkit-text-stroke: 2.5px rgba(255, 122, 51, .85); filter: drop-shadow(0 0 22px rgba(255, 85, 0, .45)); }
+.selo-v { display: inline-flex; align-items: center; gap: 12px; padding: 12px 18px; border-radius: 999px; border: 1px solid rgba(255, 85, 0, .4); background: rgba(255, 85, 0, .1); font: 500 19px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--or-pale); white-space: nowrap; }
+.selo-v .led { width: 10px; height: 10px; border-radius: 50%; background: #ff5500; box-shadow: 0 0 10px #ff5500; }
+.cursor-l { display: inline-block; width: .09em; height: .82em; margin-left: .06em; vertical-align: -.04em; background: #ff5500; box-shadow: 0 0 18px #ff5500; }
+
+/* Cartão final */
+.fim-card { left: 0; right: 0; top: 0; bottom: 0; }
+.fim-card .logo-g { position: absolute; left: 50%; top: 640px; width: 620px; transform: translateX(-50%); }
+.fim-card .slogan { position: absolute; left: 0; right: 0; top: 820px; text-align: center; font-size: 34px; font-weight: 560; letter-spacing: -.02em; color: var(--t2); }
+.fim-card .slogan b { color: var(--t1); font-weight: 560; }
+.fim-card .opcoes { position: absolute; }
+.fim-card .cta { position: absolute; left: 90px; right: 90px; top: 960px; }
+.fim-card .links { position: absolute; left: 0; right: 0; top: 1330px; display: flex; justify-content: center; gap: 40px; font: 500 26px/1 var(--sans); }
+.fim-card .links .lk { display: flex; align-items: center; gap: 12px; color: #5aa9ff; }
+.fim-card .links .lk .ico { color: #5aa9ff; font-size: 30px; }
+.fim-card .links .ar { color: var(--t2); }

@@ -126,7 +126,7 @@ Salve para revisar o seu site com calma. Se quiser uma segunda opinião técnica
 
   add({
     id: 'P03', dia: 2, hora: '12:15', formato: 'reels', pilar: 'autoridade',
-    titulo: 'Template × projeto sob medida',
+    titulo: "Esse layout também está no site do seu concorrente",
     alavanca: 'Contraste antes e depois', metrica: 'Retenção e envios', cta: 'Comentar TEMPLATE ou PROJETO',
     ficha: {
       nicho: 'Sites sob medida × temas prontos',
@@ -136,35 +136,38 @@ Salve para revisar o seu site com calma. Se quiser uma segunda opinião técnica
       tom: 'Contra-intuitivo, visual',
     },
     ganchos: [
-      ['Quebra de padrão', 'Seu site pode ter o layout de milhares de empresas.', 'Para no primeiro segundo, sem som, e a imagem do mosaico prova o que o texto diz.'],
-      ['Dor aguda', 'O tema pronto está pesando no seu site.'],
-      ['Ganho rápido', 'Template ou sob medida: a diferença em 20 segundos.'],
+      ["Quebra de padrão", "Esse layout também está no site do seu concorrente.", "É concreto e verificável: o dono pensa no próprio site na hora, e a parede de sites iguais prova sem som."],
+      ["Dor aguda", "Você trocou o logo. O resto é igual ao de todo mundo."],
+      ["Ganho rápido", "Template ou sob medida: a diferença que o cliente sente."],
     ],
     roteiro: {
-      duracao: '20 s', palavras: 46, audio: 'Sem narração. Faixa instrumental escolhida no app, volume baixo. Todo o conteúdo está no texto da tela.',
+      duracao: "28 s", palavras: 93, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
       linhas: [
-        ['0–2 s', 'Seu site pode ter o layout de milhares de empresas.', 'Mosaico de 9 sites idênticos. A mira se fecha sobre um deles.'],
-        ['2–5 s', 'Tema pronto: o mesmo layout, só troca o logo.', 'Os logos trocam em cortes secos sobre o mesmo layout.'],
-        ['5–9 s', 'Por baixo, plugins que você não usa pesam em cada página.', 'Camadas de código se empilham e a barra de carregamento trava.'],
-        ['9–13 s', 'Sob medida: código escrito do zero para o seu negócio.', 'Decodificação: símbolos de código se organizam numa interface limpa.'],
-        ['13–17 s', 'Mais leve. Mais seguro. Mais fácil de evoluir.', 'Três marcações em laranja acendem, uma por vez.'],
-        ['17–20 s', 'O seu é template ou projeto? Responde nos comentários.', 'Cartão final com a logo e o cursor piscando.'],
+        ["0–3 s", "Esse layout também está no site do seu concorrente.", "Parede 3D de sites idênticos; a mira trava em um deles."],
+        ["3–7 s", "Tema pronto: você troca o logo, a cor e a foto. O resto é igual.", "O card central avança; o logo troca em cortes secos e a estrutura não muda."],
+        ["7–11,5 s", "A mesma estrutura de quem comprou o mesmo tema.", "Todos os sites viram wireframe laranja: o mesmo esqueleto."],
+        ["11,5–16 s", "E por baixo vem tudo que o tema oferece. Até o que você nunca vai usar.", "Vista explodida em 3D: camadas de recursos empilhadas sobre a sua página."],
+        ["16–20,5 s", "E isso não fica só no código. O cliente sente: lentidão no celular, mais portas para manter, mudança que quebra.", "Três alertas entram com som de erro; as camadas tremem."],
+        ["20,5–25 s", "Código escrito do zero para o seu negócio. Mais leve, mais seguro, fácil de evoluir.", "O texto se decodifica; as camadas se fecham num card sob medida."],
+        ["25–28 s", "O seu site é template ou projeto? Comenta aqui.", "Cartão final com a logo, o slogan e as duas opções."],
       ],
     },
-    capa: 'Mosaico de sites idênticos com o título "Template × sob medida". A área central de 1080 × 1350 fica legível na grade.',
-    alt: 'Reels que compara um site feito com tema pronto, igual ao de milhares de empresas, com um site sob medida, mais leve e seguro.',
+    capa: "Quadro de 2,2 s: a parede de sites iguais com a mira travando e o título \"Esse layout também está no site do seu concorrente.\" O texto fica dentro da área central de 1080 × 1350, legível na grade.",
+    alt: "Vídeo com uma parede de sites idênticos em 3D, a vista explodida das camadas de um tema pronto e um card de site sob medida, explicando a diferença entre template e projeto.",
     linhas: [
-      'Tema pronto é rápido de montar e difícil de diferenciar.',
-      'O layout que você escolheu num catálogo também foi escolhido por outros negócios.',
+      "O layout que você escolheu num catálogo também foi escolhido pelo seu concorrente.",
+      "Tema pronto é rápido de montar e difícil de diferenciar.",
     ],
-    legenda: `Tema pronto é rápido de montar e difícil de diferenciar.
+    legenda: `O layout que você escolheu num catálogo também foi escolhido pelo seu concorrente.
 
-Num projeto sob medida, o código nasce para o seu negócio: sem plugins que você não usa, com SEO técnico integrado e uma interface desenhada a partir da sua marca.
+Num tema pronto, você troca o logo, a cor e a foto. A estrutura continua a mesma, e por baixo vem tudo o que o tema oferece, até o que a sua página nunca usa.
 
-O seu site hoje é template ou projeto? Responde aqui nos comentários.`,
+Num projeto sob medida, o código nasce do seu negócio: só o que a página precisa, com SEO técnico e a interface desenhada a partir da sua marca.
+
+O seu site hoje é template ou projeto? Comenta aqui.`,
     hashtags: '#sitesobmedida #criacaodesites #desenvolvimentoweb #webdesignbrasil',
     teste: 'Capa tipográfica. Observe a retenção nos 3 primeiros segundos e o tempo médio assistido.',
-    instrucoes: ['Vídeo produzido depois do plano (aguardando a sua liberação).', 'Escolha a música no app antes de publicar.', 'Compartilhe no story.'],
+    instrucoes: ['Baixe o 01.mp4 (vídeo) e o 02.jpg (capa).', 'No app, escolha o 02.jpg como capa do Reels.', 'Poste com o áudio original do vídeo, sem adicionar música do app.', 'Cole a legenda com as hashtags.'],
     midia: { qtd: 2, video: true },
   });
 

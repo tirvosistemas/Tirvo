@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>P29: abra o seu site no 4G, agora (versão com gancho novo do P11)</title>
+  <link rel="stylesheet" href="motor.css">
+  <style>
+    /* Cena 1: gancho */
+    #c1 .h { left: 80px; top: 372px; width: 920px; font-size: 104px; }
+    #c1 .h .linha + .linha { margin-top: 6px; }
+    #c1 .eco { left: -40px; top: 1300px; }
+    #c1 .timer { left: 80px; top: 640px; font: 500 30px/1 var(--mono); letter-spacing: .1em; color: var(--t2); display: flex; gap: 16px; align-items: center; }
+    #c1 .timer b { font-size: 64px; color: #fff; font-weight: 500; letter-spacing: 0; min-width: 190px; }
+    #c1 .timer .barra { width: 260px; height: 6px; background: rgba(255,255,255,.12); border-radius: 3px; overflow: hidden; }
+    #c1 .timer .barra i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, #ff6a1f, #ff3300); transform-origin: 0 50%; transform: scaleX(0); }
+    #c1 .volta { left: 80px; top: 1000px; width: 360px; height: 120px; }
+
+    /* Cena 2: o dado */
+    #c2 .rot { left: 80px; top: 380px; }
+    #c2 .num-g { left: 64px; top: 440px; font-size: 330px; }
+    #c2 .num-g small { font-size: .45em; -webkit-text-stroke-width: 2px; }
+    #c2 .h { left: 80px; top: 760px; width: 900px; font-size: 62px; line-height: 1.06; }
+    #c2 .pontos { left: 80px; top: 1010px; width: 600px; display: grid; grid-template-columns: repeat(20, 1fr); gap: 9px; }
+    #c2 .pontos i { width: 21px; height: 21px; border-radius: 50%; background: #fafafa; box-shadow: 0 0 8px rgba(255,255,255,.5); }
+    #c2 .legenda { left: 80px; top: 1270px; width: 880px; display: flex; gap: 36px; font: 500 20px/1.3 var(--mono); letter-spacing: .08em; color: var(--t3); text-transform: uppercase; }
+    #c2 .legenda span { display: flex; gap: 12px; align-items: center; }
+    #c2 .legenda i { width: 16px; height: 16px; border-radius: 50%; display: inline-block; }
+    #c2 .fonte { left: 80px; top: 1340px; font: 500 18px/1 var(--mono); letter-spacing: .14em; color: rgba(255,255,255,.3); text-transform: uppercase; }
+    #c2 .relogio3 { left: 700px; top: 980px; width: 280px; height: 280px; }
+
+    /* Cena 3: silêncio do cliente */
+    #c3 .h { left: 80px; top: 372px; width: 920px; font-size: 80px; }
+    #c3 .busca { left: 80px; top: 860px; width: 840px; display: grid; gap: 18px; }
+    #c3 .res { height: 150px; padding: 26px 30px; display: grid; grid-template-columns: 70px 1fr auto; gap: 24px; align-items: center; }
+    #c3 .res .fav { width: 70px; height: 70px; border-radius: 16px; background: #16161a; border: 1px solid rgba(255,255,255,.12); display: grid; place-items: center; font: 600 28px/1 var(--mono); color: var(--t3); }
+    #c3 .res b { display: block; font-size: 32px; font-weight: 620; letter-spacing: -.02em; }
+    #c3 .res small { display: block; margin-top: 8px; font: 500 19px/1 var(--mono); color: var(--t3); letter-spacing: .06em; }
+    #c3 .res .st { font: 500 19px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    #c3 .res.seu .st { color: #ff8a4c; }
+    #c3 .res.outro .st { color: #3ccf8e; }
+    #c3 .spin { width: 36px; height: 36px; border-radius: 50%; border: 4px solid rgba(255,255,255,.12); border-top-color: #ff6a1f; }
+    #c3 .dedo { left: 0; top: 0; width: 90px; height: 90px; border-radius: 50%; border: 3px solid rgba(255,255,255,.85); background: rgba(255,255,255,.12); box-shadow: 0 0 30px rgba(255,255,255,.35); }
+
+    /* Cena 4: o peso */
+    #c4 .h { left: 80px; top: 380px; width: 920px; font-size: 104px; }
+    #c4 .medidor { left: 80px; top: 640px; width: 600px; }
+    #c4 .medidor small { display: block; font: 500 19px/1 var(--mono); letter-spacing: .14em; color: var(--t3); text-transform: uppercase; margin-bottom: 14px; }
+    #c4 .medidor .trilho { height: 12px; border-radius: 6px; background: rgba(255,255,255,.1); overflow: hidden; }
+    #c4 .medidor .trilho i { display: block; height: 100%; background: linear-gradient(90deg, #ffb187, #ff5500, #ff3300); transform-origin: 0 50%; transform: scaleX(.08); box-shadow: 0 0 14px #ff5500; }
+    #c4 .medidor b { position: absolute; right: 0; top: 0; font: 500 19px/1 var(--mono); color: #ff8a4c; letter-spacing: .1em; }
+
+    /* Cena 5: sob medida */
+    #c5 .rot { left: 80px; top: 380px; }
+    #c5 .h { left: 80px; top: 440px; width: 920px; font-size: 92px; }
+    #c5 .chips { left: 80px; top: 770px; display: flex; gap: 14px; flex-wrap: wrap; width: 900px; }
+    #c5 .carga { left: 80px; top: 920px; width: 840px; font: 500 22px/1 var(--mono); letter-spacing: .1em; color: var(--t3); display: flex; justify-content: space-between; }
+    #c5 .carga b { color: #3ccf8e; font-weight: 500; }
+
+    /* Cena 6: o teste */
+    #c6 .rot { left: 80px; top: 380px; }
+    #c6 .h { left: 80px; top: 440px; width: 920px; font-size: 96px; }
+    #c6 .icone4g { left: 80px; top: 900px; width: 400px; height: 400px; display: grid; place-items: center; }
+    #c6 .icone4g .t { font: 700 130px/1 var(--sans); letter-spacing: -.05em; color: #fff; position: relative; z-index: 2; }
+    #c6 .icone4g svg { position: absolute; inset: 0; }
+    #c6 .cron { left: 540px; top: 960px; width: 420px; }
+    #c6 .cron small { display: block; font: 500 19px/1.4 var(--mono); letter-spacing: .14em; color: var(--t3); text-transform: uppercase; }
+    #c6 .cron b { display: block; font: 500 120px/1 var(--mono); color: #fff; margin: 18px 0; letter-spacing: -.02em; }
+    #c6 .cron p { font-size: 32px; line-height: 1.3; color: var(--t2); }
+    #c6 .cron p b { display: inline; font: inherit; color: #fff; margin: 0; }
+
+    /* Final */
+    #c7 .fim-card .cta .h { font-size: 74px; text-align: center; }
+  </style>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/SplitText.min.js"></script>
+  <script src="vendor/CustomEase.min.js"></script>
+  <script src="vendor/DrawSVGPlugin.min.js"></script>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+</head>
+<body>
+<div class="reel">
+  <div id="palco">
+    <section class="cena" id="c1">
+      <h1 class="h"><span class="linha"><span>Abra o seu site</span></span><span class="linha"><span>no 4G. <span class="lar"><em>Agora.</em></span></span></span></h1>
+      <div class="timer"><span>conte a tela branca</span><b id="t1">0,0 s</b></div>
+      <svg class="volta" viewBox="0 0 360 120"><path id="rastro" d="M340 60 C250 60 150 60 30 60" stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none" opacity=".85"/><path id="seta" d="M60 30 L24 60 L60 90" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      <div class="eco">voltar</div>
+    </section>
+
+    <section class="cena" id="c2">
+      <p class="rot"><i>//</i> o que os dados dizem</p>
+      <div class="num-g"><span id="n53">0</span><small>%</small></div>
+      <h2 class="h"><span class="linha"><span>das visitas no celular são</span></span><span class="linha"><span><em>abandonadas</em> quando a página</span></span><span class="linha"><span>passa de <span class="lar">3 segundos.</span></span></span></h2>
+      <div class="pontos" id="pontos"></div>
+      <div class="legenda"><span><i style="background:#fafafa"></i>ficou</span><span><i style="background:#ff5500"></i>desistiu antes de carregar</span></div>
+      <p class="fonte">fonte: Google · Think with Google</p>
+      <svg class="relogio3" viewBox="0 0 280 280"><circle cx="140" cy="140" r="118" stroke="rgba(255,255,255,.1)" stroke-width="14" fill="none"/><circle id="arco3" cx="140" cy="140" r="118" stroke="#ff5500" stroke-width="14" fill="none" stroke-linecap="round" transform="rotate(-90 140 140)" style="filter:drop-shadow(0 0 10px #ff5500)"/><text x="140" y="160" text-anchor="middle" font-family="Geist Mono" font-size="64" fill="#fff" id="seg3">0 s</text><text x="140" y="200" text-anchor="middle" font-family="Geist Mono" font-size="18" letter-spacing="3" fill="#8a8a93">LIMITE</text></svg>
+    </section>
+
+    <section class="cena" id="c3">
+      <h2 class="h"><span class="linha"><span>Ele não reclama.</span></span><span class="linha"><span class="cz">Não manda mensagem.</span></span><span class="linha"><span>Só volta e abre</span></span><span class="linha"><span class="lar"><em>o concorrente.</em></span></span></h2>
+      <div class="busca">
+        <div class="res seu" data-frame="18,0,18,0" data-tone="branco"><span class="fav">?</span><span><b>Seu site</b><small>seusite.com.br · carregando</small></span><span class="spin" id="spin"></span></div>
+        <div class="res outro" data-frame="18,0,18,0" data-tone="laranja" data-acento="topo" id="r2"><span class="fav" style="color:#3ccf8e">✓</span><span><b>O próximo resultado</b><small>abriu em menos de 1 s</small></span><span class="st">aberto</span></div>
+        <div class="res" data-frame="18,0,18,0" data-tone="branco" style="opacity:.45"><span class="fav">·</span><span><b>Outro resultado</b><small>mais uma opção</small></span><span class="st" style="color:var(--t3)">na fila</span></div>
+      </div>
+      <span class="dedo" id="dedo"></span>
+    </section>
+
+    <section class="cena" id="c4">
+      <h2 class="h"><span class="linha"><span>De onde vem</span></span><span class="linha"><span class="lar"><em>o peso?</em></span></span></h2>
+      <div class="medidor"><small>peso da página</small><b id="peso">leve</b><div class="trilho"><i id="barraPeso"></i></div></div>
+    </section>
+
+    <section class="cena" id="c5">
+      <p class="rot"><i>//</i> sob medida</p>
+      <h2 class="h"><span class="linha"><span>Código sob medida</span></span><span class="linha"><span>carrega <em>só o que</em></span></span><span class="linha"><span class="lar">a tela precisa.</span></span></h2>
+      <div class="chips"><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-check"/></svg>imagem no tamanho certo</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-check"/></svg>sem script sobrando</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-check"/></svg>sem plugin esquecido</span></div>
+      <div class="carga"><span>carregamento</span><b id="carga">aguardando</b></div>
+    </section>
+
+    <section class="cena" id="c6">
+      <p class="rot"><i>//</i> o resultado do teste</p>
+      <h2 class="h"><span class="linha"><span>Passou de 3?</span></span><span class="linha"><span>O cliente</span></span><span class="linha"><span class="lar"><em>já foi.</em></span></span></h2>
+      <div class="icone4g"><svg viewBox="0 0 400 400"><g fill="none" stroke="#fafafa" stroke-width="10"><path id="m1" d="M30 120V30H120"/><path id="m2" d="M280 30H370V120"/><path id="m3" d="M370 280V370H280"/><path id="m4" d="M120 370H30V280"/></g><g stroke="rgba(255,255,255,.45)" stroke-width="6"><path d="M200 70V110M200 290V330M70 200H110M290 200H330"/></g></svg><span class="t">4G</span></div>
+      <div class="cron"><small>conte os segundos<br>de tela branca</small><b id="cron">0,0</b><p>Teste sempre <b>fora do Wi-Fi.</b></p></div>
+    </section>
+
+    <section class="cena" id="c7">
+      <div class="fim-card">
+        <img class="logo-g" src="../../../marca/tirvo-logo.svg" alt="Tirvo">
+        <p class="slogan">Se algo pode ser melhorado, <b>ainda não está pronto.</b></p>
+        <div class="cta"><h2 class="h"><span class="linha"><span>Manda pra quem</span></span><span class="linha"><span>cuida do site</span></span><span class="linha"><span class="lar"><em>da sua empresa.</em></span></span></h2></div>
+        <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span><span class="ar">@tirvotech</span></div>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="../stories/premium/base.js"></script>
+<script type="module">
+import { iniciar, semente } from './motor.js';
+const M = iniciar({ id: 'P29', duracao: 28, trilha: 'trilha-P11.mp3', capitulos: [0, 3.2, 7.6, 12, 17, 21.6, 25.2], capa: 1.9, rotuloHud: 'performance', semente: 11 });
+const { tl } = M;
+const $ = (s) => document.querySelector(s);
+
+/* ---------- 3D: celular e blocos de peso ---------- */
+M.tres(async ({ THREE, scene, camera, RoundedBoxGeometry, textura }) => {
+  camera.position.set(0, -3, 30);
+  const luz = new THREE.DirectionalLight('#ffffff', 1.4); luz.position.set(-6, 10, 12); scene.add(luz);
+  const rim = new THREE.PointLight('#ff5500', 90, 40, 1.6); rim.position.set(7, -2, -3); scene.add(rim);
+
+  // Celular
+  const cel = new THREE.Group(); scene.add(cel);
+  const corpo = new THREE.Mesh(new RoundedBoxGeometry(5.4, 11, .55, 8, .7), new THREE.MeshPhysicalMaterial({ color: '#0d0d10', metalness: .85, roughness: .32, clearcoat: 1, clearcoatRoughness: .15 }));
+  cel.add(corpo);
+  const tela = document.createElement('canvas'); tela.width = 540; tela.height = 1100;
+  const tctx = tela.getContext('2d');
+  const tx = new THREE.CanvasTexture(tela); tx.colorSpace = THREE.SRGBColorSpace; tx.anisotropy = 8;
+  const telaM = new THREE.Mesh(new THREE.PlaneGeometry(4.9, 10.4), new THREE.MeshBasicMaterial({ map: tx, color: '#c9c9cf' }));
+  telaM.position.z = .29; cel.add(telaM);
+  const borda = new THREE.Mesh(new RoundedBoxGeometry(5.5, 11.1, .4, 8, .72), new THREE.MeshStandardMaterial({ color: '#2a2a30', metalness: 1, roughness: .2 }));
+  borda.position.z = -.1; cel.add(borda);
+
+  const est = { carga: 0, pronto: 0, branco: 1 };
+  function desenharTela() {
+    const g = tctx, W = 540, H = 1100;
+    // fundo branco que vira o site pronto
+    g.fillStyle = '#ffffff'; g.fillRect(0, 0, W, H);
+    if (est.pronto > 0) {
+      g.globalAlpha = est.pronto;
+      g.fillStyle = '#0b0b0d'; g.fillRect(0, 0, W, H);
+      g.fillStyle = '#ff5500'; g.fillRect(40, 120, 70, 70);
+      g.fillStyle = '#fafafa'; g.font = '700 54px Geist'; g.fillText('Sua empresa,', 40, 290); g.fillText('em 1 toque.', 40, 352);
+      g.fillStyle = '#a1a1aa'; g.font = '400 24px Geist'; g.fillText('Página leve, rápida e direta.', 40, 410);
+      g.fillStyle = '#ff5500'; g.beginPath(); g.roundRect(40, 460, 260, 70, 14); g.fill();
+      g.fillStyle = '#fff'; g.font = '600 26px Geist'; g.fillText('Pedir orçamento', 62, 505);
+      g.fillStyle = '#16161a'; g.beginPath(); g.roundRect(40, 590, 460, 230, 18); g.fill();
+      g.fillStyle = '#1d1d22'; g.beginPath(); g.roundRect(40, 850, 220, 160, 18); g.fill(); g.beginPath(); g.roundRect(280, 850, 220, 160, 18); g.fill();
+      g.globalAlpha = 1;
+    }
+    if (est.branco > 0) {
+      g.globalAlpha = est.branco;
+      g.fillStyle = '#f4f4f5'; g.fillRect(0, 0, W, H);
+      g.fillStyle = '#e4e4e7'; g.fillRect(0, 0, W, 6);
+      g.fillStyle = '#3b82f6'; g.fillRect(0, 0, W * est.carga, 6);
+      // spinner
+      const a = tl.time() * 7;
+      g.strokeStyle = '#d4d4d8'; g.lineWidth = 8; g.beginPath(); g.arc(W / 2, H / 2, 40, 0, Math.PI * 2); g.stroke();
+      g.strokeStyle = '#71717a'; g.beginPath(); g.arc(W / 2, H / 2, 40, a, a + 1.4); g.stroke();
+      g.globalAlpha = 1;
+    }
+    // barra de status
+    g.fillStyle = est.pronto > .5 ? '#fafafa' : '#18181b'; g.font = '600 22px Geist'; g.fillText('9:41', 40, 44);
+    g.fillText(est.pronto > .5 ? '4G' : '4G', 450, 44);
+    tx.needsUpdate = true;
+  }
+
+  // Blocos de peso
+  const blocos = [];
+  const nomes = [['imagem gigante', 'foto sem compressão'], ['script sem uso', 'carrega e não faz nada'], ['plugin esquecido', 'instalado em 2021']];
+  nomes.forEach(([t1, t2], i) => {
+    const gr = new THREE.Group();
+    const m = new THREE.Mesh(new RoundedBoxGeometry(6.4, 2.2, 2.2, 6, .3), new THREE.MeshPhysicalMaterial({ color: '#141418', metalness: .7, roughness: .35, clearcoat: .8 }));
+    gr.add(m);
+    const etiqueta = textura(640, 220, (g, W, H) => {
+      g.fillStyle = 'rgba(0,0,0,0)'; g.clearRect(0, 0, W, H);
+      g.fillStyle = '#ff6a1f'; g.fillRect(36, 40, 8, 140);
+      g.fillStyle = '#fafafa'; g.font = '600 60px Geist'; g.fillText(t1, 70, 105);
+      g.fillStyle = '#a1a1aa'; g.font = '500 30px "Geist Mono"'; g.fillText(t2.toUpperCase(), 72, 160);
+    });
+    const e = new THREE.Mesh(new THREE.PlaneGeometry(6.2, 2.13), new THREE.MeshBasicMaterial({ map: etiqueta, transparent: true, toneMapped: false }));
+    e.position.z = 1.12; gr.add(e);
+    gr.visible = false; scene.add(gr); blocos.push(gr);
+  });
+  // Laje (a página)
+  const laje = new THREE.Mesh(new RoundedBoxGeometry(9, .6, 6, 6, .25), new THREE.MeshPhysicalMaterial({ color: '#0e0e11', metalness: .85, roughness: .45, clearcoat: .6, envMapIntensity: .45, emissive: '#ff5500', emissiveIntensity: 0 }));
+  laje.visible = false; scene.add(laje);
+  const lajeEt = textura(900, 120, (g) => { g.fillStyle = '#8a8a93'; g.font = '500 44px "Geist Mono"'; g.fillText('SUA PÁGINA', 40, 80); });
+  const lajeE = new THREE.Mesh(new THREE.PlaneGeometry(8.6, 1.15), new THREE.MeshBasicMaterial({ map: lajeEt, transparent: true, toneMapped: false }));
+  lajeE.position.set(0, 0, 3.02); lajeE.scale.set(1, .5, 1); laje.add(lajeE);
+
+  // Timeline 3D
+  const P = { cx: 1.6, cy: -5.6, cz: 0, ry: -.38, rx: .12, s: .82, op: 1 };
+  tl.fromTo(P, { cy: -16, ry: -.9 }, { cx: 1.6, cy: -5.6, ry: -.38, duration: 1.1, ease: 'expo.out' }, 0);
+  tl.to(est, { carga: .22, duration: 3, ease: 'none' }, 0);
+  tl.to(P, { cx: -14, ry: .5, duration: .5, ease: 'power3.in' }, 2.55);            // o cliente sai
+  // cena 4: blocos caem sobre a laje
+  tl.set(laje, { visible: true }, 12);
+  const L = { y: -9, rx: .32 };
+  tl.fromTo(L, { y: -18 }, { y: -9, duration: .8, ease: 'expo.out' }, 12.05);
+  blocos.forEach((b, i) => {
+    const alvo = { y: 26 };
+    tl.set(b, { visible: true }, 13 + i * 1.05);
+    tl.fromTo(alvo, { y: 22 }, { y: -9 + 1.25 + i * 1.95, duration: .75, ease: 'bounce.out', onUpdate() { b.userData.y = alvo.y; } }, 13 + i * 1.05);
+    b.position.set((i - 1) * .35, 22, 0); b.rotation.set(.32, -.25 + i * .12, 0); b.scale.setScalar(.85); b.userData.y = 22;
+    M.som(13 + i * 1.05 + .42, 'bloco', 1);
+    tl.to(L, { y: '-=.9', duration: .35, ease: 'power2.out' }, 13 + i * 1.05 + .45);
+  });
+  // cena 5: blocos se desfazem, laje sobe, celular volta pronto
+  blocos.forEach((b, i) => {
+    tl.fromTo(b.scale, { x: .85, y: .85, z: .85 }, { immediateRender: false, x: .001, y: .001, z: .001, duration: .45, ease: 'back.in(2)' }, 17.15 + i * .12);
+  });
+  tl.to(L, { y: 1.5, duration: .9, ease: 'expo.out' }, 17.5);
+  tl.set(laje, { visible: false }, 18.4);
+  tl.fromTo(P, { cx: 14, cy: -1.5, ry: -.6 }, { immediateRender: false, cx: 2.4, cy: -7.2, ry: -.32, duration: .9, ease: 'expo.out' }, 18.3);
+  tl.set(est, { branco: 1, carga: 0, pronto: 0 }, 18.3);
+  tl.to(est, { carga: 1, duration: .55, ease: 'power2.in' }, 18.7);
+  tl.to(est, { branco: 0, pronto: 1, duration: .25 }, 19.25);
+  tl.to(P, { cx: 18, duration: .5, ease: 'power3.in' }, 21.3);
+
+  return (t) => {
+    cel.position.set(P.cx, P.cy + Math.sin(t * 1.3) * .12, P.cz); cel.scale.setScalar(P.s);
+    cel.rotation.set(P.rx + Math.sin(t * .8) * .03, P.ry + Math.sin(t * .6) * .04, -.06);
+    cel.visible = P.cx > -13 && P.cx < 17;
+    blocos.forEach((b) => { b.position.y = b.userData.y + Math.min(0, L.y + 9); });
+    laje.position.set(0, L.y, 0); laje.rotation.set(L.rx, -.25, 0);
+    laje.material.emissiveIntensity = Math.min(.08, Math.max(0, (-9 - L.y) * .04));
+    rim.position.x = 7 + Math.sin(t * .5) * 2;
+    camera.position.x = Math.sin(t * .25) * .6;
+    camera.lookAt(0, -3, 0);
+    desenharTela();
+  };
+}, { bloom: .42, limiar: .9, ambiente: .7 });
+
+/* ---------- Cena 1 (0 a 3,2 s) ---------- */
+M.cena('#c1', 0, 3.2);
+M.sobe($('#c1 .h'), .1, { stagger: .3 });
+M.entra('#c1 .timer', .35, { y: 20 });
+M.som(0, 'relogio', .6);
+M.som(.6, 'pop', .5);
+const t1 = { v: 0 };
+tl.to(t1, { v: 3.2, duration: 3.2, ease: 'none', onUpdate() { $('#t1').textContent = t1.v.toFixed(1).replace('.', ',') + ' s'; } }, 0);
+tl.fromTo('#rastro', { drawSVG: '0%' }, { drawSVG: '100%', duration: .35, ease: 'power2.out' }, 2.35);
+tl.fromTo('#seta', { opacity: 0, x: 280 }, { opacity: 1, x: 0, duration: .35, ease: 'power2.out' }, 2.35);
+tl.fromTo('#c1 .eco', { x: 300, opacity: 0 }, { x: -60, opacity: 1, duration: 1, ease: 'expo.out' }, 2.3);
+M.som(2.4, 'whoosh', .8);
+M.trans(3.2, 'glitch');
+
+/* ---------- Cena 2 (3,2 a 7,6 s) ---------- */
+M.cena('#c2', 3.2, 7.6);
+const pontos = $('#pontos'); pontos.innerHTML = '<i></i>'.repeat(100);
+const rp = semente(53); const ordem = [...Array(100).keys()].sort(() => rp() - .5).slice(0, 53);
+M.entra('#c2 .rot', 3.25, { y: 10 });
+M.conta($('#n53'), 3.3, 1.2, 0, 53);
+M.entra('#c2 .num-g', 3.25, { scale: .9, y: 0, blur: 20 });
+M.som(3.3, 'impacto', .7);
+M.sobe($('#c2 .h'), 3.7, { stagger: .12 });
+tl.fromTo('#pontos i', { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: .4, stagger: { each: .006, from: 'start' }, ease: 'back.out(2)' }, 3.9);
+tl.to(ordem.map((k) => pontos.children[k]), { background: '#ff5500', boxShadow: '0 0 10px #ff5500', opacity: .9, duration: .2, stagger: .012 }, 5.1);
+tl.to(ordem.map((k) => pontos.children[k]), { opacity: .22, scale: .6, duration: .4, stagger: .006 }, 6.1);
+M.entra('#c2 .legenda', 5.2, { y: 10 }); M.entra('#c2 .fonte', 5.4, { y: 6 });
+const arco = { p: 0 };
+tl.fromTo('#arco3', { drawSVG: '0%' }, { drawSVG: '100%', duration: 2.2, ease: 'none' }, 4.2);
+tl.to(arco, { p: 3, duration: 2.2, ease: 'none', onUpdate() { $('#seg3').textContent = Math.floor(arco.p) + ' s'; } }, 4.2);
+M.entra('#c2 .relogio3', 4.1, { scale: .8 });
+M.som(6.4, 'erro', .5);
+M.trans(7.6, 'varre');
+
+/* ---------- Cena 3 (7,6 a 12 s) ---------- */
+M.cena('#c3', 7.6, 12);
+M.sobe($('#c3 .h'), 7.7, { stagger: .32 });
+M.entra('#c3 .res', 8.0, { y: 40, stagger: .12 });
+tl.to('#spin', { rotate: 360 * 6, duration: 4.4, ease: 'none' }, 7.6);
+tl.fromTo('#dedo', { x: 900, y: 1180, opacity: 0, scale: 1 }, { x: 760, y: 1035, opacity: 1, duration: .5, ease: 'power2.out' }, 9.9);
+tl.to('#dedo', { scale: .78, duration: .1, yoyo: true, repeat: 1 }, 10.45);
+M.som(10.5, 'clique', .9);
+tl.to('#r2', { scale: 1.04, duration: .25, ease: 'power2.out' }, 10.5).to('#r2', { scale: 1, duration: .4 }, 10.75);
+tl.to('#c3 .res.seu', { opacity: .3, x: -30, filter: 'grayscale(1)', duration: .5 }, 10.6);
+M.som(10.6, 'confirma', .5);
+M.trans(12, 'flash');
+
+/* ---------- Cena 4 (12 a 17 s) ---------- */
+M.cena('#c4', 12, 17);
+M.sobe($('#c4 .h'), 12.1, { stagger: .2 });
+M.entra('#c4 .medidor', 12.6, { y: 20 });
+['pesada', 'mais pesada', 'afundando'].forEach((txt, i) => {
+  tl.to('#barraPeso', { scaleX: .35 + i * .3, duration: .4, ease: 'power3.out' }, 13.45 + i * 1.05);
+  tl.call(() => { $('#peso').textContent = txt; }, null, 13.45 + i * 1.05);
+});
+tl.call(() => { $('#peso').textContent = 'leve'; }, null, 12.6);
+M.som(16.4, 'reverso', .7);
+
+/* ---------- Cena 5 (17 a 21,6 s) ---------- */
+M.cena('#c5', 17, 21.6);
+M.trans(17.05, 'zoom');
+M.entra('#c5 .rot', 17.1, { y: 10 });
+M.sobe($('#c5 .h'), 17.2, { stagger: .15 });
+M.entra('#c5 .chip', 18.2, { y: 20, stagger: .15, som: 'pop', vol: .5 });
+tl.call(() => { $('#carga').textContent = 'carregando'; $('#carga').style.color = '#ff8a4c'; }, null, 18.6);
+tl.call(() => { $('#carga').textContent = 'aguardando'; $('#carga').style.color = ''; }, null, 18.55);
+tl.call(() => { $('#carga').textContent = 'pronto em 1 toque'; $('#carga').style.color = '#3ccf8e'; }, null, 19.3);
+M.entra('#c5 .carga', 18.4, { y: 10 });
+M.som(19.25, 'confirma', .8);
+M.som(17.0, 'subdrop', .7);
+M.trans(21.6, 'mira');
+
+/* ---------- Cena 6 (21,6 a 25,2 s) ---------- */
+M.cena('#c6', 21.6, 25.2);
+M.entra('#c6 .rot', 21.7, { y: 10 });
+M.sobe($('#c6 .h'), 21.75, { stagger: .14 });
+['#m1', '#m2', '#m3', '#m4'].forEach((s, i) => tl.fromTo(s, { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .5, ease: 'expo.out' }, 22.3 + i * .06));
+M.entra('#c6 .icone4g .t', 22.5, { scale: .6, blur: 20 });
+M.entra('#c6 .cron', 22.7, { x: 40, y: 0 });
+const cr = { v: 0 };
+tl.to(cr, { v: 2.4, duration: 2.4, ease: 'none', onUpdate() { $('#cron').textContent = cr.v.toFixed(1).replace('.', ','); } }, 22.8);
+M.som(22.8, 'relogio', .45);
+M.trans(25.2, 'flash');
+
+/* ---------- Final (25,2 a 28 s) ---------- */
+M.cena('#c7', 25.2);
+tl.set(['#hud .tc', '#hud .capitulos'], { opacity: .35 }, 25.2);
+M.entra('#c7 .logo-g', 25.25, { scale: .92, y: 0, blur: 24, dur: 1.1 });
+M.som(25.25, 'brilho', .8);
+M.entra('#c7 .slogan', 25.7, { y: 14 });
+M.sobe($('#c7 .cta .h'), 25.95, { stagger: .1 });
+M.entra('#c7 .links', 26.6, { y: 12 });
+tl.to(M.estado, { particulas: .5, duration: 1 }, 25.2);
+// brilhos do fundo acompanham as cenas
+tl.to('#fundo .b1', { x: 300, y: 500, duration: 6, ease: 'suave' }, 0).to('#fundo .b1', { x: -200, y: -100, duration: 8, ease: 'suave' }, 6).to('#fundo .b1', { x: 0, y: 200, duration: 8, ease: 'suave' }, 14).to('#fundo .b1', { x: 0, y: -60, duration: 6, ease: 'suave' }, 22);
+tl.to({}, { duration: 28 }, 0);
+M.pronto();
+</script>
+</body>
+</html>

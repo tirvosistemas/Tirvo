@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>P13: uma IA que não conversa, entrega</title>
+  <link rel="stylesheet" href="motor.css">
+  <style>
+    #c1 .h { left: 80px; top: 372px; width: 920px; font-size: 104px; }
+    #c1 .chat { left: 140px; top: 900px; width: 800px; display: grid; gap: 18px; }
+    #c1 .bolha { padding: 26px 30px; font-size: 32px; line-height: 1.3; color: var(--t2); max-width: 620px; }
+    #c1 .bolha.eu { justify-self: end; color: var(--t1); }
+    #c1 .bolha .dots { display: inline-flex; gap: 10px; }
+    #c1 .bolha .dots i { width: 14px; height: 14px; border-radius: 50%; background: var(--t3); }
+    #c1 .x { left: 120px; top: 880px; width: 840px; height: 420px; }
+
+    #c2 .rot { left: 80px; top: 380px; }
+    #c2 .h { left: 80px; top: 440px; width: 920px; font-size: 88px; }
+    #c2 .selo-v { left: 80px; top: 790px; }
+
+    #c3 .h { left: 80px; top: 372px; width: 920px; font-size: 84px; }
+    #c3 .c { left: 80px; top: 690px; width: 860px; }
+    #c3 .tags { left: 80px; top: 1250px; width: 900px; display: flex; flex-wrap: wrap; gap: 12px; }
+
+    #c4 .rot { left: 80px; top: 380px; }
+    #c4 .passos { left: 80px; top: 450px; width: 900px; display: grid; gap: 16px; }
+    #c4 .passo { height: 150px; display: grid; grid-template-columns: 110px 1fr auto; align-items: center; padding: 0 34px; gap: 10px; }
+    #c4 .passo b { font: 500 34px/1 var(--mono); color: var(--t3); }
+    #c4 .passo span { font-size: 50px; font-weight: 680; letter-spacing: -.04em; color: var(--t2); }
+    #c4 .passo .ico { font-size: 52px; color: var(--t3); }
+    #c4 .zip { left: 300px; top: 1170px; width: 480px; height: 220px; display: grid; grid-template-columns: 150px 1fr; gap: 26px; align-items: center; padding: 0 34px; }
+    #c4 .zip .arq { width: 130px; height: 160px; position: relative; }
+    #c4 .zip strong { display: block; font: 600 40px/1 var(--mono); color: #fff; }
+    #c4 .zip small { display: block; margin-top: 12px; font: 500 19px/1.4 var(--mono); letter-spacing: .1em; color: var(--t3); text-transform: uppercase; }
+
+    #c5 .rot { left: 80px; top: 380px; }
+    #c5 .h { left: 80px; top: 440px; width: 920px; font-size: 80px; }
+    #c5 .status { left: 80px; top: 1060px; width: 900px; display: grid; gap: 16px; }
+    #c5 .status > div { height: 104px; display: grid; grid-template-columns: 60px 1fr auto; align-items: center; padding: 0 30px; gap: 14px; }
+    #c5 .status b { font-size: 34px; font-weight: 640; letter-spacing: -.02em; }
+    #c5 .status small { font: 500 19px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    #c5 .status .ok { color: #3ccf8e; } #c5 .status .and { color: #ff8a4c; } #c5 .status .nao { color: var(--t3); }
+    #c5 .status .ico { font-size: 34px; }
+
+    #c6 .fim-card .cta .h { font-size: 80px; text-align: center; }
+    #c6 .fim-card .nota { position: absolute; left: 120px; right: 120px; top: 1220px; text-align: center; font: 500 20px/1.5 var(--mono); letter-spacing: .1em; color: var(--t3); text-transform: uppercase; }
+  </style>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/SplitText.min.js"></script>
+  <script src="vendor/CustomEase.min.js"></script>
+  <script src="vendor/DrawSVGPlugin.min.js"></script>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+</head>
+<body>
+<div class="reel">
+  <div id="palco">
+    <section class="cena" id="c1">
+      <h1 class="h"><span class="linha"><span>Uma IA que</span></span><span class="linha"><span>não conversa.</span></span><span class="linha"><span class="lar"><em>Ela entrega.</em></span></span></h1>
+      <div class="chat">
+        <div class="bolha eu" data-frame="22,0,22,0" data-tone="branco">Faz o site da minha empresa?</div>
+        <div class="bolha" data-frame="0,22,0,22" data-tone="branco">Claro. Primeiro, me conte mais sobre o seu negócio…</div>
+        <div class="bolha" data-frame="0,22,0,22" data-tone="branco"><span class="dots"><i></i><i></i><i></i></span></div>
+      </div>
+      <svg class="x" viewBox="0 0 840 420"><path id="x1" d="M40 40L800 380" stroke="#ff5500" stroke-width="8" stroke-linecap="round" style="filter:drop-shadow(0 0 12px #ff5500)"/></svg>
+    </section>
+
+    <section class="cena" id="c2">
+      <p class="rot"><i>//</i> bastidor da tirvo</p>
+      <h2 class="h"><span class="linha"><span><span class="lar">Hipercode:</span> a IA</span></span><span class="linha"><span>própria que a Tirvo</span></span><span class="linha"><span><em>está construindo.</em></span></span></h2>
+      <span class="selo-v"><span class="led"></span>em testes internos</span>
+    </section>
+
+    <section class="cena" id="c3">
+      <h2 class="h"><span class="linha"><span class="cz">Não é um chatbot.</span></span><span class="linha"><span>É um <em>enxame</em> de</span></span><span class="linha"><span class="lar">agentes autônomos.</span></span></h2>
+      <p class="c">Cada agente cuida de uma parte do trabalho. Todos dedicados <b>à programação.</b></p>
+      <div class="tags"><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-bot"/></svg>agente</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-bot"/></svg>agente</span><span class="chip" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-network"/></svg>enxame</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-bot"/></svg>agente</span></div>
+    </section>
+
+    <section class="cena" id="c4">
+      <p class="rot"><i>//</i> como ele trabalha</p>
+      <div class="passos">
+        <div class="passo" data-frame="18,0,18,0" data-tone="branco"><b>01</b><span>Recebe a tarefa</span><svg class="ico"><use href="#i-file-code"/></svg></div>
+        <div class="passo" data-frame="18,0,18,0" data-tone="branco"><b>02</b><span>Pesquisa</span><svg class="ico"><use href="#i-search"/></svg></div>
+        <div class="passo" data-frame="18,0,18,0" data-tone="branco"><b>03</b><span>Escreve o código</span><svg class="ico"><use href="#i-code"/></svg></div>
+        <div class="passo" data-frame="18,0,18,0" data-tone="branco"><b>04</b><span>Entrega o projeto</span><svg class="ico"><use href="#i-package"/></svg></div>
+      </div>
+      <div class="zip" data-frame="22,0,22,0" data-tone="quente" data-acento="topo">
+        <svg class="arq" viewBox="0 0 130 160"><path d="M10 6H86L122 42V154H10Z" fill="#16161a" stroke="#ff8a4c" stroke-width="4"/><path d="M86 6V42H122" fill="none" stroke="#ff8a4c" stroke-width="4"/><g fill="#ff8a4c"><rect x="56" y="20" width="14" height="10"/><rect x="56" y="40" width="14" height="10"/><rect x="56" y="60" width="14" height="10"/><rect x="50" y="84" width="26" height="30" rx="4"/></g></svg>
+        <span><strong>projeto.zip</strong><small>código completo,<br>pronto para abrir</small></span>
+      </div>
+    </section>
+
+    <section class="cena" id="c5">
+      <p class="rot"><i>//</i> em que pé está</p>
+      <h2 class="h"><span class="linha"><span>Cada execução é</span></span><span class="linha"><span>revisada, corrigida</span></span><span class="linha"><span class="lar"><em>e aperfeiçoada.</em></span></span></h2>
+      <div class="status">
+        <div data-frame="16,0,16,0" data-tone="branco"><svg class="ico ok"><use href="#i-check"/></svg><b>Estágio avançado</b><small class="ok">feito</small></div>
+        <div data-frame="16,0,16,0" data-tone="laranja" data-acento="topo"><svg class="ico and"><use href="#i-flask"/></svg><b>Últimos testes</b><small class="and">agora</small></div>
+        <div data-frame="16,0,16,0" data-tone="branco"><svg class="ico nao"><use href="#i-clock"/></svg><b>Lançamento</b><small class="nao">ainda não</small></div>
+      </div>
+    </section>
+
+    <section class="cena" id="c6">
+      <div class="fim-card">
+        <img class="logo-g" src="../../../marca/tirvo-logo.svg" alt="Tirvo">
+        <p class="slogan">Se algo pode ser melhorado, <b>ainda não está pronto.</b></p>
+        <div class="cta"><h2 class="h"><span class="linha"><span>Siga para ver</span></span><span class="linha"><span class="lar"><em>os próximos testes.</em></span></span></h2></div>
+        <p class="nota">o Hipercode ainda não está disponível ao público</p>
+        <div class="links"><span class="ar">@tirvotech</span><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech/hipercode</u></span></div>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="../stories/premium/base.js"></script>
+<script type="module">
+import { iniciar, semente } from './motor.js';
+const M = iniciar({ id: 'P13', duracao: 27, trilha: 'trilha-P13.mp3', capitulos: [0, 3.2, 7.6, 12.2, 17.4, 21.8], capa: 2.3, rotuloHud: 'hipercode · bastidor', semente: 13 });
+const { tl } = M;
+const $ = (s) => document.querySelector(s);
+
+/* ---------- 3D: o enxame de agentes ---------- */
+M.tres(({ THREE, scene, camera }) => {
+  camera.position.set(0, -3, 30);
+  const luz = new THREE.DirectionalLight('#ffffff', 1.2); luz.position.set(-6, 12, 10); scene.add(luz);
+  const rim = new THREE.PointLight('#ff5500', 160, 60, 1.5); rim.position.set(0, -4, 6); scene.add(rim);
+
+  // Favo de hexágonos
+  const pos = [];
+  const R = 1.05;
+  for (let q = -6; q <= 6; q++) for (let r = -9; r <= 9; r++) {
+    const x = R * 1.5 * q, y = R * Math.sqrt(3) * (r + q / 2);
+    if (x * x / 64 + (y + 0) * (y + 0) / 150 < 1) pos.push([x, y]);
+  }
+  const N = pos.length;
+  const geo = new THREE.CylinderGeometry(R * .93, R * .93, .5, 6, 1); geo.rotateX(Math.PI / 2); geo.rotateZ(Math.PI / 6);
+  const mat = new THREE.MeshPhysicalMaterial({ color: '#0c0c0f', metalness: .9, roughness: .42, clearcoat: .6, clearcoatRoughness: .35, envMapIntensity: .55 });
+  const inst = new THREE.InstancedMesh(geo, mat, N);
+  inst.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  const corBase = new THREE.Color('#18181c');
+  for (let i = 0; i < N; i++) inst.setColorAt(i, corBase);
+  scene.add(inst);
+  // Brilho por hexágono (topo emissivo)
+  const topoGeo = new THREE.CircleGeometry(R * .55, 6); topoGeo.rotateZ(Math.PI / 6);
+  const topoMat = new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, toneMapped: false });
+  const topo = new THREE.InstancedMesh(topoGeo, topoMat, N); scene.add(topo);
+  const cores = new Float32Array(N);
+
+  const rr = semente(31);
+  const dados = pos.map(([x, y], i) => ({ x, y, sx: (rr() - .5) * 60, sy: (rr() - .5) * 80, sz: -10 - rr() * 40, d: rr() * .9, f: rr() * 6, agente: rr() < .16 }));
+  const agentes = dados.map((d, i) => d.agente ? i : -1).filter((i) => i >= 0);
+
+  // Ligações entre agentes
+  const lig = [];
+  agentes.forEach((a, k) => { const b = agentes[(k * 7 + 3) % agentes.length]; if (a !== b) lig.push([a, b]); const c = agentes[(k + 1) % agentes.length]; lig.push([a, c]); });
+  const lgeo = new THREE.BufferGeometry(); const lpos = new Float32Array(lig.length * 6); lgeo.setAttribute('position', new THREE.BufferAttribute(lpos, 3));
+  const linhas = new THREE.LineSegments(lgeo, new THREE.LineBasicMaterial({ color: '#ff7a33', transparent: true, opacity: 0, toneMapped: false }));
+  scene.add(linhas);
+  // Pulsos viajando nas ligações
+  const pulsoGeo = new THREE.SphereGeometry(.12, 12, 12);
+  const pulsos = new THREE.InstancedMesh(pulsoGeo, new THREE.MeshBasicMaterial({ color: '#ffd2b0', toneMapped: false }), lig.length); scene.add(pulsos);
+
+  const S = { junta: 0, liga: 0, ativo: 0, rotY: .5, rotX: .9, camZ: 40, onda: 0, passo: -1, y: -4, esc: 1, op: 1 };
+  tl.fromTo(S, { camZ: 46 }, { camZ: 34, duration: 4, ease: 'power2.out' }, 0);
+  tl.to(S, { junta: 1, duration: 2.6, ease: 'expo.inOut' }, 3.3);
+  M.som(3.4, 'rede', .6);
+  tl.to(S, { rotX: .55, rotY: .25, duration: 4, ease: 'suave' }, 3.3);
+  tl.to(S, { ativo: 1, duration: 1.2 }, 7.8);
+  tl.to(S, { liga: 1, duration: 1.4 }, 8.4);
+  M.som(8.4, 'rede', .5);
+  tl.to(S, { rotX: 1.05, rotY: -.2, camZ: 30, y: -6, duration: 3, ease: 'suave' }, 12.2);
+  tl.to(S, { op: .45, duration: 1 }, 12.2);
+  tl.fromTo(S, { passo: 0 }, { passo: 4, duration: 4, ease: 'steps(4)' }, 12.9);
+  tl.to(S, { op: 1, rotX: .7, rotY: .35, y: -5, duration: 2.5, ease: 'suave' }, 17.4);
+  tl.to(S, { op: .4, camZ: 40, y: -15, duration: 1.4, ease: 'power3.inOut' }, 21.6);
+
+  const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), v = new THREE.Vector3(), sc = new THREE.Vector3(1, 1, 1);
+  const cor = new THREE.Color();
+  return (t) => {
+    camera.position.set(Math.sin(t * .2) * 1.2, -3, S.camZ); camera.lookAt(0, -3.5, 0);
+    const grupoRot = new THREE.Euler(-S.rotX, 0, S.rotY);
+    const gq = new THREE.Quaternion().setFromEuler(grupoRot);
+    const pontos = [];
+    dados.forEach((d, i) => {
+      const k = Math.min(1, Math.max(0, (S.junta * 1.4 - d.d * .4)));
+      const ke = 1 - Math.pow(1 - k, 3);
+      const onda = Math.sin(t * 2 - Math.hypot(d.x, d.y) * .6) * .25;
+      v.set(d.sx + (d.x - d.sx) * ke, d.sy + (d.y - d.sy) * ke, d.sz * (1 - ke) + (d.agente ? .5 * S.ativo : 0) + onda * ke);
+      v.applyQuaternion(gq); v.y += S.y;
+      e.set(-S.rotX + (1 - ke) * d.f, (1 - ke) * d.f * .5, S.rotY); q.setFromEuler(e);
+      sc.setScalar(S.esc * (.4 + .6 * ke));
+      m4.compose(v, q, sc); inst.setMatrixAt(i, m4);
+      // topo emissivo
+      const off = new THREE.Vector3(0, 0, .26 + (d.agente ? .5 * S.ativo : 0)).applyQuaternion(gq);
+      const vt = v.clone().add(off);
+      m4.compose(vt, gq, sc); topo.setMatrixAt(i, m4);
+      let b = .05 + .08 * Math.max(0, Math.sin(t * 1.5 + d.f));
+      if (d.agente) b += S.ativo * (.7 + .3 * Math.sin(t * 4 + d.f));
+      // passos: agentes acendem em sequência
+      if (S.passo >= 0 && d.agente) b *= (Math.floor(d.f * 4 / 6.3) <= S.passo - 1 ? 1.2 : .35);
+      b *= S.op;
+      cor.setRGB(1 * b + .02, .42 * b + .02, .12 * b + .02);
+      if (!d.agente) cor.setRGB(.5 * b, .5 * b, .52 * b);
+      topo.setColorAt(i, cor);
+      pontos[i] = v.clone();
+    });
+    inst.instanceMatrix.needsUpdate = true; topo.instanceMatrix.needsUpdate = true; topo.instanceColor.needsUpdate = true;
+    lig.forEach(([a, b], k) => {
+      const A = pontos[a], B = pontos[b];
+      const off = new THREE.Vector3(0, 0, .9).applyQuaternion(gq);
+      lpos.set([A.x + off.x, A.y + off.y, A.z + off.z, B.x + off.x, B.y + off.y, B.z + off.z], k * 6);
+      const p = ((t * .6 + k * .37) % 1);
+      v.set(A.x + (B.x - A.x) * p + off.x, A.y + (B.y - A.y) * p + off.y, A.z + (B.z - A.z) * p + off.z);
+      m4.compose(v, q.identity(), sc.setScalar(S.liga * S.op)); pulsos.setMatrixAt(k, m4);
+    });
+    lgeo.attributes.position.needsUpdate = true; pulsos.instanceMatrix.needsUpdate = true;
+    linhas.material.opacity = S.liga * .55 * S.op;
+    rim.intensity = 120 + 80 * S.ativo;
+  };
+}, { bloom: .7, limiar: .62, raio: .6, ambiente: .7 });
+
+/* ---------- Cena 1 ---------- */
+M.cena('#c1', 0, 3.2);
+M.sobe($('#c1 .h'), .1, { stagger: .3 });
+M.entra('#c1 .bolha', .3, { y: 30, stagger: .35, som: 'pop', vol: .5 });
+tl.fromTo('#c1 .dots i', { opacity: .3 }, { opacity: 1, duration: .25, stagger: .12, repeat: 3, yoyo: true }, 1.2);
+tl.fromTo('#x1', { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power3.in' }, 2.1);
+tl.to('#c1 .chat', { opacity: .25, filter: 'blur(4px)', duration: .4 }, 2.3);
+M.som(2.15, 'erro', .6);
+M.trans(3.2, 'flash');
+
+/* ---------- Cena 2 ---------- */
+M.cena('#c2', 3.2, 7.6);
+M.entra('#c2 .rot', 3.3, { y: 10 });
+M.sobe($('#c2 .h'), 3.4, { stagger: .2 });
+M.entra('#c2 .selo-v', 4.4, { y: 14 });
+M.som(5.8, 'impacto', .5);
+M.trans(7.6, 'varre');
+
+/* ---------- Cena 3 ---------- */
+M.cena('#c3', 7.6, 12.2);
+M.sobe($('#c3 .h'), 7.7, { stagger: .3 });
+M.palavras($('#c3 .c'), 8.9);
+M.entra('#c3 .tags .chip', 9.4, { y: 20, stagger: .15, som: 'pop', vol: .45 });
+M.trans(12.2, 'glitch');
+
+/* ---------- Cena 4 ---------- */
+M.cena('#c4', 12.2, 17.4);
+M.entra('#c4 .rot', 12.3, { y: 10 });
+M.entra('#c4 .passo', 12.35, { x: -40, y: 0, stagger: .1 });
+[0, 1, 2, 3].forEach((i) => {
+  const t = 12.9 + i;
+  tl.to(`#c4 .passo:nth-child(${i + 1}) span`, { color: '#fafafa', duration: .2 }, t);
+  tl.to(`#c4 .passo:nth-child(${i + 1}) b`, { color: '#ff6a1f', duration: .2 }, t);
+  tl.to(`#c4 .passo:nth-child(${i + 1}) .ico`, { color: '#ff8a4c', duration: .2 }, t);
+  tl.fromTo(`#c4 .passo:nth-child(${i + 1})`, { x: 0 }, { x: 18, duration: .25, yoyo: true, repeat: 1, ease: 'power2.out' }, t);
+  M.som(t, 'clique', .7);
+});
+M.entra('#c4 .zip', 16.1, { scale: .85, y: 0, blur: 20 });
+M.som(16.1, 'confirma', .8);
+M.trans(17.4, 'mira');
+
+/* ---------- Cena 5 ---------- */
+M.cena('#c5', 17.4, 21.8);
+M.entra('#c5 .rot', 17.5, { y: 10 });
+M.sobe($('#c5 .h'), 17.55, { stagger: .18 });
+M.entra('#c5 .status > div', 18.6, { x: 40, y: 0, stagger: .3, som: 'pop', vol: .45 });
+M.trans(21.8, 'flash');
+
+/* ---------- Final ---------- */
+M.cena('#c6', 21.8);
+tl.set(['#hud .tc', '#hud .capitulos'], { opacity: .35 }, 21.8);
+M.entra('#c6 .logo-g', 21.85, { scale: .92, y: 0, blur: 24, dur: 1.1 });
+M.som(21.85, 'brilho', .8);
+M.entra('#c6 .slogan', 22.3, { y: 14 });
+M.sobe($('#c6 .cta .h'), 22.55, { stagger: .12 });
+M.entra('#c6 .nota', 23.2, { y: 10 });
+M.entra('#c6 .links', 23.5, { y: 12 });
+tl.to('#fundo .b1', { x: 300, y: 450, duration: 8, ease: 'suave' }, 0).to('#fundo .b1', { x: -150, y: 100, duration: 10, ease: 'suave' }, 8).to('#fundo .b1', { x: 0, y: 0, duration: 9, ease: 'suave' }, 18);
+tl.to({}, { duration: 27 }, 0);
+M.pronto();
+</script>
+</body>
+</html>

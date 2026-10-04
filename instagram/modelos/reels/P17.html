@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>P17: seu site trabalha enquanto você dorme</title>
+  <link rel="stylesheet" href="motor.css">
+  <style>
+    .relogio { display: flex; align-items: center; font: 500 220px/1 var(--mono); letter-spacing: -.04em; color: #fff; text-shadow: 0 0 40px rgba(255,255,255,.25); }
+    .relogio .d { display: inline-block; height: 1em; overflow: hidden; position: relative; width: .62em; }
+    .relogio .d span { display: block; height: 1em; }
+    .relogio .p { width: .3em; text-align: center; color: #ff6a1f; text-shadow: 0 0 30px rgba(255,85,0,.8); }
+    #c1 .relogio { left: 70px; top: 360px; }
+    #c1 .h { left: 80px; top: 640px; width: 920px; font-size: 80px; }
+    #c2 .rot { left: 80px; top: 380px; }
+    #c2 .passos { left: 80px; top: 440px; width: 900px; display: grid; gap: 6px; }
+    #c2 .passos div { font-size: 96px; font-weight: 700; letter-spacing: -.05em; line-height: 1.04; display: flex; align-items: center; gap: 26px; }
+    #c2 .passos .ico { font-size: 70px; color: #ff8a4c; }
+    #c3 .h { left: 80px; top: 372px; width: 920px; font-size: 104px; }
+    #c3 .atritos { left: 80px; top: 640px; width: 900px; display: grid; gap: 16px; }
+    #c3 .atritos > div { height: 112px; display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 16px; padding: 0 28px; }
+    #c3 .atritos .ico { font-size: 40px; color: #ff6a1f; }
+    #c3 .atritos b { font-size: 38px; font-weight: 640; letter-spacing: -.02em; }
+    #c3 .atritos small { display: block; margin-top: 6px; font: 500 18px/1 var(--mono); letter-spacing: .1em; color: var(--t3); text-transform: uppercase; }
+    #c4 .h { left: 80px; top: 372px; width: 920px; font-size: 104px; }
+    #c4 .aba { left: 140px; top: 820px; width: 800px; height: 520px; }
+    #c4 .aba .bar { position: absolute; left: 0; right: 0; top: 0; height: 76px; display: flex; align-items: center; gap: 14px; padding: 0 22px; background: #16161a; border-radius: 16px 16px 0 0; border: 1px solid rgba(255,255,255,.12); }
+    #c4 .aba .bar i { width: 16px; height: 16px; border-radius: 50%; background: #3f3f46; }
+    #c4 .aba .bar span { margin-left: 18px; padding: 10px 18px; border-radius: 10px; background: #0f0f12; font: 500 20px/1 var(--mono); color: var(--t2); display: flex; gap: 40px; }
+    #c4 .aba .corpo { position: absolute; left: 0; right: 0; top: 76px; bottom: 0; background: #0f0f12; border: 1px solid rgba(255,255,255,.12); border-top: 0; border-radius: 0 0 16px 16px; }
+    #c4 .aba .corpo i { position: absolute; left: 40px; height: 22px; border-radius: 6px; background: rgba(255,255,255,.08); }
+    #c5 .h { left: 80px; top: 372px; width: 920px; font-size: 76px; }
+    #c5 .pedido { left: 100px; top: 760px; width: 880px; padding: 34px 38px; }
+    #c5 .pedido header { display: flex; align-items: center; gap: 18px; margin-bottom: 26px; }
+    #c5 .pedido header .ic { width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, #ff6a1f, #ff3300); display: grid; place-items: center; box-shadow: 0 0 24px rgba(255,85,0,.5); }
+    #c5 .pedido header .ic .ico { font-size: 34px; color: #fff; }
+    #c5 .pedido header b { font-size: 36px; font-weight: 650; letter-spacing: -.02em; }
+    #c5 .pedido header small { display: block; font: 500 19px/1 var(--mono); color: var(--t3); letter-spacing: .1em; margin-top: 6px; }
+    #c5 .pedido .campo { display: grid; grid-template-columns: 220px 1fr; padding: 18px 0; border-top: 1px solid rgba(255,255,255,.08); font-size: 30px; }
+    #c5 .pedido .campo span { font: 500 19px/1.6 var(--mono); letter-spacing: .12em; color: var(--t3); text-transform: uppercase; }
+    #c5 .pedido .campo b { font-weight: 560; color: var(--t1); }
+    #c6 .relogio { left: 70px; top: 360px; }
+    #c6 .h { left: 80px; top: 640px; width: 920px; font-size: 104px; }
+    #c6 .resp { left: 80px; top: 960px; }
+    #c7 .fim-card .cta .h { font-size: 76px; text-align: center; }
+    #c7 .palavra { position: absolute; left: 50%; top: 1190px; transform: translateX(-50%); display: flex; align-items: center; gap: 22px; padding: 22px 40px; white-space: nowrap; }
+    #c7 .palavra b { font: 600 56px/1 var(--mono); letter-spacing: .1em; color: #fff; text-shadow: 0 0 20px rgba(255,85,0,.7); }
+    #c7 .palavra span { font-size: 28px; color: var(--t2); }
+  </style>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/SplitText.min.js"></script>
+  <script src="vendor/CustomEase.min.js"></script>
+  <script src="vendor/DrawSVGPlugin.min.js"></script>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+</head>
+<body>
+<div class="reel">
+  <div id="palco">
+    <section class="cena" id="c1">
+      <div class="relogio" id="r1"><span class="d"><span>2</span></span><span class="d"><span>3</span></span><span class="p">:</span><span class="d"><span>0</span></span><span class="d" id="r1m"><span>1</span><span>2</span><span>3</span><span>4</span></span></div>
+      <h1 class="h"><span class="linha"><span>Alguém procurou</span></span><span class="linha"><span class="lar"><em>o que você vende.</em></span></span></h1>
+    </section>
+    <section class="cena" id="c2">
+      <p class="rot"><i>//</i> 23:05</p>
+      <div class="passos">
+        <div><svg class="ico"><use href="#i-search"/></svg>Achou o seu site.</div>
+        <div><svg class="ico"><use href="#i-eye"/></svg>Gostou.</div>
+        <div><svg class="ico"><use href="#i-chat"/></svg><span>Quis <em style="font-family:var(--serif);font-style:italic;font-weight:400">pedir</em> um orçamento.</span></div>
+      </div>
+    </section>
+    <section class="cena" id="c3">
+      <h2 class="h"><span class="linha"><span class="lar"><em>E aí?</em></span></span></h2>
+      <div class="atritos">
+        <div data-frame="16,0,16,0" data-tone="laranja"><svg class="ico"><use href="#i-search"/></svg><span><b>Botão escondido</b><small>ele procura e não acha</small></span></div>
+        <div data-frame="16,0,16,0" data-tone="laranja"><svg class="ico"><use href="#i-file-code"/></svg><span><b>Formulário que não acaba</b><small>campo atrás de campo</small></span></div>
+        <div data-frame="16,0,16,0" data-tone="laranja"><svg class="ico"><use href="#i-whatsapp"/></svg><span><b>WhatsApp perdido no rodapé</b><small>só quem rola até o fim encontra</small></span></div>
+      </div>
+    </section>
+    <section class="cena" id="c4">
+      <h2 class="h"><span class="linha"><span>Ele fecha a aba.</span></span><span class="linha"><span class="cz">Amanhã, <em>já esqueceu.</em></span></span></h2>
+      <div class="aba" id="aba"><div class="bar"><i></i><i></i><i></i><span>seusite.com.br <b style="color:#fff">✕</b></span></div><div class="corpo"><i style="top:60px;width:420px"></i><i style="top:110px;width:600px"></i><i style="top:160px;width:520px"></i><i style="top:250px;width:300px;height:70px;background:rgba(255,255,255,.05)"></i></div></div>
+    </section>
+    <section class="cena" id="c5">
+      <h2 class="h"><span class="linha"><span>Com o caminho certo,</span></span><span class="linha"><span>o pedido chega</span></span><span class="linha"><span class="lar"><em>inteiro.</em></span></span></h2>
+      <div class="pedido" data-frame="24,0,24,0" data-tone="quente" data-acento="topo">
+        <header><span class="ic"><svg class="ico"><use href="#i-send"/></svg></span><span><b>Novo pedido de orçamento</b><small>pelo site · 23:06 · exemplo</small></span></header>
+        <div class="campo"><span>precisa de</span><b id="f1">Orçamento para 40 cadeiras</b></div>
+        <div class="campo"><span>prazo</span><b id="f2">Até o fim do mês</b></div>
+        <div class="campo"><span>contato</span><b id="f3">WhatsApp informado</b></div>
+      </div>
+    </section>
+    <section class="cena" id="c6">
+      <div class="relogio" id="r6"><span class="d"><span>0</span></span><span class="d"><span>8</span></span><span class="p">:</span><span class="d"><span>0</span></span><span class="d"><span>0</span></span></div>
+      <h2 class="h"><span class="linha"><span>Você só</span></span><span class="linha"><span class="lar"><em>responde.</em></span></span></h2>
+      <span class="resp selo-v"><span class="led" style="background:#3ccf8e;box-shadow:0 0 10px #3ccf8e"></span>o site trabalhou a noite toda</span>
+    </section>
+    <section class="cena" id="c7">
+      <div class="fim-card">
+        <img class="logo-g" src="../../../marca/tirvo-logo.svg" alt="Tirvo">
+        <p class="slogan">Se algo pode ser melhorado, <b>ainda não está pronto.</b></p>
+        <div class="cta"><h2 class="h"><span class="linha"><span>Quer o seu site</span></span><span class="linha"><span class="lar"><em>trabalhando assim?</em></span></span></h2></div>
+        <div class="palavra" data-frame="18,0,18,0" data-tone="quente"><b>SITE</b><span>no direct</span></div>
+        <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span><span class="ar">@tirvotech</span></div>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="../stories/premium/base.js"></script>
+<script type="module">
+import { iniciar, semente } from './motor.js';
+const M = iniciar({ id: 'P17', duracao: 28, trilha: 'trilha-P17.mp3', capitulos: [0, 3.2, 7.4, 12, 15, 20, 24], capa: 2.4, rotuloHud: 'site 24 horas', semente: 17 });
+const { tl } = M;
+const $ = (s) => document.querySelector(s);
+
+/* ---------- 3D: a cidade à noite ---------- */
+M.tres(({ THREE, scene, camera }) => {
+  scene.fog = new THREE.Fog('#050507', 45, 150);
+  const hemi = new THREE.HemisphereLight('#8090b0', '#050505', .15); scene.add(hemi);
+  const lua = new THREE.DirectionalLight('#a8b4d8', .5); lua.position.set(-20, 40, 10); scene.add(lua);
+  const sol = new THREE.DirectionalLight('#ffb070', 0); sol.position.set(30, 8, -40); scene.add(sol);
+  const rr = semente(171);
+  const N = 520;
+  const pred = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: '#0d0d10', metalness: .4, roughness: .7 }), N);
+  const jan = [];
+  const m4 = new THREE.Matrix4();
+  const lista = [];
+  let k = 0;
+  for (let gx = -13; gx <= 13; gx++) for (let gz = -30; gz <= 6; gz++) {
+    if (k >= N) break;
+    if (rr() < .45) continue;
+    if (Math.abs(gx) < 1) continue; // avenida
+    const w = 1.4 + rr() * 1.2, d = 1.4 + rr() * 1.2, h = 2 + Math.pow(rr(), 2.2) * 16 + (Math.abs(gx) > 6 ? 2 : 0);
+    const x = gx * 3.1, z = gz * 3.1;
+    m4.compose(new THREE.Vector3(x, h / 2 - 10, z), new THREE.Quaternion(), new THREE.Vector3(w, h, d));
+    pred.setMatrixAt(k++, m4);
+    lista.push({ x, z, w, d, h });
+  }
+  pred.count = k; scene.add(pred);
+  // Janelas acesas
+  const JN = 2600;
+  const janGeo = new THREE.PlaneGeometry(.22, .3);
+  const janMat = new THREE.MeshBasicMaterial({ color: '#ffffff', toneMapped: false, transparent: true });
+  const janelas = new THREE.InstancedMesh(janGeo, janMat, JN);
+  const cor = new THREE.Color();
+  const dadosJ = [];
+  let j = 0;
+  for (const p of lista) {
+    const n = Math.floor(p.h * 1.6);
+    for (let i = 0; i < n && j < JN; i++) {
+      if (rr() < .55) continue;
+      const fy = -10 + .8 + rr() * (p.h - 1.2);
+      const fx = p.x + (rr() - .5) * (p.w - .4);
+      m4.compose(new THREE.Vector3(fx, fy, p.z + p.d / 2 + .01), new THREE.Quaternion(), new THREE.Vector3(1, 1, 1));
+      janelas.setMatrixAt(j, m4);
+      const quente = rr() < .7;
+      dadosJ.push({ quente, f: rr() * 6, apaga: rr() });
+      j++;
+    }
+  }
+  janelas.count = j; scene.add(janelas);
+  // Uma janela especial (o cliente) e um feixe
+  const alvo = new THREE.Mesh(new THREE.PlaneGeometry(.5, .6), new THREE.MeshBasicMaterial({ color: '#ff7a33', toneMapped: false }));
+  alvo.position.set(3.1, -2, -6.2 + 1.3); scene.add(alvo);
+
+  const S = { cz: 34, cy: 26, cx: 0, ly: -2, apag: 0, manha: 0, alvo: 0, rot: 0 };
+  tl.fromTo(S, { cz: 40, cy: 34 }, { cz: 30, cy: 22, duration: 7, ease: 'suave' }, 0);
+  tl.to(S, { alvo: 1, duration: .4 }, 1.8);
+  tl.to(S, { cz: 18, cy: 12, cx: 2.2, duration: 4.6, ease: 'suave' }, 7);
+  tl.to(S, { apag: .75, alvo: 0, duration: 1.2 }, 12.4);
+  tl.to(S, { apag: .3, cz: 28, cy: 20, cx: 0, duration: 3, ease: 'suave' }, 15);
+  tl.to(S, { manha: 1, apag: .9, cy: 26, cz: 34, duration: 3.5, ease: 'suave' }, 19.6);
+
+  return (t) => {
+    camera.position.set(S.cx + Math.sin(t * .2) * 1.5, S.cy, S.cz - t * .25);
+    camera.lookAt(S.cx * .6, -8, S.cz - t * .25 - 34);
+    for (let i = 0; i < j; i++) {
+      const d = dadosJ[i];
+      let b = d.quente ? .9 : .4;
+      b *= .75 + .25 * Math.sin(t * .7 + d.f);
+      if (d.apaga < S.apag) b *= .08;
+      if (d.quente) cor.setRGB(1 * b, .55 * b, .22 * b); else cor.setRGB(.55 * b, .62 * b, .8 * b);
+      janelas.setColorAt(i, cor);
+    }
+    janelas.instanceColor.needsUpdate = true;
+    alvo.material.color.setRGB(1 * (1 + S.alvo * 3), .5 * (1 + S.alvo * 2), .2);
+    alvo.scale.setScalar(1 + S.alvo * .8);
+    scene.fog.color.setRGB(.02 + S.manha * .16, .02 + S.manha * .09, .028 + S.manha * .05);
+    hemi.intensity = .15 + S.manha * 1.4;
+    sol.intensity = S.manha * 2.2;
+  };
+}, { bloom: .9, limiar: .35, raio: .5, ambiente: .25, fov: 45 });
+
+/* ---------- Relógio ---------- */
+tl.to('#r1m span', { yPercent: -300, duration: 1.8, ease: 'steps(3)' }, .6);
+[0.6, 1.2, 1.8].forEach((t) => M.som(t, 'clique', .45));
+
+/* ---------- Cena 1 ---------- */
+M.cena('#c1', 0, 3.2);
+M.entra('#r1', .05, { y: 0, scale: 1.08, blur: 20, dur: 1 });
+M.som(0, 'relogio', .5);
+M.sobe($('#c1 .h'), .7, { stagger: .3 });
+M.trans(3.2, 'varre');
+
+/* ---------- Cena 2 ---------- */
+M.cena('#c2', 3.2, 7.4);
+M.entra('#c2 .rot', 3.25, { y: 10 });
+M.entra('#c2 .passos > div', 3.4, { x: -50, y: 0, stagger: 1.1, blur: 18 });
+[3.4, 4.5, 5.6].forEach((t) => M.som(t, 'pop', .6));
+M.trans(7.4, 'glitch');
+
+/* ---------- Cena 3 ---------- */
+M.cena('#c3', 7.4, 12);
+M.sobe($('#c3 .h'), 7.45);
+M.entra('#c3 .atritos > div', 8.2, { x: 50, y: 0, stagger: 1, blur: 16 });
+[8.2, 9.2, 10.2].forEach((t) => M.som(t, 'erro', .55));
+tl.to('#c3 .atritos > div', { x: (i) => [-8, 10, -6][i], duration: .06, repeat: 5, yoyo: true }, 11);
+M.trans(12, 'corte');
+
+/* ---------- Cena 4 ---------- */
+M.cena('#c4', 12, 15);
+M.sobe($('#c4 .h'), 12.05, { stagger: .4 });
+M.entra('#aba', 12.2, { y: 40 });
+tl.to('#aba', { scaleY: .02, scaleX: .6, opacity: 0, duration: .45, ease: 'power3.in' }, 13.6);
+M.som(13.6, 'clique', .8); M.som(13.7, 'whoosh', .5);
+M.trans(15, 'flash');
+
+/* ---------- Cena 5 ---------- */
+M.cena('#c5', 15, 20);
+M.sobe($('#c5 .h'), 15.05, { stagger: .2 });
+M.entra('#c5 .pedido', 16.1, { y: 60, scale: .96, blur: 18 });
+M.som(16.1, 'notificacao', .9);
+M.decod($('#f1'), 16.7, .7);
+M.decod($('#f2'), 17.2, .6, false);
+M.decod($('#f3'), 17.6, .6, false);
+M.trans(20, 'mira');
+
+/* ---------- Cena 6 ---------- */
+M.cena('#c6', 20, 24);
+M.entra('#r6', 20.05, { y: 0, scale: 1.08, blur: 20, dur: 1 });
+M.sobe($('#c6 .h'), 20.6, { stagger: .25 });
+M.entra('#c6 .resp', 21.6, { y: 14 });
+M.som(21.6, 'confirma', .7);
+tl.to('#fundo .b1', { x: 300, y: -500, scale: 1.4, duration: 3, ease: 'suave' }, 19.8);
+M.trans(24, 'flash');
+
+/* ---------- Final ---------- */
+M.cena('#c7', 24);
+tl.set(['#hud .tc', '#hud .capitulos'], { opacity: .35 }, 24);
+M.entra('#c7 .logo-g', 24.05, { scale: .92, y: 0, blur: 24, dur: 1.1 });
+M.som(24.05, 'brilho', .8);
+M.entra('#c7 .slogan', 24.5, { y: 14 });
+M.sobe($('#c7 .cta .h'), 24.75, { stagger: .12 });
+M.entra('#c7 .palavra', 25.4, { y: 20 });
+M.entra('#c7 .links', 25.8, { y: 12 });
+tl.to(M.estado, { piso: .4, duration: .1 }, 0);
+tl.to({}, { duration: 28 }, 0);
+M.pronto();
+</script>
+</body>
+</html>

@@ -257,7 +257,11 @@
   .lb[hidden] { display: none; }
   .lb .cab { display: flex; gap: 8px; align-items: center; justify-content: flex-end; }
   .lb .cab span { margin-right: auto; font: 500 13px/1 var(--mono); color: var(--t2); }
-  .lb img { max-width: 100%; max-height: 100%; margin: auto; object-fit: contain; border-radius: 8px; }
+  .lb img, .lb video { max-width: 100%; max-height: 100%; margin: auto; object-fit: contain; border-radius: 8px; }
+  .lb img[hidden], .lb video[hidden] { display: none; }
+  .thumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .thumb .play { position: absolute; left: 50%; top: 50%; width: 54px; height: 54px; margin: -27px; border-radius: 50%; background: rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,.5); display: grid; place-items: center; }
+  .thumb .play::before { content: ''; border-left: 16px solid #fff; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 4px; }
   .lb .nav { display: flex; gap: 10px; justify-content: center; align-items: center; }
   .lb .nav span { font: 500 13px/1 var(--mono); color: var(--t2); min-width: 64px; text-align: center; }
   .lb .nav .btn { min-width: 110px; }
@@ -310,6 +314,7 @@
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Visualizar imagem">
   <div class="cab"><span id="lb-nome"></span><button class="btn" id="lb-baixar" type="button">Baixar</button><button class="btn" id="lb-fechar" type="button">Fechar</button></div>
   <img id="lb-img" alt="">
+  <video id="lb-vid" controls playsinline preload="metadata" hidden></video>
   <div class="nav"><button class="btn" id="lb-ant" type="button">← Anterior</button><span id="lb-pos"></span><button class="btn" id="lb-prox" type="button">Próxima →</button></div>
 </div>
 <div class="toast" id="toast" role="status"></div>
@@ -430,6 +435,7 @@
     botao.disabled = false; botao.innerHTML = txt;
   }
   const ehStory = (p) => p.formato === 'stories' || p.formato === 'caixinha';
+  const capaDe = (p) => (arquivos(p).find((a) => !a.endsWith('.mp4')) || '');
   const arquivos = (p) => MIDIA[(p.midia && p.midia.compartilhada) || p.id] || [];
   const nomeArquivo = (p, caminho, i) => `${p.id}-${String(i + 1).padStart(2, '0')}.${caminho.split('.').pop()}`;
   const wd = (n) => DIAS_SEMANA[(n - 1) % 7];
@@ -504,7 +510,7 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
         <span class="hora">${p.hora}</span>
         <span class="fmt ${p.formato}">${FMT_CURTO[p.formato]}</span>
         <button class="abrir" type="button" data-abrir="${p.id}" aria-expanded="${abertos.has(p.id)}" aria-controls="det-${p.id}">
-          <span class="t">${arquivos(p).length ? `<span class="capinha${ehStory(p) ? ' st' : ''}"><img src="${esc(arquivos(p)[0])}" alt="" loading="lazy"></span>` : ''}${esc(p.titulo)}</span>
+          <span class="t">${capaDe(p) ? `<span class="capinha${ehStory(p) || p.formato === 'reels' ? ' st' : ''}"><img src="${esc(capaDe(p))}" alt="" loading="lazy"></span>` : ''}${esc(p.titulo)}</span>
           <span class="m"><span class="id">${p.id}</span><span class="pil" data-p="${p.pilar}">${esc(PILAR[p.pilar].nome)}</span><span>${esc(p.metrica)}</span></span>
         </button>
         <span class="direita">
@@ -532,9 +538,9 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
         const ext = a.split('.').pop();
         const ehVideo = ext === 'mp4';
         return `<div class="mid">
-          <button class="thumb${story || ehVideo ? ' st' : ''}" type="button" data-ver="${esc(a)}" data-nome="${esc(nomeArquivo(p, a, i))}" data-gal="${p.id}" data-i="${i}">
-            ${ehVideo ? `<video src="${esc(a)}" muted playsinline preload="metadata"></video>` : `<img src="${esc(a)}" alt="${esc(p.id)} imagem ${i + 1}" loading="lazy">`}
-            <span class="num">${String(i + 1).padStart(2, '0')}</span>
+          <button class="thumb${story || ehVideo || p.formato === 'reels' ? ' st' : ''}" type="button" data-ver="${esc(a)}" data-nome="${esc(nomeArquivo(p, a, i))}" data-gal="${p.id}" data-i="${i}">
+            ${ehVideo ? `<video src="${esc(a)}#t=1.5" muted playsinline preload="metadata"></video><span class="play"></span>` : `<img src="${esc(a)}" alt="${esc(p.id)} imagem ${i + 1}" loading="lazy">`}
+            <span class="num">${ehVideo ? 'vídeo' : p.formato === 'reels' ? 'capa' : String(i + 1).padStart(2, '0')}</span>
           </button>
           <button class="btn mini" type="button" data-baixar="${esc(a)}" data-nome="${esc(nomeArquivo(p, a, i))}">${ICO.baixar}Baixar</button>
         </div>`;
@@ -683,7 +689,7 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
         <span class="sep"></span>
         <button class="btn mini pri" type="button" data-copiar-ajustes>${ICO.copiar}Copiar pedidos de ajuste</button>
       </div>
-      <p class="nota-midia">Os 11 Reels entram aqui quando os vídeos forem feitos. P14 e S26 aguardam o escopo da gestão de redes.</p>
+      <p class="nota-midia">Nos Reels, toque no vídeo para assistir com som. A segunda imagem é a capa. P14 e S26 aguardam o escopo da gestão de redes.</p>
     </section>`;
     for (const s of P.semanas) {
       const doSem = comArte.filter((p) => p.dia >= s.dias[0] && p.dia <= s.dias[1] && passaApr(p));
@@ -694,7 +700,7 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
         const compart = pecas.filter((x) => x.midia && x.midia.compartilhada === p.id && x.id !== p.id).map((x) => x.id);
         h += `<article class="apr${e.aprov ? ' ' + e.aprov : ''}" id="apr-${p.id}">
           <div class="apr-cab"><span class="q">${p.id}</span><span class="m">Dia ${p.dia} · ${wd(p.dia)} · ${p.hora} · ${FMT_CURTO[p.formato]} · ${arqs.length} ${arqs.length > 1 ? 'imagens' : 'imagem'}${compart.length ? ` · arte usada também em ${compart.join(', ')}` : ''}</span><h3>${esc(p.titulo)}</h3></div>
-          <div class="tira">${arqs.map((a, i) => `<button class="thumb${story ? ' st' : ''}" type="button" data-ver="${esc(a)}" data-nome="${esc(nomeArquivo(p, a, i))}" data-gal="${p.id}" data-i="${i}"><img src="${esc(a)}" alt="${esc(p.id)} imagem ${i + 1}" loading="lazy"><span class="num">${String(i + 1).padStart(2, '0')}/${String(arqs.length).padStart(2, '0')}</span></button>`).join('')}</div>
+          <div class="tira">${arqs.map((a, i) => { const v = a.endsWith('.mp4'); return `<button class="thumb${story || p.formato === 'reels' ? ' st' : ''}" type="button" data-ver="${esc(a)}" data-nome="${esc(nomeArquivo(p, a, i))}" data-gal="${p.id}" data-i="${i}">${v ? `<video src="${esc(a)}#t=1.5" muted playsinline preload="metadata"></video><span class="play"></span>` : `<img src="${esc(a)}" alt="${esc(p.id)} imagem ${i + 1}" loading="lazy">`}<span class="num">${v ? 'vídeo' : i === 1 && p.formato === 'reels' ? 'capa' : String(i + 1).padStart(2, '0') + '/' + String(arqs.length).padStart(2, '0')}</span></button>`; }).join('')}</div>
           <div class="apr-acoes">
             <button class="btn mini aprovar" type="button" data-aprov="${p.id}" aria-pressed="${e.aprov === 'ok'}">${e.aprov === 'ok' ? 'Aprovada' : 'Aprovar'}</button>
             <button class="btn mini ajustar" type="button" data-ajustar="${p.id}" aria-pressed="${e.aprov === 'ajuste'}">Pedir ajuste</button>
@@ -788,9 +794,14 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
   }
 
   /* ---------- Tela cheia com navegação ---------- */
+  function fecharLb() { $('#lb').hidden = true; const v = $('#lb-vid'); v.pause(); }
   let galeria = null;
   function mostrarLb(arq, nome) {
-    $('#lb-img').src = arq; $('#lb-nome').textContent = nome;
+    const ehV = arq.endsWith('.mp4'), vid = $('#lb-vid'), img = $('#lb-img');
+    vid.pause();
+    if (ehV) { img.hidden = true; vid.hidden = false; vid.src = arq; vid.play().catch(() => {}); }
+    else { vid.hidden = true; vid.removeAttribute('src'); img.hidden = false; img.src = arq; }
+    $('#lb-nome').textContent = nome;
     $('#lb-baixar').dataset.arq = arq; $('#lb-baixar').dataset.nomeArq = nome.split(' · ').pop();
     $('.lb .nav').style.visibility = galeria && galeria.arqs.length > 1 ? 'visible' : 'hidden';
     if (galeria) $('#lb-pos').textContent = `${galeria.i + 1} de ${galeria.arqs.length}`;
@@ -876,7 +887,7 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
       if (!lista.length) { aviso('Nenhum pedido de ajuste salvo ainda.'); return; }
       copiar('Ajustes nas artes do plano de 30 dias:\n\n' + lista.join('\n\n'), 'Pedidos de ajuste');
     } else if (t.id === 'lb-fechar') {
-      $('#lb').hidden = true;
+      fecharLb();
     } else if (t.id === 'lb-baixar') {
       baixarUm(t.dataset.arq, t.dataset.nomeArq);
     } else if (d.fmt) { filtro.fmt = d.fmt; render(); }
@@ -899,10 +910,10 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
       gravarConfig({ inicio: '' }); render();
     }
   });
-  $('#lb').addEventListener('click', (e) => { if (e.target.id === 'lb') $('#lb').hidden = true; });
+  $('#lb').addEventListener('click', (e) => { if (e.target.id === 'lb') fecharLb(); });
   document.addEventListener('keydown', (e) => {
     if ($('#lb').hidden) return;
-    if (e.key === 'Escape') $('#lb').hidden = true;
+    if (e.key === 'Escape') fecharLb();
     else if (e.key === 'ArrowRight') passoLb(1);
     else if (e.key === 'ArrowLeft') passoLb(-1);
   });

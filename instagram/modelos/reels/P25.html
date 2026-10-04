@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>P25: se o seu perfil sumir hoje, o que sobra</title>
+  <link rel="stylesheet" href="motor.css">
+  <style>
+    #c1 .h { left: 80px; top: 372px; width: 920px; font-size: 96px; }
+    #c2 .h { left: 80px; top: 372px; width: 920px; font-size: 80px; }
+    #c2 .itens { left: 80px; top: 1290px; width: 920px; display: flex; gap: 12px; flex-wrap: wrap; }
+    #c3 .h { left: 80px; top: 372px; width: 920px; font-size: 80px; }
+    #c3 .riscos { left: 80px; top: 780px; width: 900px; display: grid; gap: 16px; }
+    #c3 .riscos > div { height: 120px; display: grid; grid-template-columns: 70px 1fr; align-items: center; gap: 16px; padding: 0 30px; font-size: 42px; font-weight: 650; letter-spacing: -.025em; }
+    #c3 .riscos .ico { font-size: 46px; color: #ff6a1f; }
+    #c3 .acontece { left: 80px; top: 1230px; font-size: 64px; }
+    #c4 .rot { left: 80px; top: 380px; }
+    #c4 .h { left: 80px; top: 440px; width: 920px; font-size: 92px; }
+    #c5 .h { left: 80px; top: 372px; width: 920px; font-size: 80px; }
+    #c5 .comp { left: 80px; top: 800px; width: 920px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    #c5 .lado { height: 460px; padding: 34px; display: grid; align-content: space-between; }
+    #c5 .lado small { font: 500 20px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    #c5 .lado .ico { font-size: 96px; }
+    #c5 .lado b { display: block; font-size: 52px; font-weight: 700; letter-spacing: -.04em; line-height: 1; }
+    #c5 .lado p { font-size: 26px; color: var(--t2); line-height: 1.3; margin-top: 12px; }
+    #c5 .alug .ico { color: var(--t3); } #c5 .seu .ico { color: #ff8a4c; }
+    #c6 .h { left: 80px; top: 372px; width: 920px; font-size: 84px; }
+    #c7 .fim-card .cta .h { font-size: 80px; text-align: center; }
+  </style>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/SplitText.min.js"></script>
+  <script src="vendor/CustomEase.min.js"></script>
+  <script src="vendor/DrawSVGPlugin.min.js"></script>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+</head>
+<body>
+<div class="reel">
+  <div id="palco">
+    <section class="cena" id="c1">
+      <h1 class="h"><span class="linha"><span>Seu perfil some hoje.</span></span><span class="linha"><span class="cz">O que sobra da</span></span><span class="linha"><span class="lar"><em>sua empresa?</em></span></span></h1>
+    </section>
+    <section class="cena" id="c2">
+      <h2 class="h"><span class="linha"><span>Seguidores, mensagens</span></span><span class="linha"><span>e alcance ficam</span></span><span class="linha"><span class="lar"><em>com a plataforma.</em></span></span></h2>
+      <div class="itens"><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-users"/></svg>seguidores</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-chat"/></svg>mensagens</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-trending-up"/></svg>alcance</span><span class="chip" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-lock"/></svg>não são seus</span></div>
+    </section>
+    <section class="cena" id="c3">
+      <h2 class="h"><span class="linha"><span>E perder o acesso</span></span><span class="linha"><span class="lar"><em>não avisa antes.</em></span></span></h2>
+      <div class="riscos">
+        <div data-frame="18,0,18,0" data-tone="laranja"><svg class="ico"><use href="#i-fingerprint"/></svg>Conta invadida</div>
+        <div data-frame="18,0,18,0" data-tone="laranja"><svg class="ico"><use href="#i-ban"/></svg>Conta suspensa</div>
+        <div data-frame="18,0,18,0" data-tone="laranja"><svg class="ico"><use href="#i-lock"/></svg>Bloqueio por engano</div>
+      </div>
+      <p class="acontece h cz"><em>Acontece.</em></p>
+    </section>
+    <section class="cena" id="c4">
+      <p class="rot"><i>//</i> o que é seu de verdade</p>
+      <h2 class="h"><span class="linha"><span>O domínio.</span></span><span class="linha"><span>O site.</span></span><span class="linha"><span class="lar"><em>Os contatos.</em></span></span></h2>
+    </section>
+    <section class="cena" id="c5">
+      <h2 class="h"><span class="linha"><span>Rede social é vitrine</span></span><span class="linha"><span class="cz">alugada. <span style="color:#fff">Site é</span></span></span><span class="linha"><span class="lar"><em>endereço próprio.</em></span></span></h2>
+      <div class="comp">
+        <div class="lado alug" data-frame="22,0,22,0" data-tone="branco"><small>perfil</small><svg class="ico"><use href="#i-instagram"/></svg><div><b>Alugado</b><p>As regras mudam sem perguntar.</p></div></div>
+        <div class="lado seu" data-frame="22,0,22,0" data-tone="quente" data-acento="topo"><small>site e domínio</small><svg class="ico"><use href="#i-landmark"/></svg><div><b>Seu</b><p>Você decide o que fica e como funciona.</p></div></div>
+      </div>
+    </section>
+    <section class="cena" id="c6">
+      <h2 class="h"><span class="linha"><span>Use o perfil</span></span><span class="linha"><span>para atrair. <span class="lar"><em>Leve o</em></span></span></span><span class="linha"><span class="lar"><em>cliente para o que é seu.</em></span></span></h2>
+    </section>
+    <section class="cena" id="c7">
+      <div class="fim-card">
+        <img class="logo-g" src="../../../marca/tirvo-logo.svg" alt="Tirvo">
+        <p class="slogan">Se algo pode ser melhorado, <b>ainda não está pronto.</b></p>
+        <div class="cta"><h2 class="h"><span class="linha"><span>Manda pro seu sócio</span></span><span class="linha"><span class="lar"><em>antes que precise.</em></span></span></h2></div>
+        <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span><span class="ar">@tirvotech</span></div>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="../stories/premium/base.js"></script>
+<script type="module">
+import { iniciar, semente } from './motor.js';
+const M = iniciar({ id: 'P25', duracao: 28, trilha: 'trilha-P25.mp3', capitulos: [0, 3, 7.5, 11.5, 16, 20.5, 24.5], capa: 1.4, rotuloHud: 'presença própria', semente: 25 });
+const { tl } = M;
+const $ = (s) => document.querySelector(s);
+
+/* ---------- 3D: o perfil que vira pó, e o que fica ---------- */
+M.tres(({ THREE, scene, camera, RoundedBoxGeometry, textura }) => {
+  camera.position.set(0, -4, 30);
+  const luz = new THREE.DirectionalLight('#ffffff', 1.3); luz.position.set(-8, 12, 14); scene.add(luz);
+  const rim = new THREE.PointLight('#ff5500', 120, 60, 1.6); rim.position.set(6, -8, 8); scene.add(rim);
+
+  // Perfil desenhado em canvas e amostrado em pontos
+  const CW = 240, CH = 330;
+  const cv = document.createElement('canvas'); cv.width = CW; cv.height = CH; const g = cv.getContext('2d');
+  g.fillStyle = '#16161a'; g.beginPath(); g.roundRect(0, 0, CW, CH, 18); g.fill();
+  g.fillStyle = '#3f3f46'; g.beginPath(); g.arc(46, 52, 26, 0, 7); g.fill();
+  g.fillStyle = '#ff6a1f'; g.beginPath(); g.arc(46, 52, 26, 0, 7); g.lineWidth = 4; g.strokeStyle = '#ff6a1f'; g.stroke();
+  g.fillStyle = '#fafafa'; g.font = '600 18px Geist'; g.fillText('@suaempresa', 86, 46);
+  g.fillStyle = '#a1a1aa'; g.font = '400 13px Geist'; g.fillText('seguidores · posts · mensagens', 86, 68);
+  g.fillStyle = '#ff5500'; g.beginPath(); g.roundRect(18, 96, 204, 26, 8); g.fill();
+  for (let i = 0; i < 9; i++) { g.fillStyle = ['#52525b', '#3f3f46', '#71717a'][i % 3]; g.fillRect(18 + (i % 3) * 69, 136 + Math.floor(i / 3) * 64, 64, 60); }
+  const dados = g.getImageData(0, 0, CW, CH).data;
+  const pts = [], cores = [];
+  const passo = 2;
+  for (let y = 0; y < CH; y += passo) for (let x = 0; x < CW; x += passo) {
+    const k = (y * CW + x) * 4; if (dados[k + 3] < 10) continue;
+    pts.push((x - CW / 2) / 40, -(y - CH / 2) / 40, 0); cores.push(dados[k] / 255, dados[k + 1] / 255, dados[k + 2] / 255);
+  }
+  const N = pts.length / 3;
+  const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(N * 3);
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(cores), 3));
+  const mat = new THREE.PointsMaterial({ size: .085, vertexColors: true, transparent: true, sizeAttenuation: true, toneMapped: false });
+  const nuvem = new THREE.Points(geo, mat); scene.add(nuvem);
+  const rr = semente(251);
+  const aux = Array.from({ length: N }, (_, i) => ({ dx: (rr() - .3) * 14, dy: (rr() - .2) * 12, dz: (rr() - .5) * 12, atraso: (pts[i * 3] + 5) / 10 * .55 + rr() * .25, ang: rr() * 6.28, r: 1.2 + rr() * 2.2 }));
+  // a "plataforma" (cofre) para onde tudo vai
+  const cofre = new THREE.Mesh(new THREE.IcosahedronGeometry(2.3, 2), new THREE.MeshPhysicalMaterial({ color: '#1a1a1f', metalness: .9, roughness: .35, clearcoat: 1, flatShading: true, envMapIntensity: .6 }));
+  cofre.position.set(3.5, 2.2, -4); cofre.visible = false; scene.add(cofre);
+
+  // Os três blocos que são seus
+  const blocos = ['domínio', 'site', 'contatos'].map((nome, i) => {
+    const gr = new THREE.Group();
+    const m = new THREE.Mesh(new RoundedBoxGeometry(2.5, 2.5, 2.5, 6, .3), new THREE.MeshPhysicalMaterial({ color: '#111114', metalness: .85, roughness: .32, clearcoat: 1, envMapIntensity: .6 }));
+    gr.add(m);
+    const ar = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(2.52, 2.52, 2.52)), new THREE.LineBasicMaterial({ color: '#ff6a1f', transparent: true, opacity: .0, toneMapped: false }));
+    gr.add(ar); gr.userData.ar = ar;
+    const tx = textura(400, 120, (c) => { c.fillStyle = '#fafafa'; c.font = '600 64px Geist'; c.textAlign = 'center'; c.fillText(nome, 200, 82); });
+    const e = new THREE.Mesh(new THREE.PlaneGeometry(2.3, .69), new THREE.MeshBasicMaterial({ map: tx, transparent: true, toneMapped: false })); e.position.z = 1.27; gr.add(e);
+    gr.position.set((i - 1) * 4, -22, 0); scene.add(gr); return gr;
+  });
+  // fio ligando o perfil ao site
+  const fioGeo = new THREE.BufferGeometry(); const fp = new Float32Array(3 * 40); fioGeo.setAttribute('position', new THREE.BufferAttribute(fp, 3));
+  const fio = new THREE.Line(fioGeo, new THREE.LineBasicMaterial({ color: '#ff8a4c', transparent: true, opacity: 0, toneMapped: false })); scene.add(fio);
+
+  const S = { des: 0, suga: 0, cofre: 0, bl: 0, arest: 0, volta: 0, fio: 0, cardY: -6.2, blY: -7.8, cz: 30, rot: 0 };
+  tl.to(S, { des: 1, duration: 1.6, ease: 'power2.in' }, 1.6);
+  M.som(1.65, 'desintegrar', 1); M.som(1.6, 'glitch', .5);
+  tl.set(cofre, { visible: true }, 3);
+  tl.fromTo(S, { cofre: 0 }, { cofre: 1, duration: .8, ease: 'expo.out' }, 3.1);
+  tl.to(S, { suga: 1, duration: 2.2, ease: 'power3.inOut' }, 3.4);
+  M.som(3.4, 'whoosh-longo', .6); M.som(5.6, 'cadeado', .9);
+  tl.to(S, { cofre: 0, duration: .6, ease: 'power3.in' }, 11.2);
+  tl.to(S, { bl: 1, duration: 1.6, ease: 'expo.out' }, 11.6);
+  M.som(11.6, 'subdrop', .7); [11.9, 12.4, 12.9].forEach((t) => M.som(t, 'bloco', .9));
+  tl.to(S, { arest: 1, duration: .8 }, 13.2);
+  tl.to(S, { bl: .12, duration: 1 }, 15.8);
+  tl.to(S, { bl: 1, duration: 1 }, 20.4);
+  tl.to(S, { volta: 1, duration: 1.6, ease: 'expo.inOut' }, 20.5);
+  tl.to(S, { fio: 1, duration: .8 }, 22);
+  M.som(20.5, 'reverso', .5); M.som(22, 'confirma', .6);
+  tl.to(S, { cz: 40, bl: 0, volta: 0, fio: 0, duration: 1, ease: 'power3.in' }, 24.2);
+
+  const fonte = new THREE.Vector3();
+  return (t) => {
+    camera.position.set(Math.sin(t * .3) * 1.2, -4, S.cz); camera.lookAt(0, -4.5, 0);
+    const cofrePos = new THREE.Vector3(0, -6.5, -2);
+    const cardX = -2.2 * S.volta;
+    for (let i = 0; i < N; i++) {
+      const a = aux[i];
+      const bx = pts[i * 3] * (1 - .25 * S.volta) + cardX, by = pts[i * 3 + 1] * (1 - .25 * S.volta) + S.cardY + .8 * S.volta, bz = 0;
+      const p = Math.min(1, Math.max(0, (S.des - a.atraso) / .45)) * (1 - S.volta);
+      const e = p * p;
+      let x = bx + a.dx * e, y = by + a.dy * e + Math.sin(t * 2 + a.ang) * .2 * e, z = bz + a.dz * e;
+      if (S.suga > 0 && S.volta < 1) {
+        const s = Math.min(1, Math.max(0, S.suga * 1.3 - a.atraso * .5)) * (1 - S.volta);
+        const ang = a.ang + t * 2.2;
+        const tx = cofrePos.x + Math.cos(ang) * a.r * S.cofre, ty = cofrePos.y + Math.sin(ang * 1.3) * a.r * .6 * S.cofre, tz = cofrePos.z + Math.sin(ang) * a.r * S.cofre;
+        x += (tx - x) * s; y += (ty - y) * s; z += (tz - z) * s;
+      }
+      pos[i * 3] = x; pos[i * 3 + 1] = y; pos[i * 3 + 2] = z;
+    }
+    geo.attributes.position.needsUpdate = true;
+    mat.opacity = 1 - S.bl * .6 * (1 - S.volta);
+    cofre.scale.setScalar(Math.max(.001, S.cofre)); cofre.rotation.set(t * .3, t * .5, 0);
+    cofre.position.copy(cofrePos);
+    blocos.forEach((b, i) => {
+      const k = Math.min(1, Math.max(0, S.bl * 1.6 - i * .3));
+      b.position.y = -22 + (S.blY + 22) * (1 - Math.pow(1 - k, 3)) + Math.sin(t * 1.4 + i) * .1;
+      b.position.x = (i - 1) * 3.2 + (S.volta * 1.6);
+      b.rotation.set(.18, -.35 + Math.sin(t * .5 + i) * .05, 0);
+      b.scale.setScalar(S.volta > 0 ? (i === 1 ? 1 : 1 - .5 * S.volta) : 1);
+      b.userData.ar.material.opacity = S.arest * (i === 1 || S.volta < .5 ? 1 : .3);
+      b.visible = k > .001;
+    });
+    // fio do perfil ao site
+    const A = new THREE.Vector3(cardX + 1.6, S.cardY + 1, .2), B = blocos[1].position.clone().add(new THREE.Vector3(-1.2, .4, 1));
+    for (let j = 0; j < 40; j++) { const u = j / 39; const ponto = A.clone().lerp(B, u); ponto.y += Math.sin(u * Math.PI) * 1.2; fp.set([ponto.x, ponto.y, ponto.z], j * 3); }
+    fioGeo.attributes.position.needsUpdate = true; fioGeo.setDrawRange(0, Math.round(40 * S.fio));
+    fio.material.opacity = S.fio;
+    rim.intensity = 120 + S.arest * 80;
+  };
+}, { bloom: .5, limiar: .7, ambiente: .7 });
+
+/* ---------- Cena 1 ---------- */
+M.cena('#c1', 0, 3);
+M.sobe($('#c1 .h'), .05, { stagger: .3 });
+M.som(0, 'relogio', .4);
+M.trans(3, 'glitch');
+
+/* ---------- Cena 2 ---------- */
+M.cena('#c2', 3, 7.5);
+M.sobe($('#c2 .h'), 3.05, { stagger: .2 });
+M.entra('#c2 .chip', 4.2, { y: 20, stagger: .25, som: 'pop', vol: .5 });
+M.trans(7.5, 'corte');
+
+/* ---------- Cena 3 ---------- */
+M.cena('#c3', 7.5, 11.5);
+M.sobe($('#c3 .h'), 7.55, { stagger: .25 });
+M.entra('#c3 .riscos > div', 8.3, { x: 60, y: 0, stagger: .6, blur: 16 });
+[8.3, 8.9, 9.5].forEach((t) => M.som(t, 'erro', .6));
+M.entra('#c3 .acontece', 10.3, { y: 20 });
+M.som(10.9, 'reverso', .6);
+M.trans(11.5, 'flash');
+
+/* ---------- Cena 4 ---------- */
+M.cena('#c4', 11.5, 16);
+M.entra('#c4 .rot', 11.55, { y: 10 });
+M.sobe($('#c4 .h'), 11.8, { stagger: .5 });
+M.trans(16, 'varre');
+
+/* ---------- Cena 5 ---------- */
+M.cena('#c5', 16, 20.5);
+M.veu(16, 1, .6);
+M.sobe($('#c5 .h'), 16.05, { stagger: .2 });
+M.entra('#c5 .lado', 17.2, { y: 40, stagger: .35 });
+M.som(17.2, 'pop', .5); M.som(17.55, 'confirma', .6);
+M.veu(20.4, 1, 0);
+M.trans(20.5, 'mira');
+
+/* ---------- Cena 6 ---------- */
+M.cena('#c6', 20.5, 24.5);
+M.sobe($('#c6 .h'), 20.55, { stagger: .3 });
+M.trans(24.5, 'flash');
+
+/* ---------- Final ---------- */
+M.cena('#c7', 24.5);
+tl.set(['#hud .tc', '#hud .capitulos'], { opacity: .35 }, 24.5);
+M.entra('#c7 .logo-g', 24.55, { scale: .92, y: 0, blur: 24, dur: 1.1 });
+M.som(24.55, 'brilho', .8);
+M.entra('#c7 .slogan', 25, { y: 14 });
+M.sobe($('#c7 .cta .h'), 25.25, { stagger: .12 });
+M.entra('#c7 .links', 26, { y: 12 });
+tl.to('#fundo .b1', { x: 250, y: 500, duration: 9, ease: 'suave' }, 0).to('#fundo .b1', { x: -220, y: 100, duration: 9, ease: 'suave' }, 9).to('#fundo .b1', { x: 0, y: 0, duration: 10, ease: 'suave' }, 18);
+tl.to({}, { duration: 28 }, 0);
+M.pronto();
+</script>
+</body>
+</html>

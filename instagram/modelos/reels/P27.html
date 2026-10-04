@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>P27: logotipo e logomarca em 20 segundos</title>
+  <link rel="stylesheet" href="motor.css">
+  <style>
+    #c1 .h { left: 80px; top: 372px; width: 920px; font-size: 96px; }
+    .peca-logo { left: 140px; top: 900px; width: 800px; height: 197px; }
+    .peca-logo img { position: absolute; left: 0; top: 0; width: 800px; height: 197px; }
+    .peca-logo .so-nome { clip-path: inset(0 0 0 35%); }
+    .peca-logo .so-simb { clip-path: inset(0 75% 0 0); }
+    .peca-logo .apaga { opacity: .12; }
+    .cota { left: 140px; top: 860px; width: 800px; height: 300px; }
+    #legenda { left: 80px; top: 1250px; width: 920px; display: flex; justify-content: space-between; font: 500 20px/1 var(--mono); letter-spacing: .14em; color: var(--t3); text-transform: uppercase; }
+    #legenda b { color: #ff8a4c; font-weight: 500; }
+    .etq { left: 80px; top: 372px; width: 920px; }
+    .etq .num { font: 500 24px/1 var(--mono); letter-spacing: .16em; color: var(--t3); text-transform: uppercase; display: flex; gap: 14px; align-items: center; }
+    .etq .num b { color: #ff6a1f; font-weight: 500; }
+    .etq h2 { margin-top: 22px; font-size: 100px; font-weight: 700; letter-spacing: -.05em; line-height: .96; }
+    .etq h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.1em; }
+    .etq p { margin-top: 20px; font-size: 36px; color: var(--t2); }
+    #c5 .sist { left: 80px; top: 1250px; width: 920px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    #c5 .sist > div { height: 150px; padding: 20px 22px; display: grid; align-content: space-between; }
+    #c5 .sist small { font: 500 17px/1 var(--mono); letter-spacing: .14em; color: var(--t3); text-transform: uppercase; }
+    #c5 .cores { display: flex; gap: 8px; } #c5 .cores i { width: 44px; height: 44px; border-radius: 10px; border: 1px solid rgba(255,255,255,.14); }
+    #c5 .tipos { font-size: 44px; font-weight: 640; letter-spacing: -.03em; } #c5 .tipos em { font-family: var(--serif); font-weight: 400; } #c5 .tipos span { font-family: var(--mono); font-size: 34px; font-weight: 500; }
+    #c5 .regra { font-size: 26px; font-weight: 560; line-height: 1.2; }
+    #c6 .fim-card .cta .h { font-size: 80px; text-align: center; }
+    #c6 .salvar { position: absolute; left: 50%; top: 1190px; transform: translateX(-50%); display: flex; align-items: center; gap: 16px; padding: 22px 34px; font: 600 30px/1 var(--sans); white-space: nowrap; }
+    #c6 .salvar .ico { font-size: 36px; color: #ff8a4c; }
+  </style>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/SplitText.min.js"></script>
+  <script src="vendor/CustomEase.min.js"></script>
+  <script src="vendor/DrawSVGPlugin.min.js"></script>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+</head>
+<body>
+<div class="reel">
+  <div id="palco">
+    <!-- A logo oficial fica fixa durante as cenas 1 a 4; só muda o que aparece dela (recorte, sem distorção) -->
+    <div class="cena" id="logo-fixa">
+      <div class="peca-logo" id="pl">
+        <img class="base" src="../../../marca/tirvo-logo.svg" alt="Tirvo">
+        <img class="so-nome" src="../../../marca/tirvo-logo.svg" alt="">
+        <img class="so-simb" src="../../../marca/tirvo-logo.svg" alt="">
+      </div>
+      <svg class="cota" viewBox="0 0 800 300">
+        <g stroke="#ff7a33" stroke-width="2.5" fill="none" style="filter:drop-shadow(0 0 6px rgba(255,85,0,.7))">
+          <path id="kNome" d="M290 250H800M290 238V262M800 238V262"/>
+          <path id="kSimb" d="M0 250H192M0 238V262M192 238V262"/>
+          <path id="kTudo" d="M0 14H800M0 2V26M800 2V26"/>
+        </g>
+      </svg>
+      <div id="legenda"><span id="lg1">símbolo</span><b id="lg2">logomarca</b><span id="lg3">nome</span></div>
+    </div>
+    <section class="cena" id="c1">
+      <h1 class="h"><span class="linha"><span>Logotipo e logomarca</span></span><span class="linha"><span class="lar"><em>não são a mesma coisa.</em></span></span></h1>
+    </section>
+    <section class="cena" id="c2">
+      <div class="etq"><div class="num"><b>01</b>logotipo</div><h2>O nome, <em>desenhado.</em></h2><p>Só tipografia. Sem símbolo.</p></div>
+    </section>
+    <section class="cena" id="c3">
+      <div class="etq"><div class="num"><b>02</b>símbolo</div><h2>A marca <em>sem palavras.</em></h2><p>Reconhecida até em 16 px.</p></div>
+    </section>
+    <section class="cena" id="c4">
+      <div class="etq"><div class="num"><b>03</b>logomarca</div><h2>Símbolo e nome, <em>juntos.</em></h2><p>É o que a maioria chama de "logo".</p></div>
+    </section>
+    <section class="cena" id="c5">
+      <div class="etq"><div class="num"><b>04</b>identidade visual</div><h2>O sistema que <em>mantém tudo igual.</em></h2></div>
+      <div class="sist">
+        <div data-frame="16,0,16,0" data-tone="branco"><small>paleta</small><span class="cores"><i style="background:#09090b"></i><i style="background:#ff5500"></i><i style="background:#a1a1aa"></i><i style="background:#fafafa"></i></span></div>
+        <div data-frame="16,0,16,0" data-tone="branco"><small>tipografia</small><span class="tipos">Aa <em>Aa</em> <span>Aa</span></span></div>
+        <div data-frame="16,0,16,0" data-tone="laranja"><small>manual</small><span class="regra">regras de uso, respiro e versões</span></div>
+      </div>
+    </section>
+    <section class="cena" id="c6">
+      <div class="fim-card">
+        <img class="logo-g" src="../../../marca/tirvo-logo.svg" alt="Tirvo">
+        <p class="slogan">Se algo pode ser melhorado, <b>ainda não está pronto.</b></p>
+        <div class="cta"><h2 class="h"><span class="linha"><span>Salve para o dia</span></span><span class="linha"><span class="lar"><em>do briefing.</em></span></span></h2></div>
+        <span class="salvar" data-frame="18,0,18,0" data-tone="quente"><svg class="ico"><use href="#i-pin"/></svg>salvar</span>
+        <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech/marca.html</u></span><span class="ar">@tirvotech</span></div>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="../stories/premium/base.js"></script>
+<script type="module">
+import { iniciar, semente } from './motor.js';
+const M = iniciar({ id: 'P27', duracao: 22, trilha: 'trilha-P27.mp3', capitulos: [0, 3, 7, 11, 15, 19], capa: 2.6, rotuloHud: 'logotipo · marca', semente: 27 });
+const { tl } = M;
+const $ = (s) => document.querySelector(s);
+
+/* ---------- 3D: planta técnica girando atrás da logo ---------- */
+M.tres(({ THREE, scene, camera }) => {
+  camera.position.set(0, -2, 30);
+  const grupo = new THREE.Group(); scene.add(grupo);
+  const mat = new THREE.LineBasicMaterial({ color: '#ffffff', transparent: true, opacity: .12 });
+  const matL = new THREE.LineBasicMaterial({ color: '#ff7a33', transparent: true, opacity: .5, toneMapped: false });
+  // anéis e grade de construção
+  for (let r = 2; r <= 12; r += 2) {
+    const c = new THREE.EllipseCurve(0, 0, r, r, 0, Math.PI * 2); const pts = c.getPoints(120);
+    const l = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(pts.map((p) => new THREE.Vector3(p.x, p.y, 0))), r === 6 ? matL : mat); grupo.add(l);
+  }
+  const g2 = []; for (let x = -12; x <= 12; x += 2) g2.push(new THREE.Vector3(x, -12, 0), new THREE.Vector3(x, 12, 0), new THREE.Vector3(-12, x, 0), new THREE.Vector3(12, x, 0));
+  grupo.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(g2), mat));
+  grupo.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-14, -14, 0), new THREE.Vector3(14, 14, 0), new THREE.Vector3(-14, 14, 0), new THREE.Vector3(14, -14, 0)]), mat));
+  // pontos marcadores
+  const marcas = new THREE.InstancedMesh(new THREE.SphereGeometry(.12, 10, 10), new THREE.MeshBasicMaterial({ color: '#ff8a4c', toneMapped: false }), 24);
+  const m4 = new THREE.Matrix4();
+  for (let i = 0; i < 24; i++) { const a = i / 24 * Math.PI * 2; m4.setPosition(Math.cos(a) * 6, Math.sin(a) * 6, 0); marcas.setMatrixAt(i, m4); }
+  grupo.add(marcas);
+  const S = { rx: 1.1, rz: 0, op: 0, y: -4 };
+  tl.to(S, { op: 1, duration: 1.5 }, 0);
+  tl.to(S, { rz: Math.PI * .5, duration: 22, ease: 'none' }, 0);
+  tl.to(S, { rx: .75, duration: 4, ease: 'suave' }, 15);
+  return (t) => {
+    grupo.rotation.set(-S.rx, 0, S.rz); grupo.position.y = S.y;
+    mat.opacity = .1 * S.op; matL.opacity = .45 * S.op;
+    camera.lookAt(0, -2.5, 0);
+  };
+}, { bloom: .5, limiar: .5 });
+
+/* ---------- Logo fixa: o que aparece em cada cena ---------- */
+M.cena('#logo-fixa', 0, 19);
+const base = '#pl .base', nome = '#pl .so-nome', simb = '#pl .so-simb';
+tl.set([nome, simb], { opacity: 0 }, 0);
+M.entra('#pl', .3, { y: 0, scale: .94, blur: 24, dur: 1.1 });
+M.som(.3, 'brilho', .7);
+tl.set(['#kNome', '#kSimb', '#kTudo'], { drawSVG: '50% 50%' }, 0);
+M.entra('#legenda', 1.2, { y: 10 });
+// 01 logotipo: só o nome
+tl.to(base, { opacity: .1, duration: .4 }, 3.1).set(nome, { opacity: 1 }, 3.1);
+tl.fromTo(nome, { x: 30 }, { x: 0, duration: .6, ease: 'expo.out' }, 3.1);
+tl.to('#kNome', { drawSVG: '0% 100%', duration: .6 }, 3.4);
+tl.to('#lg3', { color: '#fafafa', duration: .2 }, 3.4);
+M.som(3.4, 'clique', .7);
+// 02 símbolo
+tl.to(nome, { opacity: 0, duration: .3 }, 7).set(simb, { opacity: 1 }, 7);
+tl.to('#kNome', { drawSVG: '100% 100%', duration: .3 }, 7);
+tl.fromTo(simb, { x: -30 }, { x: 0, duration: .6, ease: 'expo.out' }, 7.05);
+tl.to('#kSimb', { drawSVG: '0% 100%', duration: .6 }, 7.3);
+tl.to('#lg3', { color: '', duration: .2 }, 7).to('#lg1', { color: '#fafafa', duration: .2 }, 7.3);
+M.som(7.3, 'clique', .7);
+// 03 logomarca
+tl.to(base, { opacity: 1, duration: .5 }, 11.05).set(simb, { opacity: 0 }, 11.4);
+tl.to('#kSimb', { drawSVG: '0% 0%', duration: .3 }, 11);
+tl.to('#kTudo', { drawSVG: '0% 100%', duration: .7 }, 11.3);
+tl.to('#lg1', { color: '', duration: .2 }, 11).to('#lg2', { color: '#fff', textShadow: '0 0 14px rgba(255,85,0,.8)', duration: .3 }, 11.4);
+M.som(11.3, 'impacto', .6);
+// 04 identidade: a logo sobe e o sistema aparece
+tl.to('#pl', { y: -60, scale: .82, duration: .9, ease: 'expo.inOut' }, 15);
+tl.to(['.cota', '#legenda'], { opacity: 0, duration: .4 }, 15);
+
+/* ---------- Textos ---------- */
+M.cena('#c1', 0, 3);
+M.sobe($('#c1 .h'), .05, { stagger: .3 });
+M.trans(3, 'varre');
+[['#c2', 3, 7, 'glitch'], ['#c3', 7, 11, 'corte'], ['#c4', 11, 15, 'varre'], ['#c5', 15, 19, 'flash']].forEach(([id, a, b, tr]) => {
+  M.cena(id, a, b);
+  M.entra(`${id} .num`, a + .03, { x: -30, y: 0, dur: .5 });
+  M.letras($(`${id} .etq h2`), a + .1, { stagger: .016, dur: .55 });
+  const p = $(`${id} .etq p`); if (p) M.entra(p, a + .6, { y: 12, dur: .5 });
+  M.trans(b, tr);
+});
+M.entra('#c5 .sist > div', 16, { y: 30, stagger: .25, som: 'pop', vol: .5 });
+
+/* ---------- Final ---------- */
+M.cena('#c6', 19);
+tl.set(['#hud .tc', '#hud .capitulos'], { opacity: .35 }, 19);
+M.entra('#c6 .logo-g', 19.05, { scale: .92, y: 0, blur: 24, dur: 1.1 });
+M.som(19.05, 'brilho', .6);
+M.entra('#c6 .slogan', 19.45, { y: 14 });
+M.sobe($('#c6 .cta .h'), 19.7, { stagger: .12 });
+M.entra('#c6 .salvar', 20.3, { y: 20 });
+M.entra('#c6 .links', 20.6, { y: 12 });
+tl.to('#fundo .b1', { x: 200, y: 420, duration: 8, ease: 'suave' }, 0).to('#fundo .b1', { x: -150, y: 150, duration: 8, ease: 'suave' }, 8).to('#fundo .b1', { x: 0, y: 0, duration: 6, ease: 'suave' }, 16);
+tl.to({}, { duration: 22 }, 0);
+M.pronto();
+</script>
+</body>
+</html>

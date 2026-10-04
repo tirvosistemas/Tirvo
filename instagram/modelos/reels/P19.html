@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>P19: logo bonito não é identidade visual</title>
+  <link rel="stylesheet" href="motor.css">
+  <style>
+    #c1 .h { left: 80px; top: 372px; width: 920px; font-size: 100px; }
+    #c2 .h { left: 80px; top: 372px; width: 920px; font-size: 88px; }
+    #c3 .h { left: 80px; top: 1060px; width: 920px; font-size: 92px; }
+    #c4 .rot { left: 80px; top: 380px; }
+    #c4 .h { left: 80px; top: 440px; width: 920px; font-size: 84px; }
+    #c4 .sist { left: 80px; top: 790px; width: 920px; display: flex; flex-wrap: wrap; gap: 12px; }
+    #c5 .h { left: 80px; top: 372px; width: 920px; font-size: 80px; }
+    #c5 .quem { left: 80px; top: 1300px; width: 920px; display: flex; gap: 12px; flex-wrap: wrap; }
+    #c6 .h { left: 80px; top: 640px; width: 920px; font-size: 112px; }
+    #c6 .div { left: 80px; top: 600px; width: 920px; }
+    #c6 .eco { left: -30px; top: 1180px; }
+    #c7 .fim-card .cta .h { font-size: 76px; text-align: center; }
+    #c7 .palavra { position: absolute; left: 50%; top: 1190px; transform: translateX(-50%); display: flex; align-items: center; gap: 22px; padding: 22px 40px; white-space: nowrap; }
+    #c7 .palavra b { font: 600 56px/1 var(--mono); letter-spacing: .1em; color: #fff; text-shadow: 0 0 20px rgba(255,85,0,.7); }
+    #c7 .palavra span { font-size: 28px; color: var(--t2); }
+  </style>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/SplitText.min.js"></script>
+  <script src="vendor/CustomEase.min.js"></script>
+  <script src="vendor/DrawSVGPlugin.min.js"></script>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+</head>
+<body>
+<div class="reel">
+  <div id="palco">
+    <section class="cena" id="c1">
+      <h1 class="h"><span class="linha"><span>Seu logo é bonito.</span></span><span class="linha"><span>Sua marca está</span></span><span class="linha"><span class="lar"><em>desmontada.</em></span></span></h1>
+    </section>
+    <section class="cena" id="c2">
+      <h2 class="h"><span class="linha"><span>Post de um jeito.</span></span><span class="linha"><span class="cz">Cartão de outro.</span></span><span class="linha"><span class="cz">Site <em>de um terceiro.</em></span></span></h2>
+    </section>
+    <section class="cena" id="c3">
+      <h2 class="h"><span class="linha"><span>O cliente não nota</span></span><span class="linha"><span>o detalhe. <span class="lar"><em>Nota a bagunça.</em></span></span></span></h2>
+    </section>
+    <section class="cena" id="c4">
+      <p class="rot"><i>//</i> identidade visual</p>
+      <h2 class="h"><span class="linha"><span>Identidade não é</span></span><span class="linha"><span>um desenho.</span></span><span class="linha"><span class="lar"><em>É um sistema.</em></span></span></h2>
+      <div class="sist"><span class="chip" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-sparkles"/></svg>paleta</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-pen-tool"/></svg>tipografia</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-layers"/></svg>grade</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-ruler"/></svg>respiro</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-check"/></svg>regras de uso</span></div>
+    </section>
+    <section class="cena" id="c5">
+      <h2 class="h"><span class="linha"><span>Com um manual,</span></span><span class="linha"><span>qualquer pessoa</span></span><span class="linha"><span class="lar"><em>aplica igual.</em></span></span></h2>
+      <div class="quem"><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-user"/></svg>você</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-factory"/></svg>a gráfica</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-instagram"/></svg>quem faz seus posts</span></div>
+    </section>
+    <section class="cena" id="c6">
+      <span class="div"></span>
+      <h2 class="h"><span class="linha"><span class="cz">Logo é a peça.</span></span><span class="linha"><span>Identidade</span></span><span class="linha"><span class="lar"><em>é o sistema.</em></span></span></h2>
+      <div class="eco lar">sistema</div>
+    </section>
+    <section class="cena" id="c7">
+      <div class="fim-card">
+        <img class="logo-g" src="../../../marca/tirvo-logo.svg" alt="Tirvo">
+        <p class="slogan">Se algo pode ser melhorado, <b>ainda não está pronto.</b></p>
+        <div class="cta"><h2 class="h"><span class="linha"><span>Quer a sua marca</span></span><span class="linha"><span class="lar"><em>montada de verdade?</em></span></span></h2></div>
+        <div class="palavra" data-frame="18,0,18,0" data-tone="quente"><b>MARCA</b><span>no direct</span></div>
+        <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span><span class="ar">@tirvotech</span></div>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="../stories/premium/base.js"></script>
+<script type="module">
+import { iniciar, semente } from './motor.js';
+const M = iniciar({ id: 'P19', duracao: 28, trilha: 'trilha-P19.mp3', capitulos: [0, 3, 7.5, 11.5, 16.5, 21, 24.5], capa: 2.4, rotuloHud: 'identidade visual', semente: 19 });
+const { tl } = M;
+const $ = (s) => document.querySelector(s);
+
+/* ---------- 3D: peças soltas que viram sistema ---------- */
+M.tres(({ THREE, scene, camera, RoundedBoxGeometry }) => {
+  camera.position.set(0, -3, 36);
+  const luz = new THREE.DirectionalLight('#ffffff', 1.3); luz.position.set(-8, 12, 14); scene.add(luz);
+  const rim = new THREE.PointLight('#ff5500', 120, 60, 1.6); rim.position.set(6, -6, 6); scene.add(rim);
+  const tipos = ['post', 'cartão', 'site', 'fachada', 'proposta', 'post', 'embalagem', 'story', 'assinatura', 'cardápio', 'banner', 'uniforme'];
+  const rr = semente(77);
+  const FONTES = ['700 46px Geist', 'italic 400 54px "Instrument Serif"', '500 40px "Geist Mono"', '300 44px Geist', '800 50px Geist'];
+  function textura(tipo, sistema, i) {
+    const c = document.createElement('canvas'); c.width = 300; c.height = 380; const g = c.getContext('2d');
+    if (!sistema) {
+      const tons = ['#d4d4d8', '#71717a', '#3f3f46', '#a1a1aa', '#e4e4e7', '#52525b'];
+      const fundo = tons[Math.floor(rr() * tons.length)];
+      g.fillStyle = fundo; g.fillRect(0, 0, 300, 380);
+      const claro = ['#d4d4d8', '#a1a1aa', '#e4e4e7'].includes(fundo);
+      g.fillStyle = claro ? '#18181b' : '#fafafa';
+      // logo genérico em posição e tamanho aleatórios
+      const lx = 30 + rr() * 170, ly = 40 + rr() * 200, ls = 24 + rr() * 50;
+      if (rr() < .5) { g.beginPath(); g.arc(lx, ly, ls / 2, 0, Math.PI * 2); g.fill(); } else { g.save(); g.translate(lx, ly); g.rotate(rr() - .5); g.fillRect(-ls / 2, -ls / 2, ls, ls); g.restore(); }
+      g.font = FONTES[Math.floor(rr() * FONTES.length)];
+      g.save(); g.translate(30 + rr() * 40, 250 + rr() * 80); g.rotate((rr() - .5) * .3); g.fillText('sua marca', 0, 0); g.restore();
+      g.font = '500 18px "Geist Mono"'; g.fillStyle = claro ? '#52525b' : '#a1a1aa'; g.fillText(tipo.toUpperCase(), 20 + rr() * 120, 360);
+    } else {
+      g.fillStyle = '#0b0b0d'; g.fillRect(0, 0, 300, 380);
+      g.strokeStyle = 'rgba(255,255,255,.08)'; g.lineWidth = 1;
+      for (let x = 24; x < 300; x += 42) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 380); g.stroke(); }
+      g.fillStyle = '#ff5500'; g.fillRect(28, 32, 22, 22);
+      g.fillStyle = '#fafafa'; g.font = '700 30px Geist'; g.fillText('sua marca', 60, 52);
+      g.fillStyle = '#fafafa'; g.font = '700 38px Geist'; g.fillText(tipo, 28, 220);
+      g.font = 'italic 400 40px "Instrument Serif"'; g.fillStyle = '#ffb187'; g.fillText('sempre igual', 28, 264);
+      g.fillStyle = '#ff5500'; g.fillRect(28, 320, 90, 6);
+      g.font = '500 16px "Geist Mono"'; g.fillStyle = '#8a8a93'; g.fillText(String(i + 1).padStart(2, '0') + ' / 12', 200, 350);
+    }
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+  }
+  const cards = tipos.map((tp, i) => {
+    const gr = new THREE.Group();
+    const corpo = new THREE.Mesh(new RoundedBoxGeometry(3, 3.8, .12, 4, .1), new THREE.MeshPhysicalMaterial({ color: '#141418', metalness: .5, roughness: .4, clearcoat: 1 }));
+    gr.add(corpo);
+    const caos = textura(tp, false, i), ord = textura(tp, true, i);
+    const mat = new THREE.MeshBasicMaterial({ map: caos, color: '#d0d0d4' });
+    const face = new THREE.Mesh(new THREE.PlaneGeometry(2.9, 3.7), mat); face.position.z = .07; gr.add(face);
+    const col = i % 4, lin = Math.floor(i / 4);
+    gr.userData = { caos, ord, mat,
+      a: { x: (rr() - .5) * 20, y: -4 + (rr() - .5) * 18, z: (rr() - .5) * 8, rx: (rr() - .5) * .9, ry: (rr() - .5) * 1.2, rz: (rr() - .5) * 1.1, s: .8 + rr() * .5 },
+      b: { x: (col - 1.5) * 2.55, y: -4.6 - lin * 3.15, z: 0, rx: 0, ry: 0, rz: 0, s: .72 }, f: rr() * 6 };
+    scene.add(gr); return gr;
+  });
+  // Manual (páginas que viram)
+  const manual = new THREE.Group(); scene.add(manual); manual.visible = false;
+  const paginas = [];
+  for (let p = 0; p < 6; p++) {
+    const c = document.createElement('canvas'); c.width = 320; c.height = 420; const g = c.getContext('2d');
+    g.fillStyle = '#f4f4f5'; g.fillRect(0, 0, 320, 420);
+    g.fillStyle = '#ff5500'; g.fillRect(28, 30, 20, 20);
+    g.fillStyle = '#18181b'; g.font = '700 26px Geist'; g.fillText(['Versões', 'Paleta', 'Tipografia', 'Grade', 'Respiro', 'Usos proibidos'][p], 28, 100);
+    g.fillStyle = '#71717a'; g.font = '500 14px "Geist Mono"'; g.fillText('MANUAL DE MARCA · ' + String(p + 1).padStart(2, '0'), 28, 400);
+    if (p === 1) ['#09090b', '#ff5500', '#a1a1aa', '#e4e4e7'].forEach((cc, k) => { g.fillStyle = cc; g.fillRect(28 + k * 68, 140, 56, 120); });
+    else for (let k = 0; k < 5; k++) { g.fillStyle = '#d4d4d8'; g.fillRect(28, 140 + k * 40, 220 - k * 24, 14); }
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+    const geo = new THREE.PlaneGeometry(4, 5.2); geo.translate(2, 0, 0);
+    const pg = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: t, side: THREE.DoubleSide, color: '#bdbdc2' }));
+    pg.position.z = -p * .02; manual.add(pg); paginas.push(pg);
+  }
+  const S = { k: 0, tremor: 1, cz: 40, man: 0, vira: 0, ordem: 0, sobe: 0 };
+  tl.fromTo(S, { cz: 46 }, { cz: 36, duration: 7, ease: 'suave' }, 0);
+  tl.to(S, { tremor: 2.5, duration: 3 }, 4);
+  tl.to(S, { k: 1, tremor: 0, duration: 1.4, ease: 'expo.inOut' }, 11.3);
+  tl.set(S, { ordem: 1 }, 11.9);
+  M.som(11.3, 'whoosh-longo', .7); M.som(12.0, 'impacto', .7);
+  tl.to(S, { sobe: 1, duration: 1.2, ease: 'power3.inOut' }, 16.3);
+  tl.set(manual, { visible: true }, 16.6);
+  tl.fromTo(S, { man: 0 }, { man: 1, duration: .8, ease: 'expo.out' }, 16.6);
+  tl.to(S, { vira: 5, duration: 3.2, ease: 'none' }, 17.4);
+  for (let p = 0; p < 5; p++) M.som(17.4 + p * .64, 'whoosh', .3);
+  tl.to(S, { man: 0, duration: .9, ease: 'power3.inOut' }, 20.8);
+  tl.set(manual, { visible: false }, 21.7);
+  tl.to(S, { cz: 44, duration: 4, ease: 'suave' }, 21);
+
+  return (t) => {
+    camera.position.set(Math.sin(t * .25) * 1, -3, S.cz); camera.lookAt(0, -3.5, 0);
+    cards.forEach((c, i) => {
+      const u = c.userData, k = S.k, a = u.a, b = u.b;
+      const tr = S.tremor * .08;
+      const L = (p, q) => p + (q - p) * k;
+      c.position.set(L(a.x, b.x) + Math.sin(t * 9 + u.f) * tr, L(a.y, b.y) + Math.cos(t * 8 + u.f) * tr - S.sobe * 18, L(a.z, b.z) + Math.sin(t * .8 + u.f) * .3 * (1 - k));
+      c.rotation.set(L(a.rx, b.rx) + Math.sin(t * 7 + u.f) * tr * .2, L(a.ry, b.ry) + Math.sin(t * .5 + u.f) * .1 * (1 - k), L(a.rz, b.rz));
+      c.scale.setScalar(L(a.s, b.s));
+      u.mat.map = S.ordem ? u.ord : u.caos;
+      u.mat.color.set(S.ordem ? '#ffffff' : '#c8c8cc');
+    });
+    manual.position.set(-2, -4 + (1 - S.man) * -16, 4); manual.rotation.set(-.15, .25, 0);
+    paginas.forEach((pg, p) => { const v = Math.min(1, Math.max(0, S.vira - p)); pg.rotation.y = -v * Math.PI * .96; pg.position.z = -p * .02 + v * p * .02; });
+  };
+}, { bloom: .4, limiar: .9, ambiente: .8 });
+
+/* ---------- Cena 1 ---------- */
+M.cena('#c1', 0, 3);
+M.sobe($('#c1 .h'), .1, { stagger: .3 });
+M.som(.9, 'glitch', .4);
+M.trans(3, 'glitch');
+
+/* ---------- Cena 2 ---------- */
+M.cena('#c2', 3, 7.5);
+M.sobe($('#c2 .h'), 3.05, { stagger: .7 });
+[3.05, 3.75, 4.45].forEach((t) => M.som(t, 'pop', .6));
+M.som(6.8, 'erro', .5);
+M.trans(7.5, 'varre');
+
+/* ---------- Cena 3 ---------- */
+M.veu(7.4, .3, 1);
+M.cena('#c3', 7.5, 11.5);
+M.sobe($('#c3 .h'), 7.6, { stagger: .4 });
+M.som(10.6, 'reverso', .7);
+M.veu(11.3, 1, 0, .4);
+M.trans(11.5, 'corte');
+
+/* ---------- Cena 4 ---------- */
+M.cena('#c4', 11.5, 16.5);
+M.veu(11.6, 1, .35);
+M.entra('#c4 .rot', 11.6, { y: 10 });
+M.sobe($('#c4 .h'), 11.7, { stagger: .2 });
+M.entra('#c4 .chip', 13.2, { y: 20, stagger: .2, som: 'clique', vol: .6 });
+M.trans(16.5, 'zoom');
+
+/* ---------- Cena 5 ---------- */
+M.cena('#c5', 16.5, 21);
+M.sobe($('#c5 .h'), 16.6, { stagger: .2 });
+M.entra('#c5 .chip', 18.4, { y: 20, stagger: .25, som: 'pop', vol: .5 });
+M.trans(21, 'mira');
+
+/* ---------- Cena 6 ---------- */
+M.cena('#c6', 21, 24.5);
+M.veu(21, 1, 1);
+M.divisor($('#c6 .div'), 21.1);
+M.sobe($('#c6 .h'), 21.2, { stagger: .35 });
+tl.fromTo('#c6 .eco', { x: 200, opacity: 0 }, { x: -120, opacity: 1, duration: 3.4, ease: 'power1.out' }, 21.1);
+M.som(21.9, 'impacto', .6);
+M.trans(24.5, 'flash');
+
+/* ---------- Final ---------- */
+M.cena('#c7', 24.5);
+tl.set(['#hud .tc', '#hud .capitulos'], { opacity: .35 }, 24.5);
+M.entra('#c7 .logo-g', 24.55, { scale: .92, y: 0, blur: 24, dur: 1.1 });
+M.som(24.55, 'brilho', .8);
+M.entra('#c7 .slogan', 25, { y: 14 });
+M.sobe($('#c7 .cta .h'), 25.25, { stagger: .12 });
+M.entra('#c7 .palavra', 25.9, { y: 20 });
+M.entra('#c7 .links', 26.3, { y: 12 });
+tl.to('#fundo .b1', { x: 200, y: 500, duration: 9, ease: 'suave' }, 0).to('#fundo .b1', { x: -220, y: 100, duration: 9, ease: 'suave' }, 9).to('#fundo .b1', { x: 0, y: 0, duration: 10, ease: 'suave' }, 18);
+tl.to({}, { duration: 28 }, 0);
+M.pronto();
+</script>
+</body>
+</html>

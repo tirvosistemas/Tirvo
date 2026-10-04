@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>P15: o peso escondido dos plugins</title>
+  <link rel="stylesheet" href="motor.css">
+  <style>
+    #c1 .h { left: 80px; top: 372px; width: 920px; font-size: 92px; }
+    #c2 .h { left: 80px; top: 372px; width: 920px; font-size: 84px; }
+    #c2 .rajada { left: 80px; top: 690px; width: 520px; display: flex; flex-wrap: wrap; gap: 12px; }
+    #c3 .h { left: 80px; top: 372px; width: 920px; font-size: 84px; }
+    #c3 .gauge { left: 60px; top: 860px; width: 560px; height: 336px; }
+    #c3 .gauge-l { left: 80px; top: 1230px; width: 520px; display: flex; justify-content: space-between; font: 500 20px/1 var(--mono); letter-spacing: .12em; color: var(--t3); text-transform: uppercase; }
+    #c3 .gauge-l b { color: #ff8a4c; font-weight: 500; }
+    #c4 .h { left: 80px; top: 372px; width: 920px; font-size: 84px; }
+    #c4 .portas { left: 80px; top: 800px; width: 500px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    #c4 .porta { height: 130px; display: grid; place-items: center; }
+    #c4 .porta .ico { font-size: 72px; color: var(--t3); }
+    #c4 .nota { left: 80px; top: 1270px; width: 560px; font-size: 32px; }
+    #c5 .rot { left: 80px; top: 380px; }
+    #c5 .h { left: 80px; top: 440px; width: 920px; font-size: 90px; }
+    #c5 .ganhos { left: 80px; top: 770px; display: flex; gap: 12px; flex-wrap: wrap; width: 900px; }
+    #c6 .rot { left: 80px; top: 380px; }
+    #c6 .h { left: 80px; top: 440px; width: 920px; font-size: 76px; }
+    #c6 .check { left: 80px; top: 830px; width: 900px; display: grid; gap: 16px; }
+    #c6 .check > div { height: 128px; display: grid; grid-template-columns: 74px 1fr; align-items: center; gap: 18px; padding: 0 30px; }
+    #c6 .check .bx { width: 54px; height: 54px; border-radius: 12px; border: 3px solid #ff7a33; display: grid; place-items: center; box-shadow: 0 0 14px rgba(255,85,0,.35); }
+    #c6 .check .bx svg { width: 34px; height: 34px; }
+    #c6 .check b { display: block; font-size: 40px; font-weight: 650; letter-spacing: -.025em; }
+    #c6 .check small { display: block; margin-top: 8px; font: 500 19px/1 var(--mono); letter-spacing: .1em; color: var(--t3); text-transform: uppercase; }
+    #c7 .fim-card .cta .h { font-size: 76px; text-align: center; }
+    #c7 .salvar { position: absolute; left: 50%; top: 1200px; transform: translateX(-50%); display: flex; align-items: center; gap: 16px; padding: 22px 34px; font: 600 30px/1 var(--sans); white-space: nowrap; }
+    #c7 .salvar .ico { font-size: 36px; color: #ff8a4c; }
+  </style>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/SplitText.min.js"></script>
+  <script src="vendor/CustomEase.min.js"></script>
+  <script src="vendor/DrawSVGPlugin.min.js"></script>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+</head>
+<body>
+<div class="reel">
+  <div id="palco">
+    <section class="cena" id="c1">
+      <h1 class="h"><span class="linha"><span>Cada plugin que</span></span><span class="linha"><span>você instala,</span></span><span class="linha"><span class="lar"><em>o seu cliente carrega.</em></span></span></h1>
+    </section>
+    <section class="cena" id="c2">
+      <h2 class="h"><span class="linha"><span>Um de cada vez.</span></span><span class="linha"><span class="cz">Ninguém percebe</span></span><span class="linha"><span class="cz">o peso <em>somando.</em></span></span></h2>
+      <div class="rajada" id="rajada"><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-package"/></svg>formulário</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-package"/></svg>pop-up</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-package"/></svg>galeria</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-package"/></svg>chat</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-package"/></svg>contador</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-package"/></svg>slider</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-package"/></svg>SEO</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-package"/></svg>cache</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-package"/></svg>backup</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-package"/></svg>tradução</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-package"/></svg>mapa</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-package"/></svg>cookies</span></div>
+    </section>
+    <section class="cena" id="c3">
+      <h2 class="h"><span class="linha"><span>Cada um soma código</span></span><span class="linha"><span>em todas as páginas.</span></span><span class="linha"><span class="lar"><em>Até onde nem aparece.</em></span></span></h2>
+      <svg class="gauge" viewBox="0 0 700 420">
+        <path d="M70 380 A280 280 0 0 1 630 380" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="26" stroke-linecap="round"/>
+        <path id="gArco" d="M70 380 A280 280 0 0 1 630 380" fill="none" stroke="url(#gGrad)" stroke-width="26" stroke-linecap="round"/>
+        <defs><linearGradient id="gGrad" x1="0" x2="1"><stop offset="0" stop-color="#ff3300"/><stop offset=".5" stop-color="#ff8a4c"/><stop offset="1" stop-color="#3ccf8e"/></linearGradient></defs>
+        
+        <g id="gTicks"></g>
+        <g id="ponteiro" style="transform-origin:350px 380px"><path d="M350 380 L350 140" stroke="#fafafa" stroke-width="8" stroke-linecap="round"/><circle cx="350" cy="380" r="22" fill="#ff5500" style="filter:drop-shadow(0 0 12px #ff5500)"/></g>
+      </svg>
+      <div class="gauge-l"><span>lento</span><b id="gTxt">velocidade no celular</b><span>rápido</span></div>
+    </section>
+    <section class="cena" id="c4">
+      <h2 class="h"><span class="linha"><span>E cada um é mais</span></span><span class="linha"><span>uma porta para</span></span><span class="linha"><span class="lar"><em>manter atualizada.</em></span></span></h2>
+      <div class="portas" id="portas"><div class="porta" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-lock"/></svg></div><div class="porta" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-lock"/></svg></div><div class="porta" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-lock"/></svg></div><div class="porta" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-lock"/></svg></div><div class="porta" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-lock"/></svg></div><div class="porta" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-lock"/></svg></div><div class="porta" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-lock"/></svg></div><div class="porta" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-lock"/></svg></div><div class="porta" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-lock"/></svg></div></div>
+      <p class="nota c">Plugin esquecido e desatualizado <b>é porta aberta</b> no seu site.</p>
+    </section>
+    <section class="cena" id="c5">
+      <p class="rot"><i>//</i> sob medida</p>
+      <h2 class="h"><span class="linha"><span>A página leva</span></span><span class="linha"><span><em>só o que</em> usa.</span></span><span class="linha"><span class="lar">Nada sobrando.</span></span></h2>
+      <div class="ganhos"><span class="chip" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-zap"/></svg>menos peso</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-shield-check"/></svg>menos portas</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-check"/></svg>menos sustos</span></div>
+    </section>
+    <section class="cena" id="c6">
+      <p class="rot"><i>//</i> revisão de 10 minutos</p>
+      <h2 class="h"><span class="linha"><span>Para cada plugin</span></span><span class="linha"><span>do seu site, <em>pergunte:</em></span></span></h2>
+      <div class="check">
+        <div data-frame="16,0,16,0" data-tone="branco"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="#ff8a4c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path class="v" d="M5 12l5 5L20 7"/></svg></span><span><b>Para que ele serve?</b><small>se ninguém sabe, é candidato a sair</small></span></div>
+        <div data-frame="16,0,16,0" data-tone="branco"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="#ff8a4c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path class="v" d="M5 12l5 5L20 7"/></svg></span><span><b>Está atualizado?</b><small>versão velha é porta aberta</small></span></div>
+        <div data-frame="16,0,16,0" data-tone="laranja" data-acento="topo"><span class="bx"><svg viewBox="0 0 24 24" fill="none" stroke="#ff8a4c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path class="v" d="M5 12l5 5L20 7"/></svg></span><span><b>Alguém usa de verdade?</b><small>se não, ele só pesa</small></span></div>
+      </div>
+    </section>
+    <section class="cena" id="c7">
+      <div class="fim-card">
+        <img class="logo-g" src="../../../marca/tirvo-logo.svg" alt="Tirvo">
+        <p class="slogan">Se algo pode ser melhorado, <b>ainda não está pronto.</b></p>
+        <div class="cta"><h2 class="h"><span class="linha"><span>Salve e revise os</span></span><span class="linha"><span class="lar"><em>plugins esta semana.</em></span></span></h2></div>
+        <span class="salvar" data-frame="18,0,18,0" data-tone="quente"><svg class="ico"><use href="#i-pin"/></svg>salvar para revisar</span>
+        <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span><span class="ar">@tirvotech</span></div>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="../stories/premium/base.js"></script>
+<script type="module">
+import { iniciar, semente } from './motor.js';
+const M = iniciar({ id: 'P15', duracao: 28, trilha: 'trilha-P15.mp3', capitulos: [0, 3.2, 7.6, 12, 16.5, 21, 24.5], capa: 2.4, rotuloHud: 'performance e segurança', semente: 15 });
+const { tl } = M;
+const $ = (s) => document.querySelector(s);
+
+const NOMES = ['formulário', 'pop-up', 'galeria', 'chat', 'contador', 'slider', 'SEO', 'cache', 'backup', 'tradução', 'mapa', 'cookies'];
+
+/* ---------- 3D: a torre de plugins ---------- */
+M.tres(({ THREE, scene, camera, RoundedBoxGeometry, textura }) => {
+  camera.position.set(0, -3, 32);
+  const luz = new THREE.DirectionalLight('#ffffff', 1.3); luz.position.set(-8, 14, 12); scene.add(luz);
+  const rim = new THREE.PointLight('#ff5500', 110, 50, 1.6); rim.position.set(6, -6, 4); scene.add(rim);
+  const laje = new THREE.Mesh(new RoundedBoxGeometry(10, .7, 7, 6, .3), new THREE.MeshPhysicalMaterial({ color: '#0e0e11', metalness: .85, roughness: .45, clearcoat: .6, envMapIntensity: .45, emissive: '#ff5500', emissiveIntensity: 0 }));
+  scene.add(laje);
+  const et = textura(900, 120, (g) => { g.fillStyle = '#8a8a93'; g.font = '500 44px "Geist Mono"'; g.fillText('SUA PÁGINA', 40, 80); });
+  const etm = new THREE.Mesh(new THREE.PlaneGeometry(8.6, 1.15), new THREE.MeshBasicMaterial({ map: et, transparent: true })); etm.position.set(0, 0, 3.52); etm.scale.y = .5; laje.add(etm);
+  const rr = semente(5);
+  const blocos = NOMES.map((n, i) => {
+    const g = new THREE.Group();
+    const w = 2.6 + rr() * 1.6;
+    const m = new THREE.Mesh(new RoundedBoxGeometry(w, 1.25, 2, 5, .22), new THREE.MeshPhysicalMaterial({ color: i % 3 === 0 ? '#1d1d22' : '#141418', metalness: .7, roughness: .35, clearcoat: .8 }));
+    g.add(m);
+    const tx = textura(512, 220, (c, W, H) => { c.fillStyle = '#ff6a1f'; c.fillRect(30, 70, 8, 80); c.fillStyle = '#fafafa'; c.font = '600 64px Geist'; c.fillText(n, 60, 136); });
+    const e = new THREE.Mesh(new THREE.PlaneGeometry(w * .94, w * .94 * 220 / 512), new THREE.MeshBasicMaterial({ map: tx, transparent: true, toneMapped: false }));
+    e.position.z = 1.02; g.add(e);
+    g.userData = { y: 30, x: (rr() - .5) * 2.2, rz: (rr() - .5) * .12, ry: (rr() - .5) * .5, s: 1 };
+    g.visible = false; scene.add(g); return g;
+  });
+  const L = { cx: 0, y: -9.5, cy: -3, cz: 32, ry: -.35, peso: 0, s: 1 };
+  tl.fromTo(L, { y: -20 }, { y: -9.5, duration: .8, ease: 'expo.out' }, 0);
+  // queda em ritmo crescente
+  const tempos = [.4, .9, 1.35, 1.75, 2.1, 2.45, 2.8, 3.6, 4.2, 4.8, 5.4, 6.0];
+  blocos.forEach((b, i) => {
+    const t = tempos[i];
+    const alvoY = -9.5 + .35 + .625 + i * 1.28;
+    const o = { y: 26 };
+    tl.set(b, { visible: true }, t);
+    tl.fromTo(o, { y: 26 }, { y: alvoY, duration: .6, ease: 'bounce.out', onUpdate() { b.userData.y = o.y; } }, t);
+    M.som(t + .35, 'bloco', i < 7 ? .7 : 1);
+    tl.to(L, { peso: (i + 1) / 12, duration: .3 }, t + .35);
+  });
+  tl.to(L, { cy: 2, cz: 40, cx: -4.2, duration: 2.2, ease: 'suave' }, 3.0);
+  tl.to(L, { cx: 0, duration: 1.2, ease: 'suave' }, 16.4);
+  tl.to(L, { ry: .3, duration: 8, ease: 'suave' }, 4);
+  // colapso
+  blocos.forEach((b, i) => {
+    tl.to(b.userData, { s: .001, duration: .45, ease: 'back.in(2)' }, 16.6 + (11 - i) * .06);
+  });
+  M.som(16.6, 'desintegrar', .9);
+  tl.to(L, { peso: 0, cy: -4, cz: 30, duration: 1.2, ease: 'expo.out' }, 17.2);
+  tl.to(L, { y: -24, duration: .8, ease: 'power3.in' }, 24.2);
+
+  return (t) => {
+    camera.position.set(L.cx + Math.sin(t * .3) * 1.2, L.cy, L.cz); camera.lookAt(L.cx, L.cy - 1, 0);
+    const afunda = L.peso * 1.6;
+    laje.position.set(0, L.y - afunda, 0); laje.rotation.set(.18, L.ry, 0);
+    laje.material.emissiveIntensity = (1 - Math.min(1, L.peso * 3)) * .0 + (L.peso > .9 ? .1 : 0);
+    blocos.forEach((b, i) => {
+      const u = b.userData;
+      const balanco = Math.sin(t * 2.2 + i) * .012 * i;
+      b.position.set(u.x * (.3 + i * .03) + balanco * 8, u.y - afunda, 0);
+      b.rotation.set(.18, L.ry + u.ry * .3, u.rz + balanco);
+      b.scale.setScalar(u.s);
+      b.visible = b.visible && u.s > .01;
+    });
+    rim.intensity = 110 + L.peso * 60;
+  };
+}, { bloom: .45, limiar: .85, ambiente: .7 });
+
+/* ---------- Cena 1 ---------- */
+M.cena('#c1', 0, 3.2);
+M.sobe($('#c1 .h'), .1, { stagger: .3 });
+M.trans(3.2, 'glitch');
+
+/* ---------- Cena 2 ---------- */
+M.cena('#c2', 3.2, 7.6);
+M.sobe($('#c2 .h'), 3.3, { stagger: .25 });
+const raj = $('#rajada');
+M.entra('#rajada .chip', 3.6, { scale: .7, y: 0, blur: 8, dur: .35, stagger: .22, ease: 'back.out(2)' });
+M.som(7.1, 'riser', .6);
+M.trans(7.6, 'corte');
+
+/* ---------- Cena 3 ---------- */
+M.cena('#c3', 7.6, 12);
+M.sobe($('#c3 .h'), 7.65, { stagger: .22 });
+let tk = '';
+for (let k = 0; k <= 10; k++) { const a = Math.PI - k * Math.PI / 10; const x1 = 350 + Math.cos(a) * 240, y1 = 380 - Math.sin(a) * 240, x2 = 350 + Math.cos(a) * 214, y2 = 380 - Math.sin(a) * 214; tk += `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="rgba(255,255,255,.35)" stroke-width="3"/>`; }
+$('#gTicks').innerHTML = tk;
+M.entra('#c3 .gauge', 8.3, { scale: .9, y: 0 });
+tl.fromTo('#gArco', { drawSVG: '0% 100%' }, { drawSVG: '0% 14%', duration: 2.2, ease: 'power2.inOut' }, 9);
+tl.fromTo('#ponteiro', { rotate: 70, svgOrigin: '350 380' }, { rotate: -72, svgOrigin: '350 380', duration: 2.2, ease: 'power2.inOut' }, 9);
+M.entra('#c3 .gauge-l', 8.6, { y: 10 });
+tl.call(() => { $('#gTxt').textContent = 'velocidade no celular'; }, null, 8.9);
+tl.call(() => { $('#gTxt').textContent = 'caindo'; }, null, 9.6);
+M.som(9, 'subdrop', .7);
+M.trans(12, 'varre');
+
+/* ---------- Cena 4 ---------- */
+M.cena('#c4', 12, 16.5);
+M.sobe($('#c4 .h'), 12.05, { stagger: .2 });
+const portas = $('#portas');
+M.entra('#portas .porta', 12.7, { y: 30, stagger: .06 });
+[0, 4, 8, 2, 6].forEach((k, i) => {
+  const el = portas.children[k];
+  tl.to(el.querySelector('.ico'), { color: '#ff6a1f', rotate: -14, y: -8, duration: .2 }, 13.7 + i * .38);
+  tl.to(el, { boxShadow: '0 0 40px rgba(255,85,0,.35)', duration: .2 }, 13.7 + i * .38);
+  M.som(13.7 + i * .38, 'cadeado', .55);
+});
+M.palavras($('#c4 .nota'), 14.6);
+M.trans(16.5, 'zoom');
+
+/* ---------- Cena 5 ---------- */
+M.cena('#c5', 16.5, 21);
+M.entra('#c5 .rot', 16.6, { y: 10 });
+M.sobe($('#c5 .h'), 16.7, { stagger: .18 });
+M.entra('#c5 .chip', 18.1, { y: 20, stagger: .2, som: 'confirma', vol: .45 });
+M.trans(21, 'mira');
+
+/* ---------- Cena 6 ---------- */
+M.cena('#c6', 21, 24.5);
+M.entra('#c6 .rot', 21.1, { y: 10 });
+M.sobe($('#c6 .h'), 21.15, { stagger: .15 });
+M.entra('#c6 .check > div', 21.7, { x: 40, y: 0, stagger: .35 });
+tl.fromTo('#c6 .check .v', { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, stagger: .35 }, 22.4);
+[22.4, 22.75, 23.1].forEach((t) => M.som(t, 'clique', .7));
+M.trans(24.5, 'flash');
+
+/* ---------- Final ---------- */
+M.cena('#c7', 24.5);
+tl.set(['#hud .tc', '#hud .capitulos'], { opacity: .35 }, 24.5);
+M.entra('#c7 .logo-g', 24.55, { scale: .92, y: 0, blur: 24, dur: 1.1 });
+M.som(24.55, 'brilho', .8);
+M.entra('#c7 .slogan', 25, { y: 14 });
+M.sobe($('#c7 .cta .h'), 25.25, { stagger: .12 });
+M.entra('#c7 .salvar', 25.9, { y: 20 });
+M.entra('#c7 .links', 26.3, { y: 12 });
+tl.to('#fundo .b1', { x: 260, y: 600, duration: 8, ease: 'suave' }, 0).to('#fundo .b1', { x: -200, y: 200, duration: 8, ease: 'suave' }, 8).to('#fundo .b1', { x: 0, y: 0, duration: 12, ease: 'suave' }, 16);
+tl.to({}, { duration: 28 }, 0);
+M.pronto();
+</script>
+</body>
+</html>

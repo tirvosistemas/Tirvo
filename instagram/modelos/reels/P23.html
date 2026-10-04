@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>P23: um site, do zero ao ar, em 20 segundos</title>
+  <link rel="stylesheet" href="motor.css">
+  <style>
+    #c1 .h { left: 80px; top: 372px; width: 920px; font-size: 108px; }
+    #c1 .cron { left: 80px; top: 760px; font: 500 120px/1 var(--mono); color: #fff; letter-spacing: -.02em; }
+    #c1 .cron small { display: block; font-size: 20px; letter-spacing: .16em; color: var(--t3); margin-bottom: 14px; }
+    .etapa { position: absolute; left: 80px; top: 372px; width: 920px; }
+    .etapa .num { display: flex; align-items: baseline; gap: 16px; font: 500 24px/1 var(--mono); letter-spacing: .16em; color: var(--t3); text-transform: uppercase; }
+    .etapa .num b { font: 700 120px/.8 var(--sans); letter-spacing: -.06em; color: transparent; -webkit-text-stroke: 2px rgba(255,122,51,.9); }
+    .etapa h2 { margin-top: 28px; font-size: 86px; font-weight: 700; letter-spacing: -.05em; line-height: .96; }
+    .etapa h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.1em; }
+    .etapa p { margin-top: 22px; font-size: 38px; color: var(--t2); letter-spacing: -.015em; }
+    #s1 .notas { left: 80px; top: 900px; width: 900px; display: flex; flex-wrap: wrap; gap: 16px; }
+    #s1 .nota { width: 280px; height: 170px; padding: 22px; font-size: 26px; font-weight: 560; line-height: 1.2; }
+    #s1 .nota small { display: block; font: 500 16px/1 var(--mono); letter-spacing: .12em; color: var(--or-pale); margin-bottom: 12px; text-transform: uppercase; }
+    #s4 .medidores { left: 80px; top: 1330px; width: 900px; display: grid; gap: 22px; }
+    #s4 .med { display: grid; grid-template-columns: 300px 1fr 90px; align-items: center; gap: 20px; font: 500 22px/1 var(--mono); letter-spacing: .1em; color: var(--t2); text-transform: uppercase; }
+    #s4 .med .tr { height: 12px; border-radius: 6px; background: rgba(255,255,255,.1); overflow: hidden; }
+    #s4 .med .tr i { display: block; height: 100%; background: linear-gradient(90deg, #ff6a1f, #3ccf8e); transform-origin: 0 50%; transform: scaleX(0); }
+    #s4 .med b { color: #3ccf8e; font-weight: 500; text-align: right; }
+    #s5 .status { left: 80px; top: 1330px; width: 900px; display: flex; gap: 14px; flex-wrap: wrap; }
+    #c7 .h { left: 80px; top: 700px; width: 920px; font-size: 100px; }
+    #c7 .ap { left: 80px; top: 1080px; display: flex; gap: 14px; }
+    #c7 .ap span { width: 110px; height: 110px; display: grid; place-items: center; }
+    #c7 .ap .ico { font-size: 54px; color: #3ccf8e; }
+    #c8 .fim-card .cta .h { font-size: 78px; text-align: center; }
+  </style>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/SplitText.min.js"></script>
+  <script src="vendor/CustomEase.min.js"></script>
+  <script src="vendor/DrawSVGPlugin.min.js"></script>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+</head>
+<body>
+<div class="reel">
+  <div id="palco">
+    <section class="cena" id="c1">
+      <h1 class="h"><span class="linha"><span>Um site, do zero</span></span><span class="linha"><span>ao ar, <span class="lar"><em>em 20 segundos.</em></span></span></span></h1>
+      <div class="cron"><small>cronômetro</small><span id="cr">00,0</span></div>
+    </section>
+    <section class="cena" id="s1">
+      <div class="etapa"><div class="num"><b>01</b>/ 05 · descoberta</div><h2>Entender <em>o negócio.</em></h2><p>Objetivo, público e escopo, antes do código.</p></div>
+      <div class="notas"><div class="nota" data-frame="16,0,16,0" data-tone="laranja"><small>objetivo</small>Receber pedidos de orçamento</div><div class="nota" data-frame="16,0,16,0" data-tone="branco"><small>público</small>Quem pesquisa pelo celular</div><div class="nota" data-frame="16,0,16,0" data-tone="branco"><small>escopo</small>5 páginas e um formulário</div></div>
+    </section>
+    <section class="cena" id="s2">
+      <div class="etapa"><div class="num"><b>02</b>/ 05 · arquitetura</div><h2>Cada página <em>no lugar.</em></h2><p>Wireframe: a estrutura antes da aparência.</p></div>
+    </section>
+    <section class="cena" id="s3">
+      <div class="etapa"><div class="num"><b>03</b>/ 05 · design</div><h2>Cor, tipo e <em>interface.</em></h2><p>Design system com a cara da marca.</p></div>
+    </section>
+    <section class="cena" id="s4">
+      <div class="etapa"><div class="num"><b>04</b>/ 05 · código e testes</div><h2>Código <em>sob medida.</em></h2><p>E testado antes de publicar.</p></div>
+      <div class="medidores">
+        <div class="med"><span>performance</span><span class="tr"><i></i></span><b>ok</b></div>
+        <div class="med"><span>acessibilidade</span><span class="tr"><i></i></span><b>ok</b></div>
+        <div class="med"><span>segurança</span><span class="tr"><i></i></span><b>ok</b></div>
+      </div>
+    </section>
+    <section class="cena" id="s5">
+      <div class="etapa"><div class="num"><b>05</b>/ 05 · lançamento</div><h2>No ar <em>e monitorado.</em></h2><p>Publicação com SSL e acompanhamento.</p></div>
+      <div class="status"><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-lock"/></svg>SSL ativo</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico" style="color:#3ccf8e"><use href="#i-activity"/></svg>no ar</span><span class="chip" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-eye"/></svg>monitoramento</span></div>
+    </section>
+    <section class="cena" id="c7">
+      <h2 class="h"><span class="linha"><span>E 3 aprovações</span></span><span class="linha"><span class="lar"><em>suas no caminho.</em></span></span></h2>
+      <div class="ap"><span data-frame="16,0,16,0" data-tone="branco"><svg class="ico"><use href="#i-check"/></svg></span><span data-frame="16,0,16,0" data-tone="branco"><svg class="ico"><use href="#i-check"/></svg></span><span data-frame="16,0,16,0" data-tone="branco"><svg class="ico"><use href="#i-check"/></svg></span></div>
+    </section>
+    <section class="cena" id="c8">
+      <div class="fim-card">
+        <img class="logo-g" src="../../../marca/tirvo-logo.svg" alt="Tirvo">
+        <p class="slogan">Se algo pode ser melhorado, <b>ainda não está pronto.</b></p>
+        <div class="cta"><h2 class="h"><span class="linha"><span>Siga para ver os</span></span><span class="linha"><span class="lar"><em>próximos bastidores.</em></span></span></h2></div>
+        <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech/metodo</u></span><span class="ar">@tirvotech</span></div>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="../stories/premium/base.js"></script>
+<script type="module">
+import { iniciar, semente } from './motor.js';
+const T = [0, 2.3, 5.9, 9.5, 13.1, 16.7, 20.3, 21.6];
+const M = iniciar({ id: 'P23', duracao: 25, trilha: 'trilha-P23.mp3', capitulos: T, capa: 1.9, rotuloHud: 'bastidor · processo', semente: 23 });
+const { tl } = M;
+const $ = (s) => document.querySelector(s);
+
+/* ---------- 3D: o site sendo montado em camadas ---------- */
+M.tres(({ THREE, scene, camera, RoundedBoxGeometry, textura }) => {
+  camera.position.set(0, -5, 30);
+  const luz = new THREE.DirectionalLight('#ffffff', 1.3); luz.position.set(-8, 12, 14); scene.add(luz);
+  const rim = new THREE.PointLight('#ff5500', 80, 60, 1.6); rim.position.set(7, -8, 6); scene.add(rim);
+  const W = 7.2, H = 9.6;
+  const site = new THREE.Group(); scene.add(site);
+  const moldura = new THREE.Mesh(new RoundedBoxGeometry(W + .5, H + .9, .3, 6, .22), new THREE.MeshPhysicalMaterial({ color: '#0f0f12', metalness: .85, roughness: .35, clearcoat: 1, envMapIntensity: .6 }));
+  moldura.position.set(0, .2, -.3); site.add(moldura);
+  // barra do navegador
+  const barra = textura(720, 60, (g) => { g.fillStyle = '#16161a'; g.fillRect(0, 0, 720, 60); ['#3f3f46', '#3f3f46', '#3f3f46'].forEach((c, i) => { g.fillStyle = c; g.beginPath(); g.arc(28 + i * 26, 30, 8, 0, 7); g.fill(); }); g.fillStyle = '#0b0b0d'; g.beginPath(); g.roundRect(120, 14, 460, 32, 8); g.fill(); g.fillStyle = '#8a8a93'; g.font = '500 18px "Geist Mono"'; g.fillText('seusite.com.br', 140, 36); });
+  const bm = new THREE.Mesh(new THREE.PlaneGeometry(W, .6), new THREE.MeshBasicMaterial({ map: barra })); bm.position.set(0, H / 2 + .2, -.13); site.add(bm);
+  const cad = textura(40, 40, (g) => { g.fillStyle = '#3ccf8e'; g.beginPath(); g.arc(20, 20, 10, 0, 7); g.fill(); });
+  const ponto = new THREE.Mesh(new THREE.PlaneGeometry(.3, .3), new THREE.MeshBasicMaterial({ map: cad, transparent: true, toneMapped: false })); ponto.position.set(W / 2 - .4, H / 2 + .2, -.1); ponto.visible = false; site.add(ponto);
+
+  function camada(desenhar) { const tx = textura(720, 960, desenhar); const m = new THREE.Mesh(new THREE.PlaneGeometry(W, H), new THREE.MeshBasicMaterial({ map: tx, transparent: true, opacity: 0 })); site.add(m); return m; }
+  const fio = camada((g) => {
+    g.strokeStyle = '#ff7a33'; g.lineWidth = 3; g.setLineDash([10, 8]);
+    [[40, 40, 640, 60], [40, 140, 640, 340], [40, 520, 300, 30], [40, 570, 460, 20], [40, 630, 196, 220], [262, 630, 196, 220], [484, 630, 196, 220], [40, 880, 640, 50]].forEach((r) => g.strokeRect(...r));
+    g.beginPath(); g.moveTo(40, 140); g.lineTo(680, 480); g.moveTo(680, 140); g.lineTo(40, 480); g.stroke();
+  });
+  const design = camada((g) => {
+    g.fillStyle = '#0b0b0d'; g.fillRect(0, 0, 720, 960);
+    const gr = g.createRadialGradient(560, 260, 10, 560, 260, 360); gr.addColorStop(0, 'rgba(255,85,0,.45)'); gr.addColorStop(1, 'rgba(255,85,0,0)'); g.fillStyle = gr; g.fillRect(0, 0, 720, 960);
+    g.fillStyle = '#ff5500'; g.fillRect(40, 54, 34, 34);
+    g.fillStyle = 'rgba(255,255,255,.08)'; [[40, 630, 196, 220], [262, 630, 196, 220], [484, 630, 196, 220]].forEach((r) => { g.beginPath(); g.roundRect(...r, 16); g.fill(); });
+    g.fillStyle = '#ff5500'; g.beginPath(); g.roundRect(40, 880, 260, 56, 12); g.fill();
+  });
+  const texto = camada((g) => {
+    g.fillStyle = '#fafafa'; g.font = '700 64px Geist'; g.fillText('Sua empresa,', 40, 250); g.fillText('do jeito certo.', 40, 322);
+    g.fillStyle = '#a1a1aa'; g.font = '400 26px Geist'; g.fillText('Página rápida, clara e feita para pedir orçamento.', 40, 380);
+    g.fillStyle = '#fafafa'; g.font = '500 22px Geist'; g.fillText('Início   Serviços   Sobre   Contato', 300, 80);
+    ['Sites', 'Sistemas', 'Marca'].forEach((t, i) => { g.fillStyle = '#fafafa'; g.font = '600 30px Geist'; g.fillText(t, 64 + i * 222, 700); g.fillStyle = '#8a8a93'; g.font = '400 18px Geist'; g.fillText('Saiba mais', 64 + i * 222, 740); });
+    g.fillStyle = '#fff'; g.font = '600 24px Geist'; g.fillText('Pedir orçamento', 70, 916);
+  });
+  const codigo = camada((g) => {
+    g.font = '500 20px "Geist Mono"';
+    const linhas = ['<header class="topo">', '  <nav aria-label="principal">', '<main id="conteudo">', '  <h1>Sua empresa</h1>', '  <form action="/orcamento">', '    <input name="contato">', '<footer>', '  <a href="https://wa.me/">'];
+    linhas.forEach((l, i) => { g.fillStyle = i % 3 === 0 ? '#ff8a4c' : '#d4d4d8'; g.fillText(l, 40, 120 + i * 90); });
+  });
+  const C = [fio, design, texto, codigo];
+  const S = { ry: -.55, rx: .25, ex: 1, cz: 34, y: -5.4, fio: 0, design: 0, texto: 0, cod: 0, no: 0, sc: 0 };
+  tl.fromTo(S, { sc: 0 }, { sc: 1, duration: .8, ease: 'expo.out' }, 2.3);
+  tl.to(S, { fio: 1, duration: .5 }, 6.0);
+  tl.to(S, { design: 1, duration: .5 }, 9.6);
+  tl.to(S, { texto: 1, fio: .25, duration: .5 }, 10.4);
+  tl.to(S, { cod: 1, duration: .4 }, 13.2);
+  tl.to(S, { cod: 0, ex: 0, fio: 0, ry: -.18, rx: .08, duration: 1.2, ease: 'expo.inOut' }, 16.6);
+  tl.set(S, { no: 1 }, 17.6);
+  tl.to(S, { cz: 40, y: -9, duration: 1.4, ease: 'power3.inOut' }, 20.2);
+  tl.to(S, { sc: 0, duration: .5, ease: 'power3.in' }, 21.2);
+  [2.3, 5.9, 9.5, 13.1, 16.7].forEach((t, i) => tl.to(S, { ry: [-.55, .45, -.35, .3, -.18][i], duration: 1.2, ease: 'expo.out' }, t));
+
+  return (t) => {
+    camera.position.set(Math.sin(t * .4) * 1.2, -5, S.cz); camera.lookAt(0, -5.4, 0);
+    site.position.set(0, S.y, 0); site.rotation.set(S.rx, S.ry + Math.sin(t * .7) * .04, 0);
+    site.scale.setScalar(Math.max(.001, S.sc * .78));
+    C.forEach((m, i) => { m.position.z = (i + 1) * .9 * S.ex + .02 * i; });
+    fio.material.opacity = S.fio; design.material.opacity = S.design; texto.material.opacity = S.texto; codigo.material.opacity = S.cod * .9;
+    ponto.visible = !!S.no; ponto.scale.setScalar(1 + .3 * Math.sin(t * 6));
+  };
+}, { bloom: .45, limiar: .85, ambiente: .7 });
+
+/* ---------- Cena 1 ---------- */
+M.cena('#c1', 0, 2.3);
+M.sobe($('#c1 .h'), .05, { stagger: .3 });
+M.entra('#c1 .cron', .4, { y: 20 });
+const cr = { v: 0 };
+tl.to(cr, { v: 20, duration: 18, ease: 'none', onUpdate() { $('#cr').textContent = cr.v.toFixed(1).replace('.', ',').padStart(4, '0'); } }, 2.3);
+M.som(0, 'relogio', .4);
+M.trans(2.3, 'flash');
+
+/* ---------- Etapas ---------- */
+const ids = ['#s1', '#s2', '#s3', '#s4', '#s5'];
+ids.forEach((id, i) => {
+  const a = T[i + 1], b = T[i + 2];
+  M.cena(id, a, b);
+  M.entra(`${id} .num`, a + .02, { x: -40, y: 0, dur: .5 });
+  M.letras($(`${id} .etapa h2`), a + .1, { stagger: .018, dur: .55 });
+  M.entra(`${id} .etapa p`, a + .55, { y: 14, dur: .5 });
+  M.som(a + .05, 'pop', .6);
+  if (i < 4) M.trans(b, ['varre', 'glitch', 'corte', 'flash'][i]);
+});
+M.entra('#s1 .nota', 3.1, { y: 40, stagger: .25, giro: -4, som: 'clique', vol: .5 });
+M.som(6.1, 'rede', .4);
+tl.fromTo('#s4 .med .tr i', { scaleX: 0 }, { scaleX: 1, duration: 1.1, stagger: .35, ease: 'power3.out' }, 13.8);
+M.entra('#s4 .med', 13.6, { x: -30, y: 0, stagger: .1 });
+M.entra('#s4 .med b', 14.8, { scale: .6, y: 0, stagger: .35 });
+[14.8, 15.15, 15.5].forEach((t) => M.som(t, 'confirma', .45));
+M.som(13.15, 'decodificar', .5);
+M.entra('#s5 .chip', 17.5, { y: 20, stagger: .2 });
+M.som(17.6, 'cadeado', .7); M.som(17.9, 'confirma', .6);
+M.trans(20.3, 'mira');
+
+/* ---------- 3 aprovações ---------- */
+M.cena('#c7', 20.3, 21.6);
+M.sobe($('#c7 .h'), 20.35, { stagger: .15 });
+M.entra('#c7 .ap span', 20.6, { scale: .5, y: 0, stagger: .15, ease: 'back.out(2)', dur: .4 });
+[20.6, 20.75, 20.9].forEach((t) => M.som(t, 'clique', .7));
+M.trans(21.6, 'flash');
+
+/* ---------- Final ---------- */
+M.cena('#c8', 21.6);
+tl.set(['#hud .tc', '#hud .capitulos'], { opacity: .35 }, 21.6);
+M.entra('#c8 .logo-g', 21.65, { scale: .92, y: 0, blur: 24, dur: 1.1 });
+M.som(21.65, 'brilho', .8);
+M.entra('#c8 .slogan', 22.1, { y: 14 });
+M.sobe($('#c8 .cta .h'), 22.3, { stagger: .12 });
+M.entra('#c8 .links', 22.9, { y: 12 });
+tl.to('#fundo .b1', { x: 260, y: 520, duration: 8, ease: 'suave' }, 0).to('#fundo .b1', { x: -200, y: 150, duration: 8, ease: 'suave' }, 8).to('#fundo .b1', { x: 0, y: 0, duration: 9, ease: 'suave' }, 16);
+tl.to(M.estado, { velPiso: 120, duration: 1 }, 2.3);
+tl.to({}, { duration: 25 }, 0);
+M.pronto();
+</script>
+</body>
+</html>

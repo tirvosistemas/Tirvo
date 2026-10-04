@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>P03: template ou projeto sob medida</title>
+  <link rel="stylesheet" href="motor.css">
+  <style>
+    #c1 .h { left: 80px; top: 372px; width: 920px; font-size: 86px; }
+    #c1 .alvo { left: 380px; top: 860px; width: 320px; height: 420px; }
+    #c1 .alvo i { position: absolute; width: 60px; height: 60px; border: 0 solid #fafafa; filter: drop-shadow(0 0 8px rgba(255,255,255,.6)); }
+    #c1 .alvo i:nth-child(1) { left: 0; top: 0; border-left-width: 6px; border-top-width: 6px; }
+    #c1 .alvo i:nth-child(2) { right: 0; top: 0; border-right-width: 6px; border-top-width: 6px; }
+    #c1 .alvo i:nth-child(3) { left: 0; bottom: 0; border-left-width: 6px; border-bottom-width: 6px; }
+    #c1 .alvo i:nth-child(4) { right: 0; bottom: 0; border-right-width: 6px; border-bottom-width: 6px; }
+    #c1 .alvo b { position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; margin: -11px; border-radius: 50%; background: #ff5500; box-shadow: 0 0 20px #ff5500; }
+    #c1 .alvo small { position: absolute; left: 0; top: -44px; font: 500 18px/1 var(--mono); letter-spacing: .14em; color: var(--or-pale); white-space: nowrap; }
+
+    #c2 .rot { left: 80px; top: 380px; }
+    #c2 .h { left: 80px; top: 440px; width: 920px; font-size: 80px; }
+    #c2 .lista { left: 80px; top: 1180px; width: 900px; display: grid; gap: 14px; }
+    #c2 .lista > div { height: 74px; display: flex; align-items: center; gap: 18px; padding: 0 26px; font: 500 24px/1 var(--mono); letter-spacing: .06em; }
+    #c2 .lista .ico { font-size: 28px; }
+    #c2 .lista .ok { color: #3ccf8e; }
+    #c2 .lista .igual { margin-left: auto; color: #ff8a4c; }
+
+    #c3 .h { left: 80px; top: 1130px; width: 920px; font-size: 78px; }
+    #c3 .rot { left: 80px; top: 1070px; }
+
+    #c4 .rot { left: 80px; top: 380px; }
+    #c4 .h { left: 80px; top: 440px; width: 920px; font-size: 76px; }
+    #c4 .camadas { display: none; }
+    #c4 .camadas span { font: 500 20px/1 var(--mono); letter-spacing: .12em; color: var(--t2); text-transform: uppercase; display: flex; gap: 12px; align-items: center; }
+    #c4 .camadas span::before { content: ""; width: 40px; height: 1.5px; background: rgba(255,255,255,.4); }
+
+    #c5 .h { left: 80px; top: 372px; width: 920px; font-size: 80px; }
+    #c5 .alertas { left: 80px; top: 820px; width: 900px; display: grid; gap: 18px; }
+    #c5 .alertas > div { height: 118px; display: grid; grid-template-columns: 70px 1fr; align-items: center; gap: 22px; padding: 0 30px; }
+    #c5 .alertas .ico { font-size: 44px; color: #ff6a1f; }
+    #c5 .alertas b { display: block; font-size: 38px; font-weight: 640; letter-spacing: -.02em; }
+    #c5 .alertas small { display: block; margin-top: 6px; font: 500 19px/1 var(--mono); color: var(--t3); letter-spacing: .08em; text-transform: uppercase; }
+
+    #c6 .rot { left: 80px; top: 380px; }
+    #c6 .h { left: 80px; top: 440px; width: 920px; font-size: 92px; }
+    #c6 .h .dc { white-space: pre; }
+    #c6 .marcas { left: 80px; top: 1300px; display: flex; gap: 14px; width: 920px; flex-wrap: wrap; }
+
+    #c7 .fim-card .cta .h { font-size: 76px; text-align: center; }
+    #c7 .opcoes { left: 120px; right: 120px; top: 1200px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    #c7 .opcoes span { height: 92px; display: grid; place-items: center; font: 600 30px/1 var(--mono); letter-spacing: .14em; }
+  </style>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/SplitText.min.js"></script>
+  <script src="vendor/CustomEase.min.js"></script>
+  <script src="vendor/DrawSVGPlugin.min.js"></script>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+</head>
+<body>
+<div class="reel">
+  <div id="palco">
+    <section class="cena" id="c1">
+      <h1 class="h"><span class="linha"><span>Esse layout também</span></span><span class="linha"><span>está no site do</span></span><span class="linha"><span class="lar"><em>seu concorrente.</em></span></span></h1>
+      <div class="alvo"><small>// mesmo tema</small><i></i><i></i><i></i><i></i><b></b></div>
+    </section>
+
+    <section class="cena" id="c2">
+      <p class="rot"><i>//</i> tema pronto</p>
+      <h2 class="h"><span class="linha"><span>Você troca o logo,</span></span><span class="linha"><span>a cor e a foto.</span></span><span class="linha"><span class="cz">O resto <em>é igual.</em></span></span></h2>
+      <div class="lista">
+        <div data-frame="14,0,14,0" data-tone="branco"><svg class="ico ok"><use href="#i-check"/></svg>logo<span class="igual" style="color:#3ccf8e">trocado</span></div>
+        <div data-frame="14,0,14,0" data-tone="branco"><svg class="ico ok"><use href="#i-check"/></svg>cores<span class="igual" style="color:#3ccf8e">trocadas</span></div>
+        <div data-frame="14,0,14,0" data-tone="laranja" data-acento="topo"><svg class="ico" style="color:#ff8a4c"><use href="#i-layers"/></svg>estrutura<span class="igual">a mesma de todos</span></div>
+      </div>
+    </section>
+
+    <section class="cena" id="c3">
+      <p class="rot"><i>//</i> por trás da aparência</p>
+      <h2 class="h"><span class="linha"><span>A mesma estrutura de</span></span><span class="linha"><span>quem comprou</span></span><span class="linha"><span class="lar"><em>o mesmo tema.</em></span></span></h2>
+    </section>
+
+    <section class="cena" id="c4">
+      <p class="rot"><i>//</i> e por baixo</p>
+      <h2 class="h"><span class="linha"><span>Vem tudo que o tema</span></span><span class="linha"><span>oferece. <em>Até o que</em></span></span><span class="linha"><span class="lar">você nunca vai usar.</span></span></h2>
+      <div class="camadas"><span>animações extras</span><span>loja que não existe</span><span>galerias e sliders</span><span>dezenas de opções</span><span>sua página</span></div>
+    </section>
+
+    <section class="cena" id="c5">
+      <h2 class="h"><span class="linha"><span>E isso não fica</span></span><span class="linha"><span>só no código.</span></span><span class="linha"><span class="lar"><em>O cliente sente.</em></span></span></h2>
+      <div class="alertas">
+        <div data-frame="18,0,18,0" data-tone="laranja"><svg class="ico"><use href="#i-hourglass"/></svg><span><b>Lentidão no celular</b><small>tudo carrega, até o que não aparece</small></span></div>
+        <div data-frame="18,0,18,0" data-tone="laranja"><svg class="ico"><use href="#i-lock"/></svg><span><b>Mais portas para manter</b><small>cada recurso pede atualização</small></span></div>
+        <div data-frame="18,0,18,0" data-tone="laranja"><svg class="ico"><use href="#i-refresh"/></svg><span><b>Mudança que quebra</b><small>mexe aqui, desmonta ali</small></span></div>
+      </div>
+    </section>
+
+    <section class="cena" id="c6">
+      <p class="rot"><i>//</i> sob medida</p>
+      <h2 class="h"><span class="linha"><span class="dc" id="d1">Código escrito</span></span><span class="linha"><span class="dc" id="d2">do zero para</span></span><span class="linha"><span class="dc lar" id="d3">o seu negócio.</span></span></h2>
+      <div class="marcas"><span class="chip" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-zap"/></svg>mais leve</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-shield-check"/></svg>mais seguro</span><span class="chip" data-frame="12,0,12,0" data-tone="branco"><svg class="ico"><use href="#i-trending-up"/></svg>fácil de evoluir</span></div>
+    </section>
+
+    <section class="cena" id="c7">
+      <div class="fim-card">
+        <img class="logo-g" src="../../../marca/tirvo-logo.svg" alt="Tirvo">
+        <p class="slogan">Se algo pode ser melhorado, <b>ainda não está pronto.</b></p>
+        <div class="cta"><h2 class="h"><span class="linha"><span>O seu site é</span></span><span class="linha"><span class="lar"><em>template ou projeto?</em></span></span></h2></div>
+        <div class="opcoes"><span data-frame="16,0,16,0" data-tone="branco">TEMPLATE</span><span data-frame="16,0,16,0" data-tone="quente">PROJETO</span></div>
+        <div class="links"><span class="ar">comenta aqui embaixo</span><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span></div>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="../stories/premium/base.js"></script>
+<script type="module">
+import { iniciar, semente } from './motor.js';
+const M = iniciar({ id: 'P03', duracao: 28, trilha: 'trilha-P03.mp3', capitulos: [0, 3, 7, 11.5, 16, 20.5, 25], capa: 2.2, rotuloHud: 'sites sob medida', semente: 3 });
+const { tl } = M;
+const $ = (s) => document.querySelector(s);
+
+/* ---------- 3D: parede de sites iguais e a vista explodida ---------- */
+M.tres(({ THREE, scene, camera, RoundedBoxGeometry }) => {
+  camera.position.set(0, -2, 34);
+  const luz = new THREE.DirectionalLight('#ffffff', 1.1); luz.position.set(-8, 12, 14); scene.add(luz);
+  const rim = new THREE.PointLight('#ff5500', 120, 50, 1.6); rim.position.set(0, -4, 8); scene.add(rim);
+
+  // Textura do "tema pronto": a mesma página, só o logo muda de cor
+  function pagina(cor, modo) {
+    const c = document.createElement('canvas'); c.width = 400; c.height = 560; const g = c.getContext('2d');
+    if (modo === 'fio') {
+      g.fillStyle = 'rgba(10,10,12,.9)'; g.fillRect(0, 0, 400, 560);
+      g.strokeStyle = '#ff6a1f'; g.lineWidth = 3;
+      [[24, 22, 352, 34], [24, 80, 352, 170], [24, 274, 220, 22], [24, 308, 300, 14], [24, 352, 104, 140], [148, 352, 104, 140], [272, 352, 104, 140], [24, 512, 352, 24]].forEach((r) => g.strokeRect(...r));
+      g.beginPath(); g.moveTo(24, 80); g.lineTo(376, 250); g.moveTo(376, 80); g.lineTo(24, 250); g.stroke();
+    } else {
+      g.fillStyle = '#e9e9ec'; g.fillRect(0, 0, 400, 560);
+      g.fillStyle = cor; g.fillRect(24, 26, 60, 26);
+      g.fillStyle = '#b9b9c0'; for (let i = 0; i < 4; i++) g.fillRect(200 + i * 46, 34, 34, 10);
+      const gr = g.createLinearGradient(0, 80, 0, 250); gr.addColorStop(0, '#9c9ca6'); gr.addColorStop(1, '#c7c7ce'); g.fillStyle = gr; g.fillRect(24, 80, 352, 170);
+      g.fillStyle = '#ffffff'; g.beginPath(); g.moveTo(60, 230); g.lineTo(150, 140); g.lineTo(220, 210); g.lineTo(270, 170); g.lineTo(350, 230); g.fill();
+      g.fillStyle = '#3f3f46'; g.fillRect(24, 274, 220, 22); g.fillStyle = '#9f9fa8'; g.fillRect(24, 308, 300, 14);
+      g.fillStyle = '#d4d4d8'; [24, 148, 272].forEach((x) => g.fillRect(x, 352, 104, 140));
+      g.fillStyle = cor; g.fillRect(24, 512, 120, 26);
+    }
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+  }
+  const cores = ['#3b82f6', '#16a34a', '#db2777', '#7c3aed', '#0891b2', '#ca8a04', '#dc2626'];
+  const texNormal = cores.map((c) => pagina(c));
+  const texFio = pagina('#000', 'fio');
+
+  const parede = new THREE.Group(); scene.add(parede);
+  const cards = [];
+  const geo = new RoundedBoxGeometry(4, 5.6, .18, 4, .12);
+  const corpoMat = new THREE.MeshPhysicalMaterial({ color: '#16161a', metalness: .6, roughness: .35, clearcoat: 1 });
+  const rr = semente(7);
+  for (let y = -3; y <= 3; y++) for (let x = -3; x <= 3; x++) {
+    const g = new THREE.Group();
+    const corpo = new THREE.Mesh(geo, corpoMat); g.add(corpo);
+    const mat = new THREE.MeshBasicMaterial({ map: texNormal[Math.floor(rr() * 7)], color: '#9a9aa0' });
+    const tela = new THREE.Mesh(new THREE.PlaneGeometry(3.8, 5.32), mat); tela.position.z = .1; g.add(tela);
+    g.position.set(x * 4.6, y * 6.3, -Math.abs(x) * .6 - Math.abs(y) * .4);
+    g.userData = { x, y, mat, fase: rr() * 6, orig: mat.map };
+    parede.add(g); cards.push(g);
+  }
+  const centro = cards.find((c) => c.userData.x === 0 && c.userData.y === 0);
+  centro.userData.mat.map = texNormal[0];
+
+  // Camadas explodidas do card central (empilhadas em isométrico)
+  const rotulos = ['animações extras', 'loja que não existe', 'galerias e sliders', 'dezenas de opções', 'sua página'];
+  const camadas = rotulos.map((nome, i) => {
+    const c = document.createElement('canvas'); c.width = 400; c.height = 560; const g = c.getContext('2d');
+    if (i === 4) { g.drawImage(texNormal[0].image, 0, 0); }
+    else {
+      g.fillStyle = 'rgba(38,38,44,.9)'; g.fillRect(0, 0, 400, 560);
+      g.strokeStyle = 'rgba(255,150,90,.35)'; g.lineWidth = 2;
+      for (let k = 0; k < 9; k++) { g.strokeRect(24 + (k % 3) * 122, 120 + Math.floor(k / 3) * 130, 106, 112); }
+      g.fillStyle = '#ff6a1f'; g.fillRect(24, 40, 6, 46);
+      g.fillStyle = '#fafafa'; g.font = '600 34px Geist'; g.fillText(nome, 44, 76);
+    }
+    const tx = new THREE.CanvasTexture(c); tx.colorSpace = THREE.SRGBColorSpace; tx.anisotropy = 8;
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(4, 5.6), new THREE.MeshBasicMaterial({ map: tx, transparent: true, opacity: 0, side: THREE.DoubleSide, color: i === 4 ? '#b8b8be' : '#ffffff' }));
+    const borda = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(4, 5.6)), new THREE.LineBasicMaterial({ color: i === 4 ? '#ffffff' : '#ff6a1f', transparent: true, opacity: 0 }));
+    m.add(borda); m.userData.borda = borda;
+    scene.add(m); return m;
+  });
+
+  // Card sob medida final
+  const custom = new THREE.Group(); scene.add(custom);
+  const cc = document.createElement('canvas'); cc.width = 400; cc.height = 560; const cg = cc.getContext('2d');
+  cg.fillStyle = '#0b0b0d'; cg.fillRect(0, 0, 400, 560);
+  cg.fillStyle = '#ff5500'; cg.fillRect(28, 30, 22, 22);
+  cg.fillStyle = '#fafafa'; cg.font = '700 40px Geist'; cg.fillText('Feito para', 28, 140); cg.fillText('o seu negócio.', 28, 188);
+  cg.fillStyle = '#a1a1aa'; cg.font = '400 18px Geist'; cg.fillText('Só o que a página usa.', 28, 228);
+  cg.fillStyle = '#ff5500'; cg.beginPath(); cg.roundRect(28, 262, 170, 46, 10); cg.fill(); cg.fillStyle = '#fff'; cg.font = '600 18px Geist'; cg.fillText('Falar com a gente', 42, 292);
+  cg.strokeStyle = 'rgba(255,255,255,.12)'; cg.lineWidth = 2; cg.strokeRect(28, 340, 344, 190);
+  cg.fillStyle = 'rgba(255,106,31,.25)'; cg.fillRect(48, 360, 140, 150); cg.fillStyle = 'rgba(255,255,255,.06)'; cg.fillRect(208, 360, 144, 70); cg.fillRect(208, 440, 144, 70);
+  const ctx2 = new THREE.CanvasTexture(cc); ctx2.colorSpace = THREE.SRGBColorSpace; ctx2.anisotropy = 8;
+  custom.add(new THREE.Mesh(new RoundedBoxGeometry(4, 5.6, .22, 4, .12), new THREE.MeshPhysicalMaterial({ color: '#111114', metalness: .8, roughness: .25, clearcoat: 1, emissive: '#ff5500', emissiveIntensity: .0 })));
+  const ctela = new THREE.Mesh(new THREE.PlaneGeometry(3.8, 5.32), new THREE.MeshBasicMaterial({ map: ctx2 })); ctela.position.z = .12; custom.add(ctela);
+  custom.visible = false;
+
+  // Estado animado
+  const S = { iso: 0, logo: 0, camZ: 46, camY: -2, paredeOp: 1, dest: 0, fio: 0, explode: 0, rotX: 0, rotY: 0, frente: 0, custom: 0, glitch: 0, paredeZ: 0 };
+  tl.fromTo(S, { camZ: 50 }, { camZ: 30, duration: 3, ease: 'power2.out' }, 0);
+  tl.to(S, { dest: 1, duration: .6 }, 2.2);                       // destaca o card central
+  tl.to(S, { frente: 1, camZ: 27, duration: 1.2, ease: 'expo.inOut' }, 3.1);
+  // troca de logo em cortes secos
+  tl.fromTo(S, { logo: 0 }, { logo: 12, duration: 3, ease: 'steps(12)' }, 3.6);
+  for (let i = 0; i < 12; i++) M.som(3.6 + i * .25, 'clique', .35);
+  tl.to(S, { frente: 0, camZ: 34, dest: 0, duration: 1, ease: 'expo.inOut' }, 7);
+  tl.to(S, { fio: 1, duration: 1.2, ease: 'power2.inOut' }, 7.6);
+  M.som(7.6, 'rede', .5);
+  // vista explodida
+  tl.to(S, { paredeOp: 0, duration: .8 }, 11.4);
+  tl.to(S, { explode: 1, iso: 1, duration: 1.6, ease: 'expo.out' }, 11.6);
+  M.som(11.6, 'whoosh-longo', .6);
+  tl.to(S, { glitch: 1, duration: .1 }, 16).to(S, { glitch: 0, duration: .1 }, 20.3);
+  // tudo se fecha num card sob medida
+  tl.to(S, { explode: 0, iso: 0, duration: .9, ease: 'power3.in' }, 20.6);
+  tl.set(S, { custom: 1 }, 21.45);
+  M.som(21.45, 'impacto', .8);
+  tl.to(S, { rotY: -.25, rotX: .08, duration: 1.4, ease: 'expo.out' }, 21.45);
+  tl.to(S, { custom: 0, duration: .5 }, 24.8);
+
+  const rg = semente(99);
+  return (t) => {
+    camera.position.set(Math.sin(t * .3) * .8, S.camY, S.camZ);
+    camera.lookAt(0, -2, 0);
+    parede.visible = S.paredeOp > .01;
+    cards.forEach((c) => {
+      const d = c === centro;
+      c.userData.mat.map = S.fio > .5 ? texFio : (d ? texNormal[Math.floor(S.logo) % 7] : c.userData.orig);
+      c.userData.mat.color.set(d ? '#b4b4ba' : '#6a6a70');
+      c.userData.mat.opacity = S.paredeOp; c.userData.mat.transparent = S.paredeOp < 1;
+      c.children[0].visible = S.paredeOp > .5;
+      c.position.z = (-Math.abs(c.userData.x) * .6 - Math.abs(c.userData.y) * .4) + (d ? S.frente * 3 : 0) + Math.sin(t * .8 + c.userData.fase) * .15;
+      c.scale.setScalar(d ? 1 + S.dest * .06 : 1 - S.dest * .04);
+      c.visible = S.paredeOp > .01 && !(d && S.explode > .02);
+    });
+    // camadas
+    camadas.forEach((m, i) => {
+      const vis = S.explode > .01 && !S.custom;
+      m.visible = vis;
+      m.position.set(-.6, -8.8 + (4 - i) * 2.1 * S.explode, 0);
+      m.rotation.set(-1.05 * S.iso, 0, .62 * S.iso);
+      m.material.opacity = Math.min(1, S.explode * 1.6) * (i === 4 ? 1 : .92);
+      m.userData.borda.material.opacity = Math.min(1, S.explode * 1.4);
+      if (S.glitch > .5) m.position.x = (rg() - .5) * .5;
+    });
+    custom.visible = S.custom > .5;
+    custom.position.set(0, -2, 2); custom.rotation.set(S.rotX + Math.sin(t) * .03, S.rotY + Math.sin(t * .7) * .05, 0);
+    custom.children[0].material.emissiveIntensity = .05 + .05 * Math.sin(t * 3);
+    rim.intensity = 120 + S.glitch * 200;
+  };
+}, { bloom: .45, limiar: .88, ambiente: .75 });
+
+/* ---------- Cena 1 ---------- */
+M.cena('#c1', 0, 3);
+M.sobe($('#c1 .h'), .1, { stagger: .22 });
+M.som(.1, 'subdrop', .6);
+['#c1 .alvo i'].forEach(() => {});
+tl.fromTo('#c1 .alvo', { scale: 2.4, opacity: 0 }, { scale: 1, opacity: 1, duration: .7, ease: 'expo.out' }, 1.6);
+tl.fromTo('#c1 .alvo b', { scale: 0 }, { scale: 1, duration: .4, ease: 'back.out(3)' }, 2.2);
+M.som(1.6, 'whoosh', .5); M.som(2.25, 'clique', .9);
+M.trans(3, 'flash');
+
+/* ---------- Cena 2 ---------- */
+M.cena('#c2', 3, 7);
+M.entra('#c2 .rot', 3.05, { y: 10 });
+M.sobe($('#c2 .h'), 3.1, { stagger: .3 });
+M.entra('#c2 .lista > div', 4.6, { x: -40, y: 0, stagger: .3, som: 'pop', vol: .6 });
+M.som(5.25, 'erro', .45);
+M.trans(7, 'varre');
+
+/* ---------- Cena 3 ---------- */
+M.veu(7.2, .2, 1);
+M.veu(11.4, 1, 0, .3);
+M.cena('#c3', 7, 11.5);
+M.entra('#c3 .rot', 7.4, { y: 10 });
+M.sobe($('#c3 .h'), 7.5, { stagger: .2 });
+M.trans(11.5, 'glitch');
+
+/* ---------- Cena 4 ---------- */
+M.cena('#c4', 11.5, 16);
+M.entra('#c4 .rot', 11.6, { y: 10 });
+M.sobe($('#c4 .h'), 11.7, { stagger: .2 });
+M.entra('#c4 .camadas span', 12.6, { x: 30, y: 0, stagger: .22, som: 'pop', vol: .4 });
+M.som(15.3, 'riser', .7);
+M.trans(16, 'corte');
+
+/* ---------- Cena 5 ---------- */
+M.cena('#c5', 16, 20.5);
+M.sobe($('#c5 .h'), 16.05, { stagger: .18 });
+M.entra('#c5 .alertas > div', 16.9, { x: 60, y: 0, stagger: .55, blur: 16 });
+[16.9, 17.45, 18.0].forEach((t) => M.som(t, 'erro', .55));
+M.trans(20.5, 'mira');
+
+/* ---------- Cena 6 ---------- */
+M.cena('#c6', 20.5, 25);
+M.entra('#c6 .rot', 20.6, { y: 10 });
+M.decod($('#d1'), 20.7, .7);
+M.decod($('#d2'), 21.0, .7, false);
+M.decod($('#d3'), 21.3, .8, false);
+M.entra('#c6 .chip', 22.4, { y: 20, stagger: .2, som: 'confirma', vol: .45 });
+M.trans(25, 'flash');
+
+/* ---------- Final ---------- */
+M.cena('#c7', 25);
+tl.set(['#hud .tc', '#hud .capitulos'], { opacity: .35 }, 25);
+M.entra('#c7 .logo-g', 25.05, { scale: .92, y: 0, blur: 24, dur: 1.1 });
+M.som(25.05, 'brilho', .8);
+M.entra('#c7 .slogan', 25.45, { y: 14 });
+M.sobe($('#c7 .cta .h'), 25.7, { stagger: .12 });
+M.entra('#c7 .opcoes span', 26.3, { y: 20, stagger: .12 });
+M.entra('#c7 .links', 26.7, { y: 12 });
+tl.to('#fundo .b1', { x: 200, y: 600, duration: 7, ease: 'suave' }, 0).to('#fundo .b1', { x: -250, y: 0, duration: 9, ease: 'suave' }, 7).to('#fundo .b1', { x: 0, y: 150, duration: 12, ease: 'suave' }, 16);
+tl.to({}, { duration: 28 }, 0);
+M.pronto();
+</script>
+</body>
+</html>
