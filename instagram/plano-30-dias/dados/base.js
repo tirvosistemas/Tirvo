@@ -35,7 +35,7 @@ window.PLANO = {
   avisos: [
     'Gestão de redes é um serviço novo: o escopo está marcado com [CONFIRMAR] e as artes que falam dele só são feitas depois da sua confirmação.',
     'O Hipercode aparece só como vitrine: IA própria em fase final de testes, não disponível ao público e não usada em projetos de clientes. Nenhuma peça oferece o Hipercode.',
-    'Nenhum cliente, número, depoimento ou preço foi inventado. Os trabalhos mostrados são conceitos da Tirvo, sempre marcados como conceito.',
+    'Nenhum cliente, número, depoimento ou preço foi inventado. Só aparece trabalho real da própria Tirvo (o site e a marca). As imagens ilustrativas do site não são usadas.',
     'Os horários são hipóteses para testar, não regras. A semana 4 testa justamente o horário.',
     'Toda imagem e todo vídeo levam a logo da Tirvo.',
   ],
@@ -53,7 +53,7 @@ window.PLANO = {
     pilares: [
       { id: 'autoridade', nome: 'Autoridade em site e conversão', promessa: 'Por que sites não vendem e o que resolve, sem jargão.', servicos: 'Criação de sites · Sistemas e automações', fatia: 35, metrica: 'Salvamentos' },
       { id: 'marca', nome: 'Marca e posicionamento premium', promessa: 'Como a marca é percebida e o que a deixa coerente em todo canal.', servicos: 'Logotipo e identidade visual · Design gráfico · Gestão de redes', fatia: 25, metrica: 'Envios' },
-      { id: 'vitrine', nome: 'Vitrine e prova', promessa: 'O trabalho da própria Tirvo, os conceitos, o método e os bastidores.', servicos: 'Todos os serviços', fatia: 25, metrica: 'Visitas ao perfil e cliques no link' },
+      { id: 'vitrine', nome: 'Vitrine e prova', promessa: 'O trabalho real da própria Tirvo: o site, a marca, o método e os bastidores.', servicos: 'Todos os serviços', fatia: 25, metrica: 'Visitas ao perfil e cliques no link' },
       { id: 'dono', nome: 'Dono de negócio na prática', promessa: 'As dores de quem toca uma empresa, explicadas sem jargão.', servicos: 'Sites · Engenharia de IA · Automações', fatia: 15, metrica: 'Envios' },
     ],
   },

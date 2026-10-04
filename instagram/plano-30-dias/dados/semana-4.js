@@ -336,38 +336,42 @@ Salve para o dia de contratar a sua marca.`,
 
   add({
     id: 'P28', dia: 27, hora: '10:00', formato: 'img', pilar: 'vitrine',
-    titulo: 'Conceito Élan: um perfume, uma marca',
-    alavanca: 'Desejo e prova visual', metrica: 'Visitas ao perfil', cta: 'Salvar como referência',
+    titulo: 'O sistema da nossa marca, em uma tela',
+    alavanca: 'Prova real (o próprio trabalho)', metrica: 'Visitas ao perfil', cta: 'Salvar como referência',
     ficha: {
-      nicho: 'Identidade e direção de arte para produto (conceito)',
-      publico: 'Empreendedor de cosméticos, moda ou produto premium',
+      nicho: 'Identidade visual: a marca da própria Tirvo',
+      publico: 'Empreendedor que quer ver um sistema de marca completo e real',
       objetivo: 'Visitas ao perfil',
-      promessa: 'Ver como a marca muda a percepção de valor de um produto',
+      promessa: 'Ver as peças que uma identidade visual precisa ter, num caso real',
       tom: 'Visual, enxuto',
     },
     ganchos: [
-      ['Quebra de padrão', 'O frasco é o mesmo. A marca muda o preço que ele parece ter.', 'Aponta o efeito da marca sobre a percepção, sem citar valores.'],
-      ['Dor aguda', 'Seu produto é ótimo e parece comum?'],
-      ['Ganho rápido', 'Como uma marca eleva um produto.'],
+      ['Quebra de padrão', 'O sistema da nossa marca, em uma tela.', 'Mostra trabalho real, sem conceito ilustrativo, e organiza tudo de uma vez.'],
+      ['Dor aguda', 'A sua marca tem mais que um logo?'],
+      ['Ganho rápido', 'As peças mínimas de uma identidade visual.'],
     ],
     arte: {
-      texto: 'Marca é o que o frasco promete antes de abrir.\nConceito Élan · eau de parfum',
-      direcao: 'Foto conceitual do frasco Élan em fundo âmbar escuro, ocupando o centro. Título curto com "antes de abrir" em Instrument Serif itálico. Selo "conceito". Logo da Tirvo embaixo à direita.',
+      texto: 'O sistema da nossa marca, em uma tela.\nCapa de link · ícone · paleta · tipografia',
+      direcao: 'Quadro com peças reais da Tirvo: a capa de link oficial, o ícone (favicon) em 3 tamanhos, a paleta e as três fontes. Logo da Tirvo embaixo à direita.',
     },
     capa: 'A própria arte.',
-    alt: 'Frasco conceitual do perfume Élan sobre um pedestal, criado pela Tirvo como estudo de marca para produto.',
+    alt: 'Quadro da identidade visual da Tirvo: capa de link com a logo e o slogan, ícone em três tamanhos, paleta de preto, laranja, cinza e branco, e as fontes Geist, Instrument Serif e Geist Mono.',
     linhas: [
-      'Antes de alguém sentir o perfume, a marca já disse quanto ele vale.',
-      'Élan é um conceito da Tirvo: nome, rótulo e direção de arte pensados juntos.',
+      'Uma marca não é um arquivo. É um sistema que se repete igual em todo lugar.',
+      'Esta é a nossa: logo, ícone, paleta, fontes e slogan.',
     ],
-    legenda: `Antes de alguém sentir o perfume, a marca já disse quanto ele vale.
+    legenda: `Uma marca não é um arquivo. É um sistema que se repete igual em todo lugar.
 
-Élan é um conceito criado pela Tirvo: o nome, o rótulo e a direção de arte pensados juntos, para o produto parecer o que ele é.
+Esta é a nossa:
+· Logo e capa de link para quando alguém compartilha o site.
+· Ícone que funciona até em 16 px, na aba do navegador.
+· Paleta curta: preto, laranja, cinza e branco.
+· Três fontes, cada uma com uma função.
 
-Não é cliente. É estudo de método.
+É isso que entregamos num projeto de identidade visual, com o manual que explica como usar.
 
 Salve como referência.`,
-    hashtags: '#identidadevisual #embalagem #direcaodearte #brandingdeproduto',
+    hashtags: '#identidadevisual #branding #logotipo #designgrafico #tirvotech',
     teste: 'Visitas ao perfil, comparadas com P22.',
     instrucoes: ['Compartilhe no story de sábado.'],
     midia: { qtd: 1 },

@@ -349,41 +349,45 @@ Quer começar pela Descoberta? Mande DESCOBERTA no direct.`,
 
   add({
     id: 'P22', dia: 20, hora: '10:00', formato: 'img', pilar: 'vitrine',
-    titulo: 'Conceito Halden: um relógio, uma marca',
-    alavanca: 'Desejo e prova visual', metrica: 'Visitas ao perfil', cta: 'Salvar como referência',
+    titulo: 'Design é decidir o que se lê primeiro',
+    alavanca: 'Ganho rápido (critério aplicável)', metrica: 'Salvamentos', cta: 'Salvar como referência',
     ficha: {
-      nicho: 'Direção de arte e identidade aplicada a produto (conceito)',
-      publico: 'Empreendedor de produto que quer uma marca com cara de premium',
-      objetivo: 'Visitas ao perfil',
-      promessa: 'Ver uma marca conceitual aplicada num produto, do nome ao mostrador',
-      tom: 'Visual, enxuto',
+      nicho: 'Design gráfico: hierarquia visual',
+      publico: 'Empreendedor que faz as próprias artes ou avalia as que recebe',
+      objetivo: 'Salvamentos e visitas ao perfil',
+      promessa: 'Um critério simples para saber se uma peça está bem organizada',
+      tom: 'Didático, enxuto',
     },
     ganchos: [
-      ['Quebra de padrão', 'A marca também é o mostrador.', 'A foto de produto segura o olhar, e o texto curto dá o sentido.'],
-      ['Dor aguda', 'Seu produto parece genérico na foto?'],
-      ['Ganho rápido', 'Como a marca vira detalhe de produto.'],
+      ['Quebra de padrão', 'Design é decidir o que se lê primeiro.', 'Troca "deixar bonito" por um critério que qualquer pessoa consegue aplicar.'],
+      ['Dor aguda', 'Sua arte tem tudo e ninguém lê nada?'],
+      ['Ganho rápido', 'A ordem de leitura de uma peça em 5 passos.'],
     ],
     arte: {
-      texto: 'A marca também é o mostrador.\nConceito Halden · relógio automático',
-      direcao: 'Foto conceitual do relógio Halden ocupando 70% da peça, sobre fundo escuro. Título curto em Geist com "mostrador" em Instrument Serif itálico. Selo "conceito" em Geist Mono. Logo da Tirvo embaixo à direita.',
+      texto: 'Design é decidir o que se lê primeiro.\nTítulo, apoio, imagem, texto, ação.',
+      direcao: 'Esquema de diagramação com blocos neutros (sem nenhuma peça fictícia) e o caminho do olhar numerado de 1 a 5 em laranja, com a legenda de cada nível à direita. Logo da Tirvo embaixo à direita.',
     },
     capa: 'A própria arte.',
-    alt: 'Relógio conceitual Halden, com mostrador escuro e pulseira caramelo, criado pela Tirvo como estudo de marca aplicada a produto.',
+    alt: 'Esquema de uma peça gráfica com blocos numerados de 1 a 5 mostrando a ordem de leitura: título, apoio, imagem, texto e ação.',
     linhas: [
-      'Num produto premium, a marca aparece nos detalhes: no mostrador, na fonte, no respiro.',
-      'Halden é um conceito da Tirvo: uma marca pensada até o ponteiro.',
+      'Quando tudo grita, nada é lido.',
+      'Design gráfico não é deixar bonito. É decidir a ordem em que o olho lê.',
     ],
-    legenda: `Num produto premium, a marca aparece nos detalhes: no mostrador, na fonte, no respiro.
+    legenda: `Quando tudo grita, nada é lido.
 
-Halden é um conceito criado pela Tirvo para estudar isso: o nome, o logotipo e a forma como ele se encaixa num relógio automático.
+Uma peça bem diagramada tem uma ordem clara:
+1. Título, maior e mais forte.
+2. Apoio, num tom mais baixo.
+3. Imagem, que confirma a ideia.
+4. Texto, só o necessário.
+5. Ação, com uma cor e um destaque.
 
-Não é cliente. É método: pensar a marca até o último ponto onde ela aparece.
+Tamanho, peso, cor e espaço fazem esse trabalho. Teste na sua próxima arte: o que você leu primeiro?
 
 Salve como referência.`,
-    hashtags: '#direcaodearte #identidadevisual #designdeproduto #branding',
-    teste: 'Visitas ao perfil por alcance, comparadas com P06 e P16.',
+    hashtags: '#designgrafico #hierarquiavisual #diagramacao #identidadevisual',
+    teste: 'Salvamentos por alcance, comparados com P16.',
     instrucoes: ['Compartilhe no story de sábado.'],
-    obs: '[CONFIRMAR: o nome Halden e a descrição do conceito.]',
     midia: { qtd: 1 },
   });
 

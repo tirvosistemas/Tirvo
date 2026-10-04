@@ -260,46 +260,49 @@ Manda para quem recebeu uma proposta com "primeira página garantida".`,
 
   add({
     id: 'P06', dia: 3, hora: '19:00', formato: 'carrossel', pilar: 'vitrine',
-    titulo: '4 marcas conceituais criadas do zero',
-    alavanca: 'Especificidade (prova visual)', metrica: 'Visitas ao perfil', cta: 'Comentar o nome da marca preferida',
+    titulo: 'Como nasce um logo: 5 etapas',
+    alavanca: 'Curiosidade de bastidor (processo)', metrica: 'Salvamentos e visitas ao perfil', cta: 'Salvar para consultar depois',
     ficha: {
-      nicho: 'Logotipo e identidade visual: portfólio conceitual',
-      publico: 'Empreendedor que avalia uma agência de marca pelo que ela já desenhou',
-      objetivo: 'Visitas ao perfil e comentários',
-      promessa: 'Ver 4 marcas criadas do zero e o raciocínio visual de cada uma',
-      tom: 'Bastidores, visual',
+      nicho: 'Logotipo e identidade visual: processo',
+      publico: 'Empreendedor que vai criar ou refazer o logo e quer entender o que está comprando',
+      objetivo: 'Salvamentos e visitas ao perfil',
+      promessa: 'Entender as 5 etapas entre a ideia e um logo que funciona em qualquer tamanho',
+      tom: 'Bastidores, técnico e claro',
     },
     ganchos: [
-      ['Quebra de padrão', 'Uma marca boa se explica sem legenda. Teste com estas 4.'],
-      ['Dor aguda', 'O seu logo funciona num ícone de 40 pixels?'],
-      ['Ganho rápido', 'Do nome ao símbolo: 4 marcas criadas do zero.', 'Promete ver o processo e entrega imagem forte desde a capa.'],
+      ['Quebra de padrão', 'Um logo começa antes do desenho.', 'Contraria a ideia de que logo é só desenhar, e promete o processo inteiro.'],
+      ['Dor aguda', 'O seu logo some na aba do navegador?'],
+      ['Ganho rápido', 'As 5 etapas de um logo que funciona em qualquer tamanho.'],
     ],
     slides: [
-      ['Do nome ao símbolo: 4 marcas criadas do zero.', 'Capa visual: grade 2 × 2 com Nativa, Orbe, Vetra e Kinto em 3D, selo "conceito" em Geist Mono.', 'Uma por vez.'],
-      ['Nativa · cosméticos\nUma folha nasce da própria letra N.', 'Símbolo da Nativa em destaque, com a folha marcada pela mira.', 'A próxima é sobre movimento.'],
-      ['Orbe · estúdio digital\nUma esfera em órbita: algo sempre em movimento.', 'Símbolo da Orbe, com uma linha de órbita animada em traço.', 'Agora, solidez.'],
-      ['Vetra · capital\nUm V lapidado dentro de um losango: valor e firmeza.', 'Símbolo da Vetra em dourado, com medidas em volta do losango.', 'E a última, velocidade.'],
-      ['Kinto · mobilidade\nUm K em perspectiva, como quem já está andando.', 'Símbolo da Kinto em azul, com linhas de fuga.', 'O que as quatro têm em comum?'],
-      ['O que as 4 têm em comum\nConceito antes do desenho. Teste em tamanho pequeno. Um sistema de cor próprio.', 'Os 4 símbolos reduzidos lado a lado, no tamanho de um ícone de app.', 'Sua vez de escolher.'],
-      ['Qual delas você usaria?\nResponda com o nome nos comentários.', 'Slide final com o rodapé completo e a nota "Marcas conceituais criadas pela Tirvo. Não são clientes."', ''],
+      ['Um logo começa antes do desenho.', 'Capa: desenho técnico abstrato, com grade, círculos de construção, cotas e o ponto laranja no centro. Nenhuma marca fictícia.', '5 etapas.'],
+      ['01 · Conceito\nUma frase antes de um traço. Para quem é, o que promete e do que precisa se diferenciar.', 'Campo de texto com a pergunta "O que essa marca precisa dizer?" e o cursor laranja.', 'Depois, os esboços.'],
+      ['02 · Esboços\nMuitas ideias. Poucas sobrevivem.', 'Grade 3 × 3 de formas geométricas simples. Oito riscadas, uma destacada em laranja.', 'A escolhida vai para a régua.'],
+      ['03 · Construção\nCada curva tem uma medida.', 'Desenho técnico com grade, diagonais, cotas e ângulo.', 'Agora, o teste.'],
+      ['04 · Teste pequeno\nSe some em 16 px, ainda não está pronto.', 'O ícone oficial da Tirvo em 240, 110, 48 e 16 px, com o uso de cada tamanho.', 'E ainda falta o sistema.'],
+      ['05 · Sistema\nLogo sozinho não é marca. Paleta, tipografia e manual.', 'Três faixas: paleta da Tirvo, as três fontes e os itens do manual.', 'Quer ver um caso inteiro?'],
+      ['Quer ver o processo de ponta a ponta?\nA história da nossa própria marca está em tirvo.tech/marca.html.', 'Slide final com o rodapé completo.', ''],
     ],
-    capa: 'Slide 01, grade com os 4 símbolos.',
-    alt: 'Carrossel com 4 marcas conceituais criadas pela Tirvo: Nativa, de cosméticos; Orbe, estúdio digital; Vetra, capital; e Kinto, mobilidade.',
+    capa: 'Slide 01, desenho técnico.',
+    alt: 'Carrossel em 7 imagens com as 5 etapas de criação de um logo na Tirvo: conceito, esboços, construção, teste em tamanho pequeno e sistema de marca.',
     linhas: [
-      'Quatro marcas que não existem, desenhadas como se fossem para amanhã.',
-      'Antes do desenho, o conceito. Aqui estão 4 exemplos.',
+      'Um logo bom passa por 5 etapas antes de chegar à tela.',
+      'O desenho é a terceira etapa, não a primeira.',
     ],
-    legenda: `Quatro marcas que não existem, desenhadas como se fossem estrear amanhã.
+    legenda: `Um logo bom passa por 5 etapas antes de chegar à tela. O desenho é só a terceira.
 
-São conceitos criados pela Tirvo para mostrar o processo: primeiro a ideia, depois o símbolo, e por fim o teste em tamanho pequeno, que é onde muita marca falha.
+1. Conceito: uma frase que diz para quem a marca é e o que ela promete.
+2. Esboços: muitas ideias, comparadas com essa frase.
+3. Construção: grade, proporção e espessura definidas.
+4. Teste pequeno: se some em 16 px, volta para a régua.
+5. Sistema: paleta, tipografia e manual, para a marca sair igual em qualquer peça.
 
-Nativa, cosméticos. Orbe, estúdio digital. Vetra, capital. Kinto, mobilidade.
+O caso completo da nossa própria marca está em tirvo.tech/marca.html.
 
-Qual delas você usaria? Responde com o nome aqui embaixo.`,
+Salve para consultar quando for criar o seu.`,
     hashtags: '#logotipo #identidadevisual #designdelogo #branding #tirvotech',
-    teste: 'Capa visual. Compare visitas ao perfil por alcance com os posts de texto.',
-    instrucoes: ['Publique as 7 imagens na ordem.', 'Deixe sempre claro que são conceitos, não clientes.', 'Compartilhe no story.'],
-    obs: '[CONFIRMAR: a leitura de cada conceito descreve o que o desenho mostra. Ajuste se a ideia original for outra.]',
+    teste: 'Carrossel de processo. Compare salvamentos por alcance com o P02.',
+    instrucoes: ['Publique as 7 imagens na ordem.', 'Compartilhe no story.'],
     midia: { qtd: 7 },
   });
 
@@ -495,7 +498,7 @@ Os dois modelos estão explicados no tirvo.tech. O link está na bio.`,
     frames: [
       ['Gancho de contexto', 'Esta semana o feed ganhou 9 posts. Nenhum cliente inventado.', 'Miniatura da grade 3 × 3 com a mira passando sobre ela.', '', 'E não foi por falta de trabalho.'],
       ['Fricção narrativa', 'Projeto de cliente só aparece aqui com autorização.', 'Cadeado em traço laranja sobre uma pasta de projeto.', '', 'Então, o que mostramos?'],
-      ['Valor ou paradoxo', 'O que é nosso: o próprio site, os conceitos de marca e o método.', 'Três cartões: tirvo.tech, conceitos, método.', '', 'Comece pelo site.'],
+      ['Valor ou paradoxo', 'O que é nosso: o próprio site, a própria marca e o método.', 'Três cartões: tirvo.tech, a marca da Tirvo, método.', '', 'Comece pelo site.'],
       ['Conversão com figurinha', 'O trabalho mais completo da Tirvo está no ar.', 'Área livre para a figurinha de link. Rodapé completo.', 'Link: tirvo.tech, com o texto "Ver o site"', ''],
     ],
     teste: 'Cliques na figurinha de link por visualização do frame 4.',

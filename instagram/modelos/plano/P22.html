@@ -4,29 +4,55 @@
   <meta charset="utf-8">
   <meta name="tirvo:formato" content="feed">
   <meta name="tirvo:slides" content="1">
-  <title>P22: conceito</title>
+  <title>P22: ordem de leitura</title>
   <link rel="stylesheet" href="../stories/premium/base.css">
   <link rel="stylesheet" href="feed.css">
   <style>
-    .peca { background: radial-gradient(600px 500px at 540px 760px, rgba(255, 85, 0, .12), transparent 70%), linear-gradient(180deg, #060607 0%, #09090b 50%, #060607 100%); }
-    .foto { z-index: 3; left: 96px; top: 170px; width: 888px; height: 760px; border-radius: 24px; overflow: hidden; box-shadow: 0 50px 90px rgba(0, 0, 0, .6); }
-    .foto img { width: 100%; height: 100%; object-fit: cover; object-position:50% 50%; display: block; }
-    .foto::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(9, 9, 11, .55)); }
-    .mira-f { z-index: 4; left: 96px; top: 170px; width: 888px; height: 760px; }
-    .selo-c { z-index: 5; left: 126px; top: 200px; }
-    .feed .titulo { left: 92px; top: 970px; font-size: 80px; }
-    .rot { z-index: 4; left: 96px; top: 1196px; font: 500 20px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+    .peca { background: radial-gradient(600px 520px at 540px 820px, rgba(255, 85, 0, .13), transparent 70%), linear-gradient(180deg, #060607 0%, #09090b 50%, #060607 100%); }
+    .rotulo.r { z-index: 4; left: 96px; top: 196px; }
+    .feed .titulo { left: 92px; top: 240px; font-size: 88px; }
+    .esquema { z-index: 3; left: 96px; top: 520px; width: 888px; height: 560px; }
+    .ordem { z-index: 4; left: 96px; top: 1110px; width: 888px; font-size: 30px; line-height: 1.35; color: var(--t2); }
+    .ordem b { color: var(--t1); font-weight: 600; }
   </style>
 </head>
 <body>
+  <!-- Esquema de diagramação: blocos neutros com a ordem de leitura, sem nenhuma peça fictícia -->
   <main class="peca feed" data-n="1">
-    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">estudo de marca</span></header>
+    <header class="cab"><span>tirvo<b>_</b> / design gráfico</span><span class="num">esquema</span></header>
     <svg class="regua" width="888" height="14"></svg>
-    <div class="foto"><img src="img/halden.webp" alt=""></div>
-    <svg class="mira-f" viewBox="0 0 888 760"><g fill="none" stroke="#fafafa" stroke-width="4" opacity=".85"><path d="M24 74V24H74M814 24H864V74M864 686V736H814M74 736H24V686"/></g></svg>
-    <span class="selo-c selo"><span class="led"></span>conceito · não é cliente</span>
-    <h1 class="titulo">A marca também<br>é o <em>mostrador.</em></h1>
-    <p class="rot">conceito halden · relógio automático</p>
+    <p class="rotulo r"><i>//</i> hierarquia visual</p>
+    <h1 class="titulo">Design é decidir<br><em>o que se lê primeiro.</em></h1>
+    <svg class="esquema arte" viewBox="0 0 888 560">
+      <defs><pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1"/></pattern></defs>
+      <!-- folha -->
+      <rect x="40" y="10" width="420" height="530" rx="14" fill="#0f0f12" stroke="rgba(255,255,255,.16)" stroke-width="1.5"/>
+      <rect x="40" y="10" width="420" height="530" rx="14" fill="url(#g)"/>
+      <g fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.18)" stroke-width="1.2">
+        <rect x="76" y="50" width="300" height="70" rx="8" fill="rgba(250,250,250,.9)" stroke="none"/>
+        <rect x="76" y="140" width="220" height="26" rx="6" fill="rgba(161,161,170,.6)" stroke="none"/>
+        <rect x="76" y="200" width="348" height="190" rx="10"/>
+        <rect x="76" y="412" width="330" height="12" rx="4" stroke="none"/><rect x="76" y="436" width="300" height="12" rx="4" stroke="none"/><rect x="76" y="460" width="250" height="12" rx="4" stroke="none"/>
+        <rect x="300" y="482" width="124" height="38" rx="8" fill="#ff5500" stroke="none" style="filter:drop-shadow(0 0 10px rgba(255,85,0,.6))"/>
+      </g>
+      <path d="M76 200L424 390M424 200L76 390" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+      <!-- caminho do olhar -->
+      <path d="M226 85C330 110 330 140 300 153C250 190 250 280 250 295C250 360 200 420 240 440C300 470 340 480 362 501" fill="none" stroke="#ff7a33" stroke-width="2.4" stroke-dasharray="7 8" opacity=".85"/>
+      <g font-family="Geist Mono" font-size="20" font-weight="500" fill="#09090b">
+        <circle cx="226" cy="85" r="19" fill="#ff5500"/><text x="220" y="92">1</text>
+      </g>
+      <g font-family="Geist Mono" font-size="20" font-weight="500" fill="#fafafa">
+        <circle cx="300" cy="153" r="19" fill="#16161a" stroke="#ff7a33" stroke-width="2"/><text x="294" y="160">2</text>
+        <circle cx="250" cy="295" r="19" fill="#16161a" stroke="#ff7a33" stroke-width="2"/><text x="244" y="302">3</text>
+        <circle cx="240" cy="440" r="19" fill="#16161a" stroke="#ff7a33" stroke-width="2"/><text x="234" y="447">4</text>
+        <circle cx="362" cy="501" r="19" fill="#16161a" stroke="#ff7a33" stroke-width="2"/><text x="356" y="508">5</text>
+      </g>
+      <!-- legenda à direita -->
+      <g stroke="rgba(255,255,255,.28)" stroke-width="1.2" fill="none"><path d="M384 85H520"/><path d="M304 153H520" stroke-dasharray="3 6"/><path d="M432 295H520"/><path d="M262 440H300L320 424H520" stroke-dasharray="3 6"/><path d="M432 501H520"/></g>
+      <g font-family="Geist" font-size="27" font-weight="600" fill="#fafafa" letter-spacing="-.5"><text x="540" y="94">Título</text><text x="540" y="162">Apoio</text><text x="540" y="304">Imagem</text><text x="540" y="433">Texto</text><text x="540" y="510">Ação</text></g>
+      <g font-family="Geist Mono" font-size="15" letter-spacing="1.6" fill="#8a8a93"><text x="540" y="120">MAIOR E MAIS FORTE</text><text x="540" y="188">TOM MAIS BAIXO</text><text x="540" y="330">CONFIRMA A IDEIA</text><text x="540" y="459">SÓ O NECESSÁRIO</text><text x="540" y="536">UMA COR, UM DESTAQUE</text></g>
+    </svg>
+    <p class="ordem">Tamanho, peso, cor e espaço dizem ao olho <b>por onde começar e onde terminar.</b> Quando tudo grita, nada é lido.</p>
     <footer class="rod"><span class="dica">@tirvotech</span><img class="logo" data-logo></footer>
   </main>
   <script src="slide.js"></script>

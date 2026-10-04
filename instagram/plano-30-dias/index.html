@@ -223,12 +223,44 @@
   .config { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg2); font-size: 14px; color: var(--t2); }
   .config input { height: 36px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line2); background: var(--bg); color-scheme: dark; }
 
+  /* Aprovação */
+  .apr-topo { display: grid; gap: 14px; padding-block: 18px 6px; }
+  .apr-topo h1 { font-size: 30px; font-weight: 650; letter-spacing: -.035em; }
+  .apr-topo h1 em { color: var(--or2); }
+  .apr-topo .sub { color: var(--t2); font-size: 14.5px; max-width: 720px; }
+  .apr-sem { margin: 26px 0 12px; font-size: 19px; font-weight: 600; }
+  .apr-sem span { color: var(--t3); font-weight: 400; }
+  .apr { border: 1px solid var(--line); border-radius: var(--r); background: var(--bg2); margin-bottom: 14px; overflow: hidden; }
+  .apr.ok { border-color: rgba(60, 207, 142, .45); }
+  .apr.ajuste { border-color: rgba(242, 184, 75, .5); }
+  .apr-cab { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; padding: 14px 16px 10px; }
+  .apr-cab .q { font: 500 12px/1 var(--mono); color: var(--or2); letter-spacing: .04em; }
+  .apr-cab h3 { font-size: 16px; font-weight: 600; flex-basis: 100%; }
+  .apr-cab .m { font-size: 12.5px; color: var(--t3); }
+  .tira { display: flex; gap: 10px; overflow-x: auto; padding: 4px 16px 14px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .tira .thumb { flex: none; width: 210px; scroll-snap-align: start; }
+  .tira .thumb.st { width: 160px; }
+  .apr-acoes { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 12px 16px; border-top: 1px solid var(--line); background: var(--bg); }
+  .apr-acoes .selo-apr { margin-left: auto; font: 500 11.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 6px 8px; border-radius: 6px; background: var(--bg3); color: var(--t3); }
+  .apr.ok .selo-apr { color: var(--ok); background: var(--ok-soft); }
+  .apr.ajuste .selo-apr { color: var(--warn); background: var(--warn-soft); }
+  .btn.aprovar[aria-pressed="true"] { border-color: rgba(60, 207, 142, .6); background: var(--ok-soft); color: var(--ok); }
+  .btn.ajustar[aria-pressed="true"] { border-color: rgba(242, 184, 75, .6); background: var(--warn-soft); color: var(--warn); }
+  .apr-nota { padding: 0 16px 14px; background: var(--bg); display: grid; gap: 8px; }
+  .apr-nota textarea { width: 100%; min-height: 76px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line2); background: var(--bg2); resize: vertical; }
+  .capinha { display: inline-block; vertical-align: middle; margin-right: 10px; width: 34px; aspect-ratio: 4 / 5; border-radius: 6px; overflow: hidden; border: 1px solid var(--line2); background: var(--bg3); }
+  .capinha.st { aspect-ratio: 9 / 16; width: 26px; }
+  .capinha img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
   /* Lightbox e aviso */
-  .lb { position: fixed; inset: 0; z-index: 50; background: rgba(0, 0, 0, .92); display: grid; grid-template-rows: auto minmax(0, 1fr); padding: calc(env(safe-area-inset-top, 0px) + 10px) 12px calc(env(safe-area-inset-bottom, 0px) + 12px); gap: 10px; }
+  .lb { position: fixed; inset: 0; z-index: 50; background: rgba(0, 0, 0, .92); display: grid; grid-template-rows: auto minmax(0, 1fr) auto; padding: calc(env(safe-area-inset-top, 0px) + 10px) 12px calc(env(safe-area-inset-bottom, 0px) + 12px); gap: 10px; }
   .lb[hidden] { display: none; }
   .lb .cab { display: flex; gap: 8px; align-items: center; justify-content: flex-end; }
   .lb .cab span { margin-right: auto; font: 500 13px/1 var(--mono); color: var(--t2); }
   .lb img { max-width: 100%; max-height: 100%; margin: auto; object-fit: contain; border-radius: 8px; }
+  .lb .nav { display: flex; gap: 10px; justify-content: center; align-items: center; }
+  .lb .nav span { font: 500 13px/1 var(--mono); color: var(--t2); min-width: 64px; text-align: center; }
+  .lb .nav .btn { min-width: 110px; }
   .toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); transform: translateX(-50%) translateY(20px); z-index: 60; padding: 10px 16px; border-radius: 10px; background: var(--t1); color: #09090b; font-size: 14px; font-weight: 500; opacity: 0; pointer-events: none; transition: .25s; max-width: calc(100% - 32px); }
   .toast.on { opacity: 1; transform: translateX(-50%); }
   .rod { padding-block: 30px 50px; border-top: 1px solid var(--line); color: var(--t3); font-size: 13px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; }
@@ -278,6 +310,7 @@
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Visualizar imagem">
   <div class="cab"><span id="lb-nome"></span><button class="btn" id="lb-baixar" type="button">Baixar</button><button class="btn" id="lb-fechar" type="button">Fechar</button></div>
   <img id="lb-img" alt="">
+  <div class="nav"><button class="btn" id="lb-ant" type="button">← Anterior</button><span id="lb-pos"></span><button class="btn" id="lb-prox" type="button">Próxima →</button></div>
 </div>
 <div class="toast" id="toast" role="status"></div>
 
@@ -396,6 +429,7 @@
     } catch (e) { aviso('Não foi possível montar o zip.'); }
     botao.disabled = false; botao.innerHTML = txt;
   }
+  const ehStory = (p) => p.formato === 'stories' || p.formato === 'caixinha';
   const arquivos = (p) => MIDIA[(p.midia && p.midia.compartilhada) || p.id] || [];
   const nomeArquivo = (p, caminho, i) => `${p.id}-${String(i + 1).padStart(2, '0')}.${caminho.split('.').pop()}`;
   const wd = (n) => DIAS_SEMANA[(n - 1) % 7];
@@ -430,16 +464,16 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
   }
 
   /* ---------- Abas ---------- */
-  const ABAS = [['calendario', 'Calendário'], ['vitrine', 'Dia 0 · Vitrine'], ['estrategia', 'Estratégia'], ['stories', 'Stories'], ['sementeira', 'Sementeira'], ['metas', 'Metas e decisões'], ['uso', 'Como usar']];
-  let abaAtual = 'calendario';
-  try { abaAtual = localStorage.getItem(LS + '-aba') || abaAtual; } catch (e) {}
+  const ABAS = [['aprovar', 'Aprovar artes'], ['calendario', 'Calendário'], ['vitrine', 'Dia 0 · Vitrine'], ['estrategia', 'Estratégia'], ['stories', 'Stories'], ['sementeira', 'Sementeira'], ['metas', 'Metas e decisões'], ['uso', 'Como usar']];
+  let abaAtual = 'aprovar';
+  try { abaAtual = localStorage.getItem(LS + '-aba2') || abaAtual; } catch (e) {}
   if (/^#[PSC]\d\d$/.test(location.hash)) abaAtual = 'calendario';
   function desenharAbas() {
     $('#abas').innerHTML = ABAS.map(([id, nome]) => `<button class="aba" role="tab" type="button" data-aba="${id}" aria-selected="${id === abaAtual}">${nome}</button>`).join('');
   }
   $('#abas').addEventListener('click', (e) => {
     const b = e.target.closest('[data-aba]'); if (!b) return;
-    abaAtual = b.dataset.aba; try { localStorage.setItem(LS + '-aba', abaAtual); } catch (er) {}
+    abaAtual = b.dataset.aba; try { localStorage.setItem(LS + '-aba2', abaAtual); } catch (er) {}
     desenharAbas(); render(); window.scrollTo({ top: 0 });
   });
 
@@ -470,7 +504,7 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
         <span class="hora">${p.hora}</span>
         <span class="fmt ${p.formato}">${FMT_CURTO[p.formato]}</span>
         <button class="abrir" type="button" data-abrir="${p.id}" aria-expanded="${abertos.has(p.id)}" aria-controls="det-${p.id}">
-          <span class="t">${esc(p.titulo)}</span>
+          <span class="t">${arquivos(p).length ? `<span class="capinha${ehStory(p) ? ' st' : ''}"><img src="${esc(arquivos(p)[0])}" alt="" loading="lazy"></span>` : ''}${esc(p.titulo)}</span>
           <span class="m"><span class="id">${p.id}</span><span class="pil" data-p="${p.pilar}">${esc(PILAR[p.pilar].nome)}</span><span>${esc(p.metrica)}</span></span>
         </button>
         <span class="direita">
@@ -498,7 +532,7 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
         const ext = a.split('.').pop();
         const ehVideo = ext === 'mp4';
         return `<div class="mid">
-          <button class="thumb${story || ehVideo ? ' st' : ''}" type="button" data-ver="${esc(a)}" data-nome="${esc(nomeArquivo(p, a, i))}">
+          <button class="thumb${story || ehVideo ? ' st' : ''}" type="button" data-ver="${esc(a)}" data-nome="${esc(nomeArquivo(p, a, i))}" data-gal="${p.id}" data-i="${i}">
             ${ehVideo ? `<video src="${esc(a)}" muted playsinline preload="metadata"></video>` : `<img src="${esc(a)}" alt="${esc(p.id)} imagem ${i + 1}" loading="lazy">`}
             <span class="num">${String(i + 1).padStart(2, '0')}</span>
           </button>
@@ -625,6 +659,58 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
     </section>`;
   }
 
+  /* ---------- Aprovação das artes ---------- */
+  const filtroApr = { v: 'todas' };
+  const notaAberta = new Set();
+  function aprovar() {
+    const comArte = pecas.filter((p) => arquivos(p).length && !(p.midia && p.midia.compartilhada && p.midia.compartilhada !== p.id));
+    const ok = comArte.filter((p) => st(p.id).aprov === 'ok').length;
+    const aj = comArte.filter((p) => st(p.id).aprov === 'ajuste').length;
+    const nImg = comArte.reduce((n, p) => n + arquivos(p).length, 0);
+    const passaApr = (p) => filtroApr.v === 'todas' || (filtroApr.v === 'pendentes' && !st(p.id).aprov) || st(p.id).aprov === filtroApr.v;
+    let h = `<section class="apr-topo">
+      <span class="eyebrow">revisão antes de postar</span>
+      <h1>Aprovar <em class="s">artes</em></h1>
+      <p class="sub">Todas as ${nImg} imagens de ${comArte.length} peças, por semana e por dia. Deslize a fileira para ver as outras imagens, ou toque numa delas para abrir em tela cheia e avançar. Aprove ou peça ajuste em cada peça. Os pedidos ficam salvos, e o botão abaixo copia todos de uma vez para você me mandar no chat.</p>
+      <div class="resumo">
+        <div><b>${ok}/${comArte.length}</b><span>aprovadas</span></div>
+        <div><b>${aj}</b><span>com ajuste pedido</span></div>
+        <div><b>${comArte.length - ok - aj}</b><span>aguardando você</span></div>
+        <div><b>${nImg}</b><span>imagens no total</span></div>
+      </div>
+      <div class="filtros" role="group" aria-label="Filtrar aprovação" style="padding-bottom:0">
+        ${[['todas', 'Todas'], ['pendentes', 'Aguardando'], ['ok', 'Aprovadas'], ['ajuste', 'Com ajuste']].map(([k, n]) => `<button class="chip" type="button" data-fapr="${k}" aria-pressed="${filtroApr.v === k}">${n}</button>`).join('')}
+        <span class="sep"></span>
+        <button class="btn mini pri" type="button" data-copiar-ajustes>${ICO.copiar}Copiar pedidos de ajuste</button>
+      </div>
+      <p class="nota-midia">Os 11 Reels entram aqui quando os vídeos forem feitos. P14 e S26 aguardam o escopo da gestão de redes.</p>
+    </section>`;
+    for (const s of P.semanas) {
+      const doSem = comArte.filter((p) => p.dia >= s.dias[0] && p.dia <= s.dias[1] && passaApr(p));
+      if (!doSem.length) continue;
+      h += `<h2 class="apr-sem">Semana ${s.n} <span>· ${esc(s.nome)}</span></h2>`;
+      for (const p of doSem) {
+        const e = st(p.id), arqs = arquivos(p), story = ehStory(p);
+        const compart = pecas.filter((x) => x.midia && x.midia.compartilhada === p.id && x.id !== p.id).map((x) => x.id);
+        h += `<article class="apr${e.aprov ? ' ' + e.aprov : ''}" id="apr-${p.id}">
+          <div class="apr-cab"><span class="q">${p.id}</span><span class="m">Dia ${p.dia} · ${wd(p.dia)} · ${p.hora} · ${FMT_CURTO[p.formato]} · ${arqs.length} ${arqs.length > 1 ? 'imagens' : 'imagem'}${compart.length ? ` · arte usada também em ${compart.join(', ')}` : ''}</span><h3>${esc(p.titulo)}</h3></div>
+          <div class="tira">${arqs.map((a, i) => `<button class="thumb${story ? ' st' : ''}" type="button" data-ver="${esc(a)}" data-nome="${esc(nomeArquivo(p, a, i))}" data-gal="${p.id}" data-i="${i}"><img src="${esc(a)}" alt="${esc(p.id)} imagem ${i + 1}" loading="lazy"><span class="num">${String(i + 1).padStart(2, '0')}/${String(arqs.length).padStart(2, '0')}</span></button>`).join('')}</div>
+          <div class="apr-acoes">
+            <button class="btn mini aprovar" type="button" data-aprov="${p.id}" aria-pressed="${e.aprov === 'ok'}">${e.aprov === 'ok' ? 'Aprovada' : 'Aprovar'}</button>
+            <button class="btn mini ajustar" type="button" data-ajustar="${p.id}" aria-pressed="${e.aprov === 'ajuste'}">Pedir ajuste</button>
+            <button class="btn mini" type="button" data-ir="${p.id}">Ver legenda e detalhes</button>
+            <span class="selo-apr">${e.aprov === 'ok' ? 'aprovada' : e.aprov === 'ajuste' ? 'ajuste pedido' : 'aguardando'}</span>
+          </div>
+          ${notaAberta.has(p.id) || e.aprov === 'ajuste' ? `<div class="apr-nota">
+            <textarea id="aj-${p.id}" placeholder="O que mudar? Ex.: imagem 03, trocar o título por…">${esc(e.ajuste || '')}</textarea>
+            <div><button class="btn mini pri" type="button" data-salvar-aj="${p.id}">Salvar pedido</button></div>
+          </div>` : ''}
+        </article>`;
+      }
+    }
+    return h;
+  }
+
   /* ---------- Outras abas ---------- */
   function vitrine() {
     const g = P.dia0.grade;
@@ -701,9 +787,28 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
     </section>`;
   }
 
+  /* ---------- Tela cheia com navegação ---------- */
+  let galeria = null;
+  function mostrarLb(arq, nome) {
+    $('#lb-img').src = arq; $('#lb-nome').textContent = nome;
+    $('#lb-baixar').dataset.arq = arq; $('#lb-baixar').dataset.nomeArq = nome.split(' · ').pop();
+    $('.lb .nav').style.visibility = galeria && galeria.arqs.length > 1 ? 'visible' : 'hidden';
+    if (galeria) $('#lb-pos').textContent = `${galeria.i + 1} de ${galeria.arqs.length}`;
+    $('#lb').hidden = false;
+  }
+  function abrirLb(p, i) {
+    galeria = { p, arqs: arquivos(p), i };
+    mostrarLb(galeria.arqs[i], `${p.id} · Dia ${p.dia} · ` + nomeArquivo(p, galeria.arqs[i], i));
+  }
+  function passoLb(dir) {
+    if (!galeria) return;
+    const n = galeria.arqs.length; galeria.i = (galeria.i + dir + n) % n;
+    mostrarLb(galeria.arqs[galeria.i], `${galeria.p.id} · Dia ${galeria.p.dia} · ` + nomeArquivo(galeria.p, galeria.arqs[galeria.i], galeria.i));
+  }
+
   /* ---------- Render ---------- */
   function render() {
-    const vistas = { calendario: () => abertura() + calendario(), vitrine, estrategia, stories, sementeira, metas, uso };
+    const vistas = { aprovar, calendario: () => abertura() + calendario(), vitrine, estrategia, stories, sementeira, metas, uso };
     $('#app').innerHTML = (vistas[abaAtual] || vistas.calendario)();
     progresso();
   }
@@ -747,9 +852,29 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
     } else if (d.zip) {
       baixarTodos(porId[d.zip], t);
     } else if (d.ver) {
-      $('#lb-img').src = d.ver; $('#lb-nome').textContent = d.nome;
-      $('#lb-baixar').dataset.arq = d.ver; $('#lb-baixar').dataset.nomeArq = d.nome;
-      $('#lb').hidden = false; $('#lb-fechar').focus();
+      if (d.gal) abrirLb(porId[d.gal], +d.i);
+      else { galeria = null; mostrarLb(d.ver, d.nome); }
+    } else if (t.id === 'lb-ant' || t.id === 'lb-prox') {
+      passoLb(t.id === 'lb-prox' ? 1 : -1);
+    } else if (d.aprov) {
+      const id = d.aprov, novo = st(id).aprov === 'ok' ? null : 'ok';
+      notaAberta.delete(id);
+      gravar(id, { aprov: novo }); aviso(novo ? id + ' aprovada' : 'Aprovação desfeita'); atualizarTudo();
+    } else if (d.ajustar) {
+      const id = d.ajustar;
+      if (notaAberta.has(id) && st(id).aprov !== 'ajuste') notaAberta.delete(id); else notaAberta.add(id);
+      const y = window.scrollY; render(); window.scrollTo(0, y);
+      const ta = $('#aj-' + id); if (ta) ta.focus({ preventScroll: true });
+    } else if (d.salvarAj) {
+      const id = d.salvarAj, txt = $('#aj-' + id).value.trim();
+      gravar(id, { aprov: txt ? 'ajuste' : null, ajuste: txt }); notaAberta.delete(id);
+      aviso(txt ? 'Pedido de ajuste salvo' : 'Pedido removido');
+      const y = window.scrollY; render(); window.scrollTo(0, y);
+    } else if (d.fapr) { filtroApr.v = d.fapr; render(); }
+    else if ('copiarAjustes' in d) {
+      const lista = pecas.filter((p) => st(p.id).aprov === 'ajuste' && st(p.id).ajuste).map((p) => `${p.id} · Dia ${p.dia} · ${p.titulo}\n${st(p.id).ajuste}`);
+      if (!lista.length) { aviso('Nenhum pedido de ajuste salvo ainda.'); return; }
+      copiar('Ajustes nas artes do plano de 30 dias:\n\n' + lista.join('\n\n'), 'Pedidos de ajuste');
     } else if (t.id === 'lb-fechar') {
       $('#lb').hidden = true;
     } else if (t.id === 'lb-baixar') {
@@ -757,7 +882,7 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
     } else if (d.fmt) { filtro.fmt = d.fmt; render(); }
     else if (d.status) { filtro.status = d.status; render(); }
     else if (d.ir) {
-      abaAtual = 'calendario'; desenharAbas(); abertos.add(d.ir); filtro.fmt = 'todos'; filtro.status = 'todos'; filtro.q = '';
+      abaAtual = 'calendario'; try { localStorage.setItem(LS + '-aba2', abaAtual); } catch (er) {} desenharAbas(); abertos.add(d.ir); filtro.fmt = 'todos'; filtro.status = 'todos'; filtro.q = '';
       render(); const el = document.getElementById(d.ir); if (el) el.scrollIntoView({ block: 'start' });
     } else if (d.salvarMet) {
       const id = d.salvarMet, met = {};
@@ -775,7 +900,19 @@ ${p.id} · Dia ${p.dia} · ${FMT[p.formato]} · Pilar: ${PILAR[p.pilar].nome}
     }
   });
   $('#lb').addEventListener('click', (e) => { if (e.target.id === 'lb') $('#lb').hidden = true; });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $('#lb').hidden = true; });
+  document.addEventListener('keydown', (e) => {
+    if ($('#lb').hidden) return;
+    if (e.key === 'Escape') $('#lb').hidden = true;
+    else if (e.key === 'ArrowRight') passoLb(1);
+    else if (e.key === 'ArrowLeft') passoLb(-1);
+  });
+  let toqueX = null;
+  $('#lb').addEventListener('touchstart', (e) => { toqueX = e.touches[0].clientX; }, { passive: true });
+  $('#lb').addEventListener('touchend', (e) => {
+    if (toqueX === null) return;
+    const dx = e.changedTouches[0].clientX - toqueX; toqueX = null;
+    if (Math.abs(dx) > 50) passoLb(dx < 0 ? 1 : -1);
+  });
   document.addEventListener('input', (e) => {
     if (e.target.id === 'busca') {
       filtro.q = e.target.value; const pos = e.target.selectionStart;
