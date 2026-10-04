@@ -7,7 +7,7 @@ import {
   prog, eOut, eIO, skyAt, dayAt, W, D, COLX, COLZ, LEVELS, slabY, ROOF, T, lvlStart,
 } from './tl';
 import {makeTextures, triplanar} from './tex';
-import {CR, CYC, CD, SL, LOADS, LoadT, PILE_N, DUNNAGE, craneAt, craneDown} from './crane';
+import {CR, CYC, LOADS, LoadT, PILES, PILE_N, DUNNAGE, craneAt, craneDown, carried, pileAng} from './crane';
 
 type V3 = [number, number, number];
 const UNIT = new THREE.BoxGeometry(1, 1, 1);
@@ -18,11 +18,11 @@ const CYLX = new THREE.CylinderGeometry(1, 1, 1, 10).rotateZ(Math.PI / 2);
 const TOR = new THREE.TorusGeometry(0.16, 0.045, 6, 14, Math.PI * 1.4);
 const YUP = new THREE.Vector3(0, 1, 0);
 const AX = {x: 0, y: 1, z: 2} as const;
-// Painel de tela soldada: grade de linhas 3 x 1,5 m (malha de 15 cm)
+// Painel de tela soldada: grade de linhas 6 x 2,4 m (malha de 20 cm)
 const MESHGRID = (() => {
   const p: number[] = [];
-  for (let x = -1.5; x <= 1.501; x += 0.15) p.push(x, 0, -0.75, x, 0, 0.75);
-  for (let z = -0.75; z <= 0.751; z += 0.15) p.push(-1.5, 0, z, 1.5, 0, z);
+  for (let x = -3; x <= 3.001; x += 0.2) p.push(x, 0, -1.2, x, 0, 1.2);
+  for (let z = -1.2; z <= 1.201; z += 0.2) p.push(-3, 0, z, 3, 0, z);
   return new THREE.BufferGeometry().setAttribute('position', new THREE.Float32BufferAttribute(p, 3));
 })();
 
@@ -87,8 +87,6 @@ const useMats = () => useMemo(() => {
     wood: std('#b08a5c', 0.9),
     galv: std('#aab2b6', 0.4, 0.8),
     orange: std('#e0661f', 0.6),
-    hoist: std('#3c6f93', 0.55, 0.3),
-    hoistL: new THREE.LineBasicMaterial({color: '#cfd8de', transparent: true, opacity: 0.8}),
     fence: triplanar(std('#e9ebe7', 0.7), tx.paint, 2),
     amber: std('#f2b32a', 0.6),
     ground: triplanar(std('#ffffff', 1), tx.grass, 8),
@@ -142,37 +140,33 @@ const Cam = ({f, portrait}: {f: number; portrait: boolean}) => {
 
 type M = ReturnType<typeof useMats>;
 
-// ---------- Cargas içadas pela grua ----------
-const Load = ({t, p, yaw, m, sy = 1}: {t: LoadT; p: V3; yaw: number; m: M; sy?: number}) => {
-  if (sy <= 0.01) return null;
+// ---------- Cargas içadas pela grua (geometria centrada; comprimento no eixo x) ----------
+const Load = ({t, p, yaw, tilt = 0, m, sc = 1}: {t: LoadT; p: V3; yaw: number; tilt?: number; m: M; sc?: number}) => {
+  if (sc <= 0.01) return null;
   const L = LOADS[t];
   const k: React.ReactElement[] = [];
   if (t === 'cage') {
-    // armadura de pilar: 4 barras longitudinais e estribos
     [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(([a, b], i) => k.push(
-      <mesh key={`l${i}`} geometry={UNIT} material={m.rust} position={[0, L.h / 2 + b * 0.22, a * 0.22]} scale={[L.lx, 0.035, 0.035]} castShadow />));
-    for (let x = -L.lx / 2 + 0.1; x < L.lx / 2; x += 0.2) k.push(
-      <lineSegments key={`s${x.toFixed(2)}`} geometry={EDGES} material={m.rustL} position={[x, L.h / 2, 0]} scale={[0.01, 0.46, 0.46]} />);
-  } else if (t === 'forms') {
-    for (let i = 0; i < 2; i++) k.push(<mesh key={`b${i}`} geometry={UNIT} material={m.wood} position={[(i ? 0.8 : -0.8), 0.05, 0]} scale={[0.1, 0.1, L.lz + 0.1]} castShadow />);
-    for (let i = 0; i < 5; i++) k.push(<mesh key={`p${i}`} geometry={UNIT} material={i % 2 ? m.wood : m.ply} position={[0, 0.1 + 0.08 * i + 0.04, 0]} scale={[L.lx, 0.075, L.lz]} castShadow receiveShadow />);
-  } else if (t === 'props') {
-    for (let i = 0; i < 2; i++) k.push(<mesh key={`b${i}`} geometry={UNIT} material={m.wood} position={[(i ? 1.0 : -1.0), 0.05, 0]} scale={[0.1, 0.1, L.lz + 0.1]} castShadow />);
-    for (let r = 0; r < 3; r++) for (let i = 0; i < 6 - r; i++) {
-      const z = (i - (5 - r) / 2) * 0.14;
-      k.push(<mesh key={`t${r}${i}`} geometry={CYLX} material={m.galv} position={[0, 0.17 + r * 0.12, z]} scale={[L.lx, 0.055, 0.055]} castShadow />);
-      k.push(<mesh key={`c${r}${i}`} geometry={CYLX} material={m.orange} position={[0.35, 0.17 + r * 0.12, z]} scale={[0.22, 0.07, 0.07]} />);
-    }
-    [-1.1, 1.1].forEach((x, i) => k.push(<mesh key={`a${i}`} geometry={UNIT} material={m.craneD} position={[x, 0.3, 0]} scale={[0.04, 0.42, L.lz]} />));
-  } else if (t === 'rebar') {
-    for (let r = 0; r < 3; r++) for (let i = 0; i < 7; i++) k.push(
-      <mesh key={`r${r}${i}`} geometry={UNIT} material={m.rust} position={[(i % 2) * 0.12, 0.05 + r * 0.09, (i - 3) * 0.065]} scale={[L.lx, 0.032, 0.032]} castShadow />);
-    [-1.2, 0, 1.2].forEach((x, i) => k.push(<mesh key={`w${i}`} geometry={UNIT} material={m.craneD} position={[x, 0.15, 0]} scale={[0.03, 0.3, 0.5]} />));
+      <mesh key={`l${i}`} geometry={UNIT} material={m.rust} position={[0, b * 0.15, a * 0.15]} scale={[L.lx, 0.03, 0.03]} castShadow />));
+    for (let x = -L.lx / 2 + 0.08; x < L.lx / 2; x += 0.18) k.push(
+      <lineSegments key={`s${x.toFixed(2)}`} geometry={EDGES} material={m.rustL} position={[x, 0, 0]} scale={[0.01, 0.32, 0.32]} />);
+  } else if (t === 'cform') {
+    [[0, 0.31, 0.66, 0.04], [0, -0.31, 0.66, 0.04], [0.31, 0, 0.04, 0.58], [-0.31, 0, 0.04, 0.58]].forEach(([z, y, sz, sy], i) => k.push(
+      <mesh key={`f${i}`} geometry={UNIT} material={m.ply} position={[0, y, z]} scale={[L.lx, sy, sz]} castShadow receiveShadow />));
+    for (let x = -1.1; x <= 1.11; x += 0.55) k.push(<lineSegments key={`g${x}`} geometry={EDGES} material={m.rustL} position={[x, 0, 0]} scale={[0.06, 0.7, 0.7]} />);
   } else if (t === 'mesh') {
-    for (let i = 0; i < 2; i++) k.push(<mesh key={`b${i}`} geometry={UNIT} material={m.wood} position={[(i ? 1.0 : -1.0), 0.05, 0]} scale={[0.1, 0.1, L.lz + 0.1]} castShadow />);
-    for (let i = 0; i < 4; i++) k.push(<lineSegments key={`g${i}`} geometry={MESHGRID} material={m.rustL} position={[0, 0.12 + i * 0.05, 0]} />);
+    for (let i = 0; i < 2; i++) k.push(<lineSegments key={`g${i}`} geometry={MESHGRID} material={m.rustL} position={[0, -0.03 + i * 0.06, 0]} />);
+  } else if (t === 'rebar') {
+    for (let r = 0; r < 2; r++) for (let i = 0; i < 6; i++) k.push(
+      <mesh key={`r${r}${i}`} geometry={UNIT} material={m.rust} position={[0, -0.025 + r * 0.05, (i - 2.5) * 0.065]} scale={[L.lx, 0.03, 0.03]} castShadow />);
+  } else if (t === 'deck') {
+    for (let i = 0; i < 3; i++) k.push(<mesh key={`p${i}`} geometry={UNIT} material={i === 1 ? m.wood : m.ply} position={[0, -0.067 + i * 0.067, 0]} scale={[L.lx, 0.06, L.lz]} castShadow receiveShadow />);
   }
-  return <group position={p} rotation={[0, yaw, 0]} scale={[1, sy, 1]}>{k}</group>;
+  return (
+    <group position={p} rotation={[0, yaw, 0]} scale={[sc, sc, sc]}>
+      <group rotation={[0, 0, tilt * Math.PI / 2]}>{k}</group>
+    </group>
+  );
 };
 
 // ---------- Grua torre (geometria em coordenadas locais) ----------
@@ -512,77 +506,45 @@ export const Scene = ({portrait}: {portrait: boolean}) => {
         <mesh geometry={TOR} material={m.craneD} position={[0, 0.08, 0]} rotation={[0, Math.PI / 2, -0.6]} />
       </group>,
     );
-    // lingas: do gancho aos quatro cantos da carga
+    // lingas: do gancho à carga (quatro pernas nas peças deitadas, duas nas verticais)
     if (c.cyc >= 0 && c.u >= 0.15 && c.u < 0.8) {
       const cy = CYC[c.cyc], L = LOADS[cy.load];
-      const ly = hy - SL;
-      [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(([a, b]) => {
-        const lx = (a * L.lx * 0.38), lz = (b * L.lz * 0.45);
-        const wx = c.hx + lx * dx + lz * Math.sin(c.ang), wz = c.hz + lx * dz + lz * Math.cos(c.ang);
-        add(<Bar key={K()} a={[c.hx, hy, c.hz]} b={[wx, ly, wz]} t={0.025} m={m.cable} cast={false} />);
+      const ld = c.u >= 0.17 && c.u < 0.78 ? carried(cy, f) : null;
+      const ctr: V3 = ld ? [ld.x, ld.y + gy, ld.z] : c.u < 0.5 ? [cy.pick[0], cy.pileTop + L.h / 2, cy.pick[1]] : [cy.drop[0], cy.y + (L.v ? L.lx / 2 : L.h / 2), cy.drop[1]];
+      const yaw = ld ? ld.yaw : c.u < 0.5 ? cy.pickAng : (L.v ? cy.dropAng : cy.yaw);
+      const tilt = ld ? ld.tilt : c.u < 0.5 ? 0 : (L.v ? 1 : 0);
+      const pts: V3[] = L.v ? [[L.lx * 0.35, L.h / 2, 0], [-L.lx * 0.35, L.h / 2, 0]]
+        : [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([a, b]) => [a * L.lx * 0.4, L.h / 2, b * L.lz * 0.45] as V3);
+      const e = new THREE.Euler(0, yaw, 0), ez = new THREE.Euler(0, 0, tilt * Math.PI / 2);
+      const used = L.v && tilt > 0.5 ? [[L.lx / 2, 0, 0] as V3] : pts;
+      used.forEach((q) => {
+        const v = new THREE.Vector3(...q).applyEuler(ez).applyEuler(e);
+        add(<Bar key={K()} a={[c.hx, hy, c.hz]} b={[ctr[0] + v.x, ctr[1] + v.y, ctr[2] + v.z]} t={0.025} m={m.cable} cast={false} />);
       });
     }
   }
-  // cargas: na pilha, içadas e já descarregadas sobre a laje
-  const pileOut = 1 - eIO(prog(f, 575, 610));
+  // cargas: nas pilhas, em transporte e já posicionadas (somem dentro do elemento executado)
+  const pileOut = 1 - eIO(prog(f, 560, 595));
+  if (pileOut > 0.01) (Object.keys(PILES) as LoadT[]).forEach((t) => {
+    const L = LOADS[t], [px, pz] = PILES[t], ya = pileAng(t);
+    const busy = CYC.some((c) => c.load === t && f >= c.att && f < c.rel + 6);
+    add(<group key={K()} position={[px, 0, pz]} rotation={[0, ya, 0]} scale={[1, pileOut, 1]}>
+      {[-0.38, 0.38].map((x) => <mesh key={x} geometry={UNIT} material={m.wood} position={[x * L.lx, DUNNAGE / 2, 0]} scale={[0.14, DUNNAGE, L.lz + 0.3]} castShadow receiveShadow />)}
+    </group>);
+    for (let n = 0; n < PILE_N + (busy ? 0 : 1); n++) add(<Load key={K()} t={t} p={[px, (DUNNAGE + n * L.h + L.h / 2) * pileOut, pz]} yaw={ya} m={m} sc={pileOut} />);
+  });
   CYC.forEach((cy) => {
+    if (f < cy.att || f >= cy.gone) return;
     const L = LOADS[cy.load];
-    const att = cy.a + 0.17 * CD, rel = cy.a + 0.78 * CD;
-    // pilha (dormentes + peças que ficam)
-    if (pileOut > 0.01) {
-      const [px, pz] = cy.pick;
-      add(<group key={K()} position={[px, 0, pz]} rotation={[0, cy.pickAng, 0]} scale={[1, pileOut, 1]}>
-        {[-0.38, 0.38].map((x) => <mesh key={x} geometry={UNIT} material={m.wood} position={[x * L.lx, DUNNAGE / 2, 0]} scale={[0.14, DUNNAGE, L.lz + 0.3]} castShadow receiveShadow />)}
-      </group>);
-      for (let n = 0; n < PILE_N; n++) add(<Load key={K()} t={cy.load} p={[px, (DUNNAGE + n * L.h) * pileOut, pz]} yaw={cy.pickAng} m={m} sy={pileOut} />);
-    }
-    if (f < att) {
-      if (pileOut > 0.01) add(<Load key={K()} t={cy.load} p={[cy.pick[0], cy.pileTop, cy.pick[1]]} yaw={cy.pickAng} m={m} />);
-    } else if (f < rel) {
-      const c = craneAt(f);
-      add(<Load key={K()} t={cy.load} p={[c.hx, c.y - SL - L.h, c.hz]} yaw={c.ang} m={m} />);
+    if (f < cy.rel) {
+      const ld = carried(cy, f);
+      add(<Load key={K()} t={cy.load} p={[ld.x, ld.y + (down < 0.999 ? -down * (CR.H + 12) : 0), ld.z]} yaw={ld.yaw} tilt={ld.tilt} m={m} />);
     } else {
-      const sy = cy.gone ? 1 - eIO(prog(f, cy.gone - 25, cy.gone)) : 1;
-      add(<Load key={K()} t={cy.load} p={[cy.drop[0], cy.surf, cy.drop[1]]} yaw={cy.dropAng} m={m} sy={sy} />);
+      // fôrma de pilar é retirada depois da concretagem; as demais ficam embutidas
+      const sc = cy.load === 'cform' ? 1 - eIO(prog(f, cy.gone - 6, cy.gone)) : 1;
+      add(<Load key={K()} t={cy.load} p={[cy.drop[0], cy.y + (L.v ? L.lx / 2 : L.h / 2), cy.drop[1]]} yaw={L.v ? cy.dropAng : cy.yaw} tilt={L.v ? 1 : 0} m={m} sc={sc} />);
     }
   });
-
-  // ---------- Elevador de cremalheira (alvenaria e acabamento) ----------
-  const hIn = eOut(prog(f, 560, 600)), hOut = eIO(prog(f, 872, 900));
-  const HM = ROOF + 2.4;
-  const mTop = HM * hIn * (1 - hOut);
-  if (mTop > 0.05) {
-    const hx = -10.05, q = 0.28;
-    [[-q, -q], [q, -q], [q, q], [-q, q]].forEach(([a, b]) => add(<Bx key={K()} p={[hx + a, mTop / 2, b]} s={[0.07, mTop, 0.07]} m={m.galv} cast={false} />));
-    for (let y = 1.5; y < mTop; y += 1.5) add(<Bx key={K()} p={[hx, y, 0]} s={[2 * q + 0.07, 0.05, 2 * q + 0.07]} m={m.galv} cast={false} />);
-    add(<Bx key={K()} p={[hx - q - 0.06, mTop / 2, 0]} s={[0.05, mTop, 0.16]} m={m.craneD} cast={false} />);
-    for (let k = 2; k < LEVELS; k += 2) if (slabY(k) < mTop) add(<Bx key={K()} p={[(hx + q - 9.2) / 2, slabY(k) - 0.3, 0]} s={[Math.abs(-9.2 - hx - q), 0.06, 0.4]} m={m.galv} cast={false} />);
-    add(<lineSegments key={K()} geometry={EDGES} material={m.hoistL} position={[-11.1, 1.0, 0]} scale={[2.6, 2.0 * hIn * (1 - hOut), 3.6]} />);
-    // cabine sobe e desce entre o térreo e os pavimentos
-    const STOPS = [3, 6, 2, 8, 5, 1, 7, 4];
-    let cy = 0.2;
-    if (f >= 604 && f < 860) {
-      const t = f - 604, P = 32, i = Math.floor(t / P), u = (t % P) / P;
-      const top = slabY(STOPS[i % STOPS.length]) + 0.05;
-      cy = u < 0.12 ? 0.2 : u < 0.44 ? 0.2 + (top - 0.2) * eIO((u - 0.12) / 0.32) : u < 0.56 ? top : u < 0.9 ? top + (0.2 - top) * eIO((u - 0.56) / 0.34) : 0.2;
-    }
-    const cabS = hIn * (1 - eIO(prog(f, 868, 884)));
-    if (cabS > 0.01) add(
-      <group key={K()} position={[-11.1, cy, 0]} scale={[1, cabS, 1]}>
-        <mesh geometry={UNIT} material={m.hoist} position={[0, 0.06, 0]} scale={[1.5, 0.12, 2.6]} castShadow />
-        <mesh geometry={UNIT} material={m.hoist} position={[0, 2.3, 0]} scale={[1.5, 0.1, 2.6]} castShadow />
-        {[[-0.72, -1.27], [0.72, -1.27], [0.72, 1.27], [-0.72, 1.27]].map(([a, b]) => <mesh key={`${a}${b}`} geometry={UNIT} material={m.hoist} position={[a, 1.18, b]} scale={[0.07, 2.25, 0.07]} castShadow />)}
-        <lineSegments geometry={EDGES} material={m.hoistL} position={[0, 1.18, 0]} scale={[1.48, 2.2, 2.58]} />
-        <mesh geometry={UNIT} material={m.mason} position={[0, 0.55, 0]} scale={[1.0, 0.85, 1.1]} castShadow />
-      </group>,
-    );
-    // paletes de blocos cerâmicos na base
-    const pal = eOut(prog(f, 598, 620)) * (1 - eIO(prog(f, 862, 880)));
-    if (pal > 0.01) [[-13.6, -2.0], [-13.6, 2.0], [-15.3, -1.6]].forEach(([x, z]) => {
-      add(<Bx key={K()} p={[x, 0.07, z]} s={[1.2, 0.14, 1.0]} m={m.wood} g={pal} />);
-      add(<Bx key={K()} p={[x, 0.14 + 0.45 * pal, z]} s={[1.1, 0.9 * pal, 0.92]} m={m.mason} />);
-    });
-  }
 
   // ---------- Entorno: vizinhança existente e paisagismo na entrega ----------
   const NB: [number, number, number, number, number, number][] = [
@@ -638,7 +600,7 @@ export const Scene = ({portrait}: {portrait: boolean}) => {
       <hemisphereLight args={[lerpC('#3a5878', '#d6e6f4', day), lerpC('#0e1a24', '#8a8274', day), 0.3 + 0.45 * day]} />
       <directionalLight
         position={[46, 58, 40]} intensity={sunI} color={lerpC('#ffc890', '#fff3e2', day)} castShadow
-        shadow-mapSize-width={3072} shadow-mapSize-height={3072} shadow-bias={-0.0003} shadow-normalBias={0.03} shadow-radius={3}
+        shadow-mapSize-width={2048} shadow-mapSize-height={2048} shadow-bias={-0.0003} shadow-normalBias={0.03} shadow-radius={3}
         shadow-camera-left={-60} shadow-camera-right={60} shadow-camera-top={60} shadow-camera-bottom={-60} shadow-camera-near={1} shadow-camera-far={220}
       />
       {gridOp > 0.003 && (

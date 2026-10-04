@@ -6,8 +6,8 @@ Não é publicada no site. Os vídeos prontos ficam em `projetos/ortival/assets/
 ## Arquivos
 
 - `src/tl.ts`: duração, linha do tempo das etapas, geometria do prédio e cor do céu.
-- `src/Scene.tsx`: cena 3D (terreno, fundação, estrutura, alvenaria, fachada, grua, cremalheira, entorno e câmera).
-- `src/crane.ts`: ciclos de içamento da grua, cargas e balanço do gancho.
+- `src/Scene.tsx`: cena 3D (terreno, fundação, estrutura, alvenaria, fachada, grua, entorno e câmera).
+- `src/crane.ts`: ciclos de içamento da grua (dois por laje), cargas e balanço do gancho.
 - `src/tex.ts`: texturas procedurais e mapeamento triplanar.
 - `src/Overlay.tsx`: textos e painel de etapas.
 - `src/Root.tsx`: composições horizontal (1920x1080) e vertical (1080x1920).

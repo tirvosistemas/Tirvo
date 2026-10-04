@@ -35,7 +35,7 @@ export const STAGES = [
   {n: '01', t: 'Projeto', s: 'Modelagem e compatibilização', a: 0, b: 100},
   {n: '02', t: 'Fundação', s: 'Estacas, blocos e vigas baldrame', a: 100, b: 252},
   {n: '03', t: 'Estrutura', s: 'Pilares, vigas e lajes em concreto armado', a: 252, b: 545},
-  {n: '04', t: 'Alvenaria', s: 'Bloco cerâmico, materiais pela cremalheira', a: 545, b: 665},
+  {n: '04', t: 'Alvenaria', s: 'Vedação em bloco cerâmico', a: 545, b: 665},
   {n: '05', t: 'Fachada', s: 'Fachada ventilada, esquadrias e varandas', a: 665, b: 905},
   {n: '06', t: 'Entrega', s: 'Calçada, paisagismo e entorno', a: 905, b: DUR},
 ];
