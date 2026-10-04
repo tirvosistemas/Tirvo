@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="story">
+  <meta name="tirvo:slides" content="4">
+  <title>S01: o perfil abriu hoje</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="story.css">
+  <style>
+    .peca { background: radial-gradient(560px 520px at 540px 900px, rgba(255, 85, 0, .16), transparent 70%), radial-gradient(900px 420px at 540px 1930px, rgba(255, 70, 0, .2), transparent 70%), linear-gradient(180deg, #050506 0%, #09090b 50%, #050506 100%); }
+    /* 1: contador */
+    .contador { z-index: 4; left: 0; right: 0; top: 470px; display: flex; justify-content: center; align-items: center; }
+    .contador b { font: 600 520px/.8 var(--sans); letter-spacing: -.06em; color: #fafafa; text-shadow: 0 0 60px rgba(255, 85, 0, .25); }
+    .contador .cursor { width: 64px; height: 400px; margin-left: 28px; }
+    .contador-rot { z-index: 4; left: 0; right: 0; top: 960px; text-align: center; font: 500 24px/1 var(--mono); letter-spacing: .3em; text-transform: uppercase; color: var(--t3); }
+    /* 2: mira travando */
+    .alvo-g { z-index: 3; left: 290px; top: 420px; width: 500px; height: 500px; }
+    /* 3: lote × base */
+    .esquema { z-index: 3; left: 40px; top: 360px; width: 1000px; height: 640px; }
+  </style>
+</head>
+<body>
+  <!-- 1 · gancho de contexto -->
+  <main class="peca st" data-n="1">
+    <header class="topo"><span>tirvo<b>_</b> / bastidor</span><span class="num">01<i>/04</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+    <p class="rotulo r"><i>//</i> dia 1 do perfil</p>
+    <div class="contador"><b>0</b><span class="cursor"></span></div>
+    <p class="contador-rot">seguidores</p>
+    <div class="txt" style="top:1110px"><p class="grande">Este perfil abriu hoje.<br><span class="cinza">Do zero.</span> <em>E de propósito.</em></p></div>
+    <div class="parte"><i class="on"></i><i></i><i></i><i></i></div>
+    <div class="st-rod" data-frame="20,0,20,0" data-tone="branco"><img class="logo" data-logo><span class="lks"><span class="lk"><u>tirvo.tech</u></span><span class="arroba">@tirvotech</span></span></div>
+  </main>
+
+  <!-- 2 · fricção narrativa -->
+  <main class="peca st" data-n="2">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs><pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="gg" cx="50%" cy="36%" r="45%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><mask id="mg"><rect width="1080" height="1920" fill="url(#gg)"/></mask>
+        <filter id="halo" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="16"/></filter></defs>
+      <rect width="1080" height="1920" fill="url(#grade)" mask="url(#mg)"/>
+      <!-- cantos chegando de fora (rastro) e travando no centro -->
+      <g fill="none" stroke-linecap="square">
+                <g stroke="rgba(255,255,255,.25)" stroke-width="6"><path d="M330 430V370H390M750 430V370H690M750 910V970H690M330 910V970H390"/></g>
+        <g stroke="#fafafa" stroke-width="12"><path d="M400 540V480H460M680 540V480H620M680 800V860H620M400 800V860H460"/></g>
+        <g stroke="rgba(250,250,250,.5)" stroke-width="7"><path d="M540 500V545M540 795V840M420 670H465M615 670H660"/></g>
+      </g>
+      <circle cx="540" cy="670" r="60" fill="#ff5500" opacity=".5" filter="url(#halo)"/>
+      <circle cx="540" cy="670" r="26" fill="#ff5500" style="filter:drop-shadow(0 0 14px #ff5500)"/>
+      <circle cx="540" cy="670" r="70" fill="none" stroke="rgba(255,122,51,.35)" stroke-width="2"/>
+      <circle cx="540" cy="670" r="110" fill="none" stroke="rgba(255,122,51,.15)" stroke-width="2"/>
+    </svg>
+    <header class="topo"><span>tirvo<b>_</b> / bastidor</span><span class="num">02<i>/04</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+    <div class="txt" style="top:1110px">
+      <p class="grande">Começar do zero, com o <em>mesmo rigor</em> de um projeto.</p>
+      <p class="corpo"><b>Nada de seguidor comprado.</b> Cada número aqui vai ser de verdade.</p>
+    </div>
+    <div class="parte"><i class="on"></i><i class="on"></i><i></i><i></i></div>
+    <div class="st-rod" data-frame="20,0,20,0" data-tone="branco"><img class="logo" data-logo><span class="lks"><span class="lk"><u>tirvo.tech</u></span><span class="arroba">@tirvotech</span></span></div>
+  </main>
+
+  <!-- 3 · valor ou paradoxo -->
+  <main class="peca st" data-n="3">
+    <svg class="arte" viewBox="0 0 1080 1920" width="1080" height="1920">
+      <defs>
+        <linearGradient id="le" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1309"/><stop offset="1" stop-color="#0d0705"/></linearGradient>
+        <linearGradient id="ld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c0d06"/><stop offset="1" stop-color="#080504"/></linearGradient>
+        <linearGradient id="tb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b160c"/><stop offset="1" stop-color="#150b07"/></linearGradient>
+        <clipPath id="lote"><path d="M80 720 280 604 480 720 280 836Z"/></clipPath>
+        <filter id="halo" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="14"/></filter>
+      </defs>
+      <g clip-path="url(#lote)" stroke="rgba(255,255,255,.16)" stroke-width="1.2" stroke-dasharray="5 7"><path d="M60 740 260 624M100 760 300 644M140 783 340 667M180 806 380 690M220 829 420 713M140 667 340 783M180 644 380 760M220 621 420 737M100 690 300 806"/></g>
+      <path d="M80 720 280 604 480 720 280 836Z" fill="rgba(255,255,255,.02)" stroke="rgba(255,255,255,.35)" stroke-width="1.6" stroke-dasharray="8 8"/>
+      <g transform="translate(226 500)" opacity=".8"><rect width="108" height="190" rx="18" fill="#121215" stroke="rgba(255,255,255,.45)" stroke-width="2"/><circle cx="32" cy="36" r="14" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"/><g fill="rgba(255,255,255,.14)"><rect x="12" y="66" width="26" height="26" rx="3"/><rect x="41" y="66" width="26" height="26" rx="3"/><rect x="70" y="66" width="26" height="26" rx="3"/><rect x="12" y="96" width="26" height="26" rx="3"/><rect x="41" y="96" width="26" height="26" rx="3"/><rect x="70" y="96" width="26" height="26" rx="3"/></g></g>
+      <g transform="translate(390 560)"><path d="M30 40V150" stroke="rgba(255,255,255,.5)" stroke-width="3"/><rect x="-36" y="0" width="132" height="52" rx="6" fill="#0c0c0e" stroke="rgba(255,255,255,.55)" stroke-width="2"/><text x="30" y="34" text-anchor="middle" font-family="Geist Mono" font-size="19" letter-spacing="3" fill="#d4d4d8">ALUGADO</text></g>
+      <path d="M600 720 800 604 1000 720 800 836Z" fill="url(#tb)" stroke="#ff7a33" stroke-width="2"/>
+      <path d="M600 720V800L800 916V836Z" fill="url(#le)" stroke="#ff7a33" stroke-opacity=".6" stroke-width="1.6"/>
+      <path d="M1000 720V800L800 916V836Z" fill="url(#ld)" stroke="#ff7a33" stroke-opacity=".6" stroke-width="1.6"/>
+      <ellipse cx="800" cy="720" rx="160" ry="76" fill="#ff5500" opacity=".18" filter="url(#halo)"/>
+      <g transform="translate(680 470)"><rect width="240" height="196" rx="14" fill="#0e0d0d" stroke="rgba(255,255,255,.75)" stroke-width="2"/><path d="M0 38H240" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/><rect x="60" y="9" width="166" height="20" rx="10" fill="rgba(255,255,255,.06)"/><text x="143" y="24" text-anchor="middle" font-family="Geist Mono" font-size="14" fill="#d4d4d8">tirvo.tech</text>
+        <g transform="translate(120 116)" fill="none" stroke="#fafafa" stroke-width="3"><path d="M-32 -16V-32H-16M16 -32H32V-16M32 16V32H16M-16 32H-32V16"/></g><circle cx="120" cy="116" r="8" fill="#ff5500" style="filter:drop-shadow(0 0 8px #ff5500)"/></g>
+      <text x="280" y="900" text-anchor="middle" font-family="Geist Mono" font-size="20" letter-spacing="4" fill="#8a8a93">VITRINE</text>
+      <text x="800" y="975" text-anchor="middle" font-family="Geist Mono" font-size="20" letter-spacing="4" fill="#ffb187">SEDE</text>
+    </svg>
+    <header class="topo"><span>tirvo<b>_</b> / bastidor</span><span class="num">03<i>/04</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+    <div class="txt" style="top:1110px">
+      <p class="grande"><span class="cinza">Uma agência que avisa:</span> rede social é <em>terreno alugado.</em></p>
+      <p class="corpo">Por isso a sede é <b>tirvo.tech.</b> Aqui é a vitrine.</p>
+    </div>
+    <div class="parte"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+    <div class="st-rod" data-frame="20,0,20,0" data-tone="branco"><img class="logo" data-logo><span class="lks"><span class="lk"><u>tirvo.tech</u></span><span class="arroba">@tirvotech</span></span></div>
+  </main>
+
+  <!-- 4 · conversão com figurinha (enquete) -->
+  <main class="peca st" data-n="4">
+    <header class="topo"><span>tirvo<b>_</b> / bastidor</span><span class="num">04<i>/04</i></span></header>
+    <svg class="regua" width="912" height="14"></svg>
+    <p class="rotulo r"><i>//</i> sua vez</p>
+    <h1 class="titulo">O que você quer<br>ver <em>primeiro</em><br>por aqui?</h1>
+    <div class="figurinha" style="top:780px;height:400px"><i></i><i></i><i></i><i></i></div>
+    <div class="st-fim">
+      <div class="divisor-h"></div>
+      <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span><span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span></div>
+      <div class="acoes">
+        <span class="btn cheio" data-frame="18,0,18,0" data-tone="quente"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-up-right"/></svg></span>
+        <span class="btn vazado" data-frame="0,18,0,18" data-tone="branco"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      </div>
+      <div class="base"><img class="logo" data-logo><span>@tirvotech</span></div>
+    </div>
+  </main>
+  <script src="slide.js"></script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>

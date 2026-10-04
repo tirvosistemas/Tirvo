@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="feed">
+  <meta name="tirvo:slides" content="7">
+  <title>P04: logotipo e logomarca</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .peca { background: radial-gradient(560px 460px at 540px 560px, rgba(255, 85, 0, .14), transparent 70%), linear-gradient(180deg, #060607 0%, #09090b 50%, #060607 100%); }
+    .rotulo.r { z-index: 4; left: 96px; top: 190px; }
+    .txt { z-index: 4; left: 96px; top: 904px; width: 888px; display: grid; gap: 24px; }
+    .txt h2 { font-size: 66px; font-weight: 680; letter-spacing: -.045em; line-height: 1.02; }
+    .txt h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: -.01em; }
+    .txt .corpo { font-size: 34px; }
+    .vis { z-index: 3; left: 96px; top: 200px; width: 888px; height: 660px; }
+    .recorte { display: block; overflow: hidden; }
+    .recorte img { display: block; height: 100%; width: auto; max-width: none; }
+
+    /* capa */
+    .capa .titulo { left: 92px; top: 236px; font-size: 100px; }
+    .duo { z-index: 4; left: 96px; top: 760px; width: 888px; display: grid; grid-template-columns: 1fr 86px 1fr; align-items: center; }
+    .duo .p { height: 360px; display: grid; justify-items: center; align-content: center; gap: 40px; }
+    .duo small { font: 500 19px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--t3); }
+    .duo .neq { justify-self: center; font: 400 80px/1 var(--serif); font-style: italic; color: var(--or-pale); text-shadow: 0 0 20px rgba(255, 85, 0, .6); }
+    .h86 { height: 86px; }
+    .so-nome-86 { width: 222px; }
+    .so-nome-86 img { margin-left: -127px; }
+
+    /* 2 logotipo medido */
+    .medido { position: absolute; left: 50%; top: 260px; transform: translateX(-50%); }
+    .h170 { height: 170px; }
+    .so-nome-170 { width: 440px; }
+    .so-nome-170 img { margin-left: -251px; }
+    .so-mira-170 { width: 168px; }
+
+    /* 4 sistema */
+    .sistema { z-index: 4; left: 96px; top: 250px; width: 888px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .sistema > div { height: 250px; padding: 30px; display: grid; align-content: space-between; }
+    .sistema b { font-size: 36px; font-weight: 640; letter-spacing: -.03em; }
+    .sistema small { font: 500 17px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--or-pale); }
+    .sistema .ib { width: 84px; height: 84px; }
+
+    /* 5 paleta */
+    .paleta { z-index: 4; left: 96px; top: 230px; width: 888px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .paleta > div { height: 280px; border-radius: 18px; border: 1px solid rgba(255, 255, 255, .14); display: grid; align-content: end; padding: 20px; gap: 6px; }
+    .paleta b { font: 500 19px/1 var(--mono); }
+    .paleta small { font-size: 18px; opacity: .75; }
+    .tipos { z-index: 4; left: 96px; top: 540px; width: 888px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .tipos > div { height: 300px; padding: 26px; display: grid; align-content: space-between; }
+    .tipos .aa { font-size: 140px; line-height: .9; letter-spacing: -.04em; }
+    .tipos small { font: 500 17px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--t3); }
+
+    /* 6 respiro */
+    .respiro { position: absolute; left: 50%; top: 110px; transform: translateX(-50%); padding: 106px; border: 2px dashed rgba(255, 122, 51, .55); }
+    .respiro .h106 { height: 106px; }
+    .respiro .x { position: absolute; font: 500 22px/1 var(--mono); color: var(--or-pale); }
+    .respiro .mira-x { position: absolute; width: 106px; height: 106px; border: 1px solid rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .04); display: grid; place-items: center; font: 500 26px/1 var(--mono); color: var(--t2); }
+    .minimo { position: absolute; left: 0; right: 0; top: 540px; display: flex; justify-content: center; align-items: center; gap: 30px; font: 500 19px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--t3); }
+    .minimo img { height: 28px; }
+
+    /* final */
+    .final .titulo { left: 92px; top: 240px; font-size: 100px; }
+    .final .corpo { z-index: 4; left: 96px; top: 600px; width: 860px; }
+    .final .fim { top: 960px; }
+  </style>
+</head>
+<body>
+  <!-- 01 · capa -->
+  <main class="peca feed capa" data-n="1">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">01<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> antes do briefing</p>
+    <h1 class="titulo">Logotipo e<br>logomarca <em>não são</em><br>a mesma coisa.</h1>
+    <div class="duo">
+      <div class="p" data-frame="22,0,22,0" data-tone="branco"><span class="recorte so-nome-86 h86"><img data-logo></span><small>logotipo</small></div>
+      <span class="neq">≠</span>
+      <div class="p" data-frame="0,22,0,22" data-tone="laranja"><span class="recorte h86" style="width:auto"><img data-logo></span><small>logomarca</small></div>
+    </div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <!-- 02 · logotipo -->
+  <main class="peca feed" data-n="2">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">02<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="vis">
+      <svg width="888" height="660" viewBox="0 0 888 660" style="position:absolute;inset:0">
+        <g stroke="rgba(255,255,255,.28)" stroke-width="1.4" fill="none">
+          <path d="M224 240H664M224 450H664" stroke-dasharray="5 7"/>
+          <path d="M190 260V430M180 260H200M180 430H200"/>
+          <path d="M224 500V520M664 500V520M224 510H664"/>
+        </g>
+        <text x="172" y="350" text-anchor="end" font-family="Geist Mono" font-size="17" fill="#8a8a93">altura-x</text>
+        <text x="444" y="550" text-anchor="middle" font-family="Geist Mono" font-size="17" letter-spacing="3" fill="#ffb187">SÓ TIPOGRAFIA</text>
+      </svg>
+      <span class="recorte so-nome-170 h170 medido"><img data-logo></span>
+    </div>
+    <div class="txt"><h2><em>Logotipo</em></h2><p class="corpo">É o nome escrito de um jeito único. <b>Só tipografia, desenhada para a marca.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <!-- 03 · logomarca -->
+  <main class="peca feed" data-n="3">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">03<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="vis">
+      <span class="recorte h170 medido" style="left:444px"><img data-logo></span>
+      <svg width="888" height="660" viewBox="0 0 888 660" style="position:absolute;inset:0">
+        <g fill="none" stroke="#ff7a33" stroke-width="2" style="filter:drop-shadow(0 0 5px #ff5500)"><path d="M100 236h170v-14M100 236v-14"/><path d="M354 452h434v14M354 452v14"/></g>
+        <text x="185" y="206" text-anchor="middle" font-family="Geist Mono" font-size="18" letter-spacing="3" fill="#ffb187">SÍMBOLO</text>
+        <text x="571" y="500" text-anchor="middle" font-family="Geist Mono" font-size="18" letter-spacing="3" fill="#ffb187">NOME</text>
+      </svg>
+    </div>
+    <div class="txt"><h2><em>Logomarca</em></h2><p class="corpo">É o termo que o Brasil usa para <b>símbolo e nome juntos.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <!-- 04 · sistema -->
+  <main class="peca feed" data-n="4">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">04<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="sistema">
+      <div data-frame="20,0,20,0" data-tone="laranja"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-sparkles"/></svg></span><span><small>01</small><br><b>Paleta</b></span></div>
+      <div data-frame="0,20,0,20" data-tone="branco"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-pen-tool"/></svg></span><span><small>02</small><br><b>Tipografia</b></span></div>
+      <div data-frame="0,20,0,20" data-tone="branco"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-ruler"/></svg></span><span><small>03</small><br><b>Manual de marca</b></span></div>
+      <div data-frame="20,0,20,0" data-tone="laranja"><span class="ib" data-frame="12,0,12,0" data-tone="laranja"><svg class="ico"><use href="#i-layers"/></svg></span><span><small>04</small><br><b>Aplicações</b></span></div>
+    </div>
+    <div class="txt"><h2>Identidade visual é<br>o <em>sistema inteiro.</em></h2><p class="corpo">A marca não para no desenho. <b>São as regras que fazem ela aparecer igual em todo lugar.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <!-- 05 · paleta e tipografia -->
+  <main class="peca feed" data-n="5">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">05<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="paleta">
+      <div style="background:#09090b"><b>#09090B</b><small>fundo</small></div>
+      <div style="background:#ff5500;border-color:transparent;box-shadow:0 0 40px rgba(255,85,0,.35)"><b>#FF5500</b><small>destaque</small></div>
+      <div style="background:#fafafa;color:#09090b"><b>#FAFAFA</b><small>texto</small></div>
+      <div style="background:#a1a1aa;color:#09090b"><b>#A1A1AA</b><small>apoio</small></div>
+    </div>
+    <div class="tipos">
+      <div data-frame="18,0,18,0" data-tone="branco"><span class="aa" style="font-weight:680">Aa</span><small>Geist<br>títulos e textos</small></div>
+      <div data-frame="18,0,18,0" data-tone="branco"><span class="aa" style="font-family:var(--serif);font-style:italic">Aa</span><small>Instrument Serif<br>ênfase</small></div>
+      <div data-frame="18,0,18,0" data-tone="branco"><span class="aa" style="font-family:var(--mono);font-size:118px">Aa</span><small>Geist Mono<br>rótulos e dados</small></div>
+    </div>
+    <div class="txt"><h2>Paleta e <em>tipografia</em></h2><p class="corpo">Fazem a marca ser reconhecida <b>antes de alguém ler o nome.</b> Estas são as da Tirvo.</p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <!-- 06 · manual -->
+  <main class="peca feed" data-n="6">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">06<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="vis">
+      <div class="respiro"><span class="recorte respiro-img" style="height:106px"><img data-logo></span>
+        <span class="mira-x" style="left:0;top:0">x</span><span class="mira-x" style="right:0;bottom:0">x</span>
+      </div>
+      <div class="minimo"><span>tamanho mínimo</span><img data-logo><span>respiro = x</span></div>
+    </div>
+    <div class="txt"><h2><em>Manual</em> de marca</h2><p class="corpo">As regras que mantêm tudo igual em qualquer mão: <b>respiro, tamanho mínimo e usos proibidos.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <!-- 07 · final -->
+  <main class="peca feed final" data-n="7">
+    <header class="cab"><span>tirvo<b>_</b> / marca</span><span class="num">07<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> na hora de contratar</p>
+    <h1 class="titulo">Peça o sistema,<br><em>não só o desenho.</em></h1>
+    <p class="corpo"><b>Salve para usar no briefing</b> da sua marca. Na Tirvo, o projeto entrega conceito, logotipo, paleta, tipografia, manual e aplicações.</p>
+    <div class="fim">
+      <div class="divisor-h"></div>
+      <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span><span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span></div>
+      <div class="acoes">
+        <span class="btn cheio" data-frame="18,0,18,0" data-tone="quente"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-up-right"/></svg></span>
+        <span class="btn vazado" data-frame="0,18,0,18" data-tone="branco"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      </div>
+    </div>
+    <footer class="rod"><span class="dica">@tirvotech</span><img class="logo" data-logo></footer>
+  </main>
+  <script src="slide.js"></script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>

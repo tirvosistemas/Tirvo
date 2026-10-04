@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="feed">
+  <meta name="tirvo:slides" content="8">
+  <title>P08: por dentro do tirvo.tech</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .peca { background: radial-gradient(520px 620px at 790px 640px, rgba(255, 85, 0, .16), transparent 70%), linear-gradient(180deg, #060607 0%, #09090b 50%, #060607 100%); }
+    .rotulo.r { z-index: 4; left: 96px; top: 190px; }
+    .cel { z-index: 4; position: absolute; width: 420px; height: 910px; border-radius: 56px; padding: 12px; background: linear-gradient(160deg, #2a2a30, #0c0c0e 40%, #1a1a1e); box-shadow: 0 0 0 2px rgba(255, 255, 255, .14), 0 60px 90px rgba(0, 0, 0, .7), 0 0 80px rgba(255, 85, 0, .14); }
+    .cel img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 45px; }
+    .cel::after { content: ""; position: absolute; left: 50%; top: 24px; width: 96px; height: 28px; margin-left: -48px; border-radius: 14px; background: #000; }
+    .lado { right: 96px; top: 214px; }
+    .esq { z-index: 4; left: 96px; top: 330px; width: 430px; display: grid; gap: 26px; }
+    .esq .grande-num { font-size: 190px; }
+    .esq h2 { font-size: 56px; font-weight: 680; letter-spacing: -.045em; line-height: 1.04; }
+    .esq h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: -.01em; }
+    .esq .corpo { font-size: 30px; }
+    .capa .titulo { left: 92px; top: 236px; font-size: 76px; width: 470px; }
+    .capa .sub { z-index: 4; left: 96px; top: 760px; width: 420px; font-size: 32px; color: var(--t2); line-height: 1.35; }
+    .capa .sub b { color: var(--t1); font-weight: 600; }
+    .capa .url { z-index: 4; left: 96px; top: 980px; }
+    .codigo { z-index: 5; position: absolute; left: 96px; top: 640px; width: 448px; padding: 24px 24px; font: 500 18px/1.7 var(--mono); color: var(--t2); }
+    .codigo .t { color: #ff8a4c; } .codigo .a { color: #fafafa; } .codigo .c { color: #71717a; }
+    .final .titulo { left: 92px; top: 240px; font-size: 100px; }
+    .final .corpo { z-index: 4; left: 96px; top: 600px; width: 860px; }
+    .final .url-g { z-index: 4; left: 96px; top: 730px; font: 600 74px/1 var(--sans); letter-spacing: -.04em; color: var(--link); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 12px; text-decoration-color: rgba(90, 169, 255, .55); }
+    .final .fim { top: 960px; }
+  </style>
+</head>
+<body>
+  <main class="peca feed capa" data-n="1">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">01<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> por dentro do tirvo.tech</p>
+    <h1 class="titulo">O site de uma agência é o portfólio que <em>não dá para fingir.</em></h1>
+    <p class="sub"><b>6 decisões</b> do nosso próprio site, uma por slide.</p>
+    <span class="url selo"><span class="led"></span>tirvo.tech · no ar</span>
+    <div class="cel lado" style="transform:rotate(4deg);top:230px"><img src="img/site-hero.png" alt=""></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="2">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">02<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="esq"><span class="grande-num">01</span><h2>A abertura se <em>decodifica.</em></h2><p class="corpo">Símbolos de código viram o nome. <b>A marca nasce de código, como o trabalho.</b></p></div>
+    <div class="cel lado"><img src="img/site-abertura.png" alt=""></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="3">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">03<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="esq"><span class="grande-num">02</span><h2>O alerta vem <em>antes</em> dos serviços.</h2><p class="corpo">A página começa pelo problema de quem chega: <b>o negócio em terreno alugado.</b></p></div>
+    <div class="cel lado"><img src="img/site-alerta.png" alt=""></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="4">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">04<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="esq"><span class="grande-num">03</span><h2>Cinco frentes, <em>um padrão.</em></h2><p class="corpo">Sites, sistemas, marca, design e IA <b>com o mesmo rigor.</b></p></div>
+    <div class="cel lado"><img src="img/site-servicos.png" alt=""></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="5">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">05<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="esq"><span class="grande-num">04</span><h2>O método <em>à vista.</em></h2><p class="corpo">Três fases e três aprovações. <b>O cliente sabe o que vem antes de começar.</b></p></div>
+    <div class="cel lado"><img src="img/site-metodo.png" alt=""></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="6">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">06<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="esq" style="top:250px"><span class="grande-num">05</span><h2>Performance desde a <em>primeira linha.</em></h2><p class="corpo">Código sob medida, sem tema pronto, <b>com SEO técnico integrado.</b></p></div>
+    <div class="codigo" data-frame="20,0,20,0" data-tone="laranja" data-acento="topo" style="top:860px">
+      <span class="c">// sem template. sem peso morto.</span><br>
+      <span class="t">const</span> observador = <span class="t">new</span> <span class="a">IntersectionObserver</span>(…)<br>
+      <span class="t">&lt;img</span> data-src <span class="t">loading</span>=<span class="a">"lazy"</span><span class="t">&gt;</span><br>
+      <span class="t">&lt;script</span> type=<span class="a">"application/ld+json"</span><span class="t">&gt;</span>
+    </div>
+    <div class="cel lado"><img src="img/site-hero.png" alt="" style="object-position:0 30%"></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="7">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">07<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="esq"><span class="grande-num">06</span><h2>Um próximo passo em <em>toda página.</em></h2><p class="corpo">"Iniciar projeto" e WhatsApp <b>sempre à mão</b>, até no menu.</p></div>
+    <div class="cel lado"><img src="img/site-menu.png" alt="" style="object-position:bottom"></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed final" data-n="8">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">08<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> confira você mesmo</p>
+    <h1 class="titulo">Veja <em>ao vivo.</em></h1>
+    <p class="corpo" style="top:420px">Abra no celular, role e teste o menu. <b>O link está na bio.</b></p>
+    <span class="url-g" style="top:560px">tirvo.tech</span>
+    <div class="fim">
+      <div class="divisor-h"></div>
+      <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span><span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span></div>
+      <div class="acoes">
+        <span class="btn cheio" data-frame="18,0,18,0" data-tone="quente"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-up-right"/></svg></span>
+        <span class="btn vazado" data-frame="0,18,0,18" data-tone="branco"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      </div>
+    </div>
+    <footer class="rod"><span class="dica">@tirvotech</span><img class="logo" data-logo></footer>
+  </main>
+  <script src="slide.js"></script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>

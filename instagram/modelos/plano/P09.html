@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="feed">
+  <meta name="tirvo:slides" content="1">
+  <title>P09: o site não termina no lançamento</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .peca { background: radial-gradient(600px 420px at 540px 900px, rgba(255, 85, 0, .15), transparent 70%), linear-gradient(180deg, #060607 0%, #09090b 50%, #060607 100%); }
+    .rotulo.r { z-index: 4; left: 96px; top: 196px; }
+    .titulo { left: 92px; top: 240px; font-size: 104px; }
+    .titulo .cursor { animation: none; }
+    .ou { z-index: 4; left: 96px; top: 560px; font: 500 21px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--t3); }
+    .colunas { z-index: 4; left: 96px; top: 610px; width: 888px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .col { height: 560px; padding: 36px 34px; display: grid; align-content: start; gap: 22px; }
+    .col .ib { width: 88px; height: 88px; }
+    .col small { font: 500 18px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--or-pale); }
+    .col h2 { font-size: 46px; font-weight: 680; letter-spacing: -.04em; line-height: 1; }
+    .col p { font-size: 27px; line-height: 1.38; color: var(--t2); }
+    .col p b { color: var(--t1); font-weight: 600; }
+    .col ul { display: grid; gap: 10px; }
+    .col li { display: flex; align-items: center; gap: 12px; font-size: 24px; color: var(--t2); }
+    .col li .ico { font-size: 24px; color: #ff8a4c; }
+  </style>
+</head>
+<body>
+  <main class="peca feed" data-n="1">
+    <header class="cab"><span>tirvo<b>_</b> / depois da entrega</span><span class="num">2 modelos</span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> quem cuida do seu site?</p>
+    <h1 class="titulo">O site não termina<br>no <em>lançamento.</em><span class="cursor"></span></h1>
+    <p class="ou">você escolhe</p>
+    <div class="colunas">
+      <div class="col" data-frame="24,0,24,0" data-tone="branco">
+        <span class="ib" data-frame="14,0,14,0" data-tone="laranja"><svg class="ico"><use href="#i-package"/></svg></span>
+        <small>modelo 01</small><h2>Código<br>entregue</h2>
+        <p>Você recebe o <b>código-fonte completo e documentado</b>, pronto para a sua infraestrutura.</p>
+      </div>
+      <div class="col" data-frame="0,24,0,24" data-tone="laranja" data-acento="topo">
+        <span class="ib" data-frame="14,0,14,0" data-tone="laranja"><svg class="ico"><use href="#i-shield-check"/></svg></span>
+        <small>modelo 02</small><h2>Gestão<br>360º</h2>
+        <ul>
+          <li><svg class="ico"><use href="#i-check"/></svg>Hospedagem e domínio</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>SSL e backups</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Atualizações de segurança</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Monitoramento 24/7</li>
+        </ul>
+      </div>
+    </div>
+    <footer class="rod"><span class="dica">@tirvotech</span><img class="logo" data-logo></footer>
+  </main>
+  <script src="slide.js"></script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>

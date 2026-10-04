@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="feed">
+  <meta name="tirvo:slides" content="1">
+  <title>P10: se algo pode ser melhorado</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .peca { background: radial-gradient(520px 520px at 540px 560px, rgba(255, 85, 0, .2), transparent 70%), linear-gradient(180deg, #050506 0%, #09090b 50%, #050506 100%); }
+    .mira-g { z-index: 2; left: 190px; top: 210px; width: 700px; height: 700px; }
+    .frase { z-index: 4; left: 96px; top: 860px; width: 888px; font-size: 76px; font-weight: 680; letter-spacing: -.045em; line-height: 1.04; }
+    .frase .cinza { color: var(--t2); }
+    .frase em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.12em; letter-spacing: -.01em; }
+    .assin { z-index: 4; left: 96px; top: 1150px; font: 500 20px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--t3); }
+    .assin i { font-style: normal; color: var(--or); }
+  </style>
+</head>
+<body>
+  <main class="peca feed" data-n="1">
+    <svg class="arte mira-g" viewBox="0 0 700 700">
+      <defs><filter id="halo" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="22"/></filter></defs>
+      <g fill="none" stroke="rgba(250,250,250,.85)" stroke-width="14" stroke-linecap="square"><path d="M120 250V120H250M450 120H580V250M580 450V580H450M250 580H120V450"/></g>
+      <g stroke="rgba(250,250,250,.35)" stroke-width="7"><path d="M350 190V240M350 460V510M190 350H240M460 350H510"/></g>
+      <circle cx="350" cy="350" r="80" fill="#ff5500" opacity=".55" filter="url(#halo)"/>
+      <circle cx="350" cy="350" r="36" fill="#ff5500" style="filter:drop-shadow(0 0 18px #ff5500)"/>
+      <circle cx="350" cy="350" r="90" fill="none" stroke="rgba(255,122,51,.35)" stroke-width="2"/>
+      <circle cx="350" cy="350" r="150" fill="none" stroke="rgba(255,122,51,.14)" stroke-width="2"/>
+    </svg>
+    <header class="cab"><span>tirvo<b>_</b> / princípio</span><span class="num">código de conduta</span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="frase"><span class="cinza">Se algo pode ser melhorado,</span><br>ainda <em>não está pronto.</em></p>
+    <p class="assin"><i>—</i> o princípio da Tirvo</p>
+    <footer class="rod"><span class="dica">@tirvotech</span><img class="logo" data-logo></footer>
+  </main>
+  <script src="slide.js"></script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>

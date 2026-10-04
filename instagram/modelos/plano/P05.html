@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="feed">
+  <meta name="tirvo:slides" content="1">
+  <title>P05: ninguém sério pode prometer posição no Google</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .peca { background: radial-gradient(620px 420px at 540px 830px, rgba(255, 85, 0, .16), transparent 70%), linear-gradient(180deg, #060607 0%, #09090b 50%, #060607 100%); }
+    .rotulo.r { z-index: 4; left: 96px; top: 196px; }
+    .titulo { left: 92px; top: 240px; font-size: 100px; }
+    .campo { z-index: 4; left: 96px; top: 690px; width: 888px; height: 120px; border-radius: 60px; display: flex; align-items: center; gap: 26px; padding: 0 44px; border: 2px solid rgba(255, 255, 255, .22); background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02)), #0e0e11; box-shadow: 0 40px 80px rgba(0, 0, 0, .55); }
+    .campo .ico { font-size: 46px; color: var(--t3); }
+    .campo .q { position: relative; font-size: 44px; font-weight: 560; letter-spacing: -.02em; color: var(--t2); }
+    .campo .q::after { content: ""; position: absolute; left: -8px; right: -8px; top: 52%; height: 6px; border-radius: 3px; background: linear-gradient(90deg, #ff6a1f, #ff3300); box-shadow: 0 0 16px rgba(255, 85, 0, .8); transform: rotate(-2deg); }
+    .campo .x { margin-left: auto; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; border: 2px solid #ff6a1f; color: #ff8a4c; box-shadow: 0 0 16px rgba(255, 85, 0, .45); }
+    .campo .x .ico { font-size: 34px; color: #ff8a4c; stroke-width: 2.2; }
+    .pode { z-index: 4; left: 96px; top: 880px; font-size: 46px; font-weight: 640; letter-spacing: -.035em; color: var(--t2); }
+    .pode em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.14em; color: var(--t1); }
+    .base { z-index: 4; left: 96px; top: 980px; width: 888px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .base span { display: flex; align-items: center; gap: 18px; height: 92px; padding: 0 26px; font-size: 30px; font-weight: 560; letter-spacing: -.02em; }
+    .base .ico { font-size: 34px; color: #ff8a4c; filter: drop-shadow(0 0 6px rgba(255, 85, 0, .6)); }
+  </style>
+</head>
+<body>
+  <main class="peca feed" data-n="1">
+    <svg class="arte" viewBox="0 0 1080 1350" width="1080" height="1350">
+      <defs><pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="gg" cx="50%" cy="60%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><mask id="mg"><rect width="1080" height="1350" fill="url(#gg)"/></mask></defs>
+      <rect width="1080" height="1350" fill="url(#grade)" mask="url(#mg)"/>
+      <!-- resultados fantasmas atrás da busca -->
+      <g class="mais-longe" fill="rgba(255,255,255,.5)"><rect x="140" y="560" width="420" height="14" rx="7"/><rect x="140" y="590" width="300" height="10" rx="5"/><rect x="620" y="560" width="320" height="14" rx="7"/><rect x="620" y="590" width="240" height="10" rx="5"/></g>
+    </svg>
+    <header class="cab"><span>tirvo<b>_</b> / google</span><span class="num">seo técnico</span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> antes de assinar a proposta</p>
+    <h1 class="titulo">Ninguém sério<br>pode prometer<br><em>posição</em> no Google.</h1>
+    <div class="campo"><svg class="ico"><use href="#i-search"/></svg><span class="q">1º lugar garantido</span><span class="x"><svg class="ico"><use href="#i-x"/></svg></span></div>
+    <p class="pode">Pode entregar a <em>base técnica certa:</em></p>
+    <div class="base">
+      <span data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-code"/></svg>Estrutura semântica</span>
+      <span data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-file-code"/></svg>Metadados</span>
+      <span data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-db"/></svg>Dados estruturados</span>
+      <span data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-gauge"/></svg>Alta performance</span>
+    </div>
+    <footer class="rod"><span class="dica">@tirvotech</span><img class="logo" data-logo></footer>
+  </main>
+  <script src="slide.js"></script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>

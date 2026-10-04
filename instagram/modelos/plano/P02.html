@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="feed">
+  <meta name="tirvo:slides" content="8">
+  <title>P02: 5 sinais de que o seu site está espantando clientes</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .peca { background: radial-gradient(560px 440px at 760px 700px, rgba(255, 85, 0, .16), transparent 70%), linear-gradient(180deg, #060607 0%, #09090b 50%, #060607 100%); }
+    .rotulo.r { z-index: 4; left: 96px; top: 190px; }
+
+    /* Capa */
+    .capa .titulo { left: 92px; top: 232px; font-size: 98px; }
+    .navegador { z-index: 3; left: 160px; top: 690px; width: 760px; height: 470px; transform: perspective(1400px) rotateX(14deg) rotateY(-16deg) rotateZ(2deg); transform-origin: 50% 50%; border-radius: 22px; border: 2px solid rgba(255, 255, 255, .22); background: linear-gradient(180deg, #141417, #0b0b0d); box-shadow: 0 60px 90px rgba(0, 0, 0, .6), 0 0 70px rgba(255, 85, 0, .12); overflow: hidden; }
+    .navegador .barra { height: 58px; display: flex; align-items: center; gap: 10px; padding: 0 20px; border-bottom: 1px solid rgba(255, 255, 255, .1); }
+    .navegador .barra i { width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, .22); }
+    .navegador .barra span { margin-left: 18px; flex: 1; height: 30px; border-radius: 15px; background: rgba(255, 255, 255, .06); font: 500 16px/30px var(--mono); color: var(--t3); padding-left: 16px; }
+    .navegador .corpo-nav { padding: 40px 44px; display: grid; gap: 18px; }
+    .navegador .corpo-nav b { display: block; height: 30px; width: 70%; border-radius: 8px; background: rgba(255, 255, 255, .14); }
+    .navegador .corpo-nav p { height: 14px; border-radius: 7px; background: rgba(255, 255, 255, .07); }
+    .navegador .corpo-nav .bt { width: 200px; height: 52px; border-radius: 12px; border: 1px dashed rgba(255, 255, 255, .25); }
+    .navegador .vazio { position: absolute; right: 40px; bottom: 40px; width: 250px; height: 180px; border-radius: 14px; background: rgba(255, 255, 255, .04); }
+    .saindo { z-index: 5; left: 846px; top: 846px; width: 140px; height: 140px; }
+
+    /* Sinais */
+    .grande-num { z-index: 3; left: 84px; top: 170px; }
+    .ilustra { z-index: 3; left: 96px; top: 420px; width: 888px; height: 470px; display: grid; place-items: center; overflow: hidden; }
+    .sinal .txt { z-index: 4; left: 96px; top: 904px; width: 888px; display: grid; gap: 24px; }
+    .sinal h2 { font-size: 64px; font-weight: 680; letter-spacing: -.045em; line-height: 1.02; }
+    .sinal h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: -.01em; }
+    .sinal .corpo { width: 860px; font-size: 33px; }
+    .tag-sinal { z-index: 4; right: 96px; top: 196px; }
+
+    /* Celular genérico */
+    .cel { position: relative; width: 250px; height: 430px; border-radius: 38px; border: 2px solid rgba(255, 255, 255, .3); background: #0d0d10; box-shadow: 0 40px 70px rgba(0, 0, 0, .55); overflow: hidden; }
+    .cel::before { content: ""; position: absolute; left: 50%; top: 14px; width: 74px; height: 20px; margin-left: -37px; border-radius: 10px; background: #000; }
+    .lento { position: absolute; left: 30px; right: 30px; top: 190px; display: grid; gap: 14px; justify-items: center; }
+    .lento .trilho { width: 100%; height: 10px; border-radius: 5px; background: rgba(255, 255, 255, .08); overflow: hidden; }
+    .lento .trilho i { display: block; width: 28%; height: 100%; background: linear-gradient(90deg, #ff6a1f, #ff3300); box-shadow: 0 0 12px rgba(255, 85, 0, .7); }
+    .lento small { font: 500 15px/1 var(--mono); color: var(--t3); letter-spacing: .1em; }
+    .relogios { position: absolute; display: flex; gap: 16px; }
+    .seta-volta { position: absolute; }
+
+    .bolhas { display: flex; gap: 26px; align-items: flex-end; }
+    .janela { width: 260px; height: 300px; border-radius: 16px; border: 1.6px solid rgba(255, 255, 255, .25); background: #0f0f12; overflow: hidden; }
+    .janela .bh { height: 30px; border-bottom: 1px solid rgba(255, 255, 255, .1); display: flex; gap: 6px; align-items: center; padding: 0 12px; }
+    .janela .bh i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, .2); }
+    .janela .lg { margin: 22px 20px 16px; width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; font: 700 24px/1 var(--sans); color: #09090b; }
+    .janela .ln { margin: 0 20px 12px; height: 12px; border-radius: 6px; background: rgba(255, 255, 255, .12); }
+    .janela .hero { margin: 16px 20px; height: 90px; border-radius: 10px; background: linear-gradient(135deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .03)); }
+
+    .busca { width: 720px; display: grid; gap: 16px; }
+    .busca .campo { height: 74px; border-radius: 37px; border: 1.6px solid rgba(255, 255, 255, .25); background: #111114; display: flex; align-items: center; gap: 16px; padding: 0 28px; font-size: 26px; color: var(--t1); }
+    .busca .campo .ico { font-size: 30px; color: var(--t3); }
+    .busca .res { padding: 18px 26px; border-radius: 16px; background: rgba(255, 255, 255, .035); border: 1px solid rgba(255, 255, 255, .07); display: grid; gap: 8px; }
+    .busca .res small { font: 500 15px/1 var(--mono); color: var(--t3); }
+    .busca .res b { height: 16px; width: 60%; border-radius: 8px; background: rgba(255, 255, 255, .16); }
+    .busca .res p { height: 11px; width: 85%; border-radius: 6px; background: rgba(255, 255, 255, .07); }
+    .busca .res.seu { border: 2px dashed rgba(255, 122, 51, .65); background: rgba(255, 85, 0, .05); place-items: center; height: 110px; font: 500 20px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--or-pale); }
+
+    .status { width: 760px; display: grid; gap: 12px; }
+    .status .ln { display: grid; grid-template-columns: 54px 1fr auto; align-items: center; gap: 18px; height: 82px; padding: 0 24px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, .1); background: rgba(255, 255, 255, .03); font-size: 28px; font-weight: 560; }
+    .status .ln .ico { font-size: 32px; color: var(--t3); }
+    .status .ln span { font: 500 16px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--t3); display: flex; align-items: center; gap: 10px; }
+    .status .ln span i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .3); }
+    .status .ln.alerta { border-color: rgba(255, 122, 51, .5); }
+    .status .ln.alerta span { color: var(--or-pale); }
+    .status .ln.alerta span i { border-color: #ff6a1f; background: #ff5500; box-shadow: 0 0 10px #ff5500; }
+
+    /* Placar */
+    .placar .titulo { left: 92px; top: 240px; font-size: 104px; }
+    .caixas { z-index: 4; left: 96px; top: 560px; width: 888px; display: grid; gap: 14px; }
+    .caixas li { display: flex; align-items: center; gap: 24px; height: 86px; padding: 0 28px; font-size: 32px; font-weight: 560; letter-spacing: -.02em; }
+    .caixas li .bx { width: 40px; height: 40px; border-radius: 9px; border: 2.5px solid #ff7a33; display: grid; place-items: center; box-shadow: 0 0 12px rgba(255, 85, 0, .35); }
+    .caixas li .bx .ico { font-size: 26px; color: #ff8a4c; stroke-width: 2.4; }
+    .caixas li small { margin-left: auto; font: 500 18px/1 var(--mono); color: var(--t3); }
+    .veredito { z-index: 4; left: 96px; top: 1080px; width: 888px; font-size: 44px; font-weight: 640; letter-spacing: -.035em; line-height: 1.1; color: var(--t2); }
+    .veredito em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.14em; color: var(--t1); }
+
+    /* Final */
+    .final .titulo { left: 92px; top: 240px; font-size: 100px; }
+    .final .corpo { z-index: 4; left: 96px; top: 600px; width: 860px; }
+    .final .palavra { z-index: 4; left: 96px; top: 760px; display: flex; align-items: center; gap: 22px; }
+    .final .palavra b { font: 600 64px/1 var(--mono); letter-spacing: .06em; color: #fff; padding: 22px 34px; text-shadow: 0 0 20px rgba(255, 85, 0, .7); }
+    .final .palavra span { font-size: 28px; color: var(--t2); max-width: 420px; line-height: 1.3; }
+    .final .fim { top: 960px; }
+    .final .fim .logo { height: 48px; }
+  </style>
+</head>
+<body>
+  <!-- 01 · capa -->
+  <main class="peca feed capa" data-n="1">
+    <svg class="arte" viewBox="0 0 1080 1350" width="1080" height="1350">
+      <defs><pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="gg" cx="50%" cy="65%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><mask id="mg"><rect width="1080" height="1350" fill="url(#gg)"/></mask></defs>
+      <rect width="1080" height="1350" fill="url(#grade)" mask="url(#mg)"/>
+    </svg>
+    <header class="cab"><span>tirvo<b>_</b> / checklist</span><span class="num">01<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> confira com o seu site aberto</p>
+    <h1 class="titulo">5 sinais de que<br>o seu site está<br><em>espantando</em> clientes.</h1>
+    <div class="navegador">
+      <div class="barra"><i></i><i></i><i></i><span>seusite.com.br</span></div>
+      <div class="corpo-nav"><b></b><p style="width:90%"></p><p style="width:80%"></p><p style="width:60%"></p><div class="bt"></div></div>
+      <div class="vazio"></div>
+    </div>
+    <svg class="saindo" viewBox="0 0 140 140">
+      <path d="M20 24l34 86 12-36 36-12Z" fill="#fafafa" stroke="#09090b" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M78 40h40M90 58h30M70 22h34" stroke="#ff7a33" stroke-width="4" stroke-linecap="round" style="filter:drop-shadow(0 0 6px #ff5500)"/>
+    </svg>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <!-- 02 · sinal 01 -->
+  <main class="peca feed sinal" data-n="2">
+    <header class="cab"><span>tirvo<b>_</b> / checklist</span><span class="num">02<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="grande-num">01</span>
+    <span class="tag-sinal selo"><span class="led"></span>sinal</span>
+    <div class="ilustra">
+      <svg width="888" height="470" viewBox="0 0 888 470" style="position:absolute;inset:0">
+        <g fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2" stroke-linecap="round"><circle cx="160" cy="150" r="46"/><path d="M160 122v28l18 12"/><circle cx="728" cy="320" r="38"/><path d="M728 298v22l14 9"/></g>
+        <path d="M640 120c60-10 110 30 110 80" fill="none" stroke="#ff7a33" stroke-width="3" stroke-dasharray="6 8" stroke-linecap="round"/><path d="M738 190l12 14 12-16" fill="none" stroke="#ff7a33" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="740" y="100" text-anchor="middle" font-family="Geist Mono" font-size="18" letter-spacing="2" fill="#ffb187">VOLTOU AO GOOGLE</text>
+      </svg>
+      <div class="cel"><div class="lento"><svg class="ico" style="font-size:54px;color:#8a8a93"><use href="#i-hourglass"/></svg><div class="trilho"><i></i></div><small>carregando…</small></div></div>
+    </div>
+    <div class="txt">
+    <h2>Demora para abrir<br>no <em>celular.</em></h2>
+    <p class="corpo">Quem pesquisa no celular não espera. <b>Cada segundo de tela branca é alguém voltando ao Google.</b></p>
+    </div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <!-- 03 · sinal 02 -->
+  <main class="peca feed sinal" data-n="3">
+    <header class="cab"><span>tirvo<b>_</b> / checklist</span><span class="num">03<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="grande-num">02</span>
+    <span class="tag-sinal selo"><span class="led"></span>sinal</span>
+    <div class="ilustra">
+      <div class="cel" style="height:440px">
+        <div style="position:absolute;left:24px;right:24px;top:56px;display:grid;gap:12px">
+          <div style="height:110px;border-radius:12px;background:rgba(255,255,255,.07)"></div>
+          <div style="height:14px;width:80%;border-radius:7px;background:rgba(255,255,255,.14)"></div>
+          <div style="height:10px;width:95%;border-radius:5px;background:rgba(255,255,255,.07)"></div>
+          <div style="height:10px;width:70%;border-radius:5px;background:rgba(255,255,255,.07)"></div>
+          <div style="height:10px;width:88%;border-radius:5px;background:rgba(255,255,255,.07)"></div>
+        </div>
+        <div style="position:absolute;left:20px;right:20px;bottom:22px;display:flex;justify-content:space-between;align-items:center;font:500 10px/1 var(--mono);color:#52525b">© 2026 · termos · <svg class="ico" style="font-size:14px;color:#3f3f46"><use href="#i-whatsapp"/></svg></div>
+      </div>
+      <svg width="888" height="470" viewBox="0 0 888 470" style="position:absolute;inset:0">
+        <g fill="none" stroke="#ff6a1f" stroke-width="3" style="filter:drop-shadow(0 0 6px #ff5500)"><path d="M372 300v-18h18M498 282h18v18M516 360v18h-18M390 378h-18v-18"/></g>
+        <text x="444" y="336" text-anchor="middle" font-family="Geist Mono" font-size="16" letter-spacing="2" fill="#ffb187">AQUI</text>
+        <path d="M560 330h120" stroke="rgba(255,255,255,.3)" stroke-width="1.6" stroke-dasharray="4 6"/>
+        <text x="690" y="324" font-family="Geist" font-size="22" fill="#a1a1aa">onde o polegar</text><text x="690" y="352" font-family="Geist" font-size="22" fill="#a1a1aa">procura o contato</text>
+        <path d="M600 430l-40 0" stroke="none"/>
+        <text x="600" y="436" font-family="Geist Mono" font-size="16" letter-spacing="1.5" fill="#71717a">← WHATSAPP ESCONDIDO</text>
+      </svg>
+    </div>
+    <div class="txt">
+    <h2>O botão de <em>contato</em> some.</h2>
+    <p class="corpo">WhatsApp escondido no rodapé, telefone dentro de imagem. <b>Se o próximo passo não é óbvio, ele não acontece.</b></p>
+    </div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <!-- 04 · sinal 03 -->
+  <main class="peca feed sinal" data-n="4">
+    <header class="cab"><span>tirvo<b>_</b> / checklist</span><span class="num">04<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="grande-num">03</span>
+    <span class="tag-sinal selo"><span class="led"></span>sinal</span>
+    <div class="ilustra">
+      <div class="bolhas">
+        <div class="janela" style="transform:translateY(20px) rotate(-3deg);opacity:.7"><div class="bh"><i></i><i></i><i></i></div><div class="lg" style="background:#a1a1aa">A</div><div class="ln" style="width:70%"></div><div class="ln" style="width:50%"></div><div class="hero"></div></div>
+        <div class="janela" style="border-color:rgba(255,122,51,.6);box-shadow:0 0 40px rgba(255,85,0,.18)"><div class="bh"><i></i><i></i><i></i></div><div class="lg" style="background:#fafafa">B</div><div class="ln" style="width:70%"></div><div class="ln" style="width:50%"></div><div class="hero"></div></div>
+        <div class="janela" style="transform:translateY(20px) rotate(3deg);opacity:.7"><div class="bh"><i></i><i></i><i></i></div><div class="lg" style="background:#71717a">C</div><div class="ln" style="width:70%"></div><div class="ln" style="width:50%"></div><div class="hero"></div></div>
+      </div>
+      <svg width="888" height="470" viewBox="0 0 888 470" style="position:absolute;inset:0"><text x="444" y="452" text-anchor="middle" font-family="Geist Mono" font-size="17" letter-spacing="3" fill="#8a8a93">MESMO LAYOUT · SÓ O LOGO MUDA</text></svg>
+    </div>
+    <div class="txt">
+    <h2>Parece o site do <em>concorrente.</em></h2>
+    <p class="corpo">Tema pronto é compartilhado com milhares de sites. <b>O seu cliente já viu esse layout em outro negócio.</b></p>
+    </div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <!-- 05 · sinal 04 -->
+  <main class="peca feed sinal" data-n="5">
+    <header class="cab"><span>tirvo<b>_</b> / checklist</span><span class="num">05<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="grande-num">04</span>
+    <span class="tag-sinal selo"><span class="led"></span>sinal</span>
+    <div class="ilustra">
+      <div class="busca">
+        <div class="campo"><svg class="ico"><use href="#i-search"/></svg>o serviço que você oferece</div>
+        <div class="res"><small>concorrente-a.com.br</small><b></b><p></p></div>
+        <div class="res"><small>concorrente-b.com.br</small><b style="width:50%"></b><p style="width:70%"></p></div>
+        <div class="res seu">e o seu site?</div>
+      </div>
+    </div>
+    <div class="txt">
+    <h2>Não aparece no Google<br>pelo que <em>você faz.</em></h2>
+    <p class="corpo">Sem estrutura semântica, metadados e dados estruturados, <b>o Google não entende do que a página trata.</b></p>
+    </div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <!-- 06 · sinal 05 -->
+  <main class="peca feed sinal" data-n="6">
+    <header class="cab"><span>tirvo<b>_</b> / checklist</span><span class="num">06<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="grande-num">05</span>
+    <span class="tag-sinal selo"><span class="led"></span>sinal</span>
+    <div class="ilustra">
+      <div class="status">
+        <div class="ln"><svg class="ico"><use href="#i-globe"/></svg>Domínio<span><i></i>quem renova?</span></div>
+        <div class="ln"><svg class="ico"><use href="#i-server"/></svg>Hospedagem<span><i></i>quem acessa?</span></div>
+        <div class="ln"><svg class="ico"><use href="#i-lock"/></svg>SSL<span><i></i>quem confere?</span></div>
+        <div class="ln alerta"><svg class="ico"><use href="#i-refresh"/></svg>Atualizações<span><i></i>sem responsável</span></div>
+      </div>
+    </div>
+    <div class="txt">
+    <h2>Ninguém sabe quem <em>cuida dele.</em></h2>
+    <p class="corpo">Domínio, hospedagem, SSL e atualizações sem dono. <b>O site fica no ar até o dia em que para.</b></p>
+    </div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <!-- 07 · placar -->
+  <main class="peca feed placar" data-n="7">
+    <header class="cab"><span>tirvo<b>_</b> / checklist</span><span class="num">07<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> agora conte</p>
+    <h1 class="titulo">Contou 2<br>ou <em>mais?</em></h1>
+    <ul class="caixas">
+      <li data-frame="14,0,14,0" data-tone="branco"><span class="bx"><svg class="ico"><use href="#i-check"/></svg></span>Demora no celular<small>01</small></li>
+      <li data-frame="14,0,14,0" data-tone="branco"><span class="bx"><svg class="ico"><use href="#i-check"/></svg></span>Contato escondido<small>02</small></li>
+      <li data-frame="14,0,14,0" data-tone="branco"><span class="bx"></span>Igual ao concorrente<small>03</small></li>
+      <li data-frame="14,0,14,0" data-tone="branco"><span class="bx"></span>Fora do Google<small>04</small></li>
+      <li data-frame="14,0,14,0" data-tone="branco"><span class="bx"></span>Sem responsável<small>05</small></li>
+    </ul>
+    <p class="veredito">O problema raramente é o design.<br>É a <em>engenharia</em> por baixo dele.</p>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <!-- 08 · final -->
+  <main class="peca feed final" data-n="8">
+    <svg class="arte" viewBox="0 0 1080 1350" width="1080" height="1350"><circle cx="900" cy="330" r="160" fill="none" stroke="rgba(255,122,51,.18)" stroke-width="2"/><circle cx="900" cy="330" r="110" fill="none" stroke="rgba(255,122,51,.12)" stroke-width="2"/></svg>
+    <header class="cab"><span>tirvo<b>_</b> / checklist</span><span class="num">08<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> próximo passo</p>
+    <h1 class="titulo">Salve para revisar<br>o seu site <em>com calma.</em></h1>
+    <p class="corpo">Quer uma segunda opinião técnica? <b>Chame no direct com a palavra:</b></p>
+    <div class="palavra"><b data-frame="18,0,18,0" data-tone="neon">SITE</b><span>Quem responde é a mesma equipe que constrói os projetos.</span></div>
+    <div class="fim">
+      <div class="divisor-h"></div>
+      <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span><span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span></div>
+      <div class="acoes">
+        <span class="btn cheio" data-frame="18,0,18,0" data-tone="quente"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-up-right"/></svg></span>
+        <span class="btn vazado" data-frame="0,18,0,18" data-tone="branco"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      </div>
+    </div>
+    <footer class="rod"><span class="dica">@tirvotech</span><img class="logo" data-logo></footer>
+  </main>
+  <script src="slide.js"></script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>

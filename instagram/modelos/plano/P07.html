@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="feed">
+  <meta name="tirvo:slides" content="8">
+  <title>P07: 3 tarefas que a IA já pode assumir</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .peca { background: radial-gradient(560px 460px at 540px 640px, rgba(255, 85, 0, .15), transparent 70%), linear-gradient(180deg, #060607 0%, #09090b 50%, #060607 100%); }
+    .rotulo.r { z-index: 4; left: 96px; top: 190px; }
+    .capa .titulo { left: 92px; top: 236px; font-size: 104px; }
+    .capa .titulo em { font-size: 1.3em; color: #fff; text-shadow: 0 0 40px rgba(255, 85, 0, .6); }
+    .chip { z-index: 3; left: 290px; top: 700px; width: 500px; height: 500px; }
+    .ilustra { z-index: 3; left: 96px; top: 200px; width: 888px; height: 660px; display: grid; place-items: center; }
+    .ilustra > svg { position: absolute; inset: 0; }
+    .txt { z-index: 4; left: 96px; top: 904px; width: 888px; display: grid; gap: 22px; }
+    .txt small { font: 500 19px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--or-pale); }
+    .txt h2 { font-size: 64px; font-weight: 680; letter-spacing: -.045em; line-height: 1.02; }
+    .txt h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: -.01em; }
+    .txt .corpo { font-size: 33px; }
+    .hub { position: relative; display: grid; grid-template-columns: repeat(2, 230px); gap: 200px 330px; }
+    .hub > span { display: flex; align-items: center; gap: 16px; height: 96px; padding: 0 24px; font-size: 28px; font-weight: 560; }
+    .hub .ico { font-size: 32px; color: var(--t2); }
+    .nucleo { position: absolute; left: 50%; top: 50%; width: 170px; height: 170px; margin: -85px; transform: rotate(45deg); border-radius: 30px; border: 2px solid #ff7a33; background: radial-gradient(circle at 35% 30%, rgba(255, 85, 0, .32), rgba(14, 8, 5, .96) 70%); box-shadow: 0 0 50px rgba(255, 85, 0, .5); display: grid; place-items: center; }
+    .nucleo b { transform: rotate(-45deg); font: 600 40px/1 var(--mono); }
+    .baloes { display: grid; gap: 18px; width: 640px; }
+    .bal { max-width: 470px; padding: 22px 28px; border-radius: 28px; font-size: 27px; line-height: 1.3; }
+    .bal.c { justify-self: end; border-bottom-right-radius: 8px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .14); }
+    .bal.t { border-bottom-left-radius: 8px; background: linear-gradient(135deg, rgba(255, 106, 31, .22), rgba(255, 51, 0, .08)), #120905; border: 1px solid rgba(255, 120, 60, .55); }
+    .bal small { display: block; margin-bottom: 8px; font: 500 15px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #ffb187; }
+    .trilhas { display: grid; grid-template-columns: 260px 160px 300px; align-items: center; gap: 0; }
+    .trilhas .entra { display: grid; gap: 14px; }
+    .trilhas .entra span { height: 70px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, .14); background: rgba(255, 255, 255, .04); display: flex; align-items: center; gap: 12px; padding: 0 18px; font-size: 23px; color: var(--t2); }
+    .trilhas .sai { display: grid; gap: 22px; }
+    .trilhas .sai span { height: 82px; display: flex; align-items: center; gap: 14px; padding: 0 22px; font-size: 25px; font-weight: 560; }
+    .trilhas .ico { font-size: 26px; color: #ff8a4c; }
+    .docs { position: relative; width: 560px; height: 520px; }
+    .doc { position: absolute; width: 330px; height: 420px; border-radius: 16px; border: 1.6px solid rgba(255, 255, 255, .2); background: #101013; padding: 34px 30px; display: grid; align-content: start; gap: 16px; }
+    .doc i { display: block; height: 12px; border-radius: 6px; background: rgba(255, 255, 255, .1); }
+    .doc i.m { background: rgba(255, 122, 51, .55); box-shadow: 0 0 12px rgba(255, 85, 0, .5); }
+    .doc small { font: 500 16px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t3); }
+    .passos3 { display: grid; gap: 20px; width: 760px; }
+    .passos3 > div { display: grid; grid-template-columns: 70px 1fr auto; align-items: center; gap: 22px; height: 116px; padding: 0 28px; }
+    .passos3 b { font: 500 22px/1 var(--mono); color: var(--or); }
+    .passos3 span { font-size: 30px; font-weight: 600; letter-spacing: -.02em; }
+    .passos3 .ok { width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 85, 0, .14); border: 2px solid #ff6a1f; display: grid; place-items: center; }
+    .passos3 .ok .ico { font-size: 24px; color: #ff8a4c; stroke-width: 2.6; }
+    .ordem { display: grid; gap: 40px; width: 760px; }
+    .ordem > div { display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 26px; }
+    .ordem b { font: 600 110px/1 var(--sans); letter-spacing: -.05em; color: transparent; -webkit-text-stroke: 2px rgba(255, 122, 51, .8); }
+    .ordem span { font-size: 40px; font-weight: 640; letter-spacing: -.03em; line-height: 1.1; }
+    .final .titulo { left: 92px; top: 240px; font-size: 100px; }
+    .final .corpo { z-index: 4; left: 96px; top: 560px; width: 860px; }
+    .final .palavra { z-index: 4; left: 96px; top: 690px; display: flex; align-items: center; gap: 22px; }
+    .final .palavra b { font: 600 64px/1 var(--mono); letter-spacing: .06em; color: #fff; padding: 22px 40px; text-shadow: 0 0 20px rgba(255, 85, 0, .7); }
+    .final .palavra span { font-size: 28px; color: var(--t2); max-width: 460px; line-height: 1.3; }
+    .final .fim { top: 960px; }
+  </style>
+</head>
+<body>
+  <main class="peca feed capa" data-n="1">
+    <header class="cab"><span>tirvo<b>_</b> / inteligência artificial</span><span class="num">01<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> sem jargão</p>
+    <h1 class="titulo">3 tarefas que a <em>IA</em><br>já pode assumir<br>na sua empresa.</h1>
+    <svg class="chip" viewBox="0 0 500 500">
+      <g stroke="rgba(255,122,51,.45)" stroke-width="3" fill="none"><path d="M150 60v60M210 60v60M270 60v60M330 60v60M150 380v60M210 380v60M270 380v60M330 380v60M60 170h60M60 230h60M60 290h60M380 170h60M380 230h60M380 290h60"/></g>
+      <rect x="120" y="120" width="260" height="260" rx="34" fill="#120905" stroke="#ff7a33" stroke-width="3" style="filter:drop-shadow(0 0 18px rgba(255,85,0,.6))"/>
+      <g fill="none" stroke="#fafafa" stroke-width="5"><path d="M196 214v-18h18M286 196h18v18M304 286v18h-18M214 304h-18v-18"/></g>
+      <circle cx="250" cy="250" r="14" fill="#ff5500" style="filter:drop-shadow(0 0 10px #ff5500)"/>
+    </svg>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="2">
+    <header class="cab"><span>tirvo<b>_</b> / inteligência artificial</span><span class="num">02<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="ilustra">
+      <svg viewBox="0 0 888 660"><g stroke="#ff7a33" stroke-width="2" stroke-dasharray="6 7" fill="none" opacity=".7"><path d="M260 210 400 300M628 210 488 300M260 450 400 360M628 450 488 360"/></g></svg>
+      <div class="hub">
+        <span data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-server"/></svg>Sistema</span>
+        <span data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-browser"/></svg>Site</span>
+        <span data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-whatsapp"/></svg>WhatsApp</span>
+        <span data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-db"/></svg>Planilhas</span>
+        <div class="nucleo"><b>IA</b></div>
+      </div>
+    </div>
+    <div class="txt"><small>antes de tudo</small><h2>A IA entra no que<br>você <em>já usa.</em></h2><p class="corpo">Não precisa trocar tudo. <b>Ela se conecta ao que já funciona.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="3">
+    <header class="cab"><span>tirvo<b>_</b> / inteligência artificial</span><span class="num">03<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="ilustra">
+      <div class="baloes">
+        <p class="bal c">Vocês abrem no sábado?</p>
+        <p class="bal t"><small>resposta automática · 23:12</small>Sim, das 9h às 13h. Quer que eu reserve um horário?</p>
+        <p class="bal c">Quero, às 10h.</p>
+      </div>
+    </div>
+    <div class="txt"><small>01 · atendimento</small><h2>Dúvidas frequentes,<br>a <em>qualquer hora.</em></h2><p class="corpo">Respostas com as informações reais da empresa. <b>Exemplo ilustrativo.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="4">
+    <header class="cab"><span>tirvo<b>_</b> / inteligência artificial</span><span class="num">04<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="ilustra">
+      <div class="trilhas">
+        <div class="entra"><span><svg class="ico" style="color:var(--t3)"><use href="#i-mail"/></svg>pedido</span><span><svg class="ico" style="color:var(--t3)"><use href="#i-chat"/></svg>pedido</span><span><svg class="ico" style="color:var(--t3)"><use href="#i-whatsapp"/></svg>pedido</span><span><svg class="ico" style="color:var(--t3)"><use href="#i-mail"/></svg>pedido</span></div>
+        <svg viewBox="0 0 160 360" width="160" height="360"><path d="M0 50 70 180M0 140 70 180M0 220 70 180M0 310 70 180" stroke="rgba(255,255,255,.25)" stroke-width="2" fill="none"/><path d="M70 180 160 60M70 180 160 180M70 180 160 300" stroke="#ff7a33" stroke-width="2.5" fill="none" style="filter:drop-shadow(0 0 5px #ff5500)"/><circle cx="70" cy="180" r="12" fill="#ff5500" style="filter:drop-shadow(0 0 8px #ff5500)"/></svg>
+        <div class="sai"><span data-frame="14,0,14,0" data-tone="laranja"><svg class="ico"><use href="#i-cart"/></svg>Vendas</span><span data-frame="14,0,14,0" data-tone="laranja"><svg class="ico"><use href="#i-gear"/></svg>Suporte</span><span data-frame="14,0,14,0" data-tone="laranja"><svg class="ico"><use href="#i-file-code"/></svg>Financeiro</span></div>
+      </div>
+    </div>
+    <div class="txt"><small>02 · triagem de solicitações</small><h2>Ler, separar e<br><em>encaminhar.</em></h2><p class="corpo">Cada pedido vai para a pessoa certa, <b>sem ninguém copiar e colar.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="5">
+    <header class="cab"><span>tirvo<b>_</b> / inteligência artificial</span><span class="num">05<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="ilustra">
+      <div class="docs">
+        <div class="doc" style="left:0;top:60px;transform:rotate(-6deg);opacity:.55"><small>contrato.pdf</small><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>
+        <div class="doc" style="left:110px;top:30px;transform:rotate(-1deg);opacity:.75"><small>manual.pdf</small><i></i><i style="width:70%"></i><i></i><i style="width:85%"></i></div>
+        <div class="doc" style="left:220px;top:0;transform:rotate(4deg)"><small>tabela.xlsx</small><i></i><i style="width:70%"></i><i class="m" style="width:90%"></i><i style="width:60%"></i><i></i><i style="width:75%"></i></div>
+        <svg viewBox="0 0 200 200" width="200" height="200" style="position:absolute;left:400px;top:250px"><circle cx="80" cy="80" r="60" fill="rgba(9,9,11,.7)" stroke="#fafafa" stroke-width="6"/><path d="M124 124l52 52" stroke="#fafafa" stroke-width="12" stroke-linecap="round"/><circle cx="80" cy="80" r="8" fill="#ff5500" style="filter:drop-shadow(0 0 8px #ff5500)"/></svg>
+      </div>
+    </div>
+    <div class="txt"><small>03 · documentos internos</small><h2>A resposta certa, <em>sem abrir</em><br>arquivo por arquivo.</h2><p class="corpo">Contratos, manuais e tabelas <b>consultados em linguagem natural.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="6">
+    <header class="cab"><span>tirvo<b>_</b> / inteligência artificial</span><span class="num">06<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="selo" style="z-index:5;right:96px;top:182px"><span class="led"></span>exemplo ilustrativo</span>
+    <div class="ilustra">
+      <div class="passos3">
+        <div data-frame="16,0,16,0" data-tone="branco"><b>01</b><span>Consultou o estoque</span><span class="ok"><svg class="ico"><use href="#i-check"/></svg></span></div>
+        <div data-frame="16,0,16,0" data-tone="branco"><b>02</b><span>Calculou preço e prazo</span><span class="ok"><svg class="ico"><use href="#i-check"/></svg></span></div>
+        <div data-frame="16,0,16,0" data-tone="laranja"><b>03</b><span>Enviou a proposta</span><span class="ok"><svg class="ico"><use href="#i-check"/></svg></span></div>
+      </div>
+    </div>
+    <div class="txt"><small>do começo ao fim</small><h2>Orçamento de 40 cadeiras<br><em>pelo WhatsApp.</em></h2><p class="corpo">A IA executa a tarefa inteira, <b>não só responde a pergunta.</b></p></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="7">
+    <header class="cab"><span>tirvo<b>_</b> / inteligência artificial</span><span class="num">07<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <div class="ilustra">
+      <div class="ordem">
+        <div><b>01</b><span>Entender onde a IA<br>gera resultado.</span></div>
+        <div><b>02</b><span>Só então projetar<br>a integração.</span></div>
+      </div>
+    </div>
+    <div class="txt"><small>a ordem certa</small><h2>Primeiro o problema.<br><em>Depois a ferramenta.</em></h2></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed final" data-n="8">
+    <header class="cab"><span>tirvo<b>_</b> / inteligência artificial</span><span class="num">08<i>/08</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> próximo passo</p>
+    <h1 class="titulo">Onde a IA cabe<br>no <em>seu negócio?</em></h1>
+    <p class="corpo"><b>Chame no direct com a palavra:</b></p>
+    <div class="palavra"><b data-frame="18,0,18,0" data-tone="neon">IA</b><span>A equipe responde e entende o seu caso antes de propor qualquer coisa.</span></div>
+    <div class="fim">
+      <div class="divisor-h"></div>
+      <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span><span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span></div>
+      <div class="acoes">
+        <span class="btn cheio" data-frame="18,0,18,0" data-tone="quente"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-up-right"/></svg></span>
+        <span class="btn vazado" data-frame="0,18,0,18" data-tone="branco"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      </div>
+    </div>
+    <footer class="rod"><span class="dica">@tirvotech</span><img class="logo" data-logo></footer>
+  </main>
+  <script src="slide.js"></script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>

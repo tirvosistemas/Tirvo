@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="feed">
+  <meta name="tirvo:slides" content="1">
+  <title>P01: terreno alugado</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .peca {
+      background:
+        radial-gradient(520px 420px at 800px 900px, rgba(255, 85, 0, .2), transparent 70%),
+        radial-gradient(700px 360px at 300px 980px, rgba(255, 255, 255, .035), transparent 70%),
+        linear-gradient(180deg, #060607 0%, #09090b 50%, #060607 100%);
+    }
+    .rotulo.r { z-index: 4; left: 96px; top: 196px; }
+    .titulo { left: 92px; top: 240px; font-size: 104px; }
+    .legenda-esq, .legenda-dir { z-index: 4; top: 1020px; width: 380px; text-align: center; display: grid; gap: 10px; }
+    .legenda-esq { left: 100px; }
+    .legenda-dir { left: 600px; }
+    .legenda-esq small, .legenda-dir small { font: 500 18px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; }
+    .legenda-esq small { color: var(--t3); }
+    .legenda-dir small { color: var(--or-pale); }
+    .legenda-esq b, .legenda-dir b { font-size: 34px; font-weight: 620; letter-spacing: -.03em; }
+    .legenda-esq b { color: var(--t2); }
+    .frase { z-index: 4; left: 96px; right: 96px; top: 1136px; text-align: center; font-size: 40px; font-weight: 600; letter-spacing: -.03em; color: var(--t2); }
+    .frase em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.16em; color: var(--t1); }
+  </style>
+</head>
+<body>
+  <main class="peca feed" data-n="1">
+    <svg class="arte" viewBox="0 0 1080 1350" width="1080" height="1350">
+      <defs>
+        <pattern id="grade" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/></pattern>
+        <radialGradient id="g-grade" cx="50%" cy="60%" r="60%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m-grade"><rect width="1080" height="1350" fill="url(#g-grade)"/></mask>
+        <linearGradient id="lado-e" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1309"/><stop offset="1" stop-color="#0d0705"/></linearGradient>
+        <linearGradient id="lado-d" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c0d06"/><stop offset="1" stop-color="#080504"/></linearGradient>
+        <linearGradient id="topo-b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b160c"/><stop offset="1" stop-color="#150b07"/></linearGradient>
+        <clipPath id="lote"><path d="M110 900 290 796 470 900 290 1004Z"/></clipPath>
+        <filter id="halo" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="14"/></filter>
+        <filter id="brilho" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <rect width="1080" height="1350" fill="url(#grade)" mask="url(#m-grade)"/>
+
+      <g transform="translate(0 -56)">
+      <!-- Lote alugado: piso quadriculado tracejado, perfil em cima e placa -->
+      <g clip-path="url(#lote)" stroke="rgba(255,255,255,.16)" stroke-width="1.2" stroke-dasharray="5 7">
+        <path d="M80 917 260 813M110 935 290 831M140 952 320 848M170 969 350 865M200 987 380 883M230 1004 410 900M140 865 320 969M170 848 350 952M200 831 380 935M230 813 410 917M260 796 440 900"/>
+      </g>
+      <path d="M110 900 290 796 470 900 290 1004Z" fill="rgba(255,255,255,.02)" stroke="rgba(255,255,255,.35)" stroke-width="1.6" stroke-dasharray="8 8"/>
+      <!-- perfil (celular) apoiado no lote -->
+      <g transform="translate(232 700)" opacity=".85">
+        <rect x="0" y="0" width="116" height="200" rx="18" fill="#121215" stroke="rgba(255,255,255,.45)" stroke-width="2"/>
+        <circle cx="34" cy="38" r="15" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
+        <rect x="58" y="30" width="42" height="6" rx="3" fill="rgba(255,255,255,.35)"/><rect x="58" y="42" width="28" height="5" rx="2.5" fill="rgba(255,255,255,.2)"/>
+        <g fill="rgba(255,255,255,.14)"><rect x="12" y="70" width="28" height="28" rx="3"/><rect x="44" y="70" width="28" height="28" rx="3"/><rect x="76" y="70" width="28" height="28" rx="3"/><rect x="12" y="102" width="28" height="28" rx="3"/><rect x="44" y="102" width="28" height="28" rx="3"/><rect x="76" y="102" width="28" height="28" rx="3"/><rect x="12" y="134" width="28" height="28" rx="3"/><rect x="44" y="134" width="28" height="28" rx="3"/><rect x="76" y="134" width="28" height="28" rx="3"/></g>
+        <rect x="44" y="182" width="28" height="4" rx="2" fill="rgba(255,255,255,.3)"/>
+      </g>
+      <!-- placa de aluguel -->
+      <g transform="translate(400 770)">
+        <path d="M30 40V150" stroke="rgba(255,255,255,.5)" stroke-width="3"/>
+        <rect x="-36" y="0" width="132" height="54" rx="6" fill="#0c0c0e" stroke="rgba(255,255,255,.55)" stroke-width="2"/>
+        <text x="30" y="35" text-anchor="middle" font-family="Geist Mono" font-size="19" letter-spacing="3" fill="#d4d4d8">ALUGADO</text>
+      </g>
+      <!-- regras que mudam: setas soltas em volta do lote -->
+      <g fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.6" stroke-linecap="round">
+        <path d="M120 780c-30-40 10-80 50-70" stroke-dasharray="4 6"/><path d="M164 704l8 6-8 7"/>
+        <path d="M150 1040c40 34 110 30 140 8" stroke-dasharray="4 6"/>
+      </g>
+
+      <!-- Sede própria: bloco sólido com o site e a mira -->
+      <path d="M610 880 790 776 970 880 790 984Z" fill="url(#topo-b)" stroke="#ff7a33" stroke-width="2"/>
+      <path d="M610 880V952L790 1056V984Z" fill="url(#lado-e)" stroke="#ff7a33" stroke-opacity=".6" stroke-width="1.6"/>
+      <path d="M970 880V952L790 1056V984Z" fill="url(#lado-d)" stroke="#ff7a33" stroke-opacity=".6" stroke-width="1.6"/>
+      <g stroke="rgba(255,138,76,.22)" stroke-width="1"><path d="M655 906 835 802M700 932 880 828M745 958 925 854M655 854 835 958M700 828 880 932M745 802 925 906"/></g>
+      <ellipse cx="790" cy="880" rx="150" ry="70" fill="#ff5500" opacity=".18" filter="url(#halo)"/>
+      <!-- janela do site -->
+      <g transform="translate(676 640)">
+        <rect x="0" y="0" width="228" height="200" rx="14" fill="#0e0d0d" stroke="rgba(255,255,255,.75)" stroke-width="2"/>
+        <path d="M0 38H228" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+        <circle cx="18" cy="19" r="4.5" fill="rgba(255,255,255,.35)"/><circle cx="33" cy="19" r="4.5" fill="rgba(255,255,255,.25)"/><circle cx="48" cy="19" r="4.5" fill="rgba(255,255,255,.18)"/>
+        <rect x="64" y="9" width="152" height="20" rx="10" fill="rgba(255,255,255,.06)"/>
+        <text x="140" y="24" text-anchor="middle" font-family="Geist Mono" font-size="12.5" fill="#d4d4d8">seudominio.com.br</text>
+        <g transform="translate(114 118)" fill="none" stroke="#fafafa" stroke-width="3">
+          <path d="M-34 -18V-34H-18M18 -34H34V-18M34 18V34H18M-18 34H-34V18"/>
+          <path d="M0 -28V-20M0 20V28M-28 0H-20M20 0H28" stroke-opacity=".5" stroke-width="2"/>
+        </g>
+        <circle cx="114" cy="118" r="22" fill="#ff5500" opacity=".45" filter="url(#halo)"/>
+        <circle cx="114" cy="118" r="8" fill="#ff5500" filter="url(#brilho)"/>
+      </g>
+      <path d="M790 840V884" stroke="rgba(255,255,255,.35)" stroke-width="2"/>
+      </g>
+    </svg>
+
+    <header class="cab"><span>tirvo<b>_</b> / presença digital</span><span class="num">o alerta</span></header>
+    <svg class="regua" width="888" height="14"></svg>
+
+    <p class="rotulo r"><i>//</i> para quem vende só pelas redes</p>
+    <h1 class="titulo">Seu negócio está<br>construído em<br><em>terreno alugado.</em></h1>
+
+    <div class="legenda-esq"><small>rede social</small><b>Alcance emprestado</b></div>
+    <div class="legenda-dir"><small>site próprio</small><b>Patrimônio seu</b></div>
+    <p class="frase">Rede social é vitrine. <em>Site é sede.</em></p>
+
+    <footer class="rod"><span class="dica">@tirvotech</span><img class="logo" data-logo></footer>
+  </main>
+  <script src="slide.js"></script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>

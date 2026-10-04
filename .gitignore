@@ -4,3 +4,5 @@ instagram/saida/
 # Imagens e zips dos destaques (o código das peças fica em instagram/modelos/stories/premium/)
 instagram/destaques/*/
 instagram/destaques/*.zip
+# Mídia renderizada do plano de 30 dias (o código das peças fica em instagram/modelos/plano/)
+instagram/plano-30-dias/midia/

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="tirvo:formato" content="feed">
+  <meta name="tirvo:slides" content="7">
+  <title>P06: 4 marcas conceituais</title>
+  <link rel="stylesheet" href="../stories/premium/base.css">
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .peca { background: radial-gradient(560px 480px at 540px 560px, rgba(255, 85, 0, .12), transparent 70%), linear-gradient(180deg, #060607 0%, #09090b 50%, #060607 100%); }
+    .rotulo.r { z-index: 4; left: 96px; top: 190px; }
+    .conceito { z-index: 5; right: 96px; top: 182px; }
+    .capa .titulo { left: 92px; top: 236px; font-size: 96px; }
+    .grade4 { z-index: 4; left: 96px; top: 560px; width: 888px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grade4 > div { height: 300px; display: grid; place-items: center; position: relative; }
+    .grade4 img { width: 230px; height: 230px; filter: drop-shadow(0 20px 30px rgba(0, 0, 0, .6)); }
+    .grade4 small { position: absolute; left: 24px; bottom: 20px; font: 500 17px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--t3); }
+
+    .palco { z-index: 3; left: 96px; top: 200px; width: 888px; height: 660px; display: grid; place-items: center; }
+    .palco .disco { position: absolute; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, .05), transparent 65%); border: 1px solid rgba(255, 255, 255, .07); }
+    .palco img { position: relative; width: 420px; height: 420px; filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .7)); }
+    .palco svg.cotas { position: absolute; inset: 0; }
+    .txt { z-index: 4; left: 96px; top: 904px; width: 888px; display: grid; gap: 22px; }
+    .txt small { font: 500 19px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--or-pale); }
+    .txt h2 { font-size: 66px; font-weight: 680; letter-spacing: -.045em; line-height: 1.02; }
+    .txt h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: -.01em; }
+    .txt .corpo { font-size: 34px; }
+
+    .linha4 { z-index: 4; left: 96px; top: 300px; width: 888px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .linha4 > div { height: 210px; display: grid; justify-items: center; align-content: center; gap: 16px; }
+    .linha4 img { width: 64px; height: 64px; }
+    .linha4 small { font: 500 15px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t3); }
+    .comum { z-index: 4; left: 96px; top: 560px; width: 888px; display: grid; gap: 14px; }
+    .comum li { display: flex; align-items: center; gap: 24px; height: 96px; padding: 0 28px; font-size: 32px; font-weight: 560; letter-spacing: -.02em; }
+    .comum li b { font: 500 20px/1 var(--mono); color: var(--or); }
+
+    .final .titulo { left: 92px; top: 240px; font-size: 100px; }
+    .final .corpo { z-index: 4; left: 96px; top: 600px; width: 860px; }
+    .final .nota { z-index: 4; left: 96px; top: 760px; width: 888px; display: flex; align-items: center; gap: 16px; padding: 22px 26px; font-size: 25px; color: var(--t2); }
+    .final .nota .ico { font-size: 30px; color: var(--or); }
+    .final .fim { top: 960px; }
+  </style>
+</head>
+<body>
+  <main class="peca feed capa" data-n="1">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">01<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> estudos de marca</p>
+    <h1 class="titulo">Do nome ao símbolo:<br>4 marcas criadas<br><em>do zero.</em></h1>
+    <div class="grade4">
+      <div data-frame="20,0,0,0" data-tone="branco"><img src="img/logo-nativa.png" alt=""><small>nativa</small></div>
+      <div data-frame="0,20,0,0" data-tone="branco"><img src="img/logo-orbe.png" alt=""><small>orbe</small></div>
+      <div data-frame="0,0,0,20" data-tone="branco"><img src="img/logo-vetra.png" alt=""><small>vetra</small></div>
+      <div data-frame="0,0,20,0" data-tone="branco"><img src="img/logo-kinto.png" alt=""><small>kinto</small></div>
+    </div>
+    <footer class="rod"><span class="dica">conceitos · deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="2">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">02<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="conceito selo"><span class="led"></span>conceito</span>
+    <div class="palco"><span class="disco"></span><img src="img/logo-nativa.png" alt="">
+      <svg class="cotas" viewBox="0 0 888 660"><g fill="none" stroke="#ff6a1f" stroke-width="3" style="filter:drop-shadow(0 0 5px #ff5500)"><path d="M520 120v-22h22M594 98h22v22M616 196v22h-22M542 218h-22v-22"/></g><text x="640" y="104" font-family="Geist Mono" font-size="17" letter-spacing="2" fill="#ffb187">A FOLHA</text></svg></div>
+    <div class="txt"><small>nativa · cosméticos</small><h2>Uma folha nasce da<br>própria <em>letra N.</em></h2></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="3">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">03<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="conceito selo"><span class="led"></span>conceito</span>
+    <div class="palco"><span class="disco"></span><img src="img/logo-orbe.png" alt="">
+      <svg class="cotas" viewBox="0 0 888 660"><ellipse cx="444" cy="330" rx="300" ry="96" fill="none" stroke="rgba(255,122,51,.4)" stroke-width="2" stroke-dasharray="6 9" transform="rotate(-18 444 330)"/><circle cx="726" cy="230" r="8" fill="#ff5500" style="filter:drop-shadow(0 0 8px #ff5500)"/></svg></div>
+    <div class="txt"><small>orbe · estúdio digital</small><h2>Uma esfera em órbita:<br>algo sempre <em>em movimento.</em></h2></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="4">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">04<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="conceito selo"><span class="led"></span>conceito</span>
+    <div class="palco"><span class="disco"></span><img src="img/logo-vetra.png" alt="">
+      <svg class="cotas" viewBox="0 0 888 660"><g stroke="rgba(255,255,255,.3)" stroke-width="1.4" fill="none"><path d="M444 90V60M444 600V570M204 330H174M714 330H684"/><path d="M444 60H760M760 60V600M760 600H444" stroke-dasharray="4 7"/></g><text x="776" y="336" font-family="Geist Mono" font-size="17" fill="#8a8a93">90°</text></svg></div>
+    <div class="txt"><small>vetra · capital</small><h2>Um V lapidado num<br>losango: <em>valor e firmeza.</em></h2></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="5">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">05<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <span class="conceito selo"><span class="led"></span>conceito</span>
+    <div class="palco"><span class="disco"></span>
+      <svg class="cotas" viewBox="0 0 888 660"><g stroke="rgba(255,122,51,.35)" stroke-width="2" stroke-linecap="round"><path d="M60 250H230M90 310H240M40 370H220M100 430H250"/></g></svg>
+      <img src="img/logo-kinto.png" alt=""></div>
+    <div class="txt"><small>kinto · mobilidade</small><h2>Um K em perspectiva,<br>como quem <em>já está andando.</em></h2></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed" data-n="6">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">06<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> o que as 4 têm em comum</p>
+    <div class="linha4">
+      <div data-frame="16,0,16,0" data-tone="branco"><img src="img/logo-nativa.png" alt=""><small>64 px</small></div>
+      <div data-frame="16,0,16,0" data-tone="branco"><img src="img/logo-orbe.png" alt=""><small>64 px</small></div>
+      <div data-frame="16,0,16,0" data-tone="branco"><img src="img/logo-vetra.png" alt=""><small>64 px</small></div>
+      <div data-frame="16,0,16,0" data-tone="branco"><img src="img/logo-kinto.png" alt=""><small>64 px</small></div>
+    </div>
+    <ul class="comum">
+      <li data-frame="14,0,14,0" data-tone="laranja"><b>01</b>Conceito antes do desenho</li>
+      <li data-frame="14,0,14,0" data-tone="branco"><b>02</b>Teste em tamanho pequeno</li>
+      <li data-frame="14,0,14,0" data-tone="branco"><b>03</b>Um sistema de cor próprio</li>
+    </ul>
+    <div class="txt" style="top:960px"><h2>Marca boa funciona<br>até no <em>tamanho de um ícone.</em></h2></div>
+    <footer class="rod"><span class="dica">deslize<svg class="ico"><use href="#i-arrow-right"/></svg></span><img class="logo" data-logo></footer>
+  </main>
+
+  <main class="peca feed final" data-n="7">
+    <header class="cab"><span>tirvo<b>_</b> / vitrine</span><span class="num">07<i>/07</i></span></header>
+    <svg class="regua" width="888" height="14"></svg>
+    <p class="rotulo r"><i>//</i> sua vez</p>
+    <h1 class="titulo">Qual delas<br>você <em>usaria?</em></h1>
+    <p class="corpo"><b>Responda com o nome nos comentários:</b> Nativa, Orbe, Vetra ou Kinto.</p>
+    <div class="nota" data-frame="14,0,14,0" data-tone="branco"><svg class="ico"><use href="#i-flask"/></svg>Marcas conceituais criadas pela Tirvo. Não são clientes.</div>
+    <div class="fim">
+      <div class="divisor-h"></div>
+      <div class="links"><span class="lk"><svg class="ico"><use href="#i-globe"/></svg><u>tirvo.tech</u></span><span class="lk"><svg class="ico"><use href="#i-mail"/></svg><u>engenharia@tirvo.tech</u></span></div>
+      <div class="acoes">
+        <span class="btn cheio" data-frame="18,0,18,0" data-tone="quente"><span>Visite nosso site</span><svg class="ico"><use href="#i-arrow-up-right"/></svg></span>
+        <span class="btn vazado" data-frame="0,18,0,18" data-tone="branco"><svg class="ico"><use href="#i-send"/></svg><span>Chame no direct</span></span>
+      </div>
+    </div>
+    <footer class="rod"><span class="dica">@tirvotech</span><img class="logo" data-logo></footer>
+  </main>
+  <script src="slide.js"></script>
+  <script src="../stories/premium/base.js"></script>
+</body>
+</html>
