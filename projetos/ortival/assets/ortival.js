@@ -305,6 +305,38 @@
     setTimeout(function () { wa.classList.remove('is-tip'); }, 12500);
   }
 
+  /* ---------- Animação 3D ---------- */
+  $$('.film').forEach(function (fig) {
+    var v = fig.querySelector('video'), play = fig.querySelector('.film__play');
+    var tog = fig.querySelector('[data-film="toggle"]'), full = fig.querySelector('[data-film="full"]');
+    var bar = fig.querySelector('.film__track i'), mq = window.matchMedia('(max-width: 760px)');
+    var cur = '';
+    function pick() {
+      var k = mq.matches ? 'v' : 'h'; if (k === cur) return;
+      var t = v.currentTime || 0, was = !v.paused; cur = k;
+      v.poster = v.dataset['p' + k]; v.src = v.dataset[k];
+      if (t) v.currentTime = t; if (was) v.play().catch(function () {});
+    }
+    function setIcon(name, label) { tog.innerHTML = '<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-' + name + '"/></svg>'; tog.setAttribute('aria-label', label); }
+    function start() { pick(); var p = v.play(); if (p) p.catch(function () {}); }
+    v.addEventListener('play', function () { fig.classList.add('is-playing'); setIcon('pause', 'Pausar'); });
+    v.addEventListener('pause', function () { setIcon('play', 'Reproduzir'); });
+    v.addEventListener('timeupdate', function () { if (v.duration) bar.style.width = (100 * v.currentTime / v.duration) + '%'; });
+    play.addEventListener('click', start);
+    v.addEventListener('click', function () { if (v.paused) start(); else v.pause(); });
+    tog.addEventListener('click', function () { if (v.paused) start(); else v.pause(); });
+    full.addEventListener('click', function () { var f = fig.querySelector('.film__frame'); (f.requestFullscreen || f.webkitRequestFullscreen || function () { v.webkitEnterFullscreen && v.webkitEnterFullscreen(); }).call(f); });
+    if (mq.addEventListener) mq.addEventListener('change', pick);
+    pick();
+    if (!reduce && 'IntersectionObserver' in window) {
+      var auto = true;
+      tog.addEventListener('click', function () { auto = false; });
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { if (auto) start(); } else if (!v.paused) v.pause(); });
+      }, {threshold: .45}).observe(v);
+    }
+  });
+
   /* ---------- Ano no rodapé ---------- */
   $$('[data-year]').forEach(function (y) { y.textContent = new Date().getFullYear(); });
 
