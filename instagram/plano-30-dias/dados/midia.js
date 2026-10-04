@@ -120,8 +120,16 @@ window.PLANO_MIDIA = {
   "midia/P20/07.jpg",
   "midia/P20/08.jpg"
  ],
+ "P21": [
+  "midia/P21/01.mp4",
+  "midia/P21/02.jpg"
+ ],
  "P22": [
   "midia/P22/01.jpg"
+ ],
+ "P23": [
+  "midia/P23/01.mp4",
+  "midia/P23/02.jpg"
  ],
  "P24": [
   "midia/P24/01.jpg",
@@ -146,8 +154,16 @@ window.PLANO_MIDIA = {
   "midia/P26/06.jpg",
   "midia/P26/07.jpg"
  ],
+ "P27": [
+  "midia/P27/01.mp4",
+  "midia/P27/02.jpg"
+ ],
  "P28": [
   "midia/P28/01.jpg"
+ ],
+ "P29": [
+  "midia/P29/01.mp4",
+  "midia/P29/02.jpg"
  ],
  "P30": [
   "midia/P30/01.jpg",
