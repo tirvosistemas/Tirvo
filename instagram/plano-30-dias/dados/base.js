@@ -11,7 +11,7 @@ window.PLANO = {
       ['B', 'Plano B: 3 posts por semana (2 Reels e 1 carrossel) e stories em 3 dias. Use se a semana apertar.'],
     ] },
     { tema: 'Rosto na câmera', escolha: 'A', opcoes: [
-      ['A', 'Reels em motion design, sem rosto e sem narração, com texto na tela e música escolhida no app.', true],
+      ['A', 'Reels em motion design, sem rosto, com narração de locutor, texto na tela e trilha original já mixada no vídeo.', true],
       ['B', 'O fundador aparece em 1 Reels por semana, gravado no celular, com o mesmo roteiro.'],
     ] },
     { tema: 'Oferta de entrada', escolha: 'A', opcoes: [

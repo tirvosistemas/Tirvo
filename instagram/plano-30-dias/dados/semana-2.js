@@ -19,7 +19,7 @@
       ["Ganho rápido", "Um teste de 10 segundos no seu site."],
     ],
     roteiro: {
-      duracao: "28 s", palavras: 72, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
+      duracao: "28 s", palavras: 72, audio: "Com narração de locutor (voz gerada no ElevenLabs, a mesma em todos os Reels), acompanhando o texto da tela, que continua funcionando no mudo. Trilha original que abaixa enquanto a voz fala, e efeitos sonoros sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima. Narração: “Seu site carrega. E o cliente já foi. Passou de três segundos, mais da metade desiste. Ele não reclama. Só volta e abre o concorrente. De onde vem o peso? Quase sempre, do que a página nem usa. Código sob medida carrega só o que a tela precisa. Faça o teste: abra o seu site no 4G. Manda pra quem cuida do seu site.”",
       linhas: [
         ["0–3,2 s", "Seu site carrega. O cliente já foi.", "Celular 3D com tela branca e barra de carregamento; cronômetro de tela branca; a seta de voltar risca a tela."],
         ["3,2–7,6 s", "53% das visitas no celular são abandonadas quando a página passa de 3 segundos.", "Contador até 53%, grade de 100 pontos com 53 apagando e o relógio chegando a 3 s. Fonte na tela: Google."],
@@ -145,7 +145,7 @@ Salve e confira os 7 no seu negócio.`,
       ["Ganho rápido", "Como um enxame de agentes escreve um software."],
     ],
     roteiro: {
-      duracao: "27 s", palavras: 67, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
+      duracao: "27 s", palavras: 67, audio: "Com narração de locutor (voz gerada no ElevenLabs, a mesma em todos os Reels), acompanhando o texto da tela, que continua funcionando no mudo. Trilha original que abaixa enquanto a voz fala, e efeitos sonoros sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima. Narração: “Uma IA que não conversa. Ela entrega. Esse é o Hipercode, a IA que a Tirvo está construindo. Não é um chatbot. É um enxame de agentes, todos programando. Recebe a tarefa, pesquisa, escreve o código e entrega o projeto pronto. Cada execução é revisada e corrigida. Ainda está em teste. Siga a Tirvo para ver os próximos testes.”",
       linhas: [
         ["0–3,2 s", "Uma IA que não conversa. Ela entrega.", "Um chat comum aparece e é riscado em laranja."],
         ["3,2–7,6 s", "Hipercode: a IA própria que a Tirvo está construindo.", "Hexágonos 3D se juntam num favo: o enxame se forma. Selo \"em testes internos\"."],
@@ -272,7 +272,7 @@ A Tirvo agora cuida também das suas redes, com o mesmo rigor dos sites. Chame n
       ["Ganho rápido", "Revise os plugins do seu site em 10 minutos."],
     ],
     roteiro: {
-      duracao: "28 s", palavras: 71, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
+      duracao: "28 s", palavras: 71, audio: "Com narração de locutor (voz gerada no ElevenLabs, a mesma em todos os Reels), acompanhando o texto da tela, que continua funcionando no mudo. Trilha original que abaixa enquanto a voz fala, e efeitos sonoros sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima. Narração: “Cada plugin que você instala, o seu cliente carrega. Um de cada vez, ninguém percebe o peso somando. Cada um soma código em todas as páginas. E cada plugin é mais uma porta para manter atualizada. Sob medida, a página leva só o que usa. Nada sobrando. Para cada plugin, pergunte: alguém usa de verdade? Salve e revise os plugins esta semana.”",
       linhas: [
         ["0–3,2 s", "Cada plugin que você instala, o seu cliente carrega.", "Blocos de plugin começam a cair sobre a página."],
         ["3,2–7,6 s", "Um de cada vez. Ninguém percebe o peso somando.", "A torre cresce: formulário, pop-up, galeria, chat, contador, slider, SEO, cache, backup, tradução, mapa, cookies."],

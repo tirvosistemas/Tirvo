@@ -141,7 +141,7 @@ Salve para revisar o seu site com calma. Se quiser uma segunda opinião técnica
       ["Ganho rápido", "Template ou sob medida: a diferença que o cliente sente."],
     ],
     roteiro: {
-      duracao: "28 s", palavras: 93, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
+      duracao: "28 s", palavras: 93, audio: "Com narração de locutor (voz gerada no ElevenLabs, a mesma em todos os Reels), acompanhando o texto da tela, que continua funcionando no mudo. Trilha original que abaixa enquanto a voz fala, e efeitos sonoros sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima. Narração: “Esse layout também está no site do seu concorrente. Você troca o logo, a cor e a foto. O resto é igual. Por trás, é a mesma estrutura de quem comprou o mesmo tema. E vem tudo que o tema oferece. Até o que você nunca vai usar. E o cliente sente: lentidão no celular e mudança que quebra. Na Tirvo, o código é escrito do zero para o seu negócio. E o seu site? É template ou projeto?”",
       linhas: [
         ["0–3 s", "Esse layout também está no site do seu concorrente.", "Parede 3D de sites idênticos; a mira trava em um deles."],
         ["3–7 s", "Tema pronto: você troca o logo, a cor e a foto. O resto é igual.", "O card central avança; o logo troca em cortes secos e a estrutura não muda."],

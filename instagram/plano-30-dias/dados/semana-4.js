@@ -19,7 +19,7 @@
       ["Ganho rápido", "As 5 etapas de um site, sem enrolação."],
     ],
     roteiro: {
-      duracao: "25 s", palavras: 58, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
+      duracao: "25 s", palavras: 58, audio: "Com narração de locutor (voz gerada no ElevenLabs, a mesma em todos os Reels), acompanhando o texto da tela, que continua funcionando no mudo. Trilha original que abaixa enquanto a voz fala, e efeitos sonoros sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima. Narração: “Um site, do zero ao ar. Descoberta: entender o negócio antes do código. Arquitetura: cada página no lugar. Design: cor, tipo e a cara da marca. Código sob medida, testado antes de publicar. Lançamento: no ar e monitorado. E você aprova três vezes. Siga para ver os próximos bastidores.”",
       linhas: [
         ["0–2,3 s", "Um site, do zero ao ar, em 20 segundos.", "Cronômetro zerado; a batida entra."],
         ["2,3–5,9 s", "01 · Descoberta: entender o negócio.", "Notas de objetivo, público e escopo; o site 3D aparece vazio."],
@@ -157,7 +157,7 @@ Salve e confira o seu feed.`,
       ["Ganho rápido", "O que garantir antes que o perfil caia."],
     ],
     roteiro: {
-      duracao: "28 s", palavras: 73, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
+      duracao: "28 s", palavras: 73, audio: "Com narração de locutor (voz gerada no ElevenLabs, a mesma em todos os Reels), acompanhando o texto da tela, que continua funcionando no mudo. Trilha original que abaixa enquanto a voz fala, e efeitos sonoros sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima. Narração: “Seu perfil some hoje. O que sobra da sua empresa? Seguidores, mensagens e alcance ficam com a plataforma. E perder o acesso não avisa antes. O que é seu de verdade? O domínio, o site, os contatos. Rede social é vitrine alugada. Site é endereço próprio. Use o perfil para atrair. Leve o cliente para o que é seu. Manda pro seu sócio antes que precise.”",
       linhas: [
         ["0–3 s", "Seu perfil some hoje. O que sobra da sua empresa?", "Um perfil em 3D se desfaz em partículas."],
         ["3–7,5 s", "Seguidores, mensagens e alcance ficam com a plataforma.", "As partículas giram e são sugadas por um cofre fechado."],
@@ -292,7 +292,7 @@ Mande para quem contratou o site da sua empresa.`,
       ["Ganho rápido", "A diferença em 20 segundos."],
     ],
     roteiro: {
-      duracao: "22 s", palavras: 46, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
+      duracao: "22 s", palavras: 46, audio: "Com narração de locutor (voz gerada no ElevenLabs, a mesma em todos os Reels), acompanhando o texto da tela, que continua funcionando no mudo. Trilha original que abaixa enquanto a voz fala, e efeitos sonoros sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima. Narração: “Logotipo e logomarca não são a mesma coisa. Logotipo é o nome desenhado. Só tipografia. Símbolo é a marca sem palavras. Logomarca é símbolo e nome, juntos. E identidade visual é o sistema que mantém tudo igual. Salve para o dia do briefing.”",
       linhas: [
         ["0–3 s", "Logotipo e logomarca não são a mesma coisa.", "A logo oficial da Tirvo surge sobre uma planta técnica girando."],
         ["3–7 s", "01 · Logotipo: o nome, desenhado. Só tipografia.", "Só o nome fica aceso, com a cota de medida."],
@@ -412,7 +412,7 @@ Salve como referência.`,
       ["Quebra de padrão", "Um teste de 10 segundos no seu site."],
     ],
     roteiro: {
-      duracao: "28 s", palavras: 43, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
+      duracao: "28 s", palavras: 43, audio: "Com narração de locutor (voz gerada no ElevenLabs, a mesma em todos os Reels), acompanhando o texto da tela, que continua funcionando no mudo. Trilha original que abaixa enquanto a voz fala, e efeitos sonoros sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima. Narração: “Abra o seu site no 4G. Agora. Passou de três segundos, mais da metade desiste. Ele não reclama. Só volta e abre o concorrente. De onde vem o peso? Quase sempre, do que a página nem usa. Código sob medida carrega só o que a tela precisa. Passou de três segundos? O cliente já foi. Manda pra quem cuida do seu site.”",
       linhas: [
         ["0–3,2 s", "Abra o seu site no 4G. Agora.", "Gancho novo sobre o mesmo celular de tela branca do P11, com o cronômetro correndo."],
         ["3,2–21,6 s", "Corpo do P11: o dado do Google, o cliente que volta para o concorrente, o peso e o sob medida.", "Mesmas cenas do P11."],

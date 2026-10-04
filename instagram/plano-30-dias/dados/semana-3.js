@@ -19,7 +19,7 @@
       ["Ganho rápido", "Seu site trabalha enquanto você dorme?"],
     ],
     roteiro: {
-      duracao: "28 s", palavras: 57, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
+      duracao: "28 s", palavras: 57, audio: "Com narração de locutor (voz gerada no ElevenLabs, a mesma em todos os Reels), acompanhando o texto da tela, que continua funcionando no mudo. Trilha original que abaixa enquanto a voz fala, e efeitos sonoros sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima. Narração: “Onze da noite. Alguém procurou o que você vende. Achou o seu site. Gostou. Quis pedir um orçamento. E aí? Botão escondido, formulário sem fim, WhatsApp perdido no rodapé. Ele fecha a aba. E esquece. Com o caminho certo, o pedido chega inteiro. De manhã, você só responde. Quer o seu site trabalhando assim? Manda site no direct.”",
       linhas: [
         ["0–3,2 s", "23:04. Alguém procurou o que você vende.", "Relógio gigante virando os minutos sobre uma cidade 3D à noite, janelas acesas."],
         ["3,2–7,4 s", "Achou o seu site. Gostou. Quis pedir um orçamento.", "Três frases entram uma a uma com ícones."],
@@ -165,7 +165,7 @@ Salve para a próxima reunião com uma agência.`,
       ["Ganho rápido", "O que transforma um logo numa marca."],
     ],
     roteiro: {
-      duracao: "28 s", palavras: 77, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
+      duracao: "28 s", palavras: 77, audio: "Com narração de locutor (voz gerada no ElevenLabs, a mesma em todos os Reels), acompanhando o texto da tela, que continua funcionando no mudo. Trilha original que abaixa enquanto a voz fala, e efeitos sonoros sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima. Narração: “Seu logo é bonito. Sua marca está desmontada. Post de um jeito, cartão de outro, site de um terceiro. O cliente não nota o detalhe. Nota a bagunça. Identidade visual não é um desenho. É um sistema. Com um manual, qualquer pessoa aplica igual. Logo é a peça. Identidade é o sistema. Quer a sua marca montada de verdade? Manda marca no direct.”",
       linhas: [
         ["0–3 s", "Seu logo é bonito. Sua marca está desmontada.", "Peças soltas em 3D (post, cartão, site, fachada) giram, cada uma de um jeito."],
         ["3–7,5 s", "Post de um jeito. Cartão de outro. Site de um terceiro.", "As peças tremem; nenhuma combina com a outra."],
@@ -301,7 +301,7 @@ Salve e mande para o seu sócio.`,
       ["Ganho rápido", "Como um projeto começa sem surpresa."],
     ],
     roteiro: {
-      duracao: "28,5 s", palavras: 75, audio: "Sem narração: todo o conteúdo está no texto da tela (funciona no mudo). Trilha original feita no ElevenLabs para este vídeo, com efeitos sonoros (whoosh, impacto, cliques, decodificação) sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima.",
+      duracao: "28,5 s", palavras: 75, audio: "Com narração de locutor (voz gerada no ElevenLabs, a mesma em todos os Reels), acompanhando o texto da tela, que continua funcionando no mudo. Trilha original que abaixa enquanto a voz fala, e efeitos sonoros sincronizados aos cortes. Já vem mixada no MP4: poste com o áudio original, sem música do app por cima. Narração: “Nenhuma linha de código antes desta conversa. Projeto que começa pelo código costuma terminar no atraso. Por isso, todo projeto da Tirvo começa pela Descoberta. Primeiro, o negócio, os objetivos e o público. Depois, cada página e o que ela precisa fazer. Sai um escopo e um cronograma. Você aprova antes. Só então começa a Engenharia. Quer começar pela Descoberta? Manda descoberta no direct.”",
       linhas: [
         ["0–3 s", "Nenhuma linha de código antes desta conversa.", "Editor de código vazio com o cursor laranja piscando."],
         ["3–7 s", "Projeto que começa pelo código costuma terminar no atraso.", "A barra do cronograma passa do prazo: refação e ajuste."],
