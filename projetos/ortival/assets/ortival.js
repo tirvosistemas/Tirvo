@@ -322,7 +322,15 @@
     v.addEventListener('play', function () { fig.classList.add('is-playing'); setIcon('pause', 'Pausar'); });
     v.addEventListener('pause', function () { setIcon('play', 'Reproduzir'); });
     v.addEventListener('timeupdate', function () { if (v.duration) bar.style.width = (100 * v.currentTime / v.duration) + '%'; });
-    play.addEventListener('click', start);
+    var snd = fig.querySelector('[data-film="sound"]');
+    function setSound(on) {
+      v.muted = !on; fig.classList.toggle('is-sound', on); snd.setAttribute('aria-pressed', on ? 'true' : 'false');
+      snd.setAttribute('aria-label', on ? 'Desativar o som' : 'Ativar o som');
+      snd.innerHTML = '<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-' + (on ? 'sound' : 'mute') + '"/></svg>';
+    }
+    snd.addEventListener('click', function () { setSound(v.muted); if (v.paused) start(); });
+    fig.querySelector('[data-film="chip"]').addEventListener('click', function () { setSound(true); if (v.paused) start(); });
+    play.addEventListener('click', function () { setSound(true); start(); });
     v.addEventListener('click', function () { if (v.paused) start(); else v.pause(); });
     tog.addEventListener('click', function () { if (v.paused) start(); else v.pause(); });
     full.addEventListener('click', function () { var f = fig.querySelector('.film__frame'); (f.requestFullscreen || f.webkitRequestFullscreen || function () { v.webkitEnterFullscreen && v.webkitEnterFullscreen(); }).call(f); });

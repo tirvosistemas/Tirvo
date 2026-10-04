@@ -21,3 +21,11 @@ npx remotion still src/index.ts Alameda previa.jpg --frame=400 --gl=swangle   # 
 ```
 
 Para ver um quadro de outro ângulo: `--props='{"cam":[x,y,z,alvoX,alvoY,alvoZ]}'`.
+
+## Áudio
+
+Trilha e efeitos gerados no ElevenLabs (Music v2.5 e Sound Effects v2), em `audio/`.
+
+1. `npx esbuild audio/exp.ts --bundle --platform=node --external:three --outfile=audio/exp.js && node audio/exp.js > audio/crane.json` (movimento da grua quadro a quadro)
+2. Converter os .mp3 para .wav 48 kHz estéreo e rodar `python3 mix.py` dentro de `audio/` (numpy e scipy)
+3. Limitar e juntar ao vídeo: `ffmpeg -i mix.wav -af "volume=2.2dB,alimiter=limit=0.82:level=disabled" master.wav` e depois `ffmpeg -i video.mp4 -i master.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 256k -shortest saida.mp4`

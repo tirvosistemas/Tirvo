@@ -939,6 +939,10 @@ body.page-light .head:not(.is-scrolled) .menu-btn span { background: var(--ink);
 @keyframes filmPulse { 0% { box-shadow: 0 0 0 0 var(--accent-glow); } 70% { box-shadow: 0 0 0 26px rgba(242, 179, 42, 0); } 100% { box-shadow: 0 0 0 0 rgba(242, 179, 42, 0); } }
 .film__bar { position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 6px; background: rgba(8, 19, 28, .62); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); opacity: 0; transform: translateY(8px); transition: opacity .3s, transform .3s var(--ease); }
 .film.is-playing .film__frame:hover .film__bar, .film.is-playing .film__bar:focus-within { opacity: 1; transform: none; }
+.film__chip { position: absolute; top: 16px; right: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px 9px 11px; border: 1px solid rgba(255, 255, 255, .18); border-radius: 999px; background: rgba(8, 19, 28, .62); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); color: #fff; font: 600 13px/1 var(--f-sans); letter-spacing: .02em; cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity .3s, transform .3s var(--ease), background .2s; }
+.film__chip .icon { width: 18px; height: 18px; color: var(--accent); }
+.film__chip:hover { background: rgba(8, 19, 28, .82); }
+.film.is-playing:not(.is-sound) .film__chip { opacity: 1; pointer-events: auto; transform: none; }
 .film__btn { width: 36px; height: 36px; border: 0; border-radius: 4px; background: transparent; color: #fff; display: grid; place-items: center; cursor: pointer; }
 .film__btn:hover { background: rgba(255, 255, 255, .1); }
 .film__btn .icon { width: 18px; height: 18px; }
@@ -952,6 +956,8 @@ body.page-light .head:not(.is-scrolled) .menu-btn span { background: var(--ink);
 @media (max-width: 760px) {
   .film__play { width: 76px; height: 76px; margin: -38px 0 0 -38px; }
   .film__bar { opacity: 1; transform: none; }
+  .film__chip { top: 10px; right: 10px; padding: 6px 10px 6px 8px; gap: 6px; font-size: 12px; }
+  .film__chip .icon { width: 15px; height: 15px; }
   .film__steps { grid-template-columns: repeat(3, 1fr); row-gap: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .film__play { animation: none; } }
