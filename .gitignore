@@ -5,3 +5,8 @@ instagram/saida/
 # Dependências e renderizações da animação
 animacoes/*/node_modules/
 animacoes/*/out/
+
+# Variáveis de ambiente e chaves (nunca versionar)
+.env
+.env.*
+!.env.example
