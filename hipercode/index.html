@@ -87,6 +87,7 @@
   <link rel="stylesheet" href="../assets/site.css?v=6d94c2c1">
 <script>(function(){var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('hb');setTimeout(function(){if(!window.__hbOK)d.classList.remove('hb')},3000)}})()</script>
 <style>html.hb [data-hb]:not(.hb-done){clip-path:inset(0 100% 0 0)}.hb-fx{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:90}</style>
+<style>.fb-test{display:grid;gap:clamp(1.5rem,3vw,2.5rem);margin-top:clamp(2rem,4vw,3rem)}@media(min-width:900px){.fb-test{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);align-items:start}}.fb-test__card{display:grid;gap:1.1rem;justify-items:start;padding:clamp(1.25rem,3vw,2rem);border:1px solid var(--line);border-radius:var(--r-md);background:rgba(15,15,18,.6)}.fb-test__card h3{font-size:1.25rem;letter-spacing:-.015em}.fb-test__card p{color:var(--text-secondary);line-height:1.6}.fb-test__card .t-tag{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em}.fb-test .term__line{color:var(--text-secondary)}.fb-test .term__line b{color:var(--text-primary);font-weight:500}</style>
 </head>
 <body data-bg="logo">
   <a class="skip-link" href="#conteudo" data-overlay-inert>Pular para o conteúdo</a>
@@ -426,6 +427,41 @@
             <span class="seal__term">03</span><h3>Lançamento futuro</h3>
             <p>Quando estiver testado por completo, ele será lançado aos poucos. Até lá, esta página é uma vitrine do que está sendo construído.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="p-sec" aria-labelledby="teste-titulo">
+      <div class="container">
+        <div class="section-head">
+          <p class="label"><span class="label__num">03</span> <span class="label__txt">Teste real</span></p>
+          <span class="section-head__rule" aria-hidden="true"></span>
+        </div>
+        <div class="p-sec__head p-sec__head--split">
+          <h2 class="p-sec__title" id="teste-titulo" data-reveal="title">Um site feito pelo Hipercode <span class="serif hl-accent">em teste</span>.</h2>
+          <p class="lead" data-reveal>O Hipercode recebeu uma tarefa: criar o site de uma hamburgueria fictícia, com cardápio, carrinho e pedido. O código saiu inteiro dele, sem ninguém escrever uma linha.</p>
+        </div>
+        <div class="fb-test">
+          <div class="fb-test__card" data-reveal>
+            <span class="t-tag">projeto de teste · Fogo &amp; Brasa</span>
+            <h3>Hamburgueria Fogo &amp; Brasa</h3>
+            <p>Cardápio com busca e categorias, montagem do lanche, carrinho, cupom de desconto e fechamento do pedido para entrega ou retirada. A loja não existe e nenhum pedido é enviado.</p>
+            <a class="btn btn--primary" href="../projetos/fogo-e-brasa/" target="_blank" rel="noopener"><span class="btn__sheen" aria-hidden="true"></span>Ver o site<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          </div>
+          <figure class="term" data-reveal>
+            <div class="term__window">
+              <span class="brackets" aria-hidden="true"></span>
+              <div class="term__bar"><span>revisão do código</span><span class="term__status">em teste</span></div>
+              <div class="term__log">
+                <p class="term__line"><span class="t-tag">[revisor]</span> <b>closeSuccessModal()</b> fecha a janela e também esvazia o carrinho. Uma função fazendo duas coisas.</p>
+                <p class="term__line"><span class="t-tag">[regra]</span> cada função cuida de uma tarefa só. Fica mais fácil de testar e de mudar sem quebrar o resto.</p>
+                <p class="term__line"><span class="t-tag">[revisor]</span> quando a foto não carrega, a imagem reserva tenta de novo sem parar.</p>
+                <p class="term__line"><span class="t-tag">[correção]</span> a imagem reserva passou a carregar uma vez só.</p>
+                <p class="term__line term__line--final">→ cada erro vira um caso de teste para a próxima versão.</p>
+              </div>
+            </div>
+            <figcaption>Pontos encontrados na revisão deste teste.</figcaption>
+          </figure>
         </div>
       </div>
     </section>
