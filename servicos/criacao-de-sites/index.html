@@ -151,6 +151,33 @@
   <link rel="stylesheet" href="../../assets/site.css?v=6d94c2c1">
 <script>(function(){var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('hb');setTimeout(function(){if(!window.__hbOK)d.classList.remove('hb')},3000)}})()</script>
 <style>html.hb [data-hb]:not(.hb-done){clip-path:inset(0 100% 0 0)}.hb-fx{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:90}</style>
+<style>
+.pf-grid { display: grid; gap: clamp(1.25rem, 2.5vw, 2rem); margin-top: clamp(2rem, 4vw, 3rem); }
+@media (min-width: 900px) { .pf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .pf-card--wide { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: center; gap: clamp(1.5rem, 3vw, 3rem); } }
+.pf-card { position: relative; display: grid; gap: 1.25rem; padding: clamp(1rem, 2vw, 1.5rem); border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.008)); transition: border-color .4s; }
+.pf-card:hover, .pf-card:focus-within { border-color: rgba(255, 85, 0, .35); }
+.pf-card__stage { position: relative; display: block; padding: 0 9% 7% 0; color: inherit; text-decoration: none; border-radius: 12px; }
+.pf-card__stage:focus-visible { outline: 2px solid var(--accent, #ff5500); outline-offset: 4px; }
+.pf-screen { display: block; overflow: hidden; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--bg-elevated); box-shadow: 0 40px 80px -40px rgba(0,0,0,.95); }
+.pf-screen__view { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; }
+.pf-screen__view img, .pf-phone__view img { position: absolute; left: 0; top: 0; width: 100%; height: auto; will-change: transform; transition: transform 7s cubic-bezier(.45, 0, .25, 1); }
+.pf-phone { position: absolute; right: 0; bottom: 0; width: 21%; padding: 5px; border-radius: 22px; background: #050506; border: 1px solid var(--line-strong); box-shadow: 0 30px 60px -20px rgba(0,0,0,.9), 0 0 0 1px rgba(0,0,0,.6); }
+.pf-phone__view { position: relative; display: block; aspect-ratio: 9 / 19; overflow: hidden; border-radius: 17px; }
+.pf-card__stage:hover .pf-screen__view img, .pf-card__stage:focus-visible .pf-screen__view img, .pf-card.is-live .pf-screen__view img { transform: translateY(-48%); }
+.pf-card__stage:hover .pf-phone__view img, .pf-card__stage:focus-visible .pf-phone__view img, .pf-card.is-live .pf-phone__view img { transform: translateY(-42%); }
+.pf-card__seg { display: flex; gap: .7rem; align-items: center; color: var(--text-tertiary); font-family: var(--font-mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; }
+.pf-card__seg span { color: var(--accent, #ff5500); }
+.pf-card__body h3 { margin: .45rem 0 .55rem; font-size: clamp(1.25rem, 1rem + .9vw, 1.7rem); letter-spacing: -.02em; }
+.pf-card__body > p:not(.pf-card__seg) { color: var(--text-secondary); max-width: 52ch; }
+.pf-card__tags { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1rem 0 1.2rem; padding: 0; list-style: none; }
+.pf-card__tags li { padding: .25rem .65rem; border: 1px solid var(--line); border-radius: 999px; color: var(--text-secondary); font-family: var(--font-mono); font-size: .66rem; letter-spacing: .04em; }
+.pf-card__go { display: inline-flex; align-items: center; gap: .5rem; color: var(--text-primary, #fafafa); font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(255, 85, 0, .5); padding-bottom: .15rem; }
+.pf-card__go .icon { width: 1em; height: 1em; transition: transform .3s; }
+.pf-card__go:hover .icon { transform: translateX(4px); }
+.pf-note { margin-top: 1.5rem; color: var(--text-tertiary); font-family: var(--font-mono); font-size: .68rem; letter-spacing: .06em; text-align: center; }
+.show__note a { color: inherit; text-underline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .pf-screen__view img, .pf-phone__view img { transition: none; } }
+</style>
 </head>
 <body data-bg="logo">
   <a class="skip-link" href="#conteudo" data-overlay-inert>Pular para o conteúdo</a>
@@ -256,27 +283,122 @@
           <ul class="facts"><li>Código sob medida</li><li>SEO técnico</li><li>Pronto para celular</li><li>Código entregue ou Gestão 360º</li></ul>
         </div>
         <div class="page-hero__show">
-          <div class="show show--sites" aria-label="Conceitos visuais de sites criados pela Tirvo" role="img">
-            <figure class="frame frame--back frame__cap">
-              <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">atria.arq.br</span></div>
-              <img src="../../vitrine-arq.webp" width="960" height="600" alt="" decoding="async" fetchpriority="high">
-              <figcaption><b>Luz, matéria e silêncio.</b><span>Estúdio de arquitetura</span></figcaption>
+          <div class="show show--sites" aria-label="Sites criados pela Tirvo" role="img">
+            <figure class="frame frame--back">
+              <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">velune.com.br</span></div>
+              <img src="../../portfolio/velune-topo.webp" width="960" height="600" alt="" decoding="async" fetchpriority="high">
             </figure>
-            <figure class="frame frame--front frame__cap">
-              <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">elan.com.br</span></div>
-              <img src="../../vitrine-elan.webp" width="960" height="600" alt="" decoding="async">
-              <figcaption><b>Âmbar Noturno</b><span>Perfumaria</span></figcaption>
+            <figure class="frame frame--front">
+              <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">ortival.com.br</span></div>
+              <img src="../../portfolio/ortival-topo.webp" width="960" height="600" alt="" decoding="async">
             </figure>
           </div>
-          <p class="show__note">Conceitos visuais criados pela Tirvo</p>
+          <p class="show__note"><a href="#portfolio">Ver os 5 sites do portfólio</a></p>
         </div>
+      </div>
+    </section>
+
+    <section class="p-sec pf" id="portfolio" aria-labelledby="portfolio-titulo">
+      <div class="container">
+        <div class="section-head">
+          <p class="label" data-decode><span class="label__num">01</span> <span class="label__txt">Portfólio</span></p>
+          <span class="section-head__rule" aria-hidden="true"></span>
+          <span class="section-head__meta" aria-hidden="true">5 sites</span>
+        </div>
+        <div class="p-sec__head p-sec__head--split">
+          <h2 class="p-sec__title" id="portfolio-titulo" data-reveal="title">Sites que a Tirvo <span class="hl-accent">criou do zero</span>.</h2>
+          <p class="lead" data-reveal>Cinco segmentos, cinco identidades diferentes e nenhum template. Passe o mouse ou toque na tela de cada projeto para ver o site rolar, ou abra a versão completa.</p>
+        </div>
+        <div class="pf-grid">
+          <article class="pf-card pf-card--wide" data-reveal style="--i:0">
+            <a class="pf-card__stage" href="../../projetos/ortival/" target="_blank" rel="noopener" aria-label="Abrir o site da Ortival Engenharia em nova aba">
+              <span class="pf-screen">
+                <span class="frame__bar"><i></i><i></i><i></i><span class="frame__url">ortival.com.br</span></span>
+                <span class="pf-screen__view"><img src="../../portfolio/ortival-longo.webp" width="1200" height="3000" alt="Página inicial do site da Ortival Engenharia" decoding="async"></span>
+              </span>
+              <span class="pf-phone" aria-hidden="true"><span class="pf-phone__view"><img src="../../portfolio/ortival-celular.webp" width="600" height="3200" alt="" decoding="async"></span></span>
+            </a>
+            <div class="pf-card__body">
+              <p class="pf-card__seg"><span aria-hidden="true">01</span>Construtora</p>
+              <h3>Ortival Engenharia</h3>
+              <p>Site institucional com portfólio filtrável de obras, painel de acompanhamento e animação 3D de um edifício em construção.</p>
+              <ul class="pf-card__tags"><li>Portfólio de obras</li><li>Animação 3D</li><li>12 páginas</li></ul>
+              <a class="pf-card__go" href="../../projetos/ortival/" target="_blank" rel="noopener">Ver o site<span class="sr-only">: Ortival Engenharia (abre em nova aba)</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+            </div>
+          </article>
+          <article class="pf-card" data-reveal style="--i:1">
+            <a class="pf-card__stage" href="../../projetos/velune/" target="_blank" rel="noopener" aria-label="Abrir o site da Velune Odontologia em nova aba">
+              <span class="pf-screen">
+                <span class="frame__bar"><i></i><i></i><i></i><span class="frame__url">velune.com.br</span></span>
+                <span class="pf-screen__view"><img src="../../portfolio/velune-longo.webp" width="1200" height="3000" alt="Página inicial do site da Velune Odontologia" loading="lazy" decoding="async"></span>
+              </span>
+              <span class="pf-phone" aria-hidden="true"><span class="pf-phone__view"><img src="../../portfolio/velune-celular.webp" width="600" height="3200" alt="" loading="lazy" decoding="async"></span></span>
+            </a>
+            <div class="pf-card__body">
+              <p class="pf-card__seg"><span aria-hidden="true">02</span>Clínica odontológica</p>
+              <h3>Velune Odontologia</h3>
+              <p>Clínica com comparador de antes e depois, equipe, tratamentos detalhados e agendamento em poucos toques.</p>
+              <ul class="pf-card__tags"><li>Antes e depois</li><li>Agendamento</li><li>14 páginas</li></ul>
+              <a class="pf-card__go" href="../../projetos/velune/" target="_blank" rel="noopener">Ver o site<span class="sr-only">: Velune Odontologia (abre em nova aba)</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+            </div>
+          </article>
+          <article class="pf-card" data-reveal style="--i:2">
+            <a class="pf-card__stage" href="../../projetos/ressel-aldane/" target="_blank" rel="noopener" aria-label="Abrir o site da Ressel Aldane Advogados em nova aba">
+              <span class="pf-screen">
+                <span class="frame__bar"><i></i><i></i><i></i><span class="frame__url">resselaldane.adv.br</span></span>
+                <span class="pf-screen__view"><img src="../../portfolio/ressel-aldane-longo.webp" width="1200" height="3000" alt="Página inicial do site da Ressel Aldane Advogados" loading="lazy" decoding="async"></span>
+              </span>
+              <span class="pf-phone" aria-hidden="true"><span class="pf-phone__view"><img src="../../portfolio/ressel-aldane-celular.webp" width="600" height="3200" alt="" loading="lazy" decoding="async"></span></span>
+            </a>
+            <div class="pf-card__body">
+              <p class="pf-card__seg"><span aria-hidden="true">03</span>Escritório de advocacia</p>
+              <h3>Ressel Aldane Advogados</h3>
+              <p>Tom editorial e sóbrio, áreas de atuação, sócios e publicações em linguagem clara, dentro das regras da OAB.</p>
+              <ul class="pf-card__tags"><li>Áreas de atuação</li><li>Publicações</li><li>13 páginas</li></ul>
+              <a class="pf-card__go" href="../../projetos/ressel-aldane/" target="_blank" rel="noopener">Ver o site<span class="sr-only">: Ressel Aldane Advogados (abre em nova aba)</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+            </div>
+          </article>
+          <article class="pf-card" data-reveal style="--i:3">
+            <a class="pf-card__stage" href="../../projetos/torvix/" target="_blank" rel="noopener" aria-label="Abrir o site da Torvix Industrial em nova aba">
+              <span class="pf-screen">
+                <span class="frame__bar"><i></i><i></i><i></i><span class="frame__url">torvix.ind.br</span></span>
+                <span class="pf-screen__view"><img src="../../portfolio/torvix-longo.webp" width="1200" height="3000" alt="Página inicial do site da Torvix Industrial" loading="lazy" decoding="async"></span>
+              </span>
+              <span class="pf-phone" aria-hidden="true"><span class="pf-phone__view"><img src="../../portfolio/torvix-celular.webp" width="600" height="3200" alt="" loading="lazy" decoding="async"></span></span>
+            </a>
+            <div class="pf-card__body">
+              <p class="pf-card__seg"><span aria-hidden="true">04</span>Indústria</p>
+              <h3>Torvix Industrial</h3>
+              <p>Indústria de usinagem e caldeiraria com processos interativos, indicadores de produção e parque fabril.</p>
+              <ul class="pf-card__tags"><li>Processos interativos</li><li>Indicadores</li><li>13 páginas</li></ul>
+              <a class="pf-card__go" href="../../projetos/torvix/" target="_blank" rel="noopener">Ver o site<span class="sr-only">: Torvix Industrial (abre em nova aba)</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+            </div>
+          </article>
+          <article class="pf-card" data-reveal style="--i:4">
+            <a class="pf-card__stage" href="../../projetos/quantira/" target="_blank" rel="noopener" aria-label="Abrir o site da Quantira Contabilidade em nova aba">
+              <span class="pf-screen">
+                <span class="frame__bar"><i></i><i></i><i></i><span class="frame__url">quantira.com.br</span></span>
+                <span class="pf-screen__view"><img src="../../portfolio/quantira-longo.webp" width="1200" height="3000" alt="Página inicial do site da Quantira Contabilidade" loading="lazy" decoding="async"></span>
+              </span>
+              <span class="pf-phone" aria-hidden="true"><span class="pf-phone__view"><img src="../../portfolio/quantira-celular.webp" width="600" height="3200" alt="" loading="lazy" decoding="async"></span></span>
+            </a>
+            <div class="pf-card__body">
+              <p class="pf-card__seg"><span aria-hidden="true">05</span>Escritório de contabilidade</p>
+              <h3>Quantira Contabilidade</h3>
+              <p>Contabilidade digital com simulador de regime tributário, serviços por etapa e portal do cliente.</p>
+              <ul class="pf-card__tags"><li>Simulador</li><li>Portal do cliente</li><li>12 páginas</li></ul>
+              <a class="pf-card__go" href="../../projetos/quantira/" target="_blank" rel="noopener">Ver o site<span class="sr-only">: Quantira Contabilidade (abre em nova aba)</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+            </div>
+          </article>
+        </div>
+        <p class="pf-note">Projetos demonstrativos: marcas, textos e sites criados pela Tirvo para mostrar o padrão de entrega em cada segmento.</p>
       </div>
     </section>
 
     <section class="p-sec" aria-labelledby="entregas-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">01</span> <span class="label__txt">O que entregamos</span></p>
+          <p class="label" data-decode><span class="label__num">02</span> <span class="label__txt">O que entregamos</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
         <div class="p-sec__head p-sec__head--split">
@@ -345,7 +467,7 @@
     <section class="p-sec p-sec--raised" aria-labelledby="para-quem-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">02</span> <span class="label__txt">Para quem é</span></p>
+          <p class="label" data-decode><span class="label__num">03</span> <span class="label__txt">Para quem é</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
         <div class="p-sec__head">
@@ -365,7 +487,7 @@
     <section class="p-sec" aria-labelledby="template-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">03</span> <span class="label__txt">Diferença</span></p>
+          <p class="label" data-decode><span class="label__num">04</span> <span class="label__txt">Diferença</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
         <div class="p-sec__head p-sec__head--split">
@@ -400,7 +522,7 @@
     <section class="p-sec p-sec--raised" aria-labelledby="modelos-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">04</span> <span class="label__txt">Modelos</span></p>
+          <p class="label" data-decode><span class="label__num">05</span> <span class="label__txt">Modelos</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
         <div class="p-sec__head p-sec__head--split">
@@ -439,7 +561,7 @@
     <section class="p-sec" id="processo" aria-labelledby="processo-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">05</span> <span class="label__txt">Como trabalhamos</span></p>
+          <p class="label" data-decode><span class="label__num">06</span> <span class="label__txt">Como trabalhamos</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
         <div class="p-sec__head p-sec__head--split">
@@ -510,7 +632,7 @@
     <section class="p-sec p-sec--raised faq" aria-labelledby="faq-titulo">
       <div class="container">
         <div class="section-head">
-          <p class="label" data-decode><span class="label__num">06</span> <span class="label__txt">Perguntas frequentes</span></p>
+          <p class="label" data-decode><span class="label__num">07</span> <span class="label__txt">Perguntas frequentes</span></p>
           <span class="section-head__rule" aria-hidden="true"></span>
         </div>
         <div class="faq-wrap">
@@ -744,5 +866,16 @@
   <script type="module" src="../../assets/site.js?v=8e026d86"></script>
 <script src="../../assets/three.min.js?v=128" defer></script>
 <script src="../../assets/enxame.js?v=1" defer></script>
+<script>
+(function () {
+  var cards = document.querySelectorAll('.pf-card');
+  if (!cards.length || !('IntersectionObserver' in window)) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(hover: hover)').matches) return;
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { e.target.parentNode.classList.toggle('is-live', e.intersectionRatio > .7); });
+  }, { threshold: [0, .7, 1] });
+  cards.forEach(function (c) { io.observe(c.querySelector('.pf-card__stage')); });
+})();
+</script>
 </body>
 </html>
