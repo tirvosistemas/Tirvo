@@ -9,16 +9,12 @@
   var hover = window.matchMedia('(hover: hover)').matches;
   var fmt = function (n, dec) { return n.toLocaleString('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }); };
 
-  /* Cabeçalho flutuante: some ao descer e volta ao subir */
+  /* Cabeçalho fixo no topo */
   var head = $('[data-head]'), lastY = 0, tick = false;
   function onScroll() {
     var y = window.scrollY;
     if (head) {
       head.classList.toggle('is-scrolled', y > 10);
-      if (!root.classList.contains('menu-open')) {
-        if (y > 420 && y > lastY + 6) head.classList.add('is-hidden');
-        if (y < lastY - 6 || y < 200) head.classList.remove('is-hidden');
-      }
     }
     lastY = y; tick = false;
   }

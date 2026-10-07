@@ -65,7 +65,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 /* ============ CABEÇALHO FLUTUANTE ============ */
 .head { position: sticky; top: 12px; z-index: 90; padding: 0 var(--gut); margin-top: 12px; transition: transform .5s var(--ease); }
-.head.is-hidden { transform: translateY(-140%); }
+.head.is-hidden { transform: none; }
 .head__bar { max-width: calc(var(--wrap) - 2 * var(--gut) + 40px); margin: 0 auto; height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 0 10px 0 22px; border-radius: 999px; background: rgba(255, 255, 255, .78); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 18px 40px -26px rgba(8, 47, 48, .35), inset 0 0 0 1px rgba(11, 59, 60, .04); backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4); transition: box-shadow .35s, background .35s; }
 .head.is-scrolled .head__bar { background: rgba(255, 255, 255, .92); box-shadow: 0 22px 50px -26px rgba(8, 47, 48, .45); }
 

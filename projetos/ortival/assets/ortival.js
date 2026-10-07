@@ -16,9 +16,6 @@
     var y = window.scrollY;
     if (head) {
       head.classList.toggle('is-scrolled', y > 12);
-      var menuOpen = root.classList.contains('menu-open');
-      head.classList.toggle('is-hidden', !menuOpen && y > 480 && y > lastY + 4);
-      if (y < lastY - 4) head.classList.remove('is-hidden');
     }
     if (bar) {
       var h = d.documentElement.scrollHeight - window.innerHeight;
