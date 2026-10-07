@@ -660,3 +660,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .ticker__track, .partners__track { animation: none !important; }
 }
 .foot .tlink .icon { background: rgba(255, 255, 255, .12); color: #fff; }
+
+/* Fotos nos espaços de imagem */
+.ph--photo { background: #cfd3d6; }
+.ph--photo::before, .ph--photo::after { content: none; display: none; }
+.ph__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.ph--photo .ph__corner { z-index: 1; }

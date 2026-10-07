@@ -643,3 +643,10 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .js [data-seq] > *, .js .lz__t { opacity: 1 !important; transform: none !important; clip-path: none !important; }
   .belt__track, .oems__track { animation: none !important; }
 }
+
+/* Fotos nos espaços de imagem */
+.ph--photo { background: #cfd3d6; }
+.ph--photo::before, .ph--photo::after { content: none; display: none; }
+.ph__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.ph--photo .ph__corner { z-index: 1; }
+[data-seq] > div > .ph--photo { aspect-ratio: 16 / 10; }
