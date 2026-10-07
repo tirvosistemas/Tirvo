@@ -2996,6 +2996,67 @@
         box-sizing: content-box;
         user-select: none;
       }
+      /* ---------- Dica da brincadeira: balão sobre as letras, com as cinco teclas acendendo a cada toque ---------- */
+      .sig-hint { position: relative; width: min(100% - var(--pad-x) * 2, var(--container)); margin: clamp(2rem, 5vw, 3.5rem) auto 0; padding-bottom: 12px; pointer-events: none; user-select: none; }
+      .sig-hint + .footer__signature { margin-top: .5rem; }
+      /* O centro das letras T-I-R-V-O fica a 67,75% da largura da assinatura */
+      .sig-hint__bubble {
+        position: relative;
+        left: 67.75%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+        width: max-content;
+        max-width: 100%;
+        margin: 0;
+        padding: .55rem .6rem .55rem 1rem;
+        border: 1px solid rgba(255, 85, 0, .35);
+        border-radius: 14px;
+        background: #16161a;
+        box-shadow: 0 10px 30px -12px rgba(255, 85, 0, .45);
+        color: var(--text-secondary);
+        font-size: .875rem;
+        line-height: 1.35;
+      }
+      .sig-hint__text { text-wrap: balance; }
+      .sig-hint__keys { display: flex; gap: 4px; flex: none; }
+      .sig-hint__keys b {
+        display: grid;
+        place-items: center;
+        width: 1.6rem;
+        height: 1.6rem;
+        border: 1px solid rgba(255, 255, 255, .14);
+        border-radius: 6px;
+        font: 600 .75rem/1 var(--font-mono);
+        color: var(--text-secondary);
+        transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+      }
+      .sig-hint__keys b.is-on { background: var(--accent); border-color: var(--accent); color: #09090b; }
+      .sig-hint.is-done .sig-hint__text { color: var(--text-primary); }
+      .sig-hint__tail {
+        position: absolute;
+        bottom: 5px;
+        left: 67.75%;
+        width: 14px;
+        height: 14px;
+        border: solid rgba(255, 85, 0, .35);
+        border-width: 0 1px 1px 0;
+        background: #16161a;
+        transform: translateX(-50%) rotate(45deg);
+      }
+      /* No celular o balão fica centralizado; só a ponta continua apontando para as letras */
+      @media (max-width: 640px) {
+        .sig-hint__bubble { left: 50%; flex-direction: column; align-items: center; gap: .5rem; padding: .7rem .9rem; text-align: center; }
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        .sig-hint__bubble, .sig-hint__tail { animation: sig-hint-bob 1.8s ease-in-out infinite alternate; }
+        .sig-hint.is-done .sig-hint__keys b { animation: sig-hint-key .6s ease-out calc(var(--i) * 80ms) both; }
+      }
+      .sig-hint__keys b:nth-child(1) { --i: 0; } .sig-hint__keys b:nth-child(2) { --i: 1; } .sig-hint__keys b:nth-child(3) { --i: 2; }
+      .sig-hint__keys b:nth-child(4) { --i: 3; } .sig-hint__keys b:nth-child(5) { --i: 4; }
+      @keyframes sig-hint-bob { to { translate: 0 -5px; } }
+      @keyframes sig-hint-key { 40% { transform: translateY(-6px) scale(1.12); } }
       /* ---------- Assinatura animada do rodapé: escrita a fogo, esfria e recebe um brilho de tempos em tempos ---------- */
       .sig { display: block; aspect-ratio: 3391.78 / 900; overflow: visible; pointer-events: none; -webkit-tap-highlight-color: transparent; }
       .sig__base { opacity: .07; }

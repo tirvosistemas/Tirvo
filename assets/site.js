@@ -3564,6 +3564,30 @@
       const DURATION = { t: 900, i: 1100, r: 900, v: 850, o: 1100, pin: 1100, party: 2000 };
       const timers = new Map();
       const played = new Map();
+      // Balão da dica: cada letra tocada acende a tecla correspondente por 8 s (a mesma janela da comemoração)
+      const hint = $('[data-sig-hint]');
+      const hintText = hint && $('[data-sig-hint-text]', hint);
+      const hintDefault = hintText?.textContent;
+      const keyTimers = new Map();
+      const lightKey = (letter) => {
+        const key = hint && $(`[data-key="${letter}"]`, hint);
+        if (!key) return;
+        key.classList.add('is-on');
+        clearTimeout(keyTimers.get(letter));
+        keyTimers.set(letter, setTimeout(() => { if (!hint.classList.contains('is-done')) key.classList.remove('is-on'); }, 8000));
+      };
+      const celebrateHint = () => {
+        if (!hint) return;
+        keyTimers.forEach((timer) => clearTimeout(timer));
+        $$('[data-key]', hint).forEach((key) => key.classList.add('is-on'));
+        hint.classList.add('is-done');
+        hintText.textContent = 'Você achou a surpresa. Pode tocar de novo quando quiser.';
+        setTimeout(() => {
+          hint.classList.remove('is-done');
+          hintText.textContent = hintDefault;
+          $$('[data-key]', hint).forEach((key) => key.classList.remove('is-on'));
+        }, 6000);
+      };
       const play = (name) => {
         const className = `is-play-${name}`.replace('is-play-party', 'is-party');
         clearTimeout(timers.get(name));
@@ -3584,11 +3608,13 @@
         play(letter);
         const now = performance.now();
         played.set(letter, now);
+        lightKey(letter);
         if (Object.keys(NOTES).every((key) => now - (played.get(key) ?? -Infinity) < 8000)) {
           played.clear();
           setTimeout(() => {
             sfx.play('fanfare');
             play('party');
+            celebrateHint();
             document.dispatchEvent(new CustomEvent('tirvo:marca-completa'));
           }, 450);
         }
